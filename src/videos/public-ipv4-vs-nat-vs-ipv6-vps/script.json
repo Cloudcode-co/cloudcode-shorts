@@ -1,0 +1,168 @@
+{
+  "slug": "public-ipv4-vs-nat-vs-ipv6-vps",
+  "topic": "public ipv4 vps vs nat v4 vps vs ipv6 only vps on cloudcode.io.vn",
+  "title": "VPS Public IPv4, NAT IPv4 hay IPv6-only khác gì?",
+  "caption": "So sánh VPS Public IPv4, NAT IPv4 và IPv6-only cùng các giải pháp vượt NAT hiệu quả cho anh em lập trình.",
+  "hashtags": [
+    "#reverseproxy",
+    "#natvps",
+    "#ipv6",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Upbeat modern tech lofi synth groove with steady electronic percussion, no vocals",
+  "sources": [
+    "https://github.com/fatedier/frp",
+    "https://github.com/cloudflare/cloudflared",
+    "https://github.com/rathole-org/rathole",
+    "https://github.com/fosrl/pangolin",
+    "https://github.com/agrinman/tunnelto"
+  ],
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Thuê VPS Public IPv4, NAT IPv4 hay IPv6-only thì khác nhau thế nào anh em?",
+      "headline": "Chọn loại VPS nào?",
+      "lines": [
+        "Public IPv4",
+        "NAT IPv4",
+        "IPv6-only"
+      ],
+      "commands": [],
+      "repos": []
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Public IPv4 có IP riêng, mở port ra ngoài trực tiếp. Nhưng với NAT v4 hoặc IPv6-only, server của anh em bị giấu sau tường lửa.",
+      "headline": "Khác biệt mạng cốt lõi",
+      "lines": [
+        "Public IPv4: mở port trực tiếp",
+        "NAT IPv4: chung IP, bị giới hạn port",
+        "IPv6-only: mạng IPv4 thuần chưa vào được"
+      ],
+      "commands": [],
+      "repos": []
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Server sau NAT không có IP public thì người ngoài truy cập kiểu gì? Chúng ta cần công cụ reverse proxy hoặc tạo tunnel kết nối.",
+      "headline": "Giải pháp NAT traversal",
+      "lines": [
+        "Server nằm trong mạng nội bộ",
+        "Cần reverse proxy vượt NAT"
+      ],
+      "commands": [],
+      "repos": []
+    },
+    {
+      "id": "s4",
+      "text": "[cheerfully] Phổ biến nhất là fatedier/frp. Anh em chạy frps trên server có IP public, rồi mở frpc trên máy NAT để forward TCP, UDP hoặc HTTP.",
+      "headline": "fatedier/frp đục lỗ NAT",
+      "lines": [
+        "Hỗ trợ TCP, UDP, HTTP, HTTPS",
+        "frps chạy trên server có IP public",
+        "frpc chạy trên server sau NAT"
+      ],
+      "commands": [
+        "./frps -c ./frps.toml",
+        "./frpc -c ./frpc.toml"
+      ],
+      "repos": [
+        "fatedier/frp"
+      ]
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Cần tiết kiệm RAM và thông lượng cao hơn? Thử rathole-org/rathole bằng Rust, binary siêu nhỏ gọn khoảng 500KiB và bắt buộc dùng token.",
+      "headline": "rathole-org/rathole bằng Rust",
+      "lines": [
+        "Hiệu năng cao, tốn rất ít RAM",
+        "File thực thi chỉ khoảng 500KiB",
+        "Token bảo mật bắt buộc"
+      ],
+      "commands": [
+        "./rathole server.toml",
+        "./rathole client.toml"
+      ],
+      "repos": [
+        "rathole-org/rathole"
+      ]
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Không muốn tự thuê server trung gian để mở port? cloudflare/cloudflared dẫn luồng qua Cloudflare Tunnel, giữ server đóng kín hoàn toàn.",
+      "headline": "cloudflare/cloudflared qua Tunnel",
+      "lines": [
+        "Đưa traffic qua mạng Cloudflare",
+        "Không cần mở port trên firewall",
+        "Hỗ trợ cả HTTP và Layer 4"
+      ],
+      "commands": [
+        "cloudflared tunnel help"
+      ],
+      "repos": [
+        "cloudflare/cloudflared"
+      ]
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Cần public nhanh một web server local ra ngoài internet bằng link HTTPS? agrinman/tunnelto cài đặt và khởi chạy cực kỳ gọn gàng.",
+      "headline": "agrinman/tunnelto tạo URL HTTPS",
+      "lines": [
+        "Public HTTPS URL cho localhost",
+        "Hỗ trợ custom subdomain",
+        "Cài đặt một dòng lệnh"
+      ],
+      "commands": [
+        "curl -sL https://tunnelto.dev/install.sh | sh",
+        "tunnelto --port 8000"
+      ],
+      "repos": [
+        "agrinman/tunnelto"
+      ]
+    },
+    {
+      "id": "s8",
+      "text": "[impressed] Muốn nền tảng SASE toàn diện trên WireGuard? fosrl/pangolin hỗ trợ zero-trust reverse proxy mà không cần IP public hay mở port nào.",
+      "headline": "fosrl/pangolin trên WireGuard",
+      "lines": [
+        "Nền tảng SASE mã nguồn mở",
+        "Zero-trust reverse proxy",
+        "Không cần IP public hay mở port"
+      ],
+      "commands": [],
+      "repos": [
+        "fosrl/pangolin"
+      ]
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Public IPv4 cấu hình tiện nhất nhưng tốn chi phí. NAT IPv4 hay IPv6-only rẻ hơn nhiều, và các giải pháp tunnel sẽ giải quyết phần kết nối!",
+      "headline": "Cân nhắc nhu cầu và chi phí",
+      "lines": [
+        "Public IPv4: đơn giản, tốn phí IP",
+        "NAT & IPv6: chi phí thấp, dùng tunnel",
+        "Lựa chọn tùy vào bài toán của bạn"
+      ],
+      "commands": [],
+      "repos": []
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để thử khi dựng server nhé! Nhớ bấm theo dõi kênh để cập nhật thêm nhiều công cụ mạng thú vị!",
+      "headline": "Lưu lại và theo dõi",
+      "lines": [
+        "Lưu video để áp dụng sau",
+        "Follow kênh để xem mẹo mới"
+      ],
+      "commands": [],
+      "repos": []
+    }
+  ]
+}

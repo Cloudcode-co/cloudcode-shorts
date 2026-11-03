@@ -26,5 +26,14 @@
     "built": "claude",
     "costUsd": 0.22494879999999998,
     "revision": "Xem lại toàn bộ video. Bỏ hết các mảng nền màu (vệt highlight vàng, hộp màu) đặt sau chữ: CapCut, Rust, offline, Whisper, MCP, tự dựng và mọi chỗ khác. Chúng lệch khỏi chữ, cắt mất nét chữ trông như lỗi. Nhấn mạnh bằng màu chữ hoặc nét gạch chân vẽ tay dưới chữ. Giữ nguyên phong cách còn lại."
+  },
+  {
+    "slug": "public-ipv4-vs-nat-vs-ipv6-vps",
+    "topic": "public ipv4 vps vs nat v4 vps vs ipv6 only vps on cloudcode.io.vn",
+    "date": "2026-11-03",
+    "direction": "big-type",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "fallback",
+    "costUsd": 0.4133235
   }
 ]
