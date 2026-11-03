@@ -1,8 +1,7 @@
-// Writes a new video's script with Gemini from primary sources: the projects'
-// GitHub repos and READMEs (pipeline/research.mjs), plus Hacker News when it
-// picks the topic itself. GEMINI_SEARCH=true adds Google Search research,
-// which needs a Gemini key with billing (the free tier has no search quota
-// for Gemini 3).
+// Writes a new video's script with an LLM (Gemini through an OpenAI-compatible
+// API, see llmJson in lib.mjs) from primary sources: the projects' GitHub
+// repos and READMEs (pipeline/research.mjs), plus Hacker News when it picks
+// the topic itself.
 //
 //   node --env-file=.env pipeline/write-script.mjs "Coolify vs Dokploy"
 //   node --env-file=.env pipeline/write-script.mjs            # picks a trending topic
@@ -10,7 +9,7 @@
 // Writes src/videos/<slug>/{script.json,facts.json}, public/videos/<slug>/repos/*.png
 // and prints the slug as the last line.
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
-import { gemini, pickGeminiModels, readJson, report, slugify, writeJson } from "./lib.mjs";
+import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
 
 const VOICE = {
@@ -21,13 +20,7 @@ const VOICE = {
 const TAGS = ["excited", "curious", "casually", "impressed", "cheerfully", "warmly", "thoughtful", "laughs"];
 
 const S = (type, extra = {}) => ({ type, ...extra });
-const json = async (prompt, schema, temperature = 0.7) =>
-  JSON.parse(
-    await gemini(models, {
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature },
-    }),
-  );
+const json = llmJson;
 
 const history = readJson("pipeline/history.json", []);
 const pastTopics = history.map((h) => h.topic).filter(Boolean);
@@ -35,8 +28,8 @@ const pastTopics = history.map((h) => h.topic).filter(Boolean);
 const pastRepos = readdirSync("src/videos", { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .flatMap((d) => readJson(`src/videos/${d.name}/facts.json`, { repos: [] }).repos.map((r) => r.repo.toLowerCase()));
-const models = await pickGeminiModels();
-console.log("Gemini models:", models.join(", "));
+const models = llmModels();
+console.log("LLM models:", models.join(", "));
 
 let topic = process.argv.slice(2).join(" ").trim();
 const today = new Date().toISOString().slice(0, 10);
@@ -90,27 +83,7 @@ const found = await resolveRepos(picked);
 if (!found.length) throw new Error(`no GitHub repos found for "${topic}"`);
 console.log("Research repos:", found.join(", "));
 const briefs = (await Promise.all(found.map((r, i) => repoBrief(r, i < 2 ? 12000 : 5000)))).filter(Boolean);
-let research = `Primary sources, fetched from GitHub on ${today}:\n\n${briefs.join("\n\n")}`;
-
-if (process.env.GEMINI_SEARCH === "true") {
-  const web = await gemini(models, {
-    tools: [{ google_search: {} }],
-    contents: [
-      {
-        role: "user",
-        parts: [
-          {
-            text:
-              `Today is ${today}. For a short video about "${topic}" (repos: ${found.join(", ")}), report in ` +
-              "English, with a source URL after every fact, what changed in the last 3 months and how " +
-              "people compare these tools. No star counts.",
-          },
-        ],
-      },
-    ],
-  });
-  research += `\n\nWeb research (Google Search):\n${web}`;
-}
+const research = `Primary sources, fetched from GitHub on ${today}:\n\n${briefs.join("\n\n")}`;
 
 // 3. The script, as JSON matching a schema.
 const schema = S("OBJECT", {
@@ -163,7 +136,7 @@ const rules =
 const script = await json(rules, schema, 0.9);
 script.sources = [...new Set([...found.map((r) => `https://github.com/${r}`), ...(script.sources ?? [])])];
 
-// Checks Gemini's output; anything wrong here stops the run before spending
+// Checks the model's output; anything wrong here stops the run before spending
 // voice credits.
 const problems = [];
 if (script.scenes.length < 6 || script.scenes.length > 16) problems.push(`${script.scenes.length} scenes`);

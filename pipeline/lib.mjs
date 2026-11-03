@@ -45,101 +45,104 @@ export const slugify = (text) =>
     .slice(0, 40)
     .replace(/-+$/g, "");
 
-const GEMINI = "https://generativelanguage.googleapis.com/v1beta";
-// Longest a single Gemini call may take before it counts as failed.
-const GEMINI_TIMEOUT = 150_000;
-// Gemini 3 thinks before answering; on "high" (the default) a JSON answer can
-// take minutes on the free tier. GEMINI_THINKING overrides it.
-const THINKING = process.env.GEMINI_THINKING || "low";
+// The script writer is any OpenAI-compatible chat API (by default a Gemini
+// gateway): LLM_BASE_URL, LLM_API_KEY, and LLM_MODEL, a comma-separated list
+// tried in order.
+const LLM_BASE_URL = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/+$/, "");
+// Longest a single call may take before it counts as failed.
+const LLM_TIMEOUT = 180_000;
 
-// Models to try, best first: GEMINI_MODEL (default gemini-3.8-flash) if the
-// API lists it, then the other Flash models, newest first. A key on the free
-// tier may have no quota for the newest ones.
-export const pickGeminiModels = async () => {
-  const key = need("GEMINI_API_KEY");
-  const wanted = process.env.GEMINI_MODEL || "gemini-3.8-flash";
-  const res = await fetch(`${GEMINI}/models?pageSize=1000&key=${key}`, {
-    signal: AbortSignal.timeout(30_000),
-  });
-  if (!res.ok) throw new Error(`Gemini models: ${res.status} ${await res.text()}`);
-  const models = (await res.json()).models
-    .filter((m) => m.supportedGenerationMethods?.includes("generateContent"))
-    .map((m) => m.name.replace(/^models\//, ""));
-  const version = (id) => Number(id.match(/^gemini-(\d+(?:\.\d+)?)/)?.[1] ?? 0);
-  const flash = models
-    .filter((id) => /^gemini-[\d.]+-flash$/.test(id) && id !== wanted)
-    .sort((a, b) => version(b) - version(a));
-  const list = models.includes(wanted) ? [wanted, ...flash] : flash;
-  if (!list.length) throw new Error("no Gemini Flash model found; set GEMINI_MODEL");
-  return list;
+export const llmModels = () =>
+  (process.env.LLM_MODEL || "ag/gemini-3.8-flash-high")
+    .split(",")
+    .map((m) => m.trim())
+    .filter(Boolean);
+
+// Gemini-style schema ({type: "OBJECT", ...}) to JSON Schema for
+// response_format, with every property required and nothing extra allowed.
+const toJsonSchema = (s) => {
+  const out = { type: s.type.toLowerCase() };
+  if (s.description) out.description = s.description;
+  if (s.items) out.items = toJsonSchema(s.items);
+  if (s.properties) {
+    out.properties = Object.fromEntries(Object.entries(s.properties).map(([k, v]) => [k, toJsonSchema(v)]));
+    out.required = Object.keys(s.properties);
+    out.additionalProperties = false;
+  }
+  return out;
 };
 
-// The model that last answered, per kind of call: on the free tier only
-// Gemini 2.x may use Google Search, while plain calls can use the newest.
-const lastGood = {};
+// The JSON in a reply, without the ```json fence some models wrap it in.
+const parseJson = (text) => {
+  const t = text.trim();
+  const fenced = t.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/);
+  const body = fenced ? fenced[1] : t.slice(t.indexOf("{"), t.lastIndexOf("}") + 1);
+  return JSON.parse(body);
+};
 
-// One generateContent call, trying `models` in order (after the one that last
-// answered the same kind of call). Overloads and short rate limits get
-// retried; a model out of quota hands over to the next one.
-// Returns the text of the first candidate.
-export const gemini = async (models, body) => {
-  const key = need("GEMINI_API_KEY");
-  const kind = body.tools?.some((t) => t.google_search) ? "search" : "plain";
-  const order = lastGood[kind] ? [lastGood[kind], ...models.filter((m) => m !== lastGood[kind])] : models;
+// Asks for a JSON answer matching `schema`, trying each model in order.
+// Overloads and rate limits get one retry; a model that times out, is
+// unknown or keeps failing hands over to the next.
+export const llmJson = async (prompt, schema, temperature = 0.7) => {
+  const key = need("LLM_API_KEY");
+  const jsonSchema = toJsonSchema(schema);
   const errors = [];
-  let payload = {
-    ...body,
-    generationConfig: { thinkingConfig: { thinkingLevel: THINKING }, ...body.generationConfig },
-  };
-  for (const model of order) {
+  for (const model of llmModels()) {
     for (let attempt = 1; ; attempt++) {
       const started = Date.now();
-      const res = await fetch(`${GEMINI}/models/${model}:generateContent?key=${key}`, {
+      const res = await fetch(`${LLM_BASE_URL}/chat/completions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: AbortSignal.timeout(GEMINI_TIMEOUT),
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model,
+          stream: false,
+          temperature,
+          messages: [
+            {
+              role: "user",
+              content: `${prompt}\n\nAnswer with only a JSON object matching this JSON Schema:\n${JSON.stringify(jsonSchema)}`,
+            },
+          ],
+          response_format: { type: "json_schema", json_schema: { name: "answer", schema: jsonSchema } },
+        }),
+        signal: AbortSignal.timeout(LLM_TIMEOUT),
       }).catch((err) => new Response(String(err), { status: 599 }));
       const took = `${Math.round((Date.now() - started) / 1000)}s`;
       if (res.ok) {
         const data = await res.json();
-        const text = data.candidates?.[0]?.content?.parts
-          ?.map((p) => p.text ?? "")
-          .join("");
-        if (!text) throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
-        console.log(`Gemini (${kind}): ${model}, ${took}`);
-        lastGood[kind] = model;
-        return text;
+        const text = data.choices?.[0]?.message?.content;
+        try {
+          const value = parseJson(text ?? "");
+          console.log(`LLM: ${model}, ${took}, ${data.usage?.total_tokens ?? "?"} tokens`);
+          return value;
+        } catch {
+          errors.push(`${model}: unparseable answer ${String(text).slice(0, 300)}`);
+          if (attempt < 2) {
+            console.log(`LLM ${model}: answer was not JSON, asking again`);
+            continue;
+          }
+          break;
+        }
       }
       const detail = await res.text();
-      if (res.status === 400 && /thinking/i.test(detail) && payload.generationConfig.thinkingConfig) {
-        console.log(`Gemini ${model} rejects thinkingLevel; retrying without it`);
-        const { thinkingConfig, ...rest } = payload.generationConfig;
-        payload = { ...payload, generationConfig: rest };
-        continue;
-      }
-      // 599: our own timeout. A model that hung once usually hangs again, so
-      // move on instead of waiting another 150s.
-      if (res.status === 599) {
-        errors.push(`${model}: no answer in ${took}`);
-        console.log(`Gemini ${model}: no answer in ${took}, trying the next model`);
-        break;
-      }
-      if ((res.status >= 500 && attempt < 2) || (res.status === 429 && attempt < 2)) {
-        const wait = attempt * 10;
-        console.log(`Gemini ${model}: ${res.status} after ${took}, retrying in ${wait}s`);
-        await new Promise((r) => setTimeout(r, wait * 1000));
-        continue;
-      }
       errors.push(`${model}: ${res.status} ${detail.slice(0, 300)}`);
-      if (res.status === 429 || res.status === 404 || res.status >= 500) {
-        console.log(`Gemini ${model} failed (${res.status}), trying the next model`);
+      if (res.status === 599) {
+        console.log(`LLM ${model}: no answer in ${took}, trying the next model`);
         break;
       }
-      throw new Error(`Gemini ${errors.at(-1)}`);
+      if ((res.status >= 500 || res.status === 429) && attempt < 2) {
+        console.log(`LLM ${model}: ${res.status} after ${took}, retrying in 15s`);
+        await new Promise((r) => setTimeout(r, 15_000));
+        continue;
+      }
+      if (res.status === 429 || res.status === 404 || res.status >= 500) {
+        console.log(`LLM ${model} failed (${res.status}), trying the next model`);
+        break;
+      }
+      throw new Error(`LLM ${errors.at(-1)}`);
     }
   }
-  throw new Error(`every Gemini model failed:\n${errors.join("\n")}`);
+  throw new Error(`every LLM model failed:\n${errors.join("\n")}`);
 };
 
 // This GitHub Actions run's page, or null outside Actions.

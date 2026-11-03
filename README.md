@@ -40,11 +40,10 @@ runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's ser
 
 1. `pipeline/write-script.mjs`: research comes from primary sources, for free
    (`pipeline/research.mjs`): rising GitHub repos and Hacker News links to pick a
-   topic, then each repo's README, latest release and metadata. Gemini (default
-   `gemini-3.8-flash`) writes `script.json` from that, with install commands copied
-   from the READMEs; real stars and avatars go into `facts.json`. Set the variable
-   `GEMINI_SEARCH` to `true` to add Google Search research (needs a Gemini key with
-   billing: the free tier has no search quota for Gemini 3).
+   topic, then each repo's README, latest release and metadata. Gemini, through an
+   OpenAI-compatible API (default `ag/gemini-3.8-flash-high` on
+   `https://be-ag.harumi.io.vn/v1`), writes `script.json` from that, with install
+   commands copied from the READMEs; real stars and avatars go into `facts.json`.
 2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (Tony Nguyễn) and music.
 3. `pipeline/build-video.mjs`: Claude Code draws an art direction and writes
    `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA
@@ -63,10 +62,11 @@ node --env-file=.env pipeline/run.mjs "Coolify vs Dokploy"
 
 ### Setup
 
-Repository secrets: `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY`,
+Repository secrets: `LLM_API_KEY`, `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY`,
 for Discord `DISCORD_BOT_TOKEN`, for Telegram `TELEGRAM_BOT_TOKEN` and
 `TELEGRAM_CHAT_ID`. Results go back to the chat the command came from.
-Optional repository variables: `GEMINI_MODEL`, `CLAUDE_MODEL` (default
+Optional repository variables: `LLM_BASE_URL`, `LLM_MODEL` (comma-separated
+models tried in order), `CLAUDE_MODEL` (default
 `claude-sonnet-5-5`), `CLAUDE_BUDGET_USD` (default 4), `AUTO_DAILY` = `true` to
 make a video every night at 01:00 Vietnam time with a topic Gemini picks,
 `CDN_URL` (the bot worker's URL, with the secret `CDN_UPLOAD_SECRET`; see
