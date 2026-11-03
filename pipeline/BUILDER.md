@@ -69,6 +69,10 @@ A placeholder `Video.tsx` is already there; replace it.
 
 ## Check it (required)
 
+You can run only these commands, from the repository root where you start: run
+each one exactly as written here, alone in its own Bash call, with no `cd`, `&&`,
+`;`, pipes or redirects. Anything else is denied.
+
 1. `npm run register`, then `npx tsc`. Fix every error.
 2. `npm run qa -- <slug>` renders 10 stills with TikTok's overlay into
    `out/qa/<slug>/`. Open every still and look: text under the overlay, cut-off or

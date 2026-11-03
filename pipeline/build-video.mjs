@@ -35,7 +35,9 @@ export const video = makeFallbackVideo({
 const sh = (cmd, args, opts = {}) =>
   spawnSync(cmd, args, { stdio: "inherit", shell: process.platform === "win32", ...opts })
     .status === 0;
-const typechecks = () => sh("node", ["scripts/register.mjs"]) && sh("npx", ["tsc"]);
+// Unused names don't break a video, so they don't throw Claude's build away.
+const typechecks = () =>
+  sh("node", ["scripts/register.mjs"]) && sh("npx", ["tsc", "--noUnusedLocals", "false", "--noUnusedParameters", "false"]);
 
 // Draw a direction not used in the last 5 videos; same slug, same draw.
 const { directions, pacing } = readJson("pipeline/art-directions.json");
@@ -71,9 +73,11 @@ if (process.env.ANTHROPIC_API_KEY) {
     `Edit(src/videos/${slug}/**)`,
     `Write(src/videos/${slug}/**)`,
     "Bash(npm run register)",
+    "Bash(npm run register *)",
     "Bash(npx tsc)",
-    `Bash(npm run qa -- ${slug} *)`,
+    "Bash(npx tsc *)",
     `Bash(npm run qa -- ${slug})`,
+    `Bash(npm run qa -- ${slug} *)`,
   ];
   const env = { ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY, CI: "1" };
   for (const k of ["PATH", "Path", "HOME", "USERPROFILE", "APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "SystemRoot", "ComSpec", "PATHEXT"]) {
@@ -108,6 +112,9 @@ if (process.env.ANTHROPIC_API_KEY) {
     const out = JSON.parse(result.stdout.trim().split("\n").pop());
     costUsd = out.total_cost_usd ?? 0;
     console.log(`Claude: ${out.subtype ?? "done"}, ${out.num_turns ?? "?"} turns, $${costUsd.toFixed(2)}`);
+    for (const d of out.permission_denials ?? []) {
+      console.log(`Claude was denied ${d.tool_name}: ${JSON.stringify(d.tool_input).slice(0, 200)}`);
+    }
     if (out.result) console.log(out.result.slice(-1500));
   } catch {
     console.log(result.error?.message ?? "", result.stdout?.slice(-3000), result.stderr?.slice(-3000));
