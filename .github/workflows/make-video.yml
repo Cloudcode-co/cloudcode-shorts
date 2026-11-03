@@ -11,6 +11,10 @@ on:
         description: "Giọng ElevenLabs: tên, voice id hoặc link (để trống: Tony Nguyễn)"
         required: false
         default: ""
+      style:
+        description: "Phong cách: id/tên trong pipeline/art-directions.json hoặc mô tả tự do (để trống: bốc ngẫu nhiên)"
+        required: false
+        default: ""
       notes:
         description: "Yêu cầu thêm cho kịch bản và hình (nền, màu, nhịp...)"
         required: false
@@ -63,10 +67,14 @@ jobs:
           TOPIC: ${{ inputs.topic || github.event.client_payload.topic }}
           VOICE: ${{ inputs.voice || github.event.client_payload.voice }}
           NOTES: ${{ inputs.notes || github.event.client_payload.notes }}
+          STYLE: ${{ inputs.style || github.event.client_payload.style }}
           REVISE: ${{ inputs.revise || github.event.client_payload.revise }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_MODEL: ${{ vars.LLM_MODEL }}
+          # Builder fallback through be-ag; BUILDER=beag skips Claude.
+          BUILDER: ${{ vars.BUILDER }}
+          BUILDER_BEAG_MODEL: ${{ vars.BUILDER_BEAG_MODEL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}

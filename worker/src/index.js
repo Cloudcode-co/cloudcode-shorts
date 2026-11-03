@@ -30,9 +30,11 @@ const dispatch = (env, job, replyTo) =>
     body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
   });
 
-const queued = (res, { topic, voice, notes, revise }) => {
+const queued = (res, { topic, voice, notes, revise, style }) => {
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
-  const extra = [voice && `giọng: ${voice}`, notes && `yêu cầu: ${notes}`].filter(Boolean).join("\n");
+  const extra = [style && `phong cách: ${style}`, voice && `giọng: ${voice}`, notes && `yêu cầu: ${notes}`]
+    .filter(Boolean)
+    .join("\n");
   const what = revise ? `sửa video ${revise}` : topic || "Gemini tự chọn đề tài";
   return `Đã xếp hàng: ${what}.${extra ? `\n${extra}` : ""}\nXong mình gửi video vào đây.`;
 };
@@ -66,11 +68,27 @@ const videoSlugs = async (env) => {
   return (await res.json()).filter((f) => f.type === "dir").map((f) => f.name);
 };
 
+// The art directions in the repo, for the phongcach suggestions.
+const styles = async (env) => {
+  const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/contents/pipeline/art-directions.json`, {
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github.raw",
+      "User-Agent": "cloudcode-shorts-bot",
+    },
+  });
+  return res.ok ? (await res.json()).directions : [];
+};
+
 const autocomplete = async (interaction, env) => {
   const focused = interaction.data.options?.find((o) => o.focused);
   const typed = fold(String(focused?.value ?? ""));
   let choices = [];
-  if (focused?.name === "giong") {
+  if (focused?.name === "phongcach") {
+    choices = (await styles(env))
+      .filter((d) => fold(`${d.id} ${d.name}`).includes(typed))
+      .map((d) => ({ name: d.name.slice(0, 100), value: d.id }));
+  } else if (focused?.name === "giong") {
     choices = VOICES.filter(([name]) => fold(name).includes(typed)).map(([name, value]) => ({ name, value }));
   } else if (focused?.name === "video") {
     choices = (await videoSlugs(env))
@@ -129,10 +147,11 @@ const discord = async (request, env, ctx) => {
     topic: command === "video" ? option("topic", 200) : "",
     voice: option("giong", 300),
     notes: option("yeucau", 1000),
+    style: option("phongcach", 200),
     revise: command === "sua" ? option("video", 80) : "",
   };
-  if (command === "sua" && !job.voice && !job.notes) {
-    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `giong`, hoặc cả hai.", flags: 64 } });
+  if (command === "sua" && !job.voice && !job.notes && !job.style) {
+    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach` hoặc `giong`.", flags: 64 } });
   }
 
   // Discord wants an answer within 3s: defer, then edit the reply once

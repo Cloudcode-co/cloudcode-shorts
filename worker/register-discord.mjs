@@ -17,6 +17,14 @@ const voice = {
   autocomplete: true,
   max_length: 300,
 };
+const style = {
+  type: 3,
+  name: "phongcach",
+  description: "Phong cách hình: chọn gợi ý hoặc tự mô tả (để trống: bốc ngẫu nhiên)",
+  required: false,
+  autocomplete: true,
+  max_length: 200,
+};
 const notes = (description) => ({
   type: 3,
   name: "yeucau",
@@ -37,8 +45,9 @@ const commands = [
         required: false,
         max_length: 200,
       },
+      style,
       voice,
-      notes("Yêu cầu thêm: nền, màu, phong cách, nhịp, độ dài..."),
+      notes("Yêu cầu thêm: nền, màu, nhịp, độ dài..."),
     ],
   },
   {
@@ -54,6 +63,7 @@ const commands = [
         max_length: 80,
       },
       notes("Cần sửa gì, ví dụ: nền đen, chữ to hơn, bỏ hiệu ứng rung"),
+      style,
       voice,
     ],
   },

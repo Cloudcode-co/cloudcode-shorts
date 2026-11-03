@@ -9,7 +9,7 @@
 //
 // Renders only on CI or with --render. Env (the GitHub workflow passes these):
 // TOPIC works like the first argument; VOICE is an ElevenLabs voice name, id
-// or link; NOTES are requests for the script writer and Claude; REVISE is
+// or link; STYLE an art direction (see build-video.mjs); NOTES are requests for the script writer and Claude; REVISE is
 // the slug of a video to rework.
 import { spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
@@ -24,6 +24,7 @@ const topic = (args.filter((a) => !a.startsWith("--")).join(" ") || process.env.
 const render = Boolean(process.env.CI) || args.includes("--render");
 const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
+const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
 
 // Runs a pipeline script with its output streaming into the log, and returns
@@ -60,7 +61,7 @@ const rework = async () => {
   if (!/^[a-z0-9-]+$/.test(revise) || !existsSync(`src/videos/${revise}/script.json`)) {
     throw new Error(`không có video "${revise}" trong repo`);
   }
-  if (!voice && !notes) throw new Error("cần ít nhất một giọng mới hoặc một yêu cầu sửa");
+  if (!voice && !notes && !style) throw new Error("cần ít nhất một giọng mới, một phong cách hoặc một yêu cầu sửa");
   const slug = setSlug(revise);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
   if (voice) {
@@ -70,13 +71,13 @@ const rework = async () => {
     writeJson(file, { ...readJson(file), voiceId });
     run("node", ["scripts/voiceover.mjs", slug, "--force"]);
   }
-  const build = notes
+  const build = notes || style
     ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
     : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };
-  return { slug, build: { ...build, revision: [voice && `giọng: ${voice}`, notes].filter(Boolean).join("; ") } };
+  return { slug, build: { ...build, revision: asked } };
 };
 
-const asked = [voice && `giọng ${voice}`, notes].filter(Boolean).join("; ");
+const asked = [style && `phong cách ${style}`, voice && `giọng ${voice}`, notes].filter(Boolean).join("; ");
 let slug = revise || null;
 try {
   await sendMessage(
@@ -106,7 +107,7 @@ try {
   const caption = `${script.caption}\n\n${script.hashtags.join(" ")}`;
   const summary =
     `${revise ? `Đã sửa (bản ${version})` : "Xong"}: ${script.title}\n` +
-    `Phong cách: ${build.direction} (${build.built === "claude" ? "Claude dựng" : "khuôn dự phòng"}), ` +
+    `Phong cách: ${build.direction} (${{ claude: "Claude dựng", beag: "Gemini qua be-ag dựng" }[build.built] ?? "khuôn dự phòng"}), ` +
     `Claude $${(build.costUsd ?? 0).toFixed(2)}\n\nCaption để đăng:\n${caption}\n\n` +
     `Muốn sửa: /sua video:${slug}` +
     (runUrl ? `\n\n${runUrl}` : "");

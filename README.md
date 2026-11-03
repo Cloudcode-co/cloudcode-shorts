@@ -78,10 +78,19 @@ Start a run from the GitHub app (Actions → Make video → Run workflow), or wi
 
 In Discord:
 
-- `/video [topic] [giong] [yeucau]` makes a new video. `giong` is an ElevenLabs
-  voice: pick a suggestion, or type a name, a voice id or a voice link (a Voice
-  Library voice gets added to the account). `yeucau` is free text for the script
-  writer and Claude, such as "nền đen, chữ neon, nhịp nhanh".
-- `/sua video [yeucau] [giong]` reworks a finished video: a new voice regenerates
-  the voiceover, and `yeucau` has Claude change the existing build (or build a
-  fallback video properly). Each version renders to its own file on the CDN.
+- `/video [topic] [phongcach] [giong] [yeucau]` makes a new video. `phongcach`
+  picks the art direction: a suggestion from `pipeline/art-directions.json`, or
+  any description ("anime neon"); empty draws one at random. `giong` is an
+  ElevenLabs voice: pick a suggestion, or type a name, a voice id or a voice link
+  (a Voice Library voice gets added to the account). `yeucau` is free text for the
+  script writer and the builder, such as "nền đen, chữ neon, nhịp nhanh".
+- `/sua video [yeucau] [phongcach] [giong]` reworks a finished video: a new voice
+  regenerates the voiceover, `yeucau` has the builder change the existing build,
+  and a new `phongcach` rebuilds it in that style. Each version renders to its
+  own file on the CDN.
+
+The builder is Claude Code on Anthropic's API. When that changes nothing (no
+credit, an API error), the same Claude Code runs again on Gemini through the
+be-ag gateway (`LLM_API_KEY`); set the variable `BUILDER` to `beag` to skip
+Claude, and `BUILDER_BEAG_MODEL` to pick the gateway model (default
+`ag/gemini-3.8-flash-high`).
