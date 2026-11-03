@@ -72,3 +72,19 @@ One bot takes `/video` and posts the result back into the same channel.
 4. Send `/id` to the bot, then `npx wrangler secret put ALLOWED_CHAT_ID` with
    that number. Put the bot token in the repo secret `TELEGRAM_BOT_TOKEN`, and
    the number in `TELEGRAM_CHAT_ID` (where runs not started from Telegram report).
+
+## TikTok drafts
+
+Under every finished video the bot posts **Duyệt, gửi vào TikTok** and **Bỏ**.
+Duyệt uploads the video from the bucket to the connected account's TikTok
+inbox; the owner opens the notification in the TikTok app, pastes the caption
+and posts. Drafts need no TikTok app audit.
+
+1. On [developers.tiktok.com](https://developers.tiktok.com), create an app,
+   add the **Login Kit** and **Content Posting API** products with the scopes
+   `user.info.basic` and `video.upload`, and set the redirect URI to
+   `<WORKER_URL>/tiktok/callback`.
+2. `npx wrangler secret put TIKTOK_CLIENT_KEY` and `TIKTOK_CLIENT_SECRET`.
+3. Run `/tiktok` in Discord and open the link it replies with, signed in as the
+   channel's TikTok account. Tokens are kept in the `TIKTOK` KV namespace and
+   refresh themselves; run `/tiktok` again if the bot says the session expired.
