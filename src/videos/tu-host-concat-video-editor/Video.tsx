@@ -321,7 +321,7 @@ const ShotC: React.FC = () => {
         <Pen key={i} d={rectD(82, 66, 50 + i)} x={456 + i * 98} y={594} start={at(t6, "s6", 0.8) + i * 6} dur={10} w={3} />
       ))}
       <Sticky x={0} y={590} w={400} start={at(t6, "s6", 0.84)} rot={-3} color={STICKY.pink} size={40}>
-        Agent <Mark start={at(t6, "s6", 0.9)}>tự dựng</Mark> video
+        Agent <Mark start={at(t6, "s6", 0.9)} color="#1B4FB5">tự dựng</Mark> video
       </Sticky>
 
       {/* build */}
@@ -414,11 +414,11 @@ const ShotD: React.FC = () => {
         Anh em thấy Concat thế nào?
       </Write>
       <Sticky x={0} y={716} w={560} start={at(t9, "s9", 0.4)} rot={-2} color={STICKY.yellow} size={48}>
-        <Mark start={at(t9, "s9", 0.46)} color="#FFF3A0">Lưu video</Mark> để thử lại
+        <Mark start={at(t9, "s9", 0.46)} color="#1B4FB5">Lưu video</Mark> để thử lại
       </Sticky>
       <Pen d="M 0 0 L 76 0 L 76 112 L 38 80 L 0 112 Z" x={628} y={716} start={at(t9, "s9", 0.46)} dur={20} color={LIGHT.ink} fill={LIGHT.red} w={5} />
       <Sticky x={130} y={890} w={620} start={at(t9, "s9", 0.68)} rot={1.5} color={STICKY.green} size={48}>
-        <Mark start={at(t9, "s9", 0.74)} color="#E8FF9E">Follow kênh</Mark> để cập nhật
+        <Mark start={at(t9, "s9", 0.74)} color="#1B4FB5">Follow kênh</Mark> để cập nhật
         <br />
         công nghệ mới
       </Sticky>

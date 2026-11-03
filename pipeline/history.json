@@ -16,5 +16,15 @@
     "pacing": "Few long shots: 3–5 shots, each building up in place.",
     "built": "claude",
     "costUsd": 1.2314666000000003
+  },
+  {
+    "slug": "tu-host-concat-video-editor",
+    "topic": "Tự host Concat: Ứng dụng dựng video mã nguồn mở thay thế CapCut, hỗ trợ API và MCP",
+    "date": "2026-11-03",
+    "direction": "notebook",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.22494879999999998,
+    "revision": "Xem lại toàn bộ video. Bỏ hết các mảng nền màu (vệt highlight vàng, hộp màu) đặt sau chữ: CapCut, Rust, offline, Whisper, MCP, tự dựng và mọi chỗ khác. Chúng lệch khỏi chữ, cắt mất nét chữ trông như lỗi. Nhấn mạnh bằng màu chữ hoặc nét gạch chân vẽ tay dưới chữ. Giữ nguyên phong cách còn lại."
   }
 ]

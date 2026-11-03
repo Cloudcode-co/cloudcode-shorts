@@ -256,37 +256,32 @@ export const Mark: React.FC<{
 }> = ({ start, dur = 14, color, children }) => {
   const t = useTheme();
   const p = useP(start, dur, penEase);
-  const clip = `inset(0 ${(1 - p) * 100}% 0 0)`;
+  const c = color ?? (t.dark ? t.hl : t.red);
   return (
-    <span style={{ position: "relative", display: "inline-block" }}>
-      <span
+    <span style={{ position: "relative", display: "inline-block", color: p > 0 ? c : undefined }}>
+      {children}
+      <svg
+        viewBox="0 0 100 12"
+        preserveAspectRatio="none"
         style={{
           position: "absolute",
-          left: -8,
-          right: -8,
-          top: "38%",
-          bottom: "0%",
-          background: color ?? t.hl,
-          clipPath: clip,
-          rotate: "-1deg",
-          borderRadius: 6,
+          left: -2,
+          width: "calc(100% + 4px)",
+          bottom: "-0.12em",
+          height: "0.2em",
+          overflow: "visible",
+          clipPath: `inset(-100% ${(1 - p) * 100}% -100% 0)`,
         }}
-      />
-      <span style={{ position: "relative" }}>{children}</span>
-      {t.dark && (
-        <span
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            color: "#13213B",
-            clipPath: clip,
-            whiteSpace: "nowrap",
-          }}
-        >
-          {children}
-        </span>
-      )}
+      >
+        <path
+          d="M 1 7 Q 25 2 50 7 T 99 5"
+          fill="none"
+          stroke={c}
+          strokeWidth={5}
+          vectorEffect="non-scaling-stroke"
+          strokeLinecap="round"
+        />
+      </svg>
     </span>
   );
 };
