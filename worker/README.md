@@ -36,13 +36,13 @@ One bot takes `/video` and posts the result back into the same channel.
    `applications.commands`, permissions **Send Messages** and **Attach Files**;
    open the install link and pick the server.
 3. Put the bot token in the repo secret `DISCORD_BOT_TOKEN`.
-4. Set the worker secrets: `DISCORD_PUBLIC_KEY`, and `ALLOWED_DISCORD_USER_IDS`
-   with the Discord user ids allowed to run `/video` (comma-separated; turn on
-   Developer Mode, right-click a user, Copy User ID).
+4. Set the worker secret `DISCORD_PUBLIC_KEY`. Server admins can run `/video`;
+   to let others, also set `ALLOWED_DISCORD_USER_IDS` to their user ids
+   (comma-separated; Developer Mode, right-click a user, Copy User ID).
 
    ```bash
    npx wrangler secret put DISCORD_PUBLIC_KEY
-   npx wrangler secret put ALLOWED_DISCORD_USER_IDS
+   npx wrangler secret put ALLOWED_DISCORD_USER_IDS   # optional
    ```
 
 5. Set **Interactions Endpoint URL** to `<WORKER_URL>/discord` and save (Discord

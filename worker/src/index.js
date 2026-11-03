@@ -10,7 +10,8 @@
 //                      public URL on MEDIA_URL
 //
 // Secrets (wrangler secret put): GITHUB_TOKEN, UPLOAD_SECRET, plus for Discord
-// DISCORD_PUBLIC_KEY and ALLOWED_DISCORD_USER_IDS (comma-separated), and for
+// DISCORD_PUBLIC_KEY and optionally ALLOWED_DISCORD_USER_IDS (comma-separated;
+// server admins may always run /video), and for
 // Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID.
 // Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA.
 
@@ -62,9 +63,12 @@ const discord = async (request, env, ctx) => {
   if (interaction.type === 1) return json({ type: 1 }); // PING
   if (interaction.type !== 2 || interaction.data.name !== "video") return json({ type: 1 });
 
+  // Server admins, plus anyone listed in ALLOWED_DISCORD_USER_IDS.
   const user = interaction.member?.user?.id ?? interaction.user?.id;
   const allowed = String(env.ALLOWED_DISCORD_USER_IDS ?? "").split(",").map((s) => s.trim());
-  if (!allowed.includes(user)) {
+  const ADMINISTRATOR = 1n << 3n;
+  const admin = (BigInt(interaction.member?.permissions ?? 0) & ADMINISTRATOR) !== 0n;
+  if (!admin && !allowed.includes(user)) {
     return json({ type: 4, data: { content: "Bạn không có quyền dùng lệnh này.", flags: 64 } });
   }
   const topic = String(
