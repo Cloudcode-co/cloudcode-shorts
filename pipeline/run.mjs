@@ -17,6 +17,7 @@ import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
 import { resolveVoice } from "./voices.mjs";
+import { glFor } from "../scripts/gl.mjs";
 
 const args = process.argv.slice(2);
 const topic = (args.filter((a) => !a.startsWith("--")).join(" ") || process.env.TOPIC || "").trim();
@@ -116,7 +117,8 @@ try {
 
   if (render) {
     const out = version > 1 ? `out/${slug}-v${version}.mp4` : `out/${slug}.mp4`;
-    run("npx", ["remotion", "render", slug, out, "--crf=23", "--log=info"]);
+    const gl = glFor(slug);
+    run("npx", ["remotion", "render", slug, out, "--crf=23", "--log=info", ...(gl ? [`--gl=${gl}`] : [])]);
     const url = await uploadVideo(out, slug);
     if (url) console.log("Uploaded:", url);
     await sendVideo(out, script.title, url);

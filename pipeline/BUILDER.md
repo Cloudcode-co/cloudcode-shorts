@@ -60,6 +60,17 @@ A placeholder `Video.tsx` is already there; replace it.
   Background art may bleed to the edges. The QA stills show all of these zones.
 - Text at least 34px, Vietnamese diacritics must render (use the kit fonts or a
   `@remotion/google-fonts` font loaded with the `vietnamese` subset).
+- **3D** when the art direction asks for it, or when it shows something better
+  than flat shapes (a logo turning in light, a stack of servers, a camera flying
+  over a map of the tools). Use the kit's `Stage3D` (a full-frame
+  `ThreeCanvas` with camera and light) and `useImageTexture(staticFile(...))`
+  for avatars; write meshes as React Three Fiber JSX (`<mesh>`,
+  `<boxGeometry>`, `<meshStandardMaterial>`). Drive every movement from
+  `useCurrentFrame()` and `interpolate`/`spring`, never R3F's `useFrame` or
+  clocks: frames render out of order. Keep readable text in normal HTML layered
+  over the canvas, not as 3D text. Software WebGL is slow, so keep scenes light:
+  a few meshes, no shadow maps or post-processing, and 2D shots where 3D adds
+  nothing. Vary the 3D between videos instead of always spinning a cube.
 - Motion with purpose: ease-out `Easing.bezier(0.23, 1, 0.32, 1)` for entrances,
   hard cuts between shots unless the art direction says otherwise. Never animate
   from `scale(0)`.

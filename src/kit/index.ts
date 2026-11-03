@@ -6,3 +6,4 @@ export * from "./Terminal";
 export * from "./theme";
 export * from "./timing";
 export * from "./ui";
+export * from "./three";

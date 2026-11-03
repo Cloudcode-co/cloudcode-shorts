@@ -70,6 +70,21 @@
       "id": "big-type",
       "name": "Kinetic type",
       "brief": "Almost no imagery: words are the visuals. Huge type that fills the frame, words swapping on the voice's beat, one word per beat at key moments, colour flips between shots. Logos appear only as punctuation."
+    },
+    {
+      "id": "3d-product-shots",
+      "name": "3D product shots",
+      "brief": "Real 3D with the kit's Stage3D: each tool is an object on a turntable or a plinth (its avatar as a texture on a slab, a coin or a box), lit like a product photo against a deep backdrop in the logo's colour. The camera dollies and orbits slowly; cuts change the angle. Text stays flat HTML laid over the scene, set large and sparse."
+    },
+    {
+      "id": "3d-server-room",
+      "name": "Server room flythrough",
+      "brief": "Real 3D with the kit's Stage3D: racks, blinking status lights and cables built from simple boxes and planes, low-key light with one coloured key light from the subject's logo. The camera glides down an aisle and stops on the rack that matters for each line. Commands appear on a flat terminal laid over the scene."
+    },
+    {
+      "id": "3d-floating-diagram",
+      "name": "Floating 3D diagram",
+      "brief": "Real 3D with the kit's Stage3D: the topic as a diagram floating in space, with tools as thick tiles carrying their avatars, connected by tubes or arcs, seen from a tilted isometric camera that swings to each part as the voice reaches it. Clean, bright, matte materials; flat HTML labels beside the tiles."
     }
   ],
   "pacing": [
