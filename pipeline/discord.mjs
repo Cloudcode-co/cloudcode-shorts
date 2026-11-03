@@ -16,12 +16,12 @@ export const discordOn = Boolean(token && channel);
 const LIMIT = (Number(process.env.DISCORD_UPLOAD_MB) || 10) * 1024 * 1024 * 0.95;
 const TOO_LARGE = 413;
 
-const post = async (content, files = []) => {
+const post = async (content, files = [], components) => {
   if (!discordOn) return;
   const form = new FormData();
   form.append(
     "payload_json",
-    JSON.stringify({ content: content.slice(0, 2000), allowed_mentions: { parse: [] } }),
+    JSON.stringify({ content: content.slice(0, 2000), allowed_mentions: { parse: [] }, components }),
   );
   files.forEach((f, i) => form.append(`files[${i}]`, new Blob([readFileSync(f)]), path.basename(f)));
   const res = await fetch(`https://discord.com/api/v10/channels/${channel}/messages`, {
@@ -77,3 +77,17 @@ ${url}`);
   if (small) return post(`${caption}\nBản xem trước 540p. ${full}`, [small]);
   return post(`${caption}\nVideo quá lớn để gửi lên Discord. ${full}`);
 };
+
+// Duyệt / Bỏ buttons for a video on the CDN; the bot worker handles them
+// (Duyệt sends the video to the connected account's TikTok drafts). `key` is
+// "<slug>/<file>.mp4" under tiktok-shorts/ in the bucket.
+export const sendApproval = (key, caption) =>
+  post(`Duyệt video này? Duyệt gửi nó vào hộp nháp TikTok; caption để dán:\n${caption}`, [], [
+    {
+      type: 1,
+      components: [
+        { type: 2, style: 3, label: "Duyệt, gửi vào TikTok", custom_id: `tt:${key}` },
+        { type: 2, style: 2, label: "Bỏ", custom_id: `skip:${key}` },
+      ],
+    },
+  ]);

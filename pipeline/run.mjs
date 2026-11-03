@@ -12,10 +12,12 @@
 // or link; NOTES are requests for the script writer and Claude; REVISE is
 // the slug of a video to rework.
 import { spawnSync } from "node:child_process";
+import path from "node:path";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
+import { sendApproval } from "./discord.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { glFor } from "../scripts/gl.mjs";
 
@@ -122,8 +124,12 @@ try {
     const url = await uploadVideo(out, slug);
     if (url) console.log("Uploaded:", url);
     await sendVideo(out, script.title, url);
+    await sendMessage(summary);
+    // Approval for TikTok works from the copy on the CDN.
+    if (url) await sendApproval(`${slug}/${path.basename(out)}`, caption);
+  } else {
+    await sendMessage(summary);
   }
-  await sendMessage(summary);
   console.log(`\nDone: ${slug}${notifyOn ? " (sent to Telegram/Discord)" : ""}`);
 } catch (err) {
   await sendMessage(
