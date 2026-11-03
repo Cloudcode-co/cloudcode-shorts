@@ -1,14 +1,17 @@
-// Writes a new video's script with Gemini, in two calls (grounding and a JSON
-// schema can't share a call): research with Google Search, then the script.
-// Then looks up every GitHub repo it names for real stars and avatars.
+// Writes a new video's script with Gemini from primary sources: the projects'
+// GitHub repos and READMEs (pipeline/research.mjs), plus Hacker News when it
+// picks the topic itself. GEMINI_SEARCH=true adds Google Search research,
+// which needs a Gemini key with billing (the free tier has no search quota
+// for Gemini 3).
 //
 //   node --env-file=.env pipeline/write-script.mjs "Coolify vs Dokploy"
-//   node --env-file=.env pipeline/write-script.mjs            # Gemini picks the topic
+//   node --env-file=.env pipeline/write-script.mjs            # picks a trending topic
 //
 // Writes src/videos/<slug>/{script.json,facts.json}, public/videos/<slug>/repos/*.png
 // and prints the slug as the last line.
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { gemini, pickGeminiModels, readJson, slugify, writeJson } from "./lib.mjs";
+import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
 
 const VOICE = {
   voiceId: "2ZUpiKo5wCCuypvx2zaS", // Tony Nguyễn
@@ -17,67 +20,96 @@ const VOICE = {
 };
 const TAGS = ["excited", "curious", "casually", "impressed", "cheerfully", "warmly", "thoughtful", "laughs"];
 
+const S = (type, extra = {}) => ({ type, ...extra });
+const json = async (prompt, schema, temperature = 0.7) =>
+  JSON.parse(
+    await gemini(models, {
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature },
+    }),
+  );
+
 const history = readJson("pipeline/history.json", []);
 const pastTopics = history.map((h) => h.topic).filter(Boolean);
+// Repos earlier videos already covered, so the picker moves on.
+const pastRepos = readdirSync("src/videos", { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .flatMap((d) => readJson(`src/videos/${d.name}/facts.json`, { repos: [] }).repos.map((r) => r.repo.toLowerCase()));
 const models = await pickGeminiModels();
 console.log("Gemini models:", models.join(", "));
 
 let topic = process.argv.slice(2).join(" ").trim();
 const today = new Date().toISOString().slice(0, 10);
+const channel =
+  "a Vietnamese TikTok channel for developers and self-hosters, run by a Vietnamese VPS and " +
+  "game-server host, making 60–110 second videos";
 
-if (!topic) {
-  topic = (
-    await gemini(models, {
-      tools: [{ google_search: {} }],
-      contents: [
-        {
-          role: "user",
-          parts: [
-            {
-              text:
-                `Today is ${today}. Pick ONE topic for a 60–110 second Vietnamese TikTok video for developers ` +
-                `and self-hosters, on a channel run by a Vietnamese VPS and game-server host. Good topics: an open-source ` +
-                `tool or AI agent that is trending on GitHub or Hacker News in the last two weeks, a head-to-head ` +
-                `comparison of two popular self-hosted tools, or how to install something useful on a Linux server. ` +
-                `The topic must have an official install command. Avoid these past topics: ${JSON.stringify(pastTopics)}. ` +
-                `Reply with the topic only, one line, in Vietnamese, naming the tools exactly.`,
-            },
-          ],
-        },
-      ],
-    })
-  )
-    .trim()
-    .split("\n")[0];
-  console.log("Topic picked by Gemini:", topic);
+// 1. Topic and the repos it is about.
+const plan = S("OBJECT", {
+  properties: {
+    topic: S("STRING", { description: "the video's topic in Vietnamese, naming the tools exactly" }),
+    repos: S("ARRAY", { items: S("STRING"), description: "owner/name of the main repos" }),
+    queries: S("ARRAY", {
+      items: S("STRING"),
+      description: "GitHub repository search queries for close alternatives or the other side of a comparison",
+    }),
+  },
+  required: ["topic", "repos", "queries"],
+});
+let picked;
+if (topic) {
+  picked = await json(
+    `For ${channel}, the next video is about: "${topic}". List the GitHub repositories (owner/name) of ` +
+      "the tools it is about, and up to 3 GitHub search queries that find close alternatives worth naming. " +
+      "Keep the topic as given.",
+    plan,
+  );
+  picked.topic = topic;
+} else {
+  const candidates = await trendingCandidates(pastRepos);
+  if (!candidates.length) throw new Error("no trending candidates from GitHub or Hacker News");
+  picked = await json(
+    `Today is ${today}. Pick the next topic for ${channel}, from these real repos that are new, rising, or ` +
+      `discussed on Hacker News right now:\n${JSON.stringify(candidates, null, 1)}\n\n` +
+      "Pick something Vietnamese developers and self-hosters would want to try on a Linux server, with a way " +
+      "to install it. A head-to-head comparison with a well-known alternative works well. Avoid these past " +
+      `topics: ${JSON.stringify(pastTopics)}. "repos" must come from the list above; "queries" find the ` +
+      "alternatives to compare with.",
+    plan,
+    0.9,
+  );
+  topic = picked.topic;
+  console.log("Topic picked:", topic);
 }
 
-// 1. Research, grounded in Google Search.
-const research = await gemini(models, {
-  tools: [{ google_search: {} }],
-  contents: [
-    {
-      role: "user",
-      parts: [
-        {
-          text:
-            `Today is ${today}. Research this topic for a short video script: "${topic}".\n` +
-            `Report, in English, with a source URL after every fact:\n` +
-            `- What each tool is and who makes it, in one line each.\n` +
-            `- Each tool's GitHub repository as owner/name (only repos you found, never guessed).\n` +
-            `- The real differences that matter to someone choosing (features, language, resource use, license, pricing).\n` +
-            `- Close alternatives worth naming, with their GitHub repos.\n` +
-            `- The official install / first-run commands for Linux, copied exactly from official docs or README.\n` +
-            `- Anything that changed in the last 3 months.\n` +
-            `Do not report GitHub star counts; they are looked up separately.`,
-        },
-      ],
-    },
-  ],
-});
+// 2. Research: each repo's README, release and metadata, from GitHub itself.
+const found = await resolveRepos(picked);
+if (!found.length) throw new Error(`no GitHub repos found for "${topic}"`);
+console.log("Research repos:", found.join(", "));
+const briefs = (await Promise.all(found.map((r, i) => repoBrief(r, i < 2 ? 12000 : 5000)))).filter(Boolean);
+let research = `Primary sources, fetched from GitHub on ${today}:\n\n${briefs.join("\n\n")}`;
 
-// 2. The script, as JSON matching a schema.
-const S = (type, extra = {}) => ({ type, ...extra });
+if (process.env.GEMINI_SEARCH === "true") {
+  const web = await gemini(models, {
+    tools: [{ google_search: {} }],
+    contents: [
+      {
+        role: "user",
+        parts: [
+          {
+            text:
+              `Today is ${today}. For a short video about "${topic}" (repos: ${found.join(", ")}), report in ` +
+              "English, with a source URL after every fact, what changed in the last 3 months and how " +
+              "people compare these tools. No star counts.",
+          },
+        ],
+      },
+    ],
+  });
+  research += `\n\nWeb research (Google Search):\n${web}`;
+}
+
+// 3. The script, as JSON matching a schema.
 const schema = S("OBJECT", {
   properties: {
     slug: S("STRING", { description: "short kebab-case ascii id, e.g. coolify-vs-dokploy" }),
@@ -116,18 +148,17 @@ const rules =
   `in square brackets, only these: ${TAGS.map((t) => `[${t}]`).join(" ")}, at most one or two per line.\n` +
   `Shape: 8–14 scenes, 60–110 seconds spoken in total (about 14 Vietnamese words per 5 seconds). ` +
   `Scene 1 is a hook question in under 5 seconds. If there is an install, show it as steps with commands ` +
-  `copied exactly from the research; never invent a command. The last scene says to save the video to try later ` +
+  `copied character for character from a README in the research; never invent or edit a command, and ` +
+  `prefer the shortest official way (one-line installer, docker run, or docker compose). ` +
+  `The last scene says to save the video to try later ` +
   `and follow for more. No advertising: never pitch a product, hosting or VPS, and never mention Cloudcode.\n` +
   `Facts: use only facts from the research. No star counts or numbers the research does not source. ` +
   `Name tools exactly as their projects do. Headlines are what the scene says in a few words, not a label. ` +
-  `Repos: only owner/name pairs from the research.\n\nResearch:\n${research}`;
+  `Repos: only owner/name pairs from the research. The research is the projects' own READMEs, so it ` +
+  `praises them: say plainly what each is good at, without their marketing words.\n\nResearch:\n${research}`;
 
-const script = JSON.parse(
-  await gemini(models, {
-    contents: [{ role: "user", parts: [{ text: rules }] }],
-    generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.9 },
-  }),
-);
+const script = await json(rules, schema, 0.9);
+script.sources = [...new Set([...found.map((r) => `https://github.com/${r}`), ...(script.sources ?? [])])];
 
 // Checks Gemini's output; anything wrong here stops the run before spending
 // voice credits.

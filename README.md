@@ -38,9 +38,13 @@ Remotion needs a company license for some entities:
 `pipeline/run.mjs` makes a whole video unattended; `.github/workflows/make-video.yml`
 runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's servers.
 
-1. `pipeline/write-script.mjs`: Gemini (default `gemini-3.8-flash`) researches the
-   topic with Google Search, then writes `script.json`; real stars and avatars come
-   from the GitHub API into `facts.json`.
+1. `pipeline/write-script.mjs`: research comes from primary sources, for free
+   (`pipeline/research.mjs`): rising GitHub repos and Hacker News links to pick a
+   topic, then each repo's README, latest release and metadata. Gemini (default
+   `gemini-3.8-flash`) writes `script.json` from that, with install commands copied
+   from the READMEs; real stars and avatars go into `facts.json`. Set the variable
+   `GEMINI_SEARCH` to `true` to add Google Search research (needs a Gemini key with
+   billing: the free tier has no search quota for Gemini 3).
 2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (Tony Nguyễn) and music.
 3. `pipeline/build-video.mjs`: Claude Code draws an art direction and writes
    `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA

@@ -51,6 +51,7 @@ jobs:
           TOPIC: ${{ inputs.topic || github.event.client_payload.topic }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_SEARCH: ${{ vars.GEMINI_SEARCH }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}
