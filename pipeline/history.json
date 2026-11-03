@@ -35,5 +35,14 @@
     "pacing": "Few long shots: 3–5 shots, each building up in place.",
     "built": "fallback",
     "costUsd": 0.4133235
+  },
+  {
+    "slug": "tu-host-peach-metadata-manager",
+    "topic": "Tự host Peach: Công cụ cào metadata và quản lý media thay thế TinyMediaManager cho Jellyfin và Plex",
+    "date": "2026-11-03",
+    "direction": "print-zine",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0
   }
 ]

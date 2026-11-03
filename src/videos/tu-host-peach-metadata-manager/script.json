@@ -1,0 +1,151 @@
+{
+  "slug": "tu-host-peach-metadata-manager",
+  "topic": "Tự host Peach: Công cụ cào metadata và quản lý media thay thế TinyMediaManager cho Jellyfin và Plex",
+  "title": "Đã có công cụ cào metadata media ngon hơn TMM?",
+  "caption": "Khám phá Peach - giải pháp cào metadata video local-first cực tiện cho Jellyfin và Plex. Lưu lại để trải nghiệm ngay nhé anh em!",
+  "hashtags": [
+    "#peachvideo",
+    "#jellyfin",
+    "#plexserver",
+    "#congnghe",
+    "#meocongnghe"
+  ],
+  "musicPrompt": "Upbeat modern electronic tech groove with clean synthesizer pulses and dynamic rhythmic beat, bright and engaging, no vocals",
+  "sources": [
+    "https://github.com/peach-mitao/peach",
+    "https://github.com/cnwikee/CheckTMDB",
+    "https://github.com/Komet/MediaElch"
+  ],
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em chơi Jellyfin hay Plex đã có công cụ cào metadata thực sự ưng ý chưa?",
+      "headline": "Tìm tool cào metadata cho media server?",
+      "lines": [
+        "Jellyfin & Plex scraper",
+        "Quản lý thư viện phim"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Giới thiệu với anh em Peach, dự án mã nguồn mở viết bằng Python giúp quản lý media theo hướng local-first.",
+      "headline": "Peach: Quản lý media local-first",
+      "lines": [
+        "Mã nguồn mở Python",
+        "Triết lý Local-first",
+        "Bản quyền AGPL-3.0"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Peach tự nhận diện mã video, đọc file NFO rồi tự động điền tiêu đề, diễn viên, studio lẫn ảnh bìa từ nhiều nguồn.",
+      "headline": "Tự động nhận diện mã và quét thông tin",
+      "lines": [
+        "Nhận diện mã video",
+        "Đọc file NFO chuẩn chỉ",
+        "Kéo ảnh bìa và thông tin studio"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Điểm tuyệt vời là Peach giữ trọn vẹn những gì anh em chỉnh sửa, toàn bộ metadata và lịch sử xem đều lưu tại máy.",
+      "headline": "Giữ trọn chỉnh sửa và lưu trữ nội bộ",
+      "lines": [
+        "Không ghi đè dữ liệu sửa tay",
+        "Lưu lịch sử xem cục bộ",
+        "Bảo mật dữ liệu cá nhân"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s5",
+      "text": "[warmly] Anh em có thể duyệt chung ổ cứng nội bộ, ổ mạng SMB, thư viện đám mây gắn kèm hoặc cả tài khoản PikPak.",
+      "headline": "Gom ổ cứng, SMB và đám mây",
+      "lines": [
+        "Hỗ trợ ổ cứng cục bộ",
+        "Kết nối mạng SMB",
+        "Đồng bộ lưu trữ PikPak"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Trình phát tích hợp hỗ trợ xem trước timeline, xoay video và đổi tốc độ, kèm cả Task center theo dõi CPU, GPU.",
+      "headline": "Phát video linh hoạt kèm Task Center",
+      "lines": [
+        "Xem trước timeline khi tua",
+        "Hỗ trợ player ngoài",
+        "Giám sát tải CPU và GPU"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Peach còn cho phép tìm theo mã hoặc nạp link magnet để tải về, cùng tính năng theo dõi cập nhật từ diễn viên yêu thích.",
+      "headline": "Tải magnet và theo dõi diễn viên",
+      "lines": [
+        "Tìm mã và nạp link magnet",
+        "Theo dõi cập nhật diễn viên",
+        "Quản lý danh sách muốn xem"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Peach có sẵn bộ cài cho Windows, macOS, hướng dẫn Docker cho NAS, hoặc anh em có thể bấm thử ngay bản demo trên web.",
+      "headline": "Dễ dàng chạy trên Windows, Mac và Docker",
+      "lines": [
+        "Bản cài Windows & macOS",
+        "Hỗ trợ Docker và NAS",
+        "Trải nghiệm tại demo.peach.video"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    },
+    {
+      "id": "s9",
+      "text": "[cheerfully] Anh em lưu video này lại để thử ngay trên dàn media server ở nhà và bấm follow kênh để khám phá thêm nhiều công cụ hay nhé!",
+      "headline": "Lưu lại thử ngay và bấm theo dõi",
+      "lines": [
+        "Lưu video để tự host",
+        "Follow kênh để cập nhật tool mới"
+      ],
+      "commands": [],
+      "repos": [
+        "peach-mitao/peach"
+      ]
+    }
+  ]
+}
