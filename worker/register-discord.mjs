@@ -57,10 +57,6 @@ const commands = [
       voice,
     ],
   },
-  {
-    name: "tiktok",
-    description: "Kết nối tài khoản TikTok để nút Duyệt gửi video vào hộp nháp",
-  },
 ];
 
 const res = await fetch(`https://discord.com/api/v10/applications/${app}/commands`, {

@@ -15,8 +15,3 @@ MEDIA_URL = "https://media.cloudcode.io.vn"
 [[r2_buckets]]
 binding = "MEDIA"
 bucket_name = "cloudcode"
-
-# TikTok tokens for sending approved videos to TikTok drafts (src/tiktok.js).
-[[kv_namespaces]]
-binding = "TIKTOK"
-id = "c82200bc2b6b4beda6429a21b6f727e8"

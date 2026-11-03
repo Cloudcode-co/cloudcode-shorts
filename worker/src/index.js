@@ -3,10 +3,7 @@
 // upload.
 //
 //   POST /discord      Discord interactions: /video [topic] [giong] [yeucau],
-//                      /sua video [yeucau] [giong], their autocomplete, /tiktok
-//                      (connect a TikTok account) and the Duyệt / Bỏ buttons
-//                      under finished videos (Duyệt sends it to TikTok drafts)
-//   GET  /tiktok/callback  TikTok's redirect after connecting an account
+//                      /sua video [yeucau] [giong], and their autocomplete
 //   POST /telegram     Telegram bot webhook: any text is the topic, /auto lets
 //                      Gemini pick, /id replies with the chat id
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
@@ -16,11 +13,8 @@
 // Secrets (wrangler secret put): GITHUB_TOKEN, UPLOAD_SECRET, plus for Discord
 // DISCORD_PUBLIC_KEY and optionally ALLOWED_DISCORD_USER_IDS (comma-separated;
 // server admins may always run /video), and for
-// Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID, and for
-// TikTok TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET.
-// Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA. KV binding:
-// TIKTOK (TikTok tokens).
-import * as tiktok from "./tiktok.js";
+// Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID.
+// Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA.
 
 // Fires repository_dispatch; the workflow reads what to make (topic, voice,
 // notes, or revise: a video to rework) and where to send the result (Discord
@@ -108,51 +102,6 @@ const verifyDiscord = async (request, body, publicKey) => {
   );
 };
 
-// The Duyệt / Bỏ buttons the pipeline puts under a finished video. Their
-// custom_id is "tt:<key>" or "skip:<key>", key being the video under
-// tiktok-shorts/ in the bucket.
-const STATUS = "\n\nTikTok: ";
-const button = (interaction, env, ctx) => {
-  const [action, key] = String(interaction.data.custom_id ?? "").split(/:(.*)/s);
-  // The message without the status line an earlier press added.
-  const original = (interaction.message?.content ?? "").split(STATUS)[0];
-  if (!KEY.test(key ?? "")) return json({ type: 4, data: { content: "Nút này không còn dùng được.", flags: 64 } });
-  if (action === "skip") {
-    return json({ type: 7, data: { content: `${original}${STATUS}đã bỏ qua, không gửi lên TikTok.`, components: [] } });
-  }
-  if (action !== "tt") return json({ type: 6 });
-
-  const edit = (content, components = []) =>
-    fetch(`https://discord.com/api/v10/webhooks/${interaction.application_id}/${interaction.token}/messages/@original`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: `${original}${STATUS}${content}`, components }),
-    });
-  ctx.waitUntil(
-    (async () => {
-      try {
-        const id = await tiktok.sendToInbox(env, PREFIX + key);
-        // Usually reaches the inbox within seconds; look a few times.
-        let status = "PROCESSING_UPLOAD";
-        for (let i = 0; i < 4 && status.startsWith("PROCESSING"); i++) {
-          await new Promise((r) => setTimeout(r, 4000));
-          const s = await tiktok.uploadStatus(env, id);
-          status = s.status ?? status;
-          if (status === "FAILED") throw new Error(`TikTok không nhận video: ${s.fail_reason ?? "không rõ lý do"}`);
-        }
-        await edit(
-          status === "SEND_TO_USER_INBOX"
-            ? "đã vào hộp nháp. Mở thông báo trong app TikTok, dán caption ở trên rồi đăng."
-            : `đã gửi, TikTok đang xử lý (${status}). Lát nữa xem thông báo trong app TikTok.`,
-        );
-      } catch (err) {
-        await edit(`lỗi: ${err.message}. Bấm Duyệt để thử lại.`, interaction.message?.components ?? []);
-      }
-    })(),
-  );
-  return json({ type: 6 }); // acknowledge; the message is edited when done
-};
-
 const discord = async (request, env, ctx) => {
   const body = await request.text();
   if (!(await verifyDiscord(request, body, env.DISCORD_PUBLIC_KEY))) {
@@ -160,7 +109,10 @@ const discord = async (request, env, ctx) => {
   }
   const interaction = JSON.parse(body);
   if (interaction.type === 1) return json({ type: 1 }); // PING
+  const command = interaction.data?.name;
+  if (command !== "video" && command !== "sua") return json({ type: 1 });
   if (interaction.type === 4) return autocomplete(interaction, env);
+  if (interaction.type !== 2) return json({ type: 1 });
 
   // Server admins, plus anyone listed in ALLOWED_DISCORD_USER_IDS.
   const user = interaction.member?.user?.id ?? interaction.user?.id;
@@ -170,22 +122,6 @@ const discord = async (request, env, ctx) => {
   if (!admin && !allowed.includes(user)) {
     return json({ type: 4, data: { content: "Bạn không có quyền dùng lệnh này.", flags: 64 } });
   }
-
-  if (interaction.type === 3) return button(interaction, env, ctx);
-  const command = interaction.data?.name;
-  if (interaction.type !== 2) return json({ type: 1 });
-  if (command === "tiktok") {
-    if (!env.TIKTOK_CLIENT_KEY || !env.TIKTOK_CLIENT_SECRET || !env.TIKTOK) {
-      return json({ type: 4, data: { content: "Worker chưa có TIKTOK_CLIENT_KEY / TIKTOK_CLIENT_SECRET.", flags: 64 } });
-    }
-    const status = (await tiktok.connected(env)) ? "Đang kết nối một tài khoản TikTok." : "Chưa kết nối TikTok.";
-    const link = await tiktok.loginUrl(request, env);
-    return json({
-      type: 4,
-      data: { content: `${status}\n[Đăng nhập TikTok để kết nối](${link}) (link dùng một lần, hết hạn sau 10 phút).`, flags: 64 },
-    });
-  }
-  if (command !== "video" && command !== "sua") return json({ type: 1 });
   const option = (name, max) =>
     String(interaction.data.options?.find((o) => o.name === name)?.value ?? "").trim().slice(0, max);
   const job = {
@@ -265,7 +201,6 @@ export default {
     if (kind === "upload" && KEY.test(key) && request.method === "PUT") {
       return upload(request, env, key);
     }
-    if (pathname === "/tiktok/callback" && request.method === "GET") return tiktok.callback(request, env);
     if (request.method !== "POST") return new Response("not found", { status: 404 });
     if (pathname === "/discord") return discord(request, env, ctx);
     if (pathname === "/telegram") return telegram(request, env);
