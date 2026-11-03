@@ -46,7 +46,9 @@ runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's ser
    `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA
    stills. It may only edit that video's folder and run register / tsc / qa.
    If it fails, the kit's `FallbackVideo` is used so the run still ends with a video.
-4. QA stills, render, then Telegram gets the stills, the MP4 and the caption.
+4. QA stills and render; the MP4 goes to R2 (`media.cloudcode.io.vn/tiktok-shorts/`)
+   through the bot worker, and
+   Discord and/or Telegram get the stills, a link to the video and the caption.
    The workflow commits the video's source back to the repo.
 
 Run locally (no render unless `--render`):
@@ -58,10 +60,14 @@ node --env-file=.env pipeline/run.mjs "Coolify vs Dokploy"
 ### Setup
 
 Repository secrets: `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY`,
-and for Telegram `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
+for Discord `DISCORD_BOT_TOKEN`, for Telegram `TELEGRAM_BOT_TOKEN` and
+`TELEGRAM_CHAT_ID`. Results go back to the chat the command came from.
 Optional repository variables: `GEMINI_MODEL`, `CLAUDE_MODEL` (default
 `claude-sonnet-5-5`), `CLAUDE_BUDGET_USD` (default 4), `AUTO_DAILY` = `true` to
-make a video every night at 01:00 Vietnam time with a topic Gemini picks.
+make a video every night at 01:00 Vietnam time with a topic Gemini picks,
+`CDN_URL` (the bot worker's URL, with the secret `CDN_UPLOAD_SECRET`; see
+`worker/README.md`), `DISCORD_CHANNEL_ID` (where runs not started from Discord report),
+`DISCORD_UPLOAD_MB` (default 10; 50 or 100 on boosted servers).
 
-Start a run from the GitHub app (Actions → Make video → Run workflow) or from
-Telegram through the bot in `worker/`.
+Start a run from the GitHub app (Actions → Make video → Run workflow), or with
+`/video` in Discord or a message in Telegram through the bot in `worker/`.

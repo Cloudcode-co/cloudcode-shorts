@@ -1,7 +1,17 @@
 name = "cloudcode-shorts-bot"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
+# Ntncar311@gmail.com's Account, which owns the media bucket.
+account_id = "b0fd230e76320e80d31965568a9a7ba7"
 
 [vars]
 # The GitHub repository whose "Make video" workflow the bot starts.
 GITHUB_REPO = "Cloudcode-co/cloudcode-shorts"
+# Public URL of the media bucket.
+MEDIA_URL = "https://media.cloudcode.io.vn"
+
+# Finished videos go to the media bucket under tiktok-shorts/, served at
+# MEDIA_URL by the bucket's custom domain.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "cloudcode"

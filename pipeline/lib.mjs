@@ -83,3 +83,8 @@ export const gemini = async (model, body) => {
     throw new Error(`Gemini ${model}: ${res.status} ${await res.text()}`);
   }
 };
+
+// This GitHub Actions run's page, or null outside Actions.
+export const runUrl = process.env.GITHUB_RUN_ID
+  ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+  : null;

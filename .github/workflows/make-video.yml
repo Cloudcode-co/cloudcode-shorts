@@ -7,7 +7,7 @@ on:
         description: "Đề tài (để trống để Gemini tự chọn)"
         required: false
         default: ""
-  # Sent by the Telegram bot worker (worker/).
+  # Sent by the chat bot worker (worker/), from Discord or Telegram.
   repository_dispatch:
     types: [make-video]
   # 01:00 in Vietnam. Runs only when the repo variable AUTO_DAILY is "true".
@@ -56,7 +56,14 @@ jobs:
           CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CHAT_ID: ${{ github.event.client_payload.chat_id || secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          # The channel /video was run in, else the default channel.
+          DISCORD_CHANNEL_ID: ${{ github.event.client_payload.channel_id || vars.DISCORD_CHANNEL_ID }}
+          DISCORD_UPLOAD_MB: ${{ vars.DISCORD_UPLOAD_MB }}
+          # The bot worker's URL; finished videos are uploaded to R2 through it.
+          CDN_URL: ${{ vars.CDN_URL }}
+          CDN_UPLOAD_SECRET: ${{ secrets.CDN_UPLOAD_SECRET }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node pipeline/run.mjs
 

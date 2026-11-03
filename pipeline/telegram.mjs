@@ -2,6 +2,7 @@
 // TELEGRAM_CHAT_ID are set; otherwise every call is a no-op.
 import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
+import { runUrl } from "./lib.mjs";
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const chat = process.env.TELEGRAM_CHAT_ID;
@@ -29,15 +30,23 @@ export const sendMessage = (text) => {
   return call("sendMessage", form);
 };
 
-// Returns false when the file is too big for a bot upload.
-export const sendVideo = async (file, caption) => {
-  if (statSync(file).size > UPLOAD_LIMIT) return false;
+// Uploads the file when it fits; otherwise sends `url` (the video on the CDN)
+// or points at the run's artifacts.
+export const sendVideo = async (file, caption, url) => {
+  if (!telegramOn) return;
+  if (statSync(file).size > UPLOAD_LIMIT) {
+    if (url) return sendMessage(`${caption}
+${url}`);
+    return sendMessage(
+      `${caption}
+Video lớn hơn 50 MB nên bot không gửi được; tải ở mục Artifacts${runUrl ? `: ${runUrl}` : "."}`,
+    );
+  }
   const form = new FormData();
   form.append("video", fileBlob(file), path.basename(file));
   form.append("caption", caption.slice(0, 1000));
   form.append("supports_streaming", "true");
   await call("sendVideo", form);
-  return true;
 };
 
 export const sendPhotos = (files) => {

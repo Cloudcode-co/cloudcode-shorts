@@ -1,5 +1,5 @@
 // Makes one video end to end: script (Gemini) → voice and music (ElevenLabs) →
-// build (Claude Code, else the fallback) → QA stills → render → Telegram.
+// build (Claude Code, else the fallback) → QA stills → render → Telegram/Discord.
 //
 //   node --env-file=.env pipeline/run.mjs "Coolify vs Dokploy"
 //   node --env-file=.env pipeline/run.mjs                  # Gemini picks the topic
@@ -9,15 +9,13 @@
 // first argument (the GitHub workflow passes it that way).
 import { spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, readdirSync } from "node:fs";
-import { readJson, run, writeJson } from "./lib.mjs";
-import { sendMessage, sendPhotos, sendVideo, telegramOn } from "./telegram.mjs";
+import { readJson, run, runUrl, writeJson } from "./lib.mjs";
+import { uploadVideo } from "./cdn.mjs";
+import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
 
 const args = process.argv.slice(2);
 const topic = (args.filter((a) => !a.startsWith("--")).join(" ") || process.env.TOPIC || "").trim();
 const render = Boolean(process.env.CI) || args.includes("--render");
-const runUrl = process.env.GITHUB_RUN_ID
-  ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
-  : null;
 
 // Runs a node script, echoing its output, and returns its last output line.
 const nodeLast = (script, scriptArgs) => {
@@ -65,11 +63,12 @@ try {
   if (render) {
     const out = `out/${slug}.mp4`;
     run("npx", ["remotion", "render", slug, out, "--crf=23", "--log=info"]);
-    const sent = await sendVideo(out, script.title);
-    if (!sent) await sendMessage("Video lớn hơn 50 MB nên bot không gửi được; tải ở mục Artifacts của lần chạy.");
+    const url = await uploadVideo(out, slug);
+    if (url) console.log("Uploaded:", url);
+    await sendVideo(out, script.title, url);
   }
   await sendMessage(summary);
-  console.log(`\nDone: ${slug}${telegramOn ? " (sent to Telegram)" : ""}`);
+  console.log(`\nDone: ${slug}${notifyOn ? " (sent to Telegram/Discord)" : ""}`);
 } catch (err) {
   await sendMessage(`Lỗi khi làm video${slug ? ` ${slug}` : ""}:\n${err.message}`.slice(0, 3500) + (runUrl ? `\n${runUrl}` : ""));
   throw err;
