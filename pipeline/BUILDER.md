@@ -66,6 +66,11 @@ A placeholder `Video.tsx` is already there; replace it.
 - Avoid the generated-video look: no cream `#F4F1EA` backgrounds, no tracked-out
   ALL-CAPS labels over headings, no `→` arrows on text, no rows of identical rounded
   cards with soft grey shadows, no gradient washes as decoration, no emoji as icons.
+- No background behind words: no highlighter or marker bars, no coloured boxes,
+  pills or tags behind a word or part of a line. They never sit exactly on the
+  glyphs, so they look like a rendering bug. Emphasise with colour, weight, size,
+  or a drawn underline below the baseline. A whole panel or card behind a block
+  of text (a terminal, a note) is fine.
 
 ## Check it (required)
 
@@ -76,8 +81,8 @@ each one exactly as written here, alone in its own Bash call, with no `cd`, `&&`
 1. `npm run register`, then `npx tsc`. Fix every error.
 2. `npm run qa -- <slug>` renders 10 stills with TikTok's overlay into
    `out/qa/<slug>/`. Open every still and look: text under the overlay, cut-off or
-   overflowing words, missing images, unreadable contrast, empty-looking frames,
-   anything that looks broken or generic. Fix and run it again. Up to 3 rounds;
+   overflowing words, a shape or background behind words, missing images,
+   unreadable contrast, empty-looking frames, anything that looks broken or generic. Fix and run it again. Up to 3 rounds;
    for a specific moment, `npm run qa -- <slug> <frame> <frame>`.
 3. Finish with a passing `npx tsc` and a last QA round you are happy with.
 
