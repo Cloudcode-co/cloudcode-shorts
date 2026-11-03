@@ -122,6 +122,8 @@ try {
     run("npx", ["remotion", "render", slug, out, "--crf=23", "--log=info", ...(gl ? [`--gl=${gl}`] : [])]);
     const url = await uploadVideo(out, slug);
     if (url) console.log("Uploaded:", url);
+    // The workflow keeps a copy as an artifact only when the CDN has none.
+    if (url && process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `cdn=${url}\n`);
     await sendVideo(out, script.title, url);
   }
   await sendMessage(summary);
