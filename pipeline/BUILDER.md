@@ -30,6 +30,23 @@ Load these with the Skill tool before writing code, and follow them:
   Where they talk about clicks and hovers, apply the same judgement to motion on
   a timeline.
 
+Load these when the video calls for them:
+
+- `apple-design`: springs, momentum and depth, for motion that should feel
+  physical (cards settling, things thrown onto the frame).
+- `animation-performance`: which properties stay cheap. Renders run on a CPU
+  without a GPU, so blur, big shadows and 3D cost real minutes.
+- `animation-vocabulary`: the names of effects, when you want a specific one.
+- `theme-factory`: ready colour and font pairings, as a starting point when the
+  subject's logos give little to work with.
+- `remotion-captions`: showing spoken words on screen. There are no word
+  timings, so pace captions from each clip's length; skip its transcription and
+  SRT parts.
+- `remotion-maps`: when the art direction or topic is a map. Use no map service
+  that needs an API key or the network.
+- `review-animations`: before the last QA round, review your motion against it
+  and fix what it flags.
+
 ## What to make
 
 Write `src/videos/<slug>/Video.tsx` (plus any extra files you want inside

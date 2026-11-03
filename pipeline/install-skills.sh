@@ -13,6 +13,13 @@ SKILLS=(
   "anthropics/skills    frontend-design          -"
   "emilkowalski/skills  emil-design-eng          emilkowalski/skills:LICENSE"
   "emilkowalski/skills  animate                  emilkowalski/skills:LICENSE"
+  "remotion-dev/skills  remotion-captions        remotion-dev/remotion:LICENSE.md"
+  "remotion-dev/skills  remotion-maps            remotion-dev/remotion:LICENSE.md"
+  "emilkowalski/skills  review-animations        emilkowalski/skills:LICENSE"
+  "emilkowalski/skills  animation-performance    emilkowalski/skills:LICENSE"
+  "emilkowalski/skills  apple-design             emilkowalski/skills:LICENSE"
+  "emilkowalski/skills  animation-vocabulary     emilkowalski/skills:LICENSE"
+  "anthropics/skills    theme-factory            -"
 )
 
 dest=".claude/skills"
