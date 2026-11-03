@@ -1,0 +1,143 @@
+{
+  "slug": "tu-host-opengym-thay-the-hevy",
+  "topic": "Tự host openGym: Ứng dụng theo dõi tập luyện mã nguồn mở thay thế Hevy và Strong",
+  "title": "Ứng dụng tập gym tự host thay thế Hevy và Strong?",
+  "caption": "Tự host ứng dụng theo dõi tập luyện mã nguồn mở thay thế Hevy & Strong hoàn toàn miễn phí! #openGym #GymCoach #SelfHosted",
+  "hashtags": [
+    "#openGym",
+    "#GymCoach",
+    "#SelfHosted",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Upbeat energetic synthwave instrumental beat for gym workout and tech presentation, fast pace, no vocals",
+  "sources": [
+    "https://github.com/DuarteSantos8/openGym",
+    "https://github.com/gymcoach-app/gymcoach"
+  ],
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[excited] Anh em chán trả tiền đăng ký hàng tháng cho Hevy hay Strong chưa?",
+      "headline": "Thay thế Hevy & Strong?",
+      "lines": [
+        "Ứng dụng tập gym",
+        "Tự host hoàn toàn"
+      ],
+      "commands": [],
+      "repos": [
+        "DuarteSantos8/openGym"
+      ]
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Giới thiệu với anh em hai dự án mã nguồn mở cực ngon: openGym và GymCoach!",
+      "headline": "Mã nguồn mở miễn phí",
+      "lines": [
+        "openGym",
+        "GymCoach"
+      ],
+      "commands": [],
+      "repos": [
+        "DuarteSantos8/openGym",
+        "gymcoach-app/gymcoach"
+      ]
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] openGym có hơn 5,600 bài tập kèm ảnh động. Lại còn hỗ trợ app trên iPhone, Android và Apple Watch nữa chứ!",
+      "headline": "openGym: Hơn 5,600 bài tập",
+      "lines": [
+        "Có hoạt ảnh bài tập",
+        "App iOS, Android, Apple Watch",
+        "Nhập dữ liệu từ Hevy, Strong"
+      ],
+      "commands": [],
+      "repos": [
+        "DuarteSantos8/openGym"
+      ]
+    },
+    {
+      "id": "s4",
+      "text": "[cheerfully] Cài đặt openGym cực kỳ đơn giản với Docker Compose chỉ trong vài lệnh này!",
+      "headline": "Cài đặt openGym",
+      "lines": [
+        "Chạy qua Docker Compose"
+      ],
+      "commands": [
+        "git clone https://github.com/DuarteSantos8/openGym",
+        "cd openGym",
+        "cp .env.example .env",
+        "docker compose pull",
+        "docker compose up -d"
+      ],
+      "repos": [
+        "DuarteSantos8/openGym"
+      ]
+    },
+    {
+      "id": "s5",
+      "text": "[curious] Còn nếu anh em muốn có một huấn luyện viên AI riêng đọc dữ liệu bài tập thì sao?",
+      "headline": "GymCoach với AI Coach",
+      "lines": [
+        "Tích hợp AI coach",
+        "Tự dùng API Key cá nhân"
+      ],
+      "commands": [],
+      "repos": [
+        "gymcoach-app/gymcoach"
+      ]
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] GymCoach kết nối trực tiếp với Claude hoặc OpenRouter, hỗ trợ nhập file cardio từ đồng hồ như FIT, TCX hay GPX.",
+      "headline": "GymCoach: Đa năng & Riêng tư",
+      "lines": [
+        "Dùng Claude / OpenRouter",
+        "Nhập file FIT, TCX, GPX",
+        "PWA hoạt động offline"
+      ],
+      "commands": [],
+      "repos": [
+        "gymcoach-app/gymcoach"
+      ]
+    },
+    {
+      "id": "s7",
+      "text": "[warmly] Cài GymCoach cũng chỉ tốn một phút thôi anh em nhé!",
+      "headline": "Cài đặt GymCoach",
+      "lines": [
+        "Tự host trong 1 phút"
+      ],
+      "commands": [
+        "mkdir gymcoach && cd gymcoach",
+        "curl -fsSLo docker-compose.yml https://raw.githubusercontent.com/gymcoach-app/gymcoach/main/docker-compose.selfhost.yml",
+        "printf 'JWT_SECRET=%s\\nPOSTGRES_PASSWORD=%s\\n' \"$(openssl rand -base64 48)\" \"$(openssl rand -hex 16)\" > .env",
+        "docker compose up -d"
+      ],
+      "repos": [
+        "gymcoach-app/gymcoach"
+      ]
+    },
+    {
+      "id": "s8",
+      "text": "[laughs] Anh em lưu ngay video lại để tự host thử nhé! Nhớ bấm theo dõi để xem thêm nhiều công cụ mã nguồn mở hay!",
+      "headline": "Lưu video & Theo dõi ngay",
+      "lines": [
+        "Lưu lại để thử sau",
+        "Follow để nhận thêm video!"
+      ],
+      "commands": [],
+      "repos": [
+        "DuarteSantos8/openGym",
+        "gymcoach-app/gymcoach"
+      ]
+    }
+  ]
+}

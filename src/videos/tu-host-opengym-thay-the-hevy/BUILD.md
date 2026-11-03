@@ -1,0 +1,3 @@
+A magazine-spread build: every scene is a cover or spread with a giant Playfair Display masthead, Be Vietnam Pro cover lines set against a thick rule, the repo avatars as hero images, and page-number folios. The palette comes from the avatars (openGym's chestnut and peach, GymCoach's mint and pale grey). Four chapter cards (I–IV) come before each section, and the longer scenes (s3, s6) cut into two quick spreads. The terminals for s4 and s7 type the commands from script.json through the kit Terminal.
+
+Not verified: `npm run register`, `npx tsc` and `npm run qa` could not be run because the shell was denied in this session. `src/videos/index.ts` already registered the video before the build. Run tsc and QA before shipping.
