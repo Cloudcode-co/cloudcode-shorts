@@ -99,6 +99,22 @@ A placeholder `Video.tsx` is already there; replace it.
   glyphs, so they look like a rendering bug. Emphasise with colour, weight, size,
   or a drawn underline below the baseline. A whole panel or card behind a block
   of text (a terminal, a note) is fine.
+- Fill the frame. Lay each shot out over the whole safe area, top to bottom: a
+  headline and a short stack of cards at the top with the lower half empty is
+  the most common failure. Make the main thing big instead of adding cards.
+- Every scene its own layout. One template (headline, stacked cards, a stamp)
+  repeated for every scene reads as a slideshow; vary scale, position and what
+  carries the scene (a logo, a number, a terminal, a diagram).
+- No fake interface chrome as decoration: no resolution, fps, file-name, REC,
+  volume or version labels in the corners, no `SECTION // NAME` captions.
+- Stamps, stickers, tape and other decoration never cover text.
+- Headlines break by meaning, never leaving one short word alone on a line
+  (`TRÌNH PHÁT LINH / HOẠT` is wrong). Shorten the line or size it to fit, and
+  set `textWrap: "balance"`. Do not uppercase Vietnamese with CSS
+  `text-transform`; write the capitals in the string if you want them.
+- The 34px minimum covers every piece of text, labels and captions included.
+- Show only what the script and facts say: no invented example data such as
+  made-up codes, file names, IDs, URLs, percentages or names.
 
 ## Check it (required)
 
@@ -110,7 +126,11 @@ each one exactly as written here, alone in its own Bash call, with no `cd`, `&&`
 2. `npm run qa -- <slug>` renders 10 stills with TikTok's overlay into
    `out/qa/<slug>/`. Open every still and look: text under the overlay, cut-off or
    overflowing words, a shape or background behind words, missing images,
-   unreadable contrast, empty-looking frames, anything that looks broken or generic. Fix and run it again. Up to 3 rounds;
+   unreadable contrast, empty-looking frames, anything that looks broken or generic.
+   Check each still against the rules in "What to make" one by one, and say in
+   BUILD.md which you fixed: an empty lower half, the same layout as the last
+   scene, corner chrome, decoration over text, a lone word on a headline line,
+   text under 34px, invented data. Fix and run it again. Up to 3 rounds;
    for a specific moment, `npm run qa -- <slug> <frame> <frame>`.
 3. Finish with a passing `npx tsc` and a last QA round you are happy with.
 

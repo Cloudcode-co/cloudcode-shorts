@@ -77,7 +77,9 @@ if (topic) {
     `Today is ${today}. Pick the next topic for ${channel}, from these real repos that are new, rising, or ` +
       `discussed on Hacker News right now:\n${JSON.stringify(candidates, null, 1)}\n\n` +
       "Pick something Vietnamese developers and self-hosters would want to try on a Linux server, with a way " +
-      "to install it. A head-to-head comparison with a well-known alternative works well. Avoid these past " +
+      "to install it, and that a general TikTok audience can see: skip tools made for adult content, for " +
+      "piracy or torrent and magnet downloads, for cheating, scraping people, or evading the law, even when the " +
+      "README words it neutrally (signs: video codes, performers, magnet links). A head-to-head comparison with a well-known alternative works well. Avoid these past " +
       `topics: ${JSON.stringify(pastTopics)}. "repos" must come from the list above; "queries" find the ` +
       "alternatives to compare with.",
     plan,
@@ -139,6 +141,7 @@ const rules =
   `The last scene says to save the video to try later ` +
   `and follow for more. No advertising: never pitch a product, hosting or VPS, and never mention Cloudcode.\n` +
   `Facts: use only facts from the research. No star counts or numbers the research does not source. ` +
+  `Never invent example data: no made-up codes, file names, IDs, URLs or names on screen. ` +
   `Name tools exactly as their projects do. Headlines are what the scene says in a few words, not a label. ` +
   `Repos: only owner/name pairs from the research. The research is the projects' own READMEs, so it ` +
   `praises them: say plainly what each is good at, without their marketing words.\n` +
