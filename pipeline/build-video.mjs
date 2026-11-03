@@ -60,10 +60,11 @@ const prompt =
   `Pacing: ${pace}`;
 
 if (process.env.ANTHROPIC_API_KEY) {
-  // Claude gets file tools plus exactly the three check commands BUILDER.md
-  // names: no other shell commands, no web access. Research text from the web is
+  // Claude gets its skills, file tools and exactly the three check commands
+  // BUILDER.md names: no other shell commands, no web access. Research text from the web is
   // in its context, so it also gets no secret besides its own API key.
   const allowed = [
+    "Skill",
     "Read",
     "Glob",
     "Grep",

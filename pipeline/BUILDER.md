@@ -17,6 +17,19 @@ slug, an art direction and a pacing.
 - `src/videos/hermes-vs-openclaw/`: a finished, hand-checked video for reference.
   Learn how it times shots to voice; do not copy its look.
 
+## Skills
+
+Load these with the Skill tool before writing code, and follow them:
+
+- `remotion-best-practices`, then `remotion-markup`: how to write Remotion code
+  (timing, sequences, audio, fonts, images). Skip their advice about opening
+  Studio or rendering; this run has no browser and must not render.
+- `frontend-design`: choosing a distinctive palette, type and layout for the
+  art direction instead of a templated look.
+- `emil-design-eng` and `animate`: easing, durations and what deserves motion.
+  Where they talk about clicks and hovers, apply the same judgement to motion on
+  a timeline.
+
 ## What to make
 
 Write `src/videos/<slug>/Video.tsx` (plus any extra files you want inside
