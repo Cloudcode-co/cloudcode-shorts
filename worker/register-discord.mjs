@@ -1,5 +1,6 @@
 // Registers the bot's /video slash command with Discord. Run once, and again
-// after changing the command.
+// after changing the command; the "Register Discord command" workflow runs it
+// with the repo's secrets.
 //
 //   DISCORD_APP_ID=... DISCORD_BOT_TOKEN=... node worker/register-discord.mjs
 const app = process.env.DISCORD_APP_ID;
@@ -27,4 +28,6 @@ const res = await fetch(`https://discord.com/api/v10/applications/${app}/command
   headers: { Authorization: `Bot ${token}`, "Content-Type": "application/json" },
   body: JSON.stringify(commands),
 });
-console.log(res.status, await res.text());
+const body = await res.text();
+console.log(res.status, body);
+if (!res.ok) process.exit(1);

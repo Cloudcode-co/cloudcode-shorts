@@ -10,7 +10,7 @@
 // Writes src/videos/<slug>/{script.json,facts.json}, public/videos/<slug>/repos/*.png
 // and prints the slug as the last line.
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
-import { gemini, pickGeminiModels, readJson, slugify, writeJson } from "./lib.mjs";
+import { gemini, pickGeminiModels, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
 
 const VOICE = {
@@ -66,7 +66,9 @@ if (topic) {
   );
   picked.topic = topic;
 } else {
+  console.log("Collecting trending repos from GitHub and Hacker News...");
   const candidates = await trendingCandidates(pastRepos);
+  console.log(`${candidates.length} candidates`);
   if (!candidates.length) throw new Error("no trending candidates from GitHub or Hacker News");
   picked = await json(
     `Today is ${today}. Pick the next topic for ${channel}, from these real repos that are new, rising, or ` +
@@ -83,6 +85,7 @@ if (topic) {
 }
 
 // 2. Research: each repo's README, release and metadata, from GitHub itself.
+console.log("Looking up repos:", JSON.stringify({ repos: picked.repos, queries: picked.queries }));
 const found = await resolveRepos(picked);
 if (!found.length) throw new Error(`no GitHub repos found for "${topic}"`);
 console.log("Research repos:", found.join(", "));
@@ -227,4 +230,4 @@ writeJson(`src/videos/${slug}/script.json`, {
   scenes: script.scenes,
 });
 writeJson(`src/videos/${slug}/facts.json`, { topic, models, date: today, repos, research });
-console.log(slug);
+report(slug);

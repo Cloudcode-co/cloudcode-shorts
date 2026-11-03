@@ -8,7 +8,7 @@
 // Renders only on CI or with --render. TOPIC in the environment works like the
 // first argument (the GitHub workflow passes it that way).
 import { spawnSync } from "node:child_process";
-import { appendFileSync, existsSync, readdirSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
@@ -17,27 +17,32 @@ const args = process.argv.slice(2);
 const topic = (args.filter((a) => !a.startsWith("--")).join(" ") || process.env.TOPIC || "").trim();
 const render = Boolean(process.env.CI) || args.includes("--render");
 
-// Runs a node script, echoing its output, and returns its last output line.
-const nodeLast = (script, scriptArgs) => {
+// Runs a pipeline script with its output streaming into the log, and returns
+// what it passed to report().
+const RESULT = "out/.result.json";
+const nodeResult = (script, scriptArgs) => {
   console.log(`\n> node ${script} ${scriptArgs.join(" ")}`);
-  const r = spawnSync("node", [script, ...scriptArgs], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
-  process.stdout.write(r.stdout ?? "");
-  process.stderr.write(r.stderr ?? "");
-  if (r.status !== 0) throw new Error(`${script} failed:\n${(r.stderr || r.stdout || "").slice(-1500)}`);
-  return r.stdout.trim().split("\n").pop();
+  mkdirSync("out", { recursive: true });
+  rmSync(RESULT, { force: true });
+  const r = spawnSync("node", [script, ...scriptArgs], {
+    stdio: "inherit",
+    env: { ...process.env, RESULT_FILE: RESULT },
+  });
+  if (r.status !== 0) throw new Error(`${script} failed (exit ${r.status}); the run log has the details.`);
+  return JSON.parse(readFileSync(RESULT, "utf8"));
 };
 
 let slug = null;
 try {
   await sendMessage(`Bắt đầu làm video: ${topic || "(Gemini tự chọn đề tài)"}${runUrl ? `\n${runUrl}` : ""}`);
 
-  slug = nodeLast("pipeline/write-script.mjs", topic ? [topic] : []);
+  slug = nodeResult("pipeline/write-script.mjs", topic ? [topic] : []);
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `slug=${slug}\n`);
   const script = readJson(`src/videos/${slug}/script.json`);
 
   run("node", ["scripts/voiceover.mjs", slug]);
   run("node", ["scripts/music.mjs", slug]);
-  const build = JSON.parse(nodeLast("pipeline/build-video.mjs", [slug]));
+  const build = nodeResult("pipeline/build-video.mjs", [slug]);
   run("node", ["scripts/qa-stills.mjs", slug]);
 
   const history = readJson("pipeline/history.json", []);

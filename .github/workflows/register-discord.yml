@@ -1,0 +1,24 @@
+name: Register Discord command
+
+# Registers the bot's /video slash command, using the DISCORD_BOT_TOKEN secret
+# and the DISCORD_APP_ID variable. Run it once, and after changing the command.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - env:
+          DISCORD_APP_ID: ${{ vars.DISCORD_APP_ID }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+        run: node worker/register-discord.mjs

@@ -10,7 +10,7 @@
 // Prints a JSON line {direction, pacing, built, costUsd} last.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { readJson } from "./lib.mjs";
+import { readJson, report } from "./lib.mjs";
 
 const slug = process.argv[2];
 if (!slug || !/^[a-z0-9-]+$/.test(slug) || !existsSync(`src/videos/${slug}/script.json`)) {
@@ -125,4 +125,4 @@ if (changed && typechecks()) {
   if (!typechecks()) throw new Error("fallback build does not typecheck after Claude's run");
 }
 
-console.log(JSON.stringify({ direction: direction.id, pacing: pace, built, costUsd }));
+report({ direction: direction.id, pacing: pace, built, costUsd });

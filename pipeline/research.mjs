@@ -9,8 +9,11 @@ const headers = {
 };
 
 const gh = async (path, accept) => {
-  const res = await fetch(`${GH}${path}`, { headers: accept ? { ...headers, Accept: accept } : headers });
-  if (!res.ok) return null;
+  const res = await fetch(`${GH}${path}`, {
+    headers: accept ? { ...headers, Accept: accept } : headers,
+    signal: AbortSignal.timeout(30_000),
+  }).catch(() => null);
+  if (!res?.ok) return null;
   return accept?.endsWith("raw") ? res.text() : res.json();
 };
 
@@ -43,6 +46,7 @@ export const trendingCandidates = async (skip = []) => {
   const hn = await fetch(
     `https://hn.algolia.com/api/v1/search?query=github.com&restrictSearchableAttributes=url&tags=story` +
       `&numericFilters=created_at_i>${since},points>60&hitsPerPage=40`,
+    { signal: AbortSignal.timeout(30_000) },
   )
     .then((r) => (r.ok ? r.json() : { hits: [] }))
     .catch(() => ({ hits: [] }));

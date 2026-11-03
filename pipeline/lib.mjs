@@ -2,6 +2,7 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
+
 export const need = (name) => {
   const value = process.env[name];
   if (!value) throw new Error(`${name} is not set`);
@@ -13,6 +14,13 @@ export const readJson = (file, fallback) =>
 
 export const writeJson = (file, data) =>
   writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
+
+// Hands a script's result to run.mjs (through the file in RESULT_FILE, so
+// the script's own output can stream straight into the log) and prints it.
+export const report = (value) => {
+  console.log(typeof value === "string" ? value : JSON.stringify(value));
+  if (process.env.RESULT_FILE) writeFileSync(process.env.RESULT_FILE, JSON.stringify(value));
+};
 
 // Runs a command with inherited output; throws when it fails.
 export const run = (cmd, args, opts = {}) => {
@@ -38,6 +46,8 @@ export const slugify = (text) =>
     .replace(/-+$/g, "");
 
 const GEMINI = "https://generativelanguage.googleapis.com/v1beta";
+// Longest a single Gemini call may take before it counts as failed.
+const GEMINI_TIMEOUT = 180_000;
 
 // Models to try, best first: GEMINI_MODEL (default gemini-3.8-flash) if the
 // API lists it, then the other Flash models, newest first. A key on the free
@@ -45,7 +55,9 @@ const GEMINI = "https://generativelanguage.googleapis.com/v1beta";
 export const pickGeminiModels = async () => {
   const key = need("GEMINI_API_KEY");
   const wanted = process.env.GEMINI_MODEL || "gemini-3.8-flash";
-  const res = await fetch(`${GEMINI}/models?pageSize=1000&key=${key}`);
+  const res = await fetch(`${GEMINI}/models?pageSize=1000&key=${key}`, {
+    signal: AbortSignal.timeout(30_000),
+  });
   if (!res.ok) throw new Error(`Gemini models: ${res.status} ${await res.text()}`);
   const models = (await res.json()).models
     .filter((m) => m.supportedGenerationMethods?.includes("generateContent"))
@@ -74,24 +86,29 @@ export const gemini = async (models, body) => {
   const errors = [];
   for (const model of order) {
     for (let attempt = 1; ; attempt++) {
+      const started = Date.now();
       const res = await fetch(`${GEMINI}/models/${model}:generateContent?key=${key}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
-      });
+        signal: AbortSignal.timeout(GEMINI_TIMEOUT),
+      }).catch((err) => new Response(String(err), { status: 504 }));
+      const took = `${Math.round((Date.now() - started) / 1000)}s`;
       if (res.ok) {
         const data = await res.json();
         const text = data.candidates?.[0]?.content?.parts
           ?.map((p) => p.text ?? "")
           .join("");
         if (!text) throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
-        if (lastGood[kind] !== model) console.log(`Gemini (${kind}): ${model}`);
+        console.log(`Gemini (${kind}): ${model}, ${took}`);
         lastGood[kind] = model;
         return text;
       }
       const detail = await res.text();
-      if ((res.status >= 500 && attempt < 4) || (res.status === 429 && attempt < 2)) {
-        await new Promise((r) => setTimeout(r, attempt * 20000));
+      if ((res.status >= 500 && attempt < 3) || (res.status === 429 && attempt < 2)) {
+        const wait = attempt * 10;
+        console.log(`Gemini ${model}: ${res.status} after ${took}, retrying in ${wait}s`);
+        await new Promise((r) => setTimeout(r, wait * 1000));
         continue;
       }
       errors.push(`${model}: ${res.status} ${detail.slice(0, 300)}`);

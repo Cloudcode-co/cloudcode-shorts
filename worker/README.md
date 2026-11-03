@@ -47,7 +47,9 @@ One bot takes `/video` and posts the result back into the same channel.
 
 5. Set **Interactions Endpoint URL** to `<WORKER_URL>/discord` and save (Discord
    checks it right away).
-6. Register the command once:
+6. Register the command once: set the repo variable `DISCORD_APP_ID` and run the
+   **Register Discord command** workflow (it uses the `DISCORD_BOT_TOKEN` secret),
+   or locally:
 
    ```bash
    DISCORD_APP_ID=<app id> DISCORD_BOT_TOKEN=<bot token> node register-discord.mjs
