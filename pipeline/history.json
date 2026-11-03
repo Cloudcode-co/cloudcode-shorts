@@ -7,5 +7,14 @@
     "pacing": "Chapters: a title card before each section, then quick shots inside it.",
     "built": "fallback",
     "costUsd": 0.3821185
+  },
+  {
+    "slug": "tu-host-concat-video-editor",
+    "topic": "Tự host Concat: Ứng dụng dựng video mã nguồn mở thay thế CapCut, hỗ trợ API và MCP",
+    "date": "2026-11-03",
+    "direction": "notebook",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 1.2314666000000003
   }
 ]

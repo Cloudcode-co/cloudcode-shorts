@@ -1,0 +1,154 @@
+{
+  "slug": "tu-host-concat-video-editor",
+  "topic": "Tự host Concat: Ứng dụng dựng video mã nguồn mở thay thế CapCut, hỗ trợ API và MCP",
+  "title": "CapCut mã nguồn mở không watermark cho anh em?",
+  "caption": "Khám phá Concat: Trình dựng video mã nguồn mở bằng Rust thay thế CapCut, hỗ trợ AI offline, API và MCP!",
+  "hashtags": [
+    "#concat",
+    "#capcut",
+    "#opensource",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Upbeat modern tech electronic beat, energetic synth pulses, dynamic groove, no vocals",
+  "sources": [
+    "https://github.com/jub0t/Concat",
+    "https://github.com/OpenCut-app/OpenCut",
+    "https://github.com/rustdesk/rustdesk"
+  ],
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em muốn một ứng dụng thay thế CapCut, mã nguồn mở và không watermark không?",
+      "headline": "Thay thế CapCut miễn phí?",
+      "lines": [
+        "Mã nguồn mở",
+        "Không watermark",
+        "Thay thế CapCut"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Đây chính là Concat, phần mềm dựng video nguồn mở viết bằng Rust cực kỳ mượt mà!",
+      "headline": "Giới thiệu Concat",
+      "lines": [
+        "Dự án jub0t/Concat",
+        "Viết bằng ngôn ngữ Rust",
+        "Hiệu năng mượt mà"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Điểm sướng nhất là local một trăm phần trăm. Không bắt tạo tài khoản, không watermark và dữ liệu nằm trọn trên máy anh em.",
+      "headline": "100% Local và bảo mật",
+      "lines": [
+        "100% local, offline",
+        "Không tài khoản, không trả phí",
+        "Dữ liệu không rời máy"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Tính năng AI tải model một lần là chạy offline: tự tạo phụ đề bằng Whisper, tách nền người và vật thể, thậm chí clone giọng nói!",
+      "headline": "AI xử lý offline",
+      "lines": [
+        "Auto-caption với Whisper",
+        "Tự động tách nền",
+        "Text-to-speech & clone giọng"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Anh em có timeline đa layer, keyframe, hơn một trăm hiệu ứng GPU và hỗ trợ xuất video bốn K sáu mươi khung hình.",
+      "headline": "Đầy đủ đồ nghề dựng phim",
+      "lines": [
+        "Multi-track timeline",
+        "Hơn 100 hiệu ứng GPU",
+        "Xuất file lên đến 4K 60fps"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] Độc lạ nhất là Concat tích hợp sẵn MCP server và JSON-RPC API, cho phép các AI agent như Claude tự điều khiển dựng video!",
+      "headline": "Hỗ trợ MCP và API",
+      "lines": [
+        "Tích hợp sẵn MCP server",
+        "Điều khiển qua JSON-RPC API",
+        "AI Agent tự động dựng video"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Để tự build từ source với Rust và FFmpeg, anh em chỉ cần vào thư mục src rồi gõ lệnh cargo run.",
+      "headline": "Build nhanh từ mã nguồn",
+      "lines": [
+        "Yêu cầu Rust và FFmpeg",
+        "Chạy trực tiếp editor"
+      ],
+      "commands": [
+        "cd src",
+        "cargo run -p concat"
+      ],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Hoặc anh em có thể tải bản dựng sẵn trên GitHub Releases cho macOS, Windows, Linux và cả Android.",
+      "headline": "Cài đặt đa nền tảng",
+      "lines": [
+        "Tải từ GitHub Releases",
+        "Hỗ trợ Windows, macOS, Linux",
+        "Có sẵn bản Android"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Anh em thấy Concat thế nào? [cheerfully] Hãy lưu video lại để thử ngay và follow kênh để không bỏ lỡ tool hay nhé!",
+      "headline": "Thử nghiệm Concat ngay",
+      "lines": [
+        "Lưu video để thử lại",
+        "Follow kênh để cập nhật công nghệ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "jub0t/Concat"
+      ]
+    }
+  ]
+}
