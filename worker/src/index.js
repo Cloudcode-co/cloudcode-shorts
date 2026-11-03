@@ -12,7 +12,7 @@
 //
 // Secrets (wrangler secret put): GITHUB_TOKEN, UPLOAD_SECRET, plus for Discord
 // DISCORD_PUBLIC_KEY and optionally ALLOWED_DISCORD_USER_IDS (comma-separated;
-// server admins may always run /video), and for
+// when set, only those users may use the bot, else any server admin), and for
 // Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID.
 // Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA.
 
@@ -111,15 +111,16 @@ const discord = async (request, env, ctx) => {
   if (interaction.type === 1) return json({ type: 1 }); // PING
   const command = interaction.data?.name;
   if (command !== "video" && command !== "sua") return json({ type: 1 });
-  if (interaction.type === 4) return autocomplete(interaction, env);
-  if (interaction.type !== 2) return json({ type: 1 });
 
-  // Server admins, plus anyone listed in ALLOWED_DISCORD_USER_IDS.
+  // Only the users in ALLOWED_DISCORD_USER_IDS; server admins when it is unset.
   const user = interaction.member?.user?.id ?? interaction.user?.id;
-  const allowed = String(env.ALLOWED_DISCORD_USER_IDS ?? "").split(",").map((s) => s.trim());
+  const allowed = String(env.ALLOWED_DISCORD_USER_IDS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   const ADMINISTRATOR = 1n << 3n;
   const admin = (BigInt(interaction.member?.permissions ?? 0) & ADMINISTRATOR) !== 0n;
-  if (!admin && !allowed.includes(user)) {
+  const permitted = allowed.length ? allowed.includes(user) : admin;
+  if (interaction.type === 4) return autocomplete(permitted ? interaction : { data: {} }, env);
+  if (interaction.type !== 2) return json({ type: 1 });
+  if (!permitted) {
     return json({ type: 4, data: { content: "Bạn không có quyền dùng lệnh này.", flags: 64 } });
   }
   const option = (name, max) =>
