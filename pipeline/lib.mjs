@@ -47,7 +47,10 @@ export const slugify = (text) =>
 
 const GEMINI = "https://generativelanguage.googleapis.com/v1beta";
 // Longest a single Gemini call may take before it counts as failed.
-const GEMINI_TIMEOUT = 180_000;
+const GEMINI_TIMEOUT = 150_000;
+// Gemini 3 thinks before answering; on "high" (the default) a JSON answer can
+// take minutes on the free tier. GEMINI_THINKING overrides it.
+const THINKING = process.env.GEMINI_THINKING || "low";
 
 // Models to try, best first: GEMINI_MODEL (default gemini-3.8-flash) if the
 // API lists it, then the other Flash models, newest first. A key on the free
@@ -84,15 +87,19 @@ export const gemini = async (models, body) => {
   const kind = body.tools?.some((t) => t.google_search) ? "search" : "plain";
   const order = lastGood[kind] ? [lastGood[kind], ...models.filter((m) => m !== lastGood[kind])] : models;
   const errors = [];
+  let payload = {
+    ...body,
+    generationConfig: { thinkingConfig: { thinkingLevel: THINKING }, ...body.generationConfig },
+  };
   for (const model of order) {
     for (let attempt = 1; ; attempt++) {
       const started = Date.now();
       const res = await fetch(`${GEMINI}/models/${model}:generateContent?key=${key}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(payload),
         signal: AbortSignal.timeout(GEMINI_TIMEOUT),
-      }).catch((err) => new Response(String(err), { status: 504 }));
+      }).catch((err) => new Response(String(err), { status: 599 }));
       const took = `${Math.round((Date.now() - started) / 1000)}s`;
       if (res.ok) {
         const data = await res.json();
@@ -105,7 +112,20 @@ export const gemini = async (models, body) => {
         return text;
       }
       const detail = await res.text();
-      if ((res.status >= 500 && attempt < 3) || (res.status === 429 && attempt < 2)) {
+      if (res.status === 400 && /thinking/i.test(detail) && payload.generationConfig.thinkingConfig) {
+        console.log(`Gemini ${model} rejects thinkingLevel; retrying without it`);
+        const { thinkingConfig, ...rest } = payload.generationConfig;
+        payload = { ...payload, generationConfig: rest };
+        continue;
+      }
+      // 599: our own timeout. A model that hung once usually hangs again, so
+      // move on instead of waiting another 150s.
+      if (res.status === 599) {
+        errors.push(`${model}: no answer in ${took}`);
+        console.log(`Gemini ${model}: no answer in ${took}, trying the next model`);
+        break;
+      }
+      if ((res.status >= 500 && attempt < 2) || (res.status === 429 && attempt < 2)) {
         const wait = attempt * 10;
         console.log(`Gemini ${model}: ${res.status} after ${took}, retrying in ${wait}s`);
         await new Promise((r) => setTimeout(r, wait * 1000));
