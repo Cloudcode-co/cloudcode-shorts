@@ -39,8 +39,10 @@ export const slugify = (text) =>
 
 const GEMINI = "https://generativelanguage.googleapis.com/v1beta";
 
-// GEMINI_MODEL if the API knows it, else the newest Flash model it lists.
-export const pickGeminiModel = async () => {
+// Models to try, best first: GEMINI_MODEL (default gemini-3.8-flash) if the
+// API lists it, then the other Flash models, newest first. A key on the free
+// tier may have no quota for the newest ones.
+export const pickGeminiModels = async () => {
   const key = need("GEMINI_API_KEY");
   const wanted = process.env.GEMINI_MODEL || "gemini-3.8-flash";
   const res = await fetch(`${GEMINI}/models?pageSize=1000&key=${key}`);
@@ -48,40 +50,53 @@ export const pickGeminiModel = async () => {
   const models = (await res.json()).models
     .filter((m) => m.supportedGenerationMethods?.includes("generateContent"))
     .map((m) => m.name.replace(/^models\//, ""));
-  if (models.includes(wanted)) return wanted;
   const version = (id) => Number(id.match(/^gemini-(\d+(?:\.\d+)?)/)?.[1] ?? 0);
   const flash = models
-    .filter((id) => /^gemini-[\d.]+-flash$/.test(id))
+    .filter((id) => /^gemini-[\d.]+-flash$/.test(id) && id !== wanted)
     .sort((a, b) => version(b) - version(a));
-  if (!flash.length) throw new Error(`no Gemini Flash model found; set GEMINI_MODEL`);
-  console.log(`${wanted} not available, using ${flash[0]}`);
-  return flash[0];
+  const list = models.includes(wanted) ? [wanted, ...flash] : flash;
+  if (!list.length) throw new Error("no Gemini Flash model found; set GEMINI_MODEL");
+  return list;
 };
 
-// One generateContent call. Returns the text of the first candidate.
-export const gemini = async (model, body) => {
+// One generateContent call, trying `models` in order. Overloads and short
+// rate limits get retried; a model out of quota hands over to the next one,
+// and the model that answers moves to the front of `models` for later calls.
+// Returns the text of the first candidate.
+export const gemini = async (models, body) => {
   const key = need("GEMINI_API_KEY");
-  for (let attempt = 1; ; attempt++) {
-    const res = await fetch(`${GEMINI}/models/${model}:generateContent?key=${key}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      const text = data.candidates?.[0]?.content?.parts
-        ?.map((p) => p.text ?? "")
-        .join("");
-      if (!text) throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
-      return text;
+  const errors = [];
+  for (const model of [...models]) {
+    for (let attempt = 1; ; attempt++) {
+      const res = await fetch(`${GEMINI}/models/${model}:generateContent?key=${key}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const text = data.candidates?.[0]?.content?.parts
+          ?.map((p) => p.text ?? "")
+          .join("");
+        if (!text) throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
+        models.splice(models.indexOf(model), 1);
+        models.unshift(model);
+        return text;
+      }
+      const detail = await res.text();
+      if ((res.status >= 500 && attempt < 4) || (res.status === 429 && attempt < 2)) {
+        await new Promise((r) => setTimeout(r, attempt * 20000));
+        continue;
+      }
+      errors.push(`${model}: ${res.status} ${detail.slice(0, 300)}`);
+      if (res.status === 429 || res.status === 404 || res.status >= 500) {
+        console.log(`Gemini ${model} failed (${res.status}), trying the next model`);
+        break;
+      }
+      throw new Error(`Gemini ${errors.at(-1)}`);
     }
-    // Rate limits and overloads are worth a couple of retries.
-    if ((res.status === 429 || res.status >= 500) && attempt < 4) {
-      await new Promise((r) => setTimeout(r, attempt * 15000));
-      continue;
-    }
-    throw new Error(`Gemini ${model}: ${res.status} ${await res.text()}`);
   }
+  throw new Error(`every Gemini model failed:\n${errors.join("\n")}`);
 };
 
 // This GitHub Actions run's page, or null outside Actions.

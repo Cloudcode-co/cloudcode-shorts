@@ -8,7 +8,7 @@
 // Writes src/videos/<slug>/{script.json,facts.json}, public/videos/<slug>/repos/*.png
 // and prints the slug as the last line.
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { gemini, pickGeminiModel, readJson, slugify, writeJson } from "./lib.mjs";
+import { gemini, pickGeminiModels, readJson, slugify, writeJson } from "./lib.mjs";
 
 const VOICE = {
   voiceId: "2ZUpiKo5wCCuypvx2zaS", // Tony Nguyễn
@@ -19,15 +19,15 @@ const TAGS = ["excited", "curious", "casually", "impressed", "cheerfully", "warm
 
 const history = readJson("pipeline/history.json", []);
 const pastTopics = history.map((h) => h.topic).filter(Boolean);
-const model = await pickGeminiModel();
-console.log("Gemini model:", model);
+const models = await pickGeminiModels();
+console.log("Gemini models:", models.join(", "));
 
 let topic = process.argv.slice(2).join(" ").trim();
 const today = new Date().toISOString().slice(0, 10);
 
 if (!topic) {
   topic = (
-    await gemini(model, {
+    await gemini(models, {
       tools: [{ google_search: {} }],
       contents: [
         {
@@ -53,7 +53,7 @@ if (!topic) {
 }
 
 // 1. Research, grounded in Google Search.
-const research = await gemini(model, {
+const research = await gemini(models, {
   tools: [{ google_search: {} }],
   contents: [
     {
@@ -123,7 +123,7 @@ const rules =
   `Repos: only owner/name pairs from the research.\n\nResearch:\n${research}`;
 
 const script = JSON.parse(
-  await gemini(model, {
+  await gemini(models, {
     contents: [{ role: "user", parts: [{ text: rules }] }],
     generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.9 },
   }),
@@ -195,5 +195,5 @@ writeJson(`src/videos/${slug}/script.json`, {
   ...VOICE,
   scenes: script.scenes,
 });
-writeJson(`src/videos/${slug}/facts.json`, { topic, model, date: today, repos, research });
+writeJson(`src/videos/${slug}/facts.json`, { topic, model: models[0], date: today, repos, research });
 console.log(slug);
