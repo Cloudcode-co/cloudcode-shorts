@@ -2,7 +2,8 @@
 // videos in the media R2 bucket so chat gets a link instead of a size-capped
 // upload.
 //
-//   POST /discord      Discord interactions: /video [topic]
+//   POST /discord      Discord interactions: /video [topic] [giong] [yeucau],
+//                      /sua video [yeucau] [giong], and their autocomplete
 //   POST /telegram     Telegram bot webhook: any text is the topic, /auto lets
 //                      Gemini pick, /id replies with the chat id
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
@@ -15,9 +16,10 @@
 // Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID.
 // Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA.
 
-// Fires repository_dispatch; the workflow reads the topic and where to send
-// the result (Discord channel_id or Telegram chat_id) from client_payload.
-const dispatch = (env, topic, replyTo) =>
+// Fires repository_dispatch; the workflow reads what to make (topic, voice,
+// notes, or revise: a video to rework) and where to send the result (Discord
+// channel_id or Telegram chat_id) from client_payload.
+const dispatch = (env, job, replyTo) =>
   fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`, {
     method: "POST",
     headers: {
@@ -25,13 +27,59 @@ const dispatch = (env, topic, replyTo) =>
       Accept: "application/vnd.github+json",
       "User-Agent": "cloudcode-shorts-bot",
     },
-    body: JSON.stringify({ event_type: "make-video", client_payload: { topic, ...replyTo } }),
+    body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
   });
 
-const queued = (res, topic) =>
-  res.ok
-    ? `Đã xếp hàng: ${topic || "Gemini tự chọn đề tài"}. Xong mình gửi video vào đây.`
-    : `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
+const queued = (res, { topic, voice, notes, revise }) => {
+  if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
+  const extra = [voice && `giọng: ${voice}`, notes && `yêu cầu: ${notes}`].filter(Boolean).join("\n");
+  const what = revise ? `sửa video ${revise}` : topic || "Gemini tự chọn đề tài";
+  return `Đã xếp hàng: ${what}.${extra ? `\n${extra}` : ""}\nXong mình gửi video vào đây.`;
+};
+
+// Vietnamese voices on the ElevenLabs account, offered as /video and /sua
+// suggest them; any other name, voice id or voice link can be typed instead.
+const VOICES = [
+  ["Tony Nguyễn (mặc định)", "2ZUpiKo5wCCuypvx2zaS"],
+  ["Linh Chi - nữ, giọng Bắc", "smHgfqI7ihNDlaBs0X9I"],
+  ["Linh - nữ, nhẹ nhàng", "L5c6tGA8OiORYKxez5Zu"],
+  ["Quang Toàn - nam, trầm, kể chuyện", "ZsjEJaLQy3sgvwxicmDx"],
+  ["Hùng - nam, giọng Bắc", "oeKUzII6QxB7vwV6fpNJ"],
+  ["Hiếu Trần - nam, trầm ấm", "WVkYyTxxVgMOsw1IIVL0"],
+  ["Xuân Hòa - nam, kể chuyện", "kOiTmIEmO9JLCQDT4Zc3"],
+  ["Trung Caha - nam, rõ ràng", "ueSxRO0nLF1bj93J2hVt"],
+  ["Nhật - nam, dẫn chuyện", "6adFm46eyy74snVn6YrT"],
+];
+
+const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/gi, "d").toLowerCase();
+
+// The finished videos in the repo, for /sua's autocomplete.
+const videoSlugs = async (env) => {
+  const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/contents/src/videos`, {
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": "cloudcode-shorts-bot",
+    },
+  });
+  if (!res.ok) return [];
+  return (await res.json()).filter((f) => f.type === "dir").map((f) => f.name);
+};
+
+const autocomplete = async (interaction, env) => {
+  const focused = interaction.data.options?.find((o) => o.focused);
+  const typed = fold(String(focused?.value ?? ""));
+  let choices = [];
+  if (focused?.name === "giong") {
+    choices = VOICES.filter(([name]) => fold(name).includes(typed)).map(([name, value]) => ({ name, value }));
+  } else if (focused?.name === "video") {
+    choices = (await videoSlugs(env))
+      .filter((slug) => slug.includes(typed))
+      .reverse()
+      .map((slug) => ({ name: slug, value: slug }));
+  }
+  return json({ type: 8, data: { choices: choices.slice(0, 25) } });
+};
 
 const json = (body) =>
   new Response(JSON.stringify(body), { headers: { "Content-Type": "application/json" } });
@@ -61,7 +109,10 @@ const discord = async (request, env, ctx) => {
   }
   const interaction = JSON.parse(body);
   if (interaction.type === 1) return json({ type: 1 }); // PING
-  if (interaction.type !== 2 || interaction.data.name !== "video") return json({ type: 1 });
+  const command = interaction.data?.name;
+  if (command !== "video" && command !== "sua") return json({ type: 1 });
+  if (interaction.type === 4) return autocomplete(interaction, env);
+  if (interaction.type !== 2) return json({ type: 1 });
 
   // Server admins, plus anyone listed in ALLOWED_DISCORD_USER_IDS.
   const user = interaction.member?.user?.id ?? interaction.user?.id;
@@ -71,21 +122,29 @@ const discord = async (request, env, ctx) => {
   if (!admin && !allowed.includes(user)) {
     return json({ type: 4, data: { content: "Bạn không có quyền dùng lệnh này.", flags: 64 } });
   }
-  const topic = String(
-    interaction.data.options?.find((o) => o.name === "topic")?.value ?? "",
-  ).slice(0, 200);
+  const option = (name, max) =>
+    String(interaction.data.options?.find((o) => o.name === name)?.value ?? "").trim().slice(0, max);
+  const job = {
+    topic: command === "video" ? option("topic", 200) : "",
+    voice: option("giong", 300),
+    notes: option("yeucau", 1000),
+    revise: command === "sua" ? option("video", 80) : "",
+  };
+  if (command === "sua" && !job.voice && !job.notes) {
+    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `giong`, hoặc cả hai.", flags: 64 } });
+  }
 
   // Discord wants an answer within 3s: defer, then edit the reply once
   // GitHub has the run.
   ctx.waitUntil(
     (async () => {
-      const res = await dispatch(env, topic, { channel_id: interaction.channel_id });
+      const res = await dispatch(env, job, { channel_id: interaction.channel_id });
       await fetch(
         `https://discord.com/api/v10/webhooks/${interaction.application_id}/${interaction.token}/messages/@original`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ content: queued(res, topic) }),
+          body: JSON.stringify({ content: queued(res, job) }),
         },
       );
     })(),
@@ -115,7 +174,7 @@ const telegram = async (request, env) => {
   if (chatId !== String(env.ALLOWED_CHAT_ID)) return new Response("ok");
 
   const topic = text === "/auto" ? "" : text.replace(/^\/video\s*/, "").slice(0, 200);
-  await reply(queued(await dispatch(env, topic, { chat_id: chatId }), topic));
+  await reply(queued(await dispatch(env, { topic }, { chat_id: chatId }), { topic }));
   return new Response("ok");
 };
 

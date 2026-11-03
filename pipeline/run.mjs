@@ -1,21 +1,29 @@
 // Makes one video end to end: script (Gemini) → voice and music (ElevenLabs) →
 // build (Claude Code, else the fallback) → QA stills → render → Telegram/Discord.
+// With REVISE=<slug> it reworks a finished video instead: a new voice
+// (VOICE) and/or Claude's changes (NOTES), then renders it again.
 //
 //   node --env-file=.env pipeline/run.mjs "Coolify vs Dokploy"
 //   node --env-file=.env pipeline/run.mjs                  # Gemini picks the topic
 //   node --env-file=.env pipeline/run.mjs "..." --render   # render locally too
 //
-// Renders only on CI or with --render. TOPIC in the environment works like the
-// first argument (the GitHub workflow passes it that way).
+// Renders only on CI or with --render. Env (the GitHub workflow passes these):
+// TOPIC works like the first argument; VOICE is an ElevenLabs voice name, id
+// or link; NOTES are requests for the script writer and Claude; REVISE is
+// the slug of a video to rework.
 import { spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
+import { resolveVoice } from "./voices.mjs";
 
 const args = process.argv.slice(2);
 const topic = (args.filter((a) => !a.startsWith("--")).join(" ") || process.env.TOPIC || "").trim();
 const render = Boolean(process.env.CI) || args.includes("--render");
+const voice = (process.env.VOICE ?? "").trim();
+const notes = (process.env.NOTES ?? "").trim();
+const revise = (process.env.REVISE ?? "").trim();
 
 // Runs a pipeline script with its output streaming into the log, and returns
 // what it passed to report().
@@ -32,17 +40,55 @@ const nodeResult = (script, scriptArgs) => {
   return JSON.parse(readFileSync(RESULT, "utf8"));
 };
 
-let slug = null;
-try {
-  await sendMessage(`Bắt đầu làm video: ${topic || "(Gemini tự chọn đề tài)"}${runUrl ? `\n${runUrl}` : ""}`);
+// Tells the workflow which video to commit back.
+const setSlug = (value) => {
+  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `slug=${value}\n`);
+  return value;
+};
 
-  slug = nodeResult("pipeline/write-script.mjs", topic ? [topic] : []);
-  if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `slug=${slug}\n`);
-  const script = readJson(`src/videos/${slug}/script.json`);
-
+// A new video: script, voice, music, Claude's build.
+const makeNew = () => {
+  const slug = setSlug(nodeResult("pipeline/write-script.mjs", topic ? [topic] : []));
   run("node", ["scripts/voiceover.mjs", slug]);
   run("node", ["scripts/music.mjs", slug]);
-  const build = nodeResult("pipeline/build-video.mjs", [slug]);
+  return { slug, build: nodeResult("pipeline/build-video.mjs", [slug]) };
+};
+
+// A finished video, reworked: a new voice and/or Claude's changes.
+const rework = async () => {
+  if (!/^[a-z0-9-]+$/.test(revise) || !existsSync(`src/videos/${revise}/script.json`)) {
+    throw new Error(`không có video "${revise}" trong repo`);
+  }
+  if (!voice && !notes) throw new Error("cần ít nhất một giọng mới hoặc một yêu cầu sửa");
+  const slug = setSlug(revise);
+  const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
+  if (voice) {
+    const { voiceId, name } = await resolveVoice(voice);
+    console.log(`Voice: ${name}`);
+    const file = `src/videos/${slug}/script.json`;
+    writeJson(file, { ...readJson(file), voiceId });
+    run("node", ["scripts/voiceover.mjs", slug, "--force"]);
+  }
+  const build = notes
+    ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
+    : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };
+  return { slug, build: { ...build, revision: [voice && `giọng: ${voice}`, notes].filter(Boolean).join("; ") } };
+};
+
+const asked = [voice && `giọng ${voice}`, notes].filter(Boolean).join("; ");
+let slug = revise || null;
+try {
+  await sendMessage(
+    (revise
+      ? `Bắt đầu sửa video ${revise}: ${asked}`
+      : `Bắt đầu làm video: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
+      (runUrl ? `\n${runUrl}` : ""),
+  );
+
+  const made = revise ? await rework() : makeNew();
+  slug = made.slug;
+  const { build } = made;
+  const script = readJson(`src/videos/${slug}/script.json`);
   run("node", ["scripts/qa-stills.mjs", slug]);
 
   const history = readJson("pipeline/history.json", []);
@@ -53,12 +99,15 @@ try {
     ...build,
   });
   writeJson("pipeline/history.json", history);
+  // Each version gets its own file name, so the CDN never serves an old copy.
+  const version = history.filter((h) => h.slug === slug).length;
 
   const caption = `${script.caption}\n\n${script.hashtags.join(" ")}`;
   const summary =
-    `Xong: ${script.title}\n` +
+    `${revise ? `Đã sửa (bản ${version})` : "Xong"}: ${script.title}\n` +
     `Phong cách: ${build.direction} (${build.built === "claude" ? "Claude dựng" : "khuôn dự phòng"}), ` +
-    `Claude $${build.costUsd.toFixed(2)}\n\nCaption để đăng:\n${caption}` +
+    `Claude $${(build.costUsd ?? 0).toFixed(2)}\n\nCaption để đăng:\n${caption}\n\n` +
+    `Muốn sửa: /sua video:${slug}` +
     (runUrl ? `\n\n${runUrl}` : "");
 
   const qa = `out/qa/${slug}`;
@@ -66,7 +115,7 @@ try {
   await sendPhotos([1, 4, 8].map((i) => stills[i]).filter(Boolean).map((f) => `${qa}/${f}`));
 
   if (render) {
-    const out = `out/${slug}.mp4`;
+    const out = version > 1 ? `out/${slug}-v${version}.mp4` : `out/${slug}.mp4`;
     run("npx", ["remotion", "render", slug, out, "--crf=23", "--log=info"]);
     const url = await uploadVideo(out, slug);
     if (url) console.log("Uploaded:", url);
@@ -75,6 +124,9 @@ try {
   await sendMessage(summary);
   console.log(`\nDone: ${slug}${notifyOn ? " (sent to Telegram/Discord)" : ""}`);
 } catch (err) {
-  await sendMessage(`Lỗi khi làm video${slug ? ` ${slug}` : ""}:\n${err.message}`.slice(0, 3500) + (runUrl ? `\n${runUrl}` : ""));
+  await sendMessage(
+    `Lỗi khi ${revise ? "sửa" : "làm"} video${slug ? ` ${slug}` : ""}:\n${err.message}`.slice(0, 3500) +
+      (runUrl ? `\n${runUrl}` : ""),
+  );
   throw err;
 }

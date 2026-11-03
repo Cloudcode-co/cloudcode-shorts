@@ -11,12 +11,22 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
+import { resolveVoice } from "./voices.mjs";
 
 const VOICE = {
   voiceId: "2ZUpiKo5wCCuypvx2zaS", // Tony Nguyễn
   modelId: "eleven_v3",
   voiceSettings: { stability: 0.0, similarity_boost: 0.75 },
 };
+// VOICE (an ElevenLabs voice id or name) replaces the default voice; NOTES are
+// the channel owner's requests for this video.
+if (process.env.VOICE?.trim()) {
+  const voice = await resolveVoice(process.env.VOICE.trim());
+  console.log(`Voice: ${voice.name}`);
+  VOICE.voiceId = voice.voiceId;
+}
+const notes = (process.env.NOTES ?? "").trim();
+
 const TAGS = ["excited", "curious", "casually", "impressed", "cheerfully", "warmly", "thoughtful", "laughs"];
 
 const S = (type, extra = {}) => ({ type, ...extra });
@@ -131,7 +141,12 @@ const rules =
   `Facts: use only facts from the research. No star counts or numbers the research does not source. ` +
   `Name tools exactly as their projects do. Headlines are what the scene says in a few words, not a label. ` +
   `Repos: only owner/name pairs from the research. The research is the projects' own READMEs, so it ` +
-  `praises them: say plainly what each is good at, without their marketing words.\n\nResearch:\n${research}`;
+  `praises them: say plainly what each is good at, without their marketing words.\n` +
+  (notes
+    ? `\nThe channel owner asked for this video (follow what is about the script, the voiceover or the ` +
+      `music; requests about visuals are for the video builder, not you):\n${notes}\n`
+    : "") +
+  `\nResearch:\n${research}`;
 
 const script = await json(rules, schema, 0.9);
 script.sources = [...new Set([...found.map((r) => `https://github.com/${r}`), ...(script.sources ?? [])])];

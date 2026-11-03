@@ -7,6 +7,24 @@ const app = process.env.DISCORD_APP_ID;
 const token = process.env.DISCORD_BOT_TOKEN;
 if (!app || !token) throw new Error("set DISCORD_APP_ID and DISCORD_BOT_TOKEN");
 
+// String options; "giong" and "video" suggest values through the worker's
+// autocomplete but accept anything typed (a voice link, for one).
+const voice = {
+  type: 3,
+  name: "giong",
+  description: "Giọng đọc: chọn gợi ý, hoặc gõ tên, voice id hay dán link giọng ElevenLabs",
+  required: false,
+  autocomplete: true,
+  max_length: 300,
+};
+const notes = (description) => ({
+  type: 3,
+  name: "yeucau",
+  description,
+  required: false,
+  max_length: 1000,
+});
+
 const commands = [
   {
     name: "video",
@@ -19,6 +37,24 @@ const commands = [
         required: false,
         max_length: 200,
       },
+      voice,
+      notes("Yêu cầu thêm: nền, màu, phong cách, nhịp, độ dài..."),
+    ],
+  },
+  {
+    name: "sua",
+    description: "Sửa một video đã làm: đổi giọng, đổi nền, đổi phong cách...",
+    options: [
+      {
+        type: 3,
+        name: "video",
+        description: "Video cần sửa",
+        required: true,
+        autocomplete: true,
+        max_length: 80,
+      },
+      notes("Cần sửa gì, ví dụ: nền đen, chữ to hơn, bỏ hiệu ứng rung"),
+      voice,
     ],
   },
 ];

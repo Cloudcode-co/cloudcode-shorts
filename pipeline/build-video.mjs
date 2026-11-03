@@ -4,12 +4,13 @@
 // doesn't typecheck.
 //
 //   node --env-file=.env pipeline/build-video.mjs <slug>
+//   NOTES="dark background" node --env-file=.env pipeline/build-video.mjs <slug> --revise
 //
 // Env: ANTHROPIC_API_KEY, CLAUDE_MODEL (default claude-sonnet-5-5),
 // CLAUDE_BUDGET_USD (default 4), CLAUDE_BIN (default "claude").
 // Prints a JSON line {direction, pacing, built, costUsd} last.
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { readJson, report } from "./lib.mjs";
 
 const slug = process.argv[2];
@@ -47,19 +48,49 @@ const recent = readJson("pipeline/history.json", [])
 const pool = directions.filter((d) => !recent.includes(d.id));
 let seed = [...slug].reduce((n, c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
 const draw = (list) => list[(seed = (seed * 1103515245 + 12345) >>> 0) % list.length];
-const direction = draw(pool.length ? pool : directions);
-const pace = draw(pacing);
+// --revise keeps the video's direction and pacing and, when Claude built it,
+// its code as the starting point; NOTES are the owner's requests.
+const revise = process.argv.includes("--revise");
+const notes = (process.env.NOTES ?? "").trim();
+const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug);
+const direction =
+  (revise && directions.find((d) => d.id === past?.direction)) || draw(pool.length ? pool : directions);
+const pace = (revise && past?.pacing) || draw(pacing);
 
-// Start from the fallback so the project always typechecks.
-writeFileSync(VIDEO, FALLBACK);
-if (!typechecks()) throw new Error("fallback build does not typecheck; check the script");
+// The video's code files, to put back if Claude leaves them broken.
+const DIR = `src/videos/${slug}`;
+const snapshot = () =>
+  new Map(
+    readdirSync(DIR, { recursive: true })
+      .map((f) => `${DIR}/${String(f).replaceAll("\\", "/")}`)
+      .filter((f) => /\.tsx?$/.test(f))
+      .map((f) => [f, readFileSync(f, "utf8")]),
+  );
+const restore = (files) => {
+  for (const f of snapshot().keys()) if (!files.has(f)) rmSync(f);
+  for (const [f, text] of files) writeFileSync(f, text);
+};
+
+// Start from code that typechecks: the current build when revising one of
+// Claude's, else the fallback.
+const keep = revise && existsSync(VIDEO) && readFileSync(VIDEO, "utf8").replaceAll("\r\n", "\n") !== FALLBACK;
+if (!keep) writeFileSync(VIDEO, FALLBACK);
+if (!typechecks()) {
+  if (!keep) throw new Error("fallback build does not typecheck; check the script");
+  throw new Error(`${slug} does not typecheck before the revision`);
+}
+const start = snapshot();
 
 let built = "fallback";
 let costUsd = 0;
 const prompt =
-  `Build the video "${slug}" following pipeline/BUILDER.md (read it first, then follow it to the end).\n` +
-  `Art direction: ${direction.name}. ${direction.brief}\n` +
-  `Pacing: ${pace}`;
+  (keep
+    ? `Revise the video "${slug}" following pipeline/BUILDER.md (read it first, then follow it to the end). ` +
+      `Its current code is your starting point: change what the requests below ask for and keep the rest.\n`
+    : `Build the video "${slug}" following pipeline/BUILDER.md (read it first, then follow it to the end).\n`) +
+  // A revised video keeps its own look; only a past draw is worth repeating.
+  (keep && !past?.direction ? "" : `Art direction: ${direction.name}. ${direction.brief}\nPacing: ${pace}`) +
+  (notes ? `\n\nRequests from the channel owner, which win over the art direction and pacing:\n${notes}` : "");
 
 if (process.env.ANTHROPIC_API_KEY) {
   // Claude gets its skills, file tools and exactly the three check commands
@@ -123,13 +154,16 @@ if (process.env.ANTHROPIC_API_KEY) {
   console.log("ANTHROPIC_API_KEY is not set; using the fallback build.");
 }
 
-const changed = readFileSync(VIDEO, "utf8") !== FALLBACK;
+const now = snapshot();
+const changed = now.size !== start.size || [...now].some(([f, text]) => start.get(f) !== text);
 if (changed && typechecks()) {
   built = "claude";
 } else {
-  console.log(changed ? "Claude's build does not typecheck; using the fallback." : "Claude left the placeholder; using the fallback.");
-  writeFileSync(VIDEO, FALLBACK);
-  if (!typechecks()) throw new Error("fallback build does not typecheck after Claude's run");
+  const before = keep ? "the previous build" : "the fallback";
+  console.log(changed ? `Claude's build does not typecheck; using ${before}.` : `Claude changed nothing; using ${before}.`);
+  restore(start);
+  if (!typechecks()) throw new Error(`${before} does not typecheck after Claude's run`);
+  built = keep ? "claude" : "fallback";
 }
 
 report({ direction: direction.id, pacing: pace, built, costUsd });

@@ -75,3 +75,13 @@ make a video every night at 01:00 Vietnam time with a topic Gemini picks,
 
 Start a run from the GitHub app (Actions → Make video → Run workflow), or with
 `/video` in Discord or a message in Telegram through the bot in `worker/`.
+
+In Discord:
+
+- `/video [topic] [giong] [yeucau]` makes a new video. `giong` is an ElevenLabs
+  voice: pick a suggestion, or type a name, a voice id or a voice link (a Voice
+  Library voice gets added to the account). `yeucau` is free text for the script
+  writer and Claude, such as "nền đen, chữ neon, nhịp nhanh".
+- `/sua video [yeucau] [giong]` reworks a finished video: a new voice regenerates
+  the voiceover, and `yeucau` has Claude change the existing build (or build a
+  fallback video properly). Each version renders to its own file on the CDN.
