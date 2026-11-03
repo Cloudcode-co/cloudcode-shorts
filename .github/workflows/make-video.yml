@@ -102,6 +102,8 @@ jobs:
           TOKEN: ${{ github.token }}
         run: bash scripts/save-video.sh
 
+      # A backup of the video and the QA stills; the video also lives on the CDN.
+      # Kept 3 days: the private repo has 500 MB of artifact storage.
       - uses: actions/upload-artifact@v4
         if: always() && steps.make.outputs.slug != ''
         with:
@@ -109,5 +111,5 @@ jobs:
           path: |
             out/*.mp4
             out/qa/**/*.png
-          retention-days: 14
+          retention-days: 3
           if-no-files-found: ignore
