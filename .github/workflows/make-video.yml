@@ -1,0 +1,84 @@
+name: Make video
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Đề tài (để trống để Gemini tự chọn)"
+        required: false
+        default: ""
+  # Sent by the Telegram bot worker (worker/).
+  repository_dispatch:
+    types: [make-video]
+  # 01:00 in Vietnam. Runs only when the repo variable AUTO_DAILY is "true".
+  schedule:
+    - cron: "0 18 * * *"
+
+# One video at a time, so history.json and the commits never race.
+concurrency:
+  group: make-video
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  make:
+    if: github.event_name != 'schedule' || vars.AUTO_DAILY == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Keep the push token out of .git so the build step can't use it.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Claude Code and Remotion's browser
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          npx remotion browser ensure
+
+      - name: Make the video
+        id: make
+        env:
+          TOPIC: ${{ inputs.topic || github.event.client_payload.topic }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node pipeline/run.mjs
+
+      - name: Keep the video's source in the repo
+        if: always() && steps.make.outputs.slug != ''
+        env:
+          SLUG: ${{ steps.make.outputs.slug }}
+          TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "src/videos/$SLUG" "public/videos/$SLUG" src/videos/index.ts pipeline/history.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Add video $SLUG"
+          git push "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${GITHUB_REF_NAME}
+
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.make.outputs.slug != ''
+        with:
+          name: ${{ steps.make.outputs.slug }}
+          path: |
+            out/*.mp4
+            out/qa/**/*.png
+          retention-days: 14
+          if-no-files-found: ignore

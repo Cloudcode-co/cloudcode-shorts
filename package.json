@@ -1,7 +1,7 @@
 {
-  "name": "cloudcode-hermes-short",
+  "name": "cloudcode-shorts",
   "version": "1.0.0",
-  "description": "My Remotion video",
+  "description": "Cloudcode TikTok shorts, one Remotion composition per video",
   "repository": {},
   "license": "UNLICENSED",
   "engines": {
@@ -9,10 +9,16 @@
   },
   "private": true,
   "dependencies": {
+    "@remotion/bundler": "4.0.540",
     "@remotion/cli": "4.0.540",
+    "@remotion/google-fonts": "4.0.540",
+    "@remotion/media": "4.0.540",
+    "@remotion/renderer": "4.0.540",
+    "@remotion/transitions": "4.0.540",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "remotion": "4.0.540"
+    "remotion": "4.0.540",
+    "simple-icons": "^16.36.0"
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.540",
@@ -26,7 +32,13 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "register": "node scripts/register.mjs",
+    "voice": "node --env-file=.env scripts/voiceover.mjs",
+    "music": "node --env-file=.env scripts/music.mjs",
+    "sfx": "node --env-file=.env scripts/sfx.mjs",
+    "qa": "node scripts/qa-stills.mjs",
+    "render:qsv": "node scripts/render-qsv.mjs"
   },
   "allowScripts": {
     "esbuild": false

@@ -1,54 +1,67 @@
-# Remotion video
+# Cloudcode shorts
 
-<p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-dark.apng">
-      <img alt="Animated Remotion Logo" src="https://github.com/remotion-dev/logo/raw/main/animated-logo-banner-light.gif">
-    </picture>
-  </a>
-</p>
+TikTok shorts (1080×1920, 60fps) built with Remotion. Every video lives in its
+own folder and shares the building blocks in `src/kit`.
 
-Welcome to your Remotion project!
+## Layout
+
+| Path | What it holds |
+| --- | --- |
+| `src/kit/` | Shared parts: TikTok safe area (`SAFE`, `Shot`), fonts, `Terminal`, `BrandIcons`, `Voice` / `Sfx` / `Music`, `fit()` timing, the Cloudcode `Brand` lockup, `TikTokGuide` overlay |
+| `src/videos/<slug>/Video.tsx` | The video; exports `video: VideoDef` |
+| `src/videos/<slug>/script.json` | Voiceover lines per scene (ElevenLabs v3 audio tags allowed), optional `musicPrompt` |
+| `src/videos/<slug>/durations.json` | Voice clip lengths in seconds, written by `npm run voice` |
+| `src/videos/index.ts` | Generated list of videos (`npm run register`) |
+| `public/videos/<slug>/` | That video's images, `voiceover/*.mp3`, `music.mp3` |
+| `public/sfx/` | Shared sound effects |
+| `pipeline/art-directions.json` | Pool of art directions a new video draws from |
+| `pipeline/history.json` | Directions already used, newest last |
 
 ## Commands
 
-**Install Dependencies**
-
-```console
-npm i --loglevel=error
+```bash
+npm run dev                              # Studio preview
+npm run register                         # after adding/removing a video folder
+npm run voice -- <slug>                  # missing voice clips (--force, or scene ids)
+npm run music -- <slug>                  # background track sized to the voice
+npm run qa -- <slug>                     # stills with TikTok's overlay, out/qa/<slug>/
+npm run render:qsv -- <slug>             # MP4 via Intel QuickSync, out/<slug>.mp4
 ```
 
-**Start Preview**
+Scripts that call ElevenLabs read `ELEVENLABS_API_KEY` from `.env`.
 
-```console
-npm run dev
+Remotion needs a company license for some entities:
+[terms](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+
+## Automation
+
+`pipeline/run.mjs` makes a whole video unattended; `.github/workflows/make-video.yml`
+runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's servers.
+
+1. `pipeline/write-script.mjs`: Gemini (default `gemini-3.8-flash`) researches the
+   topic with Google Search, then writes `script.json`; real stars and avatars come
+   from the GitHub API into `facts.json`.
+2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (Tony Nguyễn) and music.
+3. `pipeline/build-video.mjs`: Claude Code draws an art direction and writes
+   `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA
+   stills. It may only edit that video's folder and run register / tsc / qa.
+   If it fails, the kit's `FallbackVideo` is used so the run still ends with a video.
+4. QA stills, render, then Telegram gets the stills, the MP4 and the caption.
+   The workflow commits the video's source back to the repo.
+
+Run locally (no render unless `--render`):
+
+```bash
+node --env-file=.env pipeline/run.mjs "Coolify vs Dokploy"
 ```
 
-**Render video**
+### Setup
 
-```console
-npx remotion render
-```
+Repository secrets: `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY`,
+and for Telegram `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
+Optional repository variables: `GEMINI_MODEL`, `CLAUDE_MODEL` (default
+`claude-sonnet-5-5`), `CLAUDE_BUDGET_USD` (default 4), `AUTO_DAILY` = `true` to
+make a video every night at 01:00 Vietnam time with a topic Gemini picks.
 
-**Upgrade Remotion**
-
-```console
-npx remotion upgrade
-```
-
-## Docs
-
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
-
-## Help
-
-We provide help on our [Discord server](https://discord.gg/6VzzNDwUwV).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
-
-## License
-
-Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+Start a run from the GitHub app (Actions → Make video → Run workflow) or from
+Telegram through the bot in `worker/`.

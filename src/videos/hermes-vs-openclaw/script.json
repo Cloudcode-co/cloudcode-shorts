@@ -1,0 +1,22 @@
+{
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": { "stability":  0.0, "similarity_boost":  0.75 },
+  "scenes": [
+    { "id": "hook", "text": "[excited] Anh em đang phân vân giữa OpenClaw và Hermes? [curious] Hôm nay mình so sánh nhanh nhé!" },
+    { "id": "family", "text": "Trước hết, OpenClaw còn cả một họ hàng: NanoClaw, nanobot, PicoClaw, ZeroClaw. [casually] Nhẹ hơn, nhưng đổi lại ít tính năng hơn." },
+    { "id": "rivals", "text": "Còn Hermes cũng có đối thủ: Letta, Agent Zero, Goose, Vellum. [casually] Mỗi cái một thế mạnh, nhưng Hermes vẫn nhiều sao GitHub nhất." },
+    { "id": "free", "text": "Điểm chung? [excited] Cả hai đều miễn phí, mã nguồn mở." },
+    { "id": "row-1", "text": "Giờ vào so sánh nhé. OpenClaw mạnh ở chỗ nối được cực nhiều kênh, [impressed] còn Hermes thì tự học, tự viết skill." },
+    { "id": "row-2", "text": "Về kênh chat, OpenClaw có cả Zalo, còn Hermes có Telegram, Discord, Slack." },
+    { "id": "row-3", "text": "Về bộ nhớ, [impressed] Hermes tự ghi nhớ và tìm lại được cả cuộc chat cũ." },
+    { "id": "row-4", "text": "Về chạy code, OpenClaw dùng JavaScript, Hermes dùng Python." },
+    { "id": "row-5", "text": "Cuối cùng, OpenClaw do một quỹ phi lợi nhuận phát triển, còn Hermes là của Nous Research." },
+    { "id": "verdict", "text": "Vậy chọn con nào? Cần bot trên Zalo, đủ mọi kênh, thì chọn OpenClaw. [excited] Muốn agent càng dùng càng khôn, thì chọn Hermes! [cheerfully] Giờ mình hướng dẫn cài Hermes luôn." },
+    { "id": "step-1", "text": "Bước một, anh em mở terminal, dán dòng lệnh này vào. [casually] Script tự lo hết." },
+    { "id": "step-2", "text": "Bước hai, chạy hermes model để chọn model mình muốn dùng." },
+    { "id": "step-3", "text": "Bước ba, gõ hermes, [excited] vậy là chat được rồi!" },
+    { "id": "step-4", "text": "Bước cuối, chạy gateway setup rồi gateway start, thế là Hermes đã nối với Telegram." },
+    { "id": "cta", "text": "[warmly] Vậy là xong rồi đó! Lưu video lại để cài sau, và follow để xem thêm nhé!" }
+  ]
+}

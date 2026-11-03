@@ -1,0 +1,80 @@
+{
+  "note": "Pool the builder draws one art direction from per video, skipping the ones in pipeline/history.json's last 5 entries. Each brief is a starting point: the palette still comes from the subject's own logos and artwork.",
+  "directions": [
+    {
+      "id": "print-zine",
+      "name": "Photocopied zine",
+      "brief": "Black-and-white photocopy texture, halftone dots, cut-out logos with rough paper edges, one spot colour from the subject's logo. Headlines set huge and tight, slightly rotated. Shots slam in like pages being slapped onto a desk."
+    },
+    {
+      "id": "pixel-quest",
+      "name": "Pixel RPG quest",
+      "brief": "The video is a quest: each step is a level, options are characters with stat bars, the verdict is a boss fight or a treasure chest. Chunky pixel frames, stepped (not eased) motion, a pixel display face only for headlines."
+    },
+    {
+      "id": "notebook",
+      "name": "Engineer's notebook",
+      "brief": "Squared paper, hand-drawn boxes and arrows drawn on with stroke animation, sticky notes for asides, highlighter swipes on key words. Logos taped in. Feels like someone explaining on paper."
+    },
+    {
+      "id": "ops-console",
+      "name": "Ops console",
+      "brief": "Dense monitoring dashboard: panels, live-looking counters, log lines scrolling, status lights. Comparisons as two services' health panels. Mono for data, a wide grotesk for headlines. Real commands typed in the terminal."
+    },
+    {
+      "id": "retro-os",
+      "name": "Retro desktop OS",
+      "brief": "Windows 98 / classic Mac desktop: every fact is a window or dialog box that pops open, buttons, title bars, a progress bar for install steps, a fake error dialog as the hook."
+    },
+    {
+      "id": "sports-broadcast",
+      "name": "Sports broadcast",
+      "brief": "Head-to-head match: lower-thirds, scoreboard that updates per round, 'round 1/2/3' cards, a final score. Bold condensed type, team colours taken from each subject's logo."
+    },
+    {
+      "id": "subway-map",
+      "name": "Transit map",
+      "brief": "The topic is a metro map: each option is a line in its logo colour, features are stations, the install is a route with stops. Thick rounded lines drawn on, clean sans, lots of white space."
+    },
+    {
+      "id": "receipt",
+      "name": "Shop receipt",
+      "brief": "Thermal receipt printing out line by line: features as items, costs and limits as prices, the verdict as the total. Mono type, torn edge, a barcode at the end. Paper on a dark counter."
+    },
+    {
+      "id": "magazine-cover",
+      "name": "Magazine spread",
+      "brief": "Each shot is a magazine cover or spread: giant masthead-style headline, cover lines around a hero image of the logo, page numbers. Strong serif display with a plain sans for cover lines."
+    },
+    {
+      "id": "vhs-tape",
+      "name": "VHS tape",
+      "brief": "Recorded-off-TV look: tracking lines, REC/PLAY overlay, timestamp, chroma bleed on edges. Chapters as tape counter jumps. Keep the text itself sharp and readable above the noise."
+    },
+    {
+      "id": "cards-on-table",
+      "name": "Trading cards",
+      "brief": "Each option is a collectible card with art, type, and stats that flips to show its back; comparisons as two cards side by side with stats lighting up. Card frames tinted from each logo."
+    },
+    {
+      "id": "blueprint",
+      "name": "Blueprint",
+      "brief": "Technical drawing: blue paper, white line work, dimension lines and callouts pointing at parts of a diagram of how the thing works. Lines draw on; labels in a narrow technical sans."
+    },
+    {
+      "id": "chat-thread",
+      "name": "Group chat",
+      "brief": "The whole video plays as a messaging thread: the question arrives as a message, answers as bubbles, logos as avatars, commands as code blocks someone pastes. Typing indicators between beats."
+    },
+    {
+      "id": "big-type",
+      "name": "Kinetic type",
+      "brief": "Almost no imagery: words are the visuals. Huge type that fills the frame, words swapping on the voice's beat, one word per beat at key moments, colour flips between shots. Logos appear only as punctuation."
+    }
+  ],
+  "pacing": [
+    "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "Few long shots: 3–5 shots, each building up in place.",
+    "Chapters: a title card before each section, then quick shots inside it."
+  ]
+}

@@ -1,0 +1,7 @@
+name = "cloudcode-shorts-bot"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# The GitHub repository whose "Make video" workflow the bot starts.
+GITHUB_REPO = "Cloudcode-co/cloudcode-shorts"
