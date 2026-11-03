@@ -59,14 +59,20 @@ export const pickGeminiModels = async () => {
   return list;
 };
 
-// One generateContent call, trying `models` in order. Overloads and short
-// rate limits get retried; a model out of quota hands over to the next one,
-// and the model that answers moves to the front of `models` for later calls.
+// The model that last answered, per kind of call: on the free tier only
+// Gemini 2.x may use Google Search, while plain calls can use the newest.
+const lastGood = {};
+
+// One generateContent call, trying `models` in order (after the one that last
+// answered the same kind of call). Overloads and short rate limits get
+// retried; a model out of quota hands over to the next one.
 // Returns the text of the first candidate.
 export const gemini = async (models, body) => {
   const key = need("GEMINI_API_KEY");
+  const kind = body.tools?.some((t) => t.google_search) ? "search" : "plain";
+  const order = lastGood[kind] ? [lastGood[kind], ...models.filter((m) => m !== lastGood[kind])] : models;
   const errors = [];
-  for (const model of [...models]) {
+  for (const model of order) {
     for (let attempt = 1; ; attempt++) {
       const res = await fetch(`${GEMINI}/models/${model}:generateContent?key=${key}`, {
         method: "POST",
@@ -79,8 +85,8 @@ export const gemini = async (models, body) => {
           ?.map((p) => p.text ?? "")
           .join("");
         if (!text) throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
-        models.splice(models.indexOf(model), 1);
-        models.unshift(model);
+        if (lastGood[kind] !== model) console.log(`Gemini (${kind}): ${model}`);
+        lastGood[kind] = model;
         return text;
       }
       const detail = await res.text();

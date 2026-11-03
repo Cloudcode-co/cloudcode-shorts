@@ -195,5 +195,5 @@ writeJson(`src/videos/${slug}/script.json`, {
   ...VOICE,
   scenes: script.scenes,
 });
-writeJson(`src/videos/${slug}/facts.json`, { topic, model: models[0], date: today, repos, research });
+writeJson(`src/videos/${slug}/facts.json`, { topic, models, date: today, repos, research });
 console.log(slug);
