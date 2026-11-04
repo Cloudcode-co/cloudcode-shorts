@@ -172,7 +172,13 @@ try {
       const draft = await sendToDrafts(slug, out, caption);
       console.log("TikTok drafts:", JSON.stringify(draft));
       if (draft.error) {
-        await sendPing(`Chưa gửi được vào nháp TikTok: ${draft.error}`);
+        // TikTok holds only a few unposted inbox videos per account (5 a day).
+        const full = /spam_risk_too_many_pending_share/.test(draft.error);
+        await sendPing(
+          full
+            ? "Chưa gửi được vào nháp TikTok: hộp thư TikTok đã đầy video chờ (tối đa 5 trong 24 giờ). Mở TikTok, đăng hoặc xóa bớt video trong hộp thư rồi bấm nút bên dưới."
+            : `Chưa gửi được vào nháp TikTok: ${draft.error}`,
+        );
         await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
       } else if (draft.mode === "post") {
         await sendPing(
