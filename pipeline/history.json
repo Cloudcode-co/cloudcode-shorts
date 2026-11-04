@@ -115,5 +115,16 @@
     "costUsd": 0.7794824,
     "reviewIssues": 4,
     "format": "quiz"
+  },
+  {
+    "slug": "tu-host-bento-slide-sieu-nhe",
+    "topic": "Tự host Bento: Bộ ứng dụng văn phòng siêu nhẹ gói gọn trong một file thay thế Nextcloud trên VPS",
+    "date": "2026-11-04",
+    "direction": "terminal-tutorial",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.5093914,
+    "reviewIssues": 3,
+    "format": "tutorial"
   }
 ]

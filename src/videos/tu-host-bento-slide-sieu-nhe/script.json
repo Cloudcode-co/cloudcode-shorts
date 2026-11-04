@@ -1,0 +1,154 @@
+{
+  "slug": "tu-host-bento-slide-sieu-nhe",
+  "format": "tutorial",
+  "topic": "Tự host Bento: Bộ ứng dụng văn phòng siêu nhẹ gói gọn trong một file thay thế Nextcloud trên VPS",
+  "title": "Tự host Bento: Slide một file siêu nhẹ thay Nextcloud?",
+  "caption": "Bộ ứng dụng trình chiếu Bento chạy ngay trên một file HTML 560KB mà không cần backend phức tạp. Thử cài ngay!",
+  "hashtags": [
+    "#bento",
+    "#selfhosted",
+    "#opensource",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Upbeat modern tech electronic beat, rhythmic synthesizer groove, bright and energetic pulse, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "punchy bass",
+        "energetic electronic",
+        "modern synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "steady tech groove",
+        "rising arpeggio",
+        "focused rhythm"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s5",
+      "styles": [
+        "bright melodic drop",
+        "triumphant electronic",
+        "crisp beat"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s6",
+      "styles": [
+        "warm synth tail",
+        "smooth decay",
+        "cheerful"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/nyblnet/bento",
+    "https://github.com/i-doll/thewiki",
+    "https://bento.page/agents.md",
+    "https://bento.page/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[excited] Cài Bento để có ngay bộ slide văn phòng siêu nhẹ, không cần backend!",
+      "headline": "Bento: Slide văn phòng siêu nhẹ",
+      "lines": [
+        "Gói gọn trong một file HTML",
+        "Không cần server nặng nề"
+      ],
+      "commands": [],
+      "repos": [
+        "nyblnet/bento"
+      ],
+      "footage": "developer working on laptop"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Anh em clone repo về rồi chuyển ngay vào thư mục slides nhé.",
+      "headline": "Vào thư mục slides",
+      "lines": [
+        "Thư mục mã nguồn Bento Slides"
+      ],
+      "commands": [
+        "cd slides"
+      ],
+      "repos": [
+        "nyblnet/bento"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[curious] Máy anh em đã có Node 20 chưa? Chỉ cần chạy npm install là xong.",
+      "headline": "Cài đặt thư viện phụ thuộc",
+      "lines": [
+        "Yêu cầu Node 20+ và npm"
+      ],
+      "commands": [
+        "npm install"
+      ],
+      "repos": [
+        "nyblnet/bento"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Tiếp theo, gõ npm run dev để khởi động máy chủ phát triển cục bộ.",
+      "headline": "Khởi chạy dev server",
+      "lines": [
+        "Chạy ngay không cần backend services"
+      ],
+      "commands": [
+        "npm run dev"
+      ],
+      "repos": [
+        "nyblnet/bento"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Mở ngay trình duyệt vào đường dẫn localhost cổng năm một bảy ba để dùng!",
+      "headline": "Mở ứng dụng trên trình duyệt",
+      "lines": [
+        "Truy cập http://localhost:5173",
+        "Tự động lưu trực tiếp vào file"
+      ],
+      "commands": [],
+      "repos": [
+        "nyblnet/bento"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[warmly] Slide tự lưu dưới dạng JSON siêu tiện lợi, anh em lưu video lại để thử nhé!",
+      "headline": "Lưu lại để thực hành ngay",
+      "lines": [
+        "Toàn bộ app chỉ ~560 KB",
+        "Lưu video để tự cài đặt"
+      ],
+      "commands": [],
+      "repos": [
+        "nyblnet/bento"
+      ],
+      "footage": "software engineer smiling at desk"
+    }
+  ]
+}

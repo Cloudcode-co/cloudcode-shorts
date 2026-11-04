@@ -1,0 +1,3 @@
+A four-shot terminal tutorial on a dark editor theme with Bento's logo purple as the only accent. The middle shot is one long terminal that carries the three steps (`cd slides`, `npm install`, `npm run dev`) in place. A "Bước n/3" counter and the headline change above it while each command types at a human pace with a blinking cursor. Results are green-check lines drawn only from the research and script.
+
+QA fixes: the localhost URL no longer wraps mid-number, lone-word wraps ("đủ", "JSON") were shortened, and fonts were enlarged so the terminal fills its box. No watermark, no invented data and no text under 34px. The footage clips were deliberately left unused so the terminal stays the whole screen.
