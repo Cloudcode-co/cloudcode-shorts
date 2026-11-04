@@ -13,8 +13,10 @@
 // With MUSIC_URL (the owner's own track: an audio file, or a video whose sound
 // is used), that track is used instead from MUSIC_START seconds in, looped or
 // cut to the video's length (the kit's <Music> fades it out). Without
-// ElevenLabs (no key, or it refuses) an earlier video's generated track from
-// the repo is reused the same way. With MUSIC_OFF the track is silence, for
+// ElevenLabs (no key, or it refuses) Gemini writes a score (pipeline/score.mjs)
+// and scripts/compose.mjs plays it in sync with the sections; when that fails
+// too, an earlier video's generated track from the repo is reused, looped or
+// cut to length. With MUSIC_OFF the track is silence, for
 // a sound picked in the TikTok app instead (MUSIC_URL still wins).
 //
 //   node --env-file=.env scripts/music.mjs <slug>
@@ -174,9 +176,36 @@ if (/^(1|true|yes)$/i.test(process.env.MUSIC_OFF ?? "")) {
   console.log(`no music: public/videos/${slug}/music.mp3 is ${total.toFixed(1)}s of silence`);
   process.exit(0);
 }
-if (!key) reuse("ELEVENLABS_API_KEY is not set");
-
 const sections = plan && sectionsFor(plan);
+const writeTimeline = () =>
+  writeFileSync(
+    `src/videos/${slug}/timeline.json`,
+    JSON.stringify(
+      sections
+        ? { ...plan, sections: sections.map(({ name, start, length, scenes }) => ({ name, start: Number(start.toFixed(2)), length: Number(length.toFixed(2)), scenes })) }
+        : plan,
+      null,
+      2,
+    ) + "\n",
+  );
+// Music made here: Gemini's score played by compose.mjs, else a seeded score
+// of its own, else an earlier track.
+const composed = async (why) => {
+  console.log(`music: ${why}; composing it`);
+  if (!plan) reuse(why);
+  writeTimeline();
+  try {
+    const { writeScore } = await import("../pipeline/score.mjs");
+    await writeScore(slug, script);
+  } catch (err) {
+    console.log(`score: Gemini could not write one (${String(err.message ?? err).slice(0, 200)}); composing from a seed`);
+    rmSync(`src/videos/${slug}/score.json`, { force: true });
+  }
+  const r = spawnSync("node", ["scripts/compose.mjs", slug], { stdio: "inherit" });
+  if (r.status !== 0) reuse("compose.mjs failed");
+  process.exit(0);
+};
+if (!key) await composed("ELEVENLABS_API_KEY is not set");
 let body;
 if (sections) {
   const lead = sections.length > 1 && sections[0].length >= 4 ? 1 : 0;
@@ -199,10 +228,7 @@ if (sections) {
       })),
     },
   };
-  writeFileSync(
-    `src/videos/${slug}/timeline.json`,
-    JSON.stringify({ ...plan, sections: sections.map(({ name, start, length, scenes }) => ({ name, start: Number(start.toFixed(2)), length: Number(length.toFixed(2)), scenes })) }, null, 2) + "\n",
-  );
+  writeTimeline();
   console.log(`Music in ${sections.length} sections: ${sections.map((s) => `${s.name} ${s.length.toFixed(1)}s`).join(", ")}`);
 } else {
   body = { prompt: script.musicPrompt ?? DEFAULT_PROMPT, music_length_ms: Math.min(lengthMs, 300000), force_instrumental: true };
@@ -219,6 +245,6 @@ if (!res.ok && sections) {
   console.log(`music plan refused: ${res.status} ${(await res.text()).slice(0, 300)}; composing from the prompt`);
   res = await compose({ prompt: script.musicPrompt ?? DEFAULT_PROMPT, music_length_ms: Math.min(lengthMs, 300000), force_instrumental: true });
 }
-if (!res.ok) reuse(`ElevenLabs refused (${res.status} ${(await res.text()).slice(0, 200)})`);
+if (!res.ok) await composed(`ElevenLabs refused (${res.status} ${(await res.text()).slice(0, 200)})`);
 writeFileSync(`public/videos/${slug}/music.mp3`, Buffer.from(await res.arrayBuffer()));
 console.log(`generated public/videos/${slug}/music.mp3 (${sections ? plan.total + 2 : lengthMs / 1000}s)`);
