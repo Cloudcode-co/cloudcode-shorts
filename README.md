@@ -44,7 +44,7 @@ runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's ser
    OpenAI-compatible API (default `ag/gemini-3.8-flash-high` on
    `https://be-ag.harumi.io.vn/v1`), writes `script.json` from that, with install
    commands copied from the READMEs; real stars and avatars go into `facts.json`.
-2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (Tony Nguyễn) and music.
+2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (Ninh Đôn by default) and music.
 3. `pipeline/build-video.mjs`: Claude Code draws an art direction and writes
    `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA
    stills. It may only edit that video's folder and run register / tsc / qa.

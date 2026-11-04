@@ -64,7 +64,8 @@ const queued = (res, { topic, source, voice, notes, revise, style, builder }) =>
 // Vietnamese voices on the ElevenLabs account, offered as /video and /sua
 // suggest them; any other name, voice id or voice link can be typed instead.
 const VOICES = [
-  ["Tony Nguyễn (mặc định)", "2ZUpiKo5wCCuypvx2zaS"],
+  ["Ninh Đôn - nam, giọng Bắc, trầm ấm (mặc định)", "aN7cv9yXNrfIR87bDmyD"],
+  ["Tony Nguyễn", "2ZUpiKo5wCCuypvx2zaS"],
   ["Linh Chi - nữ, giọng Bắc", "smHgfqI7ihNDlaBs0X9I"],
   ["Linh - nữ, nhẹ nhàng", "L5c6tGA8OiORYKxez5Zu"],
   ["Quang Toàn - nam, trầm, kể chuyện", "ZsjEJaLQy3sgvwxicmDx"],

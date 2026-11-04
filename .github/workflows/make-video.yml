@@ -12,7 +12,7 @@ on:
         required: false
         default: ""
       voice:
-        description: "Giọng ElevenLabs: tên, voice id hoặc link (để trống: Tony Nguyễn)"
+        description: "Giọng ElevenLabs: tên, voice id hoặc link (để trống: Ninh Đôn)"
         required: false
         default: ""
       style:

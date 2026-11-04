@@ -20,7 +20,7 @@ import { isWebUrl, pageBrief, webReader } from "./web.mjs";
 import { addFootage, footageOn } from "./footage.mjs";
 
 const VOICE = {
-  voiceId: "2ZUpiKo5wCCuypvx2zaS", // Tony Nguyễn
+  voiceId: "aN7cv9yXNrfIR87bDmyD", // Ninh Đôn – Deep & Warm
   modelId: "eleven_v3",
   voiceSettings: { stability: 0.0, similarity_boost: 0.75 },
 };
