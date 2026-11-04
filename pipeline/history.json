@@ -137,5 +137,16 @@
     "costUsd": 0.8782537000000001,
     "reviewIssues": 6,
     "format": "top5"
+  },
+  {
+    "slug": "diem-tin-postman-flipper-one-nvidia",
+    "topic": "Điểm tin sáng: Postman tự cài plugin AI, Flipper One mở đặt trước, Nvidia bóp hiệu năng trên Linux",
+    "date": "2026-11-04",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.6368463999999999,
+    "reviewIssues": 1,
+    "format": "brief"
   }
 ]

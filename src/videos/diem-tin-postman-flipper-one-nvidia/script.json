@@ -1,0 +1,133 @@
+{
+  "slug": "diem-tin-postman-flipper-one-nvidia",
+  "format": "brief",
+  "topic": "Điểm tin sáng: Postman tự cài plugin AI, Flipper One mở đặt trước, Nvidia bóp hiệu năng trên Linux",
+  "title": "Postman tự cài plugin, Flipper One giá bao nhiêu?",
+  "caption": "Điểm tin sáng: Postman tự cài plugin vào agent AI, Flipper One mở đặt trước và laptop Nvidia bị bóp hiệu năng trên Linux.",
+  "hashtags": [
+    "#laptrinhvien",
+    "#flipperone",
+    "#postman",
+    "#congnghe",
+    "#tintuc"
+  ],
+  "musicPrompt": "Upbeat modern tech electronic news beat, crisp synth pulses, morning broadcast tempo, light drums, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "energetic",
+        "synth pulse",
+        "punchy"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "tech beat",
+        "driving bass",
+        "curious"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "dramatic drop",
+        "bouncy",
+        "bright"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "warm fade",
+        "positive",
+        "clean"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/postmanlabs/postman-app-support/issues/14370",
+    "https://flipper.net/pages/flipper-one",
+    "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop",
+    "https://flipper.net/products/flipper-one-preorder",
+    "https://github.com/postmanlabs/postman-app-support"
+  ],
+  "voiceId": "6adFm46eyy74snVn6YrT",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[excited] Điểm tin sáng hôm nay: Postman tự cài plugin, Flipper One mở bán, và Nvidia bóp xung Linux!",
+      "headline": "Điểm tin sáng công nghệ",
+      "lines": [
+        "3 tin nóng sáng nay",
+        "Postman, Flipper One, Nvidia"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "tech news broadcast presenter"
+    },
+    {
+      "id": "s2",
+      "text": "[curious] 1/3: Theo issue 14370 trên GitHub, Postman 12.33.4 tự tiện cài plugin và CLI vào Codex lẫn Claude Code mà không hỏi người dùng. [thoughtful] Hook tự phê duyệt ép agent nạp kỹ năng Postman, anh em dev kiểm tra ngay thư mục cấu hình!",
+      "headline": "1/3 Postman tự cài plugin AI",
+      "lines": [
+        "Postman 12.33.4 tự sửa config",
+        "Cài plugin vào Codex và Claude Code",
+        "Dev kiểm tra lại ~/.codex"
+      ],
+      "commands": [],
+      "repos": [
+        "postmanlabs/postman-app-support"
+      ],
+      "footage": "developer coding at desk"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] 2/3: Theo flipper.net, Flipper One vừa mở bán coupon 20 đô để giữ giá ưu đãi 379 đô trên Kickstarter do biến động giá RAM. [casually] Thiết bị chạy chip Rockchip RK3576, tích hợp Wi-Fi 6E packet injection và khe cắm M.2 cho anh em vọc mạng.",
+      "headline": "2/3 Flipper One mở đặt trước",
+      "lines": [
+        "Coupon 20 USD giữ giá 379 USD",
+        "Chip Rockchip RK3576 8 nhân",
+        "Wi-Fi 6E và khe cắm M.2"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[laughs] 3/3: Theo MindStudio, laptop Nvidia RTX Spark cắm sạc chạy Linux bị khóa xung 780 MHz. [impressed] Test GPT-OSS-120B chỉ đạt 13.9 token một giây, chậm gấp 5 lần Windows vì thiếu driver giải mã điện năng, nên anh em AI tạm thời cứ dùng WSL.",
+      "headline": "3/3 Nvidia bóp hiệu năng Linux",
+      "lines": [
+        "Cắm sạc tụt xung còn 780 MHz",
+        "GPT-OSS-120B: 13.9 vs 65.4 tok/s",
+        "Thiếu driver Platform Controllers"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "laptop motherboard and gpu chip"
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Anh em quan tâm tin nào nhất? [warmly] Nhớ bấm theo dõi kênh để đón xem điểm tin sáng mai nhé!",
+      "headline": "Anh em quan tâm tin nào nhất?",
+      "lines": [
+        "Bình luận thảo luận bên dưới",
+        "Follow đón điểm tin sáng mai"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}
