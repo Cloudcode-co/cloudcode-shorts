@@ -9,10 +9,10 @@
 //                      Gemini pick, /id replies with the chat id
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
 //                      (Authorization: Bearer UPLOAD_SECRET); replies with its
-//                      public URL on MEDIA_URL. The whole bucket stays under
-//                      STORAGE_BUDGET_MB (default 4096): the oldest videos are
-//                      deleted to make room; nothing outside tiktok-shorts/ is
-//                      touched
+//                      public URL on MEDIA_URL. The videos under tiktok-shorts/
+//                      stay under VIDEO_BUDGET_MB (default 5120): the oldest are
+//                      deleted to make room; the rest of the bucket is not counted
+//                      or touched
 //   /, /login, /app...   the Cloudcode Shorts website with TikTok login (site.js)
 //   POST /tiktok/draft  { key } sends that video to the connected TikTok account's
 //                      drafts and waits for TikTok (Bearer UPLOAD_SECRET); the
@@ -278,20 +278,19 @@ const KEY = /^[a-z0-9-]{1,80}\/[A-Za-z0-9._-]{1,120}$/;
 // Every video lives under this prefix; the bucket also serves the site's media.
 const PREFIX = "tiktok-shorts/";
 
-// Makes room for `incoming` bytes: deletes the oldest videos until the whole
-// bucket, plus the new file, fits the budget. False when even deleting every
-// video would not make it fit.
+// Makes room for `incoming` bytes: deletes the oldest videos until the videos,
+// plus the new file, fit the budget. False when the new file alone is too big.
 const makeRoom = async (env, incoming) => {
-  const budget = (Number(env.STORAGE_BUDGET_MB) || 4096) * 1024 * 1024;
-  const all = [];
+  const budget = (Number(env.VIDEO_BUDGET_MB) || 5120) * 1024 * 1024;
+  const videos = [];
   let cursor;
   do {
-    const page = await env.MEDIA.list({ cursor, limit: 1000 });
-    all.push(...page.objects);
+    const page = await env.MEDIA.list({ prefix: PREFIX, cursor, limit: 1000 });
+    videos.push(...page.objects);
     cursor = page.truncated ? page.cursor : undefined;
   } while (cursor);
-  let total = all.reduce((n, o) => n + o.size, 0) + incoming;
-  const videos = all.filter((o) => o.key.startsWith(PREFIX)).sort((a, b) => a.uploaded - b.uploaded);
+  let total = videos.reduce((n, o) => n + o.size, 0) + incoming;
+  videos.sort((a, b) => a.uploaded - b.uploaded);
   const gone = [];
   while (total > budget && videos.length) {
     const old = videos.shift();
