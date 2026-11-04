@@ -21,3 +21,4 @@ project's videos. Each folder keeps its source's license.
 | humanizer | https://github.com/blader/humanizer | LICENSE from blader/humanizer (MIT) |
 | archify | https://github.com/tt-a1i/archify, copied from the maintainer's local `~/.agents/skills/archify` (runtime files only) | LICENSE (Apache-2.0) and LICENSE-MIT in the folder |
 | generative-music-composer | https://github.com/4444j99/a-i--skills/tree/HEAD/distributions/claude/skills/generative-music-composer | SKILL.md says MIT; repo LICENSE (Apache-2.0) copied into the folder |
+| music-composition | https://github.com/SJY051/music-composition (commit 07cecf9); SKILL.md, KNOWN-LIMITATIONS.md, references/, assets/, scripts/ copied unmodified, benchmarks and maintainer docs left out | LICENSE.md in the folder: CC BY 4.0 for the text, MIT for scripts/. Based on "Music Composition Agent Skill", licensed under CC BY 4.0 |

@@ -94,6 +94,18 @@ curl -fsSL "$base/LICENSE" -o "$music/LICENSE"
 echo "| generative-music-composer | https://github.com/4444j99/a-i--skills/tree/HEAD/distributions/claude/skills/generative-music-composer | SKILL.md says MIT; repo LICENSE (Apache-2.0) in the folder |" >> "$notice"
 echo "skill: generative-music-composer (4444j99/a-i--skills)"
 
+# Composition theory and craft (CC BY 4.0 text, MIT scripts), read with
+# generative-music-composer; its repo keeps the skill at the root, next to
+# benchmarks and READMEs that are left out.
+rm -rf "${dest:?}/music-composition"
+git clone --quiet --depth 1 https://github.com/SJY051/music-composition.git "$tmp/music-composition"
+mkdir -p "$dest/music-composition"
+for f in SKILL.md LICENSE.md KNOWN-LIMITATIONS.md references assets scripts; do
+  cp -r "$tmp/music-composition/$f" "$dest/music-composition/"
+done
+echo "| music-composition | https://github.com/SJY051/music-composition (commit 07cecf9); SKILL.md, KNOWN-LIMITATIONS.md, references/, assets/, scripts/ copied unmodified, benchmarks and maintainer docs left out | LICENSE.md in the folder: CC BY 4.0 for the text, MIT for scripts/. Based on \"Music Composition Agent Skill\", licensed under CC BY 4.0 |" >> "$notice"
+echo "skill: music-composition (SJY051/music-composition)"
+
 # archify, copied from ~/.agents/skills: the runtime files only (Node
 # built-ins, no npm install), without its 13 MB of pre-rendered example pages,
 # brand-mark sources and generator scripts.
