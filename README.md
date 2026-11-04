@@ -78,13 +78,14 @@ Start a run from the GitHub app (Actions → Make video → Run workflow), or wi
 
 In Discord:
 
-- `/video [topic] [phongcach] [giong] [yeucau]` makes a new video. `phongcach`
+- `/video [topic] [phongcach] [giong] [yeucau] [dung]` makes a new video. `phongcach`
   picks the art direction: a suggestion from `pipeline/art-directions.json`, or
   any description ("anime neon"); empty draws one at random. `giong` is an
   ElevenLabs voice: pick a suggestion, or type a name, a voice id or a voice link
   (a Voice Library voice gets added to the account). `yeucau` is free text for the
-  script writer and the builder, such as "nền đen, chữ neon, nhịp nhanh".
-- `/sua video [yeucau] [phongcach] [giong]` reworks a finished video: a new voice
+  script writer and the builder, such as "nền đen, chữ neon, nhịp nhanh". `dung`
+  picks who builds it: Claude or Gemini (empty: the `BUILDER` variable below).
+- `/sua video [yeucau] [phongcach] [giong] [dung]` reworks a finished video: a new voice
   regenerates the voiceover, `yeucau` has the builder change the existing build,
   and a new `phongcach` rebuilds it in that style. Each version renders to its
   own file on the CDN.

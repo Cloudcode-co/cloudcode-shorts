@@ -3,7 +3,7 @@
 // upload.
 //
 //   POST /discord      Discord interactions: /video [topic] [giong] [yeucau],
-//                      /sua video [yeucau] [giong], and their autocomplete
+//                      /sua video [yeucau] [giong], with [phongcach] [dung], and their autocomplete
 //   POST /telegram     Telegram bot webhook: any text is the topic, /auto lets
 //                      Gemini pick, /id replies with the chat id
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
@@ -30,9 +30,14 @@ const dispatch = (env, job, replyTo) =>
     body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
   });
 
-const queued = (res, { topic, voice, notes, revise, style }) => {
+const queued = (res, { topic, voice, notes, revise, style, builder }) => {
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
-  const extra = [style && `phong cách: ${style}`, voice && `giọng: ${voice}`, notes && `yêu cầu: ${notes}`]
+  const extra = [
+    style && `phong cách: ${style}`,
+    voice && `giọng: ${voice}`,
+    notes && `yêu cầu: ${notes}`,
+    builder && `dựng: ${builder === "beag" ? "Gemini" : "Claude"}`,
+  ]
     .filter(Boolean)
     .join("\n");
   const what = revise ? `sửa video ${revise}` : topic || "Gemini tự chọn đề tài";
@@ -149,9 +154,10 @@ const discord = async (request, env, ctx) => {
     notes: option("yeucau", 1000),
     style: option("phongcach", 200),
     revise: command === "sua" ? option("video", 80) : "",
+    builder: option("dung", 10),
   };
-  if (command === "sua" && !job.voice && !job.notes && !job.style) {
-    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach` hoặc `giong`.", flags: 64 } });
+  if (command === "sua" && !job.voice && !job.notes && !job.style && !job.builder) {
+    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach`, `giong` hoặc `dung`.", flags: 64 } });
   }
 
   // Discord wants an answer within 3s: defer, then edit the reply once

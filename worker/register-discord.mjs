@@ -25,6 +25,16 @@ const style = {
   autocomplete: true,
   max_length: 200,
 };
+const builder = {
+  type: 3,
+  name: "dung",
+  description: "Ai dựng video (để trống: Claude, hết credit thì Gemini)",
+  required: false,
+  choices: [
+    { name: "Claude", value: "claude" },
+    { name: "Gemini (be-ag, miễn phí)", value: "beag" },
+  ],
+};
 const notes = (description) => ({
   type: 3,
   name: "yeucau",
@@ -48,6 +58,7 @@ const commands = [
       style,
       voice,
       notes("Yêu cầu thêm: nền, màu, nhịp, độ dài..."),
+      builder,
     ],
   },
   {
@@ -65,6 +76,7 @@ const commands = [
       notes("Cần sửa gì, ví dụ: nền đen, chữ to hơn, bỏ hiệu ứng rung"),
       style,
       voice,
+      builder,
     ],
   },
 ];
