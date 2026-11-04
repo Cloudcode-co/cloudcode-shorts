@@ -1,0 +1,11 @@
+{
+  "topic": "Postiz: tự host công cụ lên lịch đăng TikTok, YouTube, Discord bằng AI agent",
+  "angle": "Vì bản tự host miễn phí vĩnh viễn và có MCP cùng CLI để AI agent tự soạn và lên lịch bài đăng, nên đây là cách dân làm nội dung và dev tự host có thể thay Buffer mà không bị khóa tính năng.",
+  "sources": [
+    "https://github.com/gitroomhq/postiz-app",
+    "https://docs.postiz.com"
+  ],
+  "notes": "GitHub gitroomhq/postiz-app mô tả Postiz là công cụ lên lịch mạng xã hội theo hướng agentic, công khai, 40.834 star, giấy phép AGPL-3.0, chưa lưu trữ. README của Postiz nói Postiz Cloud và bản mã nguồn mở có cùng tính năng cốt lõi, bản tự host miễn phí vĩnh viễn và bạn chỉ trả tiền hạ tầng của mình, hỗ trợ lên lịch cho TikTok, YouTube, Discord và nhiều kênh khác, đồng thời có MCP, CLI và các kết nối cho ChatGPT, Claude, Codex, Cursor và OpenClaw. Bảng xếp hạng ngày 3/11/2026 ghi Postiz tăng khoảng 2.000 star trong 7 ngày.",
+  "from": "muse",
+  "received": "2026-11-04T06:07:10.023Z"
+}
