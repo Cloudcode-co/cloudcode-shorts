@@ -1,0 +1,212 @@
+{
+  "slug": "tu-host-fugleramme-khung-tranh-chim-ai",
+  "format": "explainer",
+  "topic": "Tự host fugleramme: Biến Homelab và Raspberry Pi thành khung tranh AI nhận diện tiếng chim thay thế BirdNET-Pi",
+  "title": "Homelab thành tranh AI nhận diện chim?",
+  "caption": "Biến Raspberry Pi và Homelab thành khung tranh nghệ thuật cổ điển nhận diện tiếng chim hót quanh nhà với fugleramme và BirdNET-Go!",
+  "hashtags": [
+    "#fugleramme",
+    "#birdnet",
+    "#homelabvn",
+    "#raspberrypi",
+    "#congnghe"
+  ],
+  "musicPrompt": "Upbeat organic ambient electronica with warm acoustic guitar picking, soft synth pads, natural bird chirp textures, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "organic acoustic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "electronic pulse",
+        "lively"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "lush",
+        "triumphant",
+        "warm synths"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "cheerfully",
+        "light groove",
+        "peaceful"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/arnegiacomo/fugleramme",
+    "https://github.com/mcguirepr89/BirdNET-Analyzer-Pi",
+    "https://github.com/tphakala/birdnet-go",
+    "https://arnegiacomo.dev/fugleramme/species/",
+    "https://arnegiacomo.dev/fugleramme/faq/",
+    "https://github.com/tphakala/birdnet-go/wiki/hardware",
+    "https://github.com/conradj/fugleramme-samsung-frame"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Homelab anh em đã bao giờ tự biến thành khung tranh nhận diện tiếng chim chưa?",
+      "headline": "Khung tranh AI nhận diện chim",
+      "lines": [
+        "Homelab nghe tiếng chim hót",
+        "Vẽ tranh theo thời gian thực"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "smart home wall frame"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Dự án này tên là fugleramme, giải pháp tự host thay thế cho BirdNET-Pi cũ!",
+      "headline": "Tự host fugleramme",
+      "lines": [
+        "Thay thế BirdNET-Pi cũ",
+        "Chạy hoàn toàn local offline"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Hệ thống dùng BirdNET-Go. [excited] Nó chạy ngầm AI nhận diện BirdNET v2.4 hoặc Google Perch v2!",
+      "headline": "BirdNET-Go xử lý AI nội bộ",
+      "lines": [
+        "BirdNET v2.4 & Google Perch v2",
+        "Tích hợp cả BirdNET Geomodel v3.0"
+      ],
+      "commands": [],
+      "repos": [
+        "tphakala/birdnet-go"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Hay nhất là đồ họa! Gần một nghìn hai trăm hình vẽ chim cắt thủ công từ bản vẽ thế kỷ 19, không hề dùng AI tạo tranh.",
+      "headline": "Tranh minh họa cổ điển 1800s",
+      "lines": [
+        "Gần 1.200 tranh cắt thủ công",
+        "100% bản vẽ lịch sử tự nhiên",
+        "Không dùng ảnh tạo từ AI"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[warmly] Kích thước mỗi chú chim được tính đúng theo khối lượng cơ thể thật từ dữ liệu AVONET, loài to xếp vào trung tâm.",
+      "headline": "Sắp đặt theo khối lượng thật",
+      "lines": [
+        "Dữ liệu khối lượng từ AVONET",
+        "Chim lớn nằm ở trung tâm",
+        "Tự động sắp xếp lên trang giấy"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Anh em có thể xuất hình lên màn e-ink Inky Impression, TV Samsung Frame qua Art Mode, hoặc mở thẳng bằng trình duyệt web.",
+      "headline": "Hiển thị trên mọi loại màn hình",
+      "lines": [
+        "Màn E-ink Inky Impression",
+        "TV Samsung Frame qua Art Mode",
+        "Trình duyệt web và màn hình rời"
+      ],
+      "commands": [],
+      "repos": [
+        "conradj/fugleramme-samsung-frame"
+      ],
+      "footage": "modern living room art tv"
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Về phần cứng, bắt buộc phải dùng hệ điều hành 64-bit. Pi 5 được khuyến nghị để nghe và nhận diện liên tục hai tư trên bảy.",
+      "headline": "Yêu cầu OS 64-bit & Pi 5",
+      "lines": [
+        "TensorFlow Lite cần OS 64-bit",
+        "Pi 5 khuyến nghị chạy 24/7",
+        "Dừng hỗ trợ Pi 3 và Pi Zero cũ"
+      ],
+      "commands": [],
+      "repos": [
+        "tphakala/birdnet-go"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[laughs] Nhớ lưu ý: micro bắt buộc là mono nhé! Dùng mic stereo sẽ bị lệch pha làm AI nhận diện sai loài đấy.",
+      "headline": "Bắt buộc dùng micro mono",
+      "lines": [
+        "AI chỉ xử lý âm thanh Mono",
+        "Mic Stereo gây lệch pha và sai số",
+        "Nguồn zin Pi 5.1V giúp lọc nhiễu EMI"
+      ],
+      "commands": [],
+      "repos": [
+        "tphakala/birdnet-go"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[excited] Để cài trên Raspberry Pi, anh em chỉ cần chạy đúng một dòng lệnh installer chính thức này.",
+      "headline": "Cài đặt một dòng lệnh",
+      "lines": [
+        "Chạy trên Raspberry Pi OS 64-bit"
+      ],
+      "commands": [
+        "curl -fsSL https://raw.githubusercontent.com/arnegiacomo/fugleramme/main/install.sh | bash"
+      ],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": "developer coding at desk"
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Anh em lưu video lại để cuối tuần nghịch nhé! Thấy hay thì bấm follow kênh để vọc tiếp homelab nha!",
+      "headline": "Lưu lại và trải nghiệm ngay",
+      "lines": [
+        "Lưu video để triển khai",
+        "Follow kênh để xem dự án mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}
