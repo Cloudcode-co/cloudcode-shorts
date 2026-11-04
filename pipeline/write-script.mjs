@@ -1,17 +1,22 @@
 // Writes a new video's script with an LLM (Gemini through an OpenAI-compatible
 // API, see llmJson in lib.mjs) from primary sources: the projects' GitHub
 // repos and READMEs (pipeline/research.mjs), plus Hacker News when it picks
-// the topic itself.
+// the topic itself. With SOURCE (one or more web page links), the video is
+// about those pages instead: it reads them and a few linked pages on the same
+// site (pipeline/web.mjs) and screenshots them for the builder.
 //
 //   node --env-file=.env pipeline/write-script.mjs "Coolify vs Dokploy"
 //   node --env-file=.env pipeline/write-script.mjs            # picks a trending topic
+//   SOURCE=https://cloudcode.io.vn node --env-file=.env pipeline/write-script.mjs
 //
-// Writes src/videos/<slug>/{script.json,facts.json}, public/videos/<slug>/repos/*.png
-// and prints the slug as the last line.
+// Writes src/videos/<slug>/{script.json,facts.json}, public/videos/<slug>/repos/*.png,
+// public/videos/<slug>/pages/*.jpg and prints the slug as the last line.
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
 import { resolveVoice } from "./voices.mjs";
+import { isWebUrl, pageBrief, webReader } from "./web.mjs";
+import { addFootage } from "./footage.mjs";
 
 const VOICE = {
   voiceId: "2ZUpiKo5wCCuypvx2zaS", // Tony Nguyễn
@@ -26,6 +31,8 @@ if (process.env.VOICE?.trim()) {
   VOICE.voiceId = voice.voiceId;
 }
 const notes = (process.env.NOTES ?? "").trim();
+const sourceUrls = (process.env.SOURCE ?? "").split(/\s+/).filter(isWebUrl).slice(0, 4);
+if (process.env.SOURCE?.trim() && !sourceUrls.length) throw new Error(`SOURCE has no http(s) link: ${process.env.SOURCE}`);
 
 const TAGS = ["excited", "curious", "casually", "impressed", "cheerfully", "warmly", "thoughtful", "laughs"];
 
@@ -60,7 +67,48 @@ const plan = S("OBJECT", {
   required: ["topic", "repos", "queries"],
 });
 let picked;
-if (topic) {
+// Pages read, from SOURCE and the links the planner picks on them.
+const pages = [];
+if (sourceUrls.length) {
+  console.log("Reading pages:", sourceUrls.join(" "));
+  const web = await webReader();
+  for (const url of sourceUrls) {
+    const page = await web.read(url);
+    if (page) pages.push(page);
+  }
+  if (!pages.length) throw new Error(`could not read ${sourceUrls.join(" ")}`);
+  const links = [...new Map(pages.flatMap((p) => p.links).map((l) => [l.href, l])).values()]
+    .filter((l) => !pages.some((p) => p.url === l.href))
+    .slice(0, 60);
+  picked = await json(
+    `For ${channel}, the next video is about the website below` +
+      (topic ? `, on this topic: "${topic}"` : "") +
+      `. Pages read:\n\n${pages.map(pageBrief).join("\n\n")}\n\nLinks on these pages:\n` +
+      links.map((l) => `- ${l.href} ${l.text}`).join("\n") +
+      "\n\n" +
+      (topic
+        ? "Keep the topic as given. "
+        : "Pick one topic the pages can carry well for this audience, such as what the site offers and " +
+          "for whom, or how to do one thing with it. Write it in Vietnamese. ") +
+      'In "pages", list up to 3 of the links above worth reading for this topic (prices, plans, features, ' +
+      'how-to), never sign-in, cart or legal pages. "repos" and "queries" only when the topic is about ' +
+      "open-source projects on GitHub; otherwise leave them empty.",
+    S("OBJECT", {
+      properties: { ...plan.properties, pages: S("ARRAY", { items: S("STRING") }) },
+      required: [...plan.required, "pages"],
+    }),
+  );
+  if (topic) picked.topic = topic;
+  topic = picked.topic;
+  console.log("Topic:", topic);
+  const linked = new Set(links.map((l) => l.href));
+  for (const url of (picked.pages ?? []).filter((u) => linked.has(u)).slice(0, 3)) {
+    console.log("Reading", url);
+    const page = await web.read(url);
+    if (page) pages.push(page);
+  }
+  await web.close();
+} else if (topic) {
   picked = await json(
     `For ${channel}, the next video is about: "${topic}". List the GitHub repositories (owner/name) of ` +
       "the tools it is about, and up to 3 GitHub search queries that find close alternatives worth naming. " +
@@ -92,12 +140,91 @@ if (topic) {
 // 2. Research: each repo's README, release and metadata, from GitHub itself.
 console.log("Looking up repos:", JSON.stringify({ repos: picked.repos, queries: picked.queries }));
 const found = await resolveRepos(picked);
-if (!found.length) throw new Error(`no GitHub repos found for "${topic}"`);
-console.log("Research repos:", found.join(", "));
+if (!found.length && !pages.length) throw new Error(`no GitHub repos found for "${topic}"`);
+if (found.length) console.log("Research repos:", found.join(", "));
 const briefs = (await Promise.all(found.map((r, i) => repoBrief(r, i < 2 ? 12000 : 5000)))).filter(Boolean);
-const research = `Primary sources, fetched from GitHub on ${today}:\n\n${briefs.join("\n\n")}`;
+// Pages read for research only (docs, pricing), without screenshots: for a
+// GitHub topic, or past the site's own pages.
+const docs = [];
+const sourcesText = () =>
+  [
+    pages.length && `Web pages, read on ${today}:\n\n${pages.map(pageBrief).join("\n\n")}`,
+    briefs.length && `Primary sources, fetched from GitHub on ${today}:\n\n${briefs.join("\n\n")}`,
+    docs.length && `More pages, read on ${today}:\n\n${docs.map(pageBrief).join("\n\n")}`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+let research = sourcesText();
 
-// 3. The script, as JSON matching a schema.
+// 3. Research notes. Gemini reads the sources closely, may ask for up to 4
+// more pages linked from them (docs, pricing, comparisons), then writes notes
+// in which every fact carries a verbatim quote. Facts and commands not found
+// in the sources are dropped, so the script stands on checked ground.
+const fold = (text) => text.toLowerCase().replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, " ").trim();
+const linkList = () => {
+  const read = new Set([...pages, ...docs].map((p) => p.url));
+  const fromPages = [...pages, ...docs].flatMap((p) => p.links.map((l) => `${l.href} ${l.text}`));
+  const fromText = briefs.join("\n").match(/https?:\/\/[^\s)<>"'\]]+/g) ?? [];
+  return [...new Set([...fromPages, ...fromText])].filter((l) => !read.has(l.split(" ")[0])).slice(0, 80);
+};
+const notesSchema = S("OBJECT", {
+  properties: {
+    audience: S("STRING", { description: "who this is for, one sentence" }),
+    angle: S("STRING", { description: "the strongest angle for a short video, one sentence" }),
+    facts: S("ARRAY", {
+      description: "12–30 specific facts: what it does and how, requirements, prices and limits, setup, how it differs from alternatives",
+      items: S("OBJECT", {
+        properties: {
+          fact: S("STRING"),
+          quote: S("STRING", { description: "the exact words in the sources that back the fact, copied verbatim, under 200 characters" }),
+          source: S("STRING", { description: "URL of the page or repo the quote is from" }),
+        },
+        required: ["fact", "quote", "source"],
+      }),
+    }),
+    install: S("ARRAY", { items: S("STRING"), description: "setup commands copied verbatim from the sources, shortest official way first; empty if none" }),
+    caveats: S("ARRAY", { items: S("STRING"), description: "limits and gotchas the sources state" }),
+    gaps: S("ARRAY", { items: S("STRING"), description: "what a viewer would ask that the sources do not answer" }),
+    morePages: S("ARRAY", { items: S("STRING"), description: "up to 4 URLs from the link list worth reading to fill the gaps; empty when the sources are enough" }),
+  },
+  required: ["audience", "angle", "facts", "install", "caveats", "gaps", "morePages"],
+});
+const takeNotes = (links) =>
+  json(
+    `You research the next video for ${channel}, about "${topic}". Read the sources below closely and write ` +
+      "notes for the script writer: who it is for, the angle, the specific facts with a verbatim quote for each, " +
+      "setup commands, caveats and open questions. Prefer concrete facts (numbers, names, steps) over general " +
+      "praise; leave out what the sources do not say.\n" +
+      (links.length
+        ? `If something important is missing, name pages to read in "morePages", only from this list:\n${links.join("\n")}\n`
+        : 'Leave "morePages" empty.\n') +
+      `\nSources:\n${research}`,
+    notesSchema,
+    0.3,
+  );
+let researchNotes = await takeNotes(linkList());
+const wantedPages = new Set(linkList().map((l) => l.split(" ")[0]));
+const more = (researchNotes.morePages ?? []).filter((u) => wantedPages.has(u) && isWebUrl(u)).slice(0, 4);
+if (more.length) {
+  const web = await webReader();
+  for (const url of more) {
+    console.log("Research reads", url);
+    const page = await web.read(url);
+    // Pages on the subject's own site can be shown; the rest are only read.
+    if (page) (pages.length && new URL(url).origin === new URL(pages[0].url).origin ? pages : docs).push(page);
+  }
+  await web.close();
+  research = sourcesText();
+  researchNotes = await takeNotes([]);
+}
+const sourceText = fold(research);
+const factCount = researchNotes.facts.length;
+researchNotes.facts = researchNotes.facts.filter((f) => f.quote && sourceText.includes(fold(f.quote).replace(/(\.\.\.|…)$/, "")));
+researchNotes.install = researchNotes.install.filter((c) => sourceText.includes(fold(c)));
+delete researchNotes.morePages;
+console.log(`Research notes: ${researchNotes.facts.length} of ${factCount} facts found in the sources, ${researchNotes.install.length} commands`);
+
+// 4. The script, as JSON matching a schema.
 const schema = S("OBJECT", {
   properties: {
     slug: S("STRING", { description: "short kebab-case ascii id, e.g. coolify-vs-dokploy" }),
@@ -121,8 +248,11 @@ const schema = S("OBJECT", {
           lines: S("ARRAY", { items: S("STRING"), description: "0–4 short on-screen lines" }),
           commands: S("ARRAY", { items: S("STRING"), description: "exact shell commands shown typed, or empty" }),
           repos: S("ARRAY", { items: S("STRING"), description: "owner/name of repos whose logo appears" }),
+          footage: S("STRING", {
+            description: "English stock-video search of 2–5 words for real footage of people or places in this scene, or empty",
+          }),
         },
-        required: ["id", "text", "headline", "lines", "commands", "repos"],
+        required: ["id", "text", "headline", "lines", "commands", "repos", "footage"],
       }),
     }),
   },
@@ -136,23 +266,34 @@ const rules =
   `in square brackets, only these: ${TAGS.map((t) => `[${t}]`).join(" ")}, at most one or two per line.\n` +
   `Shape: 8–14 scenes, 60–110 seconds spoken in total (about 14 Vietnamese words per 5 seconds). ` +
   `Scene 1 is a hook question in under 5 seconds. If there is an install, show it as steps with commands ` +
-  `copied character for character from a README in the research; never invent or edit a command, and ` +
+  `copied character for character from the research; never invent or edit a command, and ` +
   `prefer the shortest official way (one-line installer, docker run, or docker compose). ` +
   `The last scene says to save the video to try later ` +
-  `and follow for more. No advertising: never pitch a product, hosting or VPS, and never mention Cloudcode.\n` +
+  `and follow for more. ` +
+  (pages.length
+    ? `The video is about what the web pages show: name the site or product as it names itself and say ` +
+      `plainly what it offers and for whom. Prices, limits and specs only exactly as the pages write them. ` +
+      `No hype words, no invented reviews, discounts, deadlines or urgency.\n`
+    : `No advertising: never pitch a product, hosting or VPS, and never mention Cloudcode.\n`) +
   `Facts: use only facts from the research. No star counts or numbers the research does not source. ` +
   `Never invent example data: no made-up codes, file names, IDs, URLs or names on screen. ` +
   `Name tools exactly as their projects do. Headlines are what the scene says in a few words, not a label. ` +
-  `Repos: only owner/name pairs from the research. The research is the projects' own READMEs, so it ` +
+  `Repos: only owner/name pairs from the research. The research is the projects' own READMEs and pages, so it ` +
   `praises them: say plainly what each is good at, without their marketing words.\n` +
+  `Footage: in up to 4 scenes where real people or places carry the line better than graphics (someone ` +
+  `gaming with friends, a developer at a desk at night, a server room), put a short English stock-video ` +
+  `search in "footage"; leave it empty everywhere else.\n` +
   (notes
     ? `\nThe channel owner asked for this video (follow what is about the script, the voiceover or the ` +
       `music; requests about visuals are for the video builder, not you):\n${notes}\n`
     : "") +
-  `\nResearch:\n${research}`;
+  `\nResearch notes, checked against the sources (build the video on these facts and this angle):\n` +
+  `${JSON.stringify(researchNotes, null, 1)}\n\nSources:\n${research}`;
 
 const script = await json(rules, schema, 0.9);
-script.sources = [...new Set([...found.map((r) => `https://github.com/${r}`), ...(script.sources ?? [])])];
+script.sources = [
+  ...new Set([...pages.map((p) => p.url), ...found.map((r) => `https://github.com/${r}`), ...(script.sources ?? [])]),
+];
 
 // Checks the model's output; anything wrong here stops the run before spending
 // voice credits.
@@ -204,6 +345,35 @@ for (const full of wanted) {
     avatar: img.ok ? avatar : null,
   });
 }
+// The pages' screenshots, icon and share image, for the builder to show.
+const pageFacts = [];
+if (pages.length) mkdirSync(`public/videos/${slug}/pages`, { recursive: true });
+const IMAGE_EXT = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/svg+xml": "svg" };
+for (const [n, p] of pages.entries()) {
+  const shots = p.shots.map((buf, i) => {
+    const file = `pages/p${n + 1}-${i + 1}.jpg`;
+    writeFileSync(`public/videos/${slug}/${file}`, buf);
+    return file;
+  });
+  const download = async (url, name) => {
+    if (!url) return null;
+    const res = await fetch(url, { signal: AbortSignal.timeout(20_000) }).catch(() => null);
+    const ext = res?.ok ? IMAGE_EXT[(res.headers.get("content-type") ?? "").split(";")[0]] : null;
+    if (!ext) return null;
+    const file = `pages/p${n + 1}-${name}.${ext}`;
+    writeFileSync(`public/videos/${slug}/${file}`, Buffer.from(await res.arrayBuffer()));
+    return file;
+  };
+  pageFacts.push({
+    url: p.url,
+    title: p.title,
+    description: p.description,
+    shots,
+    icon: await download(p.icon, "icon"),
+    image: await download(p.image, "share"),
+  });
+}
+
 // Drop logo references to repos that don't exist.
 const known = new Set(repos.map((r) => r.asked));
 for (const s of script.scenes) s.repos = s.repos.filter((r) => known.has(r));
@@ -220,5 +390,21 @@ writeJson(`src/videos/${slug}/script.json`, {
   ...VOICE,
   scenes: script.scenes,
 });
-writeJson(`src/videos/${slug}/facts.json`, { topic, models, date: today, repos, research });
+writeJson(`src/videos/${slug}/facts.json`, {
+  topic,
+  models,
+  date: today,
+  repos,
+  pages: pageFacts,
+  notes: researchNotes,
+  research,
+});
+
+// Stock footage for the scenes that asked for it (PEXELS_API_KEY).
+if (process.env.PEXELS_API_KEY) {
+  for (const s of script.scenes.filter((s) => s.footage?.trim()).slice(0, 4)) {
+    const clip = await addFootage(slug, s.footage.trim().slice(0, 100), s.id).catch((err) => console.log(err.message));
+    console.log(`Footage for ${s.id} ("${s.footage}"): ${clip?.file ?? "none"}`);
+  }
+}
 report(slug);

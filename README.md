@@ -78,7 +78,9 @@ Start a run from the GitHub app (Actions → Make video → Run workflow), or wi
 
 In Discord:
 
-- `/video [topic] [phongcach] [giong] [yeucau] [dung]` makes a new video. `phongcach`
+- `/video [topic] [nguon] [phongcach] [giong] [yeucau] [dung]` makes a new video.
+  `nguon` is one or more web page links: the video is then about that site, from
+  the pages' own text and screenshots (and up to 3 linked pages it picks). `phongcach`
   picks the art direction: a suggestion from `pipeline/art-directions.json`, or
   any description ("anime neon"); empty draws one at random. `giong` is an
   ElevenLabs voice: pick a suggestion, or type a name, a voice id or a voice link
@@ -95,3 +97,11 @@ credit, an API error), the same Claude Code runs again on Gemini through the
 be-ag gateway (`LLM_API_KEY`); set the variable `BUILDER` to `beag` to skip
 Claude, and `BUILDER_BEAG_MODEL` to pick the gateway model (default
 `ag/gemini-3.8-flash-high`).
+
+Before the script, Gemini writes research notes: it reads the sources, may read up
+to 4 more pages linked from them, and every fact keeps a verbatim quote; facts
+not found in the sources are dropped (facts.json `notes`). With the secret
+`PEXELS_API_KEY` (free at pexels.com/api), the script marks scenes that want real
+footage of people or places, the clips are downloaded for the builder, and the
+builder can fetch more with `npm run footage -- <slug> "<search>"`. Clips are not
+committed; `pipeline/footage.mjs` downloads them again from facts.json.

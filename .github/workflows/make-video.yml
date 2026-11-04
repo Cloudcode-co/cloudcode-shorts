@@ -7,6 +7,10 @@ on:
         description: "Đề tài (để trống để Gemini tự chọn)"
         required: false
         default: ""
+      source:
+        description: "Link trang web để làm video về nó (nhiều link cách nhau bằng dấu cách)"
+        required: false
+        default: ""
       voice:
         description: "Giọng ElevenLabs: tên, voice id hoặc link (để trống: Tony Nguyễn)"
         required: false
@@ -69,6 +73,7 @@ jobs:
         id: make
         env:
           TOPIC: ${{ inputs.topic || github.event.client_payload.topic }}
+          SOURCE: ${{ inputs.source || github.event.client_payload.source }}
           VOICE: ${{ inputs.voice || github.event.client_payload.voice }}
           NOTES: ${{ inputs.notes || github.event.client_payload.notes }}
           STYLE: ${{ inputs.style || github.event.client_payload.style }}
@@ -78,7 +83,10 @@ jobs:
           LLM_MODEL: ${{ vars.LLM_MODEL }}
           # Builder fallback through be-ag; BUILDER=beag skips Claude.
           BUILDER: ${{ inputs.builder || github.event.client_payload.builder || vars.BUILDER }}
+          BUILDER_CHOSEN: ${{ inputs.builder || github.event.client_payload.builder }}
           BUILDER_BEAG_MODEL: ${{ vars.BUILDER_BEAG_MODEL }}
+          # Stock footage (pipeline/footage.mjs); empty turns it off.
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}

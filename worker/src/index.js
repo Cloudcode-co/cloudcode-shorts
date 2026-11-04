@@ -2,7 +2,7 @@
 // videos in the media R2 bucket so chat gets a link instead of a size-capped
 // upload.
 //
-//   POST /discord      Discord interactions: /video [topic] [giong] [yeucau],
+//   POST /discord      Discord interactions: /video [topic] [nguon] [giong] [yeucau],
 //                      /sua video [yeucau] [giong], with [phongcach] [dung], and their autocomplete
 //   POST /telegram     Telegram bot webhook: any text is the topic, /auto lets
 //                      Gemini pick, /id replies with the chat id
@@ -30,9 +30,10 @@ const dispatch = (env, job, replyTo) =>
     body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
   });
 
-const queued = (res, { topic, voice, notes, revise, style, builder }) => {
+const queued = (res, { topic, source, voice, notes, revise, style, builder }) => {
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
   const extra = [
+    source && `nguồn: ${source}`,
     style && `phong cách: ${style}`,
     voice && `giọng: ${voice}`,
     notes && `yêu cầu: ${notes}`,
@@ -40,7 +41,7 @@ const queued = (res, { topic, voice, notes, revise, style, builder }) => {
   ]
     .filter(Boolean)
     .join("\n");
-  const what = revise ? `sửa video ${revise}` : topic || "Gemini tự chọn đề tài";
+  const what = revise ? `sửa video ${revise}` : topic || (source ? "Gemini chọn đề tài từ trang" : "Gemini tự chọn đề tài");
   return `Đã xếp hàng: ${what}.${extra ? `\n${extra}` : ""}\nXong mình gửi video vào đây.`;
 };
 
@@ -150,6 +151,7 @@ const discord = async (request, env, ctx) => {
     String(interaction.data.options?.find((o) => o.name === name)?.value ?? "").trim().slice(0, max);
   const job = {
     topic: command === "video" ? option("topic", 200) : "",
+    source: command === "video" ? option("nguon", 500) : "",
     voice: option("giong", 300),
     notes: option("yeucau", 1000),
     style: option("phongcach", 200),

@@ -141,10 +141,10 @@ const agents = [
   },
 ].filter(Boolean);
 
-// The builder gets its skills, file tools and exactly the three check
-// commands BUILDER.md names: no other shell commands, no web access. Research
-// text from the web is in its context, so it also gets no secret besides its
-// own API key.
+// The builder gets its skills, file tools and exactly the commands BUILDER.md
+// names: no other shell commands, no web access. Research text from the web is
+// in its context, so it gets no secret besides its own API key and the Pexels
+// key, which only searches stock footage.
 const allowed = [
   "Skill",
   "Read",
@@ -158,8 +158,9 @@ const allowed = [
   "Bash(npx tsc *)",
   `Bash(npm run qa -- ${slug})`,
   `Bash(npm run qa -- ${slug} *)`,
+  `Bash(npm run footage -- ${slug} *)`,
 ];
-const baseEnv = { CI: "1" };
+const baseEnv = { CI: "1", ...(process.env.PEXELS_API_KEY ? { PEXELS_API_KEY: process.env.PEXELS_API_KEY } : {}) };
 for (const k of ["PATH", "Path", "HOME", "USERPROFILE", "APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "SystemRoot", "ComSpec", "PATHEXT"]) {
   if (process.env[k]) baseEnv[k] = process.env[k];
 }

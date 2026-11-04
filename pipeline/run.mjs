@@ -17,6 +17,7 @@ import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
 import { resolveVoice } from "./voices.mjs";
+import { restoreFootage } from "./footage.mjs";
 import { glFor } from "../scripts/gl.mjs";
 
 const args = process.argv.slice(2);
@@ -26,6 +27,8 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
+// The builder asked for in this run (BUILDER also carries the repo default).
+const chosenBuilder = (process.env.BUILDER_CHOSEN ?? "").trim();
 
 // Runs a pipeline script with its output streaming into the log, and returns
 // what it passed to report().
@@ -61,8 +64,12 @@ const rework = async () => {
   if (!/^[a-z0-9-]+$/.test(revise) || !existsSync(`src/videos/${revise}/script.json`)) {
     throw new Error(`không có video "${revise}" trong repo`);
   }
-  if (!voice && !notes && !style) throw new Error("cần ít nhất một giọng mới, một phong cách hoặc một yêu cầu sửa");
+  if (!voice && !notes && !style && !chosenBuilder) {
+    throw new Error("cần ít nhất một giọng mới, một phong cách, một yêu cầu sửa hoặc người dựng");
+  }
   const slug = setSlug(revise);
+  // Footage is not committed; fetch the clips this video uses again.
+  await restoreFootage(slug);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
   if (voice) {
     const { voiceId, name } = await resolveVoice(voice);
@@ -71,13 +78,20 @@ const rework = async () => {
     writeJson(file, { ...readJson(file), voiceId });
     run("node", ["scripts/voiceover.mjs", slug, "--force"]);
   }
-  const build = notes || style
+  const build = notes || style || chosenBuilder
     ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
     : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };
   return { slug, build: { ...build, revision: asked } };
 };
 
-const asked = [style && `phong cách ${style}`, voice && `giọng ${voice}`, notes].filter(Boolean).join("; ");
+const asked = [
+  style && `phong cách ${style}`,
+  voice && `giọng ${voice}`,
+  chosenBuilder && `dựng: ${chosenBuilder === "beag" ? "Gemini" : "Claude"}`,
+  notes,
+]
+  .filter(Boolean)
+  .join("; ");
 let slug = revise || null;
 try {
   await sendMessage(

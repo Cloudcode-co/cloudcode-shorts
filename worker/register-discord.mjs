@@ -55,6 +55,13 @@ const commands = [
         required: false,
         max_length: 200,
       },
+      {
+        type: 3,
+        name: "nguon",
+        description: "Link trang web để làm video về nó (có thể dán nhiều link)",
+        required: false,
+        max_length: 500,
+      },
       style,
       voice,
       notes("Yêu cầu thêm: nền, màu, nhịp, độ dài..."),

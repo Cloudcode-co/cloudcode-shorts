@@ -6,6 +6,9 @@ dist
 # Ignore the output video from Git but not videos you import into src/.
 out
 
+# Stock clips, fetched again from facts.json (pipeline/footage.mjs)
+public/videos/*/footage/
+
 # Local-only
 voiceover-backup
 .wrangler

@@ -42,6 +42,7 @@
     "music": "node --env-file=.env scripts/music.mjs",
     "sfx": "node --env-file=.env scripts/sfx.mjs",
     "qa": "node scripts/qa-stills.mjs",
+    "footage": "node pipeline/footage.mjs",
     "render:qsv": "node scripts/render-qsv.mjs"
   },
   "allowScripts": {
