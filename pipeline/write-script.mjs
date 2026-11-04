@@ -1,7 +1,8 @@
 // Writes a new video's script with an LLM (Gemini through an OpenAI-compatible
 // API, see llmJson in lib.mjs) from primary sources: the projects' GitHub
 // repos and READMEs (pipeline/research.mjs), plus Hacker News when it picks
-// the topic itself. With SOURCE (one or more web page links), the video is
+// the topic itself, unless an outside researcher (Muse, through the worker's
+// /ideas) left an idea in ideas/: then the oldest unused one. With SOURCE (one or more web page links), the video is
 // about those pages instead: it reads them and a few linked pages on the same
 // site (pipeline/web.mjs) and screenshots them for the builder.
 //
@@ -45,10 +46,33 @@ const pastTopics = history.map((h) => h.topic).filter(Boolean);
 const pastRepos = readdirSync("src/videos", { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .flatMap((d) => readJson(`src/videos/${d.name}/facts.json`, { repos: [] }).repos.map((r) => r.repo.toLowerCase()));
+// Ideas earlier videos already used.
+const usedIdeas = new Set(
+  readdirSync("src/videos", { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => readJson(`src/videos/${d.name}/facts.json`, {}).idea)
+    .filter(Boolean),
+);
 const models = llmModels();
 console.log("LLM models:", models.join(", "));
 
 let topic = process.argv.slice(2).join(" ").trim();
+// With no topic and no SOURCE, the oldest idea from ideas/ that no video used.
+// Only its topic, angle and source links are used: its facts are checked
+// against the sources like any other research.
+let idea = null;
+if (!topic && !sourceUrls.length && existsSync("ideas")) {
+  const file = readdirSync("ideas")
+    .filter((f) => f.endsWith(".json"))
+    .sort()
+    .map((f) => `ideas/${f}`)
+    .find((f) => !usedIdeas.has(f));
+  if (file) {
+    idea = { file, ...readJson(file) };
+    topic = idea.topic;
+    console.log(`Idea from ${idea.from ?? "outside"}: ${topic} (${file})`);
+  }
+}
 const today = new Date().toISOString().slice(0, 10);
 const channel =
   "a Vietnamese TikTok channel for developers and self-hosters, run by a Vietnamese VPS and " +
@@ -154,6 +178,17 @@ const sourcesText = () =>
   ]
     .filter(Boolean)
     .join("\n\n");
+// The idea's own source links are read first.
+const ideaSources = (idea?.sources ?? []).filter(isWebUrl).slice(0, 6);
+if (ideaSources.length) {
+  const web = await webReader();
+  for (const url of ideaSources) {
+    console.log("Idea source", url);
+    const page = await web.read(url);
+    if (page) docs.push(page);
+  }
+  await web.close();
+}
 let research = sourcesText();
 
 // 3. Research notes. Gemini reads the sources closely, may ask for up to 4
@@ -195,6 +230,7 @@ const takeNotes = (links) =>
       "notes for the script writer: who it is for, the angle, the specific facts with a verbatim quote for each, " +
       "setup commands, caveats and open questions. Prefer concrete facts (numbers, names, steps) over general " +
       "praise; leave out what the sources do not say.\n" +
+      (idea?.angle ? `An outside researcher suggested this angle; keep it only if the sources bear it out: ${idea.angle}\n` : "") +
       (links.length
         ? `If something important is missing, name pages to read in "morePages", only from this list:\n${links.join("\n")}\n`
         : 'Leave "morePages" empty.\n') +
@@ -396,6 +432,7 @@ writeJson(`src/videos/${slug}/facts.json`, {
   date: today,
   repos,
   pages: pageFacts,
+  idea: idea?.file ?? null,
   notes: researchNotes,
   research,
 });

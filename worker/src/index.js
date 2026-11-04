@@ -9,8 +9,12 @@
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
 //                      (Authorization: Bearer UPLOAD_SECRET); replies with its
 //                      public URL on MEDIA_URL
+//   POST /ideas        a video idea from an outside researcher (Muse), as JSON
+//                      { topic, angle, sources: [urls], notes } with
+//                      Authorization: Bearer IDEAS_SECRET; saved to the repo
+//                      as ideas/<date>-<slug>.json for the pipeline to pick
 //
-// Secrets (wrangler secret put): GITHUB_TOKEN, UPLOAD_SECRET, plus for Discord
+// Secrets (wrangler secret put): GITHUB_TOKEN, UPLOAD_SECRET, IDEAS_SECRET, plus for Discord
 // DISCORD_PUBLIC_KEY and optionally ALLOWED_DISCORD_USER_IDS (comma-separated;
 // when set, only those users may use the bot, else any server admin), and for
 // Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID.
@@ -41,7 +45,7 @@ const queued = (res, { topic, source, voice, notes, revise, style, builder }) =>
   ]
     .filter(Boolean)
     .join("\n");
-  const what = revise ? `sửa video ${revise}` : topic || (source ? "Gemini chọn đề tài từ trang" : "Gemini tự chọn đề tài");
+  const what = revise ? `sửa video ${revise}` : topic || (source ? "Gemini chọn đề tài từ trang" : "đề tài Muse đã tìm, hoặc Gemini tự chọn");
   return `Đã xếp hàng: ${what}.${extra ? `\n${extra}` : ""}\nXong mình gửi video vào đây.`;
 };
 
@@ -221,6 +225,58 @@ const upload = async (request, env, key) => {
   return json({ url: `${env.MEDIA_URL}/${PREFIX}${key}` });
 };
 
+// Ideas are content, not instructions: the pipeline reads only the topic and
+// the source links, and checks every fact against the sources itself.
+const isUrl = (v) => {
+  try {
+    return ["http:", "https:"].includes(new URL(v).protocol);
+  } catch {
+    return false;
+  }
+};
+const text = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+const ascii = (v) =>
+  v
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/gi, "d")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 50);
+
+const ideas = async (request, env) => {
+  if (!env.IDEAS_SECRET || request.headers.get("Authorization") !== `Bearer ${env.IDEAS_SECRET}`) {
+    return new Response("unauthorized", { status: 401 });
+  }
+  const body = await request.json().catch(() => null);
+  const idea = {
+    topic: text(body?.topic, 200),
+    angle: text(body?.angle, 500),
+    sources: (Array.isArray(body?.sources) ? body.sources : []).filter(isUrl).slice(0, 8),
+    notes: text(body?.notes, 3000),
+    from: text(body?.from, 40) || "muse",
+    received: new Date().toISOString(),
+  };
+  if (!idea.topic || !idea.sources.length) {
+    return Response.json({ error: "need topic and at least one http(s) source" }, { status: 400 });
+  }
+  const path = `ideas/${idea.received.slice(0, 10)}-${ascii(idea.topic) || "idea"}.json`;
+  const content = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(idea, null, 2) + "\n")));
+  const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/contents/${path}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": "cloudcode-shorts-bot",
+    },
+    body: JSON.stringify({ message: `Idea: ${idea.topic}`, content }),
+  });
+  if (res.status === 422) return Response.json({ error: "an idea with this topic already came today" }, { status: 409 });
+  if (!res.ok) return Response.json({ error: `GitHub ${res.status}` }, { status: 502 });
+  return Response.json({ saved: path });
+};
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
@@ -232,6 +288,7 @@ export default {
     if (request.method !== "POST") return new Response("not found", { status: 404 });
     if (pathname === "/discord") return discord(request, env, ctx);
     if (pathname === "/telegram") return telegram(request, env);
+    if (pathname === "/ideas") return ideas(request, env);
     return new Response("not found", { status: 404 });
   },
 };

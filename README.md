@@ -98,6 +98,12 @@ be-ag gateway (`LLM_API_KEY`); set the variable `BUILDER` to `beag` to skip
 Claude, and `BUILDER_BEAG_MODEL` to pick the gateway model (default
 `ag/gemini-3.8-flash-high`).
 
+Outside research: Muse (Meta's agent, on a daily schedule) posts video ideas to
+the worker's `POST /ideas` (`{ topic, angle, sources, notes }`, bearer
+`IDEAS_SECRET`), which saves each to `ideas/`. A `/video` with no topic and no
+`nguon` takes the oldest unused idea; only its topic, angle and source links are
+used, and its facts are checked against the sources like any research.
+
 Before the script, Gemini writes research notes: it reads the sources, may read up
 to 4 more pages linked from them, and every fact keeps a verbatim quote; facts
 not found in the sources are dropped (facts.json `notes`). With the secret
