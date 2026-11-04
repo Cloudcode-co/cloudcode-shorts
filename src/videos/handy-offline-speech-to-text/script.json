@@ -1,0 +1,174 @@
+{
+  "slug": "handy-offline-speech-to-text",
+  "topic": "Handy: gõ bằng giọng nói hoàn toàn offline, không cần gửi audio lên cloud",
+  "title": "Gõ phím bằng giọng nói không cần cloud?",
+  "caption": "Handy giúp anh em gõ văn bản bằng giọng nói 100% offline trên máy tính, mã nguồn mở MIT và không lo gửi audio lên cloud.",
+  "hashtags": [
+    "#Handy",
+    "#SpeechToText",
+    "#OpenSource",
+    "#LapTrinh",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Upbeat modern tech lo-fi beats with crisp percussion and warm synth pads, no vocals",
+  "sources": [
+    "https://github.com/cjpais/Handy",
+    "https://github.com/ggml-org/whisper.cpp",
+    "https://github.com/peteonrails/voxtype",
+    "https://github.com/VocaHQ/vocalinux",
+    "https://github.com/amicalhq/amical",
+    "https://handy.computer",
+    "https://handy.computer/docs",
+    "https://handy.computer/about"
+  ],
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em có muốn vừa nói là chữ tự gõ mà không cần gửi bất kỳ audio nào lên cloud không?",
+      "headline": "Nói Là Có Chữ Không Cần Cloud",
+      "lines": [
+        "Gõ văn bản bằng giọng nói",
+        "100% offline trên máy tính"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": "developer typing desk"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Thử ngay Handy! Ứng dụng speech-to-text mã nguồn mở giấy phép MIT, xử lý hoàn toàn cục bộ trên máy của anh em.",
+      "headline": "Handy: Speech to Text Cục Bộ",
+      "lines": [
+        "Mã nguồn mở MIT",
+        "Xử lý trực tiếp trên máy"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Tác giả CJ Pais tạo ra Handy khi anh bị gãy ngón tay và phải bó bột, hoàn toàn không gõ phím bình thường được.",
+      "headline": "Tác Giả Viết App Khi Bó Bột Tay",
+      "lines": [
+        "Tác giả: CJ Pais",
+        "Tạo app vì bị gãy ngón tay"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": "person with broken hand"
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Cách dùng siêu tiện: nhấn phím tắt mặc định Ctrl Space, nói tự nhiên, rồi buông là chữ tự dán thẳng vào con trỏ chuột.",
+      "headline": "Nhấn Phím Tắt Là Tự Dán Chữ",
+      "lines": [
+        "Phím tắt mặc định: Ctrl + Space",
+        "Dán trực tiếp vào ô văn bản"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": "speaking into desktop microphone"
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Bên trong, Handy dùng Silero VAD để lọc im lặng và dùng mô hình Whisper hỗ trợ phiên âm hơn 99 ngôn ngữ.",
+      "headline": "Silero VAD Và Whisper 99 Thứ Tiếng",
+      "lines": [
+        "Lọc khoảng lặng bằng Silero VAD",
+        "Whisper hỗ trợ 99+ ngôn ngữ"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Máy có GPU thì tận dụng Whisper Turbo hoặc Large. Còn máy chạy CPU thì chọn Parakeet V3 để nhận diện tự động cực nhanh.",
+      "headline": "Tối Ưu Cho Cả GPU Lẫn CPU",
+      "lines": [
+        "Whisper Turbo/Large khi có GPU",
+        "Parakeet V3 tối ưu riêng cho CPU"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[excited] Anh em dev còn có thể cấu hình hook script để sửa văn bản trước khi dán, hoặc điều khiển tiện lợi qua Raycast và CLI.",
+      "headline": "Hỗ Trợ Hook Script Và Raycast",
+      "lines": [
+        "Chạy hook script can thiệp text",
+        "Điều khiển qua Raycast và CLI"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Bản v0.10.0 mới nhất hỗ trợ đầy đủ Windows, macOS, Linux, và đã bổ sung tính năng phiên âm trực tiếp từ file âm thanh.",
+      "headline": "Đa Nền Tảng Và Phiên Âm File",
+      "lines": [
+        "Windows, macOS và Linux",
+        "Hỗ trợ phiên âm file âm thanh"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Cài đặt thì cực nhàn: trên macOS dùng lệnh brew này, còn Windows chỉ cần một dòng winget duy nhất.",
+      "headline": "Lệnh Cài Đặt Chính Thức",
+      "lines": [
+        "Cài nhanh qua package manager"
+      ],
+      "commands": [
+        "brew install --cask handy",
+        "winget install cjpais.Handy"
+      ],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để cài viết code hay làm docs nhé! Nhớ follow mình để xem thêm nhiều công cụ mã nguồn mở xịn!",
+      "headline": "Lưu Lại Để Thử Ngay",
+      "lines": [
+        "Lưu video để dùng khi cần",
+        "Follow để đón xem mẹo mới"
+      ],
+      "commands": [],
+      "repos": [
+        "cjpais/Handy"
+      ],
+      "footage": "developer working late setup"
+    }
+  ]
+}

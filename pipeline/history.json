@@ -53,5 +53,14 @@
     "pacing": "Few long shots: 3–5 shots, each building up in place.",
     "built": "claude",
     "costUsd": 0.6725178999999999
+  },
+  {
+    "slug": "handy-offline-speech-to-text",
+    "topic": "Handy: gõ bằng giọng nói hoàn toàn offline, không cần gửi audio lên cloud",
+    "date": "2026-11-04",
+    "direction": "chat-thread",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 0.7041176000000001
   }
 ]
