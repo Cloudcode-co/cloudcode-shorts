@@ -160,27 +160,24 @@ const agents = [
   },
 ].filter(Boolean);
 
-// The builder gets its skills, file tools and exactly the commands BUILDER.md
-// names: no other shell commands, no web access. Research text from the web is
-// in its context, so it gets no secret besides its own API key and the stock
-// footage keys, which only search free clips.
-const allowed = [
-  "Skill",
-  "Read",
-  "Glob",
-  "Grep",
-  `Edit(src/videos/${slug}/**)`,
-  `Write(src/videos/${slug}/**)`,
-  "Bash(npm run register)",
-  "Bash(npm run register *)",
-  "Bash(npx tsc)",
-  "Bash(npx tsc *)",
-  `Bash(npm run qa -- ${slug})`,
-  `Bash(npm run qa -- ${slug} *)`,
-  `Bash(npm run footage -- ${slug} *)`,
-  `Bash(npm run image -- ${slug} *)`,
-  `Bash(npm run meme -- ${slug} *)`,
-  "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py *)",
+// The builder may run any command and edit any file it needs, since only a
+// build that typechecks is kept. What stays off: the web and subagents (cost,
+// and research text from the web is in its context), the pipeline, workflows,
+// worker and shared kit, and the usual ways to print or send its keys. Its env
+// holds no secret besides its own API key and the free media search keys.
+const allowed = ["Skill", "Read", "Glob", "Grep", "Edit", "Write", "Bash", "TodoWrite"];
+const denied = [
+  "WebFetch",
+  "WebSearch",
+  "Agent",
+  ...["pipeline", ".github", "worker", "src/kit", ".claude"].flatMap((d) => [`Edit(${d}/**)`, `Write(${d}/**)`]),
+  ...["curl", "wget", "nc", "ssh", "scp", "env", "printenv", "set", "export", "git push", "git remote", "npm publish", "npm install", "npm i", "npx -y"]
+    .flatMap((c) => [`Bash(${c})`, `Bash(${c} *)`]),
+  "Bash(*ANTHROPIC*)",
+  "Bash(*_API_KEY*)",
+  "Bash(*AUTH_TOKEN*)",
+  "Bash(*/proc/*)",
+  "Read(/proc/**)",
 ];
 const baseEnv = { CI: "1" };
 for (const k of ["PIXABAY_API_KEY", "PEXELS_API_KEY", "GIPHY_API_KEY"]) if (process.env[k]) baseEnv[k] = process.env[k];
@@ -206,7 +203,7 @@ const runAgent = (next, text) => {
       "--allowedTools",
       allowed.join(","),
       "--disallowedTools",
-      "WebFetch,WebSearch,Agent",
+      denied.join(","),
       "--output-format",
       "json",
     ],
