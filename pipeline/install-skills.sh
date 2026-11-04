@@ -81,6 +81,19 @@ done
 echo "| humanizer | https://github.com/blader/humanizer | LICENSE from blader/humanizer (MIT) |" >> "$notice"
 echo "skill: humanizer (blader/humanizer)"
 
+# Seeded, constrained composition (Markov melodies, voice leading) for music
+# made by code; its repo keeps skills under distributions/claude/skills.
+music="$dest/generative-music-composer"
+mkdir -p "$music/references"
+base="https://raw.githubusercontent.com/4444j99/a-i--skills/HEAD"
+curl -fsSL "$base/distributions/claude/skills/generative-music-composer/SKILL.md" -o "$music/SKILL.md"
+for ref in markov-music midi-reference music-theory-primer workflow-integration; do
+  curl -fsSL "$base/distributions/claude/skills/generative-music-composer/references/$ref.md" -o "$music/references/$ref.md"
+done
+curl -fsSL "$base/LICENSE" -o "$music/LICENSE"
+echo "| generative-music-composer | https://github.com/4444j99/a-i--skills/tree/HEAD/distributions/claude/skills/generative-music-composer | SKILL.md says MIT; repo LICENSE (Apache-2.0) in the folder |" >> "$notice"
+echo "skill: generative-music-composer (4444j99/a-i--skills)"
+
 # archify, copied from ~/.agents/skills: the runtime files only (Node
 # built-ins, no npm install), without its 13 MB of pre-rendered example pages,
 # brand-mark sources and generator scripts.

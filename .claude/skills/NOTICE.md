@@ -20,3 +20,4 @@ project's videos. Each folder keeps its source's license.
 | ui-ux-pro-max | copied from the maintainer's local `~/.agents/skills/ui-ux-pro-max` (SKILL.md, data, scripts) | as published by its authors |
 | humanizer | https://github.com/blader/humanizer | LICENSE from blader/humanizer (MIT) |
 | archify | https://github.com/tt-a1i/archify, copied from the maintainer's local `~/.agents/skills/archify` (runtime files only) | LICENSE (Apache-2.0) and LICENSE-MIT in the folder |
+| generative-music-composer | https://github.com/4444j99/a-i--skills/tree/HEAD/distributions/claude/skills/generative-music-composer | SKILL.md says MIT; repo LICENSE (Apache-2.0) copied into the folder |
