@@ -13,12 +13,11 @@
 // the slug of a video to rework; FORMAT is the kind of video (pipeline/formats.mjs),
 // each with its own art direction unless STYLE says otherwise.
 import { spawnSync } from "node:child_process";
-import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { FORMATS, formatOf } from "./formats.mjs";
 import { sendToDrafts, uploadVideo } from "./cdn.mjs";
-import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
-import { sendDraftButton, sendPing } from "./discord.mjs";
+import { notifyOn, sendMessage, sendResult } from "./notify.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { restoreFootage } from "./footage.mjs";
 import { restoreImages } from "./images.mjs";
@@ -120,12 +119,15 @@ const asked = [
   .join("; ");
 let slug = revise || null;
 try {
-  await sendMessage(
-    (revise
-      ? `Bắt đầu sửa video ${revise}: ${asked}`
-      : `Bắt đầu làm ${format === "explainer" ? "video" : FORMATS[format].label}: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
-      (runUrl ? `\n${runUrl}` : ""),
-  );
+  // Only runs someone asked for say they started; the daily ones speak once done.
+  if (!slot) {
+    await sendMessage(
+      (revise
+        ? `Bắt đầu sửa video ${revise}: ${asked}`
+        : `Bắt đầu làm ${format === "explainer" ? "video" : FORMATS[format].label}: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
+        (runUrl ? `\n<${runUrl}>` : ""),
+    );
+  }
 
   const made = revise ? await rework() : makeNew();
   slug = made.slug;
@@ -145,16 +147,11 @@ try {
   const version = history.filter((h) => h.slug === slug).length;
 
   const caption = `${script.caption}\n\n${script.hashtags.join(" ")}`;
-  const summary =
-    `${revise ? `Đã sửa (bản ${version})` : "Xong"}: ${script.title}\n` +
-    `Phong cách: ${build.direction} (${{ claude: "Claude dựng", beag: "Gemini qua be-ag dựng" }[build.built] ?? "khuôn dự phòng"}), ` +
-    `Claude $${(build.costUsd ?? 0).toFixed(2)}\n\nCaption để đăng:\n${caption}\n\n` +
-    `Muốn sửa: /sua video:${slug}` +
-    (runUrl ? `\n\n${runUrl}` : "");
-
-  const qa = `out/qa/${slug}`;
-  const stills = existsSync(qa) ? readdirSync(qa).filter((f) => f.endsWith(".png")).sort() : [];
-  await sendPhotos([1, 4, 8].map((i) => stills[i]).filter(Boolean).map((f) => `${qa}/${f}`));
+  const title = `${revise ? `Đã sửa (bản ${version})` : "Xong"}: ${script.title}`;
+  const footer =
+    `${build.direction}, ${{ claude: "Claude dựng", beag: "Gemini dựng" }[build.built] ?? "khuôn dự phòng"} ` +
+    `$${(build.costUsd ?? 0).toFixed(2)} · sửa: /sua video:${slug}` +
+    (runUrl ? ` · <${runUrl}>` : "");
 
   if (render) {
     const out = version > 1 ? `out/${slug}-v${version}.mp4` : `out/${slug}.mp4`;
@@ -164,41 +161,29 @@ try {
     if (url) console.log("Uploaded:", url);
     // The workflow keeps a copy as an artifact only when the CDN has none.
     if (url && process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `cdn=${url}\n`);
-    await sendVideo(out, script.title, url);
-    await sendMessage(summary);
-    // The video goes straight to TikTok: posted privately with its caption when
-    // the account granted Direct Post, else to the drafts with the caption
-    // following on its own so Copy Text copies just it. A failed send leaves
-    // the drafts button to retry.
+    // The video goes straight to TikTok (posted privately with its caption when
+    // the account granted Direct Post, else to the drafts), then one message
+    // says how it went; a failed send carries the drafts button to retry.
+    let tiktok = "";
+    let key;
     if (url) {
       const draft = await sendToDrafts(slug, out, caption);
       console.log("TikTok drafts:", JSON.stringify(draft));
       if (draft.error) {
+        key = `${slug}/${out.split("/").pop()}`;
         // TikTok holds only a few unposted inbox videos per account (5 a day).
-        const full = /spam_risk_too_many_pending_share/.test(draft.error);
-        await sendPing(
-          full
-            ? "Chưa gửi được vào nháp TikTok: hộp thư TikTok đã đầy video chờ (tối đa 5 trong 24 giờ). Mở TikTok, đăng hoặc xóa bớt video trong hộp thư rồi bấm nút bên dưới."
-            : `Chưa gửi được vào nháp TikTok: ${draft.error}`,
-        );
-        await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
+        tiktok = /spam_risk_too_many_pending_share/.test(draft.error)
+          ? "TikTok: hộp thư đầy (tối đa 5 video chờ trong 24 giờ). Đăng hoặc xóa bớt rồi bấm nút."
+          : `TikTok: chưa gửi được (${draft.error}). Bấm nút để thử lại.`;
       } else if (draft.mode === "post") {
-        await sendPing(
-          draft.status === "PUBLISH_COMPLETE"
-            ? "Đã đăng lên TikTok ở chế độ riêng tư, caption có sẵn. Mở video → ⋯ → Cài đặt quyền riêng tư → Mọi người là xong."
-            : "Đã gửi lên TikTok, vài phút nữa video hiện ở chế độ riêng tư với caption có sẵn; đổi sang Mọi người để công khai.",
-        );
+        tiktok = "TikTok: đã đăng ở chế độ riêng tư, caption có sẵn. Đổi sang Mọi người để công khai.";
       } else {
-        await sendPing(
-          draft.status === "SEND_TO_USER_INBOX"
-            ? "Đã vào nháp TikTok. Mở TikTok, chọn nháp, dán caption dưới đây rồi đăng:"
-            : "Đã gửi lên TikTok, vài phút nữa sẽ vào nháp. Caption để dán:",
-        );
-        await sendMessage(caption);
+        tiktok = "TikTok: đã vào nháp. Dán caption dưới đây rồi đăng.";
       }
     }
+    await sendResult(out, url, [title, tiktok, caption, footer].filter(Boolean).join("\n\n"), { key, ping: Boolean(url) });
   } else {
-    await sendMessage(summary);
+    await sendMessage([title, caption, footer].join("\n\n"));
   }
   console.log(`\nDone: ${slug}${notifyOn ? " (sent to Telegram/Discord)" : ""}`);
 } catch (err) {

@@ -49,6 +49,17 @@ export const sendDraftButton = (key, caption) =>
     { type: 1, components: [{ type: 2, style: 1, label: "Gửi nháp TikTok", custom_id: `tt:${key}` }] },
   ]);
 
+// A finished video as one message: `text` (with the video's CDN link, which
+// Discord plays inline), the drafts button when `key` is given, and a ping to
+// DISCORD_NOTIFY_USER_ID when `ping` is set.
+export const sendResult = (text, { key, ping } = {}) => {
+  const user = ping ? process.env.DISCORD_NOTIFY_USER_ID : null;
+  const button = key && [
+    { type: 1, components: [{ type: 2, style: 1, label: "Gửi nháp TikTok", custom_id: `tt:${key}` }] },
+  ];
+  return post(user ? `<@${user}> ${text}` : text, [], button || undefined, user ? [user] : []);
+};
+
 export const sendPhotos = (files) =>
   files.length ? post("Ảnh chụp thử (có lớp giao diện TikTok):", files.slice(0, 10)) : undefined;
 
