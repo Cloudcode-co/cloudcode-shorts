@@ -48,8 +48,8 @@ export const slugify = (text) =>
 // The script writer is any OpenAI-compatible chat API (by default a Gemini
 // gateway): LLM_BASE_URL, LLM_API_KEY, and LLM_MODEL, a comma-separated list
 // tried in order. When those all fail, the backup gateway (MPROXY_BASE_URL,
-// MPROXY_API_KEY) and its MPROXY_MODEL list take over: Mistral Large first,
-// which also reads images.
+// MPROXY_API_KEY) and its MPROXY_MODEL list take over: GPT 5.6 luna, then terra,
+// then Mistral Large; all three read images.
 const LLM_BASE_URL = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/+$/, "");
 const MPROXY_BASE_URL = (process.env.MPROXY_BASE_URL || "https://mproxy.harumi.io.vn/v1").replace(/\/+$/, "");
 // Longest a single call may take before it counts as failed.
@@ -71,7 +71,7 @@ const llmTargets = () => [
       }))
     : []),
   ...(process.env.MPROXY_API_KEY
-    ? list(process.env.MPROXY_MODEL || "mistral/mistral-large-latest,claude-coding").map((model) => ({
+    ? list(process.env.MPROXY_MODEL || "cx/gpt-5.6-luna,cx/gpt-5.6-terra,mistral/mistral-large-latest,claude-coding").map((model) => ({
         model,
         base: MPROXY_BASE_URL,
         key: process.env.MPROXY_API_KEY,
