@@ -1,0 +1,4 @@
+A news-desk bulletin in navy, white and one red accent: five long shots (hook, 1/3, 2/3, 3/3, outro) joined by red wipes that carry the next story counter. Each story builds in place: a big counter with progress bars, a white card with logo, name and counting star total, then a swap on the second voice line to the stat or typed command, with a lower-third for the facts and a scrolling ticker of real star counts at the bottom.
+QA fixes: breaking-bar text wrapped (shortened, nowrap); hook headline and cards overflowed into the ticker (resized); a lone word "bản" in the AIHOT step list (shrunk to one line); outro headline crowded the lower-third (smaller). Checked: no lone-word headlines, text at least 34px, nothing under the TikTok overlay, no invented data (numbers from facts.json and script).
+
+QA fix: s7 terminal font 42 -> 34 so `docker compose up -d --build` stays on one line (checked at frame 2800).

@@ -148,5 +148,16 @@
     "costUsd": 0.6368463999999999,
     "reviewIssues": 1,
     "format": "brief"
+  },
+  {
+    "slug": "tin-tuan-deepseek-harness-gpu-unlock-aih",
+    "topic": "Tin tuần: DeepSeek Harness, gpu-unlock, AIHOT",
+    "date": "2026-11-04",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.6300645,
+    "reviewIssues": 1,
+    "format": "news"
   }
 ]

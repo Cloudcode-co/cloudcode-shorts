@@ -1,0 +1,185 @@
+{
+  "slug": "tin-tuan-deepseek-harness-gpu-unlock-aih",
+  "format": "news",
+  "topic": "Tin tuần: DeepSeek Harness, gpu-unlock, AIHOT",
+  "title": "3 dự án mã nguồn mở tuần này anh em đã biết chưa?",
+  "caption": "Điểm tin tuần: DeepSeek Harness, tool mở khóa x2 tốc độ GPU GeForce và framework tự làm báo AIHOT! #homelab #gpu #ai",
+  "hashtags": [
+    "#deepseek",
+    "#gpuunlock",
+    "#homelabvn",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Fast-paced modern tech electronic beat, rhythmic synth pulses, punchy kick, sleek and informative vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "punchy",
+        "electronic",
+        "fast-paced"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "steady beat",
+        "driving bass",
+        "curious"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "energetic",
+        "high tension",
+        "powerful synths"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "warm",
+        "chill synth",
+        "triumphant"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/deepseek-ai/deepseek-harness",
+    "https://github.com/Zagitta/gpu-unlock",
+    "https://github.com/KKKKhazix/AIHOT",
+    "https://github.com/vastsa/PI-Desktop",
+    "https://github.com/Ckurius/rtx3070ti-laptop-gpu-unlock-benchmark",
+    "https://github.com/grregis/MuckScraper",
+    "https://deepseek-harness.github.io/deepseek-harness/guide/quickstart"
+  ],
+  "voiceId": "6adFm46eyy74snVn6YrT",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[excited] Ba dự án mã nguồn mở tuần này anh em nên xem qua!",
+      "headline": "3 dự án tuần này",
+      "lines": [
+        "Điểm tin mã nguồn mở",
+        "3 công cụ đáng thử"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "excited young man working computer"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thứ nhất là DeepSeek Harness, bộ khung chạy AI agent theo cơ chế plugin từ DeepSeek.",
+      "headline": "1/3: DeepSeek Harness",
+      "lines": [
+        "Framework AI Agent mã nguồn mở",
+        "Kiến trúc everything is a plugin"
+      ],
+      "commands": [],
+      "repos": [
+        "deepseek-ai/deepseek-harness"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Chỉ cần một lệnh npx là mở Web UI, nhập API key là định tuyến model ngay không cần restart!",
+      "headline": "1/3: Khởi chạy Web UI tức thì",
+      "lines": [
+        "Chạy ngay qua lệnh npx",
+        "Đổi model không cần khởi động lại"
+      ],
+      "commands": [
+        "npx @deepseek-ai/dsh web"
+      ],
+      "repos": [
+        "deepseek-ai/deepseek-harness"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[curious] Thứ hai, card GeForce bị bóp một nửa tốc độ nhân tensor cho FP16 và BF16.",
+      "headline": "2/3: gpu-unlock",
+      "lines": [
+        "GeForce bị giới hạn phần cứng",
+        "Tensor Core chỉ chạy nửa tốc độ"
+      ],
+      "commands": [],
+      "repos": [
+        "Zagitta/gpu-unlock"
+      ],
+      "footage": "datacenter server racks glowing blue"
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Tool gpu-unlock gỡ bỏ giới hạn khi boot Linux, đẩy RTX 4090 tăng gấp đôi MMA, xử lý prompt LLM nhanh hơn tới 55%!",
+      "headline": "2/3: Gỡ giới hạn GPU",
+      "lines": [
+        "RTX 4090: 165 lên 329 TFLOPS",
+        "LLM prefill tăng 25–55%"
+      ],
+      "commands": [
+        "git clone https://github.com/Zagitta/gpu-unlock",
+        "make install"
+      ],
+      "repos": [
+        "Zagitta/gpu-unlock"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Thứ ba là AIHOT, khung website tự cào tin đa nguồn và xuất bản nhật báo tự động.",
+      "headline": "3/3: AIHOT",
+      "lines": [
+        "Tự động cào tin đa nguồn",
+        "Tự xuất bản nhật báo ngành"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/AIHOT"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Hệ thống dùng LLM lọc thô và chấm điểm độc lập hai lần trước khi tóm tắt, dựng qua Docker là xong!",
+      "headline": "3/3: LLM tự chấm điểm",
+      "lines": [
+        "Chấm điểm độc lập 2 lần",
+        "Khởi chạy với Docker Compose"
+      ],
+      "commands": [
+        "docker compose up -d --build"
+      ],
+      "repos": [
+        "KKKKhazix/AIHOT"
+      ],
+      "footage": "developer coding at desk night"
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Anh em thấy ấn tượng với dự án nào nhất? [warmly] Để lại bình luận và follow kênh để hóng tin tuần sau nhé!",
+      "headline": "Anh em sẽ thử dự án nào?",
+      "lines": [
+        "Bình luận dự án bạn chọn",
+        "Follow để đón xem tuần sau"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}
