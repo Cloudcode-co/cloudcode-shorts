@@ -1,4 +1,5 @@
-// Writes a meme skit (FORMAT=meme) instead of an explainer: a situation the
+// Writes a silent video (no voiceover, music only): a meme skit (FORMAT=meme), or
+// a POV messaging thread (FORMAT=chat) with cats reacting. The meme skit is a situation the
 // channel's viewers have lived, told in big captions over a still background
 // with GIPHY cats reacting, on music with no voiceover. Fetches each beat's
 // meme sticker (pipeline/memes.mjs) and each place's photo (pipeline/images.mjs),
@@ -6,6 +7,7 @@
 //
 //   node --env-file=.env pipeline/write-meme.mjs "deploy ngày thứ 6"
 //   node --env-file=.env pipeline/write-meme.mjs            # picks its own situation
+//   FORMAT=chat node --env-file=.env pipeline/write-meme.mjs "khách hỏi sao web sập"
 //
 // Writes src/videos/<slug>/{script.json,facts.json,durations.json} and prints
 // the slug as the last line.
@@ -13,6 +15,7 @@ import { existsSync, mkdirSync } from "node:fs";
 import { llmJson, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { addImage } from "./images.mjs";
 import { addMeme, memesOn } from "./memes.mjs";
+import { formatOf } from "./formats.mjs";
 
 const S = (type, extra = {}) => ({ type, ...extra });
 const topic = (process.argv.slice(2).join(" ") || process.env.TOPIC || "").trim();
@@ -69,12 +72,65 @@ const rules =
   `seconds it stays (about 0.3 s per word plus 1.2 s). Keep the same place across beats unless the story moves.\n` +
   (notes ? `\nThe channel owner asked for this video:\n${notes}\n` : "");
 
-const meme = await llmJson(rules, schema, 1.0);
+// A POV chat: the same, told as messages on a phone.
+const chat = formatOf(process.env.FORMAT) === "chat";
+const chatSchema = S("OBJECT", {
+  properties: {
+    ...Object.fromEntries(Object.entries(schema.properties).filter(([k]) => k !== "beats")),
+    contact: S("STRING", { description: "the other side's name as saved in the phone, Vietnamese, funny if natural (Sếp, Khách VIP, Nhóm đồ án)" }),
+    messages: S("ARRAY", {
+      items: S("OBJECT", {
+        properties: {
+          from: S("STRING", { description: "'me' or 'them'" }),
+          text: S("STRING", { description: "the message, Vietnamese, 1–16 words, as people really text" }),
+          reaction: S("STRING", { description: "English GIPHY search for a cat reacting to this message ('shocked cat', 'cat crying'), or empty" }),
+          seconds: S("NUMBER", { description: "how long until the next message, 1.5–4" }),
+        },
+        required: ["from", "text", "reaction", "seconds"],
+      }),
+    }),
+  },
+  required: [...schema.required.filter((k) => k !== "beats"), "contact", "messages"],
+});
+const chatRules =
+  `You write Vietnamese TikTok "POV" chat videos for a channel about self-hosting, servers, coding and game ` +
+  `servers, watched by Vietnamese developers, IT students and gamers: a messaging thread on a phone, read in ` +
+  `silence over music, with a cat sticker reacting at the big moments.
+` +
+  (topic
+    ? `The chat is about: "${topic}".
+`
+    : `Pick one situation yourself, different from these recent videos: ${recent.join("; ") || "none"}.
+`) +
+  `The title starts with "POV:" and sets the scene ("POV: khách nhắn lúc 2h sáng hỏi sao web sập"). Write 6–12 ` +
+  `messages, 15–35 seconds in total, between "me" (the developer or server admin) and "them" (a boss, a ` +
+  `customer, a teammate, a friend who wants a Minecraft server). It escalates and ends on a punchline message. ` +
+  `Messages read like real Vietnamese texting: short, lowercase is fine, teencode and slang where natural, never ` +
+  `cringe, never explaining the joke. Give 2–4 messages a cat "reaction". Never pitch a product or hosting and ` +
+  `never mention Cloudcode.
+` +
+  (notes ? `
+The channel owner asked for this video:
+${notes}
+` : "");
 
+const meme = await llmJson(chat ? chatRules : rules, chat ? chatSchema : schema, 1.0);
+
+// Messages as beats: the message is the caption and the place is the phone.
+if (chat) {
+  meme.beats = (meme.messages ?? []).map((m) => ({
+    caption: m.text,
+    from: m.from === "me" ? "me" : "them",
+    reaction: m.reaction ?? "",
+    place: "",
+    seconds: m.seconds,
+  }));
+}
 const beats = (meme.beats ?? []).filter((b) => b.caption?.trim());
 const total = beats.reduce((n, b) => n + Number(b.seconds || 0), 0);
 const problems = [];
-if (beats.length < 3 || beats.length > 8) problems.push(`${beats.length} beats`);
+const [fewest, most] = chat ? [5, 14] : [3, 8];
+if (beats.length < fewest || beats.length > most) problems.push(`${beats.length} beats`);
 if (total < 10 || total > 40) problems.push(`${total.toFixed(1)}s in total`);
 if (problems.length) throw new Error(`meme rejected: ${problems.join("; ")}`);
 
@@ -88,19 +144,19 @@ const scenes = beats.map((b, i) => ({
   id: `s${i + 1}`,
   text: "",
   headline: b.caption.trim(),
-  lines: [],
+  lines: chat ? [b.from] : [],
   commands: [],
   repos: [],
   footage: "",
-  reaction: b.reaction.trim(),
-  place: b.place.trim(),
+  reaction: (b.reaction ?? "").trim(),
+  place: (b.place ?? "").trim(),
 }));
 const durations = Object.fromEntries(
-  beats.map((b, i) => [`s${i + 1}`, Number(Math.min(6, Math.max(2.5, Number(b.seconds) || 3)).toFixed(2))]),
+  beats.map((b, i) => [`s${i + 1}`, Number(Math.min(6, Math.max(chat ? 1.5 : 2.5, Number(b.seconds) || 3)).toFixed(2))]),
 );
 writeJson(`src/videos/${slug}/script.json`, {
   slug,
-  format: "meme",
+  format: chat ? "chat" : "meme",
   topic: topic || meme.topic,
   title: meme.title,
   caption: meme.caption,
@@ -110,16 +166,22 @@ writeJson(`src/videos/${slug}/script.json`, {
   scenes,
 });
 writeJson(`src/videos/${slug}/durations.json`, durations);
-writeJson(`src/videos/${slug}/facts.json`, { topic: topic || meme.topic, date: today, repos: [], notes: null });
+writeJson(`src/videos/${slug}/facts.json`, {
+  topic: topic || meme.topic,
+  date: today,
+  repos: [],
+  notes: null,
+  ...(chat ? { contact: meme.contact } : {}),
+});
 
 // The cats and places, fetched now so the builder starts with them.
 if (memesOn()) {
-  for (const s of scenes) {
+  for (const s of scenes.filter((s) => s.reaction)) {
     const found = await addMeme(slug, s.reaction, s.id).catch((err) => console.log(err.message));
     console.log(`Meme for ${s.id} ("${s.reaction}"): ${found?.file ?? "none"}`);
   }
 }
-for (const place of [...new Set(scenes.map((s) => s.place))]) {
+for (const place of [...new Set(scenes.map((s) => s.place).filter(Boolean))]) {
   const scene = scenes.find((s) => s.place === place).id;
   const found = await addImage(slug, place, { scene }).catch((err) => console.log(err.message));
   console.log(`Background for "${place}": ${found?.file ?? "none"}`);

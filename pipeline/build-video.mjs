@@ -35,7 +35,7 @@ export const video = makeFallbackVideo({
   scenes: script.scenes as ScriptScene[],
   durations,
   repos: facts.repos as RepoFact[],
-  silent: (script as { format?: string }).format === "meme",
+  silent: ["meme", "chat"].includes((script as { format?: string }).format ?? ""),
 });
 `;
 

@@ -30,9 +30,28 @@ slug, an art direction and a pacing.
 - `src/videos/hermes-vs-openclaw/`: a finished, hand-checked video for reference.
   Learn how it times shots to voice; do not copy its look.
 
+### Formats
+
+script.json's `format` says what kind of video it is (missing means `explainer`):
+
+- `quiz`: scene 1's `lines` are the answer options; scene 2 is the guess, with a
+  visible 3-2-1 countdown; scene 3 reveals the right option (its `headline`) and
+  marks the others wrong.
+- `news`: three projects, each with its logo and real stars from facts.json and a
+  clear 1/3, 2/3, 3/3 counter.
+- `tutorial`: the commands are the video; show each one large and readable,
+  typed out exactly, never a made-up output.
+- `top5`: a countdown from #5 to #1, the rank always visible.
+- `story`: led by the footage in facts.json; the story's numbers big on screen.
+- `chat`: a phone messaging screen. Each scene is one message: `headline` is its
+  text, `lines[0]` is `me` or `them`, and facts.json `contact` is the name at the
+  top. Bubbles appear one by one on their timing with a typing indicator before
+  `them`; a scene's `reaction` sticker (facts.json `memes`) pops beside it.
+- `meme`: below.
+
 ### Memes
 
-When script.json has `"format": "meme"` the video is a meme skit, not an
+When script.json has `"format": "meme"` (or `chat`) the video is silent, not an
 explainer. There is no voiceover: never use `<Voice>`. Each scene's `headline` is
 the caption on screen for `durations[id]` seconds (the whole line, word for word),
 its `reaction` and `place` say what the cats do and where. facts.json already

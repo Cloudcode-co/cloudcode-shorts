@@ -59,6 +59,21 @@ export const trendingCandidates = async (skip = []) => {
   return [...found.values()].sort((a, b) => b.stars - a.stars).slice(0, 40);
 };
 
+// Stories developers told on Hacker News lately (outages, postmortems, startup
+// lessons), as candidates for a story video: [{title, url, points}].
+export const storyCandidates = async () => {
+  const since = Math.floor(Date.now() / 1000) - 60 * 86400;
+  const data = await fetch(
+    `https://hn.algolia.com/api/v1/search?tags=story&numericFilters=created_at_i>${since},points>250&hitsPerPage=60`,
+    { signal: AbortSignal.timeout(30_000) },
+  )
+    .then((r) => (r.ok ? r.json() : { hits: [] }))
+    .catch(() => ({ hits: [] }));
+  return data.hits
+    .filter((h) => h.url && !/github\.com|youtube\.com|twitter\.com|x\.com/.test(h.url))
+    .map((h) => ({ title: h.title, url: h.url, points: h.points }));
+};
+
 // Checks repo names a model guessed, and runs its search queries; returns
 // real owner/name pairs, most-starred match first for each query.
 export const resolveRepos = async ({ repos = [], queries = [] }, limit = 6) => {

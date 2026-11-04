@@ -95,6 +95,31 @@
       "id": "meme-skit",
       "name": "Meme skit",
       "brief": "The Vietnamese TikTok meme look: one still photo as the whole background, showing where the line happens (an office, a bedroom at night, a server room; npm run image -- <slug> \"<place>\"), changed only when the place changes. One or two meme animals acting out the line in the lower half: animated stickers from npm run meme -- <slug> \"cat dancing\" (or vibing, shocked, crying, typing), played with the kit Meme, big, mirrored when they face each other; green-screen footage with the kit GreenScreen only when no meme fits. At the top a big caption telling the situation in plain spoken Vietnamese with the kit MemeCaption (yellow, black outline), centred, at most 3 lines, replaced line by line. No other graphics, cards or icons; hard cuts."
+    },
+    {
+      "id": "quiz-show",
+      "name": "Quiz show",
+      "brief": "A TV quiz: the question on a big glowing panel, answer options as 2–4 chunky buttons (A/B/C/D) stacked in the middle, a huge 3-2-1 countdown with a ticking ring during the guess scene, then the right button lights green and the wrong ones dim and shake, with a confetti burst. Saturated studio colours (deep purple or blue with gold), bold rounded type; the explanation scenes stay in the same set."
+    },
+    {
+      "id": "news-desk",
+      "name": "News desk",
+      "brief": "A tech news bulletin: a slim breaking-news bar with a ticker at the bottom, a big '1/3' story counter, each project introduced on a card with its logo, name and real star count, lower-thirds for facts. Clean broadcast look: navy and white with one red accent, a strong grotesk; quick wipes between stories."
+    },
+    {
+      "id": "terminal-tutorial",
+      "name": "Terminal tutorial",
+      "brief": "The terminal is the whole screen: a large, readable terminal window with a step counter ('Bước 1/3') above it, each command typed at a human pace with a blinking cursor, then a short plausible output line taken only from the research (or a green check, never invented logs). The headline sits above in plain bold type. Dark editor theme with one accent colour from the tool's logo."
+    },
+    {
+      "id": "countdown",
+      "name": "Top 5 countdown",
+      "brief": "A ranking countdown: a giant rank number (#5 … #1) slams in for each entry and stays as a watermark-sized numeral behind it, the entry's logo card with name and real stars, and a progress rail of 5 dots on the side. Rising energy: each rank a step brighter, #1 gets a gold treatment and a short flash. Bold condensed type."
+    },
+    {
+      "id": "documentary",
+      "name": "Documentary",
+      "brief": "A short documentary: stock footage full frame, graded slightly desaturated with a soft vignette, lower-third captions in a serif, a small date and place stamp when the story gives one, slow push-ins on footage, and key numbers set huge on black between scenes. Calm, serious pacing; quick cuts only at the turning point."
     }
   ],
   "pacing": [

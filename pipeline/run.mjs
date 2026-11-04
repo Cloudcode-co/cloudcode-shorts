@@ -10,11 +10,12 @@
 // Renders only on CI or with --render. Env (the GitHub workflow passes these):
 // TOPIC works like the first argument; VOICE is an ElevenLabs voice name, id
 // or link; STYLE an art direction (see build-video.mjs); NOTES are requests for the script writer and Claude; REVISE is
-// the slug of a video to rework; FORMAT=meme makes a meme skit (pipeline/write-meme.mjs)
-// with no voiceover, in the meme-skit style unless STYLE says otherwise.
+// the slug of a video to rework; FORMAT is the kind of video (pipeline/formats.mjs),
+// each with its own art direction unless STYLE says otherwise.
 import { spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
+import { FORMATS, formatOf } from "./formats.mjs";
 import { sendToDrafts, uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
 import { sendDraftButton, sendPing } from "./discord.mjs";
@@ -31,7 +32,9 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
-const format = (process.env.FORMAT ?? "").trim() === "meme" ? "meme" : "explainer";
+const format = formatOf(process.env.FORMAT);
+// The format's own look, unless the run asked for one.
+if (!revise && !style && FORMATS[format].style) process.env.STYLE = FORMATS[format].style;
 // The builder asked for in this run (BUILDER also carries the repo default).
 const chosenBuilder = (process.env.BUILDER_CHOSEN ?? "").trim();
 
@@ -58,16 +61,11 @@ const setSlug = (value) => {
 
 // A new video: script, voice, music, Claude's build.
 const makeNew = () => {
-  if (format === "meme") {
-    const slug = setSlug(nodeResult("pipeline/write-meme.mjs", topic ? [topic] : []));
-    run("node", ["scripts/music.mjs", slug]);
-    if (!style) process.env.STYLE = "meme-skit";
-    return { slug, build: { ...nodeResult("pipeline/build-video.mjs", [slug]), format } };
-  }
-  const slug = setSlug(nodeResult("pipeline/write-script.mjs", topic ? [topic] : []));
-  run("node", ["scripts/voiceover.mjs", slug]);
+  const voiced = FORMATS[format].voiced;
+  const slug = setSlug(nodeResult(voiced ? "pipeline/write-script.mjs" : "pipeline/write-meme.mjs", topic ? [topic] : []));
+  if (voiced) run("node", ["scripts/voiceover.mjs", slug]);
   run("node", ["scripts/music.mjs", slug]);
-  return { slug, build: nodeResult("pipeline/build-video.mjs", [slug]) };
+  return { slug, build: { ...nodeResult("pipeline/build-video.mjs", [slug]), format } };
 };
 
 // A finished video, reworked: a new voice and/or Claude's changes.
@@ -84,8 +82,8 @@ const rework = async () => {
   await restoreImages(slug);
   await restoreMemes(slug);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
-  const isMeme = readJson(`src/videos/${slug}/script.json`).format === "meme";
-  if (voice && !isMeme) {
+  const silent = FORMATS[formatOf(readJson(`src/videos/${slug}/script.json`).format)].voiced === false;
+  if (voice && !silent) {
     const { voiceId, name } = await resolveVoice(voice);
     console.log(`Voice: ${name}`);
     const file = `src/videos/${slug}/script.json`;
@@ -111,7 +109,7 @@ try {
   await sendMessage(
     (revise
       ? `Bắt đầu sửa video ${revise}: ${asked}`
-      : `Bắt đầu làm ${format === "meme" ? "meme" : "video"}: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
+      : `Bắt đầu làm ${format === "explainer" ? "video" : FORMATS[format].label}: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
       (runUrl ? `\n${runUrl}` : ""),
   );
 

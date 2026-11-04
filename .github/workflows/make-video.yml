@@ -20,7 +20,7 @@ on:
         required: false
         default: ""
       format:
-        description: "Kiểu: để trống (video giải thích) hoặc meme"
+        description: "Kiểu: để trống (giải thích), quiz, news, tutorial, top5, story, meme hoặc chat"
         required: false
         default: ""
       notes:

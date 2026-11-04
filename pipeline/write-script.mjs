@@ -14,7 +14,8 @@
 // public/videos/<slug>/pages/*.jpg and prints the slug as the last line.
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.mjs";
-import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
+import { FORMATS, formatOf } from "./formats.mjs";
+import { repoBrief, resolveRepos, storyCandidates, trendingCandidates } from "./research.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { isWebUrl, pageBrief, webReader } from "./web.mjs";
 import { addFootage, footageOn } from "./footage.mjs";
@@ -61,6 +62,28 @@ const models = llmModels();
 console.log("LLM models:", models.join(", "));
 
 let topic = process.argv.slice(2).join(" ").trim();
+// FORMAT picks the kind of video (pipeline/formats.mjs): its shape and limits.
+const formatId = formatOf(process.env.FORMAT);
+const format = FORMATS[formatId];
+if (!format.voiced) throw new Error(`${formatId} is written by pipeline/write-meme.mjs`);
+console.log(`Format: ${format.label}`);
+// A story with nothing given: Gemini picks one Hacker News story to tell, and
+// the video is about that page.
+if (formatId === "story" && !topic && !sourceUrls.length) {
+  const stories = await storyCandidates();
+  if (!stories.length) throw new Error("no stories from Hacker News");
+  const chosen = await llmJson(
+    `Pick the best true story for a Vietnamese developer TikTok channel to retell, from these Hacker News posts: ` +
+      `an outage or postmortem, a startup or side project's rise or fall, a security incident, a big bill, a hard ` +
+      `bug. It must be a first-hand account with concrete events and numbers, not news, an opinion piece or a ` +
+      `product launch. Skip these past topics: ${JSON.stringify(pastTopics)}.\n${JSON.stringify(stories, null, 1)}`,
+    S("OBJECT", { properties: { url: S("STRING") }, required: ["url"] }),
+    0.7,
+  );
+  const story = stories.find((s) => s.url === chosen.url) ?? stories[0];
+  console.log(`Story: ${story.title} (${story.url})`);
+  sourceUrls.push(story.url);
+}
 // With no topic and no SOURCE, the oldest idea from ideas/ that no video used.
 // Only its topic, angle and source links are used: its facts are checked
 // against the sources like any other research.
@@ -155,7 +178,7 @@ if (sourceUrls.length) {
       "Pick something Vietnamese developers and self-hosters would want to try on a Linux server, with a way " +
       "to install it, and that a general TikTok audience can see: skip tools made for adult content, for " +
       "piracy or torrent and magnet downloads, for cheating, scraping people, or evading the law, even when the " +
-      "README words it neutrally (signs: video codes, performers, magnet links). A head-to-head comparison with a well-known alternative works well. Avoid these past " +
+      `README words it neutrally (signs: video codes, performers, magnet links). ${format.pick} Avoid these past ` +
       `topics: ${JSON.stringify(pastTopics)}. "repos" must come from the list above; "queries" find the ` +
       "alternatives to compare with.",
     plan,
@@ -307,12 +330,7 @@ const rules =
   `Voice: a Vietnamese tech presenter talking to "anh em", lively and conversational, like presenting on stage, ` +
   `never like reading a web page. Short sentences. Questions to the viewer. Mix in ElevenLabs v3 audio tags ` +
   `in square brackets, only these: ${TAGS.map((t) => `[${t}]`).join(" ")}, at most one or two per line.\n` +
-  `Shape: 8–14 scenes, 60–110 seconds spoken in total (about 14 Vietnamese words per 5 seconds). ` +
-  `Scene 1 is a hook question in under 5 seconds. If there is an install, show it as steps with commands ` +
-  `copied character for character from the research; never invent or edit a command, and ` +
-  `prefer the shortest official way (one-line installer, docker run, or docker compose). ` +
-  `The last scene says to save the video to try later ` +
-  `and follow for more. ` +
+  `${format.shape} (About 14 Vietnamese words per 5 seconds spoken.) ` +
   (pages.length
     ? `The video is about what the web pages show: name the site or product as it names itself and say ` +
       `plainly what it offers and for whom. Prices, limits and specs only exactly as the pages write them. ` +
@@ -346,7 +364,8 @@ script.sources = [
 // Checks the model's output; anything wrong here stops the run before spending
 // voice credits.
 const problems = [];
-if (script.scenes.length < 6 || script.scenes.length > 16) problems.push(`${script.scenes.length} scenes`);
+const [minScenes, maxScenes] = format.scenes;
+if (script.scenes.length < minScenes || script.scenes.length > maxScenes) problems.push(`${script.scenes.length} scenes`);
 const ids = new Set(script.scenes.map((s) => s.id));
 if (ids.size !== script.scenes.length) problems.push("duplicate scene ids");
 for (const s of script.scenes) {
@@ -357,7 +376,7 @@ for (const s of script.scenes) {
   if (s.commands.some((c) => /[^\x20-\x7e]/.test(c))) problems.push(`${s.id}: non-ascii command`);
 }
 const words = script.scenes.reduce((n, s) => n + s.text.replace(/\[[^\]]+\]/g, "").split(/\s+/).length, 0);
-if (words < 120 || words > 380) problems.push(`${words} spoken words`);
+if (words < format.words[0] || words > format.words[1]) problems.push(`${words} spoken words`);
 script.hashtags = script.hashtags.slice(0, 5).map((h) => (h.startsWith("#") ? h : `#${h}`));
 if (problems.length) throw new Error(`script rejected: ${problems.join("; ")}`);
 
@@ -429,6 +448,7 @@ for (const s of script.scenes) s.repos = s.repos.filter((r) => known.has(r));
 mkdirSync(`src/videos/${slug}`, { recursive: true });
 writeJson(`src/videos/${slug}/script.json`, {
   slug,
+  format: formatId,
   topic,
   title: script.title,
   caption: script.caption,

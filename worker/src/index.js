@@ -31,6 +31,7 @@
 // secrets TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, KV binding TIKTOK.
 
 import voiceList from "../../pipeline/voices.json";
+import { FORMATS } from "../../pipeline/formats.mjs";
 import { site } from "./site.js";
 import { canPost, directPost, sendToInbox, uploadStatus } from "./tiktok.js";
 
@@ -51,7 +52,7 @@ const dispatch = (env, job, replyTo) =>
 const queued = (res, { topic, source, voice, notes, revise, style, builder, format }) => {
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
   const extra = [
-    format === "meme" && "kiểu: meme",
+    FORMATS[format] && format !== "explainer" && `kiểu: ${FORMATS[format].label}`,
     source && `nguồn: ${source}`,
     style && `phong cách: ${style}`,
     voice && `giọng: ${voice}`,

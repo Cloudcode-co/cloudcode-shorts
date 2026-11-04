@@ -3,6 +3,8 @@
 // with the repo's secrets.
 //
 //   DISCORD_APP_ID=... DISCORD_BOT_TOKEN=... node worker/register-discord.mjs
+import { FORMATS } from "../pipeline/formats.mjs";
+
 const app = process.env.DISCORD_APP_ID;
 const token = process.env.DISCORD_BOT_TOKEN;
 if (!app || !token) throw new Error("set DISCORD_APP_ID and DISCORD_BOT_TOKEN");
@@ -67,10 +69,7 @@ const commands = [
         name: "kieu",
         description: "Kiểu video (để trống: giải thích có lồng tiếng)",
         required: false,
-        choices: [
-          { name: "Giải thích", value: "explainer" },
-          { name: "Meme (mèo + chữ, không lồng tiếng)", value: "meme" },
-        ],
+        choices: Object.entries(FORMATS).map(([value, f]) => ({ name: f.label, value })),
       },
       style,
       voice,
