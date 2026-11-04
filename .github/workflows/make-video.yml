@@ -35,6 +35,10 @@ on:
         description: "Sửa video đã có: slug của video (dùng giọng và yêu cầu ở trên)"
         required: false
         default: ""
+      music_url:
+        description: "Link file nhạc của bạn thay cho nhạc tự tạo (để trống: nhạc ElevenLabs)"
+        required: false
+        default: ""
   # Sent by the chat bot worker (worker/), from Discord or Telegram.
   repository_dispatch:
     types: [make-video]
@@ -84,6 +88,9 @@ jobs:
           # "early", "morning" or "afternoon" for the daily videos (pipeline/schedule.json).
           SCHEDULED: ${{ github.event.client_payload.scheduled }}
           REVISE: ${{ inputs.revise || github.event.client_payload.revise }}
+          # The owner's own track instead of generated music (scripts/music.mjs).
+          MUSIC_URL: ${{ inputs.music_url || github.event.client_payload.music_url }}
+          MUSIC_START: ${{ github.event.client_payload.music_start }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_MODEL: ${{ vars.LLM_MODEL }}

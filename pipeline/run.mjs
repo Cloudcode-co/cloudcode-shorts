@@ -32,6 +32,8 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
+// The owner's own track for the video instead of generated music.
+const music = (process.env.MUSIC_URL ?? "").trim();
 // A daily run (SCHEDULED: "early", "morning" or "afternoon", from the bot
 // worker's crons) makes what pipeline/schedule.json lists for that slot of
 // this weekday in Vietnam (UTC+7), and nothing when the day leaves it out.
@@ -87,8 +89,8 @@ const rework = async () => {
   if (!/^[a-z0-9-]+$/.test(revise) || !existsSync(`src/videos/${revise}/script.json`)) {
     throw new Error(`không có video "${revise}" trong repo`);
   }
-  if (!voice && !notes && !style && !chosenBuilder) {
-    throw new Error("cần ít nhất một giọng mới, một phong cách, một yêu cầu sửa hoặc người dựng");
+  if (!voice && !notes && !style && !chosenBuilder && !music) {
+    throw new Error("cần ít nhất một giọng mới, một phong cách, một yêu cầu sửa, người dựng hoặc nhạc");
   }
   const slug = setSlug(revise);
   // Footage is not committed; fetch the clips this video uses again.
@@ -105,6 +107,8 @@ const rework = async () => {
     writeJson(file, { ...readJson(file), voiceId });
     run("node", ["scripts/voiceover.mjs", slug, "--force"]);
   }
+  // The owner's own track replaces the music (scripts/music.mjs reads MUSIC_URL).
+  if (music) run("node", ["scripts/music.mjs", slug]);
   const build = notes || style || chosenBuilder
     ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
     : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };
@@ -115,6 +119,7 @@ const asked = [
   style && `phong cách ${style}`,
   voice && `giọng ${voice}`,
   chosenBuilder && `dựng: ${chosenBuilder === "beag" ? "Gemini" : "Claude"}`,
+  music && "nhạc riêng",
   notes,
 ]
   .filter(Boolean)

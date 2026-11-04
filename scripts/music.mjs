@@ -10,12 +10,19 @@
 // section lasts exactly as long as its scenes, so the music changes where the
 // story does. The builder times the scenes to timeline.json.
 //
+// With MUSIC_URL (the owner's own track: an audio file, or a video whose sound
+// is used), that track is used instead from MUSIC_START seconds in, looped or
+// cut to the video's length (the kit's <Music> fades it out).
+//
 //   node --env-file=.env scripts/music.mjs <slug>
 //   node --env-file=.env scripts/music.mjs <slug> 114     # exact length in seconds
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+//   MUSIC_URL=https://... node scripts/music.mjs <slug>
+import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 
+const custom = (process.env.MUSIC_URL ?? "").trim();
 const key = process.env.ELEVENLABS_API_KEY;
-if (!key) throw new Error("ELEVENLABS_API_KEY is not set (put it in .env)");
+if (!key && !custom) throw new Error("ELEVENLABS_API_KEY is not set (put it in .env)");
 
 const [slug, seconds] = process.argv.slice(2);
 if (!slug) throw new Error("usage: music.mjs <slug> [seconds]");
@@ -85,6 +92,33 @@ const sectionsFor = ({ scenes }) => {
 
 mkdirSync(`public/videos/${slug}`, { recursive: true });
 const plan = seconds ? null : timeline();
+
+// The owner's track: the scenes keep their planned timing, with no sections.
+if (custom) {
+  if (plan) writeFileSync(`src/videos/${slug}/timeline.json`, JSON.stringify(plan, null, 2) + "\n");
+  const total = plan ? plan.total + 2 : lengthMs / 1000;
+  const res = await fetch(custom, { signal: AbortSignal.timeout(120_000) });
+  if (!res.ok) throw new Error(`music: could not download MUSIC_URL (${res.status})`);
+  const src = `public/videos/${slug}/music-source`;
+  writeFileSync(src, Buffer.from(await res.arrayBuffer()));
+  const start = Math.max(0, Number(process.env.MUSIC_START) || 0);
+  const r = spawnSync(
+    "npx",
+    [
+      "remotion", "ffmpeg", "-y", "-v", "error",
+      "-stream_loop", "-1", "-ss", String(start), "-i", src,
+      "-vn", "-t", total.toFixed(2),
+      "-c:a", "libmp3lame", "-b:a", "192k",
+      `public/videos/${slug}/music.mp3`,
+    ],
+    { stdio: "inherit", shell: process.platform === "win32" },
+  );
+  rmSync(src, { force: true });
+  if (r.status !== 0) throw new Error("music: ffmpeg could not read the track");
+  console.log(`used the given track for public/videos/${slug}/music.mp3 (${total.toFixed(1)}s from ${start}s)`);
+  process.exit(0);
+}
+
 const sections = plan && sectionsFor(plan);
 let body;
 if (sections) {

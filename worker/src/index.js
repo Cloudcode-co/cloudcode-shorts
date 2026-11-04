@@ -49,7 +49,7 @@ const dispatch = (env, job, replyTo) =>
     body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
   });
 
-const queued = (res, { topic, source, voice, notes, revise, style, builder, format }) => {
+const queued = (res, { topic, source, voice, notes, revise, style, builder, format, music_url, music_start }) => {
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
   const extra = [
     FORMATS[format] && format !== "explainer" && `kiểu: ${FORMATS[format].label}`,
@@ -58,6 +58,7 @@ const queued = (res, { topic, source, voice, notes, revise, style, builder, form
     voice && `giọng: ${voice}`,
     notes && `yêu cầu: ${notes}`,
     builder && `dựng: ${builder === "beag" ? "Gemini" : "Claude"}`,
+    music_url && `nhạc: file bạn gửi${Number(music_start) ? `, từ giây ${music_start}` : ""}`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -220,9 +221,12 @@ const discord = async (request, env, ctx) => {
     revise: command === "sua" ? option("video", 80) : "",
     builder: option("dung", 10),
     format: command === "video" ? option("kieu", 20) : "",
+    // An attached track: its Discord CDN link, which the run downloads.
+    music_url: interaction.data.resolved?.attachments?.[option("nhac", 30)]?.url ?? "",
+    music_start: option("nhac_tu", 10),
   };
-  if (command === "sua" && !job.voice && !job.notes && !job.style && !job.builder) {
-    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach`, `giong` hoặc `dung`.", flags: 64 } });
+  if (command === "sua" && !job.voice && !job.notes && !job.style && !job.builder && !job.music_url) {
+    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach`, `giong`, `dung` hoặc `nhac`.", flags: 64 } });
   }
 
   // Discord wants an answer within 3s: defer, then edit the reply once

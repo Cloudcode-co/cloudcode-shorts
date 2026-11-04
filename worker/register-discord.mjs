@@ -37,6 +37,24 @@ const builder = {
     { name: "Gemini (be-ag, miễn phí)", value: "beag" },
   ],
 };
+// The owner's own track instead of the generated music: an audio file (or a
+// video, whose sound is used), from MUSIC_START seconds in.
+const music = [
+  {
+    type: 11, // attachment
+    name: "nhac",
+    description: "Nhạc của bạn thay cho nhạc tự tạo: file mp3/m4a/wav (hoặc video, lấy tiếng)",
+    required: false,
+  },
+  {
+    type: 10, // number
+    name: "nhac_tu",
+    description: "Bắt đầu nhạc từ giây thứ mấy (mặc định 0)",
+    required: false,
+    min_value: 0,
+    max_value: 600,
+  },
+];
 const notes = (description) => ({
   type: 3,
   name: "yeucau",
@@ -75,6 +93,7 @@ const commands = [
       voice,
       notes("Yêu cầu thêm: nền, màu, nhịp, độ dài..."),
       builder,
+      ...music,
     ],
   },
   {
@@ -93,6 +112,7 @@ const commands = [
       style,
       voice,
       builder,
+      ...music,
     ],
   },
 ];
