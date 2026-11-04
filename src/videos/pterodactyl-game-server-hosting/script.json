@@ -1,0 +1,134 @@
+{
+  "slug": "pterodactyl-game-server-hosting",
+  "topic": "pterodactyl hosting",
+  "title": "Tự mở server game cho bạn bè bằng cách nào?",
+  "caption": "Khám phá Pterodactyl Panel và Wings giúp tự quản lý game server trong Docker an toàn và trực quan!",
+  "hashtags": [
+    "#pterodactyl",
+    "#gameserver",
+    "#selfhosted",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Upbeat energetic synth groove with modern tech pulses, crisp electronic drums, vibrant tempo, no vocals",
+  "sources": [
+    "https://github.com/pterodactyl/panel",
+    "https://github.com/pterodactyl/wings",
+    "https://github.com/MythicalLTD/FeatherPanel",
+    "https://github.com/RyanDMcAfee/ValheimBakaLoader"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em tự mở server game cho bạn bè bằng cách nào?",
+      "headline": "Tự dựng server game",
+      "lines": [
+        "Quản lý game server dễ dàng?",
+        "Tự host cho hội bạn chơi"
+      ],
+      "commands": [],
+      "repos": []
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Thay vì gõ lệnh nhức đầu trên terminal, anh em hãy nghía qua Pterodactyl Panel! [casually] Đây là bảng điều khiển game server mã nguồn mở, viết bằng PHP, React và Go.",
+      "headline": "Pterodactyl Panel trực quan",
+      "lines": [
+        "Mã nguồn mở miễn phí",
+        "Xây dựng bằng PHP, React và Go",
+        "Giao diện web trực quan"
+      ],
+      "commands": [],
+      "repos": [
+        "pterodactyl/panel"
+      ]
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Điểm ăn tiền nhất là Pterodactyl gom toàn bộ server game chạy bên trong các Docker container biệt lập. [cheerfully] Cực kỳ an toàn mà máy chủ không bị rác thư viện.",
+      "headline": "Đóng gói trong Docker",
+      "lines": [
+        "Cô lập từng game trong Docker",
+        "Bảo vệ an toàn cho hệ thống",
+        "Không lo xung đột môi trường"
+      ],
+      "commands": [],
+      "repos": [
+        "pterodactyl/panel"
+      ]
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Nhưng quản lý container thế nào? Đó là nhờ Pterodactyl Wings, một daemon viết bằng Go siêu nhẹ, làm nhiệm vụ giao tiếp qua HTTP API, bắt log và tạo backup.",
+      "headline": "Control plane Pterodactyl Wings",
+      "lines": [
+        "Control plane viết bằng Go",
+        "Giao tiếp qua HTTP API",
+        "Xem log và tạo backup"
+      ],
+      "commands": [],
+      "repos": [
+        "pterodactyl/wings"
+      ]
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Cực tiện là Wings tích hợp sẵn luôn cả SFTP server! [laughs] Anh em chỉ cần dùng đúng tài khoản của Panel là vào sửa file, kéo thả config ngon lành.",
+      "headline": "Tích hợp sẵn SFTP",
+      "lines": [
+        "Có sẵn SFTP server bên trong",
+        "Đăng nhập bằng tài khoản Panel",
+        "Truyền file tiện lợi"
+      ],
+      "commands": [],
+      "repos": [
+        "pterodactyl/wings"
+      ]
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Về độ đa dạng thì khỏi bàn! Hỗ trợ sẵn từ Minecraft đủ các bản Paper, Sponge, đến Rust, Terraria, CS:GO, ARK, thậm chí cả bot Discord bằng Node.js hay Python.",
+      "headline": "Hỗ trợ nhiều dòng game",
+      "lines": [
+        "Minecraft Paper, Sponge, Bungeecord",
+        "Rust, Terraria, CS:GO, ARK",
+        "Chạy được cả bot Discord"
+      ],
+      "commands": [],
+      "repos": [
+        "pterodactyl/panel"
+      ]
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Đặc biệt, Pterodactyl đã có bản v2 Beta với stack công nghệ hiện đại hơn, giao diện admin mới toanh và tích hợp sẵn SDK để mở rộng tính năng.",
+      "headline": "Đã có bản v2 Beta",
+      "lines": [
+        "Stack công nghệ hiện đại",
+        "Giao diện quản trị mới",
+        "Tích hợp Extension SDK"
+      ],
+      "commands": [],
+      "repos": [
+        "pterodactyl/panel"
+      ]
+    },
+    {
+      "id": "s8",
+      "text": "[warmly] Anh em nhớ lưu video lại để khi nào cần mở server cùng bạn bè thì lôi ra dựng nhé! [cheerfully] Nhớ follow mình để xem thêm nhiều công cụ mã nguồn mở đỉnh cao!",
+      "headline": "Lưu lại và theo dõi",
+      "lines": [
+        "Lưu video để tự host server",
+        "Follow để đón xem công nghệ mới"
+      ],
+      "commands": [],
+      "repos": []
+    }
+  ]
+}

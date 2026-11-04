@@ -44,5 +44,14 @@
     "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
     "built": "beag",
     "costUsd": 0
+  },
+  {
+    "slug": "pterodactyl-game-server-hosting",
+    "topic": "pterodactyl hosting",
+    "date": "2026-11-04",
+    "direction": "custom: Blueprint, như quảng cáo",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.6725178999999999
   }
 ]
