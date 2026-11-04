@@ -49,7 +49,7 @@
     {
       "id": "vhs-tape",
       "name": "VHS tape",
-      "brief": "Recorded-off-TV look: tracking lines, REC/PLAY overlay, timestamp, chroma bleed on edges. Chapters as tape counter jumps. Keep the text itself sharp and readable above the noise."
+      "brief": "Recorded-off-TV look: tracking lines and chroma bleed on edges, a PLAY or FF flash only on a cut. Chapters as tape counter jumps that sit in the shot, not a REC label or timestamp left on screen. Keep the text itself sharp and readable above the noise."
     },
     {
       "id": "cards-on-table",

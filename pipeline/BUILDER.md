@@ -102,12 +102,16 @@ A placeholder `Video.tsx` is already there; replace it.
 - Fill the frame. Lay each shot out over the whole safe area, top to bottom: a
   headline and a short stack of cards at the top with the lower half empty is
   the most common failure. Make the main thing big instead of adding cards.
-- Every scene its own layout. One template (headline, stacked cards, a stamp)
+- Every scene its own layout. One template (headline, stacked cards, a badge)
   repeated for every scene reads as a slideshow; vary scale, position and what
   carries the scene (a logo, a number, a terminal, a diagram).
 - No fake interface chrome as decoration: no resolution, fps, file-name, REC,
   volume or version labels in the corners, no `SECTION // NAME` captions.
-- Stamps, stickers, tape and other decoration never cover text.
+- Nothing that reads as a watermark: no text or logo that stays on screen
+  across scenes (a project name in a corner, a frame label, a running tag),
+  and no rubber-stamp or seal graphics. Viewers take them for a watermark from
+  another app. The kit `<Brand />` appears in the opening shot only.
+- Stickers, tape and other decoration never cover text.
 - Headlines break by meaning, never leaving one short word alone on a line
   (`TRÌNH PHÁT LINH / HOẠT` is wrong). Shorten the line or size it to fit, and
   set `textWrap: "balance"`. Do not uppercase Vietnamese with CSS
@@ -129,7 +133,7 @@ each one exactly as written here, alone in its own Bash call, with no `cd`, `&&`
    unreadable contrast, empty-looking frames, anything that looks broken or generic.
    Check each still against the rules in "What to make" one by one, and say in
    BUILD.md which you fixed: an empty lower half, the same layout as the last
-   scene, corner chrome, decoration over text, a lone word on a headline line,
+   scene, corner chrome or anything that looks like a watermark, decoration over text, a lone word on a headline line,
    text under 34px, invented data. Fix and run it again. Up to 3 rounds;
    for a specific moment, `npm run qa -- <slug> <frame> <frame>`.
 3. Finish with a passing `npx tsc` and a last QA round you are happy with.
