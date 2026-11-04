@@ -49,6 +49,10 @@ runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's ser
    `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA
    stills. It may only edit that video's folder and run register / tsc / qa.
    If it fails, the kit's `FallbackVideo` is used so the run still ends with a video.
+   Then `pipeline/review-video.mjs` renders the opening and each scene's middle and
+   has Gemini check them (logo overlap, cut-off or empty text, a background that
+   doesn't fit the line); the same builder fixes what it finds, one round, whether
+   Claude or Gemini built it. `REVIEW=off` skips it.
 4. QA stills and render; the MP4 goes to R2 (`media.cloudcode.io.vn/tiktok-shorts/`)
    through the bot worker, and
    Discord and/or Telegram get the stills, a link to the video and the caption.

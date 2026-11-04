@@ -8,13 +8,15 @@
 //
 // Env: ANTHROPIC_API_KEY, CLAUDE_MODEL (default claude-sonnet-5-5),
 // CLAUDE_BUDGET_USD (default 4), CLAUDE_BIN (default "claude"); for the
-// be-ag fallback LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
+// be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
 // ag/gemini-3.8-flash-high), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
-// to skip Claude; STYLE (an art direction id or name, or free text); NOTES.
+// to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
+// REVIEW=off skips the review round.
 // Prints a JSON line {direction, pacing, built, costUsd} last.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { llmJson, readJson, report } from "./lib.mjs";
+import { reviewVideo } from "./review-video.mjs";
 
 const slug = process.argv[2];
 if (!slug || !/^[a-z0-9-]+$/.test(slug) || !existsSync(`src/videos/${slug}/script.json`)) {
@@ -175,6 +177,7 @@ const allowed = [
   `Bash(npm run qa -- ${slug})`,
   `Bash(npm run qa -- ${slug} *)`,
   `Bash(npm run footage -- ${slug} *)`,
+  "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py *)",
 ];
 const baseEnv = { CI: "1" };
 for (const k of ["PIXABAY_API_KEY", "PEXELS_API_KEY"]) if (process.env[k]) baseEnv[k] = process.env[k];
@@ -187,14 +190,13 @@ const changedSince = (files) => {
   return now.size !== files.size || [...now].some(([f, text]) => files.get(f) !== text);
 };
 
-let agent = null;
-for (const next of agents) {
-  console.log(`\nBuilder: ${next.label}`);
+// Runs one builder on `text` in this checkout; what it changed is on disk.
+const runAgent = (next, text) => {
   const result = spawnSync(
     process.env.CLAUDE_BIN || "claude",
     [
       "-p",
-      prompt,
+      text,
       ...next.args,
       "--permission-mode",
       "dontAsk",
@@ -225,6 +227,12 @@ for (const next of agents) {
   } catch {
     console.log(result.error?.message ?? "", result.stdout?.slice(-3000), result.stderr?.slice(-3000));
   }
+};
+
+let agent = null;
+for (const next of agents) {
+  console.log(`\nBuilder: ${next.label}`);
+  runAgent(next, prompt);
   if (changedSince(start)) {
     agent = next;
     break;
@@ -243,9 +251,36 @@ if (agent && typechecks()) {
   built = keep ? past?.built ?? "claude" : "fallback";
 }
 
+// One review round, the same for every builder: a vision model checks stills
+// against BUILDER.md's checklist, and the builder that made the video fixes
+// what it found. A fix that breaks the typecheck is thrown away.
+let reviewed = null;
+if (agent && built === agent.id && process.env.REVIEW !== "off") {
+  console.log("\nReviewing the stills");
+  reviewed = await reviewVideo(slug, `${direction.name}. ${direction.brief}`);
+  if (reviewed?.length) {
+    const list = reviewed.map((r) => `- ${r.scene}: ${r.problem} Fix: ${r.fix}`).join("\n");
+    console.log(`Review found ${reviewed.length}:\n${list}`);
+    const before = snapshot();
+    runAgent(
+      agent,
+      `A reviewer looked at stills of the video "${slug}" you built and found the problems below. ` +
+        `pipeline/BUILDER.md still applies. Check each one with npm run qa, fix the real ones, keep everything ` +
+        `else as it is, and finish with its QA loop.\n\n${list}`,
+    );
+    if (!changedSince(before)) console.log(`${agent.label} changed nothing in the fix round.`);
+    else if (!typechecks()) {
+      console.log(`${agent.label}'s fixes do not typecheck; keeping the build before them.`);
+      restore(before);
+      if (!typechecks()) throw new Error("the reviewed build does not typecheck after restoring it");
+    }
+  } else if (reviewed) console.log("Review: no problems found.");
+}
+
 report({
   direction: direction.id === "custom" ? `custom: ${direction.name}` : direction.id,
   pacing: pace,
   built,
   costUsd,
+  reviewIssues: reviewed?.length ?? null,
 });

@@ -58,3 +58,16 @@ for entry in "${SKILLS[@]}"; do
   echo "| $skill | https://github.com/$repo/tree/HEAD/skills/$skill | $name |" >> "$notice"
   echo "skill: $skill ($repo)"
 done
+
+# Skills copied from this machine's ~/.agents/skills, which have no repo to
+# fetch from here: only their SKILL.md, data and Python scripts.
+for skill in ui-ux-pro-max; do
+  src="$HOME/.agents/skills/$skill"
+  [ -d "$src" ] || { echo "skip: $skill (not in ~/.agents/skills)"; continue; }
+  rm -rf "${dest:?}/$skill"
+  mkdir -p "$dest/$skill/scripts"
+  cp -r "$src/SKILL.md" "$src/data" "$dest/$skill/"
+  cp "$src"/scripts/*.py "$dest/$skill/scripts/"
+  echo "| $skill | copied from the maintainer's local \`~/.agents/skills/$skill\` (SKILL.md, data, scripts) | as published by its authors |" >> "$notice"
+  echo "skill: $skill (local)"
+done

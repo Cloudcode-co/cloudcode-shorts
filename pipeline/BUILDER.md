@@ -47,6 +47,12 @@ Load these when the video calls for them:
 - `animation-vocabulary`: the names of effects, when you want a specific one.
 - `theme-factory`: ready colour and font pairings, as a starting point when the
   subject's logos give little to work with.
+- `ui-ux-pro-max`: searchable design data. Run
+  `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<what the product is> <mood>" --design-system`
+  for a palette, type pairing and effects that fit the product's kind, then bend
+  them to the art direction (the direction wins). `--domain google-fonts` finds
+  fonts; use only fonts whose subsets include `vietnamese`. Ignore its web-only
+  parts (page sections, CTAs, hover, forms) and never pass `--persist`.
 - `remotion-captions`: showing spoken words on screen. There are no word
   timings, so pace captions from each clip's length; skip its transcription and
   SRT parts.

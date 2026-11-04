@@ -82,10 +82,15 @@ const parseJson = (text) => {
 
 // Asks for a JSON answer matching `schema`, trying each model in order.
 // Overloads and rate limits get one retry; a model that times out, is
-// unknown or keeps failing hands over to the next.
-export const llmJson = async (prompt, schema, temperature = 0.7) => {
+// unknown or keeps failing hands over to the next. `images` are data: URLs
+// sent along with the prompt.
+export const llmJson = async (prompt, schema, temperature = 0.7, images = []) => {
   const key = need("LLM_API_KEY");
   const jsonSchema = toJsonSchema(schema);
+  const text = `${prompt}\n\nAnswer with only a JSON object matching this JSON Schema:\n${JSON.stringify(jsonSchema)}`;
+  const content = images.length
+    ? [{ type: "text", text }, ...images.map((url) => ({ type: "image_url", image_url: { url } }))]
+    : text;
   const errors = [];
   for (const model of llmModels()) {
     for (let attempt = 1; ; attempt++) {
@@ -98,10 +103,7 @@ export const llmJson = async (prompt, schema, temperature = 0.7) => {
           stream: false,
           temperature,
           messages: [
-            {
-              role: "user",
-              content: `${prompt}\n\nAnswer with only a JSON object matching this JSON Schema:\n${JSON.stringify(jsonSchema)}`,
-            },
+            { role: "user", content },
           ],
           response_format: { type: "json_schema", json_schema: { name: "answer", schema: jsonSchema } },
         }),

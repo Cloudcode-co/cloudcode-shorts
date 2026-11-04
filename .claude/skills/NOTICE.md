@@ -17,3 +17,4 @@ project's videos. Each folder keeps its source's license.
 | apple-design | https://github.com/emilkowalski/skills/tree/HEAD/skills/apple-design | LICENSE from emilkowalski/skills |
 | animation-vocabulary | https://github.com/emilkowalski/skills/tree/HEAD/skills/animation-vocabulary | LICENSE from emilkowalski/skills |
 | theme-factory | https://github.com/anthropics/skills/tree/HEAD/skills/theme-factory | included in the folder |
+| ui-ux-pro-max | copied from the maintainer's local `~/.agents/skills/ui-ux-pro-max` (SKILL.md, data, scripts) | as published by its authors |
