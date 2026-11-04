@@ -1,0 +1,120 @@
+{
+  "slug": "host-server-minecraft-ban-than-farm-ga",
+  "format": "meme",
+  "topic": "Host server Minecraft cho bạn thân và cái kết sập máy",
+  "title": "Khi bạn tốt bụng host server Minecraft cho đám bạn thân",
+  "caption": "Tình bạn diệu kỳ tan vỡ chỉ vì một đàn gà. Anh em từng bị sập server vì cái máy farm nào quái dị nhất?",
+  "hashtags": [
+    "#minecraftvn",
+    "#serverminecraft",
+    "#laptrinhvien",
+    "#haihuoc",
+    "#fypvietnam"
+  ],
+  "musicPrompt": "Playful 8-bit chiptune gaming track that builds into chaotic panic breakcore with sudden comedic silence at the end, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "playful chiptune",
+        "bouncy synth",
+        "cheerful retro"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "happy groove",
+        "upbeat 8-bit",
+        "light percussion"
+      ]
+    },
+    {
+      "name": "Tension",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "quirky stop",
+        "fast tempo"
+      ]
+    },
+    {
+      "name": "Chaos",
+      "from": "s4",
+      "styles": [
+        "chaotic breakcore",
+        "distorted bass",
+        "heavy alarms"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "abrupt silence",
+        "sad trombone",
+        "comedic crash"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sinh viên IT mở server Minecraft trên laptop cũ rủ đám bạn vào chơi chill chill",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "messy student bedroom desk"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Cả team hứa danh dự chỉ xây nhà gỗ trồng lúa sinh tồn lành mạnh cuối tuần",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing dance",
+      "place": "messy student bedroom desk"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Nửa tiếng sau thấy một thằng cặm cụi dựng quả farm năm ngàn con gà bằng redstone",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat shocked face",
+      "place": "messy student bedroom desk"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "TPS server tụt về 0.1, quạt laptop bắt đầu hú như động cơ phản lực cất cánh",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic screaming",
+      "place": "messy student bedroom desk"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Màn hình đứng im kèm dòng log huyền thoại Java heap space văng cả lũ ra ngoài",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying tears",
+      "place": "messy student bedroom desk"
+    }
+  ]
+}

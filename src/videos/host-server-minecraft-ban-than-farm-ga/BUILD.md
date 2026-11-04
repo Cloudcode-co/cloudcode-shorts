@@ -1,0 +1,3 @@
+Meme skit on one bedroom-desk photo (replaced the off-topic soldier photo from the first fetch). Each scene is cut into 3–4 beats of ≤1.5s: a new yellow MemeCaption chunk, a new background crop with a zoom-punch kick, and the GIPHY cats swapping sides (mirrored to face each other). A white flash marks each scene change and the final crying cat gets the big close-up. Scene lengths follow timeline.json (s5 is 6s); the music plays at 0.55 with no voice.
+
+QA fixed: caption collided with the Brand lockup in the opening beat (moved down by BRAND_SPACE). Checked: no empty lower half, no watermark or chrome, no text under 34px, no lone words, no invented data, background matches the line (laptop desk).
