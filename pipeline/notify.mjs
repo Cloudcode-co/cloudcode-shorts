@@ -9,10 +9,13 @@ export const sendMessage = (text) => Promise.all(channels.map((c) => c.sendMessa
 export const sendPhotos = (files) => Promise.all(channels.map((c) => c.sendPhotos(files)));
 export const sendVideo = (file, caption, url) =>
   Promise.all(channels.map((c) => c.sendVideo(file, caption, url)));
-// A finished video and everything about it in one message per channel. On
-// Discord, with the CDN link, it carries the drafts button (`key`) and the ping.
-export const sendResult = (file, url, text, opts) =>
-  Promise.all([
+// A finished video: one message about it, then its caption on its own so Copy
+// Text copies just the caption. On Discord, with the CDN link, the first
+// message carries the ping and the caption the drafts button (`key`).
+export const sendResult = async (file, url, text, caption, { key, ping } = {}) => {
+  await Promise.all([
     telegram.sendVideo(file, text, url),
-    url ? discord.sendResult(`${text}\n${url}`, opts) : discord.sendVideo(file, text),
+    url ? discord.sendResult(`${text}\n${url}`, { ping }) : discord.sendVideo(file, text),
   ]);
+  await Promise.all([telegram.sendMessage(caption), discord.sendResult(caption, { key })]);
+};

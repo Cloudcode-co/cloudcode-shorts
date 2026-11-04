@@ -173,15 +173,15 @@ try {
         key = `${slug}/${out.split("/").pop()}`;
         // TikTok holds only a few unposted inbox videos per account (5 a day).
         tiktok = /spam_risk_too_many_pending_share/.test(draft.error)
-          ? "TikTok: hộp thư đầy (tối đa 5 video chờ trong 24 giờ). Đăng hoặc xóa bớt rồi bấm nút."
-          : `TikTok: chưa gửi được (${draft.error}). Bấm nút để thử lại.`;
+          ? "TikTok: hộp thư đầy (tối đa 5 video chờ trong 24 giờ). Đăng hoặc xóa bớt rồi bấm nút ở tin dưới."
+          : `TikTok: chưa gửi được (${draft.error}). Bấm nút ở tin dưới để thử lại.`;
       } else if (draft.mode === "post") {
         tiktok = "TikTok: đã đăng ở chế độ riêng tư, caption có sẵn. Đổi sang Mọi người để công khai.";
       } else {
-        tiktok = "TikTok: đã vào nháp. Dán caption dưới đây rồi đăng.";
+        tiktok = "TikTok: đã vào nháp. Dán caption ở tin dưới rồi đăng.";
       }
     }
-    await sendResult(out, url, [title, tiktok, caption, footer].filter(Boolean).join("\n\n"), { key, ping: Boolean(url) });
+    await sendResult(out, url, [title, tiktok, footer].filter(Boolean).join("\n\n"), caption, { key, ping: Boolean(url) });
   } else {
     await sendMessage([title, caption, footer].join("\n\n"));
   }
