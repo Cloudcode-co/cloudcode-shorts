@@ -1,0 +1,12 @@
+{
+  "note": "What the scheduled runs make, by weekday in Vietnam time: 'morning' is the 07:20 run, 'afternoon' the 16:20 one. Values are format ids from pipeline/formats.mjs. A run asked for by hand (Discord, the Actions page) is not affected.",
+  "days": {
+    "monday": { "morning": "news", "afternoon": "story" },
+    "tuesday": { "morning": "tutorial", "afternoon": "meme" },
+    "wednesday": { "morning": "explainer", "afternoon": "chat" },
+    "thursday": { "morning": "quiz", "afternoon": "meme" },
+    "friday": { "morning": "top5", "afternoon": "story" },
+    "saturday": { "morning": "explainer", "afternoon": "meme" },
+    "sunday": { "morning": "quiz", "afternoon": "chat" }
+  }
+}

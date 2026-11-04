@@ -32,7 +32,18 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
-const format = formatOf(process.env.FORMAT);
+// A scheduled run makes what pipeline/schedule.json lists for this weekday and
+// time of day in Vietnam (UTC+7); GitHub may start it up to an hour late.
+const scheduled = () => {
+  if (process.env.GITHUB_EVENT_NAME !== "schedule") return "";
+  const vn = new Date(Date.now() + 7 * 3600 * 1000);
+  const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][vn.getUTCDay()];
+  const slot = vn.getUTCHours() < 12 ? "morning" : "afternoon";
+  const pick = readJson("pipeline/schedule.json", {}).days?.[day]?.[slot] ?? "";
+  if (pick) console.log(`Schedule: ${day} ${slot} → ${pick}`);
+  return pick;
+};
+const format = formatOf(process.env.FORMAT?.trim() || scheduled());
 // The format's own look, unless the run asked for one.
 if (!revise && !style && FORMATS[format].style) process.env.STYLE = FORMATS[format].style;
 // The builder asked for in this run (BUILDER also carries the repo default).

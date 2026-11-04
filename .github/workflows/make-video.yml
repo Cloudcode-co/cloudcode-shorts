@@ -39,6 +39,7 @@ on:
   repository_dispatch:
     types: [make-video]
   # Twice a day, so a new video is in the TikTok drafts by about 08:00 and 17:00
+  # (what kind of video each one makes is in pipeline/schedule.json)
   # in Vietnam (a run takes 15–35 minutes; GitHub may start schedules late).
   # Runs only when the repo variable AUTO_DAILY is "true".
   schedule:
