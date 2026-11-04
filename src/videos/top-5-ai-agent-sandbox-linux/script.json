@@ -1,0 +1,177 @@
+{
+  "slug": "top-5-ai-agent-sandbox-linux",
+  "format": "top5",
+  "topic": "Top 5 công cụ mã nguồn mở tự host AI Agent có sandbox và máy ảo riêng trên Linux: OpenShell, OpenMausBot, OpenBot, cindy và rakazo",
+  "title": "Top 5 sandbox tự host AI Agent an toàn nhất trên Linux",
+  "caption": "Tổng hợp 5 công cụ mã nguồn mở tự host AI Agent có sandbox và máy ảo cô lập trên Linux!",
+  "hashtags": [
+    "#AIAgent",
+    "#SelfHost",
+    "#OpenSource",
+    "#LapTrinh",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Energetic tech synthwave bed with punchy bass, digital arpeggios, confident tech presentation vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "driving synth",
+        "punchy bass",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "steady rhythm",
+        "digital pulses",
+        "focused groove"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "triumphant brass synth",
+        "powerful beats",
+        "high energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s7",
+      "styles": [
+        "smooth fade",
+        "warm pads",
+        "resolving melody"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/NVIDIA/OpenShell",
+    "https://github.com/milind-soni/OpenMausBot",
+    "https://github.com/CopilotKit/OpenBot",
+    "https://github.com/makecindy/cindy",
+    "https://github.com/elie222/rakazo",
+    "https://github.com/samugit83/redamon",
+    "https://docs.nvidia.com/openshell/latest/about/architecture",
+    "https://docs.nvidia.com/openshell/latest/how-it-works/sandboxes/overview",
+    "https://docs.nvidia.com/openshell/latest/kubernetes/setup",
+    "https://raw.githubusercontent.com/elie222/rakazo/main/infra/compose/install-images.sh"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[excited] Top 5 công cụ tự host AI Agent có sandbox an toàn nhất trên Linux!",
+      "headline": "Top 5 Sandbox AI Agent Linux",
+      "lines": [
+        "Tự host AI Agent an toàn",
+        "Cách ly máy ảo & sandbox riêng"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer working on computer"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Top 5 là cindy. Dự án biến máy tính cá nhân thành máy chủ đa thiết bị, điều khiển từ xa ngay trên điện thoại.",
+      "headline": "#5 cindy: Biến PC thành máy chủ",
+      "lines": [
+        "Không cần cấu hình server",
+        "Remote desktop từ điện thoại",
+        "Kết hợp Claude Code, Codex và Pi"
+      ],
+      "commands": [],
+      "repos": [
+        "makecindy/cindy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[curious] Thứ tư là OpenBot. Template mã nguồn mở giúp mỗi bot sở hữu trình duyệt, file và phân quyền riêng biệt qua giao thức AG-UI.",
+      "headline": "#4 OpenBot: Trình duyệt và file riêng",
+      "lines": [
+        "Mỗi bot có một browser riêng",
+        "Giao thức mở AG-UI",
+        "Triển khai Docker Compose & Bun"
+      ],
+      "commands": [],
+      "repos": [
+        "CopilotKit/OpenBot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Top 3 là OpenMausBot. Chạy local-first, cấp cho mỗi bot một máy ảo cục bộ riêng và tận dụng sẵn CLI Claude hay Codex trên máy.",
+      "headline": "#3 OpenMausBot: Máy ảo cho từng Bot",
+      "lines": [
+        "Local-first với 2 tiến trình",
+        "Cấp VM cục bộ hoặc cloud desktop",
+        "Dùng tài khoản CLI sẵn có"
+      ],
+      "commands": [],
+      "repos": [
+        "milind-soni/OpenMausBot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Vị trí số 2 là Rakazo! Dựng nhanh bằng Docker Compose, tạo máy ảo Docker cục bộ kèm script kiểm soát egress chặt chẽ.",
+      "headline": "#2 Rakazo: Tự host Docker máy ảo",
+      "lines": [
+        "Cài nhanh với install-images.sh",
+        "Máy ảo Docker cục bộ mặc định",
+        "Giao diện web tại port 5173"
+      ],
+      "commands": [
+        "mkdir -p rakazo && cd rakazo && curl -fsSLO https://raw.githubusercontent.com/elie222/rakazo/main/infra/compose/install-images.sh && bash install-images.sh"
+      ],
+      "repos": [
+        "elie222/rakazo"
+      ],
+      "footage": "server room datacentre lights"
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] Quán quân số 1 là OpenShell của NVIDIA! Cô lập tầng kernel bằng Landlock và seccomp, chặn toàn bộ egress trực tiếp và cấp phát GPU.",
+      "headline": "#1 OpenShell: Cô lập mức Kernel",
+      "lines": [
+        "Landlock & seccomp mức kernel",
+        "Chặn sạch egress, giám sát supervisor",
+        "Cấp phát GPU CDI & formal verification"
+      ],
+      "commands": [
+        "curl -LsSf https://raw.githubusercontent.com/NVIDIA/OpenShell/main/install.sh | sh",
+        "openshell sandbox create --name demo"
+      ],
+      "repos": [
+        "NVIDIA/OpenShell"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[warmly] Anh em sẽ chọn giải pháp nào để nhốt Agent? [curious] Để lại bình luận và bấm follow mình nhé!",
+      "headline": "Bạn sẽ chọn công cụ nào?",
+      "lines": [
+        "Bình luận lựa chọn của bạn",
+        "Follow để cập nhật AI Linux"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "smiling programmer looking at camera"
+    }
+  ]
+}

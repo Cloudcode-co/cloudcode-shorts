@@ -126,5 +126,16 @@
     "costUsd": 0.5093914,
     "reviewIssues": 3,
     "format": "tutorial"
+  },
+  {
+    "slug": "top-5-ai-agent-sandbox-linux",
+    "topic": "Top 5 công cụ mã nguồn mở tự host AI Agent có sandbox và máy ảo riêng trên Linux: OpenShell, OpenMausBot, OpenBot, cindy và rakazo",
+    "date": "2026-11-04",
+    "direction": "countdown",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.8782537000000001,
+    "reviewIssues": 6,
+    "format": "top5"
   }
 ]
