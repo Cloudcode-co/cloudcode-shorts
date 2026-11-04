@@ -95,6 +95,7 @@ export const reviewVideo = async (slug, direction) => {
         `- a sticker or image squeezed, stretched or sliced off by another element\n` +
         `- a background or main visual unrelated to what the voice says at that moment ` +
         `(server racks behind a software licence, say)\n` +
+        `- in a news video (news-desk), a story on a plain flat colour with no picture behind it\n` +
         `- text hard to read against its background; text that is too small to read on a phone\n` +
         `- corner chrome or anything that looks like a watermark; decoration covering text\n` +
         `- Vietnamese text with broken or missing diacritics (a font without Vietnamese glyphs)\n` +

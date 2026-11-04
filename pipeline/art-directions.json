@@ -104,7 +104,7 @@
     {
       "id": "news-desk",
       "name": "News desk",
-      "brief": "A tech news bulletin: a slim breaking-news bar with a ticker at the bottom, a big '1/3' story counter, each project introduced on a card with its logo, name and real star count, lower-thirds for facts. Clean broadcast look: navy and white with one red accent, a strong grotesk; quick wipes between stories."
+      "brief": "A tech news bulletin: a slim breaking-news bar with a ticker at the bottom, a big '1/3' story counter, each project introduced on a card with its logo, name and real star count, lower-thirds for facts. Each story sits on its own full-frame picture (the story page's share image, or footage or a photo of its subject), darkened and slowly zooming, never a flat colour. Clean broadcast look: navy and white with one red accent, a strong grotesk; quick wipes between stories."
     },
     {
       "id": "terminal-tutorial",

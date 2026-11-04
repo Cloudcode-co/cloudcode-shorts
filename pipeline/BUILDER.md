@@ -45,6 +45,14 @@ script.json's `format` says what kind of video it is (missing means `explainer`)
   marks the others wrong.
 - `news`: three projects, each with its logo and real stars from facts.json and a
   clear 1/3, 2/3, 3/3 counter.
+- `brief`: the morning news, three stories from the pages in facts.json, a clear
+  1/3, 2/3, 3/3 counter. In `news` and `brief` every story sits on its own
+  full-frame picture, never a flat colour: the story page's share image
+  (`pages/p<n>-share.*`) when it shows the subject, else footage or a photo
+  (`npm run footage` / `npm run image`) of what the story is about (a laptop for
+  a laptop story, a robot arm for a robot), covered, darkened about 55% and
+  slowly zooming, with the cards and screenshots on top. It changes with each
+  story.
 - `tutorial`: the commands are the video; show each one large and readable,
   typed out exactly, never a made-up output.
 - `top5`: a countdown from #5 to #1, the rank always visible.
