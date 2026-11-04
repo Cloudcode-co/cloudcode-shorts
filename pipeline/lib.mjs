@@ -53,7 +53,7 @@ const LLM_BASE_URL = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1
 const LLM_TIMEOUT = 180_000;
 
 export const llmModels = () =>
-  (process.env.LLM_MODEL || "ag/gemini-3.8-flash-high")
+  (process.env.LLM_MODEL || "ag/gemini-3.8-flash-high,ag/gemini-3.8-flash-low")
     .split(",")
     .map((m) => m.trim())
     .filter(Boolean);
@@ -81,8 +81,9 @@ const parseJson = (text) => {
 };
 
 // Asks for a JSON answer matching `schema`, trying each model in order.
-// Overloads and rate limits get one retry; a model that times out, is
-// unknown or keeps failing hands over to the next. `images` are data: URLs
+// Overloads, rate limits and gateway timeouts (Cloudflare cuts a request at
+// 100 s with a 524) get up to 3 retries, waiting longer each time; a model
+// that times out, is unknown or keeps failing hands over to the next. `images` are data: URLs
 // sent along with the prompt.
 export const llmJson = async (prompt, schema, temperature = 0.7, images = []) => {
   const key = need("LLM_API_KEY");
@@ -132,9 +133,10 @@ export const llmJson = async (prompt, schema, temperature = 0.7, images = []) =>
         console.log(`LLM ${model}: no answer in ${took}, trying the next model`);
         break;
       }
-      if ((res.status >= 500 || res.status === 429) && attempt < 2) {
-        console.log(`LLM ${model}: ${res.status} after ${took}, retrying in 15s`);
-        await new Promise((r) => setTimeout(r, 15_000));
+      if ((res.status >= 500 || res.status === 429) && attempt < 4) {
+        const wait = 20 * attempt;
+        console.log(`LLM ${model}: ${res.status} after ${took}, retrying in ${wait}s`);
+        await new Promise((r) => setTimeout(r, wait * 1000));
         continue;
       }
       if (res.status === 429 || res.status === 404 || res.status >= 500) {
