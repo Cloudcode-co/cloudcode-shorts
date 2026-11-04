@@ -170,5 +170,16 @@
     "costUsd": 0.26887839999999996,
     "reviewIssues": 0,
     "format": "meme"
+  },
+  {
+    "slug": "roi-tu-do-tu-ria-vu-tru",
+    "topic": "Nếu bạn rơi tự do từ rìa vũ trụ xuống Trái Đất",
+    "format": "whatif",
+    "date": "2026-11-04",
+    "direction": "what-if-sim",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 0.5821181000000001,
+    "reviewIssues": 1
   }
 ]

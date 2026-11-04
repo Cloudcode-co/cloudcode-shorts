@@ -1,0 +1,148 @@
+{
+  "slug": "roi-tu-do-tu-ria-vu-tru",
+  "format": "whatif",
+  "topic": "Nếu bạn rơi tự do từ rìa vũ trụ xuống Trái Đất",
+  "title": "Rơi tự do từ rìa vũ trụ xuống Trái Đất sẽ ra sao?",
+  "caption": "Mô phỏng từng giây cú rơi tự do từ độ cao 39 km xuống Trái Đất và những giới hạn sinh tồn khắc nghiệt!",
+  "hashtags": [
+    "#vutru",
+    "#vatly",
+    "#khoahoc",
+    "#kienthuc",
+    "#congnghe"
+  ],
+  "musicPrompt": "tense cinematic atmospheric synth pulse building into fast-paced electronic beats with deep sub bass, thrilling and scientific, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "atmospheric",
+        "mysterious synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "fast pulse",
+        "electronic percussion"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s3",
+      "styles": [
+        "intense bass",
+        "driving rhythm",
+        "dramatic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s6",
+      "styles": [
+        "triumphant",
+        "warm pads",
+        "resolving"
+      ]
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Red_Bull_Stratos",
+    "https://en.wikipedia.org/wiki/Felix_Baumgartner",
+    "https://en.wikipedia.org/wiki/Space_diving",
+    "https://en.wikipedia.org/wiki/Free_fall",
+    "https://en.wikipedia.org/wiki/Pressure_suit",
+    "https://en.wikipedia.org/wiki/K%C3%A1rm%C3%A1n_line",
+    "https://en.wikipedia.org/wiki/Stratosphere",
+    "https://en.wikipedia.org/wiki/Joseph_Kittinger"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Nếu bạn nhảy xuống Trái Đất từ độ cao 39 km, điều gì sẽ xảy ra?",
+      "headline": "39 km",
+      "lines": [
+        "Nhảy tự do từ rìa khí quyển",
+        "Độ cao: 39 km"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "space jumper stratosphere edge"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Tầng bình lưu loãng hơn khoảng 1.000 lần khiến bạn không cảm thấy gió cản, như bơi không có nước! Sau khoảng 40 giây, bạn đạt 1.357,64 km/h, chính thức vượt bức tường âm thanh.",
+      "headline": "1.357,64 km/h",
+      "lines": [
+        "Tốc độ: 1.357,64 km/h (Mach 1.25)",
+        "Khí quyển loãng hơn 1.000 lần",
+        "Vượt bức tường âm thanh"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Nhưng bạn dễ bị xoay phẳng mất kiểm soát tới 120 vòng/phút. Lực ly tâm vọt lên hơn 22 lần trọng lực, đủ ép máu dồn lên đầu và ngất lịm!",
+      "headline": "120 vòng/phút",
+      "lines": [
+        "Hiện tượng xoay phẳng (Flat spin)",
+        "Tốc độ xoay: 120 vòng/phút",
+        "Tải trọng ly tâm: > 22 G"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "astronaut centrifuge spin training"
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Xuống tới 19.000 m, bạn chạm giới hạn Armstrong. Áp suất tụt sâu đến mức chất lỏng trong họng và phổi sẽ sôi hơi ở nhiệt độ cơ thể nếu bộ đồ rách.",
+      "headline": "19.000 m",
+      "lines": [
+        "Giới hạn Armstrong: 19.000 m",
+        "Áp suất tụt cực hạn",
+        "Chất lỏng trong phổi sôi hơi"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Nếu bộ đồ hở một lỗ nhỏ như đầu kim, bạn chỉ giữ được ý thức tối đa khoảng 15 giây, vì trên 15.000 m con người hoàn toàn không thể thở tự nhiên.",
+      "headline": "15 giây",
+      "lines": [
+        "Mất áp suất đột ngột",
+        "Thời gian tỉnh táo: 15 giây",
+        "Mất khả năng thở tự nhiên"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "pilot pressure suit helmet"
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Giữ được ổn định và bung dù ở khoảng 2.500 m, bạn sẽ sống sót tiếp đất! [laughs] Anh em muốn tụi mình mô phỏng kịch bản nào tiếp theo?",
+      "headline": "2.500 m",
+      "lines": [
+        "Bung dù ở 2.500 m",
+        "Tiếp đất an toàn",
+        "Bình luận kịch bản tiếp theo!"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "skydiver landing in desert"
+    }
+  ]
+}
