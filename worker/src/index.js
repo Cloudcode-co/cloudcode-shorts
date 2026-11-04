@@ -2,7 +2,8 @@
 // videos in the media R2 bucket so chat gets a link instead of a size-capped
 // upload.
 //
-//   POST /discord      Discord interactions: /video [topic] [nguon] [giong] [yeucau],
+//   POST /discord      Discord interactions: the "Gửi nháp TikTok" button under
+//                      finished videos, /video [topic] [nguon] [giong] [yeucau],
 //                      /sua video [yeucau] [giong], with [phongcach] [dung], and their autocomplete
 //   POST /telegram     Telegram bot webhook: any text is the topic, /auto lets
 //                      Gemini pick, /id replies with the chat id
@@ -23,6 +24,7 @@
 // secrets TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, KV binding TIKTOK.
 
 import { site } from "./site.js";
+import { sendToInbox, uploadStatus } from "./tiktok.js";
 
 // Fires repository_dispatch; the workflow reads what to make (topic, voice,
 // notes, or revise: a video to rework) and where to send the result (Discord
@@ -134,6 +136,56 @@ const verifyDiscord = async (request, body, publicKey) => {
   );
 };
 
+// The "Gửi nháp TikTok" button the pipeline puts under a finished video's
+// caption (custom_id "tt:<key>", key under tiktok-shorts/ in the bucket). It
+// uploads the video to the drafts of the TikTok account last signed in on the
+// website, then marks the button done; errors come back only to the presser.
+const draftButton = (interaction, env, ctx) => {
+  const [action, key] = String(interaction.data?.custom_id ?? "").split(/:(.*)/s);
+  if (action !== "tt" || !KEY.test(key ?? "")) {
+    return json({ type: 4, data: { content: "Nút này không còn dùng được.", flags: 64 } });
+  }
+  const hook = `https://discord.com/api/v10/webhooks/${interaction.application_id}/${interaction.token}`;
+  const button = (label, style, disabled) => [
+    { type: 1, components: [{ type: 2, style, label, custom_id: `tt:${key}`, disabled }] },
+  ];
+  const setButton = (label, style, disabled) =>
+    fetch(`${hook}/messages/@original`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ components: button(label, style, disabled) }),
+    });
+  const tell = (content) =>
+    fetch(hook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content, flags: 64 }),
+    });
+  ctx.waitUntil(
+    (async () => {
+      try {
+        const owner = await env.TIKTOK.get("owner");
+        if (!owner) throw new Error("chưa kết nối TikTok; đăng nhập ở https://shorts.cloudcode.io.vn");
+        await setButton("Đang gửi lên TikTok…", 2, true);
+        const id = await sendToInbox(env, owner, PREFIX + key);
+        let status = "PROCESSING_UPLOAD";
+        // Workers keep waitUntil work about 30 s, so look only briefly.
+        for (let i = 0; i < 5 && status.startsWith("PROCESSING"); i++) {
+          await new Promise((r) => setTimeout(r, 4000));
+          const s = await uploadStatus(env, owner, id);
+          status = s.status ?? status;
+          if (status === "FAILED") throw new Error(`TikTok không nhận video: ${s.fail_reason ?? "không rõ lý do"}`);
+        }
+        await setButton(status === "SEND_TO_USER_INBOX" ? "Đã vào nháp TikTok" : "Đã gửi, TikTok đang xử lý (vài phút là vào nháp)", 3, true);
+      } catch (err) {
+        await setButton("Gửi nháp TikTok", 1, false);
+        await tell(`Chưa gửi được: ${err.message}`);
+      }
+    })(),
+  );
+  return json({ type: 6 }); // acknowledged; the button changes when done
+};
+
 const discord = async (request, env, ctx) => {
   const body = await request.text();
   if (!(await verifyDiscord(request, body, env.DISCORD_PUBLIC_KEY))) {
@@ -142,7 +194,7 @@ const discord = async (request, env, ctx) => {
   const interaction = JSON.parse(body);
   if (interaction.type === 1) return json({ type: 1 }); // PING
   const command = interaction.data?.name;
-  if (command !== "video" && command !== "sua") return json({ type: 1 });
+  if (interaction.type !== 3 && command !== "video" && command !== "sua") return json({ type: 1 });
 
   // Only the users in ALLOWED_DISCORD_USER_IDS; server admins when it is unset.
   const user = interaction.member?.user?.id ?? interaction.user?.id;
@@ -151,10 +203,11 @@ const discord = async (request, env, ctx) => {
   const admin = (BigInt(interaction.member?.permissions ?? 0) & ADMINISTRATOR) !== 0n;
   const permitted = allowed.length ? allowed.includes(user) : admin;
   if (interaction.type === 4) return autocomplete(permitted ? interaction : { data: {} }, env);
-  if (interaction.type !== 2) return json({ type: 1 });
+  if (interaction.type !== 2 && interaction.type !== 3) return json({ type: 1 });
   if (!permitted) {
     return json({ type: 4, data: { content: "Bạn không có quyền dùng lệnh này.", flags: 64 } });
   }
+  if (interaction.type === 3) return draftButton(interaction, env, ctx);
   const option = (name, max) =>
     String(interaction.data.options?.find((o) => o.name === name)?.value ?? "").trim().slice(0, max);
   const job = {

@@ -16,12 +16,12 @@ export const discordOn = Boolean(token && channel);
 const LIMIT = (Number(process.env.DISCORD_UPLOAD_MB) || 10) * 1024 * 1024 * 0.95;
 const TOO_LARGE = 413;
 
-const post = async (content, files = []) => {
+const post = async (content, files = [], components) => {
   if (!discordOn) return;
   const form = new FormData();
   form.append(
     "payload_json",
-    JSON.stringify({ content: content.slice(0, 2000), allowed_mentions: { parse: [] } }),
+    JSON.stringify({ content: content.slice(0, 2000), allowed_mentions: { parse: [] }, components }),
   );
   files.forEach((f, i) => form.append(`files[${i}]`, new Blob([readFileSync(f)]), path.basename(f)));
   const res = await fetch(`https://discord.com/api/v10/channels/${channel}/messages`, {
@@ -34,6 +34,14 @@ const post = async (content, files = []) => {
 };
 
 export const sendMessage = (text) => post(text);
+
+// The caption alone (so Copy Text copies just it) with a button the bot worker
+// handles: it sends the video to the connected TikTok account's drafts. `key`
+// is "<slug>/<file>.mp4" under tiktok-shorts/ in the bucket.
+export const sendDraftButton = (key, caption) =>
+  post(caption, [], [
+    { type: 1, components: [{ type: 2, style: 1, label: "Gửi nháp TikTok", custom_id: `tt:${key}` }] },
+  ]);
 
 export const sendPhotos = (files) =>
   files.length ? post("Ảnh chụp thử (có lớp giao diện TikTok):", files.slice(0, 10)) : undefined;

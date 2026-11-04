@@ -241,6 +241,8 @@ export const site = async (request, env) => {
       await disconnect(env, openId);
       return html(layout("Not allowed", `<h1>This TikTok account can't use Cloudcode Shorts.</h1>`), 403);
     }
+    // The Discord drafts button sends to the account that signed in last.
+    await env.TIKTOK.put("owner", openId);
     const session = crypto.randomUUID();
     await env.TIKTOK.put(`session:${session}`, openId, { expirationTtl: SESSION_TTL });
     return new Response(null, {
@@ -293,6 +295,7 @@ export const site = async (request, env) => {
 
   if (pathname === "/logout" && method === "POST") {
     await disconnect(env, openId);
+    if ((await env.TIKTOK.get("owner")) === openId) await env.TIKTOK.delete("owner");
     await env.TIKTOK.delete(`session:${cookieOf(request)}`);
     return new Response(null, {
       status: 303,

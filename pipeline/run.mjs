@@ -16,6 +16,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSyn
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
+import { sendDraftButton } from "./discord.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { restoreFootage } from "./footage.mjs";
 import { glFor } from "../scripts/gl.mjs";
@@ -139,8 +140,12 @@ try {
     // The workflow keeps a copy as an artifact only when the CDN has none.
     if (url && process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `cdn=${url}\n`);
     await sendVideo(out, script.title, url);
+    await sendMessage(summary);
+    // The TikTok drafts button works from the copy on the CDN.
+    if (url) await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
+  } else {
+    await sendMessage(summary);
   }
-  await sendMessage(summary);
   console.log(`\nDone: ${slug}${notifyOn ? " (sent to Telegram/Discord)" : ""}`);
 } catch (err) {
   await sendMessage(
