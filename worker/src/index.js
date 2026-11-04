@@ -400,7 +400,20 @@ const autoDraft = async (request, env) => {
   }
 };
 
+// The daily videos: the cron for 02:00 UTC (09:00 in Vietnam) is the morning
+// run, the other the afternoon one; the pipeline picks the kind of video from
+// pipeline/schedule.json.
+const daily = async (event, env) => {
+  if (env.AUTO_DAILY !== "true") return;
+  const slot = event.cron === "0 2 * * *" ? "morning" : "afternoon";
+  const res = await dispatch(env, { scheduled: slot }, {});
+  if (!res.ok) console.log(`daily ${slot}: GitHub ${res.status} ${await res.text()}`);
+};
+
 export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(daily(event, env));
+  },
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     const [, kind, ...rest] = pathname.split("/");

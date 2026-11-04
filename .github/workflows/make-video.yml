@@ -38,13 +38,9 @@ on:
   # Sent by the chat bot worker (worker/), from Discord or Telegram.
   repository_dispatch:
     types: [make-video]
-  # Twice a day, so a new video is in the TikTok drafts by about 08:00 and 17:00
-  # (what kind of video each one makes is in pipeline/schedule.json)
-  # in Vietnam (a run takes 15–35 minutes; GitHub may start schedules late).
-  # Runs only when the repo variable AUTO_DAILY is "true".
-  schedule:
-    - cron: "20 0 * * *"
-    - cron: "20 9 * * *"
+  # The daily videos come from the bot worker's crons (worker/wrangler.toml) as
+  # repository_dispatch with client_payload.scheduled, since GitHub's own
+  # schedule runs late or not at all.
 
 # One video at a time, so history.json and the commits never race.
 concurrency:
@@ -56,7 +52,6 @@ permissions:
 
 jobs:
   make:
-    if: github.event_name != 'schedule' || vars.AUTO_DAILY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
@@ -86,6 +81,8 @@ jobs:
           NOTES: ${{ inputs.notes || github.event.client_payload.notes }}
           STYLE: ${{ inputs.style || github.event.client_payload.style }}
           FORMAT: ${{ inputs.format || github.event.client_payload.format }}
+          # "morning" or "afternoon" for the daily videos (pipeline/schedule.json).
+          SCHEDULED: ${{ github.event.client_payload.scheduled }}
           REVISE: ${{ inputs.revise || github.event.client_payload.revise }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}

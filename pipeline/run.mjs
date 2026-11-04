@@ -32,13 +32,14 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
-// A scheduled run makes what pipeline/schedule.json lists for this weekday and
-// time of day in Vietnam (UTC+7); GitHub may start it up to an hour late.
+// A daily run (SCHEDULED: "morning" or "afternoon", from the bot worker's
+// crons) makes what pipeline/schedule.json lists for that slot of this
+// weekday in Vietnam (UTC+7).
 const scheduled = () => {
-  if (process.env.GITHUB_EVENT_NAME !== "schedule") return "";
+  const slot = (process.env.SCHEDULED ?? "").trim();
+  if (slot !== "morning" && slot !== "afternoon") return "";
   const vn = new Date(Date.now() + 7 * 3600 * 1000);
   const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][vn.getUTCDay()];
-  const slot = vn.getUTCHours() < 12 ? "morning" : "afternoon";
   const pick = readJson("pipeline/schedule.json", {}).days?.[day]?.[slot] ?? "";
   if (pick) console.log(`Schedule: ${day} ${slot} → ${pick}`);
   return pick;

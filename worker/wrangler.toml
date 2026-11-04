@@ -18,6 +18,14 @@ MEDIA_URL = "https://media.cloudcode.io.vn"
 TIKTOK_SCOPES = "user.info.basic,video.upload,video.publish"
 # Post with the caption instead of drafts; only once TikTok audits the app.
 TIKTOK_DIRECT_POST = "false"
+# The daily videos (crons below); anything but "true" pauses them.
+AUTO_DAILY = "true"
+
+# Starts the daily videos on time (GitHub's own schedule runs late or not at
+# all): 09:00 and 17:30 in Vietnam, so each is in the TikTok drafts about 40
+# minutes later. What each one makes is in pipeline/schedule.json.
+[triggers]
+crons = ["0 2 * * *", "30 10 * * *"]
 
 # Finished videos go to the media bucket under tiktok-shorts/, served at
 # MEDIA_URL by the bucket's custom domain.
