@@ -113,8 +113,10 @@ export const disconnect = async (env, openId) => {
   await env.TIKTOK.delete(`token:${openId}`);
 };
 
-// Whether the account granted Direct Post.
+// Whether Direct Post is on (TIKTOK_DIRECT_POST "true": an unaudited app may
+// only post to private accounts) and the account granted it.
 export const canPost = async (env, openId) => {
+  if (env.TIKTOK_DIRECT_POST !== "true") return false;
   const token = JSON.parse((await env.TIKTOK.get(`token:${openId}`)) ?? "null");
   return Boolean(token?.scope?.split(",").includes("video.publish"));
 };

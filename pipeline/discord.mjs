@@ -16,12 +16,12 @@ export const discordOn = Boolean(token && channel);
 const LIMIT = (Number(process.env.DISCORD_UPLOAD_MB) || 10) * 1024 * 1024 * 0.95;
 const TOO_LARGE = 413;
 
-const post = async (content, files = [], components) => {
+const post = async (content, files = [], components, mention = []) => {
   if (!discordOn) return;
   const form = new FormData();
   form.append(
     "payload_json",
-    JSON.stringify({ content: content.slice(0, 2000), allowed_mentions: { parse: [] }, components }),
+    JSON.stringify({ content: content.slice(0, 2000), allowed_mentions: { parse: [], users: mention }, components }),
   );
   files.forEach((f, i) => form.append(`files[${i}]`, new Blob([readFileSync(f)]), path.basename(f)));
   const res = await fetch(`https://discord.com/api/v10/channels/${channel}/messages`, {
@@ -34,6 +34,12 @@ const post = async (content, files = [], components) => {
 };
 
 export const sendMessage = (text) => post(text);
+
+// A message that pings DISCORD_NOTIFY_USER_ID, so their phone gets a push.
+export const sendPing = (text) => {
+  const user = process.env.DISCORD_NOTIFY_USER_ID;
+  return user ? post(`<@${user}> ${text}`, [], undefined, [user]) : post(text);
+};
 
 // The caption alone (so Copy Text copies just it) with a button the bot worker
 // handles: it sends the video to the connected TikTok account's drafts. `key`

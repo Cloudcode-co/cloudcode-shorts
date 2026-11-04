@@ -16,7 +16,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSyn
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
 import { sendToDrafts, uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
-import { sendDraftButton } from "./discord.mjs";
+import { sendDraftButton, sendPing } from "./discord.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { restoreFootage } from "./footage.mjs";
 import { glFor } from "../scripts/gl.mjs";
@@ -149,16 +149,16 @@ try {
       const draft = await sendToDrafts(slug, out, caption);
       console.log("TikTok drafts:", JSON.stringify(draft));
       if (draft.error) {
-        await sendMessage(`Chưa gửi được vào nháp TikTok: ${draft.error}`);
+        await sendPing(`Chưa gửi được vào nháp TikTok: ${draft.error}`);
         await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
       } else if (draft.mode === "post") {
-        await sendMessage(
+        await sendPing(
           draft.status === "PUBLISH_COMPLETE"
             ? "Đã đăng lên TikTok ở chế độ riêng tư, caption có sẵn. Mở video → ⋯ → Cài đặt quyền riêng tư → Mọi người là xong."
             : "Đã gửi lên TikTok, vài phút nữa video hiện ở chế độ riêng tư với caption có sẵn; đổi sang Mọi người để công khai.",
         );
       } else {
-        await sendMessage(
+        await sendPing(
           draft.status === "SEND_TO_USER_INBOX"
             ? "Đã vào nháp TikTok. Mở TikTok, chọn nháp, dán caption dưới đây rồi đăng:"
             : "Đã gửi lên TikTok, vài phút nữa sẽ vào nháp. Caption để dán:",
