@@ -94,7 +94,7 @@
     {
       "id": "meme-skit",
       "name": "Meme skit",
-      "brief": "The Vietnamese TikTok meme look: one still photo as the whole background, showing where the line happens (an office, a bedroom at night, a server room; npm run image -- <slug> \"<place>\"), changed only when the place changes. One or two green-screen animals acting out the line in the lower half (npm run footage -- <slug> \"green screen cat\" and similar: cat, dog, dancing, walking), keyed with the kit GreenScreen, mirrored, scaled and bobbing to the beat. At the top a big caption telling the situation in plain spoken Vietnamese: yellow #FFE600, a heavy condensed font with Vietnamese glyphs, thick black outline (-webkit-text-stroke with paint-order: stroke fill), centred, at most 3 lines, replaced line by line with the voice. No other graphics, cards or icons; hard cuts."
+      "brief": "The Vietnamese TikTok meme look: one still photo as the whole background, showing where the line happens (an office, a bedroom at night, a server room; npm run image -- <slug> \"<place>\"), changed only when the place changes. One or two meme animals acting out the line in the lower half: animated stickers from npm run meme -- <slug> \"cat dancing\" (or vibing, shocked, crying, typing), played with the kit Meme, big, mirrored when they face each other; green-screen footage with the kit GreenScreen only when no meme fits. At the top a big caption telling the situation in plain spoken Vietnamese: yellow #FFE600, a heavy condensed font with Vietnamese glyphs, thick black outline (-webkit-text-stroke with paint-order: stroke fill), centred, at most 3 lines, replaced line by line with the voice. No other graphics, cards or icons; hard cuts."
     }
   ],
   "pacing": [

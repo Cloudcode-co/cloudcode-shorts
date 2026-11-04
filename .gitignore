@@ -10,6 +10,8 @@ out
 public/videos/*/footage/
 # Pixabay stickers and photos, fetched again from facts.json (pipeline/images.mjs)
 public/videos/*/images/
+# GIPHY stickers, fetched again from facts.json (pipeline/memes.mjs)
+public/videos/*/memes/
 
 # Local-only
 voiceover-backup

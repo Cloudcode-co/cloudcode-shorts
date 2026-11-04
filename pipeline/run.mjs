@@ -20,6 +20,7 @@ import { sendDraftButton, sendPing } from "./discord.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { restoreFootage } from "./footage.mjs";
 import { restoreImages } from "./images.mjs";
+import { restoreMemes } from "./memes.mjs";
 import { glFor } from "../scripts/gl.mjs";
 
 const args = process.argv.slice(2);
@@ -73,6 +74,7 @@ const rework = async () => {
   // Footage is not committed; fetch the clips this video uses again.
   await restoreFootage(slug);
   await restoreImages(slug);
+  await restoreMemes(slug);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
   if (voice) {
     const { voiceId, name } = await resolveVoice(voice);

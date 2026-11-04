@@ -178,10 +178,11 @@ const allowed = [
   `Bash(npm run qa -- ${slug} *)`,
   `Bash(npm run footage -- ${slug} *)`,
   `Bash(npm run image -- ${slug} *)`,
+  `Bash(npm run meme -- ${slug} *)`,
   "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py *)",
 ];
 const baseEnv = { CI: "1" };
-for (const k of ["PIXABAY_API_KEY", "PEXELS_API_KEY"]) if (process.env[k]) baseEnv[k] = process.env[k];
+for (const k of ["PIXABAY_API_KEY", "PEXELS_API_KEY", "GIPHY_API_KEY"]) if (process.env[k]) baseEnv[k] = process.env[k];
 for (const k of ["PATH", "Path", "HOME", "USERPROFILE", "APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "SystemRoot", "ComSpec", "PATHEXT"]) {
   if (process.env[k]) baseEnv[k] = process.env[k];
 }

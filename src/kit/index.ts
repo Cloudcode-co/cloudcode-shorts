@@ -3,6 +3,7 @@ export * from "./audio";
 export * from "./Brand";
 export * from "./FallbackVideo";
 export * from "./GreenScreen";
+export * from "./Meme";
 export * from "./Terminal";
 export * from "./theme";
 export * from "./timing";

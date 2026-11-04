@@ -91,6 +91,8 @@ jobs:
           # Stock footage (pipeline/footage.mjs); empty turns it off.
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          # Animated meme stickers (pipeline/memes.mjs); empty turns them off.
+          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}

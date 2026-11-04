@@ -12,6 +12,7 @@
     "@react-three/fiber": "9.8.2",
     "@remotion/bundler": "4.0.540",
     "@remotion/cli": "4.0.540",
+    "@remotion/gif": "4.0.540",
     "@remotion/google-fonts": "4.0.540",
     "@remotion/media": "4.0.540",
     "@remotion/renderer": "4.0.540",
@@ -44,6 +45,7 @@
     "qa": "node scripts/qa-stills.mjs",
     "footage": "node pipeline/footage.mjs",
     "image": "node pipeline/images.mjs",
+    "meme": "node pipeline/memes.mjs",
     "render:qsv": "node scripts/render-qsv.mjs"
   },
   "allowScripts": {
