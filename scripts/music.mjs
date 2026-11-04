@@ -12,17 +12,18 @@
 //
 // With MUSIC_URL (the owner's own track: an audio file, or a video whose sound
 // is used), that track is used instead from MUSIC_START seconds in, looped or
-// cut to the video's length (the kit's <Music> fades it out).
+// cut to the video's length (the kit's <Music> fades it out). Without
+// ElevenLabs (no key, or it refuses) an earlier video's generated track from
+// the repo is reused the same way.
 //
 //   node --env-file=.env scripts/music.mjs <slug>
 //   node --env-file=.env scripts/music.mjs <slug> 114     # exact length in seconds
 //   MUSIC_URL=https://... node scripts/music.mjs <slug>
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 
 const custom = (process.env.MUSIC_URL ?? "").trim();
 const key = process.env.ELEVENLABS_API_KEY;
-if (!key && !custom) throw new Error("ELEVENLABS_API_KEY is not set (put it in .env)");
 
 const [slug, seconds] = process.argv.slice(2);
 if (!slug) throw new Error("usage: music.mjs <slug> [seconds]");
@@ -93,15 +94,11 @@ const sectionsFor = ({ scenes }) => {
 mkdirSync(`public/videos/${slug}`, { recursive: true });
 const plan = seconds ? null : timeline();
 
-// The owner's track: the scenes keep their planned timing, with no sections.
-if (custom) {
+// A given track (the owner's, or an earlier video's), looped or cut to the
+// video; the scenes keep their planned timing, with no sections.
+const useTrack = (src, start, temporary) => {
   if (plan) writeFileSync(`src/videos/${slug}/timeline.json`, JSON.stringify(plan, null, 2) + "\n");
   const total = plan ? plan.total + 2 : lengthMs / 1000;
-  const res = await fetch(custom, { signal: AbortSignal.timeout(120_000) });
-  if (!res.ok) throw new Error(`music: could not download MUSIC_URL (${res.status})`);
-  const src = `public/videos/${slug}/music-source`;
-  writeFileSync(src, Buffer.from(await res.arrayBuffer()));
-  const start = Math.max(0, Number(process.env.MUSIC_START) || 0);
   const r = spawnSync(
     "npx",
     [
@@ -113,11 +110,28 @@ if (custom) {
     ],
     { stdio: "inherit", shell: process.platform === "win32" },
   );
-  rmSync(src, { force: true });
+  if (temporary) rmSync(src, { force: true });
   if (r.status !== 0) throw new Error("music: ffmpeg could not read the track");
-  console.log(`used the given track for public/videos/${slug}/music.mp3 (${total.toFixed(1)}s from ${start}s)`);
+  console.log(`used ${temporary ? "the given track" : src} for public/videos/${slug}/music.mp3 (${total.toFixed(1)}s from ${start}s)`);
   process.exit(0);
+};
+const reuse = (why) => {
+  const tracks = readdirSync("public/videos")
+    .filter((d) => d !== slug && existsSync(`public/videos/${d}/music.mp3`))
+    .map((d) => `public/videos/${d}/music.mp3`);
+  if (!tracks.length) throw new Error(`music: ${why}, and no earlier track to reuse`);
+  console.log(`music: ${why}; reusing an earlier track`);
+  useTrack(tracks[Math.floor(Math.random() * tracks.length)], 0, false);
+};
+
+if (custom) {
+  const res = await fetch(custom, { signal: AbortSignal.timeout(120_000) });
+  if (!res.ok) throw new Error(`music: could not download MUSIC_URL (${res.status})`);
+  const src = `public/videos/${slug}/music-source`;
+  writeFileSync(src, Buffer.from(await res.arrayBuffer()));
+  useTrack(src, Math.max(0, Number(process.env.MUSIC_START) || 0), true);
 }
+if (!key) reuse("ELEVENLABS_API_KEY is not set");
 
 const sections = plan && sectionsFor(plan);
 let body;
@@ -162,6 +176,6 @@ if (!res.ok && sections) {
   console.log(`music plan refused: ${res.status} ${(await res.text()).slice(0, 300)}; composing from the prompt`);
   res = await compose({ prompt: script.musicPrompt ?? DEFAULT_PROMPT, music_length_ms: Math.min(lengthMs, 300000), force_instrumental: true });
 }
-if (!res.ok) throw new Error(`music: ${res.status} ${await res.text()}`);
+if (!res.ok) reuse(`ElevenLabs refused (${res.status} ${(await res.text()).slice(0, 200)})`);
 writeFileSync(`public/videos/${slug}/music.mp3`, Buffer.from(await res.arrayBuffer()));
 console.log(`generated public/videos/${slug}/music.mp3 (${sections ? plan.total + 2 : lengthMs / 1000}s)`);

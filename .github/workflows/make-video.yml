@@ -71,10 +71,12 @@ jobs:
 
       - run: npm ci
 
-      - name: Install Claude Code and Remotion's browser
+      - name: Install Claude Code, Remotion's browser and the backup voice
         run: |
           npm install -g @anthropic-ai/claude-code
           npx remotion browser ensure
+          # Edge TTS reads the voiceover when ElevenLabs refuses (scripts/voiceover.mjs).
+          pipx install edge-tts
 
       - name: Make the video
         id: make
