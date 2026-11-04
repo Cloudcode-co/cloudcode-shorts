@@ -1,0 +1,5 @@
+Meme skit: the coffee-shop photo stays as the one background (dimmed), with each scene's GIPHY cat in the lower half and the line as a yellow, black-outlined MemeCaption at the top. Every scene is cut hard into two shots (caption split in two, word for word), the cat mirrored on the second shot, except the scene 4 sticker, which carries lettering that would read backwards. The script has no sections, so there are no title cards (the art direction says no extra cards); the opening shot carries the Brand lockup with the caption pushed below it.
+
+QA checked: captions stay at most 3 lines inside SAFE, no lone words, no decoration over text, no other chrome, background matches the place; fixed the mirrored lettering on the scene 4 sticker.
+
+Review fix: the scene 4 sticker carried a third-party watermark (Workhall Coworking logo and 'workmood' text); replaced it with a clean crying-cat sticker from npm run meme (facts.json s4 entry updated). QA round re-run: scene 4 stills show no watermark or text on the sticker.

@@ -1,0 +1,73 @@
+{
+  "slug": "deploy-t7-toang-cuoi-tuan",
+  "format": "meme",
+  "topic": "deploy t7",
+  "title": "Luật bất thành văn: Đừng bao giờ deploy thứ 7",
+  "caption": "Chỉ là một bản hotfix 2 dòng code thôi mà anh em... Cuối tuần này server bên bạn còn thở không?",
+  "hashtags": [
+    "#laptrinhvien",
+    "#devlife",
+    "#sysadmin",
+    "#haihuoc",
+    "#xuhuong"
+  ],
+  "musicPrompt": "Quirky upbeat elevator bossa nova abruptly cutting into intense dramatic panic clown meme beat, no vocals",
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sáng thứ 7 dev tiện tay bấm deploy bản hotfix nhẹ tênh rồi tính ngồi chill",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing headphones",
+      "place": "coffee shop laptop"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Vừa nhấp ngụm cafe thì điện thoại nổ 99+ thông báo lỗi đỏ lòm từ Telegram",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat shocked wide eyes",
+      "place": "coffee shop laptop"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Toang luôn cả cụm database, server ăn 502, sếp bắt đầu tag tên réo gọi",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic screaming",
+      "place": "coffee shop laptop"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Cuống cuồng tìm bản backup để rollback thì nhận ra lần backup cuối là tháng trước",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying desk",
+      "place": "coffee shop laptop"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Thế là một kỳ nghỉ cuối tuần ấm cúng bên anh em trên Discord lại bắt đầu",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop fast",
+      "place": "coffee shop laptop"
+    }
+  ]
+}
