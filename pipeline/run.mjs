@@ -141,14 +141,22 @@ try {
     if (url && process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `cdn=${url}\n`);
     await sendVideo(out, script.title, url);
     await sendMessage(summary);
-    // The video goes straight to the TikTok drafts; the caption follows on its
-    // own so Copy Text copies just it. A failed send leaves the button to retry.
+    // The video goes straight to TikTok: posted privately with its caption when
+    // the account granted Direct Post, else to the drafts with the caption
+    // following on its own so Copy Text copies just it. A failed send leaves
+    // the drafts button to retry.
     if (url) {
-      const draft = await sendToDrafts(slug, out);
+      const draft = await sendToDrafts(slug, out, caption);
       console.log("TikTok drafts:", JSON.stringify(draft));
       if (draft.error) {
         await sendMessage(`Chưa gửi được vào nháp TikTok: ${draft.error}`);
         await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
+      } else if (draft.mode === "post") {
+        await sendMessage(
+          draft.status === "PUBLISH_COMPLETE"
+            ? "Đã đăng lên TikTok ở chế độ riêng tư, caption có sẵn. Mở video → ⋯ → Cài đặt quyền riêng tư → Mọi người là xong."
+            : "Đã gửi lên TikTok, vài phút nữa video hiện ở chế độ riêng tư với caption có sẵn; đổi sang Mọi người để công khai.",
+        );
       } else {
         await sendMessage(
           draft.status === "SEND_TO_USER_INBOX"

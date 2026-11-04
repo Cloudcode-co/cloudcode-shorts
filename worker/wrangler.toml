@@ -14,6 +14,8 @@ workers_dev = true
 GITHUB_REPO = "Cloudcode-co/cloudcode-shorts"
 # Public URL of the media bucket.
 MEDIA_URL = "https://media.cloudcode.io.vn"
+# TikTok scopes asked at sign-in; video.publish needs Direct Post on the app.
+TIKTOK_SCOPES = "user.info.basic,video.upload,video.publish"
 
 # Finished videos go to the media bucket under tiktok-shorts/, served at
 # MEDIA_URL by the bucket's custom domain.

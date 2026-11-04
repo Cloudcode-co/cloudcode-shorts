@@ -14,9 +14,10 @@
 //                      deleted to make room; the rest of the bucket is not counted
 //                      or touched
 //   /, /login, /app...   the Cloudcode Shorts website with TikTok login (site.js)
-//   POST /tiktok/draft  { key } sends that video to the connected TikTok account's
-//                      drafts and waits for TikTok (Bearer UPLOAD_SECRET); the
-//                      pipeline calls it after uploading
+//   POST /tiktok/draft  { key, caption } posts that video to the connected TikTok
+//                      account with its caption when it granted Direct Post, else
+//                      sends it to the drafts; waits for TikTok (Bearer
+//                      UPLOAD_SECRET). The pipeline calls it after uploading
 //   POST /ideas        a video idea from an outside researcher (Muse), as JSON
 //                      { topic, angle, sources: [urls], notes } with
 //                      Authorization: Bearer IDEAS_SECRET; saved to the repo
@@ -30,7 +31,7 @@
 // secrets TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, KV binding TIKTOK.
 
 import { site } from "./site.js";
-import { sendToInbox, uploadStatus } from "./tiktok.js";
+import { canPost, directPost, sendToInbox, uploadStatus } from "./tiktok.js";
 
 // Fires repository_dispatch; the workflow reads what to make (topic, voice,
 // notes, or revise: a video to rework) and where to send the result (Discord
@@ -368,18 +369,20 @@ const ideas = async (request, env) => {
   return Response.json({ saved: path });
 };
 
-// The pipeline's automatic send to drafts: uploads, then waits up to about
-// two minutes for TikTok to put it in the inbox.
+// The pipeline's automatic send: a post with the caption when the account
+// granted Direct Post, else a draft; then waits up to about two minutes for
+// TikTok. Replies { mode: "post" | "draft", status }.
 const autoDraft = async (request, env) => {
   if (!env.UPLOAD_SECRET || request.headers.get("Authorization") !== `Bearer ${env.UPLOAD_SECRET}`) {
     return new Response("forbidden", { status: 403 });
   }
-  const { key } = (await request.json().catch(() => ({}))) ?? {};
+  const { key, caption } = (await request.json().catch(() => ({}))) ?? {};
   if (!KEY.test(key ?? "")) return Response.json({ error: "bad key" }, { status: 400 });
   const owner = await env.TIKTOK.get("owner");
   if (!owner) return Response.json({ error: "chưa kết nối TikTok; đăng nhập ở https://shorts.cloudcode.io.vn" }, { status: 409 });
   try {
-    const id = await sendToInbox(env, owner, PREFIX + key);
+    const post = typeof caption === "string" && caption.trim() && (await canPost(env, owner));
+    const id = post ? await directPost(env, owner, PREFIX + key, caption) : await sendToInbox(env, owner, PREFIX + key);
     let status = "PROCESSING_UPLOAD";
     for (let i = 0; i < 30 && status.startsWith("PROCESSING"); i++) {
       await new Promise((r) => setTimeout(r, 4000));
@@ -387,7 +390,7 @@ const autoDraft = async (request, env) => {
       status = s.status ?? status;
       if (status === "FAILED") return Response.json({ error: `TikTok không nhận video: ${s.fail_reason ?? "không rõ lý do"}` }, { status: 502 });
     }
-    return Response.json({ publish_id: id, status });
+    return Response.json({ publish_id: id, mode: post ? "post" : "draft", status });
   } catch (err) {
     return Response.json({ error: err.message }, { status: 502 });
   }

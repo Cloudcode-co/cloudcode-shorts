@@ -108,7 +108,7 @@ Sign in with TikTok, pick a finished video, and it lands in your TikTok inbox as
   <li>Choose a finished video and press <b>Send to TikTok drafts</b>.</li>
   <li>Open TikTok, tap the inbox notification, edit, and post it yourself.</li>
 </ol>
-<p class="notice">We never post for you. Videos only go to your drafts, and you can disconnect at any time.</p>`,
+<p class="notice">Videos go to your drafts. If you also allow posting, they are posted as <b>Only me</b> with their caption, and you choose in TikTok when to make them public. You can disconnect at any time.</p>`,
   );
 
 const legal = (title, sections) =>
@@ -121,7 +121,7 @@ const legal = (title, sections) =>
 const terms = () =>
   legal("Terms of Service", [
     ["What Cloudcode Shorts is", "Cloudcode Shorts is a tool run by Cloudcode (cloudcode.io.vn) that lets you send finished short videos made for Cloudcode's TikTok channel to your own TikTok drafts."],
-    ["Your TikTok account", "You sign in with TikTok and choose what the app may access. The app only reads your basic profile and uploads the videos you choose to your TikTok inbox as drafts. It never publishes, edits or deletes anything on your account. You finish and post each draft yourself in the TikTok app, under TikTok's own terms."],
+    ["Your TikTok account", "You sign in with TikTok and choose what the app may access. The app only reads your basic profile and uploads the videos you choose to your TikTok inbox as drafts. If you also allow posting (video.publish), a video is posted as Only me with its caption, and you decide in TikTok whether to make it public. The app never edits or deletes anything on your account."],
     ["Using the app", "Use it only for videos you are allowed to post, and follow TikTok's Terms of Service and Community Guidelines when you post them. We may limit or end access to the app at any time."],
     ["Disconnecting", "Press Disconnect TikTok on your videos page at any time. This revokes the app's access and deletes your tokens. You can also remove the app from TikTok's settings."],
     ["No warranty", "The app is provided as is, without warranties. Cloudcode is not liable for indirect losses arising from its use, to the extent the law allows."],
@@ -131,7 +131,7 @@ const terms = () =>
 const privacy = () =>
   legal("Privacy Policy", [
     ["What we collect", "When you sign in with TikTok we receive your TikTok open ID, display name and avatar (the user.info.basic scope), and the access and refresh tokens TikTok issues to the app. We also set one cookie that keeps you signed in."],
-    ["How we use it", "Your display name and avatar are shown on your videos page so you can see which account is connected. The tokens are used only to upload the videos you choose to your TikTok inbox as drafts (the video.upload scope) and to check that upload's status. We do not use your data for advertising, and we do not sell or share it."],
+    ["How we use it", "Your display name and avatar are shown on your videos page so you can see which account is connected. The tokens are used only to upload Cloudcode's finished videos to your TikTok inbox as drafts (the video.upload scope), or, if you allowed it, to post them as Only me with their caption (the video.publish scope), and to check each upload's status. We do not use your data for advertising, and we do not sell or share it."],
     ["Where it is kept", "Tokens and sessions are stored in Cloudflare Workers KV. Your session ends after 30 days; your tokens stay until you disconnect, or until TikTok expires them."],
     ["Deleting your data", "Press Disconnect TikTok on your videos page: the app revokes its access with TikTok and deletes your tokens and session. You can also remove the app from TikTok's settings."],
     ["Contact", 'Privacy questions: reach Cloudcode support through <a href="https://cloudcode.io.vn">cloudcode.io.vn</a>.'],

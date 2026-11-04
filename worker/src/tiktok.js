@@ -1,13 +1,17 @@
-// TikTok Login Kit and Content Posting API: a signed-in TikTok account sends a
-// finished video from the media bucket to its own TikTok inbox (drafts), where
-// the owner adds the caption and posts it from the app.
+// TikTok Login Kit and Content Posting API: a signed-in TikTok account gets a
+// finished video from the media bucket either in its TikTok inbox as a draft
+// (video.upload; the owner adds the caption and posts it from the app) or, when
+// the app has Direct Post and the account granted video.publish, posted with
+// its caption at TIKTOK_PRIVACY (default SELF_ONLY, the only level an
+// unaudited app may use; the owner makes it public from the app).
 //
 // Tokens are kept per account (open_id) in the TIKTOK KV namespace: the access
 // token lasts a day and is refreshed here; the refresh token lasts about a year.
 //
 // Secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET. KV binding: TIKTOK.
 const API = "https://open.tiktokapis.com/v2";
-const SCOPES = "user.info.basic,video.upload";
+// TIKTOK_SCOPES adds video.publish once the app has Direct Post.
+const scopes = (env) => env.TIKTOK_SCOPES || "user.info.basic,video.upload";
 const MB = 1024 * 1024;
 
 export const redirectUri = (request) => `${new URL(request.url).origin}/tiktok/callback`;
@@ -18,7 +22,7 @@ export const loginUrl = async (request, env) => {
   await env.TIKTOK.put(`state:${state}`, "1", { expirationTtl: 600 });
   const params = new URLSearchParams({
     client_key: env.TIKTOK_CLIENT_KEY,
-    scope: SCOPES,
+    scope: scopes(env),
     response_type: "code",
     redirect_uri: redirectUri(request),
     state,
@@ -109,6 +113,12 @@ export const disconnect = async (env, openId) => {
   await env.TIKTOK.delete(`token:${openId}`);
 };
 
+// Whether the account granted Direct Post.
+export const canPost = async (env, openId) => {
+  const token = JSON.parse((await env.TIKTOK.get(`token:${openId}`)) ?? "null");
+  return Boolean(token?.scope?.split(",").includes("video.publish"));
+};
+
 // TikTok's chunk rules: one chunk up to 64 MB, else 10 MB chunks with the
 // remainder added to the last one.
 const chunking = (size) => {
@@ -116,14 +126,15 @@ const chunking = (size) => {
   return { chunk, count: Math.floor(size / chunk) };
 };
 
-// Uploads `key` from the bucket to the account's TikTok inbox (video.upload)
-// and returns the publish id.
-export const sendToInbox = async (env, openId, key) => {
+// Starts an upload of `key` from the bucket at `path` with `extra` fields,
+// sends the file in chunks, and returns the publish id.
+const upload = async (env, openId, key, path, extra = {}) => {
   const head = await env.MEDIA.head(key);
   if (!head) throw new Error(`no video ${key} in the bucket`);
   const size = head.size;
   const { chunk, count } = chunking(size);
-  const { publish_id, upload_url } = await api(env, openId, "POST", "/post/publish/inbox/video/init/", {
+  const { publish_id, upload_url } = await api(env, openId, "POST", path, {
+    ...extra,
     source_info: { source: "FILE_UPLOAD", video_size: size, chunk_size: chunk, total_chunk_count: count },
   });
   for (let i = 0; i < count; i++) {
@@ -144,6 +155,30 @@ export const sendToInbox = async (env, openId, key) => {
   return publish_id;
 };
 
-// Where an upload stands: SEND_TO_USER_INBOX once it reached the inbox.
+// Sends `key` to the account's TikTok inbox as a draft (video.upload).
+export const sendToInbox = (env, openId, key) => upload(env, openId, key, "/post/publish/inbox/video/init/");
+
+// Posts `key` with its caption (video.publish), at TIKTOK_PRIVACY when the
+// creator may use it, else the most private level offered.
+export const directPost = async (env, openId, key, caption) => {
+  const creator = await api(env, openId, "POST", "/post/publish/creator_info/query/", {});
+  const offered = creator.privacy_level_options ?? [];
+  const wanted = env.TIKTOK_PRIVACY || "SELF_ONLY";
+  const privacy = offered.includes(wanted) ? wanted : offered.includes("SELF_ONLY") ? "SELF_ONLY" : offered[0];
+  if (!privacy) throw new Error("TikTok offered no privacy level for this account");
+  return upload(env, openId, key, "/post/publish/video/init/", {
+    post_info: {
+      title: caption.slice(0, 2200),
+      privacy_level: privacy,
+      disable_comment: false,
+      disable_duet: false,
+      disable_stitch: false,
+      video_cover_timestamp_ms: 1000,
+    },
+  });
+};
+
+// Where an upload stands: SEND_TO_USER_INBOX once a draft reached the inbox,
+// PUBLISH_COMPLETE once a post is up.
 export const uploadStatus = async (env, openId, publishId) =>
   api(env, openId, "POST", "/post/publish/status/fetch/", { publish_id: publishId });
