@@ -92,6 +92,7 @@ export const reviewVideo = async (slug, direction) => {
         `- text touching, under or overlapping the Cloudcode logo lockup in the top-left of the opening shot\n` +
         `- text cut off, overflowing its box, or under TikTok's buttons or caption area\n` +
         `- an empty bullet, row, card or placeholder; a broken image; a blank or near-empty frame\n` +
+        `- a sticker or image squeezed, stretched or sliced off by another element\n` +
         `- a background or main visual unrelated to what the voice says at that moment ` +
         `(server racks behind a software licence, say)\n` +
         `- text hard to read against its background; text that is too small to read on a phone\n` +

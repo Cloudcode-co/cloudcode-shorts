@@ -53,6 +53,11 @@ script.json's `format` says what kind of video it is (missing means `explainer`)
   text, `lines[0]` is `me` or `them`, and facts.json `contact` is the name at the
   top. Bubbles appear one by one on their timing with a typing indicator before
   `them`; a scene's `reaction` sticker (facts.json `memes`) pops beside it.
+  The thread fills the phone frame (message text at least 46px, header and
+  input bar inside the safe area, no big empty band above the thread). When it
+  scrolls, stickers move whole like bubbles and fade out under the header;
+  never squeeze, stretch or slice a sticker (keep its own width/height ratio).
+  The last message gets a reaction and at least 1.5 s to land.
 - `meme`: below.
 
 ### Memes
