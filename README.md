@@ -101,7 +101,8 @@ Claude, and `BUILDER_BEAG_MODEL` to pick the gateway model (default
 Before the script, Gemini writes research notes: it reads the sources, may read up
 to 4 more pages linked from them, and every fact keeps a verbatim quote; facts
 not found in the sources are dropped (facts.json `notes`). With the secret
-`PEXELS_API_KEY` (free at pexels.com/api), the script marks scenes that want real
+`PIXABAY_API_KEY` (free at pixabay.com/api/docs, after signing up) or
+`PEXELS_API_KEY`, the script marks scenes that want real
 footage of people or places, the clips are downloaded for the builder, and the
 builder can fetch more with `npm run footage -- <slug> "<search>"`. Clips are not
 committed; `pipeline/footage.mjs` downloads them again from facts.json.

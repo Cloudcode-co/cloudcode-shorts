@@ -16,7 +16,7 @@ import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.
 import { repoBrief, resolveRepos, trendingCandidates } from "./research.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { isWebUrl, pageBrief, webReader } from "./web.mjs";
-import { addFootage } from "./footage.mjs";
+import { addFootage, footageOn } from "./footage.mjs";
 
 const VOICE = {
   voiceId: "2ZUpiKo5wCCuypvx2zaS", // Tony Nguyễn
@@ -400,8 +400,8 @@ writeJson(`src/videos/${slug}/facts.json`, {
   research,
 });
 
-// Stock footage for the scenes that asked for it (PEXELS_API_KEY).
-if (process.env.PEXELS_API_KEY) {
+// Stock footage for the scenes that asked for it.
+if (footageOn()) {
   for (const s of script.scenes.filter((s) => s.footage?.trim()).slice(0, 4)) {
     const clip = await addFootage(slug, s.footage.trim().slice(0, 100), s.id).catch((err) => console.log(err.message));
     console.log(`Footage for ${s.id} ("${s.footage}"): ${clip?.file ?? "none"}`);

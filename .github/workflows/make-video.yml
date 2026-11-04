@@ -86,6 +86,7 @@ jobs:
           BUILDER_CHOSEN: ${{ inputs.builder || github.event.client_payload.builder }}
           BUILDER_BEAG_MODEL: ${{ vars.BUILDER_BEAG_MODEL }}
           # Stock footage (pipeline/footage.mjs); empty turns it off.
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}

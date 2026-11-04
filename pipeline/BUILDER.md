@@ -18,7 +18,7 @@ slug, an art direction and a pacing.
   `icon` and share `image` when the site has them, all under
   `public/videos/<slug>/`. `notes` are the checked research notes the
   script was written from.
-- `footage` in facts.json: real stock clips of people and places (Pexels),
+- `footage` in facts.json: real stock clips of people and places (Pixabay or Pexels),
   each with the `scene` it was found for, its `file` under
   `public/videos/<slug>/`, `duration` in seconds and size.
 - `src/kit/`: shared parts. Read `index.ts` and the files it exports.
@@ -84,7 +84,8 @@ A placeholder `Video.tsx` is already there; replace it.
 - **Footage**: real clips make a video feel shot rather than generated; use
   the listed ones where they fit, as full-frame backgrounds or framed shots,
   with `<OffthreadVideo src={staticFile(...)} muted />` cropped by
-  `objectFit: "cover"`, trimmed with `trimBefore`/`trimAfter` to a few
+  `objectFit: "cover"` (many clips are landscape: pick the crop that keeps the
+  person in frame with `objectPosition`), trimmed with `trimBefore`/`trimAfter` to a few
   seconds, and darkened or framed so text over them stays readable. To find
   another clip, run `npm run footage -- <slug> "<english search>"`: it
   prints the new entry (with `file`) or says nothing fits. Footage is never

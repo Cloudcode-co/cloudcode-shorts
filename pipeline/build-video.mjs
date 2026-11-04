@@ -143,8 +143,8 @@ const agents = [
 
 // The builder gets its skills, file tools and exactly the commands BUILDER.md
 // names: no other shell commands, no web access. Research text from the web is
-// in its context, so it gets no secret besides its own API key and the Pexels
-// key, which only searches stock footage.
+// in its context, so it gets no secret besides its own API key and the stock
+// footage keys, which only search free clips.
 const allowed = [
   "Skill",
   "Read",
@@ -160,7 +160,8 @@ const allowed = [
   `Bash(npm run qa -- ${slug} *)`,
   `Bash(npm run footage -- ${slug} *)`,
 ];
-const baseEnv = { CI: "1", ...(process.env.PEXELS_API_KEY ? { PEXELS_API_KEY: process.env.PEXELS_API_KEY } : {}) };
+const baseEnv = { CI: "1" };
+for (const k of ["PIXABAY_API_KEY", "PEXELS_API_KEY"]) if (process.env[k]) baseEnv[k] = process.env[k];
 for (const k of ["PATH", "Path", "HOME", "USERPROFILE", "APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "SystemRoot", "ComSpec", "PATHEXT"]) {
   if (process.env[k]) baseEnv[k] = process.env[k];
 }
