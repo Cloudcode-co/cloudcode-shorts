@@ -104,7 +104,7 @@ export const restoreFootage = async (slug) => {
   }
 };
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [slug, ...words] = process.argv.slice(2);
   if (!/^[a-z0-9-]+$/.test(slug ?? "") || !existsSync(factsFile(slug))) {
     throw new Error(`usage: node pipeline/footage.mjs <slug> ["<english search>"]`);
