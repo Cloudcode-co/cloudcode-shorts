@@ -11,6 +11,9 @@
 //                      (Authorization: Bearer UPLOAD_SECRET); replies with its
 //                      public URL on MEDIA_URL
 //   /, /login, /app...   the Cloudcode Shorts website with TikTok login (site.js)
+//   POST /tiktok/draft  { key } sends that video to the connected TikTok account's
+//                      drafts and waits for TikTok (Bearer UPLOAD_SECRET); the
+//                      pipeline calls it after uploading
 //   POST /ideas        a video idea from an outside researcher (Muse), as JSON
 //                      { topic, angle, sources: [urls], notes } with
 //                      Authorization: Bearer IDEAS_SECRET; saved to the repo
@@ -334,6 +337,31 @@ const ideas = async (request, env) => {
   return Response.json({ saved: path });
 };
 
+// The pipeline's automatic send to drafts: uploads, then waits up to about
+// two minutes for TikTok to put it in the inbox.
+const autoDraft = async (request, env) => {
+  if (!env.UPLOAD_SECRET || request.headers.get("Authorization") !== `Bearer ${env.UPLOAD_SECRET}`) {
+    return new Response("forbidden", { status: 403 });
+  }
+  const { key } = (await request.json().catch(() => ({}))) ?? {};
+  if (!KEY.test(key ?? "")) return Response.json({ error: "bad key" }, { status: 400 });
+  const owner = await env.TIKTOK.get("owner");
+  if (!owner) return Response.json({ error: "chưa kết nối TikTok; đăng nhập ở https://shorts.cloudcode.io.vn" }, { status: 409 });
+  try {
+    const id = await sendToInbox(env, owner, PREFIX + key);
+    let status = "PROCESSING_UPLOAD";
+    for (let i = 0; i < 30 && status.startsWith("PROCESSING"); i++) {
+      await new Promise((r) => setTimeout(r, 4000));
+      const s = await uploadStatus(env, owner, id);
+      status = s.status ?? status;
+      if (status === "FAILED") return Response.json({ error: `TikTok không nhận video: ${s.fail_reason ?? "không rõ lý do"}` }, { status: 502 });
+    }
+    return Response.json({ publish_id: id, status });
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 502 });
+  }
+};
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
@@ -348,6 +376,7 @@ export default {
     if (pathname === "/discord") return discord(request, env, ctx);
     if (pathname === "/telegram") return telegram(request, env);
     if (pathname === "/ideas") return ideas(request, env);
+    if (pathname === "/tiktok/draft") return autoDraft(request, env);
     return new Response("not found", { status: 404 });
   },
 };

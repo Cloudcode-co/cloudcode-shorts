@@ -98,6 +98,12 @@ be-ag gateway (`LLM_API_KEY`); set the variable `BUILDER` to `beag` to skip
 Claude, and `BUILDER_BEAG_MODEL` to pick the gateway model (default
 `ag/gemini-3.8-flash-high`).
 
+TikTok: sign in once at https://shorts.cloudcode.io.vn (the worker, `worker/src/site.js`,
+with the TikTok sandbox app's keys). After each render the pipeline sends the video
+straight to that account's TikTok drafts (`POST /tiktok/draft`) and posts the
+caption alone in Discord to copy; if the send fails, a Gửi nháp TikTok button
+retries it.
+
 Outside research: Muse (Meta's agent, on a daily schedule) posts video ideas to
 the worker's `POST /ideas` (`{ topic, angle, sources, notes }`, bearer
 `IDEAS_SECRET`), which saves each to `ideas/`. A `/video` with no topic and no

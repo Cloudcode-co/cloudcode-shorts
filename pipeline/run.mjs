@@ -14,7 +14,7 @@
 import { spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
-import { uploadVideo } from "./cdn.mjs";
+import { sendToDrafts, uploadVideo } from "./cdn.mjs";
 import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
 import { sendDraftButton } from "./discord.mjs";
 import { resolveVoice } from "./voices.mjs";
@@ -141,8 +141,23 @@ try {
     if (url && process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `cdn=${url}\n`);
     await sendVideo(out, script.title, url);
     await sendMessage(summary);
-    // The TikTok drafts button works from the copy on the CDN.
-    if (url) await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
+    // The video goes straight to the TikTok drafts; the caption follows on its
+    // own so Copy Text copies just it. A failed send leaves the button to retry.
+    if (url) {
+      const draft = await sendToDrafts(slug, out);
+      console.log("TikTok drafts:", JSON.stringify(draft));
+      if (draft.error) {
+        await sendMessage(`Chưa gửi được vào nháp TikTok: ${draft.error}`);
+        await sendDraftButton(`${slug}/${out.split("/").pop()}`, caption);
+      } else {
+        await sendMessage(
+          draft.status === "SEND_TO_USER_INBOX"
+            ? "Đã vào nháp TikTok. Mở TikTok, chọn nháp, dán caption dưới đây rồi đăng:"
+            : "Đã gửi lên TikTok, vài phút nữa sẽ vào nháp. Caption để dán:",
+        );
+        await sendMessage(caption);
+      }
+    }
   } else {
     await sendMessage(summary);
   }

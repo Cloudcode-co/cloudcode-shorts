@@ -19,3 +19,20 @@ export const uploadVideo = async (file, slug) => {
   }
   return (await res.json()).url;
 };
+
+// Sends a video already on the CDN to the connected TikTok account's drafts,
+// through the same worker. Returns { status } (SEND_TO_USER_INBOX once it is
+// in the drafts) or { error }.
+export const sendToDrafts = async (slug, file) => {
+  const base = process.env.CDN_URL?.replace(/\/+$/, "");
+  const secret = process.env.CDN_UPLOAD_SECRET;
+  if (!base || !secret) return { error: "no CDN_URL or CDN_UPLOAD_SECRET" };
+  const res = await fetch(`${base}/tiktok/draft`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${secret}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ key: `${slug}/${path.basename(file)}` }),
+    signal: AbortSignal.timeout(180_000),
+  }).catch((err) => ({ ok: false, status: 0, json: async () => ({ error: err.message }) }));
+  const data = await res.json().catch(() => ({}));
+  return res.ok ? data : { error: data.error ?? `worker ${res.status}` };
+};
