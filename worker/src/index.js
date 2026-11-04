@@ -38,6 +38,8 @@ import { canPost, directPost, sendToInbox, uploadStatus } from "./tiktok.js";
 // Fires repository_dispatch; the workflow reads what to make (topic, voice,
 // notes, or revise: a video to rework) and where to send the result (Discord
 // channel_id or Telegram chat_id) from client_payload.
+// GitHub takes at most 10 client_payload properties, so empty ones are left
+// out (a /video fills at most 9 plus the reply channel).
 const dispatch = (env, job, replyTo) =>
   fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`, {
     method: "POST",
@@ -46,7 +48,10 @@ const dispatch = (env, job, replyTo) =>
       Accept: "application/vnd.github+json",
       "User-Agent": "cloudcode-shorts-bot",
     },
-    body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
+    body: JSON.stringify({
+      event_type: "make-video",
+      client_payload: Object.fromEntries(Object.entries({ ...job, ...replyTo }).filter(([, v]) => v !== "" && v != null)),
+    }),
   });
 
 const queued = (res, { topic, source, voice, notes, revise, style, builder, format, music_url, music_start }) => {
