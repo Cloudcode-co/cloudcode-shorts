@@ -36,6 +36,17 @@ const schema = S("OBJECT", {
     musicPrompt: S("STRING", {
       description: "ElevenLabs Music prompt: a catchy meme track for the skit's mood (bouncy, dramatic, sad violin...), ends with 'no vocals'",
     }),
+    musicSections: S("ARRAY", {
+      description: "2–5 parts of the music that follow the story (hook, build, reveal or punchline, outro), in order",
+      items: S("OBJECT", {
+        properties: {
+          name: S("STRING", { description: "the part, e.g. Hook, Build, Drop, Outro" }),
+          from: S("STRING", { description: "number of the beat or message this part starts on (1 for the first part)" }),
+          styles: S("ARRAY", { items: S("STRING"), description: "3–6 English music style tags for this part's energy (sparse, rising tension, big drop, sad violin, triumphant)" }),
+        },
+        required: ["name", "from", "styles"],
+      }),
+    }),
     beats: S("ARRAY", {
       items: S("OBJECT", {
         properties: {
@@ -48,7 +59,7 @@ const schema = S("OBJECT", {
       }),
     }),
   },
-  required: ["slug", "topic", "title", "caption", "hashtags", "musicPrompt", "beats"],
+  required: ["slug", "topic", "title", "caption", "hashtags", "musicPrompt", "musicSections", "beats"],
 });
 
 const rules =
@@ -162,6 +173,8 @@ writeJson(`src/videos/${slug}/script.json`, {
   caption: meme.caption,
   hashtags: meme.hashtags.slice(0, 5).map((h) => (h.startsWith("#") ? h : `#${h}`)),
   musicPrompt: meme.musicPrompt,
+  // Parts start on beats; the punchline usually gets the drop.
+  musicSections: (meme.musicSections ?? []).map((m) => ({ ...m, from: `s${parseInt(m.from, 10) || 1}` })),
   sources: [],
   scenes,
 });

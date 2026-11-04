@@ -295,6 +295,17 @@ const schema = S("OBJECT", {
     caption: S("STRING", { description: "TikTok caption in Vietnamese, 1–2 sentences, under 150 characters" }),
     hashtags: S("ARRAY", { items: S("STRING"), description: "exactly 5, with #, 3 niche + 2 broad Vietnamese" }),
     musicPrompt: S("STRING", { description: "ElevenLabs Music prompt for an instrumental bed fitting the topic, ends with 'no vocals'" }),
+    musicSections: S("ARRAY", {
+      description: "2–5 parts of the music that follow the story (hook, build, reveal or punchline, outro), in order",
+      items: S("OBJECT", {
+        properties: {
+          name: S("STRING", { description: "the part, e.g. Hook, Build, Drop, Outro" }),
+          from: S("STRING", { description: "id of the scene this part starts on (s1 for the first part)" }),
+          styles: S("ARRAY", { items: S("STRING"), description: "3–6 English music style tags for this part's energy (sparse, rising tension, big drop, sad violin, triumphant)" }),
+        },
+        required: ["name", "from", "styles"],
+      }),
+    }),
     repos: S("ARRAY", {
       items: S("OBJECT", {
         properties: { repo: S("STRING", { description: "owner/name" }), name: S("STRING") },
@@ -322,7 +333,7 @@ const schema = S("OBJECT", {
       }),
     }),
   },
-  required: ["slug", "title", "caption", "hashtags", "musicPrompt", "repos", "sources", "scenes"],
+  required: ["slug", "title", "caption", "hashtags", "musicPrompt", "musicSections", "repos", "sources", "scenes"],
 });
 
 const rules =
@@ -454,6 +465,7 @@ writeJson(`src/videos/${slug}/script.json`, {
   caption: script.caption,
   hashtags: script.hashtags,
   musicPrompt: script.musicPrompt,
+  musicSections: script.musicSections ?? [],
   sources: script.sources,
   ...VOICE,
   scenes: script.scenes,

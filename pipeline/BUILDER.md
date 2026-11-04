@@ -9,6 +9,12 @@ slug, an art direction and a pacing.
 - `src/videos/<slug>/script.json`: the scenes. Each has `id`, the voiceover `text`
   (audio tags in square brackets are not shown), an on-screen `headline`, `lines`,
   `commands` (shell commands to show typed) and `repos` (owner/name whose logo appears).
+- `src/videos/<slug>/timeline.json` (when present): each scene's `start` and
+  `length` in seconds, and the music's `sections` (where the music changes: a
+  build, a drop). Make every scene exactly its length
+  (`Math.round(length * 30)` frames, in order) so the music fits the story, and
+  land the big moments (a reveal, a punchline, a number slamming in, a cut to
+  a new part) on the first frame of a section.
 - `src/videos/<slug>/durations.json`: each scene's voice clip length in seconds.
   Clips are at `public/videos/<slug>/voiceover/<id>.mp3`.
 - `src/videos/<slug>/facts.json`: real GitHub data per repo (`stars`, `license`,
