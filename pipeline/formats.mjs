@@ -49,6 +49,23 @@ export const FORMATS = {
       '"1/3", "2/3", "3/3" in the headline. The last scene asks which one viewers would try and to follow for next ' +
       "week's roundup.",
   },
+  brief: {
+    label: "Điểm tin sáng",
+    voiced: true,
+    style: "news-desk",
+    scenes: [5, 10],
+    words: [70, 180],
+    // The stories come from Hacker News (pipeline/write-script.mjs), so the
+    // trending pick never runs for it.
+    pick: "",
+    shape:
+      "Shape: a morning tech news brief, 30–50 seconds. Scene 1 opens with \"Điểm tin sáng\" and the day, and " +
+      "names the 3 stories in under 5 seconds. Each story gets 1–2 scenes: what happened, one concrete fact from " +
+      "its page (a number, a name, a date), and what it changes for Vietnamese developers or self-hosters. Number " +
+      'them "1/3", "2/3", "3/3" in the headline. Say only what the pages say: no guessing at causes or what ' +
+      "comes next, and say \"theo <site>\" for claims a company makes about itself. The last scene asks which " +
+      "story viewers care about most and to follow for tomorrow's brief.",
+  },
   tutorial: {
     label: "Hướng dẫn 30 giây",
     voiced: true,

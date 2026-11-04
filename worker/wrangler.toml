@@ -22,10 +22,11 @@ TIKTOK_DIRECT_POST = "false"
 AUTO_DAILY = "true"
 
 # Starts the daily videos on time (GitHub's own schedule runs late or not at
-# all): 09:00 and 17:30 in Vietnam, so each is in the TikTok drafts about 40
-# minutes later. What each one makes is in pipeline/schedule.json.
+# all): the news brief at 07:00 on weekdays, then 09:00 and 17:30 every day in
+# Vietnam, each ready about 40 minutes later. What each one makes is in
+# pipeline/schedule.json; src/index.js maps these strings to its slots.
 [triggers]
-crons = ["0 2 * * *", "30 10 * * *"]
+crons = ["0 0 * * MON-FRI", "0 2 * * *", "30 10 * * *"]
 
 # Finished videos go to the media bucket under tiktok-shorts/, served at
 # MEDIA_URL by the bucket's custom domain.

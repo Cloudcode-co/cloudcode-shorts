@@ -16,7 +16,7 @@ import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { FORMATS, formatOf } from "./formats.mjs";
 import { humanize } from "./humanize.mjs";
-import { repoBrief, resolveRepos, storyCandidates, trendingCandidates } from "./research.mjs";
+import { newsCandidates, repoBrief, resolveRepos, storyCandidates, trendingCandidates } from "./research.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { isWebUrl, pageBrief, webReader } from "./web.mjs";
 import { addFootage, footageOn } from "./footage.mjs";
@@ -84,6 +84,31 @@ if (formatId === "story" && !topic && !sourceUrls.length) {
   const story = stories.find((s) => s.url === chosen.url) ?? stories[0];
   console.log(`Story: ${story.title} (${story.url})`);
   sourceUrls.push(story.url);
+}
+// The morning brief with nothing given: Gemini picks the day's 3 stories from
+// Hacker News, and the video is about those pages.
+if (formatId === "brief" && !topic && !sourceUrls.length) {
+  const news = await newsCandidates();
+  if (news.length < 3) throw new Error(`only ${news.length} news stories from Hacker News`);
+  const chosen = await llmJson(
+    `Pick 3 stories for this morning's tech news brief on a Vietnamese TikTok channel for developers, ` +
+      `self-hosters and gamers, from the last day's top Hacker News posts below. Pick news a developer would ` +
+      `tell a friend about: a release, a launch, an outage, a security problem, a price or licence change, a ` +
+      `big company's move in software, AI or hosting. Three different subjects. Skip essays, opinion pieces, ` +
+      `"Ask HN", politics, crime, deaths and anything a general TikTok audience shouldn't see. Then write the ` +
+      `topic in Vietnamese as "Điểm tin sáng: <the three subjects in a few words each>". Skip stories already ` +
+      `covered: ${JSON.stringify(pastTopics.slice(-30))}.\n${JSON.stringify(news.slice(0, 40), null, 1)}`,
+    S("OBJECT", {
+      properties: { urls: S("ARRAY", { items: S("STRING") }), topic: S("STRING") },
+      required: ["urls", "topic"],
+    }),
+    0.5,
+  );
+  const urls = [...new Set(chosen.urls)].filter((u) => news.some((n) => n.url === u)).slice(0, 3);
+  for (const n of news) if (urls.length < 3 && !urls.includes(n.url)) urls.push(n.url);
+  for (const url of urls) console.log(`News: ${news.find((n) => n.url === url).title} (${url})`);
+  sourceUrls.push(...urls);
+  topic = chosen.topic?.trim() || "Điểm tin sáng";
 }
 // With no topic and no SOURCE, the oldest idea from ideas/ that no video used.
 // Only its topic, angle and source links are used: its facts are checked

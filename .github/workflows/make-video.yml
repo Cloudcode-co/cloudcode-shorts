@@ -20,7 +20,7 @@ on:
         required: false
         default: ""
       format:
-        description: "Kiểu: để trống (giải thích), quiz, news, tutorial, top5, story, meme hoặc chat"
+        description: "Kiểu: để trống (giải thích), brief (điểm tin sáng), quiz, news, tutorial, top5, story, meme hoặc chat"
         required: false
         default: ""
       notes:
@@ -81,7 +81,7 @@ jobs:
           NOTES: ${{ inputs.notes || github.event.client_payload.notes }}
           STYLE: ${{ inputs.style || github.event.client_payload.style }}
           FORMAT: ${{ inputs.format || github.event.client_payload.format }}
-          # "morning" or "afternoon" for the daily videos (pipeline/schedule.json).
+          # "early", "morning" or "afternoon" for the daily videos (pipeline/schedule.json).
           SCHEDULED: ${{ github.event.client_payload.scheduled }}
           REVISE: ${{ inputs.revise || github.event.client_payload.revise }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}

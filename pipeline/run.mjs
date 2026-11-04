@@ -32,19 +32,21 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
-// A daily run (SCHEDULED: "morning" or "afternoon", from the bot worker's
-// crons) makes what pipeline/schedule.json lists for that slot of this
-// weekday in Vietnam (UTC+7).
+// A daily run (SCHEDULED: "early", "morning" or "afternoon", from the bot
+// worker's crons) makes what pipeline/schedule.json lists for that slot of
+// this weekday in Vietnam (UTC+7), and nothing when the day leaves it out.
+const slot = (process.env.SCHEDULED ?? "").trim();
 const scheduled = () => {
-  const slot = (process.env.SCHEDULED ?? "").trim();
-  if (slot !== "morning" && slot !== "afternoon") return "";
+  if (!slot) return "";
   const vn = new Date(Date.now() + 7 * 3600 * 1000);
   const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][vn.getUTCDay()];
   const pick = readJson("pipeline/schedule.json", {}).days?.[day]?.[slot] ?? "";
-  if (pick) console.log(`Schedule: ${day} ${slot} → ${pick}`);
+  console.log(pick ? `Schedule: ${day} ${slot} → ${pick}` : `Schedule: nothing for ${day} ${slot}`);
   return pick;
 };
-const format = formatOf(process.env.FORMAT?.trim() || scheduled());
+const pick = process.env.FORMAT?.trim() || scheduled();
+if (slot && !pick) process.exit(0);
+const format = formatOf(pick);
 // The format's own look, unless the run asked for one.
 if (!revise && !style && FORMATS[format].style) process.env.STYLE = FORMATS[format].style;
 // The builder asked for in this run (BUILDER also carries the repo default).
