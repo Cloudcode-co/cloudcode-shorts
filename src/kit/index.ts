@@ -5,6 +5,7 @@ export * from "./FallbackVideo";
 export * from "./GreenScreen";
 export * from "./Meme";
 export * from "./MemeCaption";
+export * from "./transitions";
 export * from "./Terminal";
 export * from "./theme";
 export * from "./timing";

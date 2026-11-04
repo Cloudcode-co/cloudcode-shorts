@@ -209,6 +209,15 @@ A placeholder `Video.tsx` is already there; replace it.
   the background, not the words.
 - No empty or placeholder items: every bullet, row and card has its text; drop
   the slot instead of leaving a lone marker.
+- **Transitions** between scenes, not only hard cuts: `<TransitionSeries>` from
+  `@remotion/transitions` (see the remotion-markup skill's transitions.md) with
+  its fade, slide, wipe, flip or clockWipe, or the kit's TikTok ones: `whip()`
+  (a fast pan), `zoomPunch()` (the next shot slams in) and `flash()`. Keep them
+  short (8–14 frames) and pick what the art direction and the moment call for:
+  a zoom punch or flash on a reveal or punchline, a whip between list items, a
+  hard cut where the style says so. A transition overlaps the two scenes, so add
+  its length to the scene before it: every scene still starts on its
+  timeline.json `start` and the music changes on the cut.
 - Every scene its own layout. One template (headline, stacked cards, a badge)
   repeated for every scene reads as a slideshow; vary scale, position and what
   carries the scene (a logo, a number, a terminal, a diagram).
