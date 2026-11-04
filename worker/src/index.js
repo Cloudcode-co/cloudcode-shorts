@@ -9,6 +9,7 @@
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
 //                      (Authorization: Bearer UPLOAD_SECRET); replies with its
 //                      public URL on MEDIA_URL
+//   /, /login, /app...   the Cloudcode Shorts website with TikTok login (site.js)
 //   POST /ideas        a video idea from an outside researcher (Muse), as JSON
 //                      { topic, angle, sources: [urls], notes } with
 //                      Authorization: Bearer IDEAS_SECRET; saved to the repo
@@ -18,7 +19,10 @@
 // DISCORD_PUBLIC_KEY and optionally ALLOWED_DISCORD_USER_IDS (comma-separated;
 // when set, only those users may use the bot, else any server admin), and for
 // Telegram TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, ALLOWED_CHAT_ID.
-// Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA.
+// Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA. For the website:
+// secrets TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, KV binding TIKTOK.
+
+import { site } from "./site.js";
 
 // Fires repository_dispatch; the workflow reads what to make (topic, voice,
 // notes, or revise: a video to rework) and where to send the result (Discord
@@ -285,6 +289,8 @@ export default {
     if (kind === "upload" && KEY.test(key) && request.method === "PUT") {
       return upload(request, env, key);
     }
+    const page = await site(request, env);
+    if (page) return page;
     if (request.method !== "POST") return new Response("not found", { status: 404 });
     if (pathname === "/discord") return discord(request, env, ctx);
     if (pathname === "/telegram") return telegram(request, env);

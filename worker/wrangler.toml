@@ -4,6 +4,11 @@ compatibility_date = "2026-10-01"
 # Ntncar311@gmail.com's Account, which owns the media bucket.
 account_id = "b0fd230e76320e80d31965568a9a7ba7"
 
+# The Cloudcode Shorts website (src/site.js); the bot keeps workers.dev too.
+routes = [{ pattern = "shorts.cloudcode.io.vn", custom_domain = true }]
+# Discord, Muse and the pipeline call the workers.dev address.
+workers_dev = true
+
 [vars]
 # The GitHub repository whose "Make video" workflow the bot starts.
 GITHUB_REPO = "Cloudcode-co/cloudcode-shorts"
@@ -15,3 +20,8 @@ MEDIA_URL = "https://media.cloudcode.io.vn"
 [[r2_buckets]]
 binding = "MEDIA"
 bucket_name = "cloudcode"
+
+# TikTok tokens and website sessions (src/tiktok.js, src/site.js).
+[[kv_namespaces]]
+binding = "TIKTOK"
+id = "95fa493884684286bde1647eaaeec8b1"
