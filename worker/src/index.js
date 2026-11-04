@@ -48,9 +48,10 @@ const dispatch = (env, job, replyTo) =>
     body: JSON.stringify({ event_type: "make-video", client_payload: { ...job, ...replyTo } }),
   });
 
-const queued = (res, { topic, source, voice, notes, revise, style, builder }) => {
+const queued = (res, { topic, source, voice, notes, revise, style, builder, format }) => {
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
   const extra = [
+    format === "meme" && "kiểu: meme",
     source && `nguồn: ${source}`,
     style && `phong cách: ${style}`,
     voice && `giọng: ${voice}`,
@@ -217,6 +218,7 @@ const discord = async (request, env, ctx) => {
     style: option("phongcach", 200),
     revise: command === "sua" ? option("video", 80) : "",
     builder: option("dung", 10),
+    format: command === "video" ? option("kieu", 20) : "",
   };
   if (command === "sua" && !job.voice && !job.notes && !job.style && !job.builder) {
     return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach`, `giong` hoặc `dung`.", flags: 64 } });

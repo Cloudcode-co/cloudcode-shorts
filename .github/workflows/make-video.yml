@@ -19,6 +19,10 @@ on:
         description: "Phong cách: id/tên trong pipeline/art-directions.json hoặc mô tả tự do (để trống: bốc ngẫu nhiên)"
         required: false
         default: ""
+      format:
+        description: "Kiểu: để trống (video giải thích) hoặc meme"
+        required: false
+        default: ""
       notes:
         description: "Yêu cầu thêm cho kịch bản và hình (nền, màu, nhịp...)"
         required: false
@@ -80,6 +84,7 @@ jobs:
           VOICE: ${{ inputs.voice || github.event.client_payload.voice }}
           NOTES: ${{ inputs.notes || github.event.client_payload.notes }}
           STYLE: ${{ inputs.style || github.event.client_payload.style }}
+          FORMAT: ${{ inputs.format || github.event.client_payload.format }}
           REVISE: ${{ inputs.revise || github.event.client_payload.revise }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}

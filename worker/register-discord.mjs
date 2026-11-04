@@ -62,6 +62,16 @@ const commands = [
         required: false,
         max_length: 500,
       },
+      {
+        type: 3,
+        name: "kieu",
+        description: "Kiểu video (để trống: giải thích có lồng tiếng)",
+        required: false,
+        choices: [
+          { name: "Giải thích", value: "explainer" },
+          { name: "Meme (mèo + chữ, không lồng tiếng)", value: "meme" },
+        ],
+      },
       style,
       voice,
       notes("Yêu cầu thêm: nền, màu, nhịp, độ dài..."),

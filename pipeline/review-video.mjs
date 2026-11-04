@@ -74,7 +74,8 @@ export const reviewVideo = async (slug, direction) => {
     const listed = picks
       .map(
         (p, i) =>
-          `Image ${i + 1}: ${p.what}. Voice: "${p.scene.text.replace(/\[[^\]]*\]/g, "").trim()}" ` +
+          `Image ${i + 1}: ${p.what}. ` +
+          (p.scene.text ? `Voice: "${p.scene.text.replace(/\[[^\]]*\]/g, "").trim()}" ` : "") +
           `Headline: "${p.scene.headline}".${p.scene.lines?.length ? ` Lines: ${p.scene.lines.join(" / ")}.` : ""}`,
       )
       .join("\n");

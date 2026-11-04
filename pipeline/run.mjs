@@ -10,7 +10,8 @@
 // Renders only on CI or with --render. Env (the GitHub workflow passes these):
 // TOPIC works like the first argument; VOICE is an ElevenLabs voice name, id
 // or link; STYLE an art direction (see build-video.mjs); NOTES are requests for the script writer and Claude; REVISE is
-// the slug of a video to rework.
+// the slug of a video to rework; FORMAT=meme makes a meme skit (pipeline/write-meme.mjs)
+// with no voiceover, in the meme-skit style unless STYLE says otherwise.
 import { spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { readJson, run, runUrl, writeJson } from "./lib.mjs";
@@ -30,6 +31,7 @@ const voice = (process.env.VOICE ?? "").trim();
 const notes = (process.env.NOTES ?? "").trim();
 const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
+const format = (process.env.FORMAT ?? "").trim() === "meme" ? "meme" : "explainer";
 // The builder asked for in this run (BUILDER also carries the repo default).
 const chosenBuilder = (process.env.BUILDER_CHOSEN ?? "").trim();
 
@@ -56,6 +58,12 @@ const setSlug = (value) => {
 
 // A new video: script, voice, music, Claude's build.
 const makeNew = () => {
+  if (format === "meme") {
+    const slug = setSlug(nodeResult("pipeline/write-meme.mjs", topic ? [topic] : []));
+    run("node", ["scripts/music.mjs", slug]);
+    if (!style) process.env.STYLE = "meme-skit";
+    return { slug, build: { ...nodeResult("pipeline/build-video.mjs", [slug]), format } };
+  }
   const slug = setSlug(nodeResult("pipeline/write-script.mjs", topic ? [topic] : []));
   run("node", ["scripts/voiceover.mjs", slug]);
   run("node", ["scripts/music.mjs", slug]);
@@ -76,7 +84,8 @@ const rework = async () => {
   await restoreImages(slug);
   await restoreMemes(slug);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
-  if (voice) {
+  const isMeme = readJson(`src/videos/${slug}/script.json`).format === "meme";
+  if (voice && !isMeme) {
     const { voiceId, name } = await resolveVoice(voice);
     console.log(`Voice: ${name}`);
     const file = `src/videos/${slug}/script.json`;
@@ -102,7 +111,7 @@ try {
   await sendMessage(
     (revise
       ? `Bắt đầu sửa video ${revise}: ${asked}`
-      : `Bắt đầu làm video: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
+      : `Bắt đầu làm ${format === "meme" ? "meme" : "video"}: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
       (runUrl ? `\n${runUrl}` : ""),
   );
 

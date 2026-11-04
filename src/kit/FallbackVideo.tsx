@@ -110,11 +110,14 @@ export const makeFallbackVideo = ({
   scenes,
   durations,
   repos,
+  silent = false,
 }: {
   slug: string;
   scenes: ScriptScene[];
   durations: Record<string, number>;
   repos: RepoFact[];
+  // A meme: no voiceover, louder music.
+  silent?: boolean;
 }): VideoDef => {
   const accent = ACCENTS[[...slug].reduce((n, c) => n + c.charCodeAt(0), 0) % ACCENTS.length];
   const lens = scenes.map((s) =>
@@ -146,7 +149,7 @@ export const makeFallbackVideo = ({
               len={lens[i]}
               first={i === 0}
             />
-            <Voice slug={slug} id={s.id} />
+            {!silent && <Voice slug={slug} id={s.id} />}
             <Sfx id={i === 0 ? "thud" : "whoosh"} volume={i === 0 ? 0.5 : 0.35} />
             {s.commands.length > 0 && (
               <Sfx id="typing" at={TYPE_DELAY} frames={typingFrames(s.commands)} volume={0.25} />
@@ -155,7 +158,7 @@ export const makeFallbackVideo = ({
           </Series.Sequence>
         ))}
       </Series>
-      <Music slug={slug} total={total} voiceRanges={voiceRanges} />
+      <Music slug={slug} total={total} voiceRanges={silent ? [] : voiceRanges} level={silent ? 0.55 : undefined} />
       {guide && <TikTokGuide />}
     </AbsoluteFill>
   );

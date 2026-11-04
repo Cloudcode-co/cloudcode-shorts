@@ -28,12 +28,14 @@ const MUSIC_UNDER_VOICE = 0.08;
 const DUCK_RAMP = 10;
 
 // Background track public/videos/<slug>/music.mp3, ducked while the voice
-// talks (`voiceRanges` = [start, end] frames) and faded in and out.
+// talks (`voiceRanges` = [start, end] frames) and faded in and out. `level`
+// replaces the volume between lines: about 0.55 for a meme with no voice.
 export const Music: React.FC<{
   slug: string;
   total: number;
   voiceRanges: [number, number][];
-}> = ({ slug, total, voiceRanges }) => {
+  level?: number;
+}> = ({ slug, total, voiceRanges, level = MUSIC_UP }) => {
   const volume = (f: number) => {
     const duck = Math.max(
       0,
@@ -48,7 +50,7 @@ export const Music: React.FC<{
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
     });
-    return (MUSIC_UP - (MUSIC_UP - MUSIC_UNDER_VOICE) * duck) * fade;
+    return (level - (level - MUSIC_UNDER_VOICE) * duck) * fade;
   };
   return <Audio src={videoAsset(slug, "music.mp3")} volume={volume} name="Music" />;
 };

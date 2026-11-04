@@ -30,6 +30,18 @@ slug, an art direction and a pacing.
 - `src/videos/hermes-vs-openclaw/`: a finished, hand-checked video for reference.
   Learn how it times shots to voice; do not copy its look.
 
+### Memes
+
+When script.json has `"format": "meme"` the video is a meme skit, not an
+explainer. There is no voiceover: never use `<Voice>`. Each scene's `headline` is
+the caption on screen for `durations[id]` seconds (the whole line, word for word),
+its `reaction` and `place` say what the cats do and where. facts.json already
+lists a GIPHY sticker per scene under `memes` (by `scene`) and a background photo
+per place under `images`; fetch others with `npm run meme` / `npm run image`.
+Play the music louder: `<Music slug total voiceRanges={[]} level={0.55} />`.
+The opening shot still carries `<Brand />`. The joke lives in the captions and the
+cats; keep everything else out of the way.
+
 ## Skills
 
 Load these with the Skill tool before writing code, and follow them:
