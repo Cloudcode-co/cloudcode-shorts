@@ -15,6 +15,7 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { llmJson, llmModels, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { FORMATS, formatOf } from "./formats.mjs";
+import { humanize } from "./humanize.mjs";
 import { repoBrief, resolveRepos, storyCandidates, trendingCandidates } from "./research.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { isWebUrl, pageBrief, webReader } from "./web.mjs";
@@ -390,6 +391,8 @@ const words = script.scenes.reduce((n, s) => n + s.text.replace(/\[[^\]]+\]/g, "
 if (words < format.words[0] || words > format.words[1]) problems.push(`${words} spoken words`);
 script.hashtags = script.hashtags.slice(0, 5).map((h) => (h.startsWith("#") ? h : `#${h}`));
 if (problems.length) throw new Error(`script rejected: ${problems.join("; ")}`);
+// The humanizer pass over the voice lines, on-screen words and post caption.
+Object.assign(script, await humanize(script, { voiced: true }));
 
 let slug = slugify(script.slug || topic) || `video-${today}`;
 for (let n = 2; existsSync(`src/videos/${slug}`); n++) slug = `${slugify(script.slug || topic)}-${n}`;

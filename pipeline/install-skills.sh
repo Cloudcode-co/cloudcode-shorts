@@ -71,3 +71,12 @@ for skill in ui-ux-pro-max; do
   echo "| $skill | copied from the maintainer's local \`~/.agents/skills/$skill\` (SKILL.md, data, scripts) | as published by its authors |" >> "$notice"
   echo "skill: $skill (local)"
 done
+
+# The humanizer's rules, which pipeline/humanize.mjs adapts for the script pass:
+# its repo keeps the skill at the root.
+mkdir -p "$dest/humanizer"
+for file in SKILL.md LICENSE; do
+  curl -fsSL "https://raw.githubusercontent.com/blader/humanizer/HEAD/$file" -o "$dest/humanizer/$file"
+done
+echo "| humanizer | https://github.com/blader/humanizer | LICENSE from blader/humanizer (MIT) |" >> "$notice"
+echo "skill: humanizer (blader/humanizer)"

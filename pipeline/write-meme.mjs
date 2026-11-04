@@ -16,6 +16,7 @@ import { llmJson, readJson, report, slugify, writeJson } from "./lib.mjs";
 import { addImage } from "./images.mjs";
 import { addMeme, memesOn } from "./memes.mjs";
 import { formatOf } from "./formats.mjs";
+import { humanize } from "./humanize.mjs";
 
 const S = (type, extra = {}) => ({ type, ...extra });
 const topic = (process.argv.slice(2).join(" ") || process.env.TOPIC || "").trim();
@@ -165,6 +166,11 @@ const scenes = beats.map((b, i) => ({
 const durations = Object.fromEntries(
   beats.map((b, i) => [`s${i + 1}`, Number(Math.min(6, Math.max(chat ? 1.5 : 2.5, Number(b.seconds) || 3)).toFixed(2))]),
 );
+// The humanizer pass over the captions, title and post caption.
+const polished = await humanize({ title: meme.title, caption: meme.caption, scenes }, { voiced: false });
+scenes.splice(0, scenes.length, ...polished.scenes);
+meme.title = polished.title;
+meme.caption = polished.caption;
 writeJson(`src/videos/${slug}/script.json`, {
   slug,
   format: chat ? "chat" : "meme",
