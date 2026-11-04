@@ -1,0 +1,119 @@
+{
+  "slug": "canvas-fingerprinting-anti-llm",
+  "format": "story",
+  "topic": "Tìm hiểu Canvas Fingerprinting và kỹ thuật Anti-LLM Obfuscation trong JavaScript bằng Playwright",
+  "title": "Script anti-bot dọa AI từ chối đọc mã thế nào?",
+  "caption": "Khám phá câu chuyện anti-bot dùng canvas fingerprinting và bẫy anti-LLM khiến mô hình AI sợ hãi không dám dịch ngược code!",
+  "hashtags": [
+    "#canvasfingerprinting",
+    "#playwright",
+    "#deobfuscate",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Suspenseful synthwave tech documentary background beat, pulsing bassline, subtle digital clicks, minimal electronic rhythm, no vocals",
+  "sources": [
+    "https://nullpt.rs/fingerprinting-bioweapons",
+    "https://nullpt.rs/",
+    "https://nullpt.rs/compiling-browser-to-bypass-antibot-measures",
+    "https://nullpt.rs/evading-anti-debugging-techniques",
+    "https://nullpt.rs/reversing-botid",
+    "https://nullpt.rs/tackling-javascript-client-side-security-pt-1"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Script JavaScript dọa AI từ chối đọc mã, anh em tin được không?",
+      "headline": "Script dọa AI từ chối code",
+      "lines": [
+        "Script JavaScript dọa AI",
+        "Canvas fingerprinting & Playwright"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Một kỹ sư muốn tìm hiểu canvas fingerprinting diện rộng. Anh dùng Playwright quét mười nghìn website từ danh sách Tranco, hook thẳng vào hàm toDataURL để lọc dữ liệu.",
+      "headline": "Quét 10.000 web bằng Playwright",
+      "lines": [
+        "Quét 10.000 web Tranco",
+        "Hook canvas toDataURL",
+        "Lọc navigator.webdriver"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room data center"
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Kết quả gom được một nghìn không trăm ba mươi ba canvas trên trang fingerprint.garden. Trong đó, một canvas vẽ sóng cực đẹp dẫn thẳng tới script của servicepipe.tech.",
+      "headline": "1.033 canvas trên fingerprint.garden",
+      "lines": [
+        "Triển lãm 1.033 canvas",
+        "Trang web fingerprint.garden",
+        "Script từ servicepipe.tech"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[excited] Soi vào mã nguồn, anh giật mình thấy các tên hàm về liều độc ricin. Anh em biết để làm gì không? Đây là bẫy anti-LLM nhằm kích hoạt rào cản an toàn AI.",
+      "headline": "Bẫy an toàn AI trong code",
+      "lines": [
+        "Tên hàm ricin giả mạo",
+        "Kỹ thuật Anti-LLM Obfuscation",
+        "Kích hoạt rào cản AI"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Đưa code cho Astra hay Daybreak Blue, cả hai lập tức từ chối vì lo ngại rủi ro sinh học. Nhưng đổi sang GLM-5.3 thì AI này lại phân tích bình thường!",
+      "headline": "Astra từ chối, GLM-5.3 vượt qua",
+      "lines": [
+        "Astra & Daybreak Blue từ chối",
+        "GLM-5.3 xử lý thành công"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[laughs] Đào sâu hơn, script còn giấu prompt trong chuỗi Unicode vô hình. Nó giải mã bằng phép trừ code point chín trăm mười bảy nghìn năm trăm linh tư, chứa cả từ khóa kiểm duyệt.",
+      "headline": "Unicode vô hình và jailbreak",
+      "lines": [
+        "Ký tự Unicode vô hình",
+        "Trừ code point 917504",
+        "Bẫy từ khóa kiểm duyệt"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[warmly] Muốn dịch ngược JavaScript an toàn, anh em hãy dùng Babel xử lý AST thay vì phụ thuộc AI. Follow để nghe câu chuyện tiếp theo nhé!",
+      "headline": "Bài học deobfuscate JavaScript",
+      "lines": [
+        "Dùng Babel AST phân tích code",
+        "Follow để nghe câu chuyện tiếp theo"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "smiling programmer at laptop"
+    }
+  ]
+}
