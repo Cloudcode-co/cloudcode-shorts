@@ -54,7 +54,10 @@ const dispatch = (env, job, replyTo) =>
     }),
   });
 
-const queued = (res, { topic, source, voice, notes, revise, style, builder, format, music_url, music_start }) => {
+const musicOf = (url, start, off) => (url || start || off ? { url, start, off } : "");
+
+const queued = (res, { topic, source, voice, notes, revise, style, builder, format, music }) => {
+  const { url: music_url, start: music_start, off: music_off } = music || {};
   if (!res.ok) return `Không gọi được GitHub (${res.status}). Kiểm tra GITHUB_TOKEN của worker.`;
   const extra = [
     FORMATS[format] && format !== "explainer" && `kiểu: ${FORMATS[format].label}`,
@@ -64,6 +67,7 @@ const queued = (res, { topic, source, voice, notes, revise, style, builder, form
     notes && `yêu cầu: ${notes}`,
     builder && `dựng: ${builder === "beag" ? "Gemini" : "Claude"}`,
     music_url && `nhạc: file bạn gửi${Number(music_start) ? `, từ giây ${music_start}` : ""}`,
+    !music_url && music_off === "1" && "không nhạc: chọn sound trong app TikTok",
   ]
     .filter(Boolean)
     .join("\n");
@@ -226,9 +230,14 @@ const discord = async (request, env, ctx) => {
     revise: command === "sua" ? option("video", 80) : "",
     builder: option("dung", 10),
     format: command === "video" ? option("kieu", 20) : "",
-    // An attached track: its Discord CDN link, which the run downloads.
-    music_url: interaction.data.resolved?.attachments?.[option("nhac", 30)]?.url ?? "",
-    music_start: option("nhac_tu", 10),
+    // One payload property for the music, under GitHub's limit of 10: an
+    // attached track (its Discord CDN link, which the run downloads), where to
+    // start it, and "1"/"0" to leave the music out or keep it.
+    music: musicOf(
+      interaction.data.resolved?.attachments?.[option("nhac", 30)]?.url ?? "",
+      option("nhac_tu", 10),
+      { true: "1", false: "0" }[option("nhac_tiktok", 5)] ?? "",
+    ),
   };
 
   // Discord wants an answer within 3s: defer, then edit the reply once

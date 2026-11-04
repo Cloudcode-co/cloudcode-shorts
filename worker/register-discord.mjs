@@ -54,6 +54,12 @@ const music = [
     min_value: 0,
     max_value: 600,
   },
+  {
+    type: 5, // boolean
+    name: "nhac_tiktok",
+    description: "Không gắn nhạc nền, để chọn sound trong app TikTok (Có) hoặc vẫn gắn nhạc (Không)",
+    required: false,
+  },
 ];
 const notes = (description) => ({
   type: 3,

@@ -39,6 +39,11 @@ on:
         description: "Link file nhạc của bạn thay cho nhạc tự tạo (để trống: nhạc ElevenLabs)"
         required: false
         default: ""
+      music_off:
+        description: "Không gắn nhạc nền, để chọn sound trong app TikTok"
+        type: boolean
+        required: false
+        default: false
   # Sent by the chat bot worker (worker/), from Discord or Telegram.
   repository_dispatch:
     types: [make-video]
@@ -91,8 +96,11 @@ jobs:
           SCHEDULED: ${{ github.event.client_payload.scheduled }}
           REVISE: ${{ inputs.revise || github.event.client_payload.revise }}
           # The owner's own track instead of generated music (scripts/music.mjs).
-          MUSIC_URL: ${{ inputs.music_url || github.event.client_payload.music_url }}
-          MUSIC_START: ${{ github.event.client_payload.music_start }}
+          MUSIC_URL: ${{ inputs.music_url || github.event.client_payload.music.url }}
+          MUSIC_START: ${{ github.event.client_payload.music.start }}
+          # "1" leaves the music out (a sound is picked in the TikTok app); the
+          # MUSIC_OFF variable sets it for every run, "0" from /video turns it back on.
+          MUSIC_OFF: ${{ inputs.music_off && '1' || github.event.client_payload.music.off || vars.MUSIC_OFF }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_MODEL: ${{ vars.LLM_MODEL }}

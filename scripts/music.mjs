@@ -14,7 +14,8 @@
 // is used), that track is used instead from MUSIC_START seconds in, looped or
 // cut to the video's length (the kit's <Music> fades it out). Without
 // ElevenLabs (no key, or it refuses) an earlier video's generated track from
-// the repo is reused the same way.
+// the repo is reused the same way. With MUSIC_OFF the track is silence, for
+// a sound picked in the TikTok app instead (MUSIC_URL still wins).
 //
 //   node --env-file=.env scripts/music.mjs <slug>
 //   node --env-file=.env scripts/music.mjs <slug> 114     # exact length in seconds
@@ -155,6 +156,23 @@ if (custom) {
   const src = `public/videos/${slug}/music-source`;
   writeFileSync(src, Buffer.from(await res.arrayBuffer()));
   useTrack(src, Math.max(0, Number(process.env.MUSIC_START) || 0), true);
+}
+if (/^(1|true|yes)$/i.test(process.env.MUSIC_OFF ?? "")) {
+  if (plan) writeFileSync(`src/videos/${slug}/timeline.json`, JSON.stringify(plan, null, 2) + "\n");
+  const total = plan ? plan.total + 2 : lengthMs / 1000;
+  const r = spawnSync(
+    "npx",
+    [
+      "remotion", "ffmpeg", "-y", "-v", "error",
+      "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo", "-t", total.toFixed(2),
+      "-c:a", "libmp3lame", "-b:a", "64k",
+      `public/videos/${slug}/music.mp3`,
+    ],
+    { stdio: "inherit", shell: process.platform === "win32" },
+  );
+  if (r.status !== 0) throw new Error("music: ffmpeg could not write silence");
+  console.log(`no music: public/videos/${slug}/music.mp3 is ${total.toFixed(1)}s of silence`);
+  process.exit(0);
 }
 if (!key) reuse("ELEVENLABS_API_KEY is not set");
 

@@ -34,6 +34,8 @@ const style = (process.env.STYLE ?? "").trim();
 const revise = (process.env.REVISE ?? "").trim();
 // The owner's own track for the video instead of generated music.
 const music = (process.env.MUSIC_URL ?? "").trim();
+// No music at all, for a sound picked in the TikTok app (scripts/music.mjs).
+const musicOff = /^(1|true|yes)$/i.test(process.env.MUSIC_OFF ?? "");
 // A daily run (SCHEDULED: "early", "morning" or "afternoon", from the bot
 // worker's crons) makes what pipeline/schedule.json lists for that slot of
 // this weekday in Vietnam (UTC+7), and nothing when the day leaves it out.
@@ -106,7 +108,7 @@ const rework = async () => {
     run("node", ["scripts/voiceover.mjs", slug, "--force"]);
   }
   // The owner's own track replaces the music (scripts/music.mjs reads MUSIC_URL).
-  if (music) run("node", ["scripts/music.mjs", slug]);
+  if (music || musicOff) run("node", ["scripts/music.mjs", slug]);
   const build = notes || style || chosenBuilder
     ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
     : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };
@@ -118,6 +120,7 @@ const asked = [
   voice && `giọng ${voice}`,
   chosenBuilder && `dựng: ${chosenBuilder === "beag" ? "Gemini" : "Claude"}`,
   music && "nhạc riêng",
+  !music && musicOff && "không nhạc (thêm sound trong TikTok)",
   notes,
 ]
   .filter(Boolean)
@@ -184,7 +187,9 @@ try {
       } else if (draft.mode === "post") {
         tiktok = "TikTok: đã đăng ở chế độ riêng tư, caption có sẵn. Đổi sang Mọi người để công khai.";
       } else {
-        tiktok = "TikTok: đã vào nháp. Dán caption ở tin dưới rồi đăng.";
+        tiktok = musicOff && !music
+          ? "TikTok: đã vào nháp, chưa có nhạc. Bấm Add sound chọn nhạc, dán caption ở tin dưới rồi đăng."
+          : "TikTok: đã vào nháp. Dán caption ở tin dưới rồi đăng.";
       }
     }
     await sendResult(out, url, [title, tiktok, footer].filter(Boolean).join("\n\n"), caption, { key, ping: Boolean(url) });
