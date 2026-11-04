@@ -27,12 +27,17 @@ const stills = async (slug, script) => {
     picks.push({ frame: Math.min(last, Math.round(at + length / 2)), what: `the middle of scene ${scene.id}`, scene });
     at += length;
   }
+  // At most 8 stills (the opening and scenes spread evenly), so the request stays
+  // well inside the gateway's 100 s limit.
+  const MAX = 8;
+  const step = (picks.length - 1) / (MAX - 1);
+  const chosen = picks.length <= MAX ? picks : Array.from({ length: MAX }, (_, i) => picks[Math.round(i * step)]);
   const dir = `out/review/${slug}`;
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(dir, { recursive: true });
-  for (const pick of picks) {
+  for (const pick of chosen) {
     pick.file = `${dir}/frame-${String(pick.frame).padStart(5, "0")}.jpeg`;
-    // Half size keeps ten stills small enough for one request.
+    // A third of full size is enough to read layout and text.
     await renderStill({
       composition,
       serveUrl,
@@ -41,11 +46,11 @@ const stills = async (slug, script) => {
       inputProps,
       chromiumOptions,
       imageFormat: "jpeg",
-      jpegQuality: 80,
-      scale: 0.5,
+      jpegQuality: 70,
+      scale: 0.36,
     });
   }
-  return picks;
+  return chosen;
 };
 
 const schema = {
@@ -80,7 +85,7 @@ export const reviewVideo = async (slug, direction) => {
       )
       .join("\n");
     const answer = await llmJson(
-      `You review stills from a Vietnamese TikTok short (1080×1920, shown at half size) before it is posted. ` +
+      `You review stills from a Vietnamese TikTok short (1080×1920, shown at a third of full size) before it is posted. ` +
         `Its art direction: ${direction}. The tinted purple bands at the top and bottom, the red-edged side strips and the round grey buttons on the right are TikTok's ` +
         `tabs, buttons and caption area drawn for checking; they are not part of the video, and content under them is a problem.\n\n${listed}\n\n` +
         `List only clear problems a viewer would notice, the ones worth rebuilding for:\n` +
