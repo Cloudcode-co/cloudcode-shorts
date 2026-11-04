@@ -9,7 +9,10 @@
 //                      Gemini pick, /id replies with the chat id
 //   PUT  /upload/<key> store a video under tiktok-shorts/ in the bucket
 //                      (Authorization: Bearer UPLOAD_SECRET); replies with its
-//                      public URL on MEDIA_URL
+//                      public URL on MEDIA_URL. The whole bucket stays under
+//                      STORAGE_BUDGET_MB (default 4096): the oldest videos are
+//                      deleted to make room; nothing outside tiktok-shorts/ is
+//                      touched
 //   /, /login, /app...   the Cloudcode Shorts website with TikTok login (site.js)
 //   POST /tiktok/draft  { key } sends that video to the connected TikTok account's
 //                      drafts and waits for TikTok (Bearer UPLOAD_SECRET); the
@@ -275,10 +278,38 @@ const KEY = /^[a-z0-9-]{1,80}\/[A-Za-z0-9._-]{1,120}$/;
 // Every video lives under this prefix; the bucket also serves the site's media.
 const PREFIX = "tiktok-shorts/";
 
+// Makes room for `incoming` bytes: deletes the oldest videos until the whole
+// bucket, plus the new file, fits the budget. False when even deleting every
+// video would not make it fit.
+const makeRoom = async (env, incoming) => {
+  const budget = (Number(env.STORAGE_BUDGET_MB) || 4096) * 1024 * 1024;
+  const all = [];
+  let cursor;
+  do {
+    const page = await env.MEDIA.list({ cursor, limit: 1000 });
+    all.push(...page.objects);
+    cursor = page.truncated ? page.cursor : undefined;
+  } while (cursor);
+  let total = all.reduce((n, o) => n + o.size, 0) + incoming;
+  const videos = all.filter((o) => o.key.startsWith(PREFIX)).sort((a, b) => a.uploaded - b.uploaded);
+  const gone = [];
+  while (total > budget && videos.length) {
+    const old = videos.shift();
+    gone.push(old.key);
+    total -= old.size;
+  }
+  if (total > budget) return false;
+  if (gone.length) await env.MEDIA.delete(gone);
+  return true;
+};
+
 const upload = async (request, env, key) => {
   if (!env.UPLOAD_SECRET || request.headers.get("Authorization") !== `Bearer ${env.UPLOAD_SECRET}`) {
     return new Response("forbidden", { status: 403 });
   }
+  const size = Number(request.headers.get("Content-Length"));
+  if (!size) return new Response("Content-Length required", { status: 411 });
+  if (!(await makeRoom(env, size))) return new Response("over the storage budget", { status: 507 });
   await env.MEDIA.put(PREFIX + key, request.body, {
     httpMetadata: { contentType: request.headers.get("Content-Type") ?? "video/mp4" },
   });
