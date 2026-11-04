@@ -1,0 +1,180 @@
+{
+  "slug": "postiz-tu-host-ai-agent-social-media",
+  "topic": "Postiz: tự host công cụ lên lịch đăng TikTok, YouTube, Discord bằng AI agent",
+  "title": "Muốn AI agent tự lên lịch đăng bài mạng xã hội?",
+  "caption": "Tự host Postiz để lên lịch đăng bài tới 34 nền tảng mạng xã hội qua MCP và AI agent hoàn toàn miễn phí vĩnh viễn.",
+  "hashtags": [
+    "#postiz",
+    "#selfhosted",
+    "#mcp",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Upbeat energetic tech presentation beat with light synth arpeggios, driving kick drum, modern lo-fi elements, no vocals",
+  "sources": [
+    "https://github.com/gitroomhq/postiz-app",
+    "https://github.com/brightbeanxyz/brightbean-studio",
+    "https://github.com/mehmetkirkoca/social-media-manager",
+    "https://docs.postiz.com/general/introduction",
+    "https://docs.postiz.com/general/quickstart",
+    "https://docs.postiz.com/general/agents",
+    "https://docs.postiz.com/general/platforms/overview",
+    "https://docs.postiz.com/general/channels/connect"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em muốn AI agent tự lên lịch đăng bài cho mình không?",
+      "headline": "AI agent tự động lên lịch bài đăng",
+      "lines": [
+        "Đăng bài tự động",
+        "Điều khiển bằng AI"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": "developer at desk typing"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Thử ngay Postiz! Đây là công cụ mã nguồn mở AGPL-3.0, tự host miễn phí vĩnh viễn và không hề bị khóa tính năng.",
+      "headline": "Postiz mã nguồn mở AGPL-3.0",
+      "lines": [
+        "Miễn phí vĩnh viễn",
+        "Không khóa tính năng",
+        "Tự kiểm soát dữ liệu"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Hỗ trợ tới ba mươi tư nền tảng khác nhau từ một lịch chung! Bản tự host không giới hạn số kênh, không giới hạn bài đăng lẫn thành viên.",
+      "headline": "Quản lý 34 nền tảng mạng xã hội",
+      "lines": [
+        "TikTok, YouTube, Discord...",
+        "Không giới hạn số kênh",
+        "Không giới hạn bài viết"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Điểm ăn tiền nhất là AI agent tích hợp sẵn dạng chat. Anh em chỉ cần gõ yêu cầu bằng ngôn ngữ tự nhiên thay vì ngồi điền biểu mẫu.",
+      "headline": "AI Agent điều khiển qua chat",
+      "lines": [
+        "Giao diện hội thoại tiện lợi",
+        "Ra lệnh bằng ngôn ngữ tự nhiên",
+        "Không cần mở form soạn thảo"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Nó có thể tự sinh ảnh, hoặc cắt video YouTube dài thành clip ngắn dọc có phụ đề. [cheerfully] Thậm chí anh em kết nối thẳng qua giao thức MCP từ Claude hay Cursor luôn!",
+      "headline": "Cắt clip ngắn và hỗ trợ MCP",
+      "lines": [
+        "Tự tạo ảnh và video",
+        "Cắt video YouTube thành clip dọc",
+        "Hỗ trợ Claude, Cursor qua MCP"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Nhưng nhớ luật từng bên nhé! YouTube bắt buộc đúng một video. TikTok không cho trộn ảnh với video. Còn Discord dùng Markdown và tối đa một nghìn chín trăm tám mươi ký tự.",
+      "headline": "Quy tắc định dạng từng nền tảng",
+      "lines": [
+        "YouTube: chính xác 1 video",
+        "TikTok: không trộn lẫn ảnh và video",
+        "Discord: hỗ trợ Markdown, 1.980 ký tự"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Làm việc với khách hàng thì cực tiện: Postiz tạo link mời để họ tự cấp quyền qua OAuth, anh em không cần xin mật khẩu.",
+      "headline": "Link mời ủy quyền bảo mật",
+      "lines": [
+        "Tạo link mời trực tiếp",
+        "Khách tự ủy quyền qua OAuth",
+        "Không cần chia sẻ mật khẩu"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": "two colleagues discussing laptop"
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Đổi lại, tự host phải tự vận hành hạ tầng. Anh em phải tự tạo developer app trên Meta hay TikTok chờ duyệt vài tuần, và tự điền API key AI riêng nhé.",
+      "headline": "Lưu ý quan trọng khi tự host",
+      "lines": [
+        "Phải tự tạo developer app",
+        "Chờ duyệt TikTok, Meta vài tuần",
+        "Tự cung cấp API key AI riêng"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Ngoài ra chỉ mười nền tảng trả dữ liệu phân tích về giao diện. Toàn bộ stack chạy bằng NextJS, NestJS, Prisma và Temporal trên máy chủ của anh em.",
+      "headline": "Kiến trúc và phân tích chỉ số",
+      "lines": [
+        "10/34 nền tảng hỗ trợ analytics",
+        "Stack: NextJS, NestJS, Prisma",
+        "Xử lý tác vụ nền bằng Temporal"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": "modern server room glowing"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Lưu ngay video này lại để triển khai thử nhé, [cheerfully] và bấm theo dõi kênh để cập nhật thêm nhiều công cụ hay ho nha anh em!",
+      "headline": "Lưu lại và theo dõi ngay",
+      "lines": [
+        "Lưu video để tự host sau",
+        "Bấm theo dõi để xem công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "gitroomhq/postiz-app"
+      ],
+      "footage": ""
+    }
+  ]
+}

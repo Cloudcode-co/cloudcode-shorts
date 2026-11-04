@@ -2,10 +2,11 @@
 import type { VideoDef } from "../kit";
 import { video as v0 } from "./handy-offline-speech-to-text/Video";
 import { video as v1 } from "./hermes-vs-openclaw/Video";
-import { video as v2 } from "./pterodactyl-game-server-hosting/Video";
-import { video as v3 } from "./public-ipv4-vs-nat-vs-ipv6-vps/Video";
-import { video as v4 } from "./tu-host-concat-video-editor/Video";
-import { video as v5 } from "./tu-host-opengym-thay-the-hevy/Video";
-import { video as v6 } from "./tu-host-peach-metadata-manager/Video";
+import { video as v2 } from "./postiz-tu-host-ai-agent-social-media/Video";
+import { video as v3 } from "./pterodactyl-game-server-hosting/Video";
+import { video as v4 } from "./public-ipv4-vs-nat-vs-ipv6-vps/Video";
+import { video as v5 } from "./tu-host-concat-video-editor/Video";
+import { video as v6 } from "./tu-host-opengym-thay-the-hevy/Video";
+import { video as v7 } from "./tu-host-peach-metadata-manager/Video";
 
-export const VIDEOS: VideoDef[] = [v0, v1, v2, v3, v4, v5, v6];
+export const VIDEOS: VideoDef[] = [v0, v1, v2, v3, v4, v5, v6, v7];

@@ -62,5 +62,14 @@
     "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
     "built": "claude",
     "costUsd": 0.7041176000000001
+  },
+  {
+    "slug": "postiz-tu-host-ai-agent-social-media",
+    "topic": "Postiz: tự host công cụ lên lịch đăng TikTok, YouTube, Discord bằng AI agent",
+    "date": "2026-11-04",
+    "direction": "3d-server-room",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.4140986999999999
   }
 ]
