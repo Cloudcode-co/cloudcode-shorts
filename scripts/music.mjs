@@ -95,10 +95,14 @@ mkdirSync(`public/videos/${slug}`, { recursive: true });
 const plan = seconds ? null : timeline();
 
 // A given track (the owner's, or an earlier video's), looped or cut to the
-// video; the scenes keep their planned timing, with no sections.
+// video; the scenes keep their planned timing, with no sections. A reused
+// track is noted in timeline.json `reused`, so the next pick can skip it.
 const useTrack = (src, start, temporary) => {
-  if (plan) writeFileSync(`src/videos/${slug}/timeline.json`, JSON.stringify(plan, null, 2) + "\n");
   const total = plan ? plan.total + 2 : lengthMs / 1000;
+  if (plan) {
+    const note = temporary ? {} : { reused: src };
+    writeFileSync(`src/videos/${slug}/timeline.json`, JSON.stringify({ ...plan, ...note }, null, 2) + "\n");
+  }
   const r = spawnSync(
     "npx",
     [
@@ -115,13 +119,34 @@ const useTrack = (src, start, temporary) => {
   console.log(`used ${temporary ? "the given track" : src} for public/videos/${slug}/music.mp3 (${total.toFixed(1)}s from ${start}s)`);
   process.exit(0);
 };
+const lengthOf = (file) =>
+  Number(
+    spawnSync("npx", ["remotion", "ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", file], {
+      encoding: "utf8",
+      shell: process.platform === "win32",
+    }).stdout.trim(),
+  ) || 0;
+// An earlier video's track long enough to play once without looping, the one
+// reused least so far (ties at random); the longest when none is long enough.
 const reuse = (why) => {
+  const total = plan ? plan.total + 2 : lengthMs / 1000;
+  const uses = {};
+  for (const d of readdirSync("src/videos")) {
+    const file = `src/videos/${d}/timeline.json`;
+    const from = existsSync(file) && JSON.parse(readFileSync(file, "utf8")).reused;
+    if (from) uses[from] = (uses[from] ?? 0) + 1;
+  }
   const tracks = readdirSync("public/videos")
     .filter((d) => d !== slug && existsSync(`public/videos/${d}/music.mp3`))
-    .map((d) => `public/videos/${d}/music.mp3`);
+    .map((d) => ({ file: `public/videos/${d}/music.mp3`, random: Math.random() }))
+    .map((t) => ({ ...t, length: lengthOf(t.file), uses: uses[t.file] ?? 0 }));
   if (!tracks.length) throw new Error(`music: ${why}, and no earlier track to reuse`);
-  console.log(`music: ${why}; reusing an earlier track`);
-  useTrack(tracks[Math.floor(Math.random() * tracks.length)], 0, false);
+  const long = tracks.filter((t) => t.length >= total);
+  const pick = long.length
+    ? long.sort((x, y) => x.uses - y.uses || x.random - y.random)[0]
+    : tracks.sort((x, y) => y.length - x.length)[0];
+  console.log(`music: ${why}; reusing ${pick.file} (${pick.length.toFixed(0)}s, used ${pick.uses} times before)`);
+  useTrack(pick.file, 0, false);
 };
 
 if (custom) {
