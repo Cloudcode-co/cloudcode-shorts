@@ -179,7 +179,8 @@ const denied = [
   "Bash(*/proc/*)",
   "Read(/proc/**)",
 ];
-const baseEnv = { CI: "1" };
+// archify (.claude/skills/archify) checks for its own updates unless told not to.
+const baseEnv = { CI: "1", ARCHIFY_UPDATE_CHECK_DISABLED: "1" };
 for (const k of ["PIXABAY_API_KEY", "PEXELS_API_KEY", "GIPHY_API_KEY"]) if (process.env[k]) baseEnv[k] = process.env[k];
 for (const k of ["PATH", "Path", "HOME", "USERPROFILE", "APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "SystemRoot", "ComSpec", "PATHEXT"]) {
   if (process.env[k]) baseEnv[k] = process.env[k];

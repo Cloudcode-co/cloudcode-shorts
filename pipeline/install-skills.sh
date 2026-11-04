@@ -80,3 +80,27 @@ for file in SKILL.md LICENSE; do
 done
 echo "| humanizer | https://github.com/blader/humanizer | LICENSE from blader/humanizer (MIT) |" >> "$notice"
 echo "skill: humanizer (blader/humanizer)"
+
+# archify, copied from ~/.agents/skills: the runtime files only (Node
+# built-ins, no npm install), without its 13 MB of pre-rendered example pages,
+# brand-mark sources and generator scripts.
+src="$HOME/.agents/skills/archify"
+if [ -d "$src" ]; then
+  rm -rf "${dest:?}/archify"
+  mkdir -p "$dest/archify/scripts" "$dest/archify/examples"
+  for f in SKILL.md LICENSE LICENSE-MIT NOTICE THIRD_PARTY_NOTICES.md package.json skill-release.json; do
+    cp "$src/$f" "$dest/archify/"
+  done
+  for d in bin renderers schemas references explainer delta locales assets recipes migrations; do
+    cp -r "$src/$d" "$dest/archify/"
+  done
+  for f in check-update.mjs delivery-update-child.mjs check-render-output.mjs; do
+    cp "$src/scripts/$f" "$dest/archify/scripts/"
+  done
+  cp "$src"/examples/*.json "$dest/archify/examples/"
+  cp -r "$src/examples/locales" "$dest/archify/examples/"
+  echo "| archify | https://github.com/tt-a1i/archify, copied from the maintainer's local \`~/.agents/skills/archify\` (runtime files only) | LICENSE (Apache-2.0) and LICENSE-MIT in the folder |" >> "$notice"
+  echo "skill: archify (local)"
+else
+  echo "skip: archify (not in ~/.agents/skills)"
+fi

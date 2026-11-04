@@ -109,6 +109,20 @@ Load these when the video calls for them:
   that needs an API key or the network.
 - `review-animations`: before the last QA round, review your motion against it
   and fix what it flags.
+- `archify`: when a scene explains how something is put together or happens
+  in order (an architecture, a request flow, a sequence between services, a
+  lifecycle, a timeline). Use it to choose the diagram type
+  (`node .claude/skills/archify/bin/archify.mjs guide "<scenario>" --json`) and
+  to get a checked layout: write its candidate JSON to `out/diagrams/<name>.json`
+  and run `node .claude/skills/archify/bin/archify.mjs validate <type> out/diagrams/<name>.json --json`
+  until it passes (no overlaps or crossed routes); add `--layout-json` for an
+  architecture or workflow to get the measured positions and routes.
+  `.claude/skills/archify/examples/*.json` show each type's candidate. Then draw that layout
+  yourself as SVG in the scene, sized for 1080×1920 with text big enough to read
+  on a phone, and animate it in (nodes, then the routes drawing along their
+  paths). Only `guide`, `validate` and `inspect`: never `finalize`, `deliver`,
+  `preview` or `render`, which make HTML pages and need a browser, and ignore
+  its HTML viewer, export and update parts.
 
 ## What to make
 
