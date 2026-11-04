@@ -6,6 +6,8 @@
 //   GET  /tiktok/callback  TikTok's redirect; starts a session
 //   GET  /app              the signed-in account and the finished videos
 //   POST /app/send         { key } uploads that video to the account's inbox
+//   POST /app/post         { key } posts it as Only me with its caption (from the
+//                          video's script.json in GITHUB_REPO), with Direct Post
 //   GET  /app/status?id=   where that upload stands
 //   POST /logout           revokes the app's access and ends the session
 //   GET  /terms, /privacy  the app's own terms and privacy policy
@@ -13,7 +15,7 @@
 // Sessions are a random id in an HttpOnly cookie, kept 30 days in the TIKTOK
 // KV namespace. ALLOWED_TIKTOK_OPEN_IDS (comma-separated), when set, limits
 // who may sign in.
-import { checkState, connect, disconnect, loginUrl, sendToInbox, uploadStatus, userInfo } from "./tiktok.js";
+import { canPost, checkState, connect, directPost, disconnect, loginUrl, sendToInbox, uploadStatus, userInfo } from "./tiktok.js";
 
 const COOKIE = "ccs_session";
 const SESSION_TTL = 30 * 86400;
@@ -145,7 +147,7 @@ const prettyName = (key) =>
     .replace(/\.mp4$/, "")
     .replace(/-/g, " ");
 
-const dashboard = (env, user, videos) =>
+const dashboard = (env, user, videos, posting) =>
   layout(
     "Your videos · Cloudcode Shorts",
     `<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:32px">
@@ -165,7 +167,8 @@ ${
   <div class="body">
     <div class="name">${esc(prettyName(v.key))}</div>
     <div class="date">${esc(v.uploaded.toISOString().slice(0, 10))} · ${(v.size / 1048576).toFixed(1)} MB</div>
-    <button class="btn" data-key="${esc(v.key)}">Send to TikTok drafts</button>
+    <button class="btn" data-key="${esc(v.key)}" data-action="send">Send to TikTok drafts</button>
+    ${posting ? `<button class="btn ghost" data-key="${esc(v.key)}" data-action="post">Post as Only me</button>` : ""}
     <div class="status" aria-live="polite"></div>
   </div>
 </div>`,
@@ -176,21 +179,22 @@ ${
 </div>
 <script>
 const label = { PROCESSING_UPLOAD: "Uploading to TikTok…", PROCESSING_DOWNLOAD: "TikTok is processing…",
-  SEND_TO_USER_INBOX: "In your TikTok inbox. Open TikTok to finish posting.", FAILED: "TikTok could not take it" };
+  SEND_TO_USER_INBOX: "In your TikTok inbox. Open TikTok to finish posting.",
+  PUBLISH_COMPLETE: "Posted as Only me, with its caption. Make it public from TikTok.", FAILED: "TikTok could not take it" };
 for (const button of document.querySelectorAll("button[data-key]")) {
   button.addEventListener("click", async () => {
-    const status = button.nextElementSibling;
+    const status = button.parentElement.querySelector(".status");
     button.disabled = true;
     status.className = "status";
     status.textContent = "Sending…";
-    const res = await fetch("/app/send", { method: "POST", headers: { "Content-Type": "application/json" },
+    const res = await fetch("/app/" + button.dataset.action, { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ key: button.dataset.key }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) { status.className = "status err"; status.textContent = data.error || "Could not send"; button.disabled = false; return; }
     for (let i = 0; i < 40; i++) {
       const s = await fetch("/app/status?id=" + encodeURIComponent(data.publish_id)).then((r) => r.json()).catch(() => ({}));
       status.textContent = label[s.status] || s.status || "Waiting for TikTok…";
-      if (s.status === "SEND_TO_USER_INBOX") { status.className = "status ok"; return; }
+      if (s.status === "SEND_TO_USER_INBOX" || s.status === "PUBLISH_COMPLETE") { status.className = "status ok"; return; }
       if (s.status === "FAILED") { status.className = "status err"; status.textContent += ": " + (s.fail_reason || "unknown reason"); button.disabled = false; return; }
       await new Promise((r) => setTimeout(r, 3000));
     }
@@ -198,6 +202,21 @@ for (const button of document.querySelectorAll("button[data-key]")) {
 }
 </script>`,
   );
+
+// A video's TikTok caption and hashtags, from its script.json in the repo.
+const captionFor = async (env, key) => {
+  const slug = key.slice(VIDEOS.length).split("/")[0];
+  const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/contents/src/videos/${slug}/script.json`, {
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: "application/vnd.github.raw+json",
+      "User-Agent": "cloudcode-shorts-bot",
+    },
+  });
+  if (!res.ok) throw new Error(`no script for ${slug} (${res.status})`);
+  const script = await res.json();
+  return `${script.caption}\n\n${(script.hashtags ?? []).join(" ")}`.trim();
+};
 
 const finishedVideos = async (env) => {
   const found = [];
@@ -254,7 +273,7 @@ export const site = async (request, env) => {
     });
   }
 
-  if (!["/app", "/app/send", "/app/status", "/logout"].includes(pathname)) return null;
+  if (!["/app", "/app/send", "/app/post", "/app/status", "/logout"].includes(pathname)) return null;
   const openId = await sessionOpenId(request, env);
   if (!openId) {
     return method === "GET" && pathname === "/app"
@@ -264,8 +283,8 @@ export const site = async (request, env) => {
 
   if (pathname === "/app" && method === "GET") {
     try {
-      const [user, videos] = await Promise.all([userInfo(env, openId), finishedVideos(env)]);
-      return html(dashboard(env, user, videos));
+      const [user, videos, posting] = await Promise.all([userInfo(env, openId), finishedVideos(env), canPost(env, openId)]);
+      return html(dashboard(env, user, videos, posting));
     } catch (err) {
       return html(layout("Sign in again", `<h1>Please sign in again.</h1><p class="lead">${esc(err.message)}</p><p><a class="btn" href="/login">Continue with TikTok</a></p>`), 401);
     }
@@ -273,12 +292,16 @@ export const site = async (request, env) => {
 
   if (method !== "GET" && !sameOrigin(request)) return Response.json({ error: "Bad origin" }, { status: 403 });
 
-  if (pathname === "/app/send" && method === "POST") {
+  if ((pathname === "/app/send" || pathname === "/app/post") && method === "POST") {
     const { key } = (await request.json().catch(() => ({}))) ?? {};
     if (typeof key !== "string" || !key.startsWith(VIDEOS) || !key.endsWith(".mp4") || key.includes("..")) {
       return Response.json({ error: "Unknown video" }, { status: 400 });
     }
     try {
+      if (pathname === "/app/post") {
+        if (!(await canPost(env, openId))) return Response.json({ error: "Posting was not allowed at sign-in" }, { status: 403 });
+        return Response.json({ publish_id: await directPost(env, openId, key, await captionFor(env, key)) });
+      }
       return Response.json({ publish_id: await sendToInbox(env, openId, key) });
     } catch (err) {
       return Response.json({ error: err.message }, { status: 502 });

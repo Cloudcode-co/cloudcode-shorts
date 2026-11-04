@@ -381,8 +381,18 @@ const autoDraft = async (request, env) => {
   const owner = await env.TIKTOK.get("owner");
   if (!owner) return Response.json({ error: "chưa kết nối TikTok; đăng nhập ở https://shorts.cloudcode.io.vn" }, { status: 409 });
   try {
-    const post = typeof caption === "string" && caption.trim() && (await canPost(env, owner));
-    const id = post ? await directPost(env, owner, PREFIX + key, caption) : await sendToInbox(env, owner, PREFIX + key);
+    let post = typeof caption === "string" && caption.trim() && (await canPost(env, owner));
+    let id;
+    if (post) {
+      // Until TikTok audits the app it may only post to private accounts;
+      // a public account then gets a draft instead.
+      id = await directPost(env, owner, PREFIX + key, caption).catch((err) => {
+        if (!/unaudited_client/.test(err.message)) throw err;
+        post = false;
+        return null;
+      });
+    }
+    if (!post) id = await sendToInbox(env, owner, PREFIX + key);
     let status = "PROCESSING_UPLOAD";
     for (let i = 0; i < 30 && status.startsWith("PROCESSING"); i++) {
       await new Promise((r) => setTimeout(r, 4000));
