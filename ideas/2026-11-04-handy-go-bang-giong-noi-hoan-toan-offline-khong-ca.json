@@ -1,0 +1,11 @@
+{
+  "topic": "Handy: gõ bằng giọng nói hoàn toàn offline, không cần gửi audio lên cloud",
+  "angle": "Vì nó miễn phí, mã nguồn mở MIT và chạy hoàn toàn trên máy nên dev nào hay viết code, viết docs bằng giọng nói đều có thể dùng ngay mà không lo lộ audio.",
+  "sources": [
+    "https://github.com/cjpais/Handy",
+    "https://handy.computer"
+  ],
+  "notes": "GitHub cjpais/Handy mô tả Handy là ứng dụng speech-to-text miễn phí, mã nguồn mở, có thể mở rộng và chạy hoàn toàn offline, công khai, 37.397 star, giấy phép MIT, chưa lưu trữ. README của Handy nói bạn nhấn phím tắt, nói, rồi văn bản được dán thẳng vào ô nhập liệu đang dùng, quá trình xử lý hoàn toàn local với Whisper hoặc Parakeet V3, chạy trên Windows, macOS và Linux. Bản v0.9.8 ra ngày 3/10/2026 và repo có khoảng 36.000 đến 37.000 star đầu tháng 11/2026, cho thấy nó vẫn đang được dùng nhiều.",
+  "from": "muse",
+  "received": "2026-11-04T06:07:12.030Z"
+}
