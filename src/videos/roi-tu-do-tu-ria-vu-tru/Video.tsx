@@ -362,7 +362,7 @@ const Flash: React.FC = () => {
   const o = Math.max(
     0,
     ...[STARTS[1], STARTS[2], STARTS[5]].map((s) =>
-      interpolate(f - s, [0, 7], [0.55, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+      f < s ? 0 : interpolate(f - s, [0, 7], [0.55, 0], { extrapolateRight: "clamp" }),
     ),
   );
   return <AbsoluteFill style={{ background: "#fff", opacity: o }} />;

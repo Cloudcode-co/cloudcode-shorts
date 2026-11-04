@@ -225,9 +225,6 @@ const discord = async (request, env, ctx) => {
     music_url: interaction.data.resolved?.attachments?.[option("nhac", 30)]?.url ?? "",
     music_start: option("nhac_tu", 10),
   };
-  if (command === "sua" && !job.voice && !job.notes && !job.style && !job.builder && !job.music_url) {
-    return json({ type: 4, data: { content: "Cho mình biết cần sửa gì: `yeucau`, `phongcach`, `giong`, `dung` hoặc `nhac`.", flags: 64 } });
-  }
 
   // Discord wants an answer within 3s: defer, then edit the reply once
   // GitHub has the run.

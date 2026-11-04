@@ -84,13 +84,11 @@ const makeNew = () => {
   return { slug, build: { ...nodeResult("pipeline/build-video.mjs", [slug]), format } };
 };
 
-// A finished video, reworked: a new voice and/or Claude's changes.
+// A finished video, reworked: a new voice and/or Claude's changes. With
+// nothing asked it is only rendered again (after a fix pushed to its code).
 const rework = async () => {
   if (!/^[a-z0-9-]+$/.test(revise) || !existsSync(`src/videos/${revise}/script.json`)) {
     throw new Error(`không có video "${revise}" trong repo`);
-  }
-  if (!voice && !notes && !style && !chosenBuilder && !music) {
-    throw new Error("cần ít nhất một giọng mới, một phong cách, một yêu cầu sửa, người dựng hoặc nhạc");
   }
   const slug = setSlug(revise);
   // Footage is not committed; fetch the clips this video uses again.
@@ -130,7 +128,7 @@ try {
   if (!slot) {
     await sendMessage(
       (revise
-        ? `Bắt đầu sửa video ${revise}: ${asked}`
+        ? `Bắt đầu sửa video ${revise}: ${asked || "chỉ xuất lại"}`
         : `Bắt đầu làm ${format === "explainer" ? "video" : FORMATS[format].label}: ${topic || "(Gemini tự chọn đề tài)"}${asked ? `\nYêu cầu: ${asked}` : ""}`) +
         (runUrl ? `\n<${runUrl}>` : ""),
     );

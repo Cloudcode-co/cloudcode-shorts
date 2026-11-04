@@ -253,6 +253,10 @@ A placeholder `Video.tsx` is already there; replace it.
   hard cut where the style says so. A transition overlaps the two scenes, so add
   its length to the scene before it: every scene still starts on its
   timeline.json `start` and the music changes on the cut.
+- A one-off effect that starts at frame `s` (a flash, a punch, a shake) is 0
+  before `s`: write `f < s ? 0 : interpolate(f - s, ...)`. `extrapolateLeft:
+  "clamp"` holds the first value instead, so a flash from 0.55 to 0 would cover
+  the whole video before it in white.
 - Every scene its own layout. One template (headline, stacked cards, a badge)
   repeated for every scene reads as a slideshow; vary scale, position and what
   carries the scene (a logo, a number, a terminal, a diagram).
