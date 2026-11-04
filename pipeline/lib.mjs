@@ -47,16 +47,39 @@ export const slugify = (text) =>
 
 // The script writer is any OpenAI-compatible chat API (by default a Gemini
 // gateway): LLM_BASE_URL, LLM_API_KEY, and LLM_MODEL, a comma-separated list
-// tried in order.
+// tried in order. When those all fail, the backup gateway (MPROXY_BASE_URL,
+// MPROXY_API_KEY) and its MPROXY_MODEL list take over: Mistral Large first,
+// which also reads images.
 const LLM_BASE_URL = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/+$/, "");
+const MPROXY_BASE_URL = (process.env.MPROXY_BASE_URL || "https://mproxy.harumi.io.vn/v1").replace(/\/+$/, "");
 // Longest a single call may take before it counts as failed.
 const LLM_TIMEOUT = 180_000;
 
-export const llmModels = () =>
-  (process.env.LLM_MODEL || "ag/gemini-3.8-flash-high,ag/gemini-3.8-flash-low")
+const list = (value) =>
+  value
     .split(",")
     .map((m) => m.trim())
     .filter(Boolean);
+
+// Every model to try, in order, with the gateway that serves it.
+const llmTargets = () => [
+  ...(process.env.LLM_API_KEY
+    ? list(process.env.LLM_MODEL || "ag/gemini-3.8-flash-high,ag/gemini-3.8-flash-low").map((model) => ({
+        model,
+        base: LLM_BASE_URL,
+        key: process.env.LLM_API_KEY,
+      }))
+    : []),
+  ...(process.env.MPROXY_API_KEY
+    ? list(process.env.MPROXY_MODEL || "mistral/mistral-large-latest,claude-coding").map((model) => ({
+        model,
+        base: MPROXY_BASE_URL,
+        key: process.env.MPROXY_API_KEY,
+      }))
+    : []),
+];
+
+export const llmModels = () => llmTargets().map((t) => t.model);
 
 // Gemini-style schema ({type: "OBJECT", ...}) to JSON Schema for
 // response_format, with every property required and nothing extra allowed.
@@ -86,17 +109,18 @@ const parseJson = (text) => {
 // that times out, is unknown or keeps failing hands over to the next. `images` are data: URLs
 // sent along with the prompt.
 export const llmJson = async (prompt, schema, temperature = 0.7, images = []) => {
-  const key = need("LLM_API_KEY");
+  const targets = llmTargets();
+  if (!targets.length) need("LLM_API_KEY");
   const jsonSchema = toJsonSchema(schema);
   const text = `${prompt}\n\nAnswer with only a JSON object matching this JSON Schema:\n${JSON.stringify(jsonSchema)}`;
   const content = images.length
     ? [{ type: "text", text }, ...images.map((url) => ({ type: "image_url", image_url: { url } }))]
     : text;
   const errors = [];
-  for (const model of llmModels()) {
+  for (const { model, base, key } of targets) {
     for (let attempt = 1; ; attempt++) {
       const started = Date.now();
-      const res = await fetch(`${LLM_BASE_URL}/chat/completions`, {
+      const res = await fetch(`${base}/chat/completions`, {
         method: "POST",
         headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -139,11 +163,10 @@ export const llmJson = async (prompt, schema, temperature = 0.7, images = []) =>
         await new Promise((r) => setTimeout(r, wait * 1000));
         continue;
       }
-      if (res.status === 429 || res.status === 404 || res.status >= 500) {
-        console.log(`LLM ${model} failed (${res.status}), trying the next model`);
-        break;
-      }
-      throw new Error(`LLM ${errors.at(-1)}`);
+      // Anything else (a bad key, no credit, a request this model refuses)
+      // may still work on the next model or the backup gateway.
+      console.log(`LLM ${model} failed (${res.status}), trying the next model`);
+      break;
     }
   }
   throw new Error(`every LLM model failed:\n${errors.join("\n")}`);
