@@ -97,7 +97,9 @@ A placeholder `Video.tsx` is already there; replace it.
   from facts.json.
 - **Opening shot** carries the kit `<Brand />` on a dark background; no Cloudcode
   logo, URL or pitch anywhere else, unless the video is about Cloudcode's own
-  site (see Websites).
+  site (see Websites). Nothing enters the lockup's box: start that shot's
+  content `BRAND_SPACE` below `SAFE.top`, and keep big headlines out of the
+  top-left corner while the lockup shows.
 - 1080×1920 at 60fps. Everything readable must sit inside `SAFE` (TikTok's tabs or
   search bar on top, buttons on the right, caption at the bottom, and `SIDE_CROP`
   px that tall phones cut off each side). Use `Shot` or pad to `SAFE` yourself.
@@ -129,6 +131,13 @@ A placeholder `Video.tsx` is already there; replace it.
 - Fill the frame. Lay each shot out over the whole safe area, top to bottom: a
   headline and a short stack of cards at the top with the lower half empty is
   the most common failure. Make the main thing big instead of adding cards.
+- **Backgrounds match the line.** What fills the frame behind a scene shows
+  what that scene says: the app's screen or logo for a feature, a document or
+  a scale for a licence, people for a story, racks only for hardware. A
+  background that only fits the art direction, not the words, is wrong; change
+  the background, not the words.
+- No empty or placeholder items: every bullet, row and card has its text; drop
+  the slot instead of leaving a lone marker.
 - Every scene its own layout. One template (headline, stacked cards, a badge)
   repeated for every scene reads as a slideshow; vary scale, position and what
   carries the scene (a logo, a number, a terminal, a diagram).
@@ -162,7 +171,9 @@ each one exactly as written here, alone in its own Bash call, with no `cd`, `&&`
    unreadable contrast, empty-looking frames, anything that looks broken or generic.
    Check each still against the rules in "What to make" one by one, and say in
    BUILD.md which you fixed: an empty lower half, the same layout as the last
-   scene, corner chrome or anything that looks like a watermark, decoration over text, a lone word on a headline line,
+   scene, corner chrome or anything that looks like a watermark, decoration over text,
+   text touching the Cloudcode lockup, a background unrelated to the line, an empty
+   bullet, a lone word on a headline line,
    text under 34px, invented data. Fix and run it again. Up to 3 rounds;
    for a specific moment, `npm run qa -- <slug> <frame> <frame>`.
 3. Finish with a passing `npx tsc` and a last QA round you are happy with.

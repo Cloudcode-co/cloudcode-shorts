@@ -19,14 +19,18 @@ import { resolveVoice } from "./voices.mjs";
 import { isWebUrl, pageBrief, webReader } from "./web.mjs";
 import { addFootage, footageOn } from "./footage.mjs";
 
+// The voices the script writer picks from (pipeline/voices.json); the first
+// is the default.
+const { voices } = readJson("pipeline/voices.json");
 const VOICE = {
-  voiceId: "aN7cv9yXNrfIR87bDmyD", // Ninh Đôn – Deep & Warm
+  voiceId: voices[0].id,
   modelId: "eleven_v3",
   voiceSettings: { stability: 0.0, similarity_boost: 0.75 },
 };
-// VOICE (an ElevenLabs voice id or name) replaces the default voice; NOTES are
-// the channel owner's requests for this video.
-if (process.env.VOICE?.trim()) {
+// VOICE (an ElevenLabs voice id, name or link) replaces the writer's pick;
+// NOTES are the channel owner's requests for this video.
+const voiceAsked = Boolean(process.env.VOICE?.trim());
+if (voiceAsked) {
   const voice = await resolveVoice(process.env.VOICE.trim());
   console.log(`Voice: ${voice.name}`);
   VOICE.voiceId = voice.voiceId;
@@ -275,6 +279,9 @@ const schema = S("OBJECT", {
       }),
     }),
     sources: S("ARRAY", { items: S("STRING") }),
+    voice: S("STRING", {
+      description: "id of the voice that fits this video best, from: " + voices.map((v) => `${v.id} (${v.name}: ${v.fits})`).join("; "),
+    }),
     scenes: S("ARRAY", {
       items: S("OBJECT", {
         properties: {
@@ -327,6 +334,11 @@ const rules =
   `${JSON.stringify(researchNotes, null, 1)}\n\nSources:\n${research}`;
 
 const script = await json(rules, schema, 0.9);
+if (!voiceAsked) {
+  const picked = voices.find((v) => v.id === script.voice) ?? voices[0];
+  VOICE.voiceId = picked.id;
+  console.log(`Voice: ${picked.name} (picked for this video)`);
+}
 script.sources = [
   ...new Set([...pages.map((p) => p.url), ...found.map((r) => `https://github.com/${r}`), ...(script.sources ?? [])]),
 ];

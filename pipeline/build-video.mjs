@@ -14,7 +14,7 @@
 // Prints a JSON line {direction, pacing, built, costUsd} last.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
-import { readJson, report } from "./lib.mjs";
+import { llmJson, readJson, report } from "./lib.mjs";
 
 const slug = process.argv[2];
 if (!slug || !/^[a-z0-9-]+$/.test(slug) || !existsSync(`src/videos/${slug}/script.json`)) {
@@ -68,11 +68,27 @@ const custom = (name) => ({
 const chosen =
   style &&
   (directions.find((d) => fold(d.id) === fold(style) || fold(d.name) === fold(style)) ?? custom(style));
+// With no STYLE, Gemini picks the direction that fits what this video says
+// from those not used lately; a random draw if that fails.
+const fitting = async (list) => {
+  const script = readJson(`src/videos/${slug}/script.json`);
+  const answer = await llmJson(
+    `Pick the art direction that best fits this TikTok video, so its look matches what each line talks ` +
+      `about (a direction about server racks suits hosting and hardware, not a software licence or a phone app).\n` +
+      `Video: ${script.title}\nTopic: ${script.topic}\nScenes: ${script.scenes.map((s) => s.headline).join(" | ")}\n\n` +
+      `Directions:\n${list.map((d) => `- ${d.id}: ${d.brief}`).join("\n")}`,
+    { type: "OBJECT", properties: { id: { type: "STRING" }, why: { type: "STRING" } }, required: ["id", "why"] },
+    0.4,
+  ).catch((err) => console.log(`Direction pick failed: ${err.message}`));
+  const found = list.find((d) => d.id === answer?.id);
+  if (found) console.log(`Direction: ${found.id} (${answer.why})`);
+  return found ?? draw(list);
+};
 const direction =
   chosen ||
   (revise && directions.find((d) => d.id === past?.direction)) ||
   (revise && past?.direction?.startsWith("custom: ") && custom(past.direction.slice(8))) ||
-  draw(pool.length ? pool : directions);
+  (await fitting(pool.length ? pool : directions));
 const pace = (revise && past?.pacing) || draw(pacing);
 
 // The video's code files, to put back if Claude leaves them broken.

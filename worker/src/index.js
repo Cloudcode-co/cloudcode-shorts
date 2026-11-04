@@ -30,6 +30,7 @@
 // Vars: GITHUB_REPO ("owner/name"), MEDIA_URL. R2 binding: MEDIA. For the website:
 // secrets TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, KV binding TIKTOK.
 
+import voiceList from "../../pipeline/voices.json";
 import { site } from "./site.js";
 import { canPost, directPost, sendToInbox, uploadStatus } from "./tiktok.js";
 
@@ -62,20 +63,10 @@ const queued = (res, { topic, source, voice, notes, revise, style, builder }) =>
   return `Đã xếp hàng: ${what}.${extra ? `\n${extra}` : ""}\nXong mình gửi video vào đây.`;
 };
 
-// Vietnamese voices on the ElevenLabs account, offered as /video and /sua
-// suggest them; any other name, voice id or voice link can be typed instead.
-const VOICES = [
-  ["Ninh Đôn - nam, giọng Bắc, trầm ấm (mặc định)", "aN7cv9yXNrfIR87bDmyD"],
-  ["Tony Nguyễn", "2ZUpiKo5wCCuypvx2zaS"],
-  ["Linh Chi - nữ, giọng Bắc", "smHgfqI7ihNDlaBs0X9I"],
-  ["Linh - nữ, nhẹ nhàng", "L5c6tGA8OiORYKxez5Zu"],
-  ["Quang Toàn - nam, trầm, kể chuyện", "ZsjEJaLQy3sgvwxicmDx"],
-  ["Hùng - nam, giọng Bắc", "oeKUzII6QxB7vwV6fpNJ"],
-  ["Hiếu Trần - nam, trầm ấm", "WVkYyTxxVgMOsw1IIVL0"],
-  ["Xuân Hòa - nam, kể chuyện", "kOiTmIEmO9JLCQDT4Zc3"],
-  ["Trung Caha - nam, rõ ràng", "ueSxRO0nLF1bj93J2hVt"],
-  ["Nhật - nam, dẫn chuyện", "6adFm46eyy74snVn6YrT"],
-];
+// Vietnamese voices on the ElevenLabs account (pipeline/voices.json), offered
+// as /video and /sua suggest them; any other name, voice id or voice link can
+// be typed instead. Left empty, the script writer picks one per video.
+const VOICES = voiceList.voices.map((v) => [`${v.name} - ${v.label}`, v.id]);
 
 const fold = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/gi, "d").toLowerCase();
 

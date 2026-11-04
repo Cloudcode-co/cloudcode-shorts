@@ -44,7 +44,7 @@ runs it on GitHub Actions, so nothing runs on the dev machine or Cloudcode's ser
    OpenAI-compatible API (default `ag/gemini-3.8-flash-high` on
    `https://be-ag.harumi.io.vn/v1`), writes `script.json` from that, with install
    commands copied from the READMEs; real stars and avatars go into `facts.json`.
-2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (Ninh Đôn by default) and music.
+2. `scripts/voiceover.mjs`, `scripts/music.mjs`: ElevenLabs voice (picked from `pipeline/voices.json`, Ninh Đôn by default) and music.
 3. `pipeline/build-video.mjs`: Claude Code draws an art direction and writes
    `Video.tsx` following `pipeline/BUILDER.md`, checking itself with `tsc` and QA
    stills. It may only edit that video's folder and run register / tsc / qa.
@@ -82,9 +82,10 @@ In Discord:
   `nguon` is one or more web page links: the video is then about that site, from
   the pages' own text and screenshots (and up to 3 linked pages it picks). `phongcach`
   picks the art direction: a suggestion from `pipeline/art-directions.json`, or
-  any description ("anime neon"); empty draws one at random. `giong` is an
+  any description ("anime neon"); empty lets Gemini pick one that fits the script. `giong` is an
   ElevenLabs voice: pick a suggestion, or type a name, a voice id or a voice link
-  (a Voice Library voice gets added to the account). `yeucau` is free text for the
+  (a Voice Library voice gets added to the account); empty lets the script writer
+  pick from `pipeline/voices.json`. `yeucau` is free text for the
   script writer and the builder, such as "nền đen, chữ neon, nhịp nhanh". `dung`
   picks who builds it: Claude or Gemini (empty: the `BUILDER` variable below).
 - `/sua video [yeucau] [phongcach] [giong] [dung]` reworks a finished video: a new voice

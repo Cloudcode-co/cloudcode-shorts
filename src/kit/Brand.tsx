@@ -12,6 +12,7 @@ export const Brand: React.FC<{ color?: string }> = ({ color = "#FFFFFF" }) => (
   <div
     style={{
       position: "absolute",
+      zIndex: 10,
       left: SAFE.left,
       top: SAFE.top,
       display: "flex",

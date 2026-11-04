@@ -1,0 +1,15 @@
+{
+  "note": "Vietnamese ElevenLabs voices on the account: the bot suggests them for /video and /sua, and the script writer picks one to fit each video when no voice is asked for. The first is the default.",
+  "voices": [
+    { "id": "aN7cv9yXNrfIR87bDmyD", "name": "Ninh Đôn", "label": "nam, giọng Bắc, trầm ấm", "fits": "young northern man, deep and warm, conversational and excited: the channel's default for tools and how-tos" },
+    { "id": "2ZUpiKo5wCCuypvx2zaS", "name": "Tony Nguyễn", "label": "nam, năng động", "fits": "lively male presenter, upbeat: hype, new launches, quick lists" },
+    { "id": "smHgfqI7ihNDlaBs0X9I", "name": "Linh Chi", "label": "nữ, giọng Bắc", "fits": "northern woman, clear and friendly: explainers, comparisons, beginner topics" },
+    { "id": "L5c6tGA8OiORYKxez5Zu", "name": "Linh", "label": "nữ, nhẹ nhàng", "fits": "soft female voice: calm topics, privacy, wellbeing, personal tools" },
+    { "id": "ZsjEJaLQy3sgvwxicmDx", "name": "Quang Toàn", "label": "nam, trầm, kể chuyện", "fits": "deep male storyteller: origin stories, history of a project, serious topics" },
+    { "id": "oeKUzII6QxB7vwV6fpNJ", "name": "Hùng", "label": "nam, giọng Bắc", "fits": "northern man, plain and direct: tutorials, step-by-step installs" },
+    { "id": "WVkYyTxxVgMOsw1IIVL0", "name": "Hiếu Trần", "label": "nam, trầm ấm", "fits": "warm deep male: reviews, recommendations, trust and reliability" },
+    { "id": "kOiTmIEmO9JLCQDT4Zc3", "name": "Xuân Hòa", "label": "nam, kể chuyện", "fits": "male narrator: documentary feel, deep dives" },
+    { "id": "ueSxRO0nLF1bj93J2hVt", "name": "Trung Caha", "label": "nam, rõ ràng", "fits": "clear male: technical detail, security, infrastructure" },
+    { "id": "6adFm46eyy74snVn6YrT", "name": "Nhật", "label": "nam, dẫn chuyện", "fits": "male host: news roundups, trending this week" }
+  ]
+}
