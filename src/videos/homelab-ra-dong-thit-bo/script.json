@@ -1,0 +1,173 @@
+{
+  "slug": "homelab-ra-dong-thit-bo",
+  "format": "chat",
+  "topic": "Bạn cùng phòng rút điện server homelab rã đông thịt bò",
+  "title": "POV: Đang chuẩn bị demo đồ án thì server ở trọ sập nguồn",
+  "caption": "Cái giá của việc biến laptop cũ thành server phòng trọ 🥲 Bạn từng bị ai rút nhầm điện server chưa?",
+  "hashtags": [
+    "#homelab",
+    "#itstudent",
+    "#server",
+    "#laptrinh",
+    "#haihuoc"
+  ],
+  "musicPrompt": "quirky upbeat pizzicato strings meme suspense awkward tension playful bass comedic reveal no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "quirky pizzicato",
+        "playful suspense",
+        "light percussion"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s5",
+      "styles": [
+        "rising tension",
+        "awkward bassline",
+        "fast plucks"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s7",
+      "styles": [
+        "comedic drop",
+        "dramatic tuba",
+        "funny beat"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "sad violin",
+        "deflating tuba",
+        "awkward silence"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "alo m ở phòng k, check hộ t cái server với",
+      "lines": [
+        "me"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "",
+      "place": ""
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "tự nhiên mất ssh, đang chuẩn bị demo đồ án má ơi",
+      "lines": [
+        "me"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "",
+      "place": ""
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "server gì, cái laptop bể màn hình m nhét góc bàn hả",
+      "lines": [
+        "them"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "",
+      "place": ""
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "ừ đúng r, đèn nguồn còn sáng k m",
+      "lines": [
+        "me"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "",
+      "place": ""
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "nãy t thấy nó hú như trực thăng, tưởng sắp nổ",
+      "lines": [
+        "them"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat sweating",
+      "place": ""
+    },
+    {
+      "id": "s6",
+      "text": "",
+      "headline": "vcl r m làm gì nó r???",
+      "lines": [
+        "me"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "",
+      "place": ""
+    },
+    {
+      "id": "s7",
+      "text": "",
+      "headline": "t rút phích cắm nồi cơm, mà thấy vỏ máy nóng hổi",
+      "lines": [
+        "them"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": ""
+    },
+    {
+      "id": "s8",
+      "text": "",
+      "headline": "kệ mọe nó cắm lại gấp đi thầy sắp gọi tên t r",
+      "lines": [
+        "me"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "",
+      "place": ""
+    },
+    {
+      "id": "s9",
+      "text": "",
+      "headline": "chờ tí, t lỡ để khay thịt bò lên tản nhiệt cho rã đông r",
+      "lines": [
+        "them"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying",
+      "place": ""
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+A silent group-chat video in 4 long shots (cut on the music sections: Hook, Build, Drop, Outro). Each shot is one phone thread that builds in place: typing dots, then bubbles (mine in green, "Hoàng Bạn Cùng Phòng" in slate with an avatar) slide the thread up, and the three GIPHY cat reactions pop in as stickers under the matching bubbles. Each shot has its own flat tint (teal, hot amber, red, cold blue) to follow the story. Timings come from timeline.json, and the music plays at 0.55 with pop/ding/thud/whoosh sfx.
+
+QA fixes: enlarged the shocked-cat sticker, which was tiny. Checked the Brand lockup clear of the header, text of at least 34px, no lone-word lines, nothing under the TikTok overlay, and no watermark-like text.

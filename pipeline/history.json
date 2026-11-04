@@ -93,5 +93,16 @@
     "costUsd": 0.5576178,
     "reviewIssues": null,
     "format": "story"
+  },
+  {
+    "slug": "homelab-ra-dong-thit-bo",
+    "topic": "Bạn cùng phòng rút điện server homelab rã đông thịt bò",
+    "date": "2026-11-04",
+    "direction": "chat-thread",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.2343443,
+    "reviewIssues": null,
+    "format": "chat"
   }
 ]
