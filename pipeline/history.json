@@ -104,5 +104,16 @@
     "costUsd": 0.2343443,
     "reviewIssues": null,
     "format": "chat"
+  },
+  {
+    "slug": "voicestudio-clone-giong-local",
+    "topic": "VoiceStudio: clone giọng, lồng tiếng video ngay trên máy của bạn, không cần ElevenLabs",
+    "date": "2026-11-04",
+    "direction": "quiz-show",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "claude",
+    "costUsd": 0.7794824,
+    "reviewIssues": 4,
+    "format": "quiz"
   }
 ]

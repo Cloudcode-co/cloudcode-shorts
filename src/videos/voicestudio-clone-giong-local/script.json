@@ -1,0 +1,141 @@
+{
+  "slug": "voicestudio-clone-giong-local",
+  "format": "quiz",
+  "topic": "VoiceStudio: clone giọng, lồng tiếng video ngay trên máy của bạn, không cần ElevenLabs",
+  "title": "VoiceStudio clone giọng cần bao nhiêu giây?",
+  "caption": "VoiceStudio thay thế ElevenLabs chạy hoàn toàn offline trên máy tính. Bạn có biết cần bao nhiêu giây để clone giọng?",
+  "hashtags": [
+    "#voicestudio",
+    "#voiceclone",
+    "#omnivoice",
+    "#congnghe",
+    "#trituenhantao"
+  ],
+  "musicPrompt": "Upbeat electronic tech synth with playful quiz tension, modern hi-hats, punchy bass, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "playful tension",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "ticking percussion"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s3",
+      "styles": [
+        "big drop",
+        "triumphant",
+        "punchy synth"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s6",
+      "styles": [
+        "cheerful",
+        "warm outro"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/debpalash/VoiceStudio",
+    "https://voicestudio.sh/workflows/voice-clone",
+    "https://voicestudio.sh/docs"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Đố anh em, công cụ VoiceStudio cần đoạn âm thanh mẫu dài bao lâu để clone giọng chuẩn đét ngay trên máy?",
+      "headline": "VoiceStudio cần bao lâu để clone giọng?",
+      "lines": [
+        "A. Khoảng 3 giây",
+        "B. Tối thiểu 3 phút",
+        "C. Cần tận 30 phút"
+      ],
+      "commands": [],
+      "repos": [
+        "debpalash/VoiceStudio"
+      ],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Ba... hai... một...",
+      "headline": "3 2 1",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Đáp án chính xác là A: Khoảng 3 giây!",
+      "headline": "A. Khoảng 3 giây",
+      "lines": [
+        "Chỉ cần 3 giây âm thanh mẫu rõ ràng"
+      ],
+      "commands": [],
+      "repos": [
+        "debpalash/VoiceStudio"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] VoiceStudio chạy hoàn toàn cục bộ, hỗ trợ 646 ngôn ngữ và tự lồng tiếng video khớp chuẩn thời gian gốc mà không tốn phí API.",
+      "headline": "Chạy local, hỗ trợ 646 ngôn ngữ",
+      "lines": [
+        "Không tốn phí API ElevenLabs",
+        "Lồng tiếng khớp thời gian video gốc"
+      ],
+      "commands": [],
+      "repos": [
+        "debpalash/VoiceStudio"
+      ],
+      "footage": "content creator recording studio"
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Nó mở sẵn Local API trên cổng 3900 và kết nối MCP trực tiếp với Cursor hay Claude Code cực kỳ tiện.",
+      "headline": "Local API và MCP server",
+      "lines": [
+        "Local API cổng 3900",
+        "Tích hợp Cursor và Claude Code"
+      ],
+      "commands": [],
+      "repos": [
+        "debpalash/VoiceStudio"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[warmly] Anh em có đoán đúng câu này không? [laughs] Comment bên dưới và bấm follow kênh để đón xem quiz tiếp theo nhé!",
+      "headline": "Anh em đoán đúng không?",
+      "lines": [
+        "Bình luận đáp án của bạn",
+        "Follow để đón quiz tiếp theo"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "young presenter smiling camera"
+    }
+  ]
+}
