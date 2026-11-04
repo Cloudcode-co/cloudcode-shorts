@@ -34,9 +34,12 @@ on:
   # Sent by the chat bot worker (worker/), from Discord or Telegram.
   repository_dispatch:
     types: [make-video]
-  # 01:00 in Vietnam. Runs only when the repo variable AUTO_DAILY is "true".
+  # Twice a day, so a new video is in the TikTok drafts by about 08:00 and 17:00
+  # in Vietnam (a run takes 15–35 minutes; GitHub may start schedules late).
+  # Runs only when the repo variable AUTO_DAILY is "true".
   schedule:
-    - cron: "0 18 * * *"
+    - cron: "20 0 * * *"
+    - cron: "20 9 * * *"
 
 # One video at a time, so history.json and the commits never race.
 concurrency:
