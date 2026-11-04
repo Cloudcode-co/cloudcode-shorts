@@ -38,7 +38,9 @@ the caption on screen for `durations[id]` seconds (the whole line, word for word
 its `reaction` and `place` say what the cats do and where. facts.json already
 lists a GIPHY sticker per scene under `memes` (by `scene`) and a background photo
 per place under `images`; fetch others with `npm run meme` / `npm run image`.
-Play the music louder: `<Music slug total voiceRanges={[]} level={0.55} />`.
+Show captions with the kit `<MemeCaption text style />` (its outline never merges
+letters or diacritics; do not hand-roll a thicker one). Play the music louder:
+`<Music slug total voiceRanges={[]} level={0.55} />`.
 The opening shot still carries `<Brand />`. The joke lives in the captions and the
 cats; keep everything else out of the way.
 
