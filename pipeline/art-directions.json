@@ -85,6 +85,11 @@
       "id": "3d-floating-diagram",
       "name": "Floating 3D diagram",
       "brief": "Real 3D with the kit's Stage3D: the topic as a diagram floating in space, with tools as thick tiles carrying their avatars, connected by tubes or arcs, seen from a tilted isometric camera that swings to each part as the voice reaches it. Clean, bright, matte materials; flat HTML labels beside the tiles."
+    },
+    {
+      "id": "paper-meme",
+      "name": "Paper meme explainer",
+      "brief": "The Vietnamese TikTok explainer look: a full-frame photo of crumpled white paper as the only background (npm run image -- <slug> \"crumpled white paper texture\"), never a flat colour. Headlines in a heavy condensed display font with Vietnamese glyphs, ALL CAPS, filled light cyan or a colour from the subject's logo with a thick dark outline (-webkit-text-stroke with paint-order: stroke fill) and a hard offset shadow; a smaller black condensed caps line under them. Facts as label/value pairs: a small outlined coloured label (VIEW, GIÁ, RAM) over a big black value, stacked down one side. One or two meme stickers per scene (npm run image -- <slug> \"<emotion or object>\" --sticker): a cut-out with a thick white outline (stacked drop-shadow filters) and a soft shadow, slightly rotated, with a white speech bubble when it reacts; the sticker shows the feeling of the line (facepalm, shocked, thumbs up, money, laptop). Everything pops in with a quick overshoot scale and a small wiggle, text word by word on the voice; hard cuts between scenes, no fades."
     }
   ],
   "pacing": [

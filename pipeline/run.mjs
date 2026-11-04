@@ -19,6 +19,7 @@ import { notifyOn, sendMessage, sendPhotos, sendVideo } from "./notify.mjs";
 import { sendDraftButton, sendPing } from "./discord.mjs";
 import { resolveVoice } from "./voices.mjs";
 import { restoreFootage } from "./footage.mjs";
+import { restoreImages } from "./images.mjs";
 import { glFor } from "../scripts/gl.mjs";
 
 const args = process.argv.slice(2);
@@ -71,6 +72,7 @@ const rework = async () => {
   const slug = setSlug(revise);
   // Footage is not committed; fetch the clips this video uses again.
   await restoreFootage(slug);
+  await restoreImages(slug);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
   if (voice) {
     const { voiceId, name } = await resolveVoice(voice);

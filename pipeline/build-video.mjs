@@ -177,6 +177,7 @@ const allowed = [
   `Bash(npm run qa -- ${slug})`,
   `Bash(npm run qa -- ${slug} *)`,
   `Bash(npm run footage -- ${slug} *)`,
+  `Bash(npm run image -- ${slug} *)`,
   "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py *)",
 ];
 const baseEnv = { CI: "1" };

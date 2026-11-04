@@ -43,6 +43,7 @@
     "sfx": "node --env-file=.env scripts/sfx.mjs",
     "qa": "node scripts/qa-stills.mjs",
     "footage": "node pipeline/footage.mjs",
+    "image": "node pipeline/images.mjs",
     "render:qsv": "node scripts/render-qsv.mjs"
   },
   "allowScripts": {

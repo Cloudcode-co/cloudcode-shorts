@@ -8,6 +8,8 @@ out
 
 # Stock clips, fetched again from facts.json (pipeline/footage.mjs)
 public/videos/*/footage/
+# Pixabay stickers and photos, fetched again from facts.json (pipeline/images.mjs)
+public/videos/*/images/
 
 # Local-only
 voiceover-backup
