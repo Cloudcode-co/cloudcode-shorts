@@ -17,6 +17,7 @@ import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { llmJson, readJson, report } from "./lib.mjs";
 import { reviewVideo } from "./review-video.mjs";
+import { FORMATS, formatOf } from "./formats.mjs";
 
 const slug = process.argv[2];
 if (!slug || !/^[a-z0-9-]+$/.test(slug) || !existsSync(`src/videos/${slug}/script.json`)) {
@@ -159,6 +160,12 @@ const agents = [
     args: ["--model", beagModel, "--max-turns", process.env.BUILDER_MAX_TURNS || "150"],
   },
 ].filter(Boolean);
+// Simple formats (FORMATS[...].builder "beag") go to Gemini first, unless the
+// run asked for a builder.
+const format = FORMATS[formatOf(readJson(`src/videos/${slug}/script.json`, {}).format)];
+if (format.builder === "beag" && !(process.env.BUILDER_CHOSEN ?? "").trim()) {
+  agents.sort((a, b) => (b.id === "beag") - (a.id === "beag"));
+}
 
 // The builder may run any command and edit any file it needs, since only a
 // build that typechecks is kept. What stays off: the web and subagents (cost,
@@ -234,11 +241,13 @@ let agent = null;
 for (const next of agents) {
   console.log(`\nBuilder: ${next.label}`);
   runAgent(next, prompt);
-  if (changedSince(start)) {
+  if (changedSince(start) && typechecks()) {
     agent = next;
     break;
   }
-  console.log(`${next.label} changed nothing.`);
+  // A build that doesn't typecheck goes to the next builder from the start.
+  console.log(changedSince(start) ? `${next.label}'s build does not typecheck.` : `${next.label} changed nothing.`);
+  restore(start);
 }
 if (!agents.length) console.log("Neither ANTHROPIC_API_KEY nor LLM_API_KEY is set; using the fallback build.");
 

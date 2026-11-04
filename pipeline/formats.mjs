@@ -3,6 +3,8 @@
 // with their own shape; silent ones (no voiceover, music only) through
 // pipeline/write-meme.mjs. `style` is the art direction used when STYLE is
 // empty (null: Gemini picks one that fits); `scenes` and `words` bound the script.
+// `builder: "beag"` has Gemini (free on be-ag) build it first, with Claude only
+// as the fallback: for the simple layouts the kit already carries.
 export const FORMATS = {
   explainer: {
     label: "Giải thích",
@@ -21,6 +23,7 @@ export const FORMATS = {
   quiz: {
     label: "Đố vui",
     voiced: true,
+    builder: "beag",
     style: "quiz-show",
     scenes: [4, 9],
     words: [60, 200],
@@ -110,8 +113,8 @@ export const FORMATS = {
       'developers in one line, then "follow to hear the next story". Put a stock-video search in "footage" in ' +
       "most scenes (offices, servers, a developer at night, a city) since the story has no screenshots.",
   },
-  meme: { label: "Meme", voiced: false, style: "meme-skit" },
-  chat: { label: "POV tin nhắn", voiced: false, style: "chat-thread" },
+  meme: { label: "Meme", voiced: false, style: "meme-skit", builder: "beag" },
+  chat: { label: "POV tin nhắn", voiced: false, style: "chat-thread", builder: "beag" },
 };
 
 export const formatOf = (name) => FORMATS[(name ?? "").trim()] ? (name ?? "").trim() : "explainer";
