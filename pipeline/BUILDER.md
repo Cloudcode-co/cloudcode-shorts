@@ -86,7 +86,10 @@ A placeholder `Video.tsx` is already there; replace it.
   with `<OffthreadVideo src={staticFile(...)} muted />` cropped by
   `objectFit: "cover"` (many clips are landscape: pick the crop that keeps the
   person in frame with `objectPosition`), trimmed with `trimBefore`/`trimAfter` to a few
-  seconds, and darkened or framed so text over them stays readable. To find
+  seconds, and darkened or framed so text over them stays readable. A clip
+  shorter than its shot never freezes on its last frame: loop it with
+  `<Loop durationInFrames={...}>`, slow it with `playbackRate`, or end the shot
+  with it (each clip's `duration` is in facts.json). To find
   another clip, run `npm run footage -- <slug> "<english search>"`: it
   prints the new entry (with `file`) or says nothing fits. Footage is never
   proof of a fact; it sets the scene.
