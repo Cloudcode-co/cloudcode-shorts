@@ -41,6 +41,7 @@ const sources = {
         id: `pixabay-${h.id}`,
         page: h.pageURL,
         author: h.user ?? null,
+        tags: h.tags,
         duration: h.duration,
         width: file.width,
         height: file.height,

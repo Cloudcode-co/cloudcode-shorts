@@ -101,7 +101,10 @@ A placeholder `Video.tsx` is already there; replace it.
   with it (each clip's `duration` is in facts.json). To find
   another clip, run `npm run footage -- <slug> "<english search>"`: it
   prints the new entry (with `file`) or says nothing fits. Footage is never
-  proof of a fact; it sets the scene.
+  proof of a fact; it sets the scene. A clip whose `tags` say green screen or
+  chroma key goes through the kit `<GreenScreen>`, which keys the green out so
+  the subject stands on your background; give it the clip's aspect ratio at
+  about 1080 px wide.
 - **Stickers and photos**: `npm run image -- <slug> "<english search>" --sticker`
   fetches a cut-out (a reaction, animal, person or object with a transparent
   background); without `--sticker`, a photo such as a paper texture. Both print

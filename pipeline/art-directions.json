@@ -90,6 +90,11 @@
       "id": "paper-meme",
       "name": "Paper meme explainer",
       "brief": "The Vietnamese TikTok explainer look: a full-frame photo of crumpled white paper as the only background (npm run image -- <slug> \"crumpled white paper texture\"), never a flat colour. Headlines in a heavy condensed display font with Vietnamese glyphs, ALL CAPS, filled light cyan or a colour from the subject's logo with a thick dark outline (-webkit-text-stroke with paint-order: stroke fill) and a hard offset shadow; a smaller black condensed caps line under them. Facts as label/value pairs: a small outlined coloured label (VIEW, GIÁ, RAM) over a big black value, stacked down one side. One or two meme stickers per scene (npm run image -- <slug> \"<emotion or object>\" --sticker): a cut-out with a thick white outline (stacked drop-shadow filters) and a soft shadow, slightly rotated, with a white speech bubble when it reacts; the sticker shows the feeling of the line (facepalm, shocked, thumbs up, money, laptop). Everything pops in with a quick overshoot scale and a small wiggle, text word by word on the voice; hard cuts between scenes, no fades."
+    },
+    {
+      "id": "meme-skit",
+      "name": "Meme skit",
+      "brief": "The Vietnamese TikTok meme look: one still photo as the whole background, showing where the line happens (an office, a bedroom at night, a server room; npm run image -- <slug> \"<place>\"), changed only when the place changes. One or two green-screen animals acting out the line in the lower half (npm run footage -- <slug> \"green screen cat\" and similar: cat, dog, dancing, walking), keyed with the kit GreenScreen, mirrored, scaled and bobbing to the beat. At the top a big caption telling the situation in plain spoken Vietnamese: yellow #FFE600, a heavy condensed font with Vietnamese glyphs, thick black outline (-webkit-text-stroke with paint-order: stroke fill), centred, at most 3 lines, replaced line by line with the voice. No other graphics, cards or icons; hard cuts."
     }
   ],
   "pacing": [
