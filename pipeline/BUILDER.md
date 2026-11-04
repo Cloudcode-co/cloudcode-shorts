@@ -66,6 +66,17 @@ script.json's `format` says what kind of video it is (missing means `explainer`)
   scrolls, stickers move whole like bubbles and fade out under the header;
   never squeeze, stretch or slice a sticker (keep its own width/height ratio).
   The last message gets a reaction and at least 1.5 s to land.
+- `whatif`: a simulation the viewer lives through. Each scene's `headline` is
+  the counter's value at that moment; count smoothly between scenes (an
+  altitude falls, a temperature climbs) instead of jumping, and keep the number
+  formatting steady so the digits don't wobble (`fontVariantNumeric:
+  "tabular-nums"`). The world never stops moving. With facts.json `satellite`,
+  the kit's `<SatelliteZoom slug lat lon from to zoom />` is the view down:
+  drive `zoom` with `altitudeZoom(meters, lat)` from the altitude the counter
+  shows, keep it between `from` and `to + 1` (closer than about 1 km the
+  imagery turns to pixels: cut or cross-fade to footage or a photo of the
+  ground there), and put `credit` small in a corner. Without it, use footage
+  and photos of what is happening (`npm run footage`, `npm run image`).
 - `meme`: below.
 
 ### Memes

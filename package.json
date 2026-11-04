@@ -46,6 +46,7 @@
     "footage": "node pipeline/footage.mjs",
     "image": "node pipeline/images.mjs",
     "meme": "node pipeline/memes.mjs",
+    "satellite": "node pipeline/satellite.mjs",
     "render:qsv": "node scripts/render-qsv.mjs"
   },
   "allowScripts": {

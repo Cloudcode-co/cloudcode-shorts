@@ -20,6 +20,7 @@ import { newsCandidates, repoBrief, resolveRepos, storyCandidates, trendingCandi
 import { resolveVoice } from "./voices.mjs";
 import { isWebUrl, pageBrief, webReader } from "./web.mjs";
 import { addFootage, footageOn } from "./footage.mjs";
+import { addSatellite } from "./satellite.mjs";
 
 // The voices the script writer picks from (pipeline/voices.json); the first
 // is the default.
@@ -109,6 +110,54 @@ if (formatId === "brief" && !topic && !sourceUrls.length) {
   for (const url of urls) console.log(`News: ${news.find((n) => n.url === url).title} (${url})`);
   sourceUrls.push(...urls);
   topic = chosen.topic?.trim() || "Điểm tin sáng";
+}
+// A what-if: Gemini picks the scenario (science and tech by turns) unless one is
+// given, and the Wikipedia articles that carry its numbers become the pages to
+// read. A fall or flight over a real place gets satellite imagery of it.
+let whatifPlace = null;
+if (formatId === "whatif" && !sourceUrls.length) {
+  const kind = history.filter((h) => h.format === "whatif").length % 2 ? "tech" : "science";
+  const plan = await llmJson(
+    (topic
+      ? `The next what-if video is about: "${topic}". Keep it as the topic.`
+      : kind === "science"
+        ? "Pick the next what-if video: a science or everyday-physics scenario a general TikTok audience would " +
+          "watch to the end (falling from the edge of space, a city with no power for a week, the deepest dive, " +
+          "standing on Mars), with real numbers that change along the way."
+        : "Pick the next what-if video about computers, the internet or servers, for Vietnamese developers and " +
+          "gamers (a server taking a million requests a second, every undersea cable cut, a data centre losing " +
+          "cooling, a hard drive running for 100 years), with real numbers that change along the way.") +
+      ` Write the topic in Vietnamese as "Nếu …". Name 1–3 English Wikipedia articles whose facts carry the ` +
+      `numbers, exact titles. When it moves over a real place (a fall, a flight, a dive), give that place's ` +
+      `latitude and longitude; the closest views exist only over the United States, so prefer a US place when ` +
+      `the story allows (Baumgartner jumped over Roswell, New Mexico). Otherwise leave place empty. Skip these ` +
+      `past topics: ${JSON.stringify(pastTopics.slice(-40))}.`,
+    S("OBJECT", {
+      properties: {
+        topic: S("STRING"),
+        wikipedia: S("ARRAY", { items: S("STRING") }),
+        place: S("STRING", { description: "the place's name, or empty" }),
+        lat: S("NUMBER", { description: "latitude, or 0 with no place" }),
+        lon: S("NUMBER", { description: "longitude, or 0 with no place" }),
+      },
+      required: ["topic", "wikipedia", "place", "lat", "lon"],
+    }),
+    0.9,
+  );
+  for (const title of (plan.wikipedia ?? []).slice(0, 3)) {
+    const page = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title.replace(/ /g, "_"))}`, {
+      signal: AbortSignal.timeout(20_000),
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
+    const url = page?.type === "standard" ? page.content_urls?.desktop?.page : null;
+    if (url) sourceUrls.push(url);
+    console.log(`Wikipedia "${title}": ${url ?? "not found"}`);
+  }
+  if (!sourceUrls.length) throw new Error(`no Wikipedia article found for "${plan.topic}"`);
+  topic = topic || plan.topic?.trim();
+  if (plan.place?.trim() && (plan.lat || plan.lon)) whatifPlace = { name: plan.place.trim(), lat: plan.lat, lon: plan.lon };
+  console.log(`What-if (${kind}): ${topic}${whatifPlace ? ` over ${whatifPlace.name}` : ""}`);
 }
 // With no topic and no SOURCE, the oldest idea from ideas/ that no video used.
 // Only its topic, angle and source links are used: its facts are checked
@@ -509,6 +558,11 @@ writeJson(`src/videos/${slug}/facts.json`, {
   research,
 });
 
+// Satellite imagery for a what-if over a real place.
+if (whatifPlace) {
+  const sat = await addSatellite(slug, whatifPlace.lat, whatifPlace.lon, 3, 16).catch((err) => console.log(err.message));
+  if (sat) console.log(`Satellite over ${whatifPlace.name}: zoom ${sat.from}–${sat.to}, ${sat.tiles - sat.missing} tiles`);
+}
 // Stock footage for the scenes that asked for it.
 if (footageOn()) {
   for (const s of script.scenes.filter((s) => s.footage?.trim()).slice(0, 4)) {

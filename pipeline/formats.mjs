@@ -113,6 +113,23 @@ export const FORMATS = {
       'developers in one line, then "follow to hear the next story". Put a stock-video search in "footage" in ' +
       "most scenes (offices, servers, a developer at night, a city) since the story has no screenshots.",
   },
+  whatif: {
+    label: "Nếu như",
+    voiced: true,
+    style: "what-if-sim",
+    scenes: [6, 14],
+    words: [110, 260],
+    // The scenario and its Wikipedia sources come from pipeline/write-script.mjs.
+    pick: "",
+    shape:
+      "Shape: a what-if simulation, 40–75 seconds, told to the viewer as \"bạn\", as if it is happening now. " +
+      "Scene 1 sets the situation in one line under 5 seconds (\"Nếu bạn nhảy xuống từ độ cao 39 km…\"). Then " +
+      "the scenes follow it step by step in time or scale, each built on one real number from the research (an " +
+      "altitude, a speed, a temperature, seconds, requests per second) with the number and its unit in " +
+      "\"headline\" as the counter shows it, and what you would see or feel then. Use only numbers the research " +
+      "gives; one worked out from a rate or formula in the research says \"khoảng\". The last scene lands the " +
+      "outcome and asks viewers which what-if to do next and to follow.",
+  },
   meme: { label: "Meme", voiced: false, style: "meme-skit", builder: "beag" },
   chat: { label: "POV tin nhắn", voiced: false, style: "chat-thread", builder: "beag" },
 };

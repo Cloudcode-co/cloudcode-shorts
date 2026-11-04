@@ -22,6 +22,7 @@ import { resolveVoice } from "./voices.mjs";
 import { restoreFootage } from "./footage.mjs";
 import { restoreImages } from "./images.mjs";
 import { restoreMemes } from "./memes.mjs";
+import { restoreSatellite } from "./satellite.mjs";
 import { glFor } from "../scripts/gl.mjs";
 
 const args = process.argv.slice(2);
@@ -94,6 +95,7 @@ const rework = async () => {
   await restoreFootage(slug);
   await restoreImages(slug);
   await restoreMemes(slug);
+  await restoreSatellite(slug);
   const past = readJson("pipeline/history.json", []).findLast((h) => h.slug === slug) ?? {};
   const silent = FORMATS[formatOf(readJson(`src/videos/${slug}/script.json`).format)].voiced === false;
   if (voice && !silent) {
@@ -139,6 +141,7 @@ try {
   history.push({
     slug,
     topic: script.topic,
+    format: script.format ?? "explainer",
     date: new Date().toISOString().slice(0, 10),
     ...build,
   });

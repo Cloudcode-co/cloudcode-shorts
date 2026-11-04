@@ -18,3 +18,5 @@ voiceover-backup
 .wrangler
 worker/node_modules
 
+# Satellite tiles, fetched again from facts.json (pipeline/satellite.mjs)
+public/videos/*/satellite/

@@ -4,6 +4,7 @@ export * from "./Brand";
 export * from "./FallbackVideo";
 export * from "./GreenScreen";
 export * from "./Meme";
+export * from "./SatelliteZoom";
 export * from "./MemeCaption";
 export * from "./transitions";
 export * from "./Terminal";

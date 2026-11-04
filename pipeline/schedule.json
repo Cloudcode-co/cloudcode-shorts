@@ -1,12 +1,38 @@
 {
   "note": "What the scheduled runs make, by weekday in Vietnam time: 'early' is the 07:00 weekday run, 'morning' the 09:00 one, 'afternoon' the 17:30 one (worker/wrangler.toml crons). Values are format ids from pipeline/formats.mjs; a slot a day leaves out makes nothing. A run asked for by hand (Discord, the Actions page) is not affected.",
   "days": {
-    "monday": { "early": "brief", "morning": "news", "afternoon": "story" },
-    "tuesday": { "early": "brief", "morning": "tutorial", "afternoon": "meme" },
-    "wednesday": { "early": "brief", "morning": "explainer", "afternoon": "chat" },
-    "thursday": { "early": "brief", "morning": "quiz", "afternoon": "meme" },
-    "friday": { "early": "brief", "morning": "top5", "afternoon": "story" },
-    "saturday": { "morning": "explainer", "afternoon": "meme" },
-    "sunday": { "morning": "quiz", "afternoon": "chat" }
+    "monday": {
+      "early": "brief",
+      "morning": "news",
+      "afternoon": "story"
+    },
+    "tuesday": {
+      "early": "brief",
+      "morning": "tutorial",
+      "afternoon": "meme"
+    },
+    "wednesday": {
+      "early": "brief",
+      "morning": "explainer",
+      "afternoon": "whatif"
+    },
+    "thursday": {
+      "early": "brief",
+      "morning": "quiz",
+      "afternoon": "meme"
+    },
+    "friday": {
+      "early": "brief",
+      "morning": "top5",
+      "afternoon": "story"
+    },
+    "saturday": {
+      "morning": "whatif",
+      "afternoon": "meme"
+    },
+    "sunday": {
+      "morning": "quiz",
+      "afternoon": "chat"
+    }
   }
 }
