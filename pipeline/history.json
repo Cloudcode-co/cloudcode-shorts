@@ -181,5 +181,16 @@
     "built": "claude",
     "costUsd": 0.5821181000000001,
     "reviewIssues": 1
+  },
+  {
+    "slug": "fugleramme-birdnet-pi-homelab",
+    "topic": "Tự host Fugleramme trên Homelab và Raspberry Pi: Nhận diện tiếng chim bằng AI local và xuất tranh minh họa cổ điển thay thế BirdNET-Pi",
+    "format": "explainer",
+    "date": "2026-11-04",
+    "direction": "ops-console",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.9177209999999999,
+    "reviewIssues": 2
   }
 ]

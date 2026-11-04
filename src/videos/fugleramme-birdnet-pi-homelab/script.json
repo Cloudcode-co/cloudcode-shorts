@@ -1,0 +1,208 @@
+{
+  "slug": "fugleramme-birdnet-pi-homelab",
+  "format": "explainer",
+  "topic": "Tự host Fugleramme trên Homelab và Raspberry Pi: Nhận diện tiếng chim bằng AI local và xuất tranh minh họa cổ điển thay thế BirdNET-Pi",
+  "title": "Biến Raspberry Pi thành khung tranh chim tự vẽ bằng AI?",
+  "caption": "Tự dựng khung tranh cổ điển nhận diện tiếng chim hót ngoài vườn bằng AI local với Fugleramme và BirdNET-Go.",
+  "hashtags": [
+    "#fugleramme",
+    "#birdnetgo",
+    "#homelabvn",
+    "#raspberrypi",
+    "#congnghe"
+  ],
+  "musicPrompt": "Cozy warm acoustic guitar melody blended with subtle lofi beats and nature ambient chirps, relaxing tech vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "curious",
+        "acoustic guitar",
+        "warm nature ambient"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "lofi beats",
+        "warm groove",
+        "rising energy"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "upbeat electronic lofi",
+        "crisp percussion",
+        "engaging"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "mellow acoustic",
+        "smooth fade",
+        "satisfying finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/arnegiacomo/fugleramme",
+    "https://github.com/tphakala/birdnet-go",
+    "https://arnegiacomo.dev/fugleramme/faq/",
+    "https://arnegiacomo.dev/fugleramme/species/",
+    "https://github.com/tphakala/birdnet-go/wiki/hardware"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Biến Raspberry Pi thành khung tranh cổ điển tự vẽ chim ngoài vườn, anh em tin không?",
+      "headline": "Khung tranh AI tự vẽ chim?",
+      "lines": [
+        "Nghe tiếng hót đoán loài",
+        "Tự đổi tranh cổ điển"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "wooden birdhouse in garden"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Đây là Fugleramme, phối hợp cùng BirdNET-Go để nghe tiếng chim ngoài trời và xuất ngay tranh vẽ lên màn hình!",
+      "headline": "Fugleramme và BirdNET-Go",
+      "lines": [
+        "AI nhận diện tiếng chim local",
+        "Xuất tranh cổ điển thời gian thực"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme",
+        "tphakala/birdnet-go"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Gần một nghìn hai trăm bản vẽ đều được cắt thủ công từ các sách tự nhiên thế kỷ mười chín, hoàn toàn không dùng tranh AI.",
+      "headline": "Nói không với tranh AI",
+      "lines": [
+        "Gần 1.200 tranh cắt thủ công",
+        "Tranh minh họa cổ thế kỷ 19"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[cheerfully] Mỗi chú chim trên tranh được căn tỉ lệ theo trọng lượng cơ thể thật từ dữ liệu AVONET.",
+      "headline": "Tỉ lệ theo cân nặng thật",
+      "lines": [
+        "Dữ liệu sinh học AVONET",
+        "Chim càng lớn càng ở trung tâm"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Phần xử lý là BirdNET-Go, hỗ trợ nhiều mô hình AI như Perch v2 và bắn thông báo tới Home Assistant qua MQTT.",
+      "headline": "AI local 24 trên 7",
+      "lines": [
+        "Mô hình BirdNET v2.4 & Perch v2",
+        "Tích hợp MQTT Home Assistant"
+      ],
+      "commands": [],
+      "repos": [
+        "tphakala/birdnet-go"
+      ],
+      "footage": "server rack lights flashing"
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Anh em cần tối thiểu Pi 4 bản 64-bit vì Pi 3 và Pi Zero đã bị ngừng hỗ trợ. Nhớ dùng mic mono để tránh lệch pha nhé!",
+      "headline": "Lưu ý phần cứng",
+      "lines": [
+        "Tối thiểu Raspberry Pi 4 (64-bit)",
+        "Bắt buộc dùng micro mono"
+      ],
+      "commands": [],
+      "repos": [
+        "tphakala/birdnet-go"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[cheerfully] Dựng trên homelab hoặc Pi với Docker Compose thì cực nhanh, chỉ cần kéo file cấu hình về và bật lên.",
+      "headline": "Cài đặt bằng Docker Compose",
+      "lines": [
+        "Triển khai chỉ với hai lệnh"
+      ],
+      "commands": [
+        "curl -fsSL https://raw.githubusercontent.com/arnegiacomo/fugleramme/main/examples/docker-compose.yml -o docker-compose.yml",
+        "docker compose up -d"
+      ],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Kiosk tranh nằm ở cổng tám không tám không, còn trang quản trị nằm ở xuyệt admin. Xuất màn e-ink hay TV đều đẹp.",
+      "headline": "Kiosk và trang quản trị",
+      "lines": [
+        "Cổng 8080 cho chế độ Kiosk",
+        "Đường dẫn /admin để tinh chỉnh",
+        "Hỗ trợ Inky Impression và màn TV"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Hiện có bảy trăm sáu mươi lăm loài có sẵn tranh. Gặp chim lạ chưa có, anh em chỉ cần thả ảnh vào thư mục custom là xong.",
+      "headline": "Tùy biến tranh cá nhân",
+      "lines": [
+        "765 loài đã có sẵn tranh",
+        "Thả ảnh vào assets/artwork/custom/"
+      ],
+      "commands": [],
+      "repos": [
+        "arnegiacomo/fugleramme"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[excited] Anh em lưu video lại để thử cuối tuần và follow kênh để xem thêm nhé!",
+      "headline": "Lưu lại để dựng thử!",
+      "lines": [
+        "Lưu video cuối tuần thực hành",
+        "Bấm theo dõi để đón mẹo mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer at desk at night"
+    }
+  ]
+}
