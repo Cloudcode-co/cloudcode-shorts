@@ -12,8 +12,9 @@ import { pathToFileURL } from "node:url";
 import { readJson, slugify, writeJson } from "./lib.mjs";
 
 const factsFile = (slug) => `src/videos/${slug}/facts.json`;
-// Big GIFs slow the render down for little gain.
+// Big GIFs slow the render down for little gain; small ones blur when scaled up.
 const MAX_BYTES = 12 * 1024 * 1024;
+const MIN_SIDE = 400;
 
 export const memesOn = () => Boolean(process.env.GIPHY_API_KEY);
 
@@ -34,7 +35,8 @@ export const addMeme = async (slug, query, scene = null) => {
   if (!res?.ok) throw new Error(`GIPHY search: ${res?.status ?? "no answer"}`);
   const hit = ((await res.json()).data ?? []).find((s) => {
     const o = s.images?.original;
-    return o?.url && !used.includes(`giphy-${s.id}`) && Number(o.size) <= MAX_BYTES && Number(o.frames) > 1;
+    return o?.url && !used.includes(`giphy-${s.id}`) && Number(o.size) <= MAX_BYTES && Number(o.frames) > 1 &&
+      Math.max(Number(o.width), Number(o.height)) >= MIN_SIDE;
   });
   if (!hit) return null;
   const o = hit.images.original;
