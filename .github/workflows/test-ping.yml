@@ -1,0 +1,29 @@
+name: Test Discord ping
+
+# Sends one message that pings DISCORD_NOTIFY_USER_ID in DISCORD_CHANNEL_ID, the
+# way the pipeline does when a video reaches the TikTok drafts.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Ping
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CHANNEL_ID }}
+          DISCORD_NOTIFY_USER_ID: ${{ vars.DISCORD_NOTIFY_USER_ID }}
+        run: >-
+          node --input-type=module -e "import { sendPing } from './pipeline/discord.mjs';
+          console.log('discord status', await sendPing('Thử thông báo: khi video vào nháp TikTok, mình sẽ nhắc như thế này.'));"
