@@ -1,0 +1,11 @@
+{
+  "topic": "VoiceStudio: clone giọng, lồng tiếng video ngay trên máy của bạn, không cần ElevenLabs",
+  "angle": "Vì nó chạy hoàn toàn local và vừa cán mốc 100.000 star trên GitHub, nên đây là công cụ giọng nói đang hot mà dân tự host có thể thử ngay mà không tốn phí API.",
+  "sources": [
+    "https://github.com/debpalash/VoiceStudio",
+    "https://voicestudio.sh"
+  ],
+  "notes": "GitHub debpalash/VoiceStudio mô tả VoiceStudio là bản thay thế ElevenLabs mã nguồn mở, chạy hoàn toàn local, gồm clone giọng, thiết kế giọng, lồng tiếng video, đọc chính tả, chuyển giọng nói thành văn bản và tạo audiobook bằng 646 ngôn ngữ. GitHub ghi repo công khai, chưa lưu trữ, 100.279 star, giấy phép AGPL-3.0, và có API local cùng MCP để tự động hoá. Số star tăng khoảng 9.200 trong 7 ngày theo bảng xếp hạng ngày 3/11/2026 cho thấy nó đang tăng nhanh trong tuần này.",
+  "from": "muse",
+  "received": "2026-11-04T06:07:08.230Z"
+}
