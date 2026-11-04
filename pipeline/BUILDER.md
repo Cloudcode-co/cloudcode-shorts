@@ -117,7 +117,9 @@ Load these when the video calls for them:
   and run `node .claude/skills/archify/bin/archify.mjs validate <type> out/diagrams/<name>.json --json`
   until it passes (no overlaps or crossed routes); add `--layout-json` for an
   architecture or workflow to get the measured positions and routes.
-  `.claude/skills/archify/examples/*.json` show each type's candidate. Then draw that layout
+  `.claude/skills/archify/examples/*.json` show each type's candidate. Its layouts are
+  landscape, so keep a diagram to about 8 nodes or show it in parts across
+  scenes. Then draw that layout
   yourself as SVG in the scene, sized for 1080×1920 with text big enough to read
   on a phone, and animate it in (nodes, then the routes drawing along their
   paths). Only `guide`, `validate` and `inspect`: never `finalize`, `deliver`,
