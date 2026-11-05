@@ -12,7 +12,7 @@ slug, an art direction and a pacing.
 - `src/videos/<slug>/timeline.json` (when present): each scene's `start` and
   `length` in seconds, and the music's `sections` (where the music changes: a
   build, a drop). Make every scene exactly its length
-  (`Math.round(length * 30)` frames, in order) so the music fits the story, and
+  (`Math.round(length * FPS)` frames, FPS = 60 from the kit, in order) so the music fits the story, and
   land the big moments (a reveal, a punchline, a number slamming in, a cut to
   a new part) on the first frame of a section.
 - `src/videos/<slug>/durations.json`: each scene's voice clip length in seconds.
@@ -126,6 +126,8 @@ Load these when the video calls for them:
   SRT parts.
 - `remotion-maps`: when the art direction or topic is a map. Use no map service
   that needs an API key or the network.
+- `edit-styles`: when the art direction is `pastel-3d-explainer` or
+  `breakcore-swiss`; read only the file for that style.
 - `review-animations`: before the last QA round, review your motion against it
   and fix what it flags.
 - `archify`: when a scene explains how something is put together or happens
@@ -226,7 +228,8 @@ A placeholder `Video.tsx` is already there; replace it.
 - Motion with purpose: ease-out `Easing.bezier(0.23, 1, 0.32, 1)` for entrances,
   hard cuts between shots unless the art direction says otherwise. Never animate
   from `scale(0)`.
-- Avoid the generated-video look: no cream `#F4F1EA` backgrounds, no tracked-out
+- Avoid the generated-video look (an edit-styles direction may override a rule here;
+  its file says which): no cream `#F4F1EA` backgrounds, no tracked-out
   ALL-CAPS labels over headings, no `→` arrows on text, no rows of identical rounded
   cards with soft grey shadows, no gradient washes as decoration, no emoji as icons.
 - No background behind words: no highlighter or marker bars, no coloured boxes,
