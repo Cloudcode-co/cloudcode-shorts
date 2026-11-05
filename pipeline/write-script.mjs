@@ -28,7 +28,8 @@ const { voices } = readJson("pipeline/voices.json");
 const VOICE = {
   voiceId: voices[0].id,
   modelId: "eleven_v3",
-  voiceSettings: { stability: 0.0, similarity_boost: 0.75 },
+  // Natural: v3 at stability 0 (Creative) repeats words, stutters and adds sounds.
+  voiceSettings: { stability: 0.5, similarity_boost: 0.75 },
 };
 // VOICE (an ElevenLabs voice id, name or link) replaces the writer's pick;
 // NOTES are the channel owner's requests for this video.

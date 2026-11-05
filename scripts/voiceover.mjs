@@ -63,7 +63,8 @@ const body = (text) =>
     text: spoken(text),
     model_id: modelId,
     language_code: "vi",
-    voice_settings: voiceSettings ?? { stability: 0.5, similarity_boost: 0.75 },
+    // Older scripts ask for stability 0 (Creative), where v3 repeats words and stutters.
+    voice_settings: { similarity_boost: 0.75, ...voiceSettings, stability: Math.max(0.5, voiceSettings?.stability ?? 0.5) },
   });
 const failed = async (res) => `${res.status} ${(await res.text()).slice(0, 200)}`;
 
