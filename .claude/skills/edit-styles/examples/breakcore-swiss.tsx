@@ -1,17 +1,17 @@
-// Test build of the breakcore-swiss edit style (.claude/skills/edit-styles)
-// on Dossier's first four scenes, cut on a 150 BPM grid (24 frames a beat).
-import { loadFont as loadAnton } from "@remotion/google-fonts/Anton";
+// Test build of breakcore-swiss, footage-first, on the free-fall video's first
+// three scenes: a 150 BPM grid (24 frames a beat), a shot change every one or
+// two beats, white Swiss posters cut against regraded footage.
+import { loadFont as loadUnbounded } from "@remotion/google-fonts/Unbounded";
 import { ThreeCanvas } from "@remotion/three";
 import React, { useMemo } from "react";
-import type { CSSProperties, ReactNode } from "react";
-import { AbsoluteFill, Img, Sequence, interpolate, useCurrentFrame } from "remotion";
+import type { CSSProperties } from "react";
+import { AbsoluteFill, OffthreadVideo, Sequence, interpolate, useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import {
   Brand,
   FPS,
   Music,
   SAFE,
-  Sfx,
   TikTokGuide,
   Voice,
   mono,
@@ -21,429 +21,391 @@ import {
   type VideoProps,
 } from "../../kit";
 import durations from "./durations.json";
-import facts from "./facts.json";
+import script from "./script.json";
 import timeline from "./timeline.json";
 
-const SLUG = "dossier-breakcore-test";
-const anton = loadAnton("normal", { weights: ["400"], subsets: ["latin", "vietnamese"] }).fontFamily;
+const SLUG = "roi-tu-do-breakcore-test";
+const wide = loadUnbounded("normal", { weights: ["900"], subsets: ["latin", "vietnamese"] }).fontFamily;
 
-// The grid: 150 BPM at 60 fps. Every cut, insert and regrade lands on beat(n) or beat(n) + 12.
 const BEAT = 24;
 const beat = (n: number) => n * BEAT;
-
 const INK = "#0B0B0C";
-const PAPER = "#FAFAF7";
+const PAPER = "#FFFFFF";
 const CYAN = "#19C6E6";
 const RED = "#FF2E4D";
 const BLUE = "#2340FF";
+const VIOLET = "#8A6CFF";
 
-type Id = "s1" | "s2" | "s3" | "s4";
-const IDS: Id[] = ["s1", "s2", "s3", "s4"];
+type Id = "s1" | "s2" | "s3";
+const IDS: Id[] = ["s1", "s2", "s3"];
 const START = (id: Id) => Math.round(timeline.scenes[id].start * FPS);
 const LEN = (id: Id) => Math.round(timeline.scenes[id].length * FPS);
-const CLIP = (id: Id) => durations[id] * FPS;
-const TOTAL = Math.round(timeline.total * FPS);
-const DOSSIER = facts.repos[0];
-
-// One-frame inserts on the snare (2 frames at 60 fps), applied to the whole frame.
-type Insert = "invert" | "mirror" | "smear" | "rgb";
-const KINDS: Insert[] = ["invert", "rgb", "mirror", "smear"];
-const INSERTS = Array.from({ length: Math.floor(TOTAL / beat(2)) }, (_, k) => ({
-  at: beat(2 * k + 1) + 12,
-  kind: KINDS[k % KINDS.length],
-})).filter((i) => i.at > beat(2) && i.at < TOTAL - beat(1));
-const insertStyle = (f: number): CSSProperties => {
-  const hit = INSERTS.find((i) => f >= i.at && f < i.at + 2);
-  if (!hit) return {};
-  if (hit.kind === "invert") return { filter: "invert(1)" };
-  if (hit.kind === "mirror") return { transform: "scaleX(-1)" };
-  if (hit.kind === "smear") return { transform: "scaleX(1.9) skewX(-14deg)", transformOrigin: "50% 50%" };
-  return { filter: `drop-shadow(14px 0 0 ${RED}) drop-shadow(-14px 0 0 ${CYAN})` };
+const TOTAL = START("s3") + LEN("s3");
+const scene = (id: Id) => script.scenes.find((s) => s.id === id)!;
+const CLIPS: Record<Id, string[]> = {
+  s1: ["footage/space-jumper-stratosphere-edge-pixabay-126663.mp4", "footage/astronaut-helmet-visor-pixabay-132347.mp4"],
+  s2: ["footage/space-jumper-stratosphere-edge-pixabay-126663.mp4", "footage/astronaut-helmet-visor-pixabay-132347.mp4"],
+  s3: ["footage/astronaut-centrifuge-spin-training-pixabay-143016.mp4", "footage/astronaut-helmet-visor-pixabay-132347.mp4"],
 };
 
-// Per-beat regrade for images: natural, acid, pink-violet, sepia.
-const GRADES = ["none", "invert(1) hue-rotate(90deg) saturate(3)", "hue-rotate(250deg) saturate(2)", "sepia(0.9)"];
-const grade = (f: number) => GRADES[Math.floor(f / BEAT) % 4];
+// Seeded randomness, so every render of a frame is the same.
+const rand = (n: number) => {
+  const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+};
 
-// --- Poster parts.
+// --- Inserts: whole-frame, 2 frames on the snare, every 2 beats.
+const INSERTS = Array.from({ length: Math.floor(TOTAL / beat(2)) }, (_, k) => ({ at: beat(2 * k + 1) + 12, k }));
+const insertStyle = (f: number): CSSProperties => {
+  const hit = INSERTS.find((i) => f >= i.at && f < i.at + 2 && i.at > beat(2));
+  if (!hit) return {};
+  return [
+    { filter: "invert(1)" },
+    { filter: `drop-shadow(16px 0 0 ${RED}) drop-shadow(-16px 0 0 ${CYAN})` },
+    { transform: "scaleX(-1)" },
+    { transform: "scaleX(2.2) skewX(-16deg)" },
+  ][hit.k % 4];
+};
+// Per-beat regrade: natural, acid, pink-violet, sepia. Acid and pink are
+// duotones (greyscale multiplied by a fixed gradient), so every clip lands on
+// the same colours whatever its own palette.
+const MONO = "grayscale(1) contrast(1.35) brightness(1.15)";
+const GRADES: { filter: string; tint?: string }[] = [
+  { filter: "none" },
+  { filter: MONO, tint: "linear-gradient(180deg, #19E6D2, #C6FF1A)" },
+  { filter: MONO, tint: "linear-gradient(180deg, #FF7AD9, #8B5CF6)" },
+  { filter: "sepia(0.9) saturate(1.4)" },
+];
+const Graded: React.FC<{ n: number; children: React.ReactNode }> = ({ n, children }) => {
+  const g = GRADES[n % 4];
+  return (
+    <AbsoluteFill>
+      <AbsoluteFill style={{ filter: g.filter }}>{children}</AbsoluteFill>
+      {g.tint && <AbsoluteFill style={{ background: g.tint, mixBlendMode: "multiply" }} />}
+    </AbsoluteFill>
+  );
+};
+
+// --- The shot list: each scene cut into shots of one or two beats.
+type Kind = "word" | "poster" | "footage" | "portal" | "scatter" | "bars";
+type Shot = { from: number; len: number; kind: Kind; seed: number; clip: string };
+const PATTERN: Kind[] = ["poster", "footage", "scatter", "footage", "portal", "poster", "bars", "footage"];
+const SHOTS: Record<Id, Shot[]> = Object.fromEntries(
+  IDS.map((id, si) => {
+    const total = LEN(id) / BEAT;
+    const shots: Shot[] = [];
+    let b = 0;
+    let n = 0;
+    while (b < total) {
+      const len = Math.min(total - b, n === 0 ? 2 : rand(si * 50 + n) < 0.55 ? 1 : 2);
+      const kind = n === 0 ? "word" : PATTERN[(n + si * 3) % PATTERN.length];
+      shots.push({ from: beat(b), len: beat(len), kind, seed: si * 100 + n, clip: CLIPS[id][n % 2] });
+      b += len;
+      n++;
+    }
+    return [id, shots];
+  }),
+) as Record<Id, Shot[]>;
+const shotAt = (id: Id, f: number) => SHOTS[id].find((s) => f >= s.from && f < s.from + s.len)!;
+const isDark = (k: Kind) => k === "footage" || k === "bars";
+
+// --- Poster vocabulary.
 const lerp = (f: number, at: number, dur: number) =>
   f < at ? 0 : interpolate(f - at, [0, dur], [0, 1], { extrapolateRight: "clamp" });
 
-const Stroke: React.FC<{ d: string; at: number; len: number; dur?: number; w?: number; color?: string }> = ({
-  d,
-  at,
-  len,
-  dur = 12,
-  w = 4,
-  color = INK,
-}) => {
-  const f = useCurrentFrame();
-  const p = lerp(f, at, dur);
-  if (p === 0) return null;
-  return <path d={d} stroke={color} strokeWidth={w} fill="none" strokeLinecap="round" strokeDasharray={len} strokeDashoffset={len * (1 - p)} />;
-};
-const Lines: React.FC<{ children: ReactNode }> = ({ children }) => (
-  <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
-    {children}
-  </svg>
+const Disc: React.FC<{ x: number; y: number; d: number }> = ({ x, y, d }) => (
+  <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d, borderRadius: "50%", background: `radial-gradient(circle, ${INK} 0%, #555 22%, #DDD 52%, transparent 70%)` }} />
 );
-
-// The key word slams in: one frame big, then set; hard, no fade.
-const Slam: React.FC<{ at: number; children: ReactNode; style: CSSProperties }> = ({ at, children, style }) => {
-  const f = useCurrentFrame();
-  if (f < at) return null;
-  const s = f - at < 2 ? 1.25 : f - at < 4 ? 1.06 : 1;
-  return (
-    <div style={{ position: "absolute", fontFamily: anton, color: INK, lineHeight: 0.86, transform: `scale(${s})`, transformOrigin: "left top", ...style }}>
-      {children}
-    </div>
-  );
-};
-
-// Appears on its beat, no tween: the cut is the motion.
-const At: React.FC<{ at: number; children: ReactNode; style?: CSSProperties }> = ({ at, children, style }) => {
-  const f = useCurrentFrame();
-  if (f < at) return null;
-  return <div style={{ position: "absolute", ...style }}>{children}</div>;
-};
-
-const Dots: React.FC<{ n: number; style: CSSProperties }> = ({ n, style }) => (
-  <div style={{ position: "absolute", display: "flex", gap: 14, ...style }}>
+const Ring: React.FC<{ x: number; y: number; w: number; h: number; spin: number; dashed?: boolean }> = ({ x, y, w, h, spin, dashed }) => (
+  <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h, borderRadius: "50%", border: `3px ${dashed ? "dashed" : "solid"} ${INK}`, transform: `rotate(${spin}deg)` }} />
+);
+const Cone: React.FC<{ x: number; y: number; angle: number; color: string; size?: number }> = ({ x, y, angle, color, size = 900 }) => (
+  <div
+    style={{
+      position: "absolute",
+      left: x,
+      top: y - size / 2,
+      width: size,
+      height: size,
+      background: `linear-gradient(90deg, transparent, ${color})`,
+      clipPath: "polygon(0 50%, 100% 0, 100% 100%)",
+      transform: `rotate(${angle}deg)`,
+      transformOrigin: "0 50%",
+      opacity: 0.8,
+    }}
+  />
+);
+const Slab: React.FC<{ x: number; y: number; w: number; h: number; angle: number }> = ({ x, y, w, h, angle }) => (
+  <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h, background: INK, transform: `rotate(${angle}deg)` }} />
+);
+const Dots: React.FC<{ x: number; y: number; n: number }> = ({ x, y, n }) => (
+  <div style={{ position: "absolute", left: x, top: y, display: "flex", gap: 9 }}>
     {Array.from({ length: n }, (_, i) => (
-      <div key={i} style={{ width: 10, height: 10, borderRadius: 5, background: INK }} />
+      <div key={i} style={{ width: 9, height: 9, borderRadius: 5, background: INK }} />
     ))}
   </div>
 );
-
-const Sphere: React.FC<{ x: number; y: number; d: number }> = ({ x, y, d }) => {
-  const f = useCurrentFrame();
-  return (
-    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d }}>
-      <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: `radial-gradient(circle at 35% 30%, #6A6A70, ${INK} 62%)` }} />
-      {[1.25, 1.5, 1.8].map((k, i) => (
-        <div
-          key={i}
-          style={{
-            position: "absolute",
-            left: (d - d * k) / 2,
-            top: (d - d * k) / 2,
-            width: d * k,
-            height: d * k,
-            borderRadius: "50%",
-            border: `3px ${i === 1 ? "dashed" : "solid"} ${INK}`,
-            transform: `rotate(${f * (i % 2 ? -1.5 : 1) * (i + 1)}deg)`,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-const Fact: React.FC<{ at: number; top: number; size?: number; children: ReactNode; font?: string }> = ({
-  at,
-  top,
-  size = 46,
-  children,
-  font = sans,
-}) => (
-  <At at={at} style={{ left: SAFE.left, right: SAFE.right, top, fontFamily: font, fontWeight: 700, fontSize: size, color: INK, lineHeight: 1.1, textWrap: "balance" }}>
-    {children}
-  </At>
+const Pills: React.FC<{ x: number; y: number }> = ({ x, y }) => (
+  <>
+    {[0, 1, 2].map((i) => (
+      <div key={i} style={{ position: "absolute", left: x + i * 14, top: y + i * 40, width: 64, height: 16, borderRadius: 8, background: CYAN, transform: "rotate(-24deg)" }} />
+    ))}
+  </>
+);
+const Squiggle: React.FC<{ y: number; p: number }> = ({ y, p }) => (
+  <svg width={1080} height={200} style={{ position: "absolute", left: 0, top: y }}>
+    <path
+      d={Array.from({ length: 14 }, (_, i) => `${i === 0 ? "M" : "Q"}${60 + i * 70} ${i % 2 ? 40 : 160} ${100 + i * 70} 100`).join(" ")}
+      stroke={BLUE}
+      strokeWidth={6}
+      fill="none"
+      strokeDasharray={1200}
+      strokeDashoffset={1200 * (1 - p)}
+    />
+  </svg>
+);
+const Vertical: React.FC<{ x: number; y: number; text: string; color?: string }> = ({ x, y, text, color = INK }) => (
+  <div style={{ position: "absolute", left: x, top: y, writingMode: "vertical-rl", fontFamily: wide, fontSize: 34, color }}>{text}</div>
 );
 
-const Pill: React.FC<{ at: number; x: number; y: number; w?: number }> = ({ at, x, y, w = 70 }) => (
-  <At at={at} style={{ left: x, top: y, width: w, height: 18, borderRadius: 9, background: CYAN }}>
-    {null}
-  </At>
-);
-
-// --- s1 Hook: the void, a hairline, then CV slams in on beat 1.
-const S1: React.FC = () => (
-  <AbsoluteFill style={{ background: PAPER }}>
-    {/* A black Swiss block carries the lockup (its logo is white). */}
-    <div style={{ position: "absolute", left: 0, top: 226, width: 560, height: 96, background: INK }} />
-    <Brand />
-    <Lines>
-      <Stroke d="M0 410 H1080" len={1080} at={0} w={3} />
-      <Stroke d="M640 410 V930" len={520} at={beat(2)} w={3} />
-    </Lines>
-    <Slam at={beat(1)} style={{ left: SAFE.left - 12, top: 430, fontSize: 600 }}>
-      CV
-    </Slam>
-    <At at={beat(2) + 12}>
-      <Sphere x={770} y={700} d={200} />
-    </At>
-    <At at={beat(3)} style={{ left: 860, top: 460, writingMode: "vertical-rl", fontFamily: anton, fontSize: 40, color: INK }}>
-      THEO TỪNG JD
-    </At>
-    <Fact at={beat(4)} top={960} size={100} font={anton}>
-      AI viết CV theo từng JD
-    </Fact>
-    <Pill at={beat(6)} x={SAFE.left} y={1222} />
-    <Fact at={beat(6)} top={1200} size={46}>
-      <span style={{ paddingLeft: 92 }}>Chuẩn từng tin tuyển dụng</span>
-    </Fact>
-    <Pill at={beat(7)} x={SAFE.left} y={1292} />
-    <Fact at={beat(7)} top={1270} size={46}>
-      <span style={{ paddingLeft: 92 }}>Không bịa kinh nghiệm</span>
-    </Fact>
-    <Dots n={22} style={{ left: SAFE.left, top: 1390 }} />
-    <Sfx id="thud" at={beat(1)} volume={0.4} />
-    <Voice slug={SLUG} id="s1" />
-  </AbsoluteFill>
-);
-
-// --- s2 Poster build: DOSSIER, a portal holding its logo, a cone sweep, then zoom through.
-const S2: React.FC = () => {
-  const f = useCurrentFrame();
-  const len = LEN("s2");
-  const through = f < len - beat(1) ? 1 : interpolate(f, [len - beat(1), len], [1, 9]);
-  const cone = lerp(f, beat(2), beat(4));
-  return (
-    <AbsoluteFill style={{ background: PAPER, overflow: "hidden" }}>
-      {cone > 0 && cone < 1 && (
-        <div
-          style={{
-            position: "absolute",
-            left: -200,
-            top: 300,
-            width: 1500,
-            height: 900,
-            background: "linear-gradient(90deg, #8A3FFC, #19C6E6, #FF3EA5)",
-            clipPath: "polygon(100% 0, 0 40%, 0 60%)",
-            opacity: 0.85,
-            transform: `rotate(${-30 + cone * 60}deg)`,
-            transformOrigin: "100% 0",
-          }}
-        />
-      )}
-      <Lines>
-        <Stroke d="M0 520 H1080" len={1080} at={0} w={3} />
-        <Stroke d="M103 1215 C 300 1180, 500 1250, 880 1205" len={820} at={beat(6)} dur={16} w={5} />
-      </Lines>
-      <Slam at={0} style={{ left: SAFE.left - 6, top: 290, fontSize: 250 }}>
-        DOSSIER
-      </Slam>
-      <div style={{ position: "absolute", left: 0, top: 0, width: 1080, height: 1920, transform: `scale(${through})`, transformOrigin: "491px 760px" }}>
-        <At at={beat(1)}>
-          <Portal x={491} y={760} r={170} />
-        </At>
-      </div>
-      <At at={beat(3)} style={{ left: 820, top: 560, writingMode: "vertical-rl", fontFamily: anton, fontSize: 40, color: INK }}>
-        TỰ HOST
-      </At>
-      {through < 2 && (
-        <>
-          <Fact at={beat(4)} top={1050} size={74} font={anton}>
-            Dossier tự host trên máy chủ
-          </Fact>
-          <Fact at={beat(8)} top={1230} size={44}>
-            Mã nguồn mở {DOSSIER.license}
-          </Fact>
-          <Fact at={beat(9)} top={1290} size={44}>
-            Quản lý tìm việc trọn gói
-          </Fact>
-          <At at={beat(10)} style={{ left: SAFE.left, top: 1365, fontFamily: mono, fontSize: 34, color: INK }}>
-            [{DOSSIER.stars.toLocaleString("de-DE")} stars · {DOSSIER.language}]
-          </At>
-        </>
-      )}
-      <Sfx id="whoosh" at={len - beat(1)} volume={0.25} />
-      <Voice slug={SLUG} id="s2" />
-    </AbsoluteFill>
-  );
-};
-const Portal: React.FC<{ x: number; y: number; r: number }> = ({ x, y, r }) => {
-  const f = useCurrentFrame();
-  return (
-    <>
-      {[1.18, 1.36, 1.56].map((k, i) => (
-        <div
-          key={i}
-          style={{
-            position: "absolute",
-            left: x - r * k,
-            top: y - r * k,
-            width: 2 * r * k,
-            height: 2 * r * k,
-            borderRadius: "50%",
-            border: `${i === 0 ? 10 : 3}px ${i === 2 ? "dashed" : "solid"} ${INK}`,
-            transform: `rotate(${f * (i + 1) * (i % 2 ? -0.8 : 1.2)}deg)`,
-          }}
-        />
-      ))}
-      <div style={{ position: "absolute", left: x - r, top: y - r, width: 2 * r, height: 2 * r, borderRadius: "50%", overflow: "hidden", background: INK }}>
-        <Img src={videoAsset(SLUG, DOSSIER.avatar)} style={{ width: "100%", height: "100%", objectFit: "cover", filter: grade(f) }} />
-      </div>
-    </>
-  );
-};
-
-// --- s3 One profile, matched to the JD; what's missing becomes a GAP, never made up.
-const S3: React.FC = () => {
-  const gapAt = beat(11); // "khoảng trống"
-  const rows = [0, 1, 2, 3];
-  const card = (x: number, title: string, at: number, gap?: boolean) => (
-    <At at={at} style={{ left: x, top: 330, width: 340, height: 420, border: `5px solid ${INK}`, background: "#FFFFFF" }}>
-      <div style={{ fontFamily: anton, fontSize: 52, color: INK, padding: "18px 24px" }}>{title}</div>
-      {rows.map((r) => (
-        <div
-          key={r}
-          style={{
-            margin: "0 24px 30px",
-            height: 26,
-            width: [260, 200, 240, 180][r],
-            background: gap && r === 2 ? "transparent" : INK,
-            border: gap && r === 2 ? `4px dashed ${RED}` : undefined,
-          }}
-        />
-      ))}
-    </At>
-  );
+// --- Shots.
+const Poster: React.FC<{ s: Shot; f: number; id: Id }> = ({ s, f, id }) => {
+  const r = (k: number) => rand(s.seed * 7 + k);
+  const t = f - s.from;
+  const flip = r(1) < 0.5;
   return (
     <AbsoluteFill style={{ background: PAPER }}>
-      {card(SAFE.left, "HỒ SƠ GỐC", 0)}
-      {card(540, "JD", beat(1), true)}
-      <Lines>
-        <Stroke d="M383 460 C 450 430, 480 500, 564 460" len={210} at={beat(3)} w={5} />
-        <Stroke d="M343 516 C 430 560, 470 470, 564 516" len={240} at={beat(4)} w={5} />
-        <Stroke d="M363 628 C 440 600, 480 660, 564 628" len={220} at={beat(5)} w={5} />
-        <Stroke d="M103 1020 q 40 -50 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" len={1000} at={gapAt} dur={16} w={6} color={BLUE} />
-      </Lines>
-      <Slam at={gapAt} style={{ left: 470, top: 740, fontSize: 250, color: RED }}>
-        GAP
-      </Slam>
-      <At at={beat(2) + 12} style={{ left: SAFE.left, top: 790, fontFamily: sans, fontWeight: 700, fontSize: 36, color: INK }}>
-        so khớp
-      </At>
-      <Fact at={beat(6)} top={1060} size={74} font={anton}>
-        Một hồ sơ gốc duy nhất
-      </Fact>
-      <Fact at={beat(7)} top={1170} size={42}>
-        So khớp kỹ năng với JD
-      </Fact>
-      <Fact at={gapAt} top={1230} size={42}>
-        Yêu cầu thiếu tính là gap
-      </Fact>
-      <Fact at={beat(14)} top={1290} size={42}>
-        Không bao giờ bịa kinh nghiệm
-      </Fact>
-      <Dots n={18} style={{ left: SAFE.left, top: 1390 }} />
-      <Sfx id="thud" at={gapAt} volume={0.4} />
-      <Voice slug={SLUG} id="s3" />
+      <Cone x={flip ? 620 : 40} y={560 + r(2) * 400} angle={(flip ? 180 : 0) + (r(3) - 0.5) * 30 + t * 0.6} color={r(4) < 0.5 ? VIOLET : "#FF3EA5"} size={760} />
+      <Ring x={420 + r(5) * 240} y={760} w={640} h={560} spin={t * 0.8} />
+      <Ring x={500} y={760} w={260} h={260} spin={-t * 2} dashed />
+      <Disc x={flip ? 300 : 760} y={620 + r(6) * 300} d={360} />
+      <div style={{ position: "absolute", left: 300 + r(7) * 300, top: 950, width: 200, height: 100, borderRadius: "200px 200px 0 0", background: INK, transform: "rotate(180deg)" }} />
+      <Slab x={200 + r(8) * 600} y={440 + r(9) * 300} w={420} h={30} angle={-30 + t * 2.5} />
+      <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
+        <line x1={0} y1={980} x2={1080 * lerp(t, 0, 10)} y2={980 - 200 * r(10)} stroke={INK} strokeWidth={3} />
+      </svg>
+      <Dots x={SAFE.left + r(11) * 300} y={330} n={10} />
+      <Pills x={760} y={420 + r(12) * 200} />
+      {r(13) < 0.6 && <Squiggle y={1020} p={lerp(t, 0, 14)} />}
+      <Vertical x={850} y={520} text={scene(id).headline.split(" ")[0]} />
     </AbsoluteFill>
   );
 };
 
-// --- s4 Drop: the logo regraded every beat, ribbons through it, LOCAL extruded in steep perspective.
-const Ribbon: React.FC<{ points: [number, number, number][]; color: string; delay: number }> = ({ points, color, delay }) => {
-  const f = useCurrentFrame();
-  const t = interpolate(f - delay, [0, beat(3)], [0.02, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+const Ribbon: React.FC<{ points: [number, number, number][]; color: string; t: number }> = ({ points, color, t }) => {
   const geometry = useMemo(() => {
     const curve = new THREE.CatmullRomCurve3(points.map((p) => new THREE.Vector3(...p)));
     const n = 40;
-    const part = new THREE.CatmullRomCurve3(Array.from({ length: n + 1 }, (_, i) => curve.getPoint((i / n) * t)));
-    return new THREE.TubeGeometry(part, 80, 0.09, 10, false);
+    const part = new THREE.CatmullRomCurve3(Array.from({ length: n + 1 }, (_, i) => curve.getPoint((i / n) * Math.max(0.02, t))));
+    return new THREE.TubeGeometry(part, 80, 0.12, 10, false);
   }, [points, t]);
-  if (f < delay) return null;
   return (
     <mesh geometry={geometry}>
       <meshBasicMaterial color={color} />
     </mesh>
   );
 };
-const RIBBONS: { points: [number, number, number][]; color: string; delay: number }[] = [
-  { points: [[-4, -0.6, 0], [-1, 1.8, 1], [1, 0.2, 0.5], [4, 2.6, -1]], color: "#FFD60A", delay: beat(1) },
-  { points: [[4, -0.7, -1], [1, 0.4, 1], [-1, 1.9, 0], [-4, 2.8, 1]], color: "#FF3EA5", delay: beat(2) },
-  { points: [[-4, 2, -1], [-1, 0, 0.5], [2, 1.6, 1], [4, -0.5, 0]], color: BLUE, delay: beat(3) },
+const RIBBONS: { points: [number, number, number][]; color: string }[] = [
+  { points: [[-4, -1, 0], [-1, 1.4, 1], [1, 0.2, 0.5], [4, 2.6, -1]], color: "#FFE44D" },
+  { points: [[4, -0.6, -1], [1, 0.6, 1], [-1, 2, 0], [-4, 3, 1]], color: "#FF3EA5" },
+  { points: [[-4, 2.2, -1], [-1, 0, 0.5], [2, 1.8, 1], [4, -0.4, 0]], color: BLUE },
 ];
-const S4: React.FC = () => {
-  const f = useCurrentFrame();
-  const len = LEN("s4");
-  const loop = f >= len - beat(1); // rebuild the opening frame so the short loops
-  const word = lerp(f, beat(4), 10);
+const Footage: React.FC<{ s: Shot; f: number }> = ({ s, f }) => {
+  const t = f - s.from;
+  const ribbons = rand(s.seed) < 0.6;
   return (
-    <AbsoluteFill style={{ background: loop ? PAPER : INK }}>
-      {!loop && (
-        <>
-          <div style={{ position: "absolute", left: 190, top: 380, width: 700, height: 700, overflow: "hidden" }}>
-            <Img src={videoAsset(SLUG, DOSSIER.avatar)} style={{ width: "100%", height: "100%", objectFit: "cover", filter: grade(f) }} />
-          </div>
-          <ThreeCanvas width={1080} height={1920} camera={{ position: [0, 0, 9], fov: 40 }} style={{ position: "absolute", inset: 0 }}>
-            {RIBBONS.map((r, i) => (
-              <Ribbon key={i} {...r} />
-            ))}
-          </ThreeCanvas>
-          <At at={beat(6)} style={{ left: 600, top: 420, width: 260, height: 150, display: "flex", transform: `perspective(900px) rotateY(${-35 + Math.sin(f / 12) * 10}deg)` }}>
-            {["#C0C0C0", "#C0C000", "#00C0C0", "#00C000", "#C000C0", "#C00000", "#0000C0"].map((c) => (
-              <div key={c} style={{ flex: 1, background: c }} />
-            ))}
-          </At>
-          {word > 0 && (
-            <div style={{ position: "absolute", left: SAFE.left, right: SAFE.right, top: 1010, height: 200, perspective: 700 }}>
-              <div style={{ position: "relative", transform: `rotateX(52deg) rotateZ(-8deg) scale(${0.7 + 0.3 * word})`, transformStyle: "preserve-3d" }}>
-                {Array.from({ length: 16 }, (_, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      right: 0,
-                      textAlign: "center",
-                      fontFamily: anton,
-                      fontSize: 210,
-                      lineHeight: 1,
-                      color: i === 15 ? "#FFFFFF" : `hsl(${190 + i * 6}, 90%, ${30 + i * 2}%)`,
-                      transform: `translateZ(${i * 3}px)`,
-                    }}
-                  >
-                    LOCAL
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <At at={0} style={{ left: SAFE.left, right: SAFE.right, top: 270, fontFamily: anton, fontSize: 82, color: "#FFFFFF", lineHeight: 1 }}>
-            Bảo mật với AI local
-          </At>
-          <Fact at={beat(7)} top={1250} size={44}>
-            <span style={{ color: "#FFFFFF" }}>Hỗ trợ Ollama và LM Studio</span>
-          </Fact>
-          <Fact at={beat(10)} top={1320} size={44}>
-            <span style={{ color: "#FFFFFF" }}>Dữ liệu không bao giờ rò rỉ</span>
-          </Fact>
-        </>
+    <AbsoluteFill style={{ background: INK }}>
+      <Graded n={Math.floor(f / BEAT)}>
+        <Sequence from={s.from} layout="none">
+          <OffthreadVideo src={videoAsset(SLUG, s.clip)} muted trimBefore={Math.round(rand(s.seed + 3) * 300)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        </Sequence>
+      </Graded>
+      {ribbons && (
+        <ThreeCanvas width={1080} height={1920} camera={{ position: [0, 0, 9], fov: 40 }} style={{ position: "absolute", inset: 0 }}>
+          {RIBBONS.map((r, i) => (
+            <Ribbon key={i} {...r} t={interpolate(t - i * 4, [0, 30], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} />
+          ))}
+        </ThreeCanvas>
       )}
-      {loop && (
-        <>
-          <svg width={1080} height={1920} style={{ position: "absolute" }}>
-            <line x1={0} y1={410} x2={1080} y2={410} stroke={INK} strokeWidth={3} />
-          </svg>
-          <div style={{ position: "absolute", left: SAFE.left - 12, top: 430, fontFamily: anton, fontSize: 600, lineHeight: 0.86, color: INK }}>CV</div>
-        </>
-      )}
-      <Voice slug={SLUG} id="s4" />
+      <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
+        <line x1={0} y1={1080} x2={1080} y2={1080} stroke="#FFFFFF" strokeWidth={3} />
+        {[0, 1, 2, 3].map((i) => (
+          <text key={i} x={120 + rand(s.seed + i) * 700} y={400 + rand(s.seed + i + 9) * 500} fill="#FFFFFF" fontSize={40} fontFamily={mono}>
+            +
+          </text>
+        ))}
+      </svg>
     </AbsoluteFill>
   );
 };
 
-const PARTS: Record<Id, React.FC> = { s1: S1, s2: S2, s3: S3, s4: S4 };
+// Colour-bar cards fanning through 3D over the footage.
+const Bars: React.FC<{ s: Shot; f: number }> = ({ s, f }) => {
+  const t = f - s.from;
+  return (
+    <AbsoluteFill>
+      <Footage s={s} f={f} />
+      <AbsoluteFill style={{ perspective: 900 }}>
+        {[0, 1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: 260 + i * 70 - t * 3,
+              top: 560 + i * 18,
+              width: 300,
+              height: 190,
+              display: "flex",
+              transform: `rotateY(${-55 + i * 8 + t * 1.2}deg) rotateZ(${-8 + i * 3}deg)`,
+              boxShadow: "0 0 0 4px #FFFFFF",
+            }}
+          >
+            {["#C0C0C0", "#C0C000", "#00C0C0", "#00C000", "#C000C0", "#C00000", "#0000C0"].map((c) => (
+              <div key={c} style={{ flex: 1, background: c }} />
+            ))}
+          </div>
+        ))}
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+// Footage in a ring portal, zoomed through on the shot's last half-beat.
+const Portal: React.FC<{ s: Shot; f: number }> = ({ s, f }) => {
+  const t = f - s.from;
+  const z = t < s.len - 12 ? 1 : interpolate(t, [s.len - 12, s.len], [1, 7]);
+  return (
+    <AbsoluteFill style={{ background: PAPER, overflow: "hidden" }}>
+      <AbsoluteFill style={{ transform: `scale(${z})`, transformOrigin: "540px 760px" }}>
+        {[1.2, 1.4, 1.65].map((k, i) => (
+          <Ring key={i} x={540} y={760} w={520 * k} h={520 * k} spin={t * (i + 1) * (i % 2 ? -1.4 : 1)} dashed={i === 1} />
+        ))}
+        <div style={{ position: "absolute", left: 280, top: 500, width: 520, height: 520, borderRadius: "50%", overflow: "hidden" }}>
+          <Graded n={Math.floor(f / BEAT) + 1}>
+            <Sequence from={s.from} layout="none">
+              <OffthreadVideo src={videoAsset(SLUG, s.clip)} muted trimBefore={Math.round(rand(s.seed + 5) * 300)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </Sequence>
+          </Graded>
+        </div>
+      </AbsoluteFill>
+      <Dots x={SAFE.left} y={330} n={8} />
+    </AbsoluteFill>
+  );
+};
+
+// A still broken into cyan pixels that gather, then scatter.
+const COLS = 18;
+const ROWS = 14;
+const Scatter: React.FC<{ s: Shot; f: number }> = ({ s, f }) => {
+  const t = (f - s.from) / s.len;
+  const cell = 1080 / COLS;
+  return (
+    <AbsoluteFill style={{ background: PAPER }}>
+      <div style={{ position: "absolute", left: 0, top: 520, width: 1080, height: ROWS * cell, filter: "grayscale(1) sepia(1) hue-rotate(150deg) saturate(5) brightness(1.1)" }}>
+        {Array.from({ length: COLS * ROWS }, (_, i) => {
+          const x = i % COLS;
+          const y = Math.floor(i / COLS);
+          if (rand(i + s.seed) < 0.35) return null;
+          const spread = Math.abs(t - 0.45) * 2.2;
+          const dx = (rand(i * 3) - 0.5) * 600 * spread;
+          const dy = (rand(i * 5) - 0.5) * 300 * spread;
+          return (
+            <div
+              key={i}
+              style={{
+                position: "absolute",
+                left: x * cell + dx,
+                top: y * cell + dy,
+                width: cell * (rand(i * 7) < 0.3 ? 0.5 : 1),
+                height: cell,
+                backgroundImage: `url(${videoAsset(SLUG, "scatter.jpg")})`,
+                backgroundSize: `1080px ${ROWS * cell}px`,
+                backgroundPosition: `${-x * cell}px ${-y * cell}px`,
+                opacity: 1 - spread * 0.6,
+              }}
+            />
+          );
+        })}
+      </div>
+      <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
+        <line x1={SAFE.left} y1={1300} x2={880} y2={1300} stroke={INK} strokeWidth={3} />
+      </svg>
+    </AbsoluteFill>
+  );
+};
+
+// The key word slammed in, cropped off the frame, over a cone.
+const Word: React.FC<{ s: Shot; f: number; id: Id }> = ({ s, f, id }) => {
+  const t = f - s.from;
+  const word = scene(id).headline.split(" ")[0];
+  const slam = t < 2 ? 1.3 : t < 4 ? 1.06 : 1;
+  return (
+    <AbsoluteFill style={{ background: PAPER, overflow: "hidden" }}>
+      <Cone x={460} y={760} angle={-10 + t * 0.8} color={VIOLET} size={900} />
+      <Disc x={760} y={640} d={300} />
+      <div style={{ position: "absolute", left: -30, top: 520, fontFamily: wide, fontSize: 300, lineHeight: 1, color: INK, letterSpacing: -12, transform: `scale(${slam})`, transformOrigin: "left center", whiteSpace: "nowrap" }}>
+        {word}
+      </div>
+      <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
+        <line x1={0} y1={500} x2={1080 * lerp(t, 0, 8)} y2={500} stroke={INK} strokeWidth={3} />
+      </svg>
+    </AbsoluteFill>
+  );
+};
+
+// The scene's fact stays put while the shots cut underneath it.
+const FactLayer: React.FC<{ id: Id; dark: boolean; f: number }> = ({ id, dark, f }) => {
+  const sc = scene(id);
+  const long = sc.headline.length > 8;
+  if (f < beat(1)) return null;
+  return (
+    <>
+      <div style={{ position: "absolute", left: SAFE.left, right: SAFE.right, top: 1130, fontFamily: wide, fontSize: long ? 76 : 120, lineHeight: 1, color: dark ? "#FFFFFF" : INK, letterSpacing: -2, textShadow: dark ? `5px 5px 0 ${INK}` : undefined }}>
+        {sc.headline}
+      </div>
+      <div style={{ position: "absolute", left: SAFE.left, right: SAFE.right, top: long ? 1240 : 1275, fontFamily: sans, fontWeight: 700, fontSize: 40, color: dark ? "#FFFFFF" : INK, textShadow: dark ? `3px 3px 0 ${INK}` : undefined }}>
+        {sc.lines[0]}
+      </div>
+    </>
+  );
+};
+
+const Scene: React.FC<{ id: Id }> = ({ id }) => {
+  const f = useCurrentFrame();
+  const s = shotAt(id, f);
+  const body =
+    s.kind === "word" ? <Word s={s} f={f} id={id} /> :
+    s.kind === "poster" ? <Poster s={s} f={f} id={id} /> :
+    s.kind === "portal" ? <Portal s={s} f={f} /> :
+    s.kind === "scatter" ? <Scatter s={s} f={f} /> :
+    s.kind === "bars" ? <Bars s={s} f={f} /> :
+    <Footage s={s} f={f} />;
+  return (
+    <AbsoluteFill>
+      {body}
+      <FactLayer id={id} dark={isDark(s.kind)} f={f} />
+      {id === "s1" && f < beat(4) && (
+        <>
+          <div style={{ position: "absolute", left: 0, top: 226, width: 560, height: 96, background: INK }} />
+          <Brand />
+        </>
+      )}
+      <Voice slug={SLUG} id={id} />
+    </AbsoluteFill>
+  );
+};
 
 const Main: React.FC<VideoProps> = ({ guide }) => {
   const f = useCurrentFrame();
-  const ranges: [number, number][] = IDS.map((id) => [START(id), START(id) + Math.round(CLIP(id))]);
+  const ranges: [number, number][] = IDS.map((id) => [START(id), START(id) + Math.round(durations[id] * FPS)]);
   return (
     <AbsoluteFill style={{ background: PAPER }}>
-      {/* Hard cuts only: the inserts and the portal are the transitions. */}
       <AbsoluteFill style={insertStyle(f)}>
-        {IDS.map((id) => {
-          const Part = PARTS[id];
-          return (
-            <Sequence key={id} from={START(id)} durationInFrames={LEN(id)} name={id}>
-              <Part />
-            </Sequence>
-          );
-        })}
+        {IDS.map((id) => (
+          <Sequence key={id} from={START(id)} durationInFrames={LEN(id)} name={id}>
+            <Scene id={id} />
+          </Sequence>
+        ))}
       </AbsoluteFill>
       <Music slug={SLUG} total={TOTAL} voiceRanges={ranges} />
       {guide && <TikTokGuide />}
@@ -451,8 +413,4 @@ const Main: React.FC<VideoProps> = ({ guide }) => {
   );
 };
 
-export const video: VideoDef = {
-  id: SLUG,
-  component: Main,
-  durationInFrames: TOTAL,
-};
+export const video: VideoDef = { id: SLUG, component: Main, durationInFrames: TOTAL };

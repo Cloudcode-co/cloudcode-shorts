@@ -1,5 +1,5 @@
 {
-  "note": "Pool the builder draws one art direction from per video, skipping the ones in pipeline/history.json's last 5 entries. Each brief is a starting point: the palette still comes from the subject's own logos and artwork.",
+  "note": "Pool the builder draws one art direction from per video, skipping the ones in pipeline/history.json's last 5 entries. Each brief is a starting point: the palette still comes from the subject's own logos and artwork. `heavy: true` marks an edit too demanding for the default builder: it is built by Opus (pipeline/build-video.mjs).",
   "directions": [
     {
       "id": "print-zine",
@@ -135,7 +135,8 @@
       "id": "breakcore-swiss",
       "bpm": 150,
       "name": "Breakcore Swiss",
-      "brief": "Load the edit-styles skill and follow its breakcore-swiss.md. A white Swiss technical poster cut hard on a 150 BPM grid (24 frames a beat): hairlines drawing on, dotted grids, micro-text, a heavy grotesque key word that slams and mirrors, gradient cones and black spheres, footage regraded every beat with ribbon trails, 2-frame flash and smear inserts on the snare, a portal transition, a seamless loop. Facts still hold still for a second."
+      "brief": "Load the edit-styles skill and follow its breakcore-swiss.md. Footage-first: fetch 2+ clips per scene, cut every scene into 1–2 beat shots on a 150 BPM grid (24 frames a beat), half of them full-bleed footage regraded every beat with ribbons, the rest white Swiss posters, pixel scatters, a ring portal and colour-bar cards. 2-frame flash and smear inserts on the snare. Almost no text: each scene's fact in Unbounded at one fixed spot, still while the shots cut under it.",
+      "heavy": true
     }
   ],
   "pacing": [

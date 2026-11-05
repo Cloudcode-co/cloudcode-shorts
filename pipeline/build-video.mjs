@@ -7,9 +7,12 @@
 //   NOTES="dark background" node --env-file=.env pipeline/build-video.mjs <slug> --revise
 //
 // Env: ANTHROPIC_API_KEY, CLAUDE_MODEL (default claude-sonnet-5-5),
-// CLAUDE_BUDGET_USD (default 4), CLAUDE_BIN (default "claude"); for the
+// CLAUDE_BUDGET_USD (default 4), CLAUDE_BIN (default "claude"); for a `heavy`
+// art direction CLAUDE_HEAVY_MODEL (default claude-opus-5-5) and
+// CLAUDE_HEAVY_BUDGET_USD (default 10); for the
 // be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
-// ag/gemini-3.8-flash-high), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
+// ag/gemini-3.8-flash-high), BUILDER_HEAVY_BEAG_MODEL (the heavy backup's
+// model, default oc/glm-5.3-flash-free), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
 // to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
 // REVIEW=off skips the review round.
 // Prints a JSON line {direction, pacing, built, costUsd} last.
@@ -102,19 +105,28 @@ const prompt =
 // Who builds, in order: Claude on Anthropic's API, then the same Claude Code
 // running Gemini through the be-ag gateway (LLM_*), for when Anthropic fails
 // or the credit runs out. BUILDER=beag skips Claude.
+// A heavy direction (a demanding edit like breakcore-swiss) is always built by
+// Opus, with Claude first and a bigger budget, whatever CLAUDE_MODEL says. Its
+// backup runs an opencode model (oc/*) through be-ag, then Gemini: the oc free
+// quota is small and runs out within a build or two.
+const heavy = direction.heavy === true;
+const claudeModel = heavy ? process.env.CLAUDE_HEAVY_MODEL || "claude-opus-5-5" : process.env.CLAUDE_MODEL || "claude-sonnet-5-5";
+const claudeBudget = heavy ? process.env.CLAUDE_HEAVY_BUDGET_USD || "10" : process.env.CLAUDE_BUDGET_USD || "4";
+if (heavy) console.log(`Heavy direction ${direction.id}: building with ${claudeModel}, budget $${claudeBudget}`);
 const gateway = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/v1\/?$/, "");
-const beagModel = process.env.BUILDER_BEAG_MODEL || "ag/gemini-3.8-flash-high";
+const geminiModel = process.env.BUILDER_BEAG_MODEL || "ag/gemini-3.8-flash-high";
+const beagModels = heavy ? [process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/glm-5.3-flash-free", geminiModel] : [geminiModel];
 const agents = [
   process.env.ANTHROPIC_API_KEY &&
     process.env.BUILDER !== "beag" && {
       id: "claude",
       label: "Claude",
       env: { ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY },
-      args: ["--model", process.env.CLAUDE_MODEL || "claude-sonnet-5-5", "--max-budget-usd", process.env.CLAUDE_BUDGET_USD || "4"],
+      args: ["--model", claudeModel, "--max-budget-usd", claudeBudget],
     },
-  process.env.LLM_API_KEY && {
+  ...(process.env.LLM_API_KEY ? beagModels : []).map((beagModel) => ({
     id: "beag",
-    label: `Gemini (${beagModel})`,
+    label: `be-ag (${beagModel})`,
     env: {
       ANTHROPIC_BASE_URL: gateway,
       ANTHROPIC_AUTH_TOKEN: process.env.LLM_API_KEY,
@@ -126,12 +138,12 @@ const agents = [
     },
     // The gateway's prices are not Anthropic's, so cap turns instead of dollars.
     args: ["--model", beagModel, "--max-turns", process.env.BUILDER_MAX_TURNS || "150"],
-  },
+  })),
 ].filter(Boolean);
 // Simple formats (FORMATS[...].builder "beag") go to Gemini first, unless the
 // run asked for a builder.
 const format = FORMATS[formatOf(readJson(`src/videos/${slug}/script.json`, {}).format)];
-if (format.builder === "beag" && !(process.env.BUILDER_CHOSEN ?? "").trim()) {
+if (format.builder === "beag" && !heavy && !(process.env.BUILDER_CHOSEN ?? "").trim()) {
   agents.sort((a, b) => (b.id === "beag") - (a.id === "beag"));
 }
 
