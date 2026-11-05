@@ -157,8 +157,10 @@ export const llmJson = async (prompt, schema, temperature = 0.7, images = []) =>
         console.log(`LLM ${model}: no answer in ${took}, trying the next model`);
         break;
       }
-      if ((res.status >= 500 || res.status === 429) && attempt < 4) {
-        const wait = 20 * attempt;
+      // One short retry, then the next model: the list is long, and a model
+      // that is overloaded now (503) rarely recovers within minutes.
+      if ((res.status >= 500 || res.status === 429) && attempt < 2) {
+        const wait = 10;
         console.log(`LLM ${model}: ${res.status} after ${took}, retrying in ${wait}s`);
         await new Promise((r) => setTimeout(r, wait * 1000));
         continue;
