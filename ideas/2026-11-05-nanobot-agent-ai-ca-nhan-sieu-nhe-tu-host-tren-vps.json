@@ -1,0 +1,10 @@
+{
+  "topic": "nanobot: agent AI cá nhân siêu nhẹ tự host trên VPS, chat qua Telegram và Discord, nhớ lâu và chạy việc theo lịch",
+  "angle": "Một agent nhẹ chạy trên VPS của bạn, trả lời bạn qua Telegram hoặc Discord, nhớ sở thích của bạn và tự chạy việc lặp lại theo lịch.",
+  "sources": [
+    "https://github.com/HKUDS/nanobot"
+  ],
+  "notes": "Repo GitHub HKUDS/nanobot xác nhận: tự mô tả là ultra-lightweight, open-source, self-hosted personal AI agent framework viết bằng Python, giấy phép MIT, tạo ngày 2026-02-01, 49.826 sao tại thời điểm kiểm tra ngày 2026-11-05. README nói nanobot chạy qua WebUI trong trình duyệt hoặc terminal, kết nối Telegram, Discord, Slack, WeChat, Email, Mattermost và Linear, đọc file PDF, Word, Excel, PowerPoint, dùng shell, web search, MCP, cron và multi-agent delegation, giữ lịch sử và long-term memory, chạy được model local hoặc API tương thích OpenAI. Cài đặt bản ổn định bằng lệnh uv tool install nanobot-ai hoặc pip install nanobot-ai, cần Python 3.11 trở lên, nanobot không cấp tài khoản model.",
+  "from": "muse",
+  "received": "2026-11-05T00:02:29.249Z"
+}
