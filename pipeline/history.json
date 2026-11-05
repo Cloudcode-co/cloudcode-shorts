@@ -192,5 +192,16 @@
     "built": "claude",
     "costUsd": 0.9177209999999999,
     "reviewIssues": 2
+  },
+  {
+    "slug": "subnetdesk-lan-remote-desktop",
+    "topic": "SubnetDesk: Remote desktop nội bộ cực mượt cho Homelab dựa trên RustDesk, thay thế AnyDesk không cần Relay Server",
+    "format": "brief",
+    "date": "2026-11-05",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.38581079999999995,
+    "reviewIssues": 0
   }
 ]

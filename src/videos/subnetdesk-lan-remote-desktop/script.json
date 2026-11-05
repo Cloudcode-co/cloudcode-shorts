@@ -1,0 +1,211 @@
+{
+  "slug": "subnetdesk-lan-remote-desktop",
+  "format": "explainer",
+  "topic": "SubnetDesk: Remote desktop nội bộ cực mượt cho Homelab dựa trên RustDesk, thay thế AnyDesk không cần Relay Server",
+  "title": "Remote máy nội bộ không cần Relay Server?",
+  "caption": "SubnetDesk biến RustDesk thành công cụ remote desktop LAN-first gọn nhẹ, kết nối thẳng không lo lộ lọt hay tốn server.",
+  "hashtags": [
+    "#subnetdesk",
+    "#rustdesk",
+    "#homelabvn",
+    "#congnghe",
+    "#kienthucmaytinh"
+  ],
+  "musicPrompt": "Punchy modern synthwave with rhythmic bass, tech vlog vibe, energetic electronic beats, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth",
+        "upbeat",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "triumphant",
+        "punchy bass",
+        "high energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm finish",
+        "resolved",
+        "smooth outro"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/zibo-chen/SubnetDesk",
+    "https://github.com/rustdesk/rustdesk",
+    "https://github.com/zszszszsz/.config",
+    "https://github.com/rustdesk/rustdesk/wiki/FAQ"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em có bao giờ bực mình khi remote máy nội bộ mà cứ phải phụ thuộc server trung gian bên ngoài?",
+      "headline": "Remote LAN cần chi Cloud Server?",
+      "lines": [
+        "Phụ thuộc Relay bên thứ ba",
+        "Độ trễ cao và nghẽn mạng"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] RustDesk tự host rất tốt nhưng phải dựng relay. Còn tính năng Direct IP mặc định của nó lại không hề có mã hoá.",
+      "headline": "Hạn chế của bản gốc",
+      "lines": [
+        "RustDesk gốc: Direct IP không mã hóa",
+        "Không nhập trực tiếp được hostname",
+        "Dựng Rendezvous/Relay tốn tài nguyên"
+      ],
+      "commands": [],
+      "repos": [
+        "rustdesk/rustdesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Đây là lý do SubnetDesk ra đời! Một bản fork độc lập từ RustDesk, tối ưu riêng cho Homelab và VPN.",
+      "headline": "SubnetDesk xuất hiện",
+      "lines": [
+        "Bản fork độc lập từ RustDesk",
+        "Thiết kế riêng cho LAN & VPN"
+      ],
+      "commands": [],
+      "repos": [
+        "zibo-chen/SubnetDesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Dự án loại bỏ toàn bộ ID công khai, cloud account lẫn relay server. Hai máy kết nối thẳng trực tiếp endpoint với nhau!",
+      "headline": "Loại bỏ hoàn toàn trung gian",
+      "lines": [
+        "Không Rendezvous / Relay server",
+        "Không ID công khai & Cloud account",
+        "Kết nối thẳng điểm tới điểm"
+      ],
+      "commands": [],
+      "repos": [
+        "zibo-chen/SubnetDesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Không cần nhớ mã số ID. SubnetDesk tự động quét thiết bị qua mDNS, hoặc anh em gõ thẳng hostname và địa chỉ IP.",
+      "headline": "Tự nhận diện thiết bị nội bộ",
+      "lines": [
+        "Tự quét mạng qua mDNS",
+        "Kết nối bằng Hostname hoặc IP",
+        "Cổng mặc định TCP 21118"
+      ],
+      "commands": [],
+      "repos": [
+        "zibo-chen/SubnetDesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Về bảo mật, mật khẩu được băm bằng Argon2id, xác thực fingerprint thiết bị lần đầu, và có allowlist dải IP theo CIDR.",
+      "headline": "Bảo vệ truy cập an toàn",
+      "lines": [
+        "Mật khẩu băm bằng Argon2id",
+        "Xác minh vân tay thiết bị (TOFU)",
+        "Giới hạn nguồn theo dải mạng CIDR"
+      ],
+      "commands": [],
+      "repos": [
+        "zibo-chen/SubnetDesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[laughs] Không cần server điều phối nhưng vẫn giữ trọn bộ điều khiển màn hình, chia sẻ âm thanh, clipboard và truyền file!",
+      "headline": "Trọn vẹn tính năng cốt lõi",
+      "lines": [
+        "Điều khiển máy tính từ xa",
+        "Đồng bộ clipboard & âm thanh",
+        "Truyền file trực tiếp giữa hai máy"
+      ],
+      "commands": [],
+      "repos": [
+        "zibo-chen/SubnetDesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Anh em lưu ý: hai máy bắt buộc phải thấy nhau qua cùng LAN hoặc VPN như Tailscale, WireGuard, và nhớ mở cổng TCP 21118 nhé.",
+      "headline": "Yêu cầu trước khi dùng",
+      "lines": [
+        "Cần kết nối LAN hoặc WireGuard / Tailscale",
+        "Mở cổng TCP 21118 trên máy đích",
+        "Hiện tại chưa hỗ trợ iOS"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[curious] Ai thích tự build từ mã nguồn thì có thể clone repository và chạy script build Flutter với lệnh chính thức này.",
+      "headline": "Biên dịch từ mã nguồn",
+      "lines": [
+        "Clone repo kèm submodules",
+        "Chạy build script hỗ trợ hwcodec"
+      ],
+      "commands": [
+        "git clone --recurse-submodules https://github.com/zibo-chen/SubnetDesk.git",
+        "cd SubnetDesk",
+        "./build.py --flutter --hwcodec"
+      ],
+      "repos": [
+        "zibo-chen/SubnetDesk"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em nhớ lưu video lại để dựng cho hệ thống homelab của mình, và bấm follow kênh để cập nhật thêm nhiều công cụ hay nhé!",
+      "headline": "Lưu lại trải nghiệm ngay",
+      "lines": [
+        "Lưu video để setup Homelab",
+        "Follow kênh để xem thêm công cụ hữu ích"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room datacenter lights"
+    }
+  ]
+}
