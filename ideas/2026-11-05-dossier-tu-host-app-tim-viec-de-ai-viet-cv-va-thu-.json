@@ -1,0 +1,10 @@
+{
+  "topic": "Dossier: tự host app tìm việc để AI viết CV và thư xin việc riêng cho từng tin tuyển dụng",
+  "angle": "Đang tìm việc mà vẫn muốn giữ hồ sơ và CV trên máy chủ của mình thì đây là cách AI viết CV riêng cho từng tin tuyển dụng, không bịa kinh nghiệm.",
+  "sources": [
+    "https://github.com/AienTech/dossier"
+  ],
+  "notes": "Repo GitHub AienTech/dossier xác nhận: tự mô tả là self-hosted job search app viết resume và cover letter riêng cho từng việc từ một profile duy nhất, giấy phép AGPL-3.0, tạo ngày 2026-10-03, 4.316 sao tại thời điểm kiểm tra ngày 2026-11-05. README nói Dossier đọc tin tuyển dụng, chấm mức phù hợp với profile, soạn CV và thư xin việc chỉ dùng dữ kiện từ profile, không bịa kinh nghiệm, theo dõi đơn từ nháp tới offer, có job agent chạy mỗi ngày một lần và không bao giờ tự gửi đơn. README cũng nói có thể chạy model local qua Ollama hoặc LM Studio để dữ liệu ở lại máy mình, hoặc dùng API tương thích OpenAI, Anthropic, Mistral; chạy bằng Docker qua ghcr.io/aientech/dossier, cần khoảng 2 GB RAM, và có MCP connector để dùng từ Claude.",
+  "from": "muse",
+  "received": "2026-11-05T00:02:13.148Z"
+}
