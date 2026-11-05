@@ -77,12 +77,17 @@ const setSlug = (value) => {
   return value;
 };
 
+// The music's beats, downbeats and drops for the builder (scripts/beatmap.mjs);
+// a video still gets made without them.
+const beatmap = (slug) => spawnSync("node", ["scripts/beatmap.mjs", slug], { stdio: "inherit" });
+
 // A new video: script, voice, music, Claude's build.
 const makeNew = () => {
   const voiced = FORMATS[format].voiced;
   const slug = setSlug(nodeResult(voiced ? "pipeline/write-script.mjs" : "pipeline/write-meme.mjs", topic ? [topic] : []));
   if (voiced) run("node", ["scripts/voiceover.mjs", slug]);
   run("node", ["scripts/music.mjs", slug]);
+  beatmap(slug);
   return { slug, build: { ...nodeResult("pipeline/build-video.mjs", [slug]), format } };
 };
 
@@ -113,8 +118,11 @@ const rework = async () => {
   const hasBpm = (s) => readJson("pipeline/art-directions.json").directions.find((d) => d.id === s || d.name === s)?.bpm;
   const pastDirection = existsSync(`src/videos/${slug}/direction.json`) ? readJson(`src/videos/${slug}/direction.json`) : null;
   const regrid = style && (hasBpm(style) || pastDirection?.bpm);
-  if (music || musicOff || regrid) run("node", ["scripts/music.mjs", slug]);
-  const build = notes || style || chosenBuilder
+  const remixed = music || musicOff || regrid;
+  if (remixed) run("node", ["scripts/music.mjs", slug]);
+  const rebuild = notes || style || chosenBuilder;
+  if (remixed || (rebuild && !existsSync(`src/videos/${slug}/beatmap.json`))) beatmap(slug);
+  const build = rebuild
     ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
     : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };
   return { slug, build: { ...build, revision: asked } };

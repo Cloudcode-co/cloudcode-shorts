@@ -25,6 +25,7 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { pickDirection } from "../pipeline/direction.mjs";
+import { measure } from "./beatmap.mjs";
 
 const custom = (process.env.MUSIC_URL ?? "").trim();
 const key = process.env.ELEVENLABS_API_KEY;
@@ -274,30 +275,9 @@ console.log(`generated public/videos/${slug}/music.mp3 (${sections ? plan.total 
 // A track cut to the beat: measure its beats, then move each scene start to
 // the nearest beat that still leaves the scene before it its whole line.
 if (grid && plan) {
-  const out = `public/videos/${slug}/beats.json`;
-  const r = spawnSync("uv", ["run", "scripts/beats.py", `public/videos/${slug}/music.mp3`, "--fps", "60", "--out", out], {
-    stdio: "inherit",
-    shell: process.platform === "win32",
-  });
-  if (r.status !== 0 || !existsSync(out)) await composed("could not measure the track's beats");
-  const measured = JSON.parse(readFileSync(out, "utf8"));
-  rmSync(out, { force: true });
-  // Quiet parts (an intro without drums) leave gaps: fill them, and the start,
-  // at the track's own beat length.
-  const raw = measured.beats_s;
-  const gaps = raw.slice(1).map((b, i) => b - raw[i]).sort((x, y) => x - y);
-  const period = gaps[Math.floor(gaps.length / 2)] || 60 / direction.bpm;
-  const beats = [];
-  for (let b = raw[0] - period; b > -0.01; b -= period) beats.unshift(Math.max(0, b));
-  raw.forEach((b, i) => {
-    beats.push(b);
-    const next = raw[i + 1];
-    if (next && next - b > period * 1.5) {
-      const n = Math.round((next - b) / period);
-      for (let k = 1; k < n; k++) beats.push(b + ((next - b) * k) / n);
-    }
-  });
-  beats.forEach((b, i) => (beats[i] = Number(b.toFixed(3))));
+  const measured = measure(slug);
+  if (!measured) await composed("could not measure the track's beats");
+  const { beats } = measured;
   const lines = existsSync(durationsFile) ? JSON.parse(readFileSync(durationsFile, "utf8")) : {};
   const ids = script.scenes.map((s) => s.id);
   ids.forEach((id, i) => {

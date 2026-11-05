@@ -15,6 +15,9 @@ slug, an art direction and a pacing.
   (`Math.round(length * FPS)` frames, FPS = 60 from the kit, in order) so the music fits the story, and
   land the big moments (a reveal, a punchline, a number slamming in, a cut to
   a new part) on the first frame of a section.
+- `src/videos/<slug>/beatmap.json` (when present): the music's beats,
+  downbeats, phrases, energy sections and drops, measured from the track. Time
+  what happens inside each scene to it with the `dj-cut` skill.
 - `src/videos/<slug>/durations.json`: each scene's voice clip length in seconds.
   Clips are at `public/videos/<slug>/voiceover/<id>.mp3`.
 - `src/videos/<slug>/facts.json`: real GitHub data per repo (`stars`, `license`,
@@ -126,6 +129,9 @@ Load these when the video calls for them:
   SRT parts.
 - `remotion-maps`: when the art direction or topic is a map. Use no map service
   that needs an API key or the network.
+- `dj-cut` (.claude/skills/dj-cut/SKILL.md): whenever beatmap.json exists.
+  Cuts, slams and pumps land on the music's beats, bars and drops, sized to
+  match, and the drop carries the biggest moment.
 - `edit-styles`: when the art direction is `pastel-3d-explainer` or
   `breakcore-swiss`; read only the file for that style.
 - `review-animations`: before the last QA round, review your motion against it

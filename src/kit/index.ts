@@ -1,5 +1,6 @@
 // Building blocks every video shares. Videos import from "../../kit".
 export * from "./audio";
+export * from "./beat";
 export * from "./Brand";
 export * from "./FallbackVideo";
 export * from "./GreenScreen";
