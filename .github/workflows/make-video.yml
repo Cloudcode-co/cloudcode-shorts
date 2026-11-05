@@ -82,6 +82,8 @@ jobs:
           npx remotion browser ensure
           # Edge TTS reads the voiceover when ElevenLabs refuses (scripts/voiceover.mjs).
           pipx install edge-tts
+          # uv runs scripts/beats.py (librosa), which measures a beat-cut track.
+          pipx install uv
 
       - name: Make the video
         id: make

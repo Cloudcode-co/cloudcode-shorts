@@ -47,8 +47,10 @@ const voice = existsSync(durationsFile)
 const estimate = voice.reduce((sum, s) => sum + s + 1, 0) + 20;
 const lengthMs = Math.round((seconds ? Number(seconds) : estimate) * 1000);
 
-// An art direction cut on a beat grid (breakcore-swiss: `bpm` 150) needs
-// every scene to start on a beat and music exactly at that tempo.
+// An art direction cut to the beat (breakcore-swiss: `bpm` 150) gets its
+// music at that tempo and every scene starting on a beat. timeline.json
+// `beats` lists the track's beats in seconds, measured from the track itself
+// (scripts/beats.py) when ElevenLabs made it, so the builder cuts to them.
 const direction = seconds ? null : await pickDirection(slug).catch((err) => console.log(`music: no direction (${err.message})`));
 const grid = direction?.bpm ? 60 / direction.bpm : 0;
 const onGrid = (s) => (grid ? Math.ceil(s / grid - 1e-6) * grid : s);
@@ -185,7 +187,7 @@ if (/^(1|true|yes)$/i.test(process.env.MUSIC_OFF ?? "")) {
   console.log(`no music: public/videos/${slug}/music.mp3 is ${total.toFixed(1)}s of silence`);
   process.exit(0);
 }
-const sections = plan && sectionsFor(plan);
+let sections = plan && sectionsFor(plan);
 const writeTimeline = () =>
   writeFileSync(
     `src/videos/${slug}/timeline.json`,
@@ -202,6 +204,7 @@ const writeTimeline = () =>
 const composed = async (why) => {
   console.log(`music: ${why}; composing it`);
   if (!plan) reuse(why);
+  if (grid) plan.beats = Array.from({ length: Math.ceil((plan.total + 2) / grid) }, (_, i) => Number((i * grid).toFixed(3)));
   writeTimeline();
   try {
     const { writeScore } = await import("../pipeline/score.mjs");
@@ -216,12 +219,12 @@ const composed = async (why) => {
   process.exit(0);
 };
 if (!key) await composed("ELEVENLABS_API_KEY is not set");
-// ElevenLabs can't hold an exact tempo, so a beat-grid direction is composed here.
-if (grid) await composed(`${direction.id} is cut on a ${direction.bpm} BPM grid`);
 let body;
 if (sections) {
   const lead = sections.length > 1 && sections[0].length >= 4 ? 1 : 0;
-  const style = (script.musicPrompt ?? DEFAULT_PROMPT).replace(/,?\s*no vocals\.?$/i, "");
+  const style = grid
+    ? `breakcore, ${direction.bpm} BPM, chopped amen break drums, fast snare rolls, distorted reese bass, glitchy atmospheric pads`
+    : (script.musicPrompt ?? DEFAULT_PROMPT).replace(/,?\s*no vocals\.?$/i, "");
   body = {
     model_id: "music_v1",
     respect_sections_durations: true,
@@ -252,11 +255,70 @@ const compose = (b) =>
     body: JSON.stringify(b),
   });
 let res = await compose(body);
+// Busy (429 system_busy) is worth two more tries before giving up the plan.
+for (let i = 0; i < 2 && res.status === 429; i++) {
+  console.log(`music: ElevenLabs is busy; trying again in 20s`);
+  await new Promise((r) => setTimeout(r, 20000));
+  res = await compose(body);
+}
 // A plan ElevenLabs refuses still gets a track, from the prompt.
 if (!res.ok && sections) {
   console.log(`music plan refused: ${res.status} ${(await res.text()).slice(0, 300)}; composing from the prompt`);
-  res = await compose({ prompt: script.musicPrompt ?? DEFAULT_PROMPT, music_length_ms: Math.min(lengthMs, 300000), force_instrumental: true });
+  const prompt = grid ? `${body.composition_plan.positive_global_styles[0]}, instrumental, no vocals` : script.musicPrompt ?? DEFAULT_PROMPT;
+  res = await compose({ prompt, music_length_ms: Math.min(lengthMs, 300000), force_instrumental: true });
 }
 if (!res.ok) await composed(`ElevenLabs refused (${res.status} ${(await res.text()).slice(0, 200)})`);
 writeFileSync(`public/videos/${slug}/music.mp3`, Buffer.from(await res.arrayBuffer()));
 console.log(`generated public/videos/${slug}/music.mp3 (${sections ? plan.total + 2 : lengthMs / 1000}s)`);
+
+// A track cut to the beat: measure its beats, then move each scene start to
+// the nearest beat that still leaves the scene before it its whole line.
+if (grid && plan) {
+  const out = `public/videos/${slug}/beats.json`;
+  const r = spawnSync("uv", ["run", "scripts/beats.py", `public/videos/${slug}/music.mp3`, "--fps", "60", "--out", out], {
+    stdio: "inherit",
+    shell: process.platform === "win32",
+  });
+  if (r.status !== 0 || !existsSync(out)) await composed("could not measure the track's beats");
+  const measured = JSON.parse(readFileSync(out, "utf8"));
+  rmSync(out, { force: true });
+  // Quiet parts (an intro without drums) leave gaps: fill them, and the start,
+  // at the track's own beat length.
+  const raw = measured.beats_s;
+  const gaps = raw.slice(1).map((b, i) => b - raw[i]).sort((x, y) => x - y);
+  const period = gaps[Math.floor(gaps.length / 2)] || 60 / direction.bpm;
+  const beats = [];
+  for (let b = raw[0] - period; b > -0.01; b -= period) beats.unshift(Math.max(0, b));
+  raw.forEach((b, i) => {
+    beats.push(b);
+    const next = raw[i + 1];
+    if (next && next - b > period * 1.5) {
+      const n = Math.round((next - b) / period);
+      for (let k = 1; k < n; k++) beats.push(b + ((next - b) * k) / n);
+    }
+  });
+  beats.forEach((b, i) => (beats[i] = Number(b.toFixed(3))));
+  const lines = existsSync(durationsFile) ? JSON.parse(readFileSync(durationsFile, "utf8")) : {};
+  const ids = script.scenes.map((s) => s.id);
+  ids.forEach((id, i) => {
+    if (i === 0) return;
+    const prev = plan.scenes[ids[i - 1]];
+    const earliest = prev.start + (lines[ids[i - 1]] ?? 0) + 0.3;
+    const near = beats.filter((b) => b >= earliest).reduce((a, b) => (Math.abs(b - plan.scenes[id].start) < Math.abs(a - plan.scenes[id].start) ? b : a), Infinity);
+    if (Number.isFinite(near)) plan.scenes[id].start = Number(near.toFixed(3));
+  });
+  ids.forEach((id, i) => {
+    const end = i + 1 < ids.length ? plan.scenes[ids[i + 1]].start : Math.max(plan.total, plan.scenes[id].start + plan.scenes[id].length);
+    plan.scenes[id].length = Number((end - plan.scenes[id].start).toFixed(3));
+  });
+  plan.total = Number((plan.scenes[ids.at(-1)].start + plan.scenes[ids.at(-1)].length).toFixed(3));
+  plan.bpm = measured.bpm;
+  plan.beats = beats;
+  if (sections) sections = sections.map((s) => {
+    const start = plan.scenes[s.scenes[0]].start;
+    const length = s.scenes.reduce((n, id) => n + plan.scenes[id].length, 0);
+    return { ...s, start, length };
+  });
+  writeTimeline();
+  console.log(`beats: ${measured.bpm} BPM measured, ${beats.length} beats; scenes moved onto them`);
+}
