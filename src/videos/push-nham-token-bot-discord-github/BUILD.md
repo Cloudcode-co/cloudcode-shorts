@@ -1,0 +1,3 @@
+# Build: push-nham-token-bot-discord-github
+
+Built a fast-paced Vietnamese TikTok meme skit depicting a developer accidentally pushing an OpenAI API key and Discord bot token to GitHub at 2 AM. The composition uses a single dark developer desk setup background photo, 16 rapid sub-shots cutting every 1.4–1.5 seconds, and large animated meme cat stickers acting out each emotional beat (from late-night coding euphoria to GitGuardian panic, credit card wipeout, and Discord classmates celebrating). Transitions feature snappy 8-frame zoom punches, 4-frame cut flashes, subtle sound effects (`thud`, `pop`, `whoosh`, `ding`), and bold yellow `<MemeCaption>` headlines strictly aligned to TikTok safe zones.

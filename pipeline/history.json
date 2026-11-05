@@ -225,5 +225,16 @@
     "built": "claude",
     "costUsd": 0.579596,
     "reviewIssues": 4
+  },
+  {
+    "slug": "push-nham-token-bot-discord-github",
+    "topic": "Push nhầm API key và token bot Discord lên GitHub",
+    "format": "meme",
+    "date": "2026-11-05",
+    "direction": "meme-skit",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]

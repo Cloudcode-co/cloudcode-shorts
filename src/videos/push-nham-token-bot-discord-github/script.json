@@ -1,0 +1,102 @@
+{
+  "slug": "push-nham-token-bot-discord-github",
+  "format": "meme",
+  "topic": "Push nhầm API key và token bot Discord lên GitHub",
+  "title": "Cảm giác push nhầm OpenAI key lên public GitHub lúc 2h sáng",
+  "caption": "Một bài học xương máu cho các coder nửa đêm. Đã anh em nào dính đòn GitGuardian gõ cửa chưa?",
+  "hashtags": [
+    "#laptrinh",
+    "#devlife",
+    "#discordbot",
+    "#laptrinhvien",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Lo-fi cozy chill beat suddenly abruptly turns into high tension chaotic orchestra meme sound then awkward deadpan music, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "lo-fi",
+        "cozy beat",
+        "chill synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "fast ticking",
+        "dramatic drop"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "awkward pause",
+        "sad cartoon trombone",
+        "ironic upbeat"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Dev 2 giờ sáng hí hửng code xong con bot Discord tích hợp AI cho anh em chém gió",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "messy dev bedroom night"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Quen tay git add chấm, git commit fix bug rồi git push origin main đi ngủ",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing happy",
+      "place": "messy dev bedroom night"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Vừa đặt lưng xuống thì điện thoại ting ting 10 cái mail GitGuardian cảnh báo lộ token",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat shocked panic",
+      "place": "messy dev bedroom night"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Bật vội máy check thẻ tín dụng với OpenAI thấy bay sạch 100 đô trong 2 phút",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying scream",
+      "place": "messy dev bedroom night"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Nhóm bạn Discord vừa ping: Bot mượt quá mày, tao share link cho cả trường dùng rồi",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat blank stare",
+      "place": "messy dev bedroom night"
+    }
+  ]
+}
