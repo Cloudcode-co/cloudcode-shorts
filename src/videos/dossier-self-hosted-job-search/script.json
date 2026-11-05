@@ -1,0 +1,217 @@
+{
+  "slug": "dossier-self-hosted-job-search",
+  "format": "explainer",
+  "topic": "Dossier: tự host app tìm việc để AI viết CV và thư xin việc riêng cho từng tin tuyển dụng",
+  "title": "Tự host AI viết CV chuẩn từng JD không bịa kinh nghiệm?",
+  "caption": "Tự host Dossier: AI tự viết CV và cover letter riêng cho từng JD, không sợ bịa kinh nghiệm, dữ liệu nằm trọn trên server riêng!",
+  "hashtags": [
+    "#dossier",
+    "#selfhosted",
+    "#cvxinviec",
+    "#laptrinhvien",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern upbeat tech beat, crisp synthesizers, minimal rhythmic percussion, focused and energetic, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "curious",
+        "sparse",
+        "modern synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "upbeat",
+        "rising groove",
+        "steady drums"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s5",
+      "styles": [
+        "energetic",
+        "punchy bass",
+        "dynamic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm",
+        "resolving",
+        "chill beat"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/reactive-resume/reactive-resume",
+    "https://github.com/career-ops-hq/career-ops",
+    "https://github.com/AienTech/dossier"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em có bao giờ ước có AI tự viết CV chuẩn cho từng JD mà không bịa kinh nghiệm?",
+      "headline": "AI viết CV theo từng JD",
+      "lines": [
+        "Chuẩn từng tin tuyển dụng",
+        "Không bịa kinh nghiệm"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer looking at screen"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Gặp ngay Dossier! Một dự án mã nguồn mở giúp anh em tự host toàn bộ quy trình tìm việc trên máy chủ riêng.",
+      "headline": "Dossier tự host trên máy chủ",
+      "lines": [
+        "Mã nguồn mở AGPL-3.0",
+        "Quản lý tìm việc trọn gói"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Mọi lịch sử sự nghiệp nằm ở một hồ sơ gốc. AI đọc JD rồi đối chiếu, phần nào thiếu sẽ đánh dấu là khoảng trống chứ không bịa đặt!",
+      "headline": "Một hồ sơ gốc duy nhất",
+      "lines": [
+        "So khớp kỹ năng với JD",
+        "Yêu cầu thiếu tính là gap",
+        "Không bao giờ bịa kinh nghiệm"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Anh em có thể chạy AI local qua Ollama hoặc LM Studio, giữ dữ liệu một trăm phần trăm trên phần cứng của mình.",
+      "headline": "Bảo mật với AI local",
+      "lines": [
+        "Hỗ trợ Ollama & LM Studio",
+        "Tùy chọn OpenAI, Anthropic, Mistral",
+        "Dữ liệu không bao giờ rò rỉ"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": "home server rack homelab"
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Dossier còn tích hợp tìm việc từ JSearch, YC startups và Hacker News. Job Agent mỗi ngày tự quét và chấm điểm tin phù hợp.",
+      "headline": "Job Agent tự quét tin tuyển dụng",
+      "lines": [
+        "Tìm việc qua JSearch, Adzuna",
+        "Quét YC & Hacker News hàng ngày",
+        "Chấm điểm bài đăng theo hồ sơ"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Yên tâm là Job Agent chỉ soạn sẵn bản nháp để anh em duyệt, nó không bao giờ tự ý nộp đơn hay gửi email thay anh em.",
+      "headline": "Quyền quyết định luôn ở bạn",
+      "lines": [
+        "Tự soạn CV và cover letter",
+        "Không tự ý nộp đơn",
+        "Không tự gửi email"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": "person working laptop coffee"
+    },
+    {
+      "id": "s7",
+      "text": "[cheerfully] App có sẵn mười hai theme CV, xuất PDF trực tiếp trên server và còn hỗ trợ cả giao thức MCP kết nối Claude hoặc n8n.",
+      "headline": "Xuất PDF và kết nối MCP",
+      "lines": [
+        "12 theme CV",
+        "Trình duyệt Chromium xuất PDF",
+        "Hỗ trợ giao thức MCP cho Claude"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Cấu hình tối thiểu chỉ cần hai vCPU và hai GB RAM. Anh em tạo thư mục và tải file compose về máy.",
+      "headline": "Khởi tạo thư mục và file cấu hình",
+      "lines": [
+        "Tối thiểu 2 vCPU và 2 GB RAM",
+        "Tải file compose production"
+      ],
+      "commands": [
+        "mkdir ~/dossier && cd ~/dossier",
+        "curl -fsSL -o compose.yml https://raw.githubusercontent.com/AienTech/dossier/main/compose.production.yml",
+        "echo \"POSTGRES_PASSWORD=$(openssl rand -hex 24)\" > .env",
+        "echo \"DOSSIER_SECRET=$(openssl rand -base64 32)\" >> .env"
+      ],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[excited] Tạo mã băm mật khẩu Argon2id, thêm vào file cấu hình rồi chạy docker compose up là xong ngay!",
+      "headline": "Mã hóa mật khẩu và khởi chạy",
+      "lines": [
+        "Băm mật khẩu qua Argon2id",
+        "Bật container với Docker Compose"
+      ],
+      "commands": [
+        "docker run --rm -it --platform linux/amd64 ghcr.io/aientech/dossier hash-password",
+        "docker compose up -d"
+      ],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để cuối tuần dựng thử, và follow mình để khám phá thêm nhiều công cụ tự host nhé!",
+      "headline": "Lưu lại và thử ngay",
+      "lines": [
+        "Lưu video để tự host",
+        "Follow để nhận thêm công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "AienTech/dossier"
+      ],
+      "footage": "young programmer smiling desk"
+    }
+  ]
+}

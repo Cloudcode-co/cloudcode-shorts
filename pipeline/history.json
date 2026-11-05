@@ -203,5 +203,16 @@
     "built": "claude",
     "costUsd": 0.38581079999999995,
     "reviewIssues": 0
+  },
+  {
+    "slug": "dossier-self-hosted-job-search",
+    "topic": "Dossier: tự host app tìm việc để AI viết CV và thư xin việc riêng cho từng tin tuyển dụng",
+    "format": "quiz",
+    "date": "2026-11-05",
+    "direction": "quiz-show",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.7319697000000001,
+    "reviewIssues": 7
   }
 ]
