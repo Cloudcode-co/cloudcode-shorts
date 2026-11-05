@@ -1,0 +1,10 @@
+{
+  "topic": "Open Notebook: tự host NotebookLM của riêng bạn, chọn model tùy ý và tạo podcast từ tài liệu",
+  "angle": "Google NotebookLM giữ tài liệu của bạn trên cloud của Google, còn bản này bạn tự host, chọn model nào cũng được, và làm được podcast nhiều giọng.",
+  "sources": [
+    "https://github.com/lfnovo/open-notebook"
+  ],
+  "notes": "Repo GitHub lfnovo/open-notebook xác nhận: tự mô tả là open source, privacy-focused alternative to Google Notebook LM, giấy phép MIT, tạo ngày 2024-10-21, 41.586 sao tại thời điểm kiểm tra ngày 2026-11-05. README nói Open Notebook hỗ trợ hơn 20 nhà cung cấp AI gồm OpenAI, Anthropic, Google, Mistral, Ollama và bất kỳ server tương thích OpenAI nào, nhận PDF, video, audio, trang web, chat theo ngữ cảnh tài liệu, tìm kiếm full-text và vector, trích dẫn nguồn, tạo podcast nhiều người nói từ 1 đến 4 giọng với profile riêng. Chạy bằng Docker Compose với hai service surrealdb và open_notebook, UI ở cổng 8502, API ở cổng 5055, và có thể chạy hoàn toàn local với Ollama để không tốn phí API.",
+  "from": "muse",
+  "received": "2026-11-05T00:02:35.969Z"
+}
