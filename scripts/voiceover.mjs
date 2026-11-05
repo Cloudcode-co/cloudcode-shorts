@@ -37,14 +37,30 @@ const durationOf = (file) => {
 
 const DURATIONS = `src/videos/${slug}/durations.json`;
 
+// A Vietnamese voice reads an acronym as a word ("IP" as "íp"), so acronyms
+// are spelled out with the English letter names Vietnamese speakers use
+// ("ai pi"). The few said as words stay. Only the spoken text changes.
+const LETTERS = {
+  A: "ây", B: "bi", C: "xi", D: "đi", E: "i", F: "ép", G: "gi", H: "ếch", I: "ai", J: "giây", K: "cây", L: "eo", M: "em",
+  N: "en", O: "âu", P: "pi", Q: "kiu", R: "a", S: "ét", T: "ti", U: "diu", V: "vi", W: "đắp bờ liu", X: "ích", Y: "oai", Z: "dét",
+};
+const WORDS = new Set(["RAM", "ROM", "NASA", "LAN", "WAN", "LED", "GIF", "JPEG", "CAPTCHA", "COVID", "UNESCO", "ASEAN", "OK", "WIFI", "SIM", "BIOS", "LOL"]);
+const spell = (word) => [...word].map((c) => LETTERS[c]).join(" ");
+const UNITS = { KB: "ki lô bai", MB: "mê ga bai", GB: "gi ga bai", TB: "tê ra bai", PB: "pê ta bai" };
+const spoken = (text) =>
+  text
+    .replace(/(\d)\s?([KMGTP]B)(?![\p{L}])/gu, (m, n, unit) => `${n} ${UNITS[unit]}`) // 8GB
+    .replace(/(?<![\p{L}\[])([A-Z]{2,6})v(\d)/gu, (m, word, n) => `${spell(word)} vi ${n}`) // IPv6
+    .replace(/(?<![\p{L}\[])([A-Z]{2,6})s?(?![\p{L}\]])/gu, (m, word) => (WORDS.has(word) ? m : spell(word)));
+
 // Edge would read Eleven v3's audio tags ([excited], [laughs]) aloud.
 const edge = (text, file) =>
-  execFileSync("edge-tts", [`--voice=${EDGE_VOICE}`, "--rate=+8%", `--text=${text.replace(/\[[^\]]*\]/g, " ").replace(/\s+/g, " ").trim()}`, `--write-media=${file}`], {
+  execFileSync("edge-tts", [`--voice=${EDGE_VOICE}`, "--rate=+8%", `--text=${spoken(text).replace(/\[[^\]]*\]/g, " ").replace(/\s+/g, " ").trim()}`, `--write-media=${file}`], {
     stdio: ["ignore", "ignore", "inherit"],
   });
 const body = (text) =>
   JSON.stringify({
-    text,
+    text: spoken(text),
     model_id: modelId,
     language_code: "vi",
     voice_settings: voiceSettings ?? { stability: 0.5, similarity_boost: 0.75 },
