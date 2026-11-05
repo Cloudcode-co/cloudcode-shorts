@@ -133,6 +133,7 @@
     },
     {
       "id": "breakcore-swiss",
+      "bpm": 150,
       "name": "Breakcore Swiss",
       "brief": "Load the edit-styles skill and follow its breakcore-swiss.md. A white Swiss technical poster cut hard on a 150 BPM grid (24 frames a beat): hairlines drawing on, dotted grids, micro-text, a heavy grotesque key word that slams and mirrors, gradient cones and black spheres, footage regraded every beat with ribbon trails, 2-frame flash and smear inserts on the snare, a portal transition, a seamless loop. Facts still hold still for a second."
     }

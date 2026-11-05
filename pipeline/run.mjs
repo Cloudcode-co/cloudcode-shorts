@@ -108,7 +108,12 @@ const rework = async () => {
     run("node", ["scripts/voiceover.mjs", slug, "--force"]);
   }
   // The owner's own track replaces the music (scripts/music.mjs reads MUSIC_URL).
-  if (music || musicOff) run("node", ["scripts/music.mjs", slug]);
+  // A new style to or from one cut on a beat grid (a direction with `bpm`)
+  // needs new music and a new timeline too.
+  const hasBpm = (s) => readJson("pipeline/art-directions.json").directions.find((d) => d.id === s || d.name === s)?.bpm;
+  const pastDirection = existsSync(`src/videos/${slug}/direction.json`) ? readJson(`src/videos/${slug}/direction.json`) : null;
+  const regrid = style && (hasBpm(style) || pastDirection?.bpm);
+  if (music || musicOff || regrid) run("node", ["scripts/music.mjs", slug]);
   const build = notes || style || chosenBuilder
     ? nodeResult("pipeline/build-video.mjs", [slug, "--revise"])
     : { direction: past.direction, pacing: past.pacing, built: past.built, costUsd: 0 };

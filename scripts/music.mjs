@@ -24,6 +24,7 @@
 //   MUSIC_URL=https://... node scripts/music.mjs <slug>
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { pickDirection } from "../pipeline/direction.mjs";
 
 const custom = (process.env.MUSIC_URL ?? "").trim();
 const key = process.env.ELEVENLABS_API_KEY;
@@ -46,8 +47,15 @@ const voice = existsSync(durationsFile)
 const estimate = voice.reduce((sum, s) => sum + s + 1, 0) + 20;
 const lengthMs = Math.round((seconds ? Number(seconds) : estimate) * 1000);
 
+// An art direction cut on a beat grid (breakcore-swiss: `bpm` 150) needs
+// every scene to start on a beat and music exactly at that tempo.
+const direction = seconds ? null : await pickDirection(slug).catch((err) => console.log(`music: no direction (${err.message})`));
+const grid = direction?.bpm ? 60 / direction.bpm : 0;
+const onGrid = (s) => (grid ? Math.ceil(s / grid - 1e-6) * grid : s);
+
 // The planned timeline: a voiced scene lasts its line plus a breath (longer
 // when it types commands), a silent beat its own length; the last scene holds.
+// On a beat grid each length is rounded up to whole beats.
 const BREATH = 0.9;
 const LAST_HOLD = 1.5;
 const timeline = () => {
@@ -60,10 +68,11 @@ const timeline = () => {
     const typing = (s.commands ?? []).join("").length * 0.05 + 2.5;
     let length = silent ? line : Math.max(line + BREATH, s.commands?.length ? typing : 2.5);
     if (i === script.scenes.length - 1) length += LAST_HOLD;
-    scenes[s.id] = { start: Number(at.toFixed(2)), length: Number(length.toFixed(2)) };
+    length = onGrid(length);
+    scenes[s.id] = { start: Number(at.toFixed(3)), length: Number(length.toFixed(3)) };
     at += length;
   });
-  return { scenes, total: Number(at.toFixed(2)) };
+  return { scenes, total: Number(at.toFixed(3)), ...(grid ? { bpm: direction.bpm } : {}) };
 };
 
 // The writer's sections, as consecutive runs of scenes of at least 3 s
@@ -196,16 +205,19 @@ const composed = async (why) => {
   writeTimeline();
   try {
     const { writeScore } = await import("../pipeline/score.mjs");
-    await writeScore(slug, script);
+    await writeScore(slug, script, grid ? { style: "breakcore", bpm: direction.bpm } : undefined);
   } catch (err) {
     console.log(`score: Gemini could not write one (${String(err.message ?? err).slice(0, 200)}); composing from a seed`);
     rmSync(`src/videos/${slug}/score.json`, { force: true });
   }
-  const r = spawnSync("node", ["scripts/compose.mjs", slug], { stdio: "inherit" });
+  const scored = existsSync(`src/videos/${slug}/score.json`);
+  const r = spawnSync("node", ["scripts/compose.mjs", slug, ...(grid && !scored ? ["breakcore"] : [])], { stdio: "inherit" });
   if (r.status !== 0) reuse("compose.mjs failed");
   process.exit(0);
 };
 if (!key) await composed("ELEVENLABS_API_KEY is not set");
+// ElevenLabs can't hold an exact tempo, so a beat-grid direction is composed here.
+if (grid) await composed(`${direction.id} is cut on a ${direction.bpm} BPM grid`);
 let body;
 if (sections) {
   const lead = sections.length > 1 && sections[0].length >= 4 ? 1 : 0;

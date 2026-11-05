@@ -13,7 +13,7 @@ import { llmJson } from "./lib.mjs";
 const S = (type, extra = {}) => ({ type, ...extra });
 export const STYLE_NAMES = ["lofi", "synthwave", "chiptune"];
 const NOTES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"];
-const BPM = { lofi: [72, 90], synthwave: [84, 110], chiptune: [104, 140] };
+const BPM = { lofi: [72, 90], synthwave: [84, 110], chiptune: [104, 140], breakcore: [150, 150] };
 
 const RULES = `You are scoring the background music of a short vertical video (TikTok) that
 has a voice-over. Write a score that a simple synth engine will play.
@@ -34,7 +34,8 @@ The music sits under the voice: it supports, never competes.
   degrees from 1 (tonic) to 13 (an octave and a sixth up). Mostly steps, a leap or two,
   chord tones (1, 3, 5) on beats 0, 2, 4, 6, and it ends on 1, 3 or 5. Leave some space.`;
 
-export const writeScore = async (slug, script) => {
+// `forced` ({style, bpm}) fixes both, for an art direction cut on a beat grid.
+export const writeScore = async (slug, script, forced) => {
   const timeline = JSON.parse(readFileSync(`src/videos/${slug}/timeline.json`, "utf8"));
   const sections = timeline.sections?.length ? timeline.sections : [{ name: "Build", start: 0, length: timeline.total, scenes: [] }];
   const scene = Object.fromEntries((script.scenes ?? []).map((s) => [s.id, s.headline ?? s.text ?? ""]));
@@ -69,14 +70,18 @@ export const writeScore = async (slug, script) => {
       }),
     },
   });
-  const out = await llmJson(`${RULES}\n\nThe video, its music sections in order:\n${JSON.stringify(brief, null, 1)}`, schema, 0.8);
+  const fixed = forced
+    ? `\n\nThis video's style is fixed: ${forced.style} (chopped amen breaks, reese bass, minor key) at exactly ${forced.bpm} BPM. ` +
+      `Answer with that style and tempo; drums "full" everywhere but the opening.`
+    : "";
+  const out = await llmJson(`${RULES}${fixed}\n\nThe video, its music sections in order:\n${JSON.stringify(brief, null, 1)}`, schema, 0.8);
 
   // Checked and clamped, so the engine never gets anything it can't play.
   const clamp = (v, lo, hi, d) => (Number.isFinite(Number(v)) ? Math.min(hi, Math.max(lo, Number(v))) : d);
-  const style = STYLE_NAMES.includes(out.style) ? out.style : "lofi";
+  const style = forced?.style ?? (STYLE_NAMES.includes(out.style) ? out.style : "lofi");
   const score = {
     style,
-    bpm: Math.round(clamp(out.bpm, ...BPM[style], (BPM[style][0] + BPM[style][1]) / 2)),
+    bpm: forced?.bpm ?? Math.round(clamp(out.bpm, ...BPM[style], (BPM[style][0] + BPM[style][1]) / 2)),
     key: NOTES.includes(out.key) ? out.key : "C",
     mode: out.mode === "minor" ? "minor" : "major",
     sections: sections.map((s, i) => {

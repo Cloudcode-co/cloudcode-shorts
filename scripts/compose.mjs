@@ -50,6 +50,13 @@ const STYLES = {
     progressions: [[1, 6, 3, 7], [1, 4, 6, 5], [6, 7, 1, 1], [1, 7, 6, 7]],
     keys: [57, 59, 62, 64], lead: "saw", kit: "gated", crackle: false,
   },
+  // Breakcore: chopped amen-style breaks in 16ths and a long reese bass, at the
+  // exact tempo of an art direction cut on a beat grid.
+  breakcore: {
+    bpm: [150, 150], swing: 0.5, mode: "minor", sevenths: false,
+    progressions: [[1, 6, 3, 7], [1, 4, 6, 5], [6, 7, 1, 1], [1, 7, 6, 4]],
+    keys: [57, 59, 62], lead: "saw", kit: "break", crackle: false,
+  },
   chiptune: {
     bpm: [112, 126], swing: 0.5, mode: "major", sevenths: false,
     progressions: [[1, 5, 6, 4], [6, 4, 1, 5], [1, 4, 5, 4], [4, 1, 5, 6]],
@@ -211,6 +218,39 @@ const lead = (t, note, dur, v) => {
   }
 };
 
+// One bar of chopped breaks (16 steps): a different chop each bar, ghost
+// snares, a ride on the eighths, and a stuttered roll to end a phrase.
+const BREAKS = [
+  { k: [0, 2, 10, 11], s: [4, 7, 9, 12, 15], g: [6, 14] },
+  { k: [0, 3, 8, 10], s: [4, 6, 12, 13], g: [9, 15] },
+  { k: [0, 2, 5, 10], s: [4, 9, 12, 14, 15], g: [7] },
+  { k: [0, 1, 8, 11, 14], s: [4, 12], g: [6, 7, 15] },
+];
+const breakBar = (t0, barEnd, e, drums, roll) => {
+  const step = beat / 4;
+  if (drums === "light") {
+    kick(t0, e);
+    for (const st of [4, 12]) snare(t0 + st * step, 0.7);
+    for (let st = 0; st < 16; st += 2) if (t0 + st * step < barEnd) hat(t0 + st * step, 0.5);
+    return;
+  }
+  const p = pick(BREAKS);
+  for (let st = 0; st < 16; st++) {
+    const t = t0 + st * step;
+    if (t >= barEnd) break;
+    if (roll && st >= 12) {
+      snare(t, 0.5 + (st - 12) * 0.15);
+      snare(t + step / 2, 0.4 + (st - 12) * 0.15);
+      continue;
+    }
+    if (p.k.includes(st)) kick(t, e);
+    if (p.s.includes(st)) snare(t, 0.85);
+    if (p.g.includes(st)) snare(t, 0.3);
+    if (st % 2 === 0) hat(t, st % 4 === 0 ? 0.65 : 0.45);
+  }
+};
+const breaks = style.kit === "break";
+
 // --- Composition --------------------------------------------------------
 // Nearest voicing: the chord's notes moved by octaves to sit closest to the
 // previous chord, inside 52-76, so the harmony moves smoothly.
@@ -283,7 +323,11 @@ for (const [si, sec] of sections.entries()) {
     // Chord rhythm by energy: one long hit, or a syncopated comp.
     const hits = e < 0.5 ? [0] : [0, 1.5, 2.5];
     for (const h of hits) if (t0 + h * beat < barEnd) chordHit(t0 + h * beat, notes, beat * (e < 0.5 ? 3.5 : 1), 0.7 + 0.3 * e);
-    for (let q = 0; q < 4; q++) {
+    if (breaks && sec.drums !== "none") {
+      breakBar(t0, barEnd, e, sec.drums, b % 4 === 3 || (lastBar && si < sections.length - 1));
+      bass(t0, degree(root) - 24, (barEnd - t0) * 0.96, 0.9);
+    }
+    for (let q = 0; q < 4 && !breaks; q++) {
       const t = t0 + q * beat;
       if (t >= barEnd) break;
       const off = t + beat * style.swing;

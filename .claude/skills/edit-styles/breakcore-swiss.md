@@ -1,63 +1,65 @@
 # Breakcore Swiss
 
-Taken from a 5 s After Effects + Blender loop ("time travel", 1024×576, 30 fps, about 150 BPM), measured frame by frame, and stretched here to a full vertical explainer. The feel: a white technical poster that glitches on every drum hit.
+Taken from a 5 s After Effects + Blender loop ("time travel", about 150 BPM), measured frame by frame, and stretched here to a full vertical explainer. The feel: a white technical poster that glitches on every drum hit.
 
-## The beat grid comes first
+**Read [examples/breakcore-swiss.tsx](examples/breakcore-swiss.tsx) first.** It is the approved test build (Dossier, scenes s1–s4). Copy its grid, inserts, `Slam`, `Stroke`, `Portal`, `Sphere`, regrade, ribbons and loop rather than rewriting them. Its scenes are examples of the grammar: your scenes follow your own script and layouts.
 
-- Pick the tempo before writing scenes: 150 BPM, which is **24 frames per beat** at 60 fps. Put it in the music prompt ("breakcore / jungle, 150 BPM, chopped amen breaks").
-- Write the grid as data: `const BEAT = 24; const beat = (n: number) => n * BEAT;`. Every hard cut, insert and regrade lands on `beat(n)` or on the half-beat `beat(n) + 12`. Never place one by eye.
-- The reference cut every 8–20 frames at 30 fps. Here that is a visual change every 1–1.5 beats, with a real scene change every 2–4 beats, so the voiceover's facts can still be read.
+## Where this style overrides BUILDER.md
+
+- **Hard cuts, not transitions.** Beat-locked inserts and the portal replace `<TransitionSeries>`, `whip()` and `flash()`, and no scene fades.
+- **Bracketed tags** are allowed when they carry real facts from facts.json or the script, for example `[4.337 stars · TypeScript]`. Each tag holds a fact or doesn't appear.
+- **BUILDER's other rules still apply:** no fake editor-UI icons, no pills behind words, and micro-text at 34 px or larger.
+- **Opening.** The `<Brand />` logo PNG is white, so put a black Swiss block behind it in the opening shot (left 0, top 226, 560×96).
+
+## The beat grid
+
+- **150 BPM**, which is `BEAT = 24` frames at 60 fps, written as `const beat = (n: number) => n * BEAT`.
+- For this direction the pipeline composes a 150 BPM breakcore track and snaps every scene `start` in timeline.json onto the grid. Rely on that: `start * 60 % 24 === 0`.
+- Every cut, insert, regrade and slam lands on `beat(n)` or the half-beat `beat(n) + 12`, counted from the root frame. Never place one by eye.
+- Pace: a visual change every 1–1.5 beats, and a real scene change at each timeline scene start. A fact (number, name, command) holds still and readable for at least 60 frames while things move around it.
+
+## Inserts
+
+- Inserts are whole-frame wrappers driven by the root frame, never placed per scene.
+- One lands every 2 beats, at `beat(2k + 1) + 12`, and lasts 2 frames.
+- They cycle through four kinds:
+  - **invert:** `invert(1)`. This is the flash; a white flash would be invisible on the white ground.
+  - **rgb:** `drop-shadow(14px 0 #FF2E4D) drop-shadow(-14px 0 #19C6E6)`.
+  - **mirror:** `scaleX(-1)`.
+  - **smear:** `scaleX(1.9) skewX(-14deg)`.
 
 ## Look
 
-- **Ground.** A white void, laid out like a Swiss print poster:
-  - thin black hairlines, plus hand-drawn black strokes that draw themselves on;
-  - dotted grids (`••••••••`) and tiny micro-text blocks;
-  - bracketed rainbow tags such as `[COLOR WHEEL]`;
-  - topographic contour lines and cyan pill dashes.
+- **Ground.** White paper (`#FAFAF7`) with ink (`#0B0B0C`), laid out like a Swiss print poster:
+  - thin hairlines and hand-drawn strokes drawing on (`Stroke`);
+  - dotted grids;
+  - micro-text and fact tags;
+  - topographic contours;
+  - cyan pill dashes as shapes, never behind words.
+- **Accents:** cyan `#19C6E6`, red `#FF2E4D`, blue `#2340FF`.
 - **Type.**
-  - The topic's key word is set in a heavy grotesque (Archivo Black or Anton, with Vietnamese subsets). It slams in, is mirrored for one frame, masks footage, and breaks into pixel noise.
-  - Small labels run vertically along shapes ("TWO", "THREE").
-  - Micro-text uses a mono face.
-  - Once per video, one extruded 3D word is seen in steep perspective.
+  - Anton is the only display face, because it has the Vietnamese glyphs.
+  - The topic's key word `Slam`s in: one frame oversized, then set, with no tween.
+  - The kit mono has no Vietnamese, so use it only for ASCII tags and numbers.
 - **Shapes.**
-  - black radial-gradient spheres with concentric rings, and black half-moon discs;
+  - black radial-gradient spheres with concentric rings (`Sphere`);
+  - half-moon discs;
   - rotating black slabs;
   - gradient light cones (violet → cyan → magenta);
   - a blue sine-wave squiggle;
-  - SMPTE colour-bar cards flying in 3D.
-- **Footage or screenshots.**
-  - Ribbon trails (yellow, magenta, blue tubes) fly through the shot.
-  - Fake editor-UI icons sit on top: a pen tool, a T text tool, a cube.
-  - Each beat regrades the shot: natural → acid lime/cyan → pink/violet → sepia.
-
-## Inserts and transitions
-
-- **One-frame inserts** mark the snare. At 60 fps make them 2 frames long. Use one of:
-  - a white flash;
-  - a horizontal smear (the same frame with `scaleX(6)` and a 1-row scanline stretch);
-  - the key word mirrored (`scaleX(-1)`);
-  - an RGB split (three offset copies with `mix-blend-mode: screen` in R, G and B).
-- **Portal.** Footage clipped to a circle with concentric rings rotating at different speeds, then zoomed through into the next scene.
-- **Hard cuts everywhere else.** BUILDER.md's rule asks for transitions; in this style, the beat-locked inserts and the portal are those transitions. Never use a fade.
-- **Loop.** End by rebuilding the opening frame (the key word, the hairline, the first shape) so the short loops seamlessly on TikTok.
+  - SMPTE colour-bar cards.
+- **Extruded word** (once per video, on the drop): 16 stacked CSS layers, `translateZ(i * 3px)` with a hue ramp, under `perspective(700px) rotateX(52deg)`. The repo has no font file for `TextGeometry`.
+- **Ribbons:**
+  - `TubeGeometry` grown along a `CatmullRomCurve3` as the frame advances;
+  - unlit `MeshBasicMaterial`, at most 3 tubes;
+  - kept above the text block: in 3D, y ≥ -0.8 with the camera at z = 9 and fov 40.
+- **Regrade per beat:** `["none", "invert(1) hue-rotate(90deg) saturate(3)", "hue-rotate(250deg) saturate(2)", "sepia(0.9)"][Math.floor(f / BEAT) % 4]`. Tested on images; with footage, check a QA still of each grade before relying on it.
+- **Portal:** the image is clipped to a circle with concentric rings rotating at different speeds, then zoomed through into the next scene.
 
 ## Structure
 
-1. **Hook** (first 2 beats): the white void, a hairline draws on, then the key word slams in on beat 1.
-2. **Poster build** (4–6 beats): technical layout elements arrive one per half-beat; a cone sweeps; a portal opens.
-3. **Body**: each voiceover phrase gets one scene of 2–4 beats.
-   - Show the fact big and still for at least 60 frames.
-   - Around it, inserts and regrades keep the frame moving.
-   - Alternate between poster scenes and footage/UI scenes.
-4. **Drop**: the 3D word and the colour bars, on the strongest line.
-5. **Outro**: back to the opening frame, `<Brand />`, loop.
-
-## In Remotion (60 fps)
-
-- Shot list as data, `{ beat, beats, scene, grade }`, rendered with `<Sequence from={beat(b)} durationInFrames={beat(n)}>`.
-- An insert is `<Sequence from={beat(b) + 12} durationInFrames={2}>` holding the insert component.
-- Regrade: a CSS `filter` chain on the footage, picked by `Math.floor(frame / BEAT) % 4`: `none`, `invert(1) hue-rotate(90deg) saturate(3)`, `hue-rotate(250deg) saturate(2)`, `sepia(0.9)`. These filters are cheap; blur is not.
-- Strokes drawing on: SVG paths with `strokeDasharray` equal to their length, and `strokeDashoffset` taken by `interpolate` to 0 over 8–16 frames from the beat.
-- Ribbons: `@remotion/three` `TubeGeometry` along a `CatmullRomCurve3`, unlit `MeshBasicMaterial`, at most 3 tubes. The extruded word is `TextGeometry` with a bevel.
-- An effect that starts at frame `s` is 0 before `s` (the BUILDER.md rule about one-off effects).
+1. **Hook** (first 2 beats): the void, a hairline draws on, then the key word slams on beat 1. The Swiss block sits behind `<Brand />`.
+2. **Poster build:** layout elements arrive one per half-beat, a cone sweeps, and a portal holds the logo, then zooms through.
+3. **Body:** one scene per voiceover phrase, alternating poster scenes with image scenes. The fact is big and still; inserts and regrades keep the frame alive around it.
+4. **Drop:** on the strongest line, the extruded word, ribbons through the logo, and the colour bars.
+5. **Outro:** rebuild the opening frame (key word, hairline, first shape), so the short loops seamlessly on TikTok.
