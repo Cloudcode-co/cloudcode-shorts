@@ -1,0 +1,199 @@
+{
+  "slug": "nanobot-agent-ai-ca-nhan-tu-host",
+  "format": "explainer",
+  "topic": "nanobot: agent AI cá nhân siêu nhẹ tự host trên VPS, chat qua Telegram và Discord, nhớ lâu và chạy việc theo lịch",
+  "title": "Muốn có agent AI riêng chạy việc cả ngày không?",
+  "caption": "nanobot là agent AI Python nhẹ, tự host trên VPS, chat Telegram hoặc Discord, nhớ lâu và chạy lịch.",
+  "hashtags": [
+    "#nanobot",
+    "#selfhosted",
+    "#aivps",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Energetic futuristic tech instrumental, minimal synth pulse, warm bass, rising digital textures, confident electronic rhythm, clean outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "futuristic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady pulse",
+        "rising tension",
+        "digital"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "bigger beat",
+        "impressed",
+        "confident"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "clean",
+        "hopeful"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/HKUDS/nanobot",
+    "https://nanobot.wiki/docs/0.4.0/getting-started/nanobot-overview"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em muốn có một agent AI riêng, chạy việc cả ngày trên VPS không?",
+      "headline": "Agent AI riêng trên VPS",
+      "lines": [
+        "Tự host",
+        "Chạy việc cả ngày"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Đây là nanobot: framework agent AI cá nhân, mã nguồn mở, viết bằng Python, khá nhẹ và tự host được.",
+      "headline": "nanobot là gì?",
+      "lines": [
+        "Python",
+        "Mã nguồn mở",
+        "Self-hosted"
+      ],
+      "commands": [],
+      "repos": [
+        "HKUDS/nanobot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Anh em có thể dùng WebUI, terminal, hoặc chat app. Telegram, Discord, cùng nhiều kênh khác đều được hỗ trợ.",
+      "headline": "Chat ở nơi anh em thích",
+      "lines": [
+        "WebUI",
+        "Terminal",
+        "Telegram · Discord"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer chatting at desk"
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Nó xử lý file PDF, DOCX, XLSX, PPTX; dùng shell, web search, MCP, cron, tạo ảnh và ủy quyền nhiều agent.",
+      "headline": "Không chỉ biết chat",
+      "lines": [
+        "Đọc tài liệu",
+        "Shell · Web",
+        "Cron · MCP"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Về phần nhớ, nanobot giữ lịch sử phiên và bộ nhớ dài hạn qua Dream. Một instance chia sẻ profile, memory và skills giữa các project.",
+      "headline": "Nhớ lâu, dùng xuyên project",
+      "lines": [
+        "Session history",
+        "Long-term memory",
+        "Dream"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Cài stable trên Linux hoặc macOS, đầu tiên cần Python 3.11 trở lên. Lệnh ngắn nhất đây:",
+      "headline": "Cài stable",
+      "lines": [
+        "Python 3.11+"
+      ],
+      "commands": [
+        "curl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh",
+        "nanobot --version"
+      ],
+      "repos": [],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Trên VPS headless, chạy WebUI không mở trình duyệt server. Sau đó tạo SSH tunnel về máy anh em.",
+      "headline": "Mở WebUI qua SSH",
+      "lines": [
+        "VPS headless",
+        "SSH tunnel",
+        "Cổng 8765"
+      ],
+      "commands": [
+        "nanobot webui --no-open",
+        "ssh -N -L 127.0.0.1:8765:127.0.0.1:8765 user@SERVER"
+      ],
+      "repos": [],
+      "footage": "server room blinking lights"
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Lần đầu, vào Settings → Models, lưu provider và model. Gửi Hello! kiểm tra kết nối. Muốn thử file, chọn workspace-only access.",
+      "headline": "Thiết lập lần đầu",
+      "lines": [
+        "Settings → Models",
+        "Gửi Hello!",
+        "Workspace-only access"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Nanobot không cấp tài khoản model. Anh em cần provider được hỗ trợ hoặc local model server. Phí model và phần cứng tùy dịch vụ chọn.",
+      "headline": "Nhớ cấp model",
+      "lines": [
+        "Không kèm tài khoản model",
+        "Provider hoặc local model"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Muốn chạy lịch, gateway và host phải luôn hoạt động. Lịch bị lỡ sẽ không tự chạy bù sau restart. Nhớ khóa quyền truy cập: WebUI chỉ chia sẻ với operator tin cậy, group cần kiểm tra policy riêng. Lưu video lại để thử sau, rồi follow để xem thêm mẹo self-host và AI.",
+      "headline": "Chạy bền, khóa quyền",
+      "lines": [
+        "Gateway luôn chạy",
+        "Không chạy bù",
+        "Chỉ chia sẻ operator tin cậy"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

@@ -248,5 +248,16 @@
     "costUsd": 2.1349867999999996,
     "reviewIssues": 2,
     "revision": "phong cách breakcore-swiss"
+  },
+  {
+    "slug": "nanobot-agent-ai-ca-nhan-tu-host",
+    "topic": "nanobot: agent AI cá nhân siêu nhẹ tự host trên VPS, chat qua Telegram và Discord, nhớ lâu và chạy việc theo lịch",
+    "format": "explainer",
+    "date": "2026-11-05",
+    "direction": "breakcore-swiss",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 3.2546467999999997,
+    "reviewIssues": 8
   }
 ]

@@ -1,0 +1,477 @@
+{
+  "topic": "nanobot: agent AI cá nhân siêu nhẹ tự host trên VPS, chat qua Telegram và Discord, nhớ lâu và chạy việc theo lịch",
+  "models": [
+    "ag/gemini-3.8-flash-high",
+    "ag/gemini-3.8-flash-low",
+    "cx/gpt-5.6-luna",
+    "cx/gpt-5.6-terra",
+    "mistral/mistral-large-latest",
+    "claude-coding"
+  ],
+  "date": "2026-11-05",
+  "repos": [
+    {
+      "repo": "HKUDS/nanobot",
+      "asked": "HKUDS/nanobot",
+      "name": "nanobot",
+      "stars": 49859,
+      "description": "Your lightweight open-source personal agent.",
+      "license": "MIT",
+      "language": "Python",
+      "pushedAt": "2026-11-05T17:52:11Z",
+      "url": "https://github.com/HKUDS/nanobot",
+      "avatar": "repos/HKUDS.png"
+    }
+  ],
+  "pages": [],
+  "idea": "ideas/2026-11-05-nanobot-agent-ai-ca-nhan-sieu-nhe-tu-host-tren-vps.json",
+  "notes": {
+    "audience": "Developer, self-hoster, chủ VPS muốn tự chạy trợ lý AI cá nhân qua WebUI, Telegram hoặc Discord.",
+    "angle": "Một agent Python nhẹ, tự host trên VPS, nhận việc qua Telegram hoặc Discord, lưu sở thích, chạy tác vụ định kỳ; cần tự cấp model và khóa quyền truy cập.",
+    "facts": [
+      {
+        "fact": "nanobot là framework agent AI cá nhân mã nguồn mở, self-hosted, viết bằng Python.",
+        "quote": "nanobot is an ultra-lightweight, open-source, self-hosted personal AI agent framework written in Python.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có thể dùng qua trình duyệt, terminal hoặc ứng dụng chat.",
+        "quote": "Use it in a browser, terminal, or chat app to work with files, remember preferences, and schedule tasks.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Hỗ trợ Telegram và Discord cùng nhiều kênh khác.",
+        "quote": "connect to Telegram, Discord, Slack, WeChat, Email, Mattermost, Linear, and other channels",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Agent có thể lưu lịch sử phiên và bộ nhớ dài hạn qua Dream.",
+        "quote": "keep session history and long-term memory through Dream",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có thể chạy mục tiêu dài hạn và automation theo lịch.",
+        "quote": "run long-horizon goals and scheduled automations",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có công cụ shell, web search/fetch, MCP, cron, tạo ảnh và ủy quyền nhiều agent.",
+        "quote": "use shell, web search/fetch, MCP integrations, cron, image generation, and multi-agent delegation",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Đọc được PDF, DOCX, XLSX và PPTX bằng công cụ file tích hợp.",
+        "quote": "read PDF, Word (`.docx`), Excel (`.xlsx`), and PowerPoint (`.pptx`) files with built-in file tools",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có thể cung cấp Python SDK và API tương thích OpenAI.",
+        "quote": "expose a Python SDK and OpenAI-compatible API for integrations",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Chạy như gateway dài hạn trên máy cá nhân hoặc server.",
+        "quote": "deploy as a long-running local or server-side agent gateway",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Yêu cầu Python 3.11 trở lên.",
+        "quote": "You need **Python 3.11 or newer**",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "nanobot không cung cấp tài khoản model; người dùng cần provider được hỗ trợ hoặc local model server.",
+        "quote": "nanobot does not supply a model account.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Chi phí model và yêu cầu phần cứng phụ thuộc dịch vụ model đã chọn.",
+        "quote": "Model fees or local hardware requirements depend on the service you choose",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Bản ổn định mới nhất được nêu là v0.4.0, phát hành ngày 2026-10-28.",
+        "quote": "Latest release: v0.4.0 (2026-10-28)",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Bản stable phù hợp dùng hằng ngày; source phù hợp thử tính năng mới và phát triển.",
+        "quote": "If you want the most stable day-to-day experience, install from PyPI or with `uv`.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Installer stable dùng môi trường Python riêng tại ~/.nanobot/venv khi cài mới.",
+        "quote": "Fresh installations use a dedicated environment under `~/.nanobot/venv`.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có thể mở WebUI bằng nanobot webui.",
+        "quote": "nanobot webui",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Trên VPS headless, WebUI chạy không mở trình duyệt server; truy cập qua SSH tunnel.",
+        "quote": "nanobot webui --no-open",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "SSH tunnel mặc định chuyển cổng WebUI 8765 về máy local.",
+        "quote": "ssh -N -L 127.0.0.1:8765:127.0.0.1:8765 user@SERVER",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Quy trình lần đầu: cấu hình provider/model, gửi Hello!, rồi thử tác vụ file trong workspace.",
+        "quote": "Open **Settings → Models** and save a provider/model preset",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có thể chọn workspace-only access để giới hạn quyền file khi thử nghiệm.",
+        "quote": "select that folder and **Default Permission** (workspace-only access)",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "WebUI, TUI và chat app dùng chung Python gateway.",
+        "quote": "The Python gateway owns agent execution, sessions, tools, memory, and security policy for the WebUI, TUI, and chat apps.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Một instance chia sẻ profile, memory và skills giữa các project.",
+        "quote": "one instance shares its agent profile, memory, and skills across projects.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Có thể dùng instance riêng để cô lập dữ liệu hoặc sở thích khách hàng.",
+        "quote": "Use separate instances when client data or preferences must stay isolated.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Automation cần gateway tiếp tục chạy và host không ngủ.",
+        "quote": "Keep the gateway running and the host awake for scheduled delivery.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Lịch bị bỏ lỡ không được chạy bù sau khi gateway restart.",
+        "quote": "Missed scheduled times are not replayed after a gateway restart.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "WebUI cấp quyền quản trị toàn bộ instance agent, chỉ nên chia sẻ với operator tin cậy.",
+        "quote": "WebUI access grants administration of the same agent instance; share it only with trusted operators.",
+        "source": "https://github.com/HKUDS/nanobot"
+      },
+      {
+        "fact": "Kết nối bot vào group cần kiểm tra DM pairing, allowlist và group-access policy riêng.",
+        "quote": "Approving a private sender does not restrict group access on every platform",
+        "source": "https://github.com/HKUDS/nanobot"
+      }
+    ],
+    "install": [
+      "curl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh",
+      "nanobot --version",
+      "nanobot webui --no-open",
+      "ssh -N -L 127.0.0.1:8765:127.0.0.1:8765 user@SERVER",
+      "uv tool install nanobot-ai",
+      "python -m pip install nanobot-ai",
+      "nanobot webui",
+      "nanobot onboard --wizard"
+    ],
+    "caveats": [
+      "Cần Python 3.11+ và model provider hoặc local model server.",
+      "nanobot không bao gồm tài khoản model; phí model hoặc phần cứng local chưa cố định.",
+      "Không đưa API key, bot token, password vào issue hoặc log công khai.",
+      "Giữ kín toàn bộ login link WebUI, gồm phần sau ký tự #.",
+      "WebUI có quyền quản trị instance; không chia sẻ tùy tiện.",
+      "Workspace, topic không tạo memory riêng; muốn cô lập dữ liệu cần instance riêng.",
+      "Automation không chạy bù sau restart; gateway và host phải luôn hoạt động.",
+      "Private sender allowlist không tự hạn chế quyền truy cập group trên mọi nền tảng.",
+      "Tài liệu README mô tả current source; tài liệu phát hành dành cho bản stable.",
+      "Không dùng tạm một tool environment để quản lý installation hiện có."
+    ],
+    "gaps": [
+      "Mức RAM, CPU, disk tối thiểu trên VPS là bao nhiêu?",
+      "Telegram và Discord cấu hình bot token, allowlist cụ thể thế nào?",
+      "Có cần reverse proxy, HTTPS hoặc domain khi dùng ngoài localhost không?",
+      "Lưu memory, session và credential ở file nào; mã hóa ra sao?",
+      "Cron/automation tạo bằng cú pháp nào, múi giờ nào?",
+      "Model provider nào rẻ hoặc phù hợp VPS Việt Nam?",
+      "Agent có cơ chế xác nhận trước khi chạy shell hoặc thao tác nguy hiểm không?",
+      "Hiệu năng và chi phí thực tế cho một người dùng là bao nhiêu?"
+    ]
+  },
+  "research": "Primary sources, fetched from GitHub on 2026-11-05:\n\n## HKUDS/nanobot (https://github.com/HKUDS/nanobot)\nDescription: Your lightweight open-source personal agent.\nHomepage: https://nanobot.wiki\nLanguage: Python; license: MIT; created 2026-02-01; last push 2026-11-05\nLatest release: v0.4.0 (2026-10-28)\nREADME (start):\nEnglish |\n    简体中文 |\n    繁體中文 |\n    Español |\n    Français |\n    Bahasa Indonesia |\n    日本語 |\n    한국어 |\n    Русский |\n    Tiếng Việt\n  \n  \n    \n    \n    \n    \n    \n    \n    \n  \n  \n    Discord ·\n    X ·\n    WeChat 微信交流群 ·\n    Feishu\n  \n\n# nanobot\n\n🐈 **nanobot** is an ultra-lightweight, open-source, self-hosted personal AI agent framework written in Python. Use it in a browser, terminal, or chat app to work with files, remember preferences, and schedule tasks. Connect a supported model provider or local model server to supply the AI.\n\n## Start Here\n\n| You want to... | Go to |\n|---|---|\n| Install nanobot with no terminal/config background | [Start Without Technical Background](./docs/start-without-technical-background.md) |\n| Install quickly and get your first reply | [Install](#-install) and [Quick Start](#-quick-start) |\n| Open the bundled browser UI | [WebUI](#-webui) |\n| Connect Telegram, Discord, WeChat, Slack, Email, Mattermost, Linear, or another channel | [Chat app guide](./docs/guides/chat-app-ai-agent.md) |\n| Configure providers, fallback models, Langfuse, MCP, web tools, or security | [Docs](./docs/README.md) and [Configuration](./docs/configuration.md) |\n| Develop the browser UI | [Install current source](#-install), then [WebUI development](./webui/README.md) and [Contributing](./CONTRIBUTING.md) |\n| Integrate from Python or HTTP | [Python SDK](./docs/python-sdk.md) or [Agent API](./docs/openai-api.md) |\n| Understand or extend the internals | [Architecture](./docs/architecture.md), [Contributing](./CONTRIBUTING.md), and [Provider extensions](./docs/development.md) |\n| Deploy to the cloud or keep nanobot running as a service | [Deployment](./docs/deployment.md) |\n\n## What can nanobot do?\n\nnanobot can:\n\n- run in a browser WebUI or terminal\n- connect to Telegram, Discord, Slack, WeChat, Email, Mattermost, Linear, and other channels\n- read PDF, Word (`.docx`), Excel (`.xlsx`), and PowerPoint (`.pptx`) files with built-in file tools, for tasks such as summarizing reports\n- use shell, web search/fetch, MCP integrations, cron, image generation, and multi-agent delegation\n- keep session history and long-term memory through [Dream](./docs/memory.md#save-and-check-a-preference)\n- run [long-horizon goals](./docs/guides/long-running-ai-agent.md) and [scheduled automations](./docs/automations.md)\n- expose a Python SDK and OpenAI-compatible API for integrations\n- deploy as a long-running local or server-side agent gateway\n\n## 💡 Why nanobot\n\n- **Persistent workflows**: keep saved conversations, long-term memory, and task results for later work.\n- **Chat-native reach**: WebUI, API, Telegram, Feishu, Slack, Discord, Teams, email, Mattermost, and Linear.\n- **Model freedom**: OpenAI-compatible APIs, local LLMs, image generation, search, and fallbacks.\n- **Small core**: readable internals with MCP, memory, deployment, and automation built in.\n- **Own your stack**: inspect, customize, self-host, and extend without a giant platform.\n\n## 📦 Install\n\nYou need **Python 3.11 or newer** and access to a [supported model provider or local model server](./docs/providers.md). Model fees or local hardware requirements depend on the service you choose; nanobot does not supply a model account.\n\nChoose the **stable release** for everyday use or **current source** for development and the latest features. This README describes current source; [published documentation](https://nanobot.wiki/docs/latest/getting-started/nanobot-overview) covers the released version.\n\nNew to terminals or model credentials? Follow [Start Without Technical Background](./docs/start-without-technical-background.md). Updating an existing instance? Follow [updates and recovery](./docs/updating.md) for your installation method, backup steps and restart checks.\n\n| Track | Install with | Update with | What runs |\n|---|---|---|---|\n| Stable | installer, `uv`, or pip | managed installer: WebUI update; other installs: original package tool | one released Python/WebUI/TUI version |\n| Current source | editable Git checkout | `git pull --ff-only` + editable dependency sync | Python, WebUI, and TUI from that checkout |\n\n**Stable release: automatic setup (recommended)**\n\nThe installer chooses an isolated Python environment and opens setup for you. The two commands below are the same installation method for different operating systems; run only the one for your system.\n\nmacOS / Linux\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh\n```\n\nWindows PowerShell\n\n```powershell\nirm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1 | iex\n```\n\nInstaller details, preview, and script review\n\nThe default command installs or upgrades the stable PyPI release. Fresh installations use a dedicated environment under `~/.nanobot/venv`. On a fresh local desktop it opens the WebUI for model setup. That gateway keeps running after the browser or terminal closes; use the printed `gateway stop` command to stop it. SSH, headless, existing-config and older-release installs use terminal setup.\n\nExisting installations keep their package manager, extras and constraints. An active ordinary venv remains an explicit target, not an installer-managed environment. The installer avoids system-wide pip and prints the command to reuse if `nanobot` is not on `PATH`.\n\nTo preview the plan without changing your environment, pass `--dry-run`.\n\n```bash\ncurl -fsSL https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.sh | sh -s -- --dry-run\n```\n\n```powershell\n& ([scriptblock]::Create((irm https://raw.githubusercontent.com/HKUDS/nanobot/main/scripts/install.ps1))) --dry-run\n```\n\nIf you prefer to inspect the script first, open [`scripts/install.sh`](./scripts/install.sh) or [`scripts/install.ps1`](./scripts/install.ps1).\n\nAlready use uv or pip? Install the stable package yourself\n\nUse this instead of the recommended installer when you already manage your own Python environment. These commands install the same stable `nanobot-ai` package; they do not launch setup.\n\n**uv: isolated CLI installation**\n\n```bash\nuv tool install nanobot-ai\n```\n\n**pip: activate your virtual environment first**\n\n```bash\npython -m pip install nanobot-ai\n```\n\nThen run `nanobot webui` for browser setup, or `nanobot onboard --wizard` for terminal-only setup. For the [Python SDK](./docs/python-sdk.md), install `nanobot-ai` in your application's virtual environment so the application can import it; a separate `uv tool` environment does not make the SDK importable there.\n\nIf pip reports `externally-managed-environment`, use the recommended installer, `uv tool install nanobot-ai`, `pipx install nanobot-ai`, or an activated virtual environment. Upgrade with the same method; for uv use `uv tool upgrade nanobot-ai`, and for pip use `python -m pip install -U nanobot-ai`.\n\n**Current source: development checkout**\n\nInstall current source with Git and Bun\n\nClone the repository and install it in editable mode. A source install requires Git and [Bun](https://bun.sh/); Bun runs the matching TUI directly from the checkout instead of downloading an older release binary.\n\n```bash\ngit clone https://github.com/HKUDS/nanobot.git\ncd nanobot\npython -m venv .venv\n```\n\nActivate it with `source .venv/bin/activate` on macOS/Linux or `.venv\\Scripts\\Activate.ps1` in Windows PowerShell, then run:\n\n```bash\npython -m pip install -e .\n```\n\nAfter that, the normal commands are identical to a stable install. `nanobot` runs the TUI from this checkout, and `nanobot webui` rebuilds stale frontend assets automatically. After stopping the old instance, `git pull --ff-only` updates the Python, TUI, and WebUI source together; rerun `python -m pip install -e .` when Python dependencies change, then restart the instance. Contributors should also read [`CONTRIBUTING.md`](./CONTRIBUTING.md).\n\nSupported platforms, bundled UIs, and release tracks\n\nPublished packages include the WebUI, and supported platform wheels also include the native TUI. A source-distribution install can fetch a checksummed, version-matched TUI archive—with its licenses, notices, corresponding application source, source offer, and relinking instructions—on first use.\n\nPlatform wheels include both the WebUI and the native terminal UI: macOS 13+ (Apple Silicon and Intel), glibc 2.17+ Linux (ARM64 and x64), and Windows x64. The x64 runtime requires SSE4.2. Pip selects the matching wheel; opening the TUI does not need a separate GitHub download or Bun installation. A source-distribution install on a supported target can use the matching checksummed GitHub release archive. On other platforms, use `nanobot --classic` or the WebUI.\n\n> [!IMPORTANT]\n>\n> If you want the newest features and experiments, install from source.\n>\n> If you want the most stable day-to-day experience, install from PyPI or with `uv`.\n\nPick **one** install method:\n\n| Track | Install with | Update with | What runs |\n|---|---|---|---|\n| Stable | installer, `uv`, or pip | [same installation method](./docs/quick-start.md#updating) | one released Python/WebUI/TUI version |\n| Current source | editable Git checkout | `git pull --ff-only` + editable dependency sync | Python, WebUI, and TUI from that checkout |\n\nVerify the installation or locate the nanobot command\n\nVerify the install:\n\n```bash\nnanobot --version\n```\n\nIf `nanobot` is not on `PATH`, reuse the installer's printed command or run the Python executable from the existing installation with `-I -m nanobot`. For uv/pipx, locate that environment with the original manager. Do not use a temporary tool environment to manage an existing installation.\n\nAfter installation, continue with [Quick Start](#-quick-start). Use the exact command printed by the installer if `nanobot` is not on `PATH`.\n\n## 🚀 Quick Start\n\n**Open nanobot in your browser**\n\nIf the installer already opened the WebUI, continue there. Otherwise run:\n\n```bash\nnanobot webui\n```\n\nKeep the launcher terminal open while using the browser. It starts or joins the shared local gateway and binds the first-run WebUI to localhost. If the browser does not open, copy the complete login link printed in the terminal, including everything after `#`; keep this credential private. For SSH or a headless host, use the remote-browser or terminal-only instructions below.\n\n**Your first three steps**\n\n1. Open **Settings → Models** and save a provider/model preset with your credential or supported sign-in. See [model setup](./docs/quick-start.md#2-configure-your-model) if you need the full steps.\n2. Start a new topic and send `Hello!` to verify the model connection.\n3. To try file work, put a copy of `notes.txt` in a practice folder, select that folder and **Default Permission** (workspace-only access), and ask: \"Read notes.txt and write a short summary to summary.md.\" Open `summary.md` in that folder to check the result. See [Your first file task](./docs/start-without-technical-background.md#your-first-file-task).\n\nA normal reply verifies the provider/model and browser connection. The file task separately checks the selected project and its file permissions. Attaching a file sends it to the conversation; it does not change the selected project folder.\n\nThen describe your next goal in the same chat, for example: \"I am already using the WebUI. Help me connect Telegram and allow only my account.\" An enabled `nanobot-document` skill can consult the documentation bundled with your installation; see [Continue with nanobot](./docs/quick-start.md#continue-with-nanobot) for examples, explicit invocation, and availability.\n\nOpen the WebUI on a remote server through SSH\n\nAfter installing nanobot on the server, start its WebUI without opening a server-side browser:\n\n```bash\nnanobot webui --no-open\n```\n\nKeep that server terminal running. In a second terminal on your own computer, forward the default WebUI port through SSH:\n\n```bash\nssh -N -L 127.0.0.1:8765:127.0.0.1:8765 user@SERVER\n```\n\nReplace `user@SERVER` with your SSH login and leave the tunnel open. In your l\n\nMore pages, read on 2026-11-05:\n\n## GitHub - HKUDS/nanobot: Your lightweight open-source personal agent. · GitHub\nURL: https://github.com/HKUDS/nanobot\nDescription: Your lightweight open-source personal agent. Contribute to HKUDS/nanobot development by creating an account on GitHub.\n\nSkip to content\nNavigation Menu\nSign in\nHKUDS\nnanobot\nRepository navigation\nCode\nIssues\n214\n (214)\nMore\nitems\nnanobot\nPublic\nNotifications\nFork8.7k\n (8.7k)\nStar49.9k\n (49.9k)\nAbout\n\nYour lightweight open-source personal agent.\n\nnanobot.wiki\nTopics\nagent-framework\nai-agent\nai-agents\nchatbot\nchatops\ndiscord-bot\nllm-agents\nllms\nlocal-llm\nmcp\nmodel-context-protocol\nmulti-agent\nopenai-compatible\nopenclaw\npersonal-ai-assistant\npython\nself-hosted\ntelegram-bot-ai-assistant\nwebui\nworkflow-automation\nResources\nReadme\nMIT license\nContributing\nContributing\nSecurity policy\nSecurity policy\nActivity\nCustom properties\nStars\n49.9k stars\nWatchers\n208 watching\nForks\n8.7k forks\nReport repository\nmain\nCode\nLatest commit\nRe-bin\nHistory\nFolders and files\nName\tLast commit date\n\n.agent\n\t\n\n.github\n\t\n\ndocs\n\t\n\nimages\n\t\n\nnanobot\n\t\n\npackages/client-events\n\t\n\nscripts\n\t\n\ntests\n\t\n\ntui\n\t\n\nwebui\n\t\n\nView all files\nRepository files navigation\nREADME\nContributing\nMore\nitems\n\nEnglish | 简体中文 | 繁體中文 | Español | Français | Bahasa Indonesia | 日本語 | 한국어 | Русский | Tiếng Việt\n\n      \n\nDiscord · X · WeChat 微信交流群 · Feishu\n\nnanobot\n\n🐈 nanobot is an ultra-lightweight, open-source, self-hosted personal AI agent framework written in Python. Use it in a browser, terminal, or chat app to work with files, remember preferences, and schedule tasks. Connect a supported model provider or local model server to supply the AI.\n\nStart Here\nYou want to...\tGo to\nInstall nanobot with no terminal/config background\tStart Without Technical Background\nInstall quickly and get your first reply\tInstall and Quick Start\nOpen the bundled browser UI\tWebUI\nConnect Telegram, Discord, WeChat, Slack, Email, Mattermost, Linear, or another channel\tChat app guide\nConfigure providers, fallback models, Langfuse, MCP, web tools, or security\tDocs and Configuration\nDevelop the browser UI\tInstall current source, then WebUI development and Contributing\nIntegrate from Python or HTTP\tPython SDK or Agent API\nUnderstand or extend the internals\tArchitecture, Contributing, and Provider extensions\nDeploy to the cloud or keep nanobot running as a service\tDeployment\nWhat can nanobot do?\n\nnanobot can:\n\nrun in a browser WebUI or terminal\nconnect to Telegram, Discord, Slack, WeChat, Email, Mattermost, Linear, and other channels\nread PDF, Word (.docx), Excel (.xlsx), and PowerPoint (.pptx) files with built-in file tools, for tasks such as summarizing reports\nuse shell, web search/fetch, MCP integrations, cron, image generation, and multi-agent delegation\nkeep session history and long-term memory through Dream\nrun long-horizon goals and scheduled automations\nexpose a Python SDK and OpenAI-compatible API for integrations\ndeploy as a long-running local or server-side agent gateway\n💡 Why nanobot\nPersistent workflows: keep saved conversations, long-term memory, and task results for later work.\nChat-native reach: WebUI, API, Telegram, Feishu, Slack, Discord, Teams, email, Mattermost, and Linear.\nModel freedom: OpenAI-compatible APIs, local LLMs, image generation, search, and fallbacks.\nSmall core: readable internals with MCP, memory, deployment, and automation built in.\nOwn your stack: inspect, customize, self-host, and extend without a giant platform.\n📦 Install\n\nYou need Python 3.11 or newer and access to a supported model provider or local model server. Model fees or local hardware requirements depend on the service you choose; nanobot does not supply a model account.\n\nChoose the stable release for everyday use or current source for development and the latest features. This README describes current source; published documentation covers the released version.\n\nNew to terminals or model credentials? Follow Start Without Technical Background. Updating an existing instance? Follow updates and recovery for your installation method, backup steps and restart checks.\n\nTrack\tInstall with\tUpdate with\tWhat runs\nStable\tinstaller, uv, or pip\tmanaged installer: WebUI update; other installs: original package tool\tone released Python/WebUI/TUI version\nCurrent source\teditable Git checkout\tgit pull --ff-only + editable dependency sync\tPython, WebUI, and TUI from that checkout\n\nStable release: automatic setup (recommended)\n\nThe installer chooses an isolated Python environment and opens setup for you. The two commands below are the same installation method for different operating systems; run only the one for your system.\n\nmacOS / Linux\nWindows PowerShell\nInstaller details, preview, and script review\nAlready use uv or pip? Install the stable package yourself\n\nCurrent source: development checkout\n\nInstall current source with Git and Bun\nSupported platforms, bundled UIs, and release tracks\nVerify the installation or locate the nanobot command\n\nAfter installation, continue with Quick Start. Use the exact command printed by the installer if nanobot is not on PATH.\n\n🚀 Quick Start\n\nOpen nanobot in your browser\n\nIf the installer already opened the WebUI, continue there. Otherwise run:\n\nnanobot webui\n\nKeep the launcher terminal open while using the browser. It starts or joins the shared local gateway and binds the first-run WebUI to localhost. If the browser does not open, copy the complete login link printed in the terminal, including everything after #; keep this credential private. For SSH or a headless host, use the remote-browser or terminal-only instructions below.\n\nYour first three steps\n\nOpen Settings → Models and save a provider/model preset with your credential or supported sign-in. See model setup if you need the full steps.\nStart a new topic and send Hello! to verify the model connection.\nTo try file work, put a copy of notes.txt in a practice folder, select that folder and Default Permission (workspace-only access), and ask: \"Read notes.txt and write a short summary to summary.md.\" Open summary.md in that folder to check the result. See Your first file task.\n\nA normal reply verifies the provider/model and browser connection. The file task separately checks the selected project and its file permissions. Attaching a file sends it to the conversation; it does not change the selected project folder.\n\nThen describe your next goal in the same chat, for example: \"I am already using the WebUI. Help me connect Telegram and allow only my account.\" An enabled nanobot-document skill can consult the documentation bundled with your installation; see Continue with nanobot for examples, explicit invocation, and availability.\n\nOpen the WebUI on a remote server through SSH\nTerminal-only setup, one-shot checks, and the TUI\nSave and check a preference\nStart and stop a sustained goal\nKeep the gateway running after closing interactive clients\nRun a configured gateway directly\nRead task guides or look up configuration details\n\nIf nanobot worked for you, a star on GitHub is the simplest way to support the project.\n\n☁️ Deploy\n\nRender — one click\n\nDeploy nanobot's gateway and bundled WebUI from the repository's ready-to-use Blueprint:\n\nRender will ask for ANTHROPIC_API_KEY and a private NANOBOT_WEB_TOKEN, then provision persistent storage for sessions, memory, and WebUI history. Persistent disks require a paid Render service.\n\nSelf-host\n\nPrefer your own infrastructure? Follow the deployment guide for Docker, Docker Compose, Linux services, and macOS LaunchAgent setup.\n\n🌐 WebUI\n\nThe WebUI ships inside the published wheel with no separate frontend build. It is the browser workbench for persistent topics, temporary chats, visible agent activity, workspace controls, Apps, Skills, Automations, and settings. Start it with nanobot webui. WebUI access grants administration of the same agent instance; share it only with trusted operators. See Sharing access.\n\nThe screenshots below show the current source WebUI with example conversations, illustrative token counts, and paused schedules.\n\nMobile WebUI · dark theme\n\nUse it to:\n\nkeep separate topics for different tasks and projects;\nuse temporary chats when a conversation should not be saved to history or memory;\ninspect reasoning, tool calls, file edits, diffs, command output, and generated artifacts;\nswitch model presets and choose a project before starting a topic;\nconfigure models in Settings, connect chat platforms in Channels, and manage Apps, Skills, and Automations.\nKeep related work side by side\n\nGroup up to four conversations and arrange them in columns, rows, a grid, or a main pane with supporting panes. Each topic keeps its own history. Select another topic from the @ menu, or drag it into the composer, to let the agent read its context and coordinate work across sessions.\n\nChoose a project, access mode, and model for each task. Topics separate conversation history; project folders select where file work happens. Neither creates separate long-term memory: one instance shares its agent profile, memory, and skills across projects. Use separate instances when client data or preferences must stay isolated. Explore topics and panes →\n\nInspect the work and its context\n\nExpand agent activity to see reasoning, tool calls, and file changes. Switch Settings → Appearance → Edit preview to Diff for inline patches. The composer's context indicator shows the current context size, input tokens by round, and cache reuse when the provider reports it.\n\nContext compaction also appears in the conversation timeline. Explore activity and context →\n\nBring your tools into the conversation\n\nUse Apps to connect MCP servers, enable Agent Plugins, and manage local CLI App adapters. Add a preset or a custom server, then attach an available tool with @. Skills provide reusable instructions. Settings holds model, voice, image, and web setup; Channels handles chat-platform connections.\n\nExplore Apps → · Discover Skills → · Connect chat apps →\n\nBefore connecting a personal bot to shared channels, check the platform's DM pairing/allowlist and group-access policies separately. Approving a private sender does not restrict group access on every platform; see the channel reference.\n\nLet recurring work run on a schedule\n\nAsk for an automation from the topic that should receive its results. Use Tasks to review and manage schedules, or Calendar to scan completed and upcoming runs by date. Local triggers let a script start a saved task on demand.\n\nKeep the gateway running and the host awake for scheduled delivery. Missed scheduled times are not replayed after a gateway restart. See delivery and recovery rules. Explore Automations →\n\nFor a conversation that should stay out of saved topic history and long-term memory, use Temporary chat from the header. Temporary chats end when the connection closes and use the default workspace with workspace-only permissions. Requests still go to the configured model provider, and files created by tools remain after the chat closes.\n\nSee the WebUI guide for LAN access, background operation, workspace controls, and the full feature tour. Working on the frontend itself? Use webui/README.md.\n\nArchitecture\n\nThe Python gateway owns agent execution, sessions, tools, memory, and security policy for the WebUI, TUI, and chat apps. The clients share that runtime; the core agent loop builds context, calls the model, executes requested tools, and returns the result. Memory, skills, channels, and MCP integrations extend that loop.\n\nThe Python SDK embeds the agent runtime in your application process. The OpenAI-compatible API starts a separate HTTP service for /v1/chat/completions: each request contains one user message, history is managed by the server, and the model comes from configuration. Responses return to the HTTP client; that service does not deliver tool messages to chat apps.\n\nSee Architecture for source ownership and extension points.\n\nDocs\n\nBrowse the repo docs for current source documentation, or visit nanobot.wiki for the stable release. The task guide index groups walkthroughs by outcome.\n\nGet started: Beginner walkthrough or Install and Quick Start.\nChoose and configure a model: Providers and Models and Provider Cookbook.\nConnect a chat app: Chat App AI Agent and c\n\n## Introduction | nanobot docs\nURL: https://nanobot.wiki/docs/0.4.0/getting-started/nanobot-overview\nDescription: Use these docs to get a working agent first. After the first reply, describe your next goal to nanobot or choose a task guide to read yourself. Source-level design and extension details are kept in the contributor section.\n\nSkip to main content\nStart hereIntroduction\nOn this page\nIntroduction\n\nUse these docs to get a working agent first. After the first reply, describe your next goal to nanobot or choose a task guide to read yourself. Source-level design and extension details are kept in the contributor section.\n\nThis manual covers nanobot 0.4.0. Use nanobot --version to check your installation. For an older installation, choose its version from the menu.\n\nUse the graphical setup steps first when the WebUI exposes the setting. Expand Manual configuration for headless deployments or configuration managed as code. Settings without a graphical control keep their direct configuration instructions.\n\nStart Here​\nYour situation\tRead this\tYou are done when...\nTerminals, Python, or API keys are new to you\tBeginner walkthrough\tThe browser can send Hello! and receive a reply\nYou are comfortable running commands\tInstall and Quick Start\tnanobot status is healthy and the WebUI or CLI can get one reply\nnanobot will not start\tTroubleshooting: Installation Problems\tnanobot starts, or you know what to fix next\nThe browser or chat app opens, but nanobot does not reply\tTroubleshooting: Provider and Model Problems, WebUI Problems, or Chat App Problems\tYou have a working reply or a specific next step\n\nThe recommended first-run path is:\n\nInstall nanobot.\nLet the installer open nanobot webui on a fresh local desktop.\nConfigure a provider and model in Settings → Models.\nSend Hello! before configuring anything else.\n\nMost people do not need to edit JSON for the first run. The WebUI handles the initial provider, model, and local browser settings. SSH, headless, existing-config, and older-release installs retain nanobot onboard --wizard as a terminal fallback. After the WebUI opens, use Settings for models and built-in capabilities, Channels for chat apps, and Apps for Agent Plugins, CLI Apps, and MCP integrations.\n\nAfter the First Reply​\n\nWhen the built-in nanobot-document skill is available and enabled, nanobot can consult the documentation bundled with your installation as you ask about features, configuration, or errors. Describe your current setup and one goal in the same chat; see Continue with nanobot for examples and explicit skill invocation. The skill links to the task and reference pages below as needed.\n\nFor independent reading, choose a task guide below. Use the reference section when you need an exact field, default, command, or protocol detail.\n\nAdd One Capability​\n\nPick the row that matches what you want to accomplish next:\n\nGoal\tGuide\nLearn the browser workbench\tWebUI\nConnect Telegram, Discord, Slack, Feishu, WeChat, Email, or another chat app\tChat Apps\nChoose a hosted, OAuth, company, or local model\tProvider Cookbook\nAdd model fallbacks\tConfigure Model Fallback\nEnable web search\tConfigure Web Search\nManage Agent Plugins, CLI Apps, or MCP integrations\tWebUI Apps\nAdd an MCP tool server\tConfigure MCP Tools\nGenerate images\tImage Generation\nSchedule work or create a local trigger\tAutomations\nUnderstand and manage long-term memory\tMemory\nRun nanobot continuously\tDeployment\nRun separate bots or workspaces\tMultiple Instances\nCall nanobot from Python\tPython SDK\nExpose an OpenAI-compatible endpoint\tOpenAI-Compatible API\n\nFor shorter, outcome-focused walkthroughs, browse the task guide index.\n\nOperate nanobot​\nNeed\tRead\nCommands and flags\tCLI Reference\nUpdate an installation or recover an interrupted update\tUpdating nanobot\nIn-chat slash commands\tIn-Chat Commands\nConfig, workspace, gateway, sessions, tools, and memory in plain language\tConcepts\nProvider/model matching and selection\tProviders and Models\nSetup and runtime diagnosis\tTroubleshooting\nOlder development highlights\tRelease Archive\nReference​\n\nUse reference pages to look up an exact option after you know what you are trying to configure:\n\nArea\tReference\nEvery configuration field and default\tConfiguration\nProvider and model behavior\tProviders and Models\nChat channel prerequisites and manual JSON\tChat Apps\nWebSocket authentication and wire protocol\tWebSocket\nPython SDK classes, events, sessions, and hooks\tPython SDK\nOpenAI-compatible HTTP routes and payloads\tOpenAI-Compatible API\nRuntime self-inspection and tuning\tMy Tool\n\nConfiguration examples are usually snippets to merge into ~/.nanobot/config.json, not complete replacement files. The docs use camelCase because nanobot writes config that way. Keep real API keys, bot tokens, and passwords out of issues and public logs.\n\nExtend or Contribute​\n\nThese pages explain implementation and extension points. You do not need them to install or operate nanobot.\n\nGoal\tRead\nUnderstand source ownership and runtime flow\tArchitecture\nSet up a development environment\tDevelopment and CONTRIBUTING.md\nAdd a channel package\tChannel Package Guide\nBuild the WebUI source\tWebUI Development\nChange update APIs, execution or recovery\tUpdate protocol\nPrepare and publish a release\tRelease checklist\n\nIf a command or screen no longer matches these docs, please open an issue with your nanobot version, operating system, and the page that needs correction.\n\nNEXT\nBeginner Setup\nnanobot\nDocumentation\nCommunity\nGitHub\nMIT License\n\n## Issues · HKUDS/nanobot · GitHub\nURL: https://github.com/HKUDS/nanobot/issues\nDescription: Your lightweight open-source personal agent. Contribute to HKUDS/nanobot development by creating an account on GitHub.\n\nSkip to content\nNavigation Menu\nSign in\nHKUDS\nnanobot\nRepository navigation\nCode\nIssues\n214\n (214)\nMore\nitems\nIssues\nChange the issues type filter\nNew issue\nSearch issues\nis:issue\n \nstate:open\nIssues\nOpen\n214\n (214)\nClosed\n1,373\n (1,373)\nAuthor\nLabels\nProjects\nWebUI: model button does not reflect the active primary or fallback model\nUnread\nHKUDS/nanobot#6550\n· \nFilter by author\nHackyRoot opened \n1\nLinear setup cancellation reports cancelled after authorization has completed\nUnread\nHKUDS/nanobot#6542\n· \nFilter by author\nKDB-Wind opened \n[Bug] strip_think removes literal think-tag examples inside fenced code blocks\nUnread\nHKUDS/nanobot#6539\n· \nFilter by author\nQuantumglucrack opened \n1\nNative Iris Chat channel: tested external package and upstream integration proposal\nUnread\nHKUDS/nanobot#6535\n· \nFilter by author\nmmalmi opened \n[Signal] Transcribe audio attachments automatically\nenhancement\nUnread\nHKUDS/nanobot#6534\n· \nFilter by author\nserotonie opened \nDeepSeek Chat Completions: interrupted generations are reported as completed\nUnread\nHKUDS/nanobot#6530\n· \nFilter by author\nchengyongru opened \n1\nTool parameter validation silently skips $ref / anyOf / oneOf schemas and crashes on tuple-form items\nUnread\nHKUDS/nanobot#6485\n· \nFilter by author\nxiong-wei1 opened \n1\nfeat(privacy): reversible PII de-identification at the provider boundary (distinct from secret redaction)\nUnread\nHKUDS/nanobot#6440\n· \nFilter by author\nyrxeva opened \nAPI session lock registry grows without bound for completed sessions\nUnread\nHKUDS/nanobot#6438\n· \nFilter by author\nSC-10749 opened \n1\nAllow web_fetch to continue beyond truncated text\nenhancement\nUnread\nHKUDS/nanobot#6316\n· \nFilter by author\ndavid-dev666 opened \nAdd optional pagination to list_sessions\nenhancement\nUnread\nHKUDS/nanobot#6314\n· \nFilter by author\ndavid-dev666 opened \nGoogle Sheets tool for reading and updating shared spreadsheets\nUnread\nHKUDS/nanobot#6188\n· \nFilter by author\ngianfrancodemarco opened \n1\nGoogle Drive tool for reading files from shared folders\nUnread\nHKUDS/nanobot#6187\n· \nFilter by author\ngianfrancodemarco opened \n1\nProposal: optional Plazmi world catch-up example through restricted MCP tools\nUnread\nHKUDS/nanobot#6182\n· \nFilter by author\ncairn-agent opened \nfeat(telegram): send multiple outbound images as albums\nUnread\nHKUDS/nanobot#6121\n· \nFilter by author\ngianfrancodemarco opened \n1\nWorkspace picker: drive list, folder creation, and common location shortcuts on Windows\nenhancement\nUnread\nHKUDS/nanobot#6111\n· \nFilter by author\nKailBug opened \n2\nSlack: compaction notices post as two permanent messages; add showCompactionNotices (or edit in place)\nUnread\nHKUDS/nanobot#6084\n· \nFilter by author\nccaryotakis opened \n1\n3\nAllow agents to observe group messages without always replying\nenhancement\npriority: p2\nUnread\nHKUDS/nanobot#6079\n· \nFilter by author\ndmerkert opened \n1\nAllow a separate model preset for the heartbeat notification evaluator\nenhancement\nUnread\nHKUDS/nanobot#6078\n· \nFilter by author\ndmerkert opened \n1\nNotify chat channels when a fallback model serves a turn (currently WebUI-only)\nUnread\nHKUDS/nanobot#6031\n· \nFilter by author\nGZY-SUPER-HACKER opened \n1\n1\nsendProgress: true yields at most one line per turn — tool_contract.md contradicts itself\nUnread\nHKUDS/nanobot#6000\n· \nFilter by author\nGZY-SUPER-HACKER opened \n1\nTelegram: per-chat and per-topic group policy (and a /group command to manage it)\nUnread\nHKUDS/nanobot#5972\n· \nFilter by author\nCarmeloCampos opened \nfeishu: allow bot-to-bot messages in groups (allowlisted bot senders + hop limit)\nUnread\nHKUDS/nanobot#5929\n· \nFilter by author\nzxan000 opened \nAgent gets stuck in sudo loop - becomes unusuable\nbug\npriority: p1\nquestion\nUnread\nHKUDS/nanobot#5924\n· \nFilter by author\nkkayam opened \n9\nfeat(api): server-side message queue (\"waiting room\") while agent is busy\nUnread\nHKUDS/nanobot#5909\n· \nFilter by author\ncoinwh opened \nPrevious123456789Next\nFooter\n© 2026 GitHub, Inc.\nFooter navigation\nTerms\nPrivacy\nSecurity\nStatus\nCommunity\nDocs\nContact\nManage cookies\nDo not share my personal information\n\n## GitHub · Change is constant. GitHub keeps you ahead. · GitHub · GitHub\nURL: https://github.com/\nDescription: Join the world's most widely adopted, AI-powered developer platform where millions of developers, businesses, and the largest open source community build software that advances humanity.\n\nSkip to content\nNavigation Menu\nSign in\n \n \nGitHub Universe ‘26 Recap\n \nSoftware still starts\nwith you\nEnter your email\nSign up for GitHub\nDownload GitHub Copilot app\nProduct walkthrough\nGitHub activity\nrepo forked from yunho-c\napache/tvm-tirx\n225M+\n0M+\ndevelopers building on GitHub\npush from viper1971\nviper1971/bali-lombok\npull request from dependabot[bot]\nmarkusritschel/bayes-climsim-eval\nbranch merged from eagleoflqj\niSimStore/simstore\nrepo starred by mauzus\nkburna243/frieds-hotwm\n230+\n0+\nrepositories created every minute\nrepo forked from cjdiaz24-art\nrequarks/wiki\npush from AngelGonzalez2109\nAngelGonzalez2109/recursos-humanos\npull request from tezbo\ntezbo/playscribe\nbranch merged from DenysTabachuk\nDenysTabachuk/ReadovoMobile\n43M+\n0M+\npull requests merged each month\nrepo starred by Saubhik11\nNutlope/hallmark\nrepo forked from Boluwatifetade\ncloudflare/security-audit-skill\npush from 13AuDHD\n13AuDHD/llamascout\nrepo forked from yunho-c\napache/tvm-tirx\nGitHub Platform\nGitHub\n\nRepository hosting, code review, and collaboration\n\nLearn more\nSee plans and pricing\nCopilot\n\nAI coding agent for tasks, projects, and automated work\n\nLearn more\nSee plans and pricing\nMore ways to use GitHub\nActions\n\nCI/CD and automation\n\nExplore Actions\nCode Quality\n\nQuality analysis, fixes, and enforcement\n\nExplore Code Quality\nCode Security\n\nVulnerability detection and response\n\nExplore Code Security\nSecret Protection\n\nSecret scanning and leak prevention\n\nExplore Secret Protection\nCodespaces\n\nCloud development environments\n\nExplore Codespaces\nWhatever you're building, you can build it on GitHub\nStart Enterprise free trial\nWhat our customers say\n“\nGitHub is one of the de facto tools that engineers want to use, and because of that, we don't have long, expensive onboarding periods or productivity gaps.\nRob Witoff\nCTO, Coinbase\n\n800M\n0M\n\npublic and open source repositories\n\n90%\n0%\n\nof the Fortune 100 uses GitHub\n\nCOMPANIES USING GITHUB\nCustomer stories\nFigma streamlines development and strengthens security\nRead customer story\nMercedes-Benz standardizes source code and automates onboarding\nRead customer story\nMercado Libre cuts coding time by 50%with GitHub Copilot\nRead customer story\nFeatured repositories\nBUILT WITH GITHUB\nBUILT WITH GITHUB\nJoin the world's\nlargest developer community\n\nEvery project adds something new to the community. Explore what developers are building across GitHub, then create an account and contribute your own.\n\nEnter your email\nSign up for GitHub\nSite-wide Links\nTHE DEVELOPER NEWSLETTER\n\nGet tips, technical guides, and best practices. Twice a month. Right in your inbox.\n\nSubscribe\nPRODUCTS\nGitHub\nActions\nCode Quality\nCopilot\nCodespaces\nCode Security\nSecret Protection\nPricing\nTeam\nResources\nRoadmap\nCompare GitHub\nAll Features\nDEVELOPERS\nDeveloper API\nEducation\nGitHub CLI\nGitHub Desktop\nGitHub Mobile\nIntegrations\nMCP Registry\nTraining\nBuild with Copilot\nSUPPORT\nDocs\nCommunity Forum\nProfessional Services\nPremium Support\nGitHub Status\nContact GitHub\nSitemap\nCOMPANY\nAbout\nWhy GitHub\nCustomer Stories\nBlog\nCareers\nInclusion\nPartners\nSocial Impact\nShop\nWhat is Git?\n© 2026 GITHUB, INC.\nTERMS\nPRIVACY\nMANAGE COOKIES\nDO NOT SHARE MY PERSONAL INFORMATION\nGitHub on LinkedIn\nGitHub on Instagram\nGitHub on YouTube\nGitHub on X\nGitHub on TikTok\nGitHub on Twitch\nGitHub’s organization on GitHub\nEnglish",
+  "footage": [
+    {
+      "scene": "s3",
+      "query": "developer chatting at desk",
+      "file": "footage/developer-chatting-at-desk-pixabay-232538.mp4",
+      "id": "pixabay-232538",
+      "page": "https://pixabay.com/videos/id-232538/",
+      "author": "Darioguzben",
+      "tags": "keyboard, writing, digital, technology, desk, hardware, job, electronics, computing",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2024/09/21/232538_large.mp4"
+    },
+    {
+      "scene": "s6",
+      "query": "developer at desk night",
+      "file": "footage/developer-at-desk-night-pixabay-12126.mp4",
+      "id": "pixabay-12126",
+      "page": "https://pixabay.com/videos/id-12126/",
+      "author": "badzhoo",
+      "tags": "city, movement, night, at home, building, street, light, window, community, lights, evening, transport",
+      "duration": 30,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2017/09/20/12126-235051437_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "data center server rack",
+      "file": "footage/data-center-server-rack-pixabay-171185.mp4",
+      "id": "pixabay-171185",
+      "page": "https://pixabay.com/videos/id-171185/",
+      "author": "MozoMozo",
+      "tags": "ai generated, robot, technology, future, screens, futuristic, sci fi, server, date",
+      "duration": 21,
+      "width": 1080,
+      "height": 1881,
+      "link": "https://cdn.pixabay.com/video/2023/07/12/171185-844787983_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "person typing laptop night",
+      "file": "footage/person-typing-laptop-night-pixabay-10822.mp4",
+      "id": "pixabay-10822",
+      "page": "https://pixabay.com/videos/id-10822/",
+      "author": "Coverr-Free-Footage",
+      "tags": "keyboard, typing, writing, notebook, computer, technology, laptop, business, internet, work, office, person, hand, communication, working, using, connection, pc, information, desktop, web, workplace",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2017/07/23/10822-226624975_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "programmer coding monitor",
+      "file": "footage/programmer-coding-monitor-pixabay-23355.mp4",
+      "id": "pixabay-23355",
+      "page": "https://pixabay.com/videos/id-23355/",
+      "author": "ninosouza",
+      "tags": "codes, internet, computer, code, digital, dice, technology, network, schedule, web, www, encoding, html, programmer, hacker, development, security, binary, notebook, business, monitor, hosting, information, cloud, media",
+      "duration": 55,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2019/05/06/23355-334950213_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "person using phone chat",
+      "file": "footage/person-using-phone-chat-pixabay-38084.mp4",
+      "id": "pixabay-38084",
+      "page": "https://pixabay.com/videos/id-38084/",
+      "author": "mephala1980",
+      "tags": "woman, phone, smartphone, technology, mobile, telephone, cellphone, person, female, wireless, device, media, communication, people, holding, business",
+      "duration": 8,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2020/05/04/38084-416330724_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "documents paper office",
+      "file": "footage/documents-paper-office-pixabay-34258.mp4",
+      "id": "pixabay-34258",
+      "page": "https://pixabay.com/videos/id-34258/",
+      "author": "thenickmurphy",
+      "tags": "writing, journal, notes, diary, typewriter, desk, office, write, notebook, note, writer, book, paper, pen, work, business, notepad, document, journalism, schedule, typing, working, feminine",
+      "duration": 20,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2020/03/25/34258-400974049_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "spreadsheet laptop screen",
+      "file": "footage/spreadsheet-laptop-screen-pixabay-1058.mp4",
+      "id": "pixabay-1058",
+      "page": "https://pixabay.com/videos/id-1058/",
+      "author": "Coverr-Free-Footage",
+      "tags": "laptop, notebook, student, studying, typing, writing, computer, technology, business, screen, laptop screen, office, internet, computer technology, computer screen, work, mobile, communication, woman, girl, female",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2015/10/16/1058-142621439_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "brain neurons",
+      "file": "footage/brain-neurons-pixabay-324831.mp4",
+      "id": "pixabay-324831",
+      "page": "https://pixabay.com/videos/id-324831/",
+      "author": "WhiteHatDesigner",
+      "tags": "neuron, brain, neural network, artificial intelligence, synapse, neuroscience, science, technology, biology, abstract, data, connection, intelligence, mind, energy, glow, anatomy, medical, digital, futuristic, concept, cells, nervous system, microscopic, 3d animation, ai generated",
+      "duration": 8,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2025/12/29/324831_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "person sleeping dreaming",
+      "file": "footage/person-sleeping-dreaming-pixabay-358932.mp4",
+      "id": "pixabay-358932",
+      "page": "https://pixabay.com/videos/id-358932/",
+      "author": "stephansigg",
+      "tags": "woman, sleep, wake up, dream, nonsense, silly, fun, person",
+      "duration": 8,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2026/06/17/358932_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "code on screen",
+      "file": "footage/code-on-screen-pixabay-14214.mp4",
+      "id": "pixabay-14214",
+      "page": "https://pixabay.com/videos/id-14214/",
+      "author": "voltamax",
+      "tags": "code, programming, system, failure, computing, computer, screen, language, technology, binary code",
+      "duration": 40,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2018/02/09/14214-255797028_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "network cables server",
+      "file": "footage/network-cables-server-pixabay-14900.mp4",
+      "id": "pixabay-14900",
+      "page": "https://pixabay.com/videos/id-14900/",
+      "author": "cipnt",
+      "tags": "network, internet, data, switch, router, cabinet, ethernet, equipment, connection, server, cable, rack, networking, lan, technology",
+      "duration": 24,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2018/03/09/14900-259623335_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "hands typing keyboard",
+      "file": "footage/hands-typing-keyboard-pixabay-3174.mp4",
+      "id": "pixabay-3174",
+      "page": "https://pixabay.com/videos/id-3174/",
+      "author": "Coverr-Free-Footage",
+      "tags": "computer keyboard, typing, hands, female, keyboard, computer, technology, business, office, internet, type, key, communication, pc, information, white, working, letter, fingers",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3174-166338976_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "cloud computing",
+      "file": "footage/cloud-computing-pixabay-68978.mp4",
+      "id": "pixabay-68978",
+      "page": "https://pixabay.com/videos/id-68978/",
+      "author": "CreativeWorlds99",
+      "tags": "tunnel, lights, neon, abstract, advertisement, big data, binary, blurred motion, cloud computing, code, communication, computer, data center, design, flowing",
+      "duration": 10,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2021/03/25/68978-529861058_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "padlock security",
+      "file": "footage/padlock-security-pixabay-133084.mp4",
+      "id": "pixabay-133084",
+      "page": "https://pixabay.com/videos/id-133084/",
+      "author": "julientromeur",
+      "tags": "security, 3d, background, art, padlock, bug, virus, computer, beautiful wallpaper, cloud, privacy",
+      "duration": 10,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2022/09/30/133084-755697289_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "clock time lapse",
+      "file": "footage/clock-time-lapse-pixabay-61621.mp4",
+      "id": "pixabay-61621",
+      "page": "https://pixabay.com/videos/id-61621/",
+      "author": "wastedgeneration",
+      "tags": "clock, alarm, desk, time, lapse, moving, watch, vintage, timer, steampunk, retro, gear, metal, gears, antique, machine",
+      "duration": 14,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2021/01/10/61621-499906216_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "server room",
+      "file": "footage/server-room-pixabay-345428.mp4",
+      "id": "pixabay-345428",
+      "page": "https://pixabay.com/videos/id-345428/",
+      "author": "WhiteHatDesigner",
+      "tags": "technology, data, digital, cyberspace, server, network, futuristic, sci-fi, internet, computing, database, future, ai, glowing, abstract, matrix, tunnel, hallway, cyber, tech, information, system, connection, server room",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/09/345428_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "smartphone messaging app",
+      "file": "footage/smartphone-messaging-app-pixabay-3172.mp4",
+      "id": "pixabay-3172",
+      "page": "https://pixabay.com/videos/id-3172/",
+      "author": "Coverr-Free-Footage",
+      "tags": "smartphone, scroll, emails, messages, app, mobile, device, modern, communication, internet, wireless, touchscreen, technology, digital, cellphone, gadget, telephone, using, equipment, hand, cellular, multimedia, smart phone, communicator, screen",
+      "duration": 11,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3172-166338958_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "computer chip circuit",
+      "file": "footage/computer-chip-circuit-pixabay-311332.mp4",
+      "id": "pixabay-311332",
+      "page": "https://pixabay.com/videos/id-311332/",
+      "author": "doktorkleinmusic",
+      "tags": "technology, circuit, chip, motherboard, processor, glow, energy, gold, electronics, light, macro, connection, data, network, loop, hardware, power, digital, electric, modern, engineering, precision, abstract, cpu, computer, ai generated",
+      "duration": 17,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2025/10/22/311332_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "humanoid robot",
+      "file": "footage/humanoid-robot-pixabay-334173.mp4",
+      "id": "pixabay-334173",
+      "page": "https://pixabay.com/videos/id-334173/",
+      "author": "TonyDias7",
+      "tags": "cyborg, robot, bot, futuristic, android, technology, robotics, sci-fi, humanoid, hand, handshake, welcome, agreement, hands, hello, ai generated",
+      "duration": 12,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/02/12/334173_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "calendar schedule",
+      "file": "footage/calendar-schedule-pixabay-197974.mp4",
+      "id": "pixabay-197974",
+      "page": "https://pixabay.com/videos/id-197974/",
+      "author": "EnchantedStudios",
+      "tags": "calendar, months, flipping, loop, countdown, diary, beautiful wallpaper, schedule, white, business, event, background",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2024/01/24/197974-906217212_large.mp4"
+    }
+  ]
+}
