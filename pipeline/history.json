@@ -236,5 +236,17 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "roi-tu-do-tu-ria-vu-tru",
+    "topic": "Nếu bạn rơi tự do từ rìa vũ trụ xuống Trái Đất",
+    "format": "whatif",
+    "date": "2026-11-05",
+    "direction": "breakcore-swiss",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 2.1349867999999996,
+    "reviewIssues": 2,
+    "revision": "phong cách breakcore-swiss"
   }
 ]

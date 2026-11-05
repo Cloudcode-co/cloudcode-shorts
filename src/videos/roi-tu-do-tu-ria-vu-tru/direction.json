@@ -1,0 +1,7 @@
+{
+  "id": "breakcore-swiss",
+  "bpm": 150,
+  "name": "Breakcore Swiss",
+  "brief": "Load the edit-styles skill and follow its breakcore-swiss.md. Footage-first: fetch 2+ clips per scene, cut every scene into 1–2 beat shots on a 150 BPM grid (24 frames a beat), half of them full-bleed footage regraded every beat with ribbons, the rest white Swiss posters, pixel scatters, a ring portal and colour-bar cards. 2-frame flash and smear inserts on the snare. Almost no text: each scene's fact in Unbounded at one fixed spot, still while the shots cut under it.",
+  "heavy": true
+}
