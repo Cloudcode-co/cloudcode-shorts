@@ -1,0 +1,173 @@
+{
+  "slug": "hermes-101-setup-co-ban",
+  "format": "explainer",
+  "topic": "hermes 101: setup cơ bản",
+  "title": "Anh em đã biết tự dựng IBC relayer bằng Rust chưa?",
+  "caption": "Hướng dẫn setup cơ bản Hermes IBC relayer bằng Rust và những lưu ý về crate package.",
+  "hashtags": [
+    "#cosmosibc",
+    "#hermesrelayer",
+    "#rustlang",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Upbeat modern tech electronic beat with synth pulses and crisp hi-hats, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "punchy synth",
+        "curious"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving rhythm",
+        "fast hi-hats",
+        "rising energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "warm synth",
+        "smooth fade",
+        "triumphant"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/informalsystems/hermes",
+    "https://github.com/neutron-org/neutron-query-relayer",
+    "https://github.com/ChainTools-Tech/ibc_refresh",
+    "https://hermes.informal.systems/",
+    "https://crates.io/crates/ibc-relayer-cli",
+    "https://github.com/cosmos/chain-registry"
+  ],
+  "voiceId": "2ZUpiKo5wCCuypvx2zaS",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em đã biết cách tự dựng một IBC relayer bằng Rust chưa?",
+      "headline": "Tự dựng IBC relayer bằng Rust",
+      "lines": [
+        "Kết nối các chain Cosmos",
+        "Tự vận hành relayer riêng"
+      ],
+      "commands": [],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": "developer working at desk"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Hermes là relayer của Informal Systems, chuyên quét trạng thái rồi chuyển giao dịch giữa các blockchain Cosmos.",
+      "headline": "Hermes hoạt động thế nào?",
+      "lines": [
+        "Quét chain state off-chain",
+        "Tạo và gửi giao dịch liên chuỗi"
+      ],
+      "commands": [],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Nhưng đừng gõ nhầm nhé! Crate tên hermes trên Rust hoàn toàn không liên quan, phải dùng ibc-relayer-cli.",
+      "headline": "Coi chừng nhầm crate",
+      "lines": [
+        "Crate 'hermes' không liên quan",
+        "Phải dùng crate ibc-relayer-cli"
+      ],
+      "commands": [],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Điều kiện tiên quyết: máy anh em phải cài sẵn Rust phiên bản tối thiểu là 1.85.0.",
+      "headline": "Yêu cầu Rust tối thiểu",
+      "lines": [
+        "Yêu cầu Rust >= 1.85.0",
+        "Mã nguồn mở Apache-2.0"
+      ],
+      "commands": [],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Cài đặt với một dòng lệnh duy nhất, binary hermes sẽ được nạp toàn hệ thống.",
+      "headline": "Cài đặt Hermes CLI",
+      "lines": [
+        "Cài đặt binary hermes toàn hệ thống"
+      ],
+      "commands": [
+        "cargo install ibc-relayer-cli"
+      ],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Tiếp theo, endpoint RPC tại status và REST syncing của blockchain phải phản hồi HTTP 200 thì Hermes mới kết nối được.",
+      "headline": "Kiểm tra endpoint kết nối",
+      "lines": [
+        "RPC /status phản hồi HTTP 200",
+        "REST /syncing phản hồi HTTP 200"
+      ],
+      "commands": [],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": "server room lights flashing"
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Hermes có sẵn REST API và Prometheus telemetry để giám sát. Phần mềm phát hành dạng as is, không cam kết bug-free.",
+      "headline": "Giám sát và vận hành",
+      "lines": [
+        "Prometheus endpoint ibc-telemetry",
+        "Phần mềm cung cấp dạng as is"
+      ],
+      "commands": [],
+      "repos": [
+        "informalsystems/hermes"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Muốn tự động dọn packet, anh em hãy nghía qua ibc_refresh. Lưu video lại để thực hành và follow mình nhé!",
+      "headline": "Tự động hóa với ibc_refresh",
+      "lines": [
+        "Tự động clear_packets và update_client",
+        "Lưu video và follow ngay"
+      ],
+      "commands": [],
+      "repos": [
+        "ChainTools-Tech/ibc_refresh"
+      ],
+      "footage": ""
+    }
+  ]
+}

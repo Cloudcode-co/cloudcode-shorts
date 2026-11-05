@@ -214,5 +214,16 @@
     "built": "claude",
     "costUsd": 0.7319697000000001,
     "reviewIssues": 7
+  },
+  {
+    "slug": "hermes-101-setup-co-ban",
+    "topic": "hermes 101: setup cơ bản",
+    "format": "explainer",
+    "date": "2026-11-05",
+    "direction": "terminal-tutorial",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.579596,
+    "reviewIssues": 4
   }
 ]
