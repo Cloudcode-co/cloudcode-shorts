@@ -1,0 +1,265 @@
+{
+  "slug": "golive-ai-trien-khai-app",
+  "format": "explainer",
+  "topic": "GoLive: AI tự triển khai app lên VPS, thay thế Coolify",
+  "title": "AI có thể tự đưa app lên VPS thay Coolify không?",
+  "caption": "GoLive không phải panel VPS. Đây là Agent Skill giúp AI lập kế hoạch, xin duyệt, triển khai và kiểm tra app.",
+  "hashtags": [
+    "#GoLive",
+    "#AICodingAgent",
+    "#DevOpsVietNam",
+    "#LapTrinh",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Energetic modern tech instrumental, pulsing synths, crisp digital percussion, rising tension, confident reveal, warm outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal tech pulse",
+        "curious",
+        "sparse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "digital percussion",
+        "focused"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "big drop",
+        "impressed",
+        "confident"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm",
+        "steady groove",
+        "hopeful"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/mikehasa/golive-skill",
+    "https://github.com/sinhaankur/WatchTower",
+    "https://github.com/rahmanef63/si-coder-agent",
+    "https://github.com/Autonoma-Tools/open-source-alternatives-vercel",
+    "https://clawhub.ai/mikehasa/skills/golive"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em, AI có thể tự đưa app lên VPS, thay luôn Coolify không?",
+      "headline": "AI tự deploy app?",
+      "lines": [
+        "GoLive là gì?",
+        "Có thay Coolify không?"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Câu trả lời ngắn: đừng gọi GoLive là panel VPS. Nó là Agent Skill cho coding agent.",
+      "headline": "Không phải panel VPS",
+      "lines": [
+        "Agent Skill",
+        "Không phải dashboard VPS"
+      ],
+      "commands": [],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[casually] GoLive phát hiện app cần gì, lập kế hoạch, xin anh em duyệt, rồi mới áp dụng và kiểm tra.",
+      "headline": "Năm bước chính",
+      "lines": [
+        "detect → plan → approve",
+        "apply → verify"
+      ],
+      "commands": [],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Nó có thể nối hosting, database, auth, domain, email và payments bằng tài khoản riêng của anh em.",
+      "headline": "Nối cả hệ thống",
+      "lines": [
+        "Hosting",
+        "Database · Auth · Domain",
+        "Email · Payments"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer working late desk"
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Không có tài khoản GoLive, backend hosted hay product telemetry riêng.",
+      "headline": "Không backend riêng",
+      "lines": [
+        "Open source",
+        "MIT",
+        "No account · No telemetry"
+      ],
+      "commands": [],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] Cài skill toàn cục bằng lệnh này. Cài xong chưa đăng nhập, chưa kết nối tài khoản, chưa deploy.",
+      "headline": "Cài trong một lệnh",
+      "lines": [
+        "Node.js 20+",
+        "Cài skill toàn cục"
+      ],
+      "commands": [
+        "npx skills add https://github.com/mikehasa/golive-skill --skill golive --global"
+      ],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Sau đó mở repo trong agent, gọi skill bằng prompt. Codex dùng đô-la, Claude Code dùng slash.",
+      "headline": "Gọi GoLive từ agent",
+      "lines": [
+        "Codex: $golive",
+        "Claude Code: /golive"
+      ],
+      "commands": [
+        "$golive Help me take this app live.",
+        "/golive Help me take this app live."
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Agent sẽ kiểm tra app, hỏi provider còn thiếu, hiển thị tài khoản đích và plan. Anh em duyệt rồi nó mới thay đổi thật.",
+      "headline": "Anh em vẫn cầm lái",
+      "lines": [
+        "Xem plan",
+        "Duyệt trước khi apply",
+        "Không gửi secret qua chat"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Nhưng nhớ kỹ: credential lưu plaintext, quyền 0600, ngoài repo. Rollback hẹp, không tự động, hiện live re-point chỉ hỗ trợ Netlify.",
+      "headline": "Alpha có giới hạn",
+      "lines": [
+        "Credential: plaintext, mode 0600",
+        "Rollback: opt-in",
+        "Netlify mới hỗ trợ re-point"
+      ],
+      "commands": [],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Teardown cũng không xóa bừa. Nó chỉ xóa tài nguyên chứng minh được đã tạo, rồi liệt kê phần còn sót để anh em xử lý.",
+      "headline": "Xóa có kiểm soát",
+      "lines": [
+        "Chỉ xóa tài nguyên đã xác minh",
+        "Phần còn sót: xử lý thủ công"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room racks"
+    },
+    {
+      "id": "s11",
+      "text": "[curious] Vậy có thay Coolify hoàn toàn không? Nguồn chưa chứng minh điều đó. GoLive là workflow agent nối nhiều provider, không phải VPS control panel.",
+      "headline": "Không thay thế hoàn toàn",
+      "lines": [
+        "Workflow agent",
+        "Không phải VPS panel",
+        "Provider scope còn giới hạn"
+      ],
+      "commands": [],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s12",
+      "text": "Còn WatchTower là hướng khác: self-host trên máy anh em bằng rootless Podman, riêng tư mặc định qua Tailscale, tập trung self-healing.",
+      "headline": "Một dự án khác",
+      "lines": [
+        "WatchTower",
+        "Rootless Podman",
+        "Tailscale · Self-healing"
+      ],
+      "commands": [],
+      "repos": [
+        "sinhaankur/WatchTower"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s13",
+      "text": "[laughs] Tóm lại, GoLive giúp AI triển khai có kế hoạch, có phê duyệt, có kiểm tra. Đây là alpha, không phải phép màu.",
+      "headline": "Kết luận",
+      "lines": [
+        "Plan",
+        "Approve",
+        "Apply · Verify"
+      ],
+      "commands": [],
+      "repos": [
+        "mikehasa/golive-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s14",
+      "text": "[cheerfully] Anh em lưu video để thử sau, nhớ đọc giới hạn trước khi deploy production, rồi follow để xem thêm tool dev khác.",
+      "headline": "Lưu lại thử sau",
+      "lines": [
+        "Lưu video",
+        "Đọc giới hạn",
+        "Follow xem thêm"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

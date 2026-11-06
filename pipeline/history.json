@@ -270,5 +270,16 @@
     "built": "claude",
     "costUsd": 1.0870339000000002,
     "reviewIssues": 6
+  },
+  {
+    "slug": "golive-ai-trien-khai-app",
+    "topic": "GoLive: AI tự triển khai app lên VPS, thay thế Coolify",
+    "format": "top5",
+    "date": "2026-11-06",
+    "direction": "countdown",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 0.8131543999999999,
+    "reviewIssues": 5
   }
 ]
