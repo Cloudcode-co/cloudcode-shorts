@@ -281,5 +281,16 @@
     "built": "claude",
     "costUsd": 0.8131543999999999,
     "reviewIssues": 5
+  },
+  {
+    "slug": "paperpilot-vs-stirling-pdf",
+    "topic": "PaperPilot vs Stirling-PDF: tự host AI đọc và hỏi đáp PDF riêng tư trên VPS",
+    "format": "story",
+    "date": "2026-11-06",
+    "direction": "documentary",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.7341303,
+    "reviewIssues": 3
   }
 ]

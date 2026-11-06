@@ -1,0 +1,239 @@
+{
+  "slug": "paperpilot-vs-stirling-pdf",
+  "format": "explainer",
+  "topic": "PaperPilot vs Stirling-PDF: tự host AI đọc và hỏi đáp PDF riêng tư trên VPS",
+  "title": "PaperPilot có thay thế Stirling-PDF để hỏi PDF riêng tư?",
+  "caption": "PaperPilot xử lý PDF local, MCP và REST. Nhưng đã đủ để thay Stirling-PDF chưa?",
+  "hashtags": [
+    "#PaperPilot",
+    "#StirlingPDF",
+    "#SelfHostPDF",
+    "#CongNghe",
+    "#LapTrinh"
+  ],
+  "musicPrompt": "Modern minimalist tech instrumental, warm analog synths, subtle digital pulses, rising tension, clean percussion, confident outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "digital pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady beat",
+        "rising tension",
+        "minimal techno"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "bright synth",
+        "confident",
+        "technical energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm pads",
+        "calm",
+        "soft resolution"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/KrushnaVardhanReddy/PaperPilot",
+    "https://usepaperpilot.com/",
+    "https://github.com/KrushnaVardhanReddy/PaperPilot/releases",
+    "https://github.com/KrushnaVardhanReddy/PaperPilot/actions"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em muốn AI đọc PDF riêng tư trên VPS? PaperPilot đấu Stirling-PDF thế nào?",
+      "headline": "AI đọc PDF riêng tư?",
+      "lines": [
+        "PaperPilot vs Stirling-PDF"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Nói nhanh: PaperPilot là bộ công cụ PDF viết bằng Rust, chạy local. README nói file không rời máy.",
+      "headline": "Local trước, cloud sau",
+      "lines": [
+        "Pure Rust",
+        "Files never leave your machine"
+      ],
+      "commands": [],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": "developer working late desk"
+    },
+    {
+      "id": "s3",
+      "text": "Trên trình duyệt, file xử lý trong bộ nhớ. Không upload. Không cần Chromium, runtime C++ hay cloud calls.",
+      "headline": "Không upload file",
+      "lines": [
+        "Browser WASM",
+        "Nothing is uploaded"
+      ],
+      "commands": [],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Về PDF cơ bản, PaperPilot có merge, split, rotate, delete, reorder, extract và compress. Có OCR thuần Rust qua PaddleOCR và rten.",
+      "headline": "PDF toolkit khá rộng",
+      "lines": [
+        "Merge • Split • Rotate",
+        "OCR: PaddleOCR via rten"
+      ],
+      "commands": [],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Với anh em self-host: CLI, REST gateway, MCP server, desktop và WASM dùng chung Rust core.",
+      "headline": "Một engine, nhiều cách dùng",
+      "lines": [
+        "CLI",
+        "REST",
+        "MCP",
+        "WASM"
+      ],
+      "commands": [],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": "server room closeup"
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] MCP cho coding agent. REST chạy local ở cổng 7823. Open-WebUI và Apache Tika có adapter ingestion.",
+      "headline": "Kết nối AI agent",
+      "lines": [
+        "MCP: stdio",
+        "REST: localhost:7823",
+        "Open-WebUI + Apache Tika"
+      ],
+      "commands": [
+        "paperpilot serve --port 7823",
+        "curl -X PUT http://localhost:7823/tika/text"
+      ],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Muốn build từ source, quy trình là ba lệnh này. Nhớ: cần Rust 1.75+, Node.js và pnpm.",
+      "headline": "Build trên máy riêng",
+      "lines": [
+        "Rust 1.75+",
+        "Node.js",
+        "pnpm"
+      ],
+      "commands": [
+        "git clone https://github.com/KrushnaVardhanReddy/PaperPilot.git",
+        "cd PaperPilot",
+        "cargo build --release -p paperpilot-cli -p paperpilot-mcp -p paperpilot-gateway"
+      ],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Nhưng khoan gọi đây là AI hỏi đáp hoàn chỉnh. OCR và trích xuất text chưa đồng nghĩa với RAG hay model trả lời.",
+      "headline": "Đừng nhầm OCR với hỏi đáp",
+      "lines": [
+        "OCR ≠ RAG",
+        "Chưa rõ model AI",
+        "Chưa rõ pipeline đầy đủ"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Còn Stirling-PDF? Tài liệu nghiên cứu lần này không có nguồn của dự án đó. Vì vậy chưa thể xác nhận tính năng, benchmark hay khả năng AI hỏi đáp để so ngang.",
+      "headline": "Chưa đủ dữ liệu so sánh",
+      "lines": [
+        "Không kết luận thắng thua",
+        "Thiếu nguồn Stirling-PDF"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer comparing software screens"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] PaperPilot v0.6.1 vẫn là pre-release. Nguồn cũng ghi một số workflow GitHub thất bại. Nếu public REST lên VPS, tài liệu chưa nêu TLS, authentication hay phân quyền.",
+      "headline": "Kiểm tra trước production",
+      "lines": [
+        "v0.6.1: pre-release",
+        "REST security còn cần kiểm tra",
+        "Kiểm tra LICENSE"
+      ],
+      "commands": [],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[casually] Kết luận: PaperPilot hợp với xử lý PDF local, CLI, MCP và REST. Nhưng chưa đủ dữ liệu nói nó thay thế Stirling-PDF cho AI hỏi đáp.",
+      "headline": "PaperPilot có gì?",
+      "lines": [
+        "Có: local PDF + MCP + REST",
+        "Chưa kết luận: AI Q&A"
+      ],
+      "commands": [],
+      "repos": [
+        "KrushnaVardhanReddy/PaperPilot"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s12",
+      "text": "[cheerfully] Lưu video lại, lúc cần thì thử trên máy riêng. Follow để xem thêm các công cụ self-host thực tế.",
+      "headline": "Lưu lại để thử sau",
+      "lines": [
+        "Save video",
+        "Follow để xem tiếp"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}
