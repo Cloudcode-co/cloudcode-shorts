@@ -1,0 +1,259 @@
+{
+  "slug": "open-notebook-tu-host-notebooklm",
+  "format": "explainer",
+  "topic": "Open Notebook: tự host NotebookLM của riêng bạn, chọn model tùy ý và tạo podcast từ tài liệu",
+  "title": "Muốn tự host NotebookLM, chọn model, tạo podcast?",
+  "caption": "Open Notebook giúp anh em tự host NotebookLM, dùng model tùy ý, chat tài liệu và tạo podcast nhiều speaker.",
+  "hashtags": [
+    "#OpenNotebook",
+    "#SelfHosting",
+    "#NotebookLM",
+    "#AI",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Modern cinematic technology instrumental, warm analog synths, subtle pulses, curious opening, rising digital percussion, confident reveal, clean outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "warm synth",
+        "minimal pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "digital percussion",
+        "modern tech",
+        "steady groove"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s7",
+      "styles": [
+        "impressed",
+        "big lift",
+        "confident",
+        "cinematic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s11",
+      "styles": [
+        "clean outro",
+        "warm",
+        "light pulse",
+        "resolved"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/lfnovo/open-notebook",
+    "https://github.com/ComposioHQ/awesome-claude-skills",
+    "https://github.com/sindresorhus/awesome",
+    "https://github.com/lfnovo/open-notebook/issues",
+    "https://www.open-notebook.ai/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em muốn tự host NotebookLM, giữ tài liệu riêng, tạo podcast luôn không?",
+      "headline": "NotebookLM riêng của anh em",
+      "lines": [
+        "Tự host",
+        "Chọn model",
+        "Tạo podcast"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "Đây là Open Notebook, nền tảng mã nguồn mở, MIT-licensed, tập trung vào ghi chú và nghiên cứu có AI.",
+      "headline": "Open Notebook là gì?",
+      "lines": [
+        "Mã nguồn mở",
+        "MIT-licensed",
+        "AI cho nghiên cứu"
+      ],
+      "commands": [],
+      "repos": [
+        "lfnovo/open-notebook"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Điểm đáng chú ý: chạy self-hosted. Dùng model local thì dữ liệu không rời máy. Anh em tự kiểm soát hạ tầng của mình.",
+      "headline": "Dữ liệu nằm trong hạ tầng",
+      "lines": [
+        "Self-hosted",
+        "Model local",
+        "Dữ liệu không rời máy"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer working desk at night"
+    },
+    {
+      "id": "s4",
+      "text": "Open Notebook hỗ trợ hơn 20 provider, gồm OpenAI, Anthropic, Google, Mistral, Ollama, LM Studio và vLLM.",
+      "headline": "Chọn model tùy ý",
+      "lines": [
+        "20+ provider",
+        "Ollama",
+        "LM Studio, vLLM"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Nguồn đưa vào cũng rộng: PDF, video, audio, web page, tài liệu Office và nhiều định dạng khác. Sau đó chat theo ngữ cảnh, tìm kiếm toàn văn lẫn vector.",
+      "headline": "Nạp cả kho tài liệu",
+      "lines": [
+        "PDF · video · audio",
+        "Web page · Office",
+        "Chat · full-text · vector"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Câu trả lời còn trỏ citation về source, note và insight đã dùng. Research nhanh hơn, kiểm tra lại cũng rõ hơn.",
+      "headline": "Có citation để kiểm tra",
+      "lines": [
+        "Source",
+        "Note",
+        "Insight"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Và phần vui nhất: tạo podcast bằng Episode Profiles, hỗ trợ từ một đến bốn speaker với profile tùy chỉnh.",
+      "headline": "Biến tài liệu thành podcast",
+      "lines": [
+        "Episode Profiles",
+        "1–4 speaker",
+        "Profile tùy chỉnh"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "friends listening podcast together"
+    },
+    {
+      "id": "s8",
+      "text": "Muốn chạy thử, cần Docker Desktop trên macOS hoặc Windows; Linux cần Docker Engine kèm Compose plugin. Tạo thư mục trước.",
+      "headline": "Cài bằng Docker Compose",
+      "lines": [
+        "macOS · Windows · Linux"
+      ],
+      "commands": [
+        "mkdir open-notebook && cd open-notebook"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Tải file Compose, rồi tạo secret dài, ngẫu nhiên bằng lệnh này.",
+      "headline": "Tải cấu hình",
+      "lines": [
+        "docker-compose.yml",
+        "Tạo encryption key"
+      ],
+      "commands": [
+        "curl -o docker-compose.yml https://raw.githubusercontent.com/lfnovo/open-notebook/main/docker-compose.yml",
+        "openssl rand -hex 32"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Sửa OPEN_NOTEBOOK_ENCRYPTION_KEY trong docker-compose.yml, thay change-me-to-a-secret-string bằng secret vừa tạo. Giữ lại key này, vì nó mã hóa API key đã lưu. Sau đó khởi động.",
+      "headline": "Đừng bỏ qua encryption key",
+      "lines": [
+        "Thay secret mặc định",
+        "Giữ lại key",
+        "Mã hóa API key"
+      ],
+      "commands": [
+        "docker compose up -d"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "Chờ khoảng 30 giây, mở http://localhost:8502. Vào Models, thêm provider trong UI, không bỏ API key vào file cấu hình. Cần ít nhất một Language model và một Embedding model.",
+      "headline": "Mở giao diện, nối model",
+      "lines": [
+        "http://localhost:8502",
+        "Language model",
+        "Embedding model"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s12",
+      "text": "Lưu ý bảo mật: mặc định cổng 8502 và 5055 bind trên mọi network interface, chưa có password. Nếu máy reachable từ thiết bị khác, bind về 127.0.0.1 hoặc bật OPEN_NOTEBOOK_PASSWORD trước khi chạy.",
+      "headline": "Đừng public khi chưa khóa",
+      "lines": [
+        "8502 · 5055",
+        "Không password mặc định",
+        "Giới hạn interface hoặc bật password"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room network racks"
+    },
+    {
+      "id": "s13",
+      "text": "Ollama có Language và Embedding nhưng không có speech-to-text, text-to-speech. Anthropic và Groq thiếu Embedding, nên phải ghép provider khác cho phần đó.",
+      "headline": "Nhớ kiểm tra ma trận model",
+      "lines": [
+        "Ollama thiếu audio",
+        "Anthropic thiếu Embedding",
+        "Groq thiếu Embedding"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s14",
+      "text": "[cheerfully] Lưu video này để thử Open Notebook sau, rồi follow để xem thêm các tool self-host và workflow AI nhé anh em!",
+      "headline": "Lưu lại để thử",
+      "lines": [
+        "Save video",
+        "Follow để xem tiếp"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

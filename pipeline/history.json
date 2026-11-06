@@ -259,5 +259,16 @@
     "built": "claude",
     "costUsd": 3.2546467999999997,
     "reviewIssues": 8
+  },
+  {
+    "slug": "open-notebook-tu-host-notebooklm",
+    "topic": "Open Notebook: tự host NotebookLM của riêng bạn, chọn model tùy ý và tạo podcast từ tài liệu",
+    "format": "brief",
+    "date": "2026-11-06",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 1.0870339000000002,
+    "reviewIssues": 6
   }
 ]
