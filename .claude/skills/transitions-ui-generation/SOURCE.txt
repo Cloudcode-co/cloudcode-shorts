@@ -1,0 +1,2 @@
+Source: github.com/jakubantalik/transitions.dev @ e3aefb5 (skills/), unmodified.
+Local change: description frontmatter quoted (upstream YAML had unquoted ": " and failed to parse).

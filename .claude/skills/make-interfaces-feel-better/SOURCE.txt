@@ -1,0 +1,1 @@
+Source: github.com/jakubkrehel/make-interfaces-feel-better @ 35545ea, unmodified.

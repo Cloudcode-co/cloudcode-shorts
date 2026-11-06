@@ -1,0 +1,1 @@
+Source: github.com/jakubantalik/transitions.dev @ e3aefb5 (skills/), unmodified.

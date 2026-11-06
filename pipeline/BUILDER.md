@@ -134,6 +134,24 @@ Load these when the video calls for them:
   match, and the drop carries the biggest moment.
 - `edit-styles`: when the art direction is `pastel-3d-explainer` or
   `breakcore-swiss`; read only the file for that style.
+- `transitions-dev`: ready-made motion for explainer parts: a number popping in
+  (`02`), text swaps and morphs (`04`, `33`, `34`), a staggered text reveal
+  (`18`), a spinning counter (`26`), an AI "thinking" line and streaming text
+  (`28`–`30`), a matrix dot loader (`31`), a donut chart (`35`). Read only the
+  file you need. They are CSS transitions for the web: keep their tokens
+  (durations, distances, curves, stagger) and rebuild them with
+  `interpolate`/`spring` on the frame. Never CSS transitions, keyframes or
+  timers, which do not render. Use them on shots that hold, not in a hard-cut
+  edit like breakcore.
+- `transitions-ui-generation`: when the topic is AI building or writing
+  something, show it being generated: a dotted wireframe, glyphs traced in
+  dots, an image going sketch, halftone, then photo. Its JS runtime does not
+  run in a render; rebuild the stages per frame.
+- `transitions-polish`: before the last QA round, tune durations, distances,
+  stagger and easing against its token scale.
+- `make-interfaces-feel-better`: typography details (tabular numbers on every
+  counter, optical alignment, text wrapping) and layered shadows and borders on
+  cards and screens.
 - `review-animations`: before the last QA round, review your motion against it
   and fix what it flags.
 - `archify`: when a scene explains how something is put together or happens

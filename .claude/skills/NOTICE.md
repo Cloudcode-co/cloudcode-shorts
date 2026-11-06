@@ -22,3 +22,7 @@ project's videos. Each folder keeps its source's license.
 | archify | https://github.com/tt-a1i/archify, copied from the maintainer's local `~/.agents/skills/archify` (runtime files only) | LICENSE (Apache-2.0) and LICENSE-MIT in the folder |
 | generative-music-composer | https://github.com/4444j99/a-i--skills/tree/HEAD/distributions/claude/skills/generative-music-composer | SKILL.md says MIT; repo LICENSE (Apache-2.0) copied into the folder |
 | music-composition | https://github.com/SJY051/music-composition (commit 07cecf9); SKILL.md, KNOWN-LIMITATIONS.md, references/, assets/, scripts/ copied unmodified, benchmarks and maintainer docs left out | LICENSE.md in the folder: CC BY 4.0 for the text, MIT for scripts/. Based on "Music Composition Agent Skill", licensed under CC BY 4.0 |
+| transitions-dev | https://github.com/jakubantalik/transitions.dev (commit e3aefb5, skills/), copied from the maintainer's local `~/.agents/skills` | LICENSE.txt (Transitions.dev License) in the folder |
+| transitions-polish | https://github.com/jakubantalik/transitions.dev (commit e3aefb5, skills/) | LICENSE.txt (Transitions.dev License) in the folder |
+| transitions-ui-generation | https://github.com/jakubantalik/transitions.dev (commit e3aefb5, skills/); description frontmatter quoted so the YAML parses | LICENSE.txt (Transitions.dev License) in the folder |
+| make-interfaces-feel-better | https://github.com/jakubkrehel/make-interfaces-feel-better (commit 35545ea) | LICENSE (MIT) in the folder |

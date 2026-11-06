@@ -418,6 +418,16 @@ const rules =
   `never like reading a web page. Short sentences. Questions to the viewer. Mix in ElevenLabs v3 audio tags ` +
   `in square brackets, only these: ${TAGS.map((t) => `[${t}]`).join(" ")}, at most one or two per line.\n` +
   `${format.shape} (About 14 Vietnamese words per 5 seconds spoken.) ` +
+  `
+Retention (the shape above wins where they differ): scene 1 lands in under 15 words with the most ` +
+  `specific, surprising thing in the research (a number, a contrast with the usual way, a common mistake), ` +
+  `starting mid-thought: no greeting, no "hôm nay", no "trong video này". Every line earns its place. Explain ` +
+  `how it works, not only that it works, and set the usual way against this one ("Thường thì... Còn X thì..."). ` +
+  `Glue lines with "tức là", "nên", "vì vậy" so each follows from the last. Never: three-beat loops ` +
+  `("Nhanh. Gọn. Rẻ."), "X? Y." question-answer lists, meta lines ("cùng tìm hiểu", "nhưng có một twist"), ` +
+  `hype words ("bá đạo", "đỉnh của chóp", "thay đổi cuộc chơi") or made-up scenes ("hãy tưởng tượng"). ` +
+  `Where the shape leaves room, the last line echoes the hook so the video loops.
+` +
   (pages.length
     ? `The video is about what the web pages show: name the site or product as it names itself and say ` +
       `plainly what it offers and for whom. Prices, limits and specs only exactly as the pages write them. ` +
