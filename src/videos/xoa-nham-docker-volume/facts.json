@@ -1,0 +1,136 @@
+{
+  "topic": "Xóa nhầm Docker volume production",
+  "date": "2026-11-07",
+  "repos": [],
+  "notes": null,
+  "memes": [
+    {
+      "scene": "s1",
+      "query": "cat typing laptop",
+      "file": "memes/cat-typing-laptop-giphy-WUlplcMpOCEmTGBtBW.gif",
+      "id": "giphy-WUlplcMpOCEmTGBtBW",
+      "title": "Black Cat Sticker by TRU LUV",
+      "page": "https://giphy.com/stickers/selfcare-the-app-tru-luv-WUlplcMpOCEmTGBtBW",
+      "author": "TRULUV",
+      "width": 500,
+      "height": 343,
+      "frames": 5,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRleDNnYmdreDNoNHJvb3dsZmU4MWtwdzhuZjBjZWZxMDN5bzJqODdjaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/WUlplcMpOCEmTGBtBW/giphy.gif"
+    },
+    {
+      "scene": "s2",
+      "query": "cat dancing",
+      "file": "memes/cat-dancing-giphy-ThtjSltXVCvzkuyMZH.gif",
+      "id": "giphy-ThtjSltXVCvzkuyMZH",
+      "title": "",
+      "page": "https://giphy.com/stickers/kforce-k-force-yokoyure-ThtjSltXVCvzkuyMZH",
+      "author": "k_force",
+      "width": 480,
+      "height": 480,
+      "frames": 29,
+      "link": "https://media3.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlZzlwYXZtbmpzNjk4MDBxY3F6am92MDV2bzBwczFleWs5bWc5dWYycyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ThtjSltXVCvzkuyMZH/giphy.gif"
+    },
+    {
+      "scene": "s3",
+      "query": "cat panic",
+      "file": "memes/cat-panic-giphy-eAot8Ldr85y3peseC3.gif",
+      "id": "giphy-eAot8Ldr85y3peseC3",
+      "title": "Happy Cat Sticker",
+      "page": "https://giphy.com/stickers/cat-kitten-yippee-eAot8Ldr85y3peseC3",
+      "author": "michael_lurz_xr",
+      "width": 498,
+      "height": 486,
+      "frames": 120,
+      "link": "https://media0.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlOGNtcW9hd2diajZsY3g3eXEzbHAxcTBzODlsZWd4Y2I1YXZkNDN0ayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/eAot8Ldr85y3peseC3/giphy.gif"
+    },
+    {
+      "scene": "s4",
+      "query": "shocked cat",
+      "file": "memes/shocked-cat-giphy-crPtfTE2O00qrDgmm7.gif",
+      "id": "giphy-crPtfTE2O00qrDgmm7",
+      "title": "Sticker ねこ Sticker by Japan",
+      "page": "https://giphy.com/stickers/japan-sticker-neko-meme-mi-mu-crPtfTE2O00qrDgmm7",
+      "author": "japan",
+      "width": 480,
+      "height": 301,
+      "frames": 198,
+      "link": "https://media1.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlMG1icjU5OG0xam16YXM0bXNmN3h3cGxpcWR1NnM2ZWxrenpxZTRsNCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/crPtfTE2O00qrDgmm7/giphy.gif"
+    },
+    {
+      "scene": "s5",
+      "query": "cat crying",
+      "file": "memes/cat-crying-giphy-Xr9TlAqw3S7VPOrftK.gif",
+      "id": "giphy-Xr9TlAqw3S7VPOrftK",
+      "title": "Happy Cat Sticker",
+      "page": "https://giphy.com/stickers/beauty-crying-cry-Xr9TlAqw3S7VPOrftK",
+      "author": "mrcartes",
+      "width": 480,
+      "height": 397,
+      "frames": 2,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlbGdpeHVpOGF6YW04ZW9paDhrZDNwZHE1OHkzeTlwMDZxdjFtajQ1eCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/Xr9TlAqw3S7VPOrftK/giphy.gif"
+    },
+    {
+      "scene": null,
+      "query": "cat shocked face",
+      "file": "memes/cat-shocked-face-giphy-E4RPAfBUJFofU5CoEP.gif",
+      "id": "giphy-E4RPAfBUJFofU5CoEP",
+      "title": "Tuxedo Cat Cats Sticker",
+      "page": "https://giphy.com/stickers/transparent-E4RPAfBUJFofU5CoEP",
+      "author": "mauriandcucumbers",
+      "width": 480,
+      "height": 480,
+      "frames": 2,
+      "link": "https://media1.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlcTh0M2hsZ2J5N3dqdW80dzU0ZWRzZ3A4eHBqMnhhMGE1OHRoczBoayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/E4RPAfBUJFofU5CoEP/giphy.gif"
+    }
+  ],
+  "images": [
+    {
+      "scene": "s1",
+      "query": "bedroom at night computer",
+      "file": "images/bedroom-at-night-computer-pixabay-5884606.jpg",
+      "sticker": false,
+      "id": "pixabay-5884606",
+      "page": "https://pixabay.com/photos/christmas-tree-christmas-bokeh-5884606/",
+      "author": "stewie012",
+      "tags": "christmas tree, christmas, bokeh, christmas lights, holidays, december, decoration, christmas decoration, christmas tree, christmas tree, christmas tree, christmas tree, christmas tree, christmas, christmas, christmas, christmas, christmas lights",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "dark bedroom laptop night",
+      "file": "images/dark-bedroom-laptop-night-pixabay-10528056.jpg",
+      "sticker": false,
+      "id": "pixabay-10528056",
+      "page": "https://pixabay.com/photos/milky-way-starry-sky-night-sky-10528056/",
+      "author": "Lanius",
+      "tags": "milky way, starry sky, night sky, astronomy, space, galaxy, dark sky, light pollution, photography, black, radiant light, stargazing, mountains, horizon, hiking, astrophotography, night, tranquil, awe, nature, peace",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "programmer laptop dark room",
+      "file": "images/programmer-laptop-dark-room-pixabay-1568556.jpg",
+      "sticker": false,
+      "id": "pixabay-1568556",
+      "page": "https://pixabay.com/photos/code-program-programming-language-1568556/",
+      "author": "markusspiske",
+      "tags": "code, program, programming language, web, source code, networking, screen, system, one, numbers, crash, zero, scripting language, functional, hacker, binary, information superhighway, monitor, file type, programming, binary code, keyboard, network, code, code, code, program, programming language, hacker, hacker, hacker, programming, programming, programming, programming, programming",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "developer working late at night laptop",
+      "file": "images/developer-working-late-at-night-laptop-pixabay-2583442.jpg",
+      "sticker": false,
+      "id": "pixabay-2583442",
+      "page": "https://pixabay.com/photos/girl-woman-office-work-coffee-2583442/",
+      "author": "StockSnap",
+      "tags": "girl, woman, office, work, coffee, laptop, computer, business, busy, windows, office, office, office, office, office, work, business",
+      "width": 853,
+      "height": 1280
+    }
+  ]
+}

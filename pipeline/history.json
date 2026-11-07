@@ -292,5 +292,16 @@
     "built": "claude",
     "costUsd": 0.7341303,
     "reviewIssues": 3
+  },
+  {
+    "slug": "xoa-nham-docker-volume",
+    "topic": "Xóa nhầm Docker volume production",
+    "format": "meme",
+    "date": "2026-11-07",
+    "direction": "meme-skit",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 0.45287330000000003,
+    "reviewIssues": 8
   }
 ]

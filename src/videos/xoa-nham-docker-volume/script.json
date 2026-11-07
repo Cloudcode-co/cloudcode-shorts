@@ -1,0 +1,111 @@
+{
+  "slug": "xoa-nham-docker-volume",
+  "format": "meme",
+  "topic": "Xóa nhầm Docker volume production",
+  "title": "Dev xóa volume Docker lúc 3 giờ sáng",
+  "caption": "Tưởng xóa cache, ai ngờ xóa luôn dữ liệu khách hàng. Anh em từng toang kiểu này chưa?",
+  "hashtags": [
+    "#Docker",
+    "#DevOps",
+    "#SelfHosting",
+    "#CongNghe",
+    "#LapTrinh"
+  ],
+  "musicPrompt": "Catchy meme track with playful bouncy intro, rising tech panic, sudden dramatic drop, chaotic comedic ending, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "bouncy",
+        "playful",
+        "minimal beat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "glitchy",
+        "faster rhythm"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "big drop",
+        "dramatic",
+        "chaotic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "comedic",
+        "abrupt stop",
+        "dark humor"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Dev 3 giờ sáng dọn Docker, thấy volume cũ nằm chình ình",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Nghĩ bụng: xóa cache thôi, mai hệ thống chạy mượt hơn",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Gõ nhầm docker volume rm production_db, terminal vẫn hỏi xác nhận",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Dev bấm yes vì tưởng yes là viết tắt của yên tâm",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Mười giây sau: backup cũng nằm chung volume vừa bị xóa",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying",
+      "place": "bedroom at night computer"
+    }
+  ]
+}
