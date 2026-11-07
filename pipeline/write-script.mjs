@@ -470,7 +470,23 @@ for (const s of script.scenes) {
     if (!TAGS.includes(tag.slice(1, -1))) s.text = s.text.replace(tag, "");
   }
   s.text = s.text.replace(/\s{2,}/g, " ").trim();
-  if (s.commands.some((c) => /[^\x20-\x7e]/.test(c))) problems.push(`${s.id}: non-ascii command`);
+  // Models slip typography into commands (curly quotes, dashes, a no-break
+  // space): put the ASCII back, and drop a command that still isn't a command
+  // rather than the whole video.
+  s.commands = s.commands
+    .map((c) =>
+      c
+        .replace(/[‘’]/g, "'")
+        .replace(/[“”]/g, '"')
+        .replace(/[–—]/g, "-")
+        .replace(/…/g, "...")
+        .replace(/[  ]/g, " "),
+    )
+    .filter((c) => {
+      const ascii = !/[^\x20-\x7e]/.test(c);
+      if (!ascii) console.log(`${s.id}: dropped a command with non-ASCII text: ${c}`);
+      return ascii;
+    });
 }
 const words = script.scenes.reduce((n, s) => n + s.text.replace(/\[[^\]]+\]/g, "").split(/\s+/).length, 0);
 if (words < format.words[0] || words > format.words[1]) problems.push(`${words} spoken words`);
