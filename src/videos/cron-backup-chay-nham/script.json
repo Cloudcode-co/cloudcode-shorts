@@ -1,0 +1,111 @@
+{
+  "slug": "cron-backup-chay-nham",
+  "format": "meme",
+  "topic": "Cron backup chạy nhầm giờ",
+  "title": "Khi cron backup có chính kiến riêng",
+  "caption": "Cron chạy đúng lịch, chỉ là lịch của nó hơi khác. Anh em từng bị chưa?",
+  "hashtags": [
+    "#selfhosting",
+    "#homelab",
+    "#devops",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Bouncy tech meme track with ticking clock, playful synth bass, rising panic, sudden comedic stop, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "bouncy",
+        "playful synth",
+        "light groove"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "ticking clock",
+        "rising tension",
+        "quirky"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "big drop",
+        "panic energy",
+        "comedic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "sudden stop",
+        "muted comedy",
+        "short tail"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Dev tự tin cấu hình cron backup server trước khi đi ngủ",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Backup chạy mỗi ngày lúc hai giờ sáng",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Sáng hôm sau mở log thấy backup chạy mỗi phút",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Ổ cứng đầy, server tự backup luôn cả đống file backup",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Dev xóa cron, rồi phát hiện cron nằm trong container khác",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat facepalm",
+      "place": "bedroom at night computer"
+    }
+  ]
+}

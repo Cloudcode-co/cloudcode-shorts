@@ -314,5 +314,16 @@
     "built": "claude",
     "costUsd": 0.8920861,
     "reviewIssues": 6
+  },
+  {
+    "slug": "cron-backup-chay-nham",
+    "topic": "Cron backup chạy nhầm giờ",
+    "format": "chat",
+    "date": "2026-11-08",
+    "direction": "chat-thread",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.808316,
+    "reviewIssues": 3
   }
 ]
