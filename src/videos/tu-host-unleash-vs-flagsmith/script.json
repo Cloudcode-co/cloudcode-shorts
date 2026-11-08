@@ -1,0 +1,220 @@
+{
+  "slug": "tu-host-unleash-vs-flagsmith",
+  "format": "explainer",
+  "topic": "Tự host Unleash trên VPS: Feature Flags mã nguồn mở thay thế LaunchDarkly, so sánh với Flagsmith",
+  "title": "Feature Flags tự host thay LaunchDarkly được không?",
+  "caption": "Tự host Unleash trên VPS: flag chạy cục bộ, dữ liệu ở lại app. So sánh Flagsmith? Nguồn chưa đủ để chốt.",
+  "hashtags": [
+    "#Unleash",
+    "#FeatureFlags",
+    "#DevOpsVPS",
+    "#LapTrinh",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Energetic modern tech instrumental, punchy electronic drums, warm synth bass, subtle server-room ambience, rising tension for deployment, confident outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "punchy",
+        "modern tech"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady groove",
+        "rising tension",
+        "electronic pulse",
+        "focused"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "big drop",
+        "confident",
+        "bright synths",
+        "driving beat"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "resolved",
+        "light groove",
+        "optimistic"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/Unleash/unleash",
+    "https://docs.getunleash.io/deploy/getting-started",
+    "https://docs.getunleash.io/deploy/configuring-unleash",
+    "https://docs.getunleash.io/get-started/unleash-overview#system-overview"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] LaunchDarkly cần cloud, còn Unleash chạy thẳng trên VPS của anh em được không?",
+      "headline": "Cloud hay tự host?",
+      "lines": [
+        "Unleash trên VPS",
+        "Thay LaunchDarkly?",
+        ""
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Unleash là nền tảng feature management mã nguồn mở, viết bằng TypeScript, giấy phép AGPL-3.0. Tức là mình tự quản lý hệ thống, dữ liệu nằm trong hạ tầng của mình.",
+      "headline": "Mã nguồn mở, tự quản lý",
+      "lines": [
+        "TypeScript",
+        "AGPL-3.0",
+        "Self-hosted"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": "developer working late desk"
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Thường thì bật flag là gọi dịch vụ bên ngoài. Còn Unleash backend SDK tải cấu hình, cache trong memory, rồi đánh giá ngay trong ứng dụng.",
+      "headline": "Flag chạy ở đâu?",
+      "lines": [
+        "Backend SDK",
+        "Cache trong memory",
+        "Đánh giá cục bộ"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Vì vậy độ trễ chủ yếu là lúc cấu hình mới truyền xuống, thường vài giây và có thể chỉnh. Dữ liệu người dùng không bị gửi lên Unleash server.",
+      "headline": "Dữ liệu ở lại app",
+      "lines": [
+        "Độ trễ: thường vài giây",
+        "User data không rời app",
+        ""
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Bật tắt theo user hoặc segment, rollout dần, canary, A/B testing, kill switch. Không cần redeploy mỗi lần đổi chiến lược phát hành.",
+      "headline": "Đổi flag, không redeploy",
+      "lines": [
+        "Gradual rollout",
+        "Canary",
+        "Kill switch",
+        "A/B testing"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": "developer testing software screen"
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Cài nhanh bằng Docker Compose. Clone repository, chạy đúng ba lệnh này trên máy hoặc VPS.",
+      "headline": "Khởi chạy bằng Compose",
+      "lines": [
+        "Docker Compose",
+        "Server và database cùng chạy"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Nhưng nhớ: Unleash bắt buộc PostgreSQL. Bản 8.x cần PostgreSQL 15 trở lên; MySQL và MariaDB không được hỗ trợ chính thức.",
+      "headline": "PostgreSQL là bắt buộc",
+      "lines": [
+        "Unleash 8.x: PostgreSQL 15+",
+        "MySQL: không hỗ trợ chính thức",
+        "MariaDB: không hỗ trợ chính thức"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": "server room racks"
+    },
+    {
+      "id": "s8",
+      "text": "[warmly] Đăng nhập mặc định là admin và unleash4all, nhưng đổi mật khẩu khi rời môi trường local. VPS công khai còn cần HTTPS, reverse proxy, firewall, backup PostgreSQL.",
+      "headline": "Đừng bê nguyên local lên VPS",
+      "lines": [
+        "Đổi mật khẩu mặc định",
+        "HTTPS + firewall",
+        "Backup PostgreSQL"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[curious] Còn Flagsmith thì sao? Nguồn nghiên cứu này không có so sánh cụ thể về tính năng, giá hay vận hành, nên chưa thể chốt bên nào hơn. Chỉ có thể nói Unleash mạnh ở backend evaluation cục bộ.",
+      "headline": "Unleash hay Flagsmith?",
+      "lines": [
+        "Chưa đủ dữ liệu so sánh",
+        "Unleash: backend đánh giá cục bộ",
+        ""
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Anh em lưu video để thử sau. Follow để xem tiếp phần HTTPS, backup và triển khai Unleash production.",
+      "headline": "Tự host được, tự vận hành nhé",
+      "lines": [
+        "Lưu video để thử sau",
+        "Follow để xem phần tiếp"
+      ],
+      "commands": [],
+      "repos": [
+        "Unleash/unleash"
+      ],
+      "footage": ""
+    }
+  ]
+}

@@ -303,5 +303,16 @@
     "built": "claude",
     "costUsd": 0.45287330000000003,
     "reviewIssues": 8
+  },
+  {
+    "slug": "tu-host-unleash-vs-flagsmith",
+    "topic": "Tự host Unleash trên VPS: Feature Flags mã nguồn mở thay thế LaunchDarkly, so sánh với Flagsmith",
+    "format": "quiz",
+    "date": "2026-11-08",
+    "direction": "quiz-show",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.8920861,
+    "reviewIssues": 6
   }
 ]
