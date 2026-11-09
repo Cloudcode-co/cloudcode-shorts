@@ -1,0 +1,228 @@
+{
+  "slug": "tu-host-kept-vps-ai-inventory",
+  "format": "explainer",
+  "topic": "Tự host Kept trên VPS: quản lý mọi đồ đạc trong nhà bằng AI, thay thế Snipe-IT",
+  "title": "VPS 1 GB RAM quản lý cả kho đồ bằng AI?",
+  "caption": "Kept biến VPS thành inventory gia đình: QR, bản đồ 3D, AI và dữ liệu tự quản. Lưu lại để thử.",
+  "hashtags": [
+    "#KeptInventory",
+    "#SelfHosting",
+    "#MCP",
+    "#CongNghe",
+    "#AI"
+  ],
+  "musicPrompt": "Lively modern tech instrumental, warm synth pulse, subtle digital textures, rising tension, confident electronic groove, clean outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "digital pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady groove",
+        "rising energy",
+        "tech minimal"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "big drop",
+        "impressed",
+        "futuristic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm",
+        "confident",
+        "soft landing"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/keptinventory/kept",
+    "https://keptinventory.info/install/compose/",
+    "https://keptinventory.info/install/https/",
+    "https://keptinventory.info/admin/backups/",
+    "https://keptinventory.info/users/mcp-clients/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] VPS chỉ 1 GB RAM, vẫn quản lý được cả kho đồ bằng AI?",
+      "headline": "1 GB RAM vẫn đủ?",
+      "lines": [
+        "Kept trên VPS",
+        "1 GB RAM, 1 CPU"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì anh em dùng Snipe-IT để theo dõi tài sản. Còn Kept hướng vào nhà, gara, kho, và mọi đồ vật bên trong.",
+      "headline": "Inventory cho cả nhà",
+      "lines": [
+        "Nhà",
+        "Gara",
+        "Kho"
+      ],
+      "commands": [],
+      "repos": [
+        "keptinventory/kept"
+      ],
+      "footage": "developer organizing home storage"
+    },
+    {
+      "id": "s3",
+      "text": "[cheerfully] Không chỉ ghi tên đồ. Kept lưu vị trí, hộp, ảnh, giấy tờ, giao dịch, tag, số lượng và lịch sử; tức là tìm lại đồ có ngữ cảnh.",
+      "headline": "Không chỉ danh sách",
+      "lines": [
+        "Ảnh, giấy tờ, bảo hành",
+        "Vị trí, hộp, lịch sử"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Mỗi hộp có ID ngắn và QR. In nhãn, quét một cái, mở thẳng hộp đó; nên không phải nhớ đồ nằm đâu.",
+      "headline": "Quét QR mở đúng hộp",
+      "lines": [
+        "ID ngắn",
+        "QR cho từng hộp"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Bản đồ 3D hiển thị tầng, phòng, kệ, hộp; graph lại cho thấy quan hệ giữa địa điểm và đồ vật.",
+      "headline": "Bản đồ 3D của nhà",
+      "lines": [
+        "Tầng",
+        "Phòng",
+        "Kệ và hộp"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[curious] Anh em chụp đồ hoặc hóa đơn, AI đề xuất thông tin, nhưng thay đổi vẫn phải chờ mình xác nhận.",
+      "headline": "AI đề xuất, anh em duyệt",
+      "lines": [
+        "OpenAI",
+        "Anthropic",
+        "Google, Ollama"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] MCP cho phép hỏi vị trí cái khoan, rồi thêm, di chuyển hoặc sửa đồ nếu cấp quyền. Endpoint nằm ở địa chỉ Kept cộng `/mcp`.",
+      "headline": "Hỏi kho đồ bằng ngôn ngữ tự nhiên",
+      "lines": [
+        "Read hoặc read-write",
+        "Không có công cụ xóa"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Cài nhanh bằng Docker Compose. Kept chạy cùng PostgreSQL 18 và pgvector; bắt đầu bằng đúng bốn lệnh này.",
+      "headline": "Cài bằng Docker Compose",
+      "lines": [
+        "Docker Compose v2",
+        "Cổng mặc định: 8080"
+      ],
+      "commands": [
+        "mkdir kept && cd kept",
+        "curl -fsSLO https://raw.githubusercontent.com/keptinventory/kept/v1.14.6/compose.yaml",
+        "docker compose run --rm init",
+        "docker compose up -d"
+      ],
+      "repos": [
+        "keptinventory/kept"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Sau lần chạy đầu, giữ recovery kit ngoài server. Bật HTTPS nếu cần camera, app offline, push, location hoặc thao tác chứa secret.",
+      "headline": "Đừng bỏ qua HTTPS",
+      "lines": [
+        "Recovery kit ngoài server",
+        "HTTPS cho tính năng nhạy cảm"
+      ],
+      "commands": [
+        "docker compose exec kept kept admin recovery-kit"
+      ],
+      "repos": [],
+      "footage": "server room security monitoring"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Dữ liệu không rời máy chủ nếu anh em chưa bật; telemetry tắt, provider AI tự chọn. Backup nightly mã hóa bằng restic, lưu sang disk khác, S3 hoặc SFTP.",
+      "headline": "Dữ liệu vẫn trong tay mình",
+      "lines": [
+        "Không telemetry",
+        "Backup mã hóa",
+        "Restic, S3, SFTP"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[cheerfully] Điện thoại còn chụp, quét, tìm kiếm offline; nhắc hạn bảo hành, bảo trì, khoản mượn và tồn kho thấp qua app, email, push, ntfy, Telegram hoặc calendar.",
+      "headline": "Quản lý sau khi nhập kho",
+      "lines": [
+        "Chụp và quét",
+        "Nhắc bảo hành",
+        "Theo dõi khoản mượn"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s12",
+      "text": "[laughs] Vậy anh em còn nhớ đồ nằm đâu không? Lưu video này để thử Kept sau, và follow để xem thêm các kèo self-hosting thực tế.",
+      "headline": "Lưu lại để thử",
+      "lines": [
+        "Kept trên VPS",
+        "Follow để xem thêm"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

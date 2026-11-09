@@ -325,5 +325,16 @@
     "built": "claude",
     "costUsd": 0.808316,
     "reviewIssues": 3
+  },
+  {
+    "slug": "tu-host-kept-vps-ai-inventory",
+    "topic": "Tự host Kept trên VPS: quản lý mọi đồ đạc trong nhà bằng AI, thay thế Snipe-IT",
+    "format": "brief",
+    "date": "2026-11-09",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 1.0734054,
+    "reviewIssues": 6
   }
 ]
