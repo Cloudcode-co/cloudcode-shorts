@@ -1,0 +1,222 @@
+{
+  "slug": "tu-host-rivet-vps",
+  "format": "explainer",
+  "topic": "Tự host Rivet trên VPS: orchestration cho AI agent thay Temporal",
+  "title": "Agent không cần Temporal, dùng Rivet được không?",
+  "caption": "Rivet biến mỗi AI agent thành Actor có state, SQLite, WebSocket và lịch chạy. Tự host bằng Docker Compose trên VPS.",
+  "hashtags": [
+    "#Rivet",
+    "#AIAgent",
+    "#SelfHosting",
+    "#LapTrinh",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Energetic modern electronic tech instrumental, warm synth bass, subtle glitch textures, rising arpeggios, confident tutorial momentum, clean outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "digital pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "driving synth",
+        "technical"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "big drop",
+        "impressed",
+        "wide electronic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "steady",
+        "warm",
+        "clean resolution"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/rivet-dev/rivet",
+    "https://github.com/Inomy-shop/allen",
+    "https://rivet.dev/docs/deploy/self-host/control-plane/",
+    "https://rivet.dev/docs/deploy/self-host/nodes/docker-compose/",
+    "https://rivet.dev/actors/docs/quickstart/backend/",
+    "https://rivet.dev/docs/jwt/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Agent không cần Temporal, vẫn có state bền vững bằng Rivet?",
+      "headline": "Agent không cần Temporal?",
+      "lines": [
+        "Rivet Actors",
+        "State bền vững"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì agent chạy trong sandbox, chờ model trả lời nhưng vẫn chiếm cả môi trường. Còn Rivet chạy loop bên ngoài sandbox, chỉ gọi sandbox khi cần thực thi code.",
+      "headline": "Tách phần điều khiển khỏi sandbox",
+      "lines": [
+        "Loop bên ngoài sandbox",
+        "Sandbox khi cần"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": "developer working late"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Mỗi agent trở thành một Actor sống lâu: có state trong RAM, SQLite, WebSocket và scheduling. Tức là memory, realtime và lịch chạy nằm cùng một đơn vị.",
+      "headline": "Mỗi agent là một Actor",
+      "lines": [
+        "RAM state",
+        "SQLite",
+        "WebSocket",
+        "Scheduling"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Anh em có thể tạo Actor cho từng agent, user, session hoặc tenant. Khi idle, Actor hibernate; có request thì thức dậy, dữ liệu vẫn còn.",
+      "headline": "Hibernate khi không dùng",
+      "lines": [
+        "Một Actor cho mỗi agent",
+        "Idle: hibernate",
+        "Request: thức dậy"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": "server room lights"
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Dữ liệu durable nằm trên object storage. Rivet không cần database hay message bus riêng; các control plane instance tìm nhau qua bucket.",
+      "headline": "S3 là dependency chính",
+      "lines": [
+        "Object storage",
+        "Không database riêng",
+        "Không message bus"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Self-host gồm bốn phần: control plane, disk riêng cho từng instance, một bucket, rồi các node chạy app. Một instance để thử; production cần từ ba instance.",
+      "headline": "Bốn phần cần chuẩn bị",
+      "lines": [
+        "Control plane",
+        "Disk riêng",
+        "Bucket",
+        "Nodes"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Với node Node.js, cài RivetKit trước. Sau đó chạy server local bằng đúng lệnh này.",
+      "headline": "Cài RivetKit",
+      "lines": [
+        "Node.js 22 trở lên"
+      ],
+      "commands": [
+        "npm install rivetkit",
+        "npx tsx --watch index.ts"
+      ],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[excited] Trên VPS, node mở kết nối outbound tới control plane, nên app container không cần publish port. Port 6420 dành cho node; 6421 giữ trong private network.",
+      "headline": "Node không cần mở port",
+      "lines": [
+        "Outbound tới control plane",
+        "6420: node",
+        "6421: private network"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": "developer terminal VPS"
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Compose cần stop_grace_period 60 giây, vì Actor có tối đa 15 giây để lưu state. Chạy xong, kiểm tra service bằng hai lệnh này.",
+      "headline": "Đừng để Actor mất state",
+      "lines": [
+        "stop_grace_period: 60s",
+        "Actor lưu state trước khi dừng"
+      ],
+      "commands": [
+        "docker compose up -d",
+        "docker compose ps"
+      ],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Nhớ: Compose không có autoscaler, nhiều replica vẫn dùng chung CPU và RAM một host. Đừng đưa RIVET_ADMIN_TOKEN cho client; dùng scoped token. Lưu video để thử sau, follow để xem thêm cách self-host agent.",
+      "headline": "Nhớ giới hạn vận hành",
+      "lines": [
+        "Compose không autoscaler",
+        "Không đưa RIVET_ADMIN_TOKEN",
+        "Scoped token"
+      ],
+      "commands": [],
+      "repos": [
+        "rivet-dev/rivet"
+      ],
+      "footage": ""
+    }
+  ]
+}

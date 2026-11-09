@@ -28,8 +28,9 @@ import { video as v24 } from "./tu-host-concat-video-editor/Video";
 import { video as v25 } from "./tu-host-kept-vps-ai-inventory/Video";
 import { video as v26 } from "./tu-host-opengym-thay-the-hevy/Video";
 import { video as v27 } from "./tu-host-peach-metadata-manager/Video";
-import { video as v28 } from "./tu-host-unleash-vs-flagsmith/Video";
-import { video as v29 } from "./voicestudio-clone-giong-local/Video";
-import { video as v30 } from "./xoa-nham-docker-volume/Video";
+import { video as v28 } from "./tu-host-rivet-vps/Video";
+import { video as v29 } from "./tu-host-unleash-vs-flagsmith/Video";
+import { video as v30 } from "./voicestudio-clone-giong-local/Video";
+import { video as v31 } from "./xoa-nham-docker-volume/Video";
 
-export const VIDEOS: VideoDef[] = [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30];
+export const VIDEOS: VideoDef[] = [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31];

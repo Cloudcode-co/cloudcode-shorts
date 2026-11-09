@@ -336,5 +336,16 @@
     "built": "claude",
     "costUsd": 1.0734054,
     "reviewIssues": 6
+  },
+  {
+    "slug": "tu-host-rivet-vps",
+    "topic": "Tự host Rivet trên VPS: orchestration cho AI agent thay Temporal",
+    "format": "news",
+    "date": "2026-11-09",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.6721656,
+    "reviewIssues": 1
   }
 ]
