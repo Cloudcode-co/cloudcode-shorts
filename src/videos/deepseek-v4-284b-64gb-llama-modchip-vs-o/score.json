@@ -1,0 +1,98 @@
+{
+  "style": "synthwave",
+  "bpm": 110,
+  "key": "F#",
+  "mode": "minor",
+  "sections": [
+    {
+      "name": "Hook",
+      "energy": 0.45,
+      "chords": [
+        1,
+        6,
+        3,
+        7
+      ],
+      "drums": "none",
+      "lead": false
+    },
+    {
+      "name": "Build",
+      "energy": 0.68,
+      "chords": [
+        1,
+        4,
+        6,
+        5
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Reveal",
+      "energy": 0.95,
+      "chords": [
+        1,
+        6,
+        3,
+        7
+      ],
+      "drums": "full",
+      "lead": true
+    },
+    {
+      "name": "Outro",
+      "energy": 0.35,
+      "chords": [
+        6,
+        7,
+        1,
+        1
+      ],
+      "drums": "light",
+      "lead": false
+    }
+  ],
+  "motif": [
+    {
+      "beat": 0,
+      "length": 0.5,
+      "degree": 1
+    },
+    {
+      "beat": 1.5,
+      "length": 0.5,
+      "degree": 2
+    },
+    {
+      "beat": 2,
+      "length": 0.5,
+      "degree": 3
+    },
+    {
+      "beat": 3.5,
+      "length": 0.5,
+      "degree": 5
+    },
+    {
+      "beat": 4,
+      "length": 0.5,
+      "degree": 6
+    },
+    {
+      "beat": 5.5,
+      "length": 0.5,
+      "degree": 5
+    },
+    {
+      "beat": 6,
+      "length": 0.5,
+      "degree": 3
+    },
+    {
+      "beat": 7.5,
+      "length": 0.5,
+      "degree": 1
+    }
+  ]
+}

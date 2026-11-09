@@ -1,0 +1,208 @@
+{
+  "slug": "deepseek-v4-284b-64gb-llama-modchip-vs-o",
+  "format": "explainer",
+  "topic": "Chạy DeepSeek-V4-Flash 284B trên Linux chỉ với 64GB RAM: llama-modchip vs Ollama",
+  "title": "284B chạy được trên 64GB RAM thật à?",
+  "caption": "DeepSeek-V4-Flash 284B chạy CPU Linux 64GB, nhưng Ollama lại không đọc được Fractal-64.",
+  "hashtags": [
+    "#DeepSeekV4",
+    "#llamamodchip",
+    "#OllamaLinux",
+    "#LapTrinh",
+    "#CongNghe"
+  ],
+  "musicPrompt": "Futuristic cyberpunk instrumental, pulsing synth bass, technical tension, rising arpeggios, dramatic reveal, warm outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "technical"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "pulsing synth",
+        "focused"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "big drop",
+        "impressed",
+        "futuristic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "steady",
+        "resolved"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/synchopate/llama-modchip",
+    "https://github.com/Sethuram2003/MCP-ollama_server",
+    "https://ollama.com/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] 284B tham số, vẫn chạy Linux 64GB RAM, không cần GPU?",
+      "headline": "284B trên 64GB RAM",
+      "lines": [
+        "284.33B tổng tham số",
+        "0 GPU"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Bản này khác Ollama thông thường. DeepSeek-V4-Flash có 13.17B tham số active, còn tổng là 284.33B.",
+      "headline": "Không phải Ollama thường",
+      "lines": [
+        "13.17B active",
+        "284.33B total"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Thường thì checkpoint lớn hơn RAM khả dụng sẽ gây swap hoặc OOM. Còn Fractal-64 nén model xuống 56.56 GiB, hiệu dụng 1.71 bpw, nên vừa máy Linux 64GB.",
+      "headline": "Fractal-64 nén còn 56.56 GiB",
+      "lines": [
+        "56.56 GiB trên đĩa",
+        "1.71 bpw"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Cách chạy dùng llama-modchip, tức là bộ patch kernel ggml, llama.cpp, transcoder quantization và runtime riêng. Quickstart Linux chỉ có ba lệnh.",
+      "headline": "Cài runtime",
+      "lines": [
+        "Clone repo",
+        "Chạy chat"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Nếu chạy binary DeepSeek trực tiếp, tải checkpoint, cấp quyền rồi mở server. Lệnh mẫu đặt context 32768, 16 thread và bật Flash Attention.",
+      "headline": "Chạy server CPU",
+      "lines": [
+        "Context 32768",
+        "16 threads",
+        "Flash Attention"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] Bộ nhớ thực tế đạt đỉnh 57.61 GiB ở context 256K, nên 64GB phải còn đủ RAM khả dụng. Không swap, không GPU.",
+      "headline": "57.61 GiB VmRSS",
+      "lines": [
+        "256K context",
+        "0 GPU",
+        "Không swap"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": "Linux server room"
+    },
+    {
+      "id": "s7",
+      "text": "[excited] Tốc độ prefill trên CPU Zen 5 sixteen-core là 44.36 token mỗi giây. Decode chậm hơn: khoảng 9.1 đến 14.7 token mỗi giây.",
+      "headline": "Nhanh lúc nạp prompt",
+      "lines": [
+        "Prefill: 44.36 tok/s",
+        "Decode: 9.1–14.7 tok/s"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Kernel cache-tiled nâng prefill từ 25 lên 44.36 tok/s, tức khoảng cộng 77 phần trăm. Muốn decode nhanh hơn, Top-K có thể xuống 5 hoặc 4, đổi lại perplexity lệch nhẹ.",
+      "headline": "Tốc độ đổi bằng chất lượng",
+      "lines": [
+        "25.0 → 44.36 tok/s",
+        "+77% prefill",
+        "Top-K 5 hoặc 4"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[curious] Vậy Ollama đứng ở đâu? Ollama hỗ trợ local trên Linux, macOS và Windows. Nhưng Fractal-64 dùng tensor type 40; binary Ollama chưa patch sẽ báo unknown tensor type 40, nên không đọc được checkpoint này.",
+      "headline": "Ollama không đọc Fractal-64",
+      "lines": [
+        "unknown tensor type 40",
+        "Cần binary đã patch"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer typing terminal"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Tóm lại, 284B trên 64GB là khả thi với llama-modchip, nhưng tốc độ vẫn là CPU decode 9.1 đến 14.7 token mỗi giây. Lưu video lại thử sau, follow để xem thêm, và nhớ: 284B vẫn chạy được trên 64GB RAM.",
+      "headline": "Lưu lại để thử sau",
+      "lines": [
+        "llama-modchip: chạy được",
+        "Ollama: chưa đọc Fractal-64",
+        "Lưu video, follow nhé"
+      ],
+      "commands": [],
+      "repos": [
+        "synchopate/llama-modchip"
+      ],
+      "footage": ""
+    }
+  ]
+}

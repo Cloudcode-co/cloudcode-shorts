@@ -347,5 +347,16 @@
     "built": "claude",
     "costUsd": 0.6721656,
     "reviewIssues": 1
+  },
+  {
+    "slug": "deepseek-v4-284b-64gb-llama-modchip-vs-o",
+    "topic": "Chạy DeepSeek-V4-Flash 284B trên Linux chỉ với 64GB RAM: llama-modchip vs Ollama",
+    "format": "story",
+    "date": "2026-11-09",
+    "direction": "documentary",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.5547764,
+    "reviewIssues": 2
   }
 ]
