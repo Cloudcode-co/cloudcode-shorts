@@ -1,0 +1,111 @@
+{
+  "slug": "homelab-laptop-cu-mat-dien",
+  "format": "meme",
+  "topic": "dựng homelab bằng laptop cũ bị phụ huynh rút điện",
+  "title": "Khi bạn tự host server bằng laptop cũ và cái kết",
+  "caption": "Kỷ lục uptime 99 ngày tan thành mây khói trong một nốt nhạc. Có anh em nào từng bị người nhà rút nhầm phích cắm server chưa?",
+  "hashtags": [
+    "#homelab",
+    "#laptrinhvien",
+    "#devvn",
+    "#congnghe",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Bouncy playful retro 8-bit meme music, comedic build up turning into dramatic suspense and goofy sad defeat, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "playful",
+        "bouncy",
+        "8-bit chiptune"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "confident",
+        "triumphant",
+        "groovy"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s3",
+      "styles": [
+        "sudden glitch",
+        "rising panic",
+        "dramatic suspense"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "comedic fail",
+        "sad goofy tune",
+        "funny defeat"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sinh viên IT tận dụng con laptop cũ gãy bản lề làm server cắm 24/7",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "messy bedroom desk laptop"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Tự hào khoe anh em uptime 99 ngày, gáy to hơn cả Senior DevOps",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing smug",
+      "place": "messy bedroom desk laptop"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Đang trên trường thì Telegram réo inh ỏi: Cụm server bay màu không dấu vết",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": "messy bedroom desk laptop"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Mồ hôi lạnh toát ra, tưởng chập điện nổ bình vội mở camera check gấp",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "messy bedroom desk laptop"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Thấy mẹ vừa rút phích cắm server ra để cắm quạt máy vì trời nóng",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat facepalm",
+      "place": "messy bedroom desk laptop"
+    }
+  ]
+}

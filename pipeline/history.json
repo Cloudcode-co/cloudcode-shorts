@@ -380,5 +380,16 @@
     "built": "claude",
     "costUsd": 0.5931886999999999,
     "reviewIssues": 4
+  },
+  {
+    "slug": "homelab-laptop-cu-mat-dien",
+    "topic": "dựng homelab bằng laptop cũ bị phụ huynh rút điện",
+    "format": "meme",
+    "date": "2026-11-10",
+    "direction": "meme-skit",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]

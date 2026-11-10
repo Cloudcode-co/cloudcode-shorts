@@ -1,0 +1,5 @@
+# Build log: homelab-laptop-cu-mat-dien
+
+Built a Vietnamese TikTok meme-skit video about hosting a homelab on an old broken-hinge laptop that gets accidentally unplugged by mom to plug in an electric fan. The visual design follows the meme-skit art direction with still photo backgrounds per location (bedroom desk for s1-s2, Vietnamese classroom for s3-s4, and room with electric fan for s5), animated sticker meme animals acting out each beat in the lower half (typing cat, dancing cat facing a thumbs-up cat, shocked cat, screaming cat, and teary crying cat), and prominent yellow outlined `MemeCaption` headers at the top with quick `zoomPunch` and `flash` transitions.
+
+During visual QA review across the 10 stills, fixed right-side TikTok button zone collisions by narrowing the dual-cat spacing in scene 2, resolved awkward line wrapping and lone words across all headlines so every caption sits naturally on 2 to 3 semantic lines, replaced a cut-off shocked cat sticker with a clean full-resolution sticker in scene 3, and eliminated third-party watermark badges on the finale sticker by swapping in the classic clean crying cat meme for scene 5.
