@@ -1,0 +1,226 @@
+{
+  "slug": "gately-all-in-one-gateway",
+  "format": "explainer",
+  "topic": "Tự host Gately trên VPS và Homelab: Gateway mạng tất cả trong một thay thế Nginx Proxy Manager và FRP",
+  "title": "SSH, HTTPS và RDP chạy chung một cổng?",
+  "caption": "Gately gom reverse proxy, WAF, STUN và tunnel vào một binary Go gọn nhẹ cho homelab và VPS.",
+  "hashtags": [
+    "#homelab",
+    "#selfhosted",
+    "#reverseproxy",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern low-profile electronic synth groove with subtle driving percussion and tech ambiance, clean and focused, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "intriguing",
+        "crisp synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving electronic",
+        "rising energy",
+        "clean bass"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s7",
+      "styles": [
+        "confident",
+        "steady beat",
+        "bright synth"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm synth pad",
+        "resolving",
+        "subtle fade"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/wangwanjie/gately",
+    "https://github.com/NginxProxyManager/nginx-proxy-manager",
+    "https://github.com/jpfranca-br/frps-setup",
+    "https://gately.cn/en/",
+    "https://gately.cn/en/docs/guide/install"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em có tin SSH, HTTPS và RDP chạy chung đúng một cổng không?",
+      "headline": "Chia sẻ chung một cổng",
+      "lines": [
+        "20 giao thức mạng",
+        "Không cần giải mã dữ liệu"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[thoughtful] Thường thì anh em phải dựng Nginx Proxy Manager quản lý cổng 81, rồi cấu hình thêm FRP phức tạp để đục lỗ NAT.",
+      "headline": "Cách quản lý thông thường",
+      "lines": [
+        "Dựng Nginx Proxy Manager",
+        "Cài thêm tiến trình FRP và tunnel"
+      ],
+      "commands": [],
+      "repos": [
+        "NginxProxyManager/nginx-proxy-manager"
+      ],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Còn Gately gom tất cả vào một binary Go ba mươi hai megabyte duy nhất, từ DDNS, reverse proxy cho tới quản lý tunnel.",
+      "headline": "Gately gom mọi tác vụ",
+      "lines": [
+        "Mã nguồn mở Apache-2.0",
+        "Một binary Go khoảng 32 MB"
+      ],
+      "commands": [],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Tính năng Protocol Routing nhận diện gói tin từ các byte đầu tiên, nên tối đa hai mươi giao thức dùng chung một cổng mà không cần giải mã.",
+      "headline": "Cơ chế Protocol Routing",
+      "lines": [
+        "Nhận diện từ các byte đầu tiên",
+        "HTTPS, SSH, RDP chung một port"
+      ],
+      "commands": [],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Tức là anh em có HTTP/3 và chứng chỉ tự động, kèm tường lửa Coraza với bộ quy tắc OWASP CRS v4 cấu hình riêng cho từng website.",
+      "headline": "Tường lửa WAF Coraza",
+      "lines": [
+        "Bộ quy tắc OWASP CRS v4",
+        "Chế độ chặn hoặc phát hiện riêng biệt"
+      ],
+      "commands": [],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[warmly] Gately tự tải và giám sát tiến trình frp hay Cloudflare Tunnel từ upstream, lưu ba bản cũ để rollback và giấu token trong biến môi trường.",
+      "headline": "Quản lý tiến trình ngoài",
+      "lines": [
+        "Tự tải frp và Cloudflare Tunnel",
+        "Lưu 3 bản cũ để rollback 1-click"
+      ],
+      "commands": [],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Hệ thống còn vẽ sơ đồ luồng traffic trực quan với bảy kiểu hiển thị, và vẫn hỗ trợ chip ARMv7 thay vì dừng lại như Nginx Proxy Manager.",
+      "headline": "Sơ đồ mạng trực quan",
+      "lines": [
+        "Network Topology với 7 giao diện",
+        "Vẫn hỗ trợ kiến trúc ARMv7"
+      ],
+      "commands": [],
+      "repos": [
+        "wangwanjie/gately",
+        "NginxProxyManager/nginx-proxy-manager"
+      ],
+      "footage": "server room datacenter"
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Để chạy trực tiếp trên máy chủ bằng file nhị phân, anh em chỉ cần gõ đúng một dòng lệnh.",
+      "headline": "Chạy binary trực tiếp",
+      "lines": [
+        "Khởi chạy kèm thư mục cấu hình"
+      ],
+      "commands": [
+        "./gately -c /etc/gately"
+      ],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Muốn chạy ngầm cùng hệ điều hành thì cài service, sau đó mở trình duyệt vào cổng 16680 để quản lý giao diện.",
+      "headline": "Cài đặt chạy cùng hệ thống",
+      "lines": [
+        "Tạo dịch vụ hệ thống",
+        "Giao diện trực quan cổng 16680"
+      ],
+      "commands": [
+        "sudo ./gately service install"
+      ],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[thoughtful] Vì mật khẩu mặc định gately.cn rất dễ lộ nên phải đổi ngay, lỡ quên mật khẩu thì anh em dùng lệnh reset này trên máy chủ nhé.",
+      "headline": "Khôi phục mật khẩu admin",
+      "lines": [
+        "Đổi mật khẩu mặc định ngay",
+        "Reset trực tiếp trên máy chủ"
+      ],
+      "commands": [
+        "docker exec -it gately gately reset-password"
+      ],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Anh em lưu video lại để tối ưu homelab và follow kênh nhé, anh em đã sẵn sàng gom hết giao thức mạng về chung một cổng chưa?",
+      "headline": "Lưu lại để thử nghiệm",
+      "lines": [
+        "Tối ưu hạ tầng homelab",
+        "Gom gateway mạng về một nơi"
+      ],
+      "commands": [],
+      "repos": [
+        "wangwanjie/gately"
+      ],
+      "footage": ""
+    }
+  ]
+}

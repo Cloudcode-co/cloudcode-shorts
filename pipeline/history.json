@@ -358,5 +358,16 @@
     "built": "claude",
     "costUsd": 0.5547764,
     "reviewIssues": 2
+  },
+  {
+    "slug": "gately-all-in-one-gateway",
+    "topic": "Tự host Gately trên VPS và Homelab: Gateway mạng tất cả trong một thay thế Nginx Proxy Manager và FRP",
+    "format": "brief",
+    "date": "2026-11-10",
+    "direction": "news-desk",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "claude",
+    "costUsd": 0.9803945000000001,
+    "reviewIssues": 7
   }
 ]
