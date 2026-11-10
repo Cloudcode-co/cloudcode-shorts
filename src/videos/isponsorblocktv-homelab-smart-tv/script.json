@@ -1,0 +1,209 @@
+{
+  "slug": "isponsorblocktv-homelab-smart-tv",
+  "format": "explainer",
+  "topic": "Tự host iSponsorBlockTV trên VPS và Homelab: Tự động bỏ qua quảng cáo tài trợ trên mọi Smart TV, so sánh với SmartTube",
+  "title": "TV LG hay Samsung không cài được SmartTube thì làm sao?",
+  "caption": "Tự host iSponsorBlockTV trên VPS hoặc homelab để tự động bỏ qua quảng cáo và sponsor trên mọi Smart TV.",
+  "hashtags": [
+    "#isponsorblocktv",
+    "#homelabvn",
+    "#selfhosted",
+    "#congnghe",
+    "#smarttv"
+  ],
+  "musicPrompt": "Upbeat modern tech groove with warm synth pulses, snappy electronic beat, chill lo-fi undertone, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic bass"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady rhythm",
+        "warm synth"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s5",
+      "styles": [
+        "upbeat groove",
+        "clean beat",
+        "confident"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "resolving",
+        "gentle beat",
+        "chill synth"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/dmunozv04/iSponsorBlockTV",
+    "https://github.com/yuliskov/SmartTube",
+    "https://github.com/yt-dlp/yt-dlp",
+    "https://github.com/dmunozv04/iSponsorBlockTV/wiki/Installation"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] TV LG hay Samsung không cài được SmartTube thì làm sao bỏ qua quảng cáo?",
+      "headline": "Smart TV không cài được SmartTube?",
+      "lines": [
+        "LG webOS và Samsung Tizen",
+        "Không hỗ trợ app SmartTube"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "living room smart tv couch"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì anh em sideload SmartTube, nhưng app này chỉ chạy trên Android, hoàn toàn không hỗ trợ webOS, Tizen hay Apple TV.",
+      "headline": "SmartTube chỉ chạy Android TV",
+      "lines": [
+        "Yêu cầu Android 4.3 trở lên",
+        "Không hỗ trợ Tizen, webOS, Apple TV"
+      ],
+      "commands": [],
+      "repos": [
+        "yuliskov/SmartTube"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Còn iSponsorBlockTV tự host trên homelab hoặc VPS và điều khiển trực tiếp app YouTube gốc trên mọi TV.",
+      "headline": "iSponsorBlockTV tự host độc lập",
+      "lines": [
+        "Chạy app YouTube chính thức",
+        "Tương thích Tizen, webOS, Apple TV"
+      ],
+      "commands": [],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Nó dùng SponsorBlock API để tự nhảy qua đoạn tài trợ, đồng thời tự bấm Skip Ad và tắt tiếng ngay khi quảng cáo xuất hiện.",
+      "headline": "Tự bấm Skip Ad và tắt tiếng",
+      "lines": [
+        "Tự động skip đoạn sponsor",
+        "Auto mute và bấm nút Skip Ad"
+      ],
+      "commands": [],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Máy chủ host không cần chung mạng LAN với TV, tức là anh em dựng trên VPS ngoài internet vẫn điều khiển được bình thường.",
+      "headline": "Không bắt buộc chung mạng LAN",
+      "lines": [
+        "Chỉ cần kết nối youtube.com",
+        "Host linh hoạt trên VPS hoặc Homelab"
+      ],
+      "commands": [],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": "server rack datacenter blinking lights"
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Để cài đặt trên máy chủ, anh em chỉ cần gõ đúng một lệnh qua pipx hoặc uv.",
+      "headline": "Cài đặt iSponsorBlockTV",
+      "lines": [
+        "Cài nhanh qua pipx hoặc uv"
+      ],
+      "commands": [
+        "pipx install isponsorblocktv"
+      ],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[cheerfully] Tiếp theo, chạy lệnh setup CLI để nhập mã liên kết TV lấy từ mục cài đặt của app YouTube.",
+      "headline": "Liên kết bằng YouTube TV Code",
+      "lines": [
+        "YouTube app -> Settings",
+        "Link with TV code"
+      ],
+      "commands": [
+        "isponsorblocktv --setup-cli"
+      ],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": "person typing on mechanical keyboard"
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Ghép nối xong, anh em khởi chạy tiến trình để công cụ tự động lắng nghe và xử lý video trên TV.",
+      "headline": "Khởi chạy ứng dụng",
+      "lines": [
+        "Chạy nền tự động đồng bộ"
+      ],
+      "commands": [
+        "iSponsorBlockTV"
+      ],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Anh em lưu ý, công cụ này không chặn phân giải mạng như Pi-hole mà bấm nút bỏ qua, và YouTube Shorts chưa được hỗ trợ hoàn chỉnh.",
+      "headline": "Hạn chế kỹ thuật cần biết",
+      "lines": [
+        "Không lọc triệt để như DNS blocker",
+        "YouTube Shorts chưa hỗ trợ đầy đủ"
+      ],
+      "commands": [],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để dựng trên homelab, bấm theo dõi để không còn hỏi TV không cài được SmartTube thì làm sao!",
+      "headline": "Lưu lại và thử ngay",
+      "lines": [
+        "Lưu video để cấu hình sau",
+        "Follow kênh để cập nhật mẹo tự host"
+      ],
+      "commands": [],
+      "repos": [
+        "dmunozv04/iSponsorBlockTV"
+      ],
+      "footage": ""
+    }
+  ]
+}

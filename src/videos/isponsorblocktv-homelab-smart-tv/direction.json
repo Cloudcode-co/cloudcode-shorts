@@ -1,0 +1,5 @@
+{
+  "id": "terminal-tutorial",
+  "name": "Terminal tutorial",
+  "brief": "The terminal is the whole screen: a large, readable terminal window with a step counter ('Bước 1/3') above it, each command typed at a human pace with a blinking cursor, then a short plausible output line taken only from the research (or a green check, never invented logs). The headline sits above in plain bold type. Dark editor theme with one accent colour from the tool's logo."
+}

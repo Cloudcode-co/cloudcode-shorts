@@ -369,5 +369,16 @@
     "built": "claude",
     "costUsd": 0.9803945000000001,
     "reviewIssues": 7
+  },
+  {
+    "slug": "isponsorblocktv-homelab-smart-tv",
+    "topic": "Tự host iSponsorBlockTV trên VPS và Homelab: Tự động bỏ qua quảng cáo tài trợ trên mọi Smart TV, so sánh với SmartTube",
+    "format": "tutorial",
+    "date": "2026-11-10",
+    "direction": "terminal-tutorial",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 0.5931886999999999,
+    "reviewIssues": 4
   }
 ]
