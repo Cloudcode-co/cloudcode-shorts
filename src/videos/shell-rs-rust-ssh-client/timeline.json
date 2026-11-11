@@ -1,0 +1,80 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 4.949
+    },
+    "s2": {
+      "start": 4.949,
+      "length": 12.289
+    },
+    "s3": {
+      "start": 17.238,
+      "length": 11.506
+    },
+    "s4": {
+      "start": 28.744,
+      "length": 9.102
+    },
+    "s5": {
+      "start": 37.846,
+      "length": 10.069
+    },
+    "s6": {
+      "start": 47.915,
+      "length": 10.696
+    },
+    "s7": {
+      "start": 58.611,
+      "length": 10.539
+    },
+    "s8": {
+      "start": 69.15,
+      "length": 9.729
+    },
+    "s9": {
+      "start": 78.879,
+      "length": 10.994
+    }
+  },
+  "total": 89.873,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 4.95,
+      "scenes": [
+        "s1"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 4.95,
+      "length": 23.8,
+      "scenes": [
+        "s2",
+        "s3"
+      ]
+    },
+    {
+      "name": "Energy",
+      "start": 28.74,
+      "length": 40.41,
+      "scenes": [
+        "s4",
+        "s5",
+        "s6",
+        "s7"
+      ]
+    },
+    {
+      "name": "Outro",
+      "start": 69.15,
+      "length": 20.72,
+      "scenes": [
+        "s8",
+        "s9"
+      ]
+    }
+  ]
+}

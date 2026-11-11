@@ -413,5 +413,16 @@
     "built": "claude",
     "costUsd": 0.6410697999999999,
     "reviewIssues": 1
+  },
+  {
+    "slug": "shell-rs-rust-ssh-client",
+    "topic": "Trải nghiệm shell-rs: SSH client bằng Rust siêu tốc với GPUI, quản lý VPS và SFTP thay thế Termius và WindTerm",
+    "format": "whatif",
+    "date": "2026-11-11",
+    "direction": "what-if-sim",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.34829940000000004,
+    "reviewIssues": 0
   }
 ]

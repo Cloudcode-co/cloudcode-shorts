@@ -1,0 +1,202 @@
+{
+  "slug": "shell-rs-rust-ssh-client",
+  "format": "explainer",
+  "topic": "Trải nghiệm shell-rs: SSH client bằng Rust siêu tốc với GPUI, quản lý VPS và SFTP thay thế Termius và WindTerm",
+  "title": "Quản lý VPS mượt mà với SSH client bằng Rust?",
+  "caption": "Trải nghiệm shell-rs: SSH client bằng Rust với GPUI, tích hợp SFTP chuẩn WinSCP và theo dõi Docker trực tiếp trên VPS.",
+  "hashtags": [
+    "#shellrs",
+    "#sshclient",
+    "#sysadmin",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern driving electronic beat with clean synth pulses and warm sub bass, tech conference vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious",
+        "sub bass pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "clean synth rhythm",
+        "forward momentum"
+      ]
+    },
+    {
+      "name": "Energy",
+      "from": "s4",
+      "styles": [
+        "upbeat tech bounce",
+        "crisp percussion",
+        "lively groove"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "warm synth resolution",
+        "steady rhythm",
+        "fade out"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/since2006/shell-rs",
+    "https://github.com/kingToolbox/WindTerm",
+    "https://github.com/RewindJailerFoster/Tabby-Terminal-SSH-Client-Guide",
+    "https://github.com/electerm/electerm",
+    "https://shellrs.com/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Vừa mở terminal SSH vừa soi được server mà không cần đăng nhập lần hai?",
+      "headline": "SSH client không cần login 2 lần?",
+      "lines": [
+        "Không cần mở thêm phiên phụ",
+        "Xem thẳng trạng thái VPS"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": "server room flashing lights"
+    },
+    {
+      "id": "s2",
+      "text": "Đây là shell-rs, SSH client viết bằng Rust với engine đồ họa GPUI mượn từ Zed editor. [excited] Không dùng Electron hay JVM, tức là toàn bộ giao diện đều do GPU vẽ trực tiếp.",
+      "headline": "Rust và GPU Renderer GPUI",
+      "lines": [
+        "Viết hoàn toàn bằng Rust",
+        "Engine GPUI từ Zed editor",
+        "Không Electron, không JVM"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Thường thì anh em phải gõ lệnh htop hoặc mở thêm kết nối. [impressed] Còn shell-rs có sẵn sidebar giám sát CPU từng nhân, RAM và mạng cập nhật mỗi hai giây, chạy ngay trên kết nối SSH hiện tại.",
+      "headline": "System Monitor tích hợp sẵn",
+      "lines": [
+        "Cập nhật CPU và RAM mỗi 2 giây",
+        "Chạy trên chính session SSH hiện tại",
+        "Hỗ trợ máy chủ Linux"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": "developer working late at night"
+    },
+    {
+      "id": "s4",
+      "text": "Vì dùng chung kết nối SSH đó, nên anh em quản lý được luôn Docker theo từng compose project, xem log hay khởi động lại container chỉ bằng một cú click.",
+      "headline": "Quản lý Docker tiện lợi",
+      "lines": [
+        "Gom nhóm theo Docker Compose",
+        "Xem log và restart container",
+        "Hỗ trợ systemd services"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Cần chuyển file giữa hai máy? Nó tích hợp sẵn trình duyệt SFTP hai khung phong cách WinSCP, hỗ trợ phím tắt F5, F7 và tự khôi phục phiên truyền khi rớt mạng.",
+      "headline": "SFTP chuẩn WinSCP Commander",
+      "lines": [
+        "Giao diện 2 khung đối xứng",
+        "Phím tắt F5 F2 F7 F8",
+        "Hỗ trợ resume truyền file"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Về bảo mật, SQLite chỉ lưu danh sách host, còn mật khẩu và SSH key nằm an toàn trong Keychain của hệ điều hành. Hộp thoại Port Forwarding cũng vẽ sơ đồ luồng mạng rất trực quan.",
+      "headline": "Bảo mật chuẩn OS Keychain",
+      "lines": [
+        "Mật khẩu lưu trong Keychain OS",
+        "Database SQLite không chứa secret",
+        "Sơ đồ Port Forwarding trực quan"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Đặc biệt, công cụ này cung cấp CLI riêng để các AI agent như Claude Code chạy lệnh từ xa mà không sợ lộ khóa bí mật, kèm khả năng tự điền mã TOTP sáu số.",
+      "headline": "CLI bảo vệ AI Agent",
+      "lines": [
+        "CLI shellrs an toàn cho AI agent",
+        "Không để lộ SSH key cho AI",
+        "Tự điền mã xác thực TOTP 6 số"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": "person typing on keyboard code"
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Trên Linux, anh em chỉ việc tải bản AppImage và cấp quyền thực thi là dùng được ngay. Với Windows, bộ cài chưa có chữ ký số nên anh em cứ bấm Run anyway nhé.",
+      "headline": "Cài đặt và trải nghiệm",
+      "lines": [
+        "Linux yêu cầu glibc 2.31+",
+        "Windows SmartScreen chọn Run anyway"
+      ],
+      "commands": [
+        "chmod +x ShellRS-*.AppImage"
+      ],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Lưu video lại để cài đặt thử khi quản lý VPS và follow kênh nhé! Vừa mở terminal SSH vừa soi được server mà không cần đăng nhập lần hai, trải nghiệm ngay thôi anh em!",
+      "headline": "Thử ngay shell-rs!",
+      "lines": [
+        "Lưu video để dùng khi cần VPS",
+        "Follow kênh để cập nhật tool mới"
+      ],
+      "commands": [],
+      "repos": [
+        "since2006/shell-rs"
+      ],
+      "footage": ""
+    }
+  ]
+}
