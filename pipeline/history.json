@@ -402,5 +402,16 @@
     "built": "claude",
     "costUsd": 0.7660274,
     "reviewIssues": 0
+  },
+  {
+    "slug": "memdoor-linux-team-mode-cli",
+    "topic": "Trải nghiệm Memdoor trên Linux: CLI coding agent chế độ Team Mode phối hợp 5 model giá rẻ thay thế Claude Code và Aider",
+    "format": "explainer",
+    "date": "2026-11-11",
+    "direction": "ops-console",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.6410697999999999,
+    "reviewIssues": 1
   }
 ]

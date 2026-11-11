@@ -1,0 +1,5 @@
+Ops-console video in five long shots (hook, architecture, numbers, install, remote and outro), each building in place on a monitoring-dashboard grid with status lights that pulse on the beat, scrolling logs, and health panels comparing Claude Code / Aider with Memdoor Team Mode. The shots change on the timeline's scene starts, with the flash transition landing on the music drop. The two install and offline commands are typed in the kit Terminal; all numbers come from script.json and facts.json.
+
+QA fixes: the hook's second health panel ran under the TikTok caption zone, so I shrank the panels. The token-reduction body overlapped a two-line headline, so I moved it down. Empty lower halves in the accuracy, install and outro shots now hold log panels. A log overflowed its panel, so I reduced its rows. No watermarks, no corner chrome, no text under 34px.
+
+Review round: a reviewer said the opening headline touches the Cloudcode lockup. Checked frames 0, 6, 12 and 60 with npm run qa: the headline already starts at SAFE.top + BRAND_SPACE and its slide-in moves up from below, with about 45px clear between the lockup and the glyphs. No overlap, so nothing changed.

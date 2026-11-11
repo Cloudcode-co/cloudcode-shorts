@@ -1,0 +1,217 @@
+{
+  "slug": "memdoor-linux-team-mode-cli",
+  "format": "explainer",
+  "topic": "Trải nghiệm Memdoor trên Linux: CLI coding agent chế độ Team Mode phối hợp 5 model giá rẻ thay thế Claude Code và Aider",
+  "title": "Chín nghìn đồng giải bài toán khó ngang frontier model?",
+  "caption": "Trải nghiệm Memdoor Team Mode trên Linux: phối hợp 5 model giá rẻ giải bài toán khó chỉ tốn 0.39 USD.",
+  "hashtags": [
+    "#memdoor",
+    "#devops",
+    "#linuxserver",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimalist electronic synth beats with driving hi-hats, subtle bassline for coding and terminal workflows, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "driving rhythm",
+        "clean synth"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s5",
+      "styles": [
+        "punchy bass",
+        "confident",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "resolving",
+        "steady"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/guregodevo/memdoor",
+    "https://github.com/anthropics/claude-code",
+    "https://github.com/herdrdev/herdr",
+    "https://github.com/Aider-AI/aider",
+    "https://github.com/restlessronin/llm-code-highlighter",
+    "https://memdoor.ai/docs/team-solve",
+    "https://memdoor.ai/docs/open-weight",
+    "https://github.com/slee-persis/GVS5H"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Chỉ tốn chín nghìn đồng tiền API để giải bài toán khó ngang ngửa frontier model?",
+      "headline": "0.39 USD một bài toán khó",
+      "lines": [
+        "LiveCodeBench Hard: 9.8 / 10",
+        "Chi phí: trung vị $0.39 một lượt chạy"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì anh em dùng Claude Code hay Aider phải chịu phí API khá buốt ví, [thoughtful] còn Memdoor lại phối hợp năm model mã nguồn mở giá rẻ chạy cùng nhau.",
+      "headline": "Thói quen cũ và giải pháp mới",
+      "lines": [
+        "Thường thì: tốn kém cho frontier model đơn lẻ",
+        "Memdoor: Team Mode phối hợp 5 model giá rẻ"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": "programmer typing terminal night"
+    },
+    {
+      "id": "s3",
+      "text": "Memdoor là CLI coding agent viết bằng Go gói gọn trong một file binary. [impressed] Khi chạy Team Mode, nhiệm vụ được chia tự động cho planner, hai ideator song song, solver, review và repair worker.",
+      "headline": "Kiến trúc 5 vai trò độc lập",
+      "lines": [
+        "Một file Go binary duy nhất",
+        "Phân rã: planner, 2 ideators, solver, manager, repair"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor",
+        "slee-persis/GVS5H"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Tức là mỗi model đều bắt đầu từ một ngữ cảnh mới tinh để không bị lẫn lộn, [casually] nên chúng chỉ trao đổi thông tin với nhau qua các file lưu trên ổ cứng.",
+      "headline": "Fresh context qua file trên đĩa",
+      "lines": [
+        "Không nhồi chat history",
+        "Giao tiếp độc quyền qua ledger trên ổ cứng"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Vì vậy năm model Qwen hai mươi bảy B đã tăng độ chính xác từ sáu mươi sáu phẩy tám lên chín mươi hai phẩy bốn phần trăm, [excited] đạt trung bình chín phẩy tám trên mười ở bài toán khó LiveCodeBench.",
+      "headline": "Tăng độ chính xác",
+      "lines": [
+        "Qwen3.8-27B: 66.8% vọt lên 92.4%",
+        "9.8/10 LiveCodeBench Hard (vượt Fable 5: 8.0)"
+      ],
+      "commands": [],
+      "repos": [
+        "slee-persis/GVS5H"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Đồng thời model phán đoán Jev phản hồi dưới nửa giây, [impressed] giúp Memdoor cắt giảm tới bảy mươi tư phần trăm lượng token đầu vào khi đọc codebase.",
+      "headline": "Giảm 74% input token",
+      "lines": [
+        "Decision model Jev: phản hồi < 0.5s",
+        "Cắt token từ 54,661 xuống 14,367 (-74%)"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Để cài đặt trên Linux, anh em chạy một lệnh duy nhất rồi cấp API key qua OpenRouter.",
+      "headline": "Cài đặt một lệnh trên Linux",
+      "lines": [
+        "Cài đặt binary và cấu hình API key"
+      ],
+      "commands": [
+        "curl -fsSL https://memdoor.ai/install.sh | bash",
+        "export OPENROUTER_API_KEY=sk-or-..."
+      ],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Nếu chạy offline tại chỗ trên GPU hai mươi tư ghi VRAM, [thoughtful] anh em cần lưu ý chỉnh ngữ cảnh Ollama lên ba mươi hai nghìn token để tránh bị nuốt mất lệnh gọi tool.",
+      "headline": "Chạy offline và lưu ý context",
+      "lines": [
+        "Yêu cầu tối thiểu: 27B Q5, GPU 24 GB VRAM",
+        "Bắt buộc: OLLAMA_CONTEXT_LENGTH=32768"
+      ],
+      "commands": [
+        "memdoor connect local",
+        "memdoor workflow run team-solve --wait"
+      ],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": "server room glowing racks"
+    },
+    {
+      "id": "s9",
+      "text": "Anh em muốn ra ngoài mà máy chủ vẫn chạy tác vụ nặng? [cheerfully] Lệnh remote sẽ xuất link mã hóa đầu cuối cùng mã Q-R để theo dõi thẳng từ điện thoại.",
+      "headline": "Theo dõi từ xa trên điện thoại",
+      "lines": [
+        "Lệnh /remote: mã hóa đầu cuối E2E",
+        "Quét mã QR mở trực tiếp terminal"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": "man checking smartphone cafe"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để dựng lab chạy thử trên Linux và follow kênh nhé. [curious] Liệu team model giá rẻ có đủ sức giải bài toán cho anh em với chín nghìn đồng?",
+      "headline": "Lưu video và thử nghiệm ngay",
+      "lines": [
+        "Memdoor: github.com/guregodevo/memdoor",
+        "Theo dõi kênh để cập nhật công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "guregodevo/memdoor"
+      ],
+      "footage": ""
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 5.184
+    },
+    "s2": {
+      "start": 5.184,
+      "length": 8.449
+    },
+    "s3": {
+      "start": 13.633,
+      "length": 13.334
+    },
+    "s4": {
+      "start": 26.967,
+      "length": 8.136
+    },
+    "s5": {
+      "start": 35.103,
+      "length": 10.774
+    },
+    "s6": {
+      "start": 45.877,
+      "length": 7.901
+    },
+    "s7": {
+      "start": 53.778,
+      "length": 6.6
+    },
+    "s8": {
+      "start": 60.378,
+      "length": 9.808
+    },
+    "s9": {
+      "start": 70.186,
+      "length": 8.449
+    },
+    "s10": {
+      "start": 78.635,
+      "length": 10.211
+    }
+  },
+  "total": 88.846,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 13.63,
+      "scenes": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 13.63,
+      "length": 21.47,
+      "scenes": [
+        "s3",
+        "s4"
+      ]
+    },
+    {
+      "name": "Drop",
+      "start": 35.1,
+      "length": 35.08,
+      "scenes": [
+        "s5",
+        "s6",
+        "s7",
+        "s8"
+      ]
+    },
+    {
+      "name": "Outro",
+      "start": 70.19,
+      "length": 18.66,
+      "scenes": [
+        "s9",
+        "s10"
+      ]
+    }
+  ]
+}

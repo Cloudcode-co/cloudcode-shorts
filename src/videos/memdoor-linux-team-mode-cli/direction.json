@@ -1,0 +1,5 @@
+{
+  "id": "ops-console",
+  "name": "Ops console",
+  "brief": "Dense monitoring dashboard: panels, live-looking counters, log lines scrolling, status lights. Comparisons as two services' health panels. Mono for data, a wide grotesk for headlines. Real commands typed in the terminal."
+}
