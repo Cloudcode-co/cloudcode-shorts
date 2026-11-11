@@ -391,5 +391,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "moli-rust-headless-browser",
+    "topic": "Moli: Trình duyệt headless bằng Rust siêu nhẹ cho AI Agent trên VPS Linux, thay thế Playwright",
+    "format": "brief",
+    "date": "2026-11-11",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "claude",
+    "costUsd": 0.7660274,
+    "reviewIssues": 0
   }
 ]

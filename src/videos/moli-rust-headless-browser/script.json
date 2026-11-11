@@ -1,0 +1,206 @@
+{
+  "slug": "moli-rust-headless-browser",
+  "format": "explainer",
+  "topic": "Moli: Trình duyệt headless bằng Rust siêu nhẹ cho AI Agent trên VPS Linux, thay thế Playwright",
+  "title": "Moli: Trình duyệt Rust nhẹ thay thế Chromium?",
+  "caption": "Moli là trình duyệt headless bằng Rust ngốn ít hơn 90% RAM so với Chromium, kết nối thẳng Playwright qua CDP.",
+  "hashtags": [
+    "#moli",
+    "#headlessbrowser",
+    "#playwright",
+    "#laptrinh",
+    "#devops"
+  ],
+  "musicPrompt": "modern tech synth beat with steady electronic pulse, minimal clean bassline, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious synth",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving bass",
+        "steady rhythm",
+        "tech groove"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "punchy beats",
+        "triumphant synth",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "smooth groove",
+        "warm release",
+        "fade out"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/lexmount/moli",
+    "https://github.com/lightpanda-io/browser",
+    "https://github.com/h4ckf0r0day/obscura",
+    "https://github.com/browserless/browserless",
+    "https://github.com/lexmount/Lexbench-Headless-Browser"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Chạy Playwright trên VPS mà Chromium ngốn tận 700 megabyte RAM với 11 tiến trình?",
+      "headline": "Chromium ngốn kiệt RAM VPS",
+      "lines": [
+        "Chrome: 734 MiB RAM",
+        "Đẻ 11 tiến trình / 123 luồng",
+        "Dễ sập VPS cấu hình thấp"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer looking at server terminal"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Anh em thử nghía qua Moli xem, [impressed] một browser engine viết bằng Rust độc lập, không phải fork từ Chromium.",
+      "headline": "Moli viết bằng Rust độc lập",
+      "lines": [
+        "Browser kernel độc lập",
+        "Không phải bản bọc Chromium",
+        "Mã nguồn mở Apache-2.0"
+      ],
+      "commands": [],
+      "repos": [
+        "lexmount/moli"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Thường thì Chromium phải liên tục dựng hình visual tốn RAM. Còn Moli chỉ đọc DOM và chạy JS, bỏ qua bước vẽ giao diện.",
+      "headline": "Không vẽ giao diện thừa",
+      "lines": [
+        "Thường thì: Chrome render liên tục",
+        "Còn Moli: xử lý DOM và JS trên RAM",
+        "Bỏ qua bước paint tốn tài nguyên"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[excited] Tức là Chromium ngốn 11 tiến trình và 123 luồng, trong khi Moli chỉ chạy 1 tiến trình và 24 luồng duy nhất.",
+      "headline": "1 tiến trình duy nhất",
+      "lines": [
+        "Moli: 1 process / 24 threads",
+        "Chromium: 11 processes / 123 threads",
+        "Cắt giảm tải tối đa cho CPU"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server rack blinking lights in datacenter"
+    },
+    {
+      "id": "s5",
+      "text": "Vì vậy, bộ nhớ đỉnh trung vị của Moli chỉ tốn 78 MiB thay vì 734 MiB, thời gian sẵn sàng CDP chỉ 35 mili giây.",
+      "headline": "Tiết kiệm gần 90% bộ nhớ",
+      "lines": [
+        "RAM đỉnh: 78 MiB vs 734 MiB",
+        "Khởi động CDP: 34.85 ms vs 169.37 ms",
+        "CPU trung vị: 24 ms vs 177 ms"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Trên bộ test Lexbench gần 2 nghìn tác vụ, Moli đạt tỷ lệ thành công hơn 93%, vượt xa Lightpanda hay Obscura.",
+      "headline": "Tỷ lệ tương thích 93.10%",
+      "lines": [
+        "Moli 1.1.17: 1,795 / 1,928 tác vụ (93.10%)",
+        "Lightpanda: 81.38%",
+        "Obscura: 60.22%"
+      ],
+      "commands": [],
+      "repos": [
+        "lexmount/moli"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Anh em cũng không phải viết lại code, vì Playwright kết nối thẳng vào Moli qua giao thức CDP bằng lệnh connectOverCDP.",
+      "headline": "Cắm thẳng vào Playwright",
+      "lines": [
+        "chromium.connectOverCDP(\"http://127.0.0.1:9222\")",
+        "Hỗ trợ cả CDP, WebDriver Classic & BiDi",
+        "Không cần cài ChromeDriver"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Vì mặc định không vẽ hình, nên nếu cần chụp screenshot hay click tọa độ, anh em chỉ việc bật thêm cờ layout.",
+      "headline": "Bật layout khi cần thiết",
+      "lines": [
+        "Mặc định: Layout mock nhẹ",
+        "Thêm --layout: dựng hình, chụp screenshot",
+        "Xuất ảnh PNG hoặc tài liệu PDF"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Để khởi động server nhận lệnh automation, anh em chỉ cần gõ đúng một lệnh moli serve trên terminal Linux.",
+      "headline": "Khởi động chỉ với một lệnh",
+      "lines": [
+        "Chạy automation server cơ bản",
+        "Hoặc bật thêm layout đồ họa"
+      ],
+      "commands": [
+        "moli serve",
+        "moli serve --layout"
+      ],
+      "repos": [
+        "lexmount/moli"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Lưu video lại để tối ưu VPS ngay nhé, bấm follow kênh để cập nhật thêm tool hay. Giờ anh em đã sẵn sàng dẹp Chromium 11 tiến trình chưa?",
+      "headline": "Tối ưu RAM cho AI Agent",
+      "lines": [
+        "Lưu video để áp dụng",
+        "Follow kênh để xem thêm tool hay",
+        "Tạm biệt Chromium ngốn 700MB RAM"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer smiling closing laptop"
+    }
+  ]
+}
