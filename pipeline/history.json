@@ -424,5 +424,16 @@
     "built": "claude",
     "costUsd": 0.34829940000000004,
     "reviewIssues": 0
+  },
+  {
+    "slug": "aws-emulator-selfhost",
+    "topic": "Tự host AWS Emulator trên VPS: Giả lập AWS chính chủ siêu nhẹ thay thế LocalStack",
+    "format": "quiz",
+    "date": "2026-11-12",
+    "direction": "quiz-show",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "claude",
+    "costUsd": 1.2435483999999999,
+    "reviewIssues": 5
   }
 ]

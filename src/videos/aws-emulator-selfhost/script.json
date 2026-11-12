@@ -1,0 +1,206 @@
+{
+  "slug": "aws-emulator-selfhost",
+  "format": "explainer",
+  "topic": "Tự host AWS Emulator trên VPS: Giả lập AWS chính chủ siêu nhẹ thay thế LocalStack",
+  "title": "Tự host AWS Emulator thay thế LocalStack chỉ 160MB RAM?",
+  "caption": "AWS vừa ra mắt AWS Emulator bằng Rust, ngốn đúng 160MB RAM để anh em test API cục bộ mà không lo tốn phí.",
+  "hashtags": [
+    "#awsemulator",
+    "#localstack",
+    "#devops",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Upbeat modern tech lo-fi electronic groove with warm synth pads, crisp drums, and clean bassline, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic beat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving rhythm",
+        "clean bass",
+        "rising energy"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s7",
+      "styles": [
+        "smooth groove",
+        "confident",
+        "warm synth"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "triumphant",
+        "mellow outro",
+        "chill finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/aws/aws-emulator",
+    "https://github.com/localstack/localstack",
+    "https://github.com/getmoto/moto",
+    "https://docs.aws.amazon.com/emulator/latest/userguide/getting-started-linux.html",
+    "https://docs.aws.amazon.com/emulator/latest/userguide/point-sdk-to-emulator.html"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em vẫn tốn cả gigabyte RAM chạy LocalStack trên VPS à?",
+      "headline": "LocalStack ngốn quá nhiều RAM?",
+      "lines": [
+        "LocalStack chiếm nhiều tài nguyên",
+        "Khó chạy trên VPS cấu hình thấp"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer frustrated computer screen"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Kho mã nguồn LocalStack gốc vừa đóng lại. Còn AWS thì tự tung ra công cụ AWS Emulator viết hoàn toàn bằng Rust.",
+      "headline": "AWS ra mắt AWS Emulator",
+      "lines": [
+        "LocalStack GitHub đã archived",
+        "AWS Emulator chính chủ từ AWS",
+        "Viết bằng Rust theo giấy phép CC0"
+      ],
+      "commands": [],
+      "repos": [
+        "localstack/localstack",
+        "aws/aws-emulator"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Thường các bộ mock ngốn rất nhiều tài nguyên, còn bản này lúc rảnh chỉ tốn đúng một trăm sáu mươi megabyte RAM. Tức là anh em chạy ngon ơ trên các VPS nhỏ mà không cần tài khoản AWS.",
+      "headline": "Chỉ tốn 160MB RAM",
+      "lines": [
+        "Ăn ~160 MiB RAM khi không tải",
+        "Không cần tạo tài khoản AWS",
+        "Miễn phí hoàn toàn khi test"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room datacenter racks"
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Cơ chế của nó là lưu trữ mọi thứ trên bộ nhớ RAM và phục vụ HTTPS ở cổng chín hai chín bảy. Vì vậy, cứ tắt tiến trình là sạch bong dữ liệu tạm.",
+      "headline": "Cơ chế in-memory",
+      "lines": [
+        "HTTPS mặc định tại 127.0.0.1:9297",
+        "Tự tạo credentials và certificate",
+        "Dọn sạch dữ liệu khi dừng"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Cài trên VPS Debian hay Ubuntu rất dễ. Anh em tải gói deb chính thức do AWS ký số về máy bằng một dòng curl.",
+      "headline": "Tải gói cài đặt Linux",
+      "lines": [
+        "Gói chính thức từ downloads.aws.com",
+        "Ký số xác thực bởi AWS"
+      ],
+      "commands": [
+        "curl -fsSLo aws-emulator.deb https://downloads.aws.com/aws-emulator/packages/aws-emulator/LTS/latest/aws-emulator_amd64.deb"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Tiếp theo anh em gõ lệnh apt này để cài đặt. Hệ thống sẽ tự tạo sẵn lệnh nhị phân trong đường dẫn usr bin.",
+      "headline": "Cài đặt trực tiếp",
+      "lines": [
+        "Cài đặt vào /opt/aws-emulator/",
+        "Tạo binary /usr/bin/aws-emulator"
+      ],
+      "commands": [
+        "sudo apt-get install -y ./aws-emulator.deb"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Mặc định hệ thống tự thu thập dữ liệu viễn trắc, nên anh em hãy chạy lệnh với cờ telemetry off để tắt đi nhé.",
+      "headline": "Khởi động và tắt telemetry",
+      "lines": [
+        "Telemetry tự bật mặc định",
+        "Thêm cờ --telemetry off để tắt"
+      ],
+      "commands": [
+        "aws-emulator --telemetry off"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Sau đó xuất biến môi trường trỏ endpoint về cổng chín hai chín bảy. Lưu ý phải tắt tiêm tiền tố tên miền để SDK không gọi nhầm sang host ảo.",
+      "headline": "Trỏ CLI và SDK về emulator",
+      "lines": [
+        "Chỉ định endpoint 127.0.0.1:9297",
+        "Bắt buộc tắt host prefix injection"
+      ],
+      "commands": [
+        "export AWS_ENDPOINT_URL=https://127.0.0.1:9297",
+        "export AWS_DISABLE_HOST_PREFIX_INJECTION=true"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[impressed] Chạy thử lệnh kiểm tra danh tính, kết quả lập tức trả về mã tài khoản toàn số không của bộ giả lập.",
+      "headline": "Kiểm tra kết nối mock",
+      "lines": [
+        "Lệnh: aws sts get-caller-identity",
+        "Account ID: 000000000000",
+        "Arn: arn:aws:iam::000000000000:user/emulator"
+      ],
+      "commands": [
+        "aws sts get-caller-identity"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để thử test API trên VPS nhé, bấm theo dõi để cập nhật thêm nhiều công cụ hay!",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để áp dụng thực tế",
+        "Follow để đón xem mẹo DevOps tiếp theo"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer smiling at desk"
+    }
+  ]
+}
