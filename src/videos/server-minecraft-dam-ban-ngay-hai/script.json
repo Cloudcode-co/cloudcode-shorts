@@ -1,0 +1,122 @@
+{
+  "slug": "server-minecraft-dam-ban-ngay-hai",
+  "format": "meme",
+  "topic": "Lời nguyền mở server Minecraft cho đám bạn",
+  "title": "Lời nguyền mở server Minecraft cho đám bạn thân",
+  "caption": "Lời nguyền server Minecraft đúng 2 ngày là off sạch không trượt phát nào. Hội anh em trụ được lâu nhất mấy ngày?",
+  "hashtags": [
+    "#minecraftvietnam",
+    "#vpsvietnam",
+    "#laptrinhvien",
+    "#haihuoc",
+    "#gamervietnam"
+  ],
+  "musicPrompt": "Playful bouncy 8-bit gaming chiptune intro turning into an awkward sudden silence then dramatic sad meme violin, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "bouncy chiptune",
+        "playful retro",
+        "upbeat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "hype party beat",
+        "energetic chiptune",
+        "triumphant"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "sudden stop",
+        "awkward silence",
+        "minimal"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "sad violin",
+        "dramatic piano",
+        "melancholy meme"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Đám bạn thề sống chết chơi hết hè, năn nỉ mình bỏ tiền thuê VPS mở server",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat thumbs up",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Thức trắng đêm config PaperMC, chỉnh chunk mượt mà với cài cả đống plugin",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing fast",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Tối đầu tiên mở server chục thằng quẩy banh nóc, hú hét đào kim cương tới sáng",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing happy",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "8 giờ tối hôm sau hào hứng mở máy vào kiểm tra: Server status 0/20 online",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat staring blankly",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Nhắn group hỏi thì đứa bảo buồn ngủ, đứa lướt TikTok, đứa rủ qua Valorant",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat facepalm",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s6",
+      "text": "",
+      "headline": "Nhìn hoá đơn VPS còn nguyên 29 ngày với con chó cưng ngồi bơ vơ giữa map",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying rain",
+      "place": "bedroom at night computer"
+    }
+  ]
+}

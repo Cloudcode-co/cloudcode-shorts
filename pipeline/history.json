@@ -435,5 +435,16 @@
     "built": "claude",
     "costUsd": 1.2435483999999999,
     "reviewIssues": 5
+  },
+  {
+    "slug": "server-minecraft-dam-ban-ngay-hai",
+    "topic": "Lời nguyền mở server Minecraft cho đám bạn",
+    "format": "meme",
+    "date": "2026-11-12",
+    "direction": "meme-skit",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
