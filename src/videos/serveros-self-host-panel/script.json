@@ -1,0 +1,220 @@
+{
+  "slug": "serveros-self-host-panel",
+  "format": "explainer",
+  "topic": "Tự host ServerOS Panel trên VPS: Quản lý tập trung dàn server Linux thay thế Cockpit và 1Panel",
+  "title": "Quản lý nhiều VPS trên một web thay 1Panel?",
+  "caption": "Tự host ServerOS Panel quản lý tập trung toàn bộ dàn VPS Linux hoàn toàn miễn phí, thay thế Cockpit và 1Panel Pro.",
+  "hashtags": [
+    "#serveros",
+    "#selfhosted",
+    "#vpslinux",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Deep electronic bass groove with subtle tech synth arpeggios, driving modern cybersecurity vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "mysterious",
+        "sparse",
+        "subtle tech pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s4",
+      "styles": [
+        "driving synth",
+        "rising energy",
+        "crisp beats"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm resolution",
+        "smooth synth",
+        "triumphant"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/serveroshq/panel",
+    "https://github.com/1Panel-dev/1Panel",
+    "https://github.com/cockpit-project/cockpit",
+    "https://github.com/serveroshq/daemon",
+    "https://serveros.com/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Muốn quản lý nhiều VPS trên một web mà 1Panel bắt mua bản Pro?",
+      "headline": "Quản lý nhiều VPS cùng lúc?",
+      "lines": [
+        "1Panel OSS: không có multi-node",
+        "Bản Pro & Enterprise mới hỗ trợ"
+      ],
+      "commands": [],
+      "repos": [
+        "1Panel-dev/1Panel"
+      ],
+      "footage": "frustrated developer night desk"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì Cockpit chỉ mở phiên SSH cục bộ từng máy, còn 1Panel bản miễn phí lại khóa tính năng multi-node.",
+      "headline": "Giới hạn của các công cụ cũ",
+      "lines": [
+        "Cockpit: chỉ tương tác phiên Linux cục bộ",
+        "1Panel OSS: tính phí tính năng quản lý cụm"
+      ],
+      "commands": [],
+      "repos": [
+        "cockpit-project/cockpit",
+        "1Panel-dev/1Panel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Vì vậy ServerOS cho phép tự host miễn phí, [excited] gom toàn bộ server về một trang quản trị mã nguồn mở.",
+      "headline": "Giải pháp ServerOS self-hosted",
+      "lines": [
+        "Mã nguồn mở AGPL-3.0",
+        "Tự host miễn phí trên VPS riêng"
+      ],
+      "commands": [],
+      "repos": [
+        "serveroshq/panel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Trên từng VPS con, agent serverosd viết bằng Rust sẽ tự động quét dịch vụ đang chạy mà không cần khởi động lại.",
+      "headline": "Agent Rust cực nhẹ",
+      "lines": [
+        "Một file thực thi nhị phân tĩnh duy nhất",
+        "Lần quét đầu là read-only, không restart app"
+      ],
+      "commands": [],
+      "repos": [
+        "serveroshq/daemon"
+      ],
+      "footage": "datacenter server racks flashing lights"
+    },
+    {
+      "id": "s5",
+      "text": "VPS con hoàn toàn không cần mở port inbound, vì agent tự kết nối outbound TLS 1.3 về panel qua cổng 8443.",
+      "headline": "Bảo mật kết nối ngược",
+      "lines": [
+        "Không cần mở port inbound trên node con",
+        "Agent chủ động gọi outbound TLS 1.3"
+      ],
+      "commands": [],
+      "repos": [
+        "serveroshq/daemon"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Mọi thao tác root đều ghi rõ ràng vào file actions chấm log, và còn hỗ trợ mạng riêng WireGuard.",
+      "headline": "Minh bạch và bảo mật mạng",
+      "lines": [
+        "Ghi log lệnh root vào /var/log/serveros/actions.log",
+        "Tạo mạng riêng WireGuard giữa các máy"
+      ],
+      "commands": [],
+      "repos": [
+        "serveroshq/daemon"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Để dựng panel, anh em chỉ cần trỏ domain kèm bản ghi wildcard rồi chạy lệnh cài đặt này:",
+      "headline": "Cài ServerOS Panel",
+      "lines": [
+        "Cần mở port 80, 443 và 8443",
+        "Trỏ domain chính và *.domain"
+      ],
+      "commands": [
+        "curl -fsSL https://raw.githubusercontent.com/serveroshq/panel/main/docker/self-hosted/install.sh | sudo bash -s -- --domain=panel.example.com --email=you@example.com"
+      ],
+      "repos": [
+        "serveroshq/panel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Cài xong, anh em lấy mã kích hoạt để vào giao diện web tạo tài khoản quản trị:",
+      "headline": "Lấy mã kích hoạt Admin",
+      "lines": [
+        "Nhập mã tại trang web của panel",
+        "Thiết lập tài khoản quản trị ban đầu"
+      ],
+      "commands": [
+        "serveros-panel setup-code"
+      ],
+      "repos": [
+        "serveroshq/panel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[cheerfully] Sau đó lấy token trên web và dán lệnh cài agent lên từng VPS muốn kết nối về:",
+      "headline": "Kết nối VPS con về cụm",
+      "lines": [
+        "Chạy lệnh cài agent trên từng node con",
+        "Node con tự ghi danh về gateway"
+      ],
+      "commands": [
+        "curl -fsSL https://serveros.com/install.sh | sudo bash -s -- --token=ENROL_TOKEN"
+      ],
+      "repos": [
+        "serveroshq/daemon"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[thoughtful] Nếu ngừng dùng, chỉ cần chạy lệnh ngắt kết nối là mọi website và database trên VPS vẫn tiếp tục chạy bình thường.",
+      "headline": "Rời đi không gián đoạn",
+      "lines": [
+        "Lệnh: serverosd disconnect",
+        "Không ảnh hưởng dịch vụ đang chạy"
+      ],
+      "commands": [],
+      "repos": [
+        "serveroshq/daemon"
+      ],
+      "footage": "developer drinking coffee at desk"
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Anh em lưu video lại để thử quản lý dàn VPS nhé, follow kênh để xem thêm công cụ DevOps hay!",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để tự dựng lab quản lý VPS",
+        "Follow kênh để cập nhật công cụ DevOps"
+      ],
+      "commands": [],
+      "repos": [
+        "serveroshq/panel"
+      ],
+      "footage": ""
+    }
+  ]
+}
