@@ -457,5 +457,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 1
+  },
+  {
+    "slug": "yogurt-ai-meeting-notes-self-host",
+    "topic": "Tự host Yogurt trên VPS: Ghi chép cuộc họp bằng AI mã nguồn mở thay thế Granola và Otter.ai",
+    "format": "story",
+    "date": "2026-11-13",
+    "direction": "documentary",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 3
   }
 ]

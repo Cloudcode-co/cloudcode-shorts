@@ -1,0 +1,201 @@
+{
+  "slug": "yogurt-ai-meeting-notes-self-host",
+  "format": "explainer",
+  "topic": "Tự host Yogurt trên VPS: Ghi chép cuộc họp bằng AI mã nguồn mở thay thế Granola và Otter.ai",
+  "title": "Anh em tính thuê VPS để host AI họp ư?",
+  "caption": "Yogurt và Meetily: AI ghi chép và tóm tắt cuộc họp offline 100% không cần bot hay tốn tiền VPS.",
+  "hashtags": [
+    "#yogurt",
+    "#meetily",
+    "#selfhost",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Lively modern electronic beat with warm ambient synths, tech explainer background, steady rhythm, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "clean synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "electronic pulse",
+        "steady beat"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s5",
+      "styles": [
+        "deep bass",
+        "driving rhythm",
+        "clear modern tech"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "bright",
+        "triumphant",
+        "playful synth"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/FrigadeHQ/yogurt",
+    "https://github.com/Zackriya-Solutions/meetily",
+    "https://www.yogurt.so/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Anh em tính thuê VPS để tự host AI ghi âm cuộc họp ư?",
+      "headline": "Hiểu lầm về tự host AI họp",
+      "lines": [
+        "Thuê VPS để chạy AI họp?",
+        "Sự thật hoàn toàn khác"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "Thực ra Yogurt không cần VPS, [casually] vì đây là ứng dụng Electron chạy thẳng trên máy tính của anh em.",
+      "headline": "Yogurt chạy offline trên máy",
+      "lines": [
+        "Ứng dụng Electron cục bộ",
+        "Mã nguồn mở giấy phép MIT",
+        "Không cần đăng ký tài khoản"
+      ],
+      "commands": [],
+      "repos": [
+        "FrigadeHQ/yogurt"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Thường thì các công cụ như Otter phải thả bot vào phòng, còn Yogurt bắt trực tiếp âm thanh loa và micro.",
+      "headline": "Không cần bot tham gia cuộc gọi",
+      "lines": [
+        "Ghi âm trực tiếp từ micro và loa",
+        "Hỗ trợ Zoom, Teams và Google Meet",
+        "Không có tài khoản bot lạ trong phòng"
+      ],
+      "commands": [],
+      "repos": [
+        "FrigadeHQ/yogurt"
+      ],
+      "footage": "business video conference call"
+    },
+    {
+      "id": "s4",
+      "text": "Tức là whisper.cpp sẽ bóc băng tại chỗ, [impressed] sau đó llama.cpp chạy mô hình Gemma 4 hoặc Qwen3 để tóm tắt.",
+      "headline": "Bóc băng và tóm tắt bằng LLM local",
+      "lines": [
+        "whisper.cpp bóc băng âm thanh",
+        "llama.cpp tóm tắt nội dung",
+        "Mô hình Gemma 4 và Qwen3"
+      ],
+      "commands": [],
+      "repos": [
+        "FrigadeHQ/yogurt"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Vì vậy dữ liệu không gửi lên mạng, nên máy cần ít nhất 8 GB RAM để tải mô hình ban đầu tầm 5 GB.",
+      "headline": "Yêu cầu phần cứng máy tính",
+      "lines": [
+        "Tối thiểu 8 GB RAM",
+        "Tải mô hình ban đầu khoảng 5 GB",
+        "Dữ liệu lưu hoàn toàn trên máy"
+      ],
+      "commands": [],
+      "repos": [
+        "FrigadeHQ/yogurt"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Mặc định ứng dụng chỉ nhận tiếng Anh, nên anh em nhớ bật Multi-language trong cài đặt để nhận diện 99 ngôn ngữ.",
+      "headline": "Bật chế độ đa ngôn ngữ",
+      "lines": [
+        "Settings → Language → Spoken language",
+        "Chọn Multi-language",
+        "Hỗ trợ 99 ngôn ngữ"
+      ],
+      "commands": [],
+      "repos": [
+        "FrigadeHQ/yogurt"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Nhưng tính năng nhận diện tên người nói trên Zoom hay Meet chỉ có trên macOS, đi kèm máy chủ MCP cục bộ.",
+      "headline": "Điểm giới hạn cần lưu ý",
+      "lines": [
+        "Nhận diện người nói: chỉ có trên macOS",
+        "Tích hợp MCP server chế độ read-only",
+        "Windows và Linux chưa nhận diện tên"
+      ],
+      "commands": [],
+      "repos": [
+        "FrigadeHQ/yogurt"
+      ],
+      "footage": "developer working on macbook"
+    },
+    {
+      "id": "s8",
+      "text": "Nếu anh em muốn tự biên dịch trên Linux bằng Rust và Tauri, thì dự án Meetily cũng là lựa chọn mã nguồn mở tương tự.",
+      "headline": "Lựa chọn thay thế: Meetily",
+      "lines": [
+        "Meetily: Viết bằng Rust và Tauri",
+        "Hỗ trợ Whisper và Parakeet",
+        "Biên dịch trực tiếp trên Linux"
+      ],
+      "commands": [
+        "git clone https://github.com/Zackriya-Solutions/meetily",
+        "cd meetily/frontend",
+        "pnpm install --frozen-lockfile",
+        "./build-gpu.sh"
+      ],
+      "repos": [
+        "Zackriya-Solutions/meetily"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[cheerfully] Nhớ lưu video để cài thử lúc rảnh, theo dõi mình và đừng tốn tiền thuê VPS ghi âm họp nữa nhé!",
+      "headline": "Lưu lại để cài thử",
+      "lines": [
+        "Lưu video để cài đặt",
+        "Theo dõi để xem thêm công cụ mã nguồn mở",
+        "Khỏi tốn tiền thuê VPS"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

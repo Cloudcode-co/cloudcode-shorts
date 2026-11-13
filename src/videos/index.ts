@@ -42,5 +42,6 @@ import { video as v38 } from "./tu-host-rivet-vps/Video";
 import { video as v39 } from "./tu-host-unleash-vs-flagsmith/Video";
 import { video as v40 } from "./voicestudio-clone-giong-local/Video";
 import { video as v41 } from "./xoa-nham-docker-volume/Video";
+import { video as v42 } from "./yogurt-ai-meeting-notes-self-host/Video";
 
-export const VIDEOS: VideoDef[] = [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41];
+export const VIDEOS: VideoDef[] = [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42];
