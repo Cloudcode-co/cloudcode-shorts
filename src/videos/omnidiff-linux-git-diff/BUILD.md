@@ -1,0 +1,5 @@
+# Build Summary: omnidiff-linux-git-diff
+
+Built a high-energy Top 5 countdown short for OmniDiff on Linux following the requested ranking countdown art direction and chapter-based pacing. Each of the top 5 features (#5 Tree-sitter for 26 languages, #4 Code move detection, #3 Enclosing context sticky headers, #2 Multiformat image/font/archive diffing, and #1 24-bit Truecolor TUI with SSH fallback) features an impactful rank numeral slam that settles into a background watermark, an official OmniDiff logo card with real stars (1,350 ★), a vertical 5-dot progress rail, and rising brightness culminating in a brilliant 24K gold flash treatment for #1.
+
+In QA review, fixed the opening scene (SceneHook) which previously hid content behind a delayed title overlay leaving frame 0 blank: directly surfaced the official OmniDiff repo card with 1,350 stars, headline 'Git diff dưới 100ms', hero 98% under 100ms metric card, and bullet points ('98% lượt diff < 100ms', 'Viết hoàn toàn bằng Rust' with Rust sticker) from frame 0 with full opacity, proper diacritics, all text >= 34px, and verified TikTok safe area alignment.

@@ -446,5 +446,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "omnidiff-linux-git-diff",
+    "topic": "Trải nghiệm OmniDiff trên Linux: Công cụ Git diff nhận diện cú pháp siêu tốc bằng Rust thay thế Difftastic và Delta",
+    "format": "top5",
+    "date": "2026-11-13",
+    "direction": "countdown",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 1
   }
 ]

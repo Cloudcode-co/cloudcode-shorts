@@ -1,0 +1,227 @@
+{
+  "slug": "omnidiff-linux-git-diff",
+  "format": "explainer",
+  "topic": "Trải nghiệm OmniDiff trên Linux: Công cụ Git diff nhận diện cú pháp siêu tốc bằng Rust thay thế Difftastic và Delta",
+  "title": "Git diff nhận diện cú pháp dưới 100ms?",
+  "caption": "Trải nghiệm OmniDiff trên Linux: công cụ Git diff viết bằng Rust nhận diện cú pháp thay thế Delta và Difftastic.",
+  "hashtags": [
+    "#omnidiff",
+    "#gitdiff",
+    "#treesitter",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern upbeat synthwave tech background with punchy driving bassline, crisp digital percussion, energetic and rhythmic, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "digital pulse",
+        "punchy bass"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "steady rhythm",
+        "focused synth"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "triumphant",
+        "bright arpeggio",
+        "driving tech beat"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s11",
+      "styles": [
+        "warm finish",
+        "resolved",
+        "crisp decay"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/ivankovic/omnidiff",
+    "https://github.com/Wilfred/difftastic",
+    "https://github.com/dandavison/delta",
+    "https://ivankovic.github.io/omnidiff/showcase/?case=python-refactoring&view=diff"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] 98% lượt git diff trên OmniDiff xử lý dưới 100 mili-giây.",
+      "headline": "Git diff dưới 100ms",
+      "lines": [
+        "98% lượt diff < 100ms",
+        "Viết hoàn toàn bằng Rust"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[thoughtful] Thường thì Delta chỉ so sánh từ bằng thuật toán Levenshtein, còn Difftastic giải đồ thị Dijkstra nên dễ ngốn RAM khi file thay đổi lớn.",
+      "headline": "Hạn chế của Delta & Difftastic",
+      "lines": [
+        "Delta: so sánh Levenshtein",
+        "Difftastic: Dijkstra ngốn bộ nhớ"
+      ],
+      "commands": [],
+      "repos": [
+        "dandavison/delta",
+        "Wilfred/difftastic"
+      ],
+      "footage": "developer working on computer monitor"
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn OmniDiff dùng Tree-sitter phân tích cấu trúc cú pháp của 26 ngôn ngữ, đạt độ bền tới 99,95% thay đổi code.",
+      "headline": "Tree-sitter cho 26 ngôn ngữ",
+      "lines": [
+        "Phân tích cú pháp AST",
+        "Độ bền 99.95% code"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Tức là khi refactor Python, Unix diff báo lệch 23 dòng, nhưng OmniDiff bóc tách chính xác thành hai lần di chuyển code.",
+      "headline": "Nhận diện di chuyển code",
+      "lines": [
+        "Unix diff: 23 dòng đổi",
+        "OmniDiff: 2 lần di chuyển code"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Vì vậy mỗi đoạn thay đổi đều tự động gắn tên hàm hoặc class bao quanh, giúp anh em không bao giờ bị lạc ngữ cảnh.",
+      "headline": "Tự động ghim ngữ cảnh",
+      "lines": [
+        "Hiện tên hàm hoặc class",
+        "Không lạc trong file dài"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Hơn nữa, nó so sánh ảnh pixel theo pixel, mở file zip hoặc tar soi bên trong và vẽ so sánh từng ký tự font chữ.",
+      "headline": "Diff ảnh, font chữ và file nén",
+      "lines": [
+        "Ảnh pixel theo pixel",
+        "Soi archive và font chữ"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Giao diện TUI tương tác hỗ trợ màu 24-bit truecolor, và tự động chuyển về 256 màu nếu anh em kết nối qua SSH.",
+      "headline": "Giao diện TUI 24-bit",
+      "lines": [
+        "Hỗ trợ 24-bit truecolor",
+        "Tự lùi 256 màu qua SSH"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": "datacenter server racks flashing lights"
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Để cài đặt trên Linux, cách tiện nhất là anh em dùng lệnh Homebrew này.",
+      "headline": "Cài đặt OmniDiff",
+      "lines": [
+        "Cài đặt qua Homebrew"
+      ],
+      "commands": [
+        "brew install ivankovic/omnidiff/omnidiff"
+      ],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Sau đó chạy lệnh git configure; nên nhớ git difftool sẽ mở TUI, còn git diff thông thường sẽ in dạng văn bản.",
+      "headline": "Cấu hình Git difftool",
+      "lines": [
+        "git difftool mở TUI",
+        "git diff in văn bản"
+      ],
+      "commands": [
+        "omnidiff git configure"
+      ],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[casually] Anh em cũng có thể chạy ngay bằng biến môi trường GIT_EXTERNAL_DIFF mà chưa cần sửa file cấu hình git.",
+      "headline": "Dùng trực tiếp không cần config",
+      "lines": [
+        "Gán GIT_EXTERNAL_DIFF",
+        "Chạy diff tức thì"
+      ],
+      "commands": [
+        "GIT_EXTERNAL_DIFF=omnidiff git diff"
+      ],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Anh em lưu video lại để nâng cấp Git diff dưới 100 mili-giây, và bấm follow kênh để xem thêm mẹo Linux nhé!",
+      "headline": "Lưu video và follow kênh",
+      "lines": [
+        "Lưu lại để trải nghiệm",
+        "Follow kênh để xem thêm mẹo"
+      ],
+      "commands": [],
+      "repos": [
+        "ivankovic/omnidiff"
+      ],
+      "footage": "young programmer smiling at desk"
+    }
+  ]
+}
