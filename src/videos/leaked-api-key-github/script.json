@@ -1,0 +1,105 @@
+{
+  "slug": "leaked-api-key-github",
+  "format": "meme",
+  "topic": "Quên cho env vào gitignore lộ API key",
+  "title": "Quên cho .env vào gitignore và cái kết thót tim",
+  "caption": "Một pha thoát chết trong gang tấc nhờ sự nghèo khó. Anh em đã từng bị leak secret key lên repo chưa?",
+  "hashtags": [
+    "#laptrinh",
+    "#devlife",
+    "#github",
+    "#cntt",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Quirky playful tech beat turning into intense dramatic suspense before ending with funny triumphant celebratory funk, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "playful",
+        "bouncy",
+        "lo-fi",
+        "quirky"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "suspense",
+        "rising tension",
+        "dramatic",
+        "fast tempo"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "triumphant",
+        "goofy",
+        "celebratory",
+        "funny disco"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sinh viên IT 2 giờ sáng vừa code xong con bot AI push GitHub lấy le",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Quên béng file .env chưa vào gitignore nhưng nghĩ bụng repo vắng ai mà thèm soi",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Đúng mười phút sau bot cào tự động húp trọn cái API key mang đi cày",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat shocked face",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "App ngân hàng nổ ting ting liên tục thông báo trừ tiền token Claude tới tấp",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic screaming",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Thần may mắn độ liền vì tài khoản thẻ visa còn đúng bốn mươi hai nghìn",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing happy",
+      "place": "bedroom at night computer"
+    }
+  ]
+}
