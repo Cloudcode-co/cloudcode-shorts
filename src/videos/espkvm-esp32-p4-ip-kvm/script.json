@@ -1,0 +1,193 @@
+{
+  "slug": "espkvm-esp32-p4-ip-kvm",
+  "format": "explainer",
+  "topic": "Tự dựng IP-KVM cho Homelab với espkvm: Cứu hộ và quản lý server từ BIOS qua trình duyệt trên ESP32-P4 thay thế PiKVM",
+  "title": "Server kẹt ở BIOS, làm sao cứu hộ không tốn tiền triệu?",
+  "caption": "Tự dựng IP-KVM điều khiển server từ BIOS bằng ESP32-P4 và espkvm, không cần Raspberry Pi hay cài Linux.",
+  "hashtags": [
+    "#espkvm",
+    "#homelab",
+    "#pikvm",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Energetic modern electronic synth beat with subtle rhythmic pulses, clean hi-hats, tech homelab vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious synth",
+        "curious"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving electronic beat",
+        "rising energy",
+        "rhythmic"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "upbeat synth drop",
+        "confident groove",
+        "bright"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm closing beat",
+        "fade out",
+        "positive"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/espkvm/espkvm",
+    "https://github.com/pikvm/pikvm",
+    "https://github.com/sipeed/NanoKVM",
+    "https://espkvm.io/boards/p4-eth/",
+    "https://espkvm.io/flash/",
+    "https://espkvm.io/blog/what-an-ip-kvm-is/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Server sập ở BIOS thì Remote Desktop chịu chết, còn PiKVM lại tốn tiền triệu? [curious]",
+      "headline": "Cứu server từ BIOS không tốn tiền triệu?",
+      "lines": [
+        "Mất kết nối khi kẹt màn hình BIOS",
+        "PiKVM DIY tốn từ $30 đến $100"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer server rack"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì máy chủ lỗi kernel hay kẹt boot menu, anh em phải chạy tới cắm màn hình cơ. [casually]",
+      "headline": "Khi máy chủ mất hệ điều hành",
+      "lines": [
+        "Remote Desktop cần hệ điều hành chạy",
+        "Không thể thao tác từ xa ngoài OS"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room dark walk"
+    },
+    {
+      "id": "s3",
+      "text": "Còn espkvm biến vi điều khiển ESP32-P4 thành IP-KVM hoàn chỉnh mà không cần cài Linux. [excited]",
+      "headline": "Giải pháp IP-KVM trên vi điều khiển",
+      "lines": [
+        "Chạy thẳng trên chip ESP32-P4",
+        "Không cần chạy hệ điều hành Linux"
+      ],
+      "commands": [],
+      "repos": [
+        "espkvm/espkvm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Chip cầu Toshiba TC358743 bắt tín hiệu HDMI, đẩy qua giao tiếp CSI để bộ mã hóa phần cứng của ESP32-P4 nén video. [thoughtful]",
+      "headline": "Xử lý phần cứng HDMI sang CSI",
+      "lines": [
+        "Bridge HDMI sang CSI: Toshiba TC358743",
+        "Nén phần cứng H.264 và MJPEG"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Nhờ vậy, độ trễ chuột chỉ khoảng sáu mươi mili-giây trên chip rev 3.x, còn toàn bộ giao diện web chỉ nặng vỏn vẹn bảy mươi kilobyte. [impressed]",
+      "headline": "Độ trễ thấp, giao diện nhẹ",
+      "lines": [
+        "Độ trễ chuột: ~60 ms (rev 3.x)",
+        "Web console nhúng sẵn: ~70 KB"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Tức là máy tính nhận thiết bị như chuột phím thật, kèm tính năng Virtual Media giúp cắm file ISO từ thẻ nhớ để cứu hộ BIOS từ xa. [cheerfully]",
+      "headline": "Giả lập phím chuột và ổ boot ISO",
+      "lines": [
+        "USB HID nhận diện trực tiếp phần cứng",
+        "Virtual Media: mount file ISO từ thẻ nhớ"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Để cài đặt, anh em cắm cổng USB-C rồi mở Chrome hoặc Edge vào trang flasher là nạp firmware xong. [warmly]",
+      "headline": "Flash firmware ngay trên trình duyệt",
+      "lines": [
+        "Nạp trực tiếp qua Web Serial",
+        "Không cần cài đặt toolchain"
+      ],
+      "commands": [
+        "https://espkvm.io/flash/"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Nhưng nhớ là cổng nối máy chủ nằm ở giắc MX1.25, và anh em phải cài chứng chỉ CA thì trình duyệt mới kích hoạt phím chuột. [thoughtful]",
+      "headline": "Lưu ý đấu dây và chứng chỉ bảo mật",
+      "lines": [
+        "Cổng USB OTG dùng giắc MX1.25",
+        "Cần tin cậy chứng chỉ cert.pem"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Vì Secure Boot và mã hóa flash chưa bật, nên anh em tuyệt đối không mở trực tiếp ra Internet mà hãy đi qua Tailscale hoặc WireGuard. [casually]",
+      "headline": "Bảo mật trong mạng nội bộ",
+      "lines": [
+        "Chưa bật Secure Boot và mã hóa flash",
+        "Truy cập an toàn qua Tailscale / WireGuard"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Anh em lưu video lại để tự dựng cứu hộ homelab, và bấm theo dõi để không lo kẹt ở BIOS nhé! [excited]",
+      "headline": "Lưu lại dựng IP-KVM cứu hộ homelab!",
+      "lines": [
+        "Lưu video để tự làm KVM giá mềm",
+        "Follow để đón xem mẹo homelab mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer smiling at computer desk"
+    }
+  ]
+}

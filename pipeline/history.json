@@ -468,5 +468,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 3
+  },
+  {
+    "slug": "espkvm-esp32-p4-ip-kvm",
+    "topic": "Tự dựng IP-KVM cho Homelab với espkvm: Cứu hộ và quản lý server từ BIOS qua trình duyệt trên ESP32-P4 thay thế PiKVM",
+    "format": "whatif",
+    "date": "2026-11-14",
+    "direction": "what-if-sim",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
