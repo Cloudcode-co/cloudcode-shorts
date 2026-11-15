@@ -490,5 +490,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "clouds-against-humanity-zero-trust-homel",
+    "topic": "Tự dựng Clouds-Against-Humanity trên Homelab và VPS: Thực hành Zero Trust và DevSecOps từ con số 0 thay thế CloudGoat",
+    "format": "quiz",
+    "date": "2026-11-15",
+    "direction": "quiz-show",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

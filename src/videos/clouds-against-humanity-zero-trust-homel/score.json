@@ -1,0 +1,93 @@
+{
+  "style": "synthwave",
+  "bpm": 110,
+  "key": "A",
+  "mode": "minor",
+  "sections": [
+    {
+      "name": "Hook",
+      "energy": 0.45,
+      "chords": [
+        1,
+        6,
+        3,
+        7
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Build",
+      "energy": 0.65,
+      "chords": [
+        1,
+        4,
+        6,
+        5
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Drop",
+      "energy": 0.95,
+      "chords": [
+        1,
+        6,
+        3,
+        7
+      ],
+      "drums": "full",
+      "lead": true
+    },
+    {
+      "name": "Outro",
+      "energy": 0.35,
+      "chords": [
+        1,
+        6,
+        7,
+        1
+      ],
+      "drums": "none",
+      "lead": false
+    }
+  ],
+  "motif": [
+    {
+      "beat": 0,
+      "length": 1,
+      "degree": 5
+    },
+    {
+      "beat": 1,
+      "length": 0.5,
+      "degree": 6
+    },
+    {
+      "beat": 1.5,
+      "length": 0.5,
+      "degree": 7
+    },
+    {
+      "beat": 2,
+      "length": 1.5,
+      "degree": 8
+    },
+    {
+      "beat": 4,
+      "length": 1,
+      "degree": 10
+    },
+    {
+      "beat": 5.5,
+      "length": 0.5,
+      "degree": 9
+    },
+    {
+      "beat": 6,
+      "length": 1.5,
+      "degree": 8
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "slug": "clouds-against-humanity-zero-trust-homel",
+  "format": "explainer",
+  "topic": "Tự dựng Clouds-Against-Humanity trên Homelab và VPS: Thực hành Zero Trust và DevSecOps từ con số 0 thay thế CloudGoat",
+  "title": "Dựng lab Zero Trust không mở cổng mạng nào?",
+  "caption": "Tự dựng lab Zero Trust và DevSecOps trên VPS với chi phí thấp thay thế CloudGoat, bảo vệ hạ tầng từ con số 0.",
+  "hashtags": [
+    "#zerotrust",
+    "#devsecops",
+    "#opentofu",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Deep tech minimal electro beat with subtle rolling bassline, cyber security synth tension, smooth futuristic groove, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "mysterious synth",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady beat",
+        "tech electro groove",
+        "driving bass"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "punchy bassline",
+        "cybernetic pulses",
+        "confident rhythm"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm synth",
+        "smooth fade",
+        "resolving beat"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/ChiefGyk3D/Clouds-Against-Humanity",
+    "https://github.com/RhinoSecurityLabs/cloudgoat",
+    "https://github.com/ChiefGyk3D/Clouds-Against-Humanity/wiki/Start-Here-If-You-Are-New",
+    "https://github.com/ChiefGyk3D/Clouds-Against-Humanity/wiki/Why-This-Exists"
+  ],
+  "voiceId": "ueSxRO0nLF1bj93J2hVt",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Dựng lab cloud chuẩn Zero Trust không mở một cổng mạng nào, anh em tin không?",
+      "headline": "Không mở cổng mạng nào",
+      "lines": [
+        "Zero Trust Homelab",
+        "Không mở cổng inbound"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì học cloud security, anh em hay tải CloudGoat về thực hành khai thác trên môi trường cố tình để lộ lỗi.",
+      "headline": "Cách học CTF thường thấy",
+      "lines": [
+        "CloudGoat: Mô phỏng tấn công",
+        "Cố tình cấu hình lỗ hổng"
+      ],
+      "commands": [
+        "docker run -it rhinosecuritylabs/cloudgoat:latest"
+      ],
+      "repos": [
+        "RhinoSecurityLabs/cloudgoat"
+      ],
+      "footage": "developer typing on laptop"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Còn dự án Clouds-Against-Humanity của ChiefGyk3D lại tập trung vào phòng thủ thực chiến, chỉ yêu cầu nền tảng tương đương CompTIA A+.",
+      "headline": "Phòng thủ DevSecOps thực tế",
+      "lines": [
+        "Clouds-Against-Humanity",
+        "Độ khó tương đương CompTIA A+"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Toàn bộ hạ tầng dùng OpenTofu, chạy qua Spacelift và nhận biến môi trường từ Doppler, tức là repo không chứa bất kỳ secret nào.",
+      "headline": "Hạ tầng hoàn toàn là mã nguồn",
+      "lines": [
+        "OpenTofu + Spacelift",
+        "Doppler: Cấp một read-only token"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Khi máy ảo khởi động trên DigitalOcean, firewall tự động gắn qua metadata tag, vì vậy mọi cổng inbound đều bị chặn.",
+      "headline": "Khóa cổng tự động từ boot",
+      "lines": [
+        "DigitalOcean Droplet",
+        "Gắn firewall tự động qua tag"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[curious] Không mở cổng SSH thì quản trị thế nào? [impressed] Thay vì dùng VPN có thể dính lỗi khai thác trước xác thực, dự án dùng Twingate ZTNA.",
+      "headline": "Truy cập bằng Twingate ZTNA",
+      "lines": [
+        "Không dùng VPN truyền thống",
+        "Tránh lỗi pre-auth VPN"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": "cybersecurity server room"
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Connector của Twingate chỉ gửi kết nối ra ngoài, tức là trên internet hoàn toàn không có cổng nào mở để kẻ xấu quét.",
+      "headline": "Kết nối một chiều an toàn",
+      "lines": [
+        "Connector quay số chiều ra",
+        "Mô hình phân quyền từng tài nguyên"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Anh em cũng không lo cháy ví, vì kịch bản CI cost gate sẽ tự động chặn pull request nếu vượt trần ba mươi đô một tháng.",
+      "headline": "Tự động chặn bill vượt trần",
+      "lines": [
+        "CI cost gate kiểm soát chi phí",
+        "Trần chi phí: 30 USD/tháng"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": "developer looking at monitor"
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Chi phí thực tế giai đoạn một chỉ mười hai đô, nhưng dữ liệu thanh toán thường bị trễ, nên anh em phải kiểm tra lại vào hôm sau.",
+      "headline": "Chỉ mười hai đô mỗi tháng",
+      "lines": [
+        "Stage 1: 12 USD/tháng",
+        "Kiểm tra lại console sau khi hủy"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Lưu video lại để dựng thử lab Zero Trust này và follow kênh nhé.",
+      "headline": "Lưu lại và thực hành ngay",
+      "lines": [
+        "Thực hành phòng thủ cloud",
+        "Follow kênh để cập nhật"
+      ],
+      "commands": [],
+      "repos": [
+        "ChiefGyk3D/Clouds-Against-Humanity"
+      ],
+      "footage": ""
+    }
+  ]
+}
