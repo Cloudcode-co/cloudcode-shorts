@@ -1,0 +1,53 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 3.8
+    },
+    "s2": {
+      "start": 3.8,
+      "length": 3.8
+    },
+    "s3": {
+      "start": 7.6,
+      "length": 3.8
+    },
+    "s4": {
+      "start": 11.4,
+      "length": 4.2
+    },
+    "s5": {
+      "start": 15.6,
+      "length": 5.5
+    }
+  },
+  "total": 21.1,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 7.6,
+      "scenes": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 7.6,
+      "length": 3.8,
+      "scenes": [
+        "s3"
+      ]
+    },
+    {
+      "name": "Drop",
+      "start": 11.4,
+      "length": 9.7,
+      "scenes": [
+        "s4",
+        "s5"
+      ]
+    }
+  ]
+}

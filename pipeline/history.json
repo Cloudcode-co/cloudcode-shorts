@@ -501,5 +501,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "vps-bi-hack-dao-coin-pass-root-yeu",
+    "topic": "VPS bị hack đào coin do đặt pass root yếu",
+    "format": "chat",
+    "date": "2026-11-15",
+    "direction": "chat-thread",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

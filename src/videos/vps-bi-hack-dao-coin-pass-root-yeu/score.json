@@ -1,0 +1,81 @@
+{
+  "style": "chiptune",
+  "bpm": 130,
+  "key": "A",
+  "mode": "minor",
+  "sections": [
+    {
+      "name": "Hook",
+      "energy": 0.45,
+      "chords": [
+        1,
+        6,
+        3,
+        7
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Build",
+      "energy": 0.7,
+      "chords": [
+        6,
+        7,
+        1,
+        1
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Drop",
+      "energy": 0.95,
+      "chords": [
+        1,
+        6,
+        3,
+        7
+      ],
+      "drums": "full",
+      "lead": true
+    }
+  ],
+  "motif": [
+    {
+      "beat": 0,
+      "length": 1,
+      "degree": 1
+    },
+    {
+      "beat": 1.5,
+      "length": 0.5,
+      "degree": 3
+    },
+    {
+      "beat": 2,
+      "length": 1,
+      "degree": 5
+    },
+    {
+      "beat": 3.5,
+      "length": 0.5,
+      "degree": 4
+    },
+    {
+      "beat": 4,
+      "length": 1,
+      "degree": 3
+    },
+    {
+      "beat": 5,
+      "length": 1,
+      "degree": 2
+    },
+    {
+      "beat": 6,
+      "length": 1.5,
+      "degree": 1
+    }
+  ]
+}

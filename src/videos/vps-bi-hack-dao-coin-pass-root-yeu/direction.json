@@ -1,0 +1,5 @@
+{
+  "id": "chat-thread",
+  "name": "Group chat",
+  "brief": "The whole video plays as a messaging thread: the question arrives as a message, answers as bubbles, logos as avatars, commands as code blocks someone pastes. Typing indicators between beats."
+}

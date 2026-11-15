@@ -1,0 +1,103 @@
+{
+  "slug": "vps-bi-hack-dao-coin-pass-root-yeu",
+  "format": "meme",
+  "topic": "VPS bị hack đào coin do đặt pass root yếu",
+  "title": "Khi bạn lười tạo SSH key và cái kết bú 100% CPU",
+  "caption": "Lời khuyên chân thành cho anh em mới nghịch VPS: tắt ngay password auth. Có ai từng được hacker mượn server đào coin hộ chưa?",
+  "hashtags": [
+    "#vps",
+    "#linux",
+    "#laptrinhvien",
+    "#congnghe",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Bouncy energetic electronic beat with goofy quirky bassline, transitioning to dramatic suspense, sudden comedic realization drop, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "playful",
+        "bouncy beat",
+        "electronic",
+        "quirky"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "mysterious synth",
+        "staccato"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "dramatic drop",
+        "goofy bass",
+        "comedic"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sinh viên năm nhất hý hửng sắm con VPS rẻ để host bot Discord",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing headphones",
+      "place": "student bedroom night desk"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Tiện tay set pass root là 123456 cho lẹ khỏi tạo SSH key chi mệt",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop fast",
+      "place": "student bedroom night desk"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Sáng ngủ dậy thấy bot Discord ngỏm, terminal SSH gõ giật đùng đùng",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat shocked wide eyes",
+      "place": "student bedroom night desk"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Mở htop lên soi thì thấy tiến trình tên xmrig đang bú full 100% CPU",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic screaming",
+      "place": "student bedroom night desk"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Thì ra có anh hacker Nga ngố tốt bụng ghé mượn server cày coin hộ",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying thumbs up",
+      "place": "student bedroom night desk"
+    }
+  ]
+}
