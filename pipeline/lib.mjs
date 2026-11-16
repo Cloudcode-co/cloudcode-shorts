@@ -47,11 +47,9 @@ export const slugify = (text) =>
 
 // The script writer is any OpenAI-compatible chat API (by default a Gemini
 // gateway): LLM_BASE_URL, LLM_API_KEY, and LLM_MODEL, a comma-separated list
-// tried in order. When those all fail, the backup gateway (MPROXY_BASE_URL,
-// MPROXY_API_KEY) and its MPROXY_MODEL list take over: GPT 5.6 luna, then terra,
-// then Mistral Large; all three read images.
+// tried in order: Gemini high and low, then GLM through opencode, which is on
+// other accounts than the Gemini pair and so answers when they are locked.
 const LLM_BASE_URL = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/+$/, "");
-const MPROXY_BASE_URL = (process.env.MPROXY_BASE_URL || "https://mproxy.harumi.io.vn/v1").replace(/\/+$/, "");
 // Longest a single call may take before it counts as failed.
 const LLM_TIMEOUT = 180_000;
 
@@ -64,17 +62,10 @@ const list = (value) =>
 // Every model to try, in order, with the gateway that serves it.
 const llmTargets = () => [
   ...(process.env.LLM_API_KEY
-    ? list(process.env.LLM_MODEL || "ag/gemini-3.8-flash-high,ag/gemini-3.8-flash-low").map((model) => ({
+    ? list(process.env.LLM_MODEL || "ag/gemini-3.8-flash-high,ag/gemini-3.8-flash-low,oc/glm-5.3-flash-free").map((model) => ({
         model,
         base: LLM_BASE_URL,
         key: process.env.LLM_API_KEY,
-      }))
-    : []),
-  ...(process.env.MPROXY_API_KEY
-    ? list(process.env.MPROXY_MODEL || "cx/gpt-5.6-luna,cx/gpt-5.6-terra,mistral/mistral-large-latest,claude-coding").map((model) => ({
-        model,
-        base: MPROXY_BASE_URL,
-        key: process.env.MPROXY_API_KEY,
       }))
     : []),
 ];

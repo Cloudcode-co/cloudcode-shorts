@@ -106,9 +106,6 @@ jobs:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_MODEL: ${{ vars.LLM_MODEL }}
-          # Backup gateway when be-ag fails (pipeline/lib.mjs).
-          MPROXY_API_KEY: ${{ secrets.MPROXY_API_KEY }}
-          MPROXY_MODEL: ${{ vars.MPROXY_MODEL }}
           # Builder fallback through be-ag; BUILDER=beag skips Claude.
           BUILDER: ${{ inputs.builder || github.event.client_payload.builder || vars.BUILDER }}
           BUILDER_CHOSEN: ${{ inputs.builder || github.event.client_payload.builder }}
