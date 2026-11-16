@@ -12,7 +12,9 @@
 // CLAUDE_HEAVY_BUDGET_USD (default 10); for the
 // be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
 // ag/gemini-3.8-flash-high), BUILDER_HEAVY_BEAG_MODEL (the heavy backup's
-// model, default oc/glm-5.3-flash-free), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
+// model, default oc/glm-5.3-flash-free), then the backup gateway's MPROXY_API_KEY,
+// MPROXY_BASE_URL and BUILDER_MPROXY_MODELS (default claude-coding,cx/gpt-5.6-terra),
+// BUILDER_MAX_TURNS (default 150), and BUILDER=beag
 // to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
 // REVIEW=off skips the review round.
 // Prints a JSON line {direction, pacing, built, costUsd} last.
@@ -115,7 +117,17 @@ const claudeBudget = heavy ? process.env.CLAUDE_HEAVY_BUDGET_USD || "10" : proce
 if (heavy) console.log(`Heavy direction ${direction.id}: building with ${claudeModel}, budget $${claudeBudget}`);
 const gateway = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/v1\/?$/, "");
 const geminiModel = process.env.BUILDER_BEAG_MODEL || "ag/gemini-3.8-flash-high";
-const beagModels = heavy ? [process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/glm-5.3-flash-free", geminiModel] : [geminiModel];
+// The gateway locks its accounts per model, so the low tier still answers when
+// the high one is locked.
+const geminiLow = geminiModel.replace(/-high$/, "-low");
+const beagModels = [
+  ...(heavy ? [process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/glm-5.3-flash-free"] : []),
+  geminiModel,
+  ...(geminiLow !== geminiModel ? [geminiLow] : []),
+];
+// Then the backup gateway (pipeline/lib.mjs), when be-ag has nothing left.
+const mproxy = (process.env.MPROXY_BASE_URL || "https://mproxy.harumi.io.vn/v1").replace(/\/v1\/?$/, "");
+const mproxyModels = (process.env.BUILDER_MPROXY_MODELS || "claude-coding,cx/gpt-5.6-terra").split(",").map((m) => m.trim()).filter(Boolean);
 const agents = [
   process.env.ANTHROPIC_API_KEY &&
     process.env.BUILDER !== "beag" && {
@@ -124,12 +136,15 @@ const agents = [
       env: { ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY },
       args: ["--model", claudeModel, "--max-budget-usd", claudeBudget],
     },
-  ...(process.env.LLM_API_KEY ? beagModels : []).map((beagModel) => ({
+  ...[
+    ...(process.env.LLM_API_KEY ? beagModels.map((model) => ["be-ag", gateway, process.env.LLM_API_KEY, model]) : []),
+    ...(process.env.MPROXY_API_KEY ? mproxyModels.map((model) => ["mproxy", mproxy, process.env.MPROXY_API_KEY, model]) : []),
+  ].map(([name, base, token, beagModel]) => ({
     id: "beag",
-    label: `be-ag (${beagModel})`,
+    label: `${name} (${beagModel})`,
     env: {
-      ANTHROPIC_BASE_URL: gateway,
-      ANTHROPIC_AUTH_TOKEN: process.env.LLM_API_KEY,
+      ANTHROPIC_BASE_URL: base,
+      ANTHROPIC_AUTH_TOKEN: token,
       // Claude Code's own side calls go to the gateway's models too.
       ANTHROPIC_DEFAULT_OPUS_MODEL: beagModel,
       ANTHROPIC_DEFAULT_SONNET_MODEL: beagModel,
@@ -224,9 +239,11 @@ for (const next of agents) {
   console.log(`\nBuilder: ${next.label}`);
   let run = runAgent(next, prompt);
   // The gateway throttles for a few minutes at a time ("HTTP 403 (reset after
-  // 2m)"): a build that failed on the API before changing anything waits out
-  // the reset and tries again, rather than leaving the video to the fallback.
-  for (let retry = 1; next.id === "beag" && run.error && !changedSince(start) && retry <= 2; retry++) {
+  // 2m)"): when no other builder is left, a build that failed on the API
+  // before changing anything waits out the reset and tries again, rather than
+  // leaving the video to the fallback.
+  const last = next === agents[agents.length - 1];
+  for (let retry = 1; last && next.id === "beag" && run.error && !changedSince(start) && retry <= 2; retry++) {
     const minutes = Math.min(5, Number(run.text.match(/reset after (\d+)m/)?.[1] ?? 2) + 0.5);
     console.log(`${next.label}: API error, trying again in ${minutes} min (${retry}/2)`);
     await new Promise((r) => setTimeout(r, minutes * 60 * 1000));
