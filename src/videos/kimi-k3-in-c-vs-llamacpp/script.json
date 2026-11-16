@@ -1,0 +1,226 @@
+{
+  "slug": "kimi-k3-in-c-vs-llamacpp",
+  "format": "explainer",
+  "topic": "Chạy Kimi K3 2.78T tham số trên VPS chỉ với 8GB RAM bằng C thuần: kimi-k3-in-c vs llama.cpp",
+  "title": "Kimi K3 2.78T chạy trên 8GB RAM thế nào?",
+  "caption": "Chạy mô hình AI 2.78 nghìn tỷ tham số trên VPS 8GB RAM bằng C thuần không cần GPU. Giải mã cơ chế của kimi-k3-in-c.",
+  "hashtags": [
+    "#kimik3",
+    "#llamacpp",
+    "#selfhostedai",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Fast-paced tech synthwave with deep electronic bassline, digital arpeggio pulses, futuristic tension, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "suspenseful",
+        "digital pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady electronic beat",
+        "driving bass"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "punchy synth",
+        "fast tempo",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm synth",
+        "triumphant",
+        "resolving"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/FareedKhan-dev/kimi-k3-in-c",
+    "https://github.com/ggml-org/llama.cpp",
+    "https://github.com/dorjeduck/llm.mojo"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Mô hình hai phẩy bảy tám nghìn tỷ tham số chạy trên tám gigabyte RAM thật không anh em?",
+      "headline": "2.78T tham số trên 8GB RAM?",
+      "lines": [
+        "Kimi K3: 2.78 Trillion params",
+        "RAM yêu cầu: 8 GB",
+        "GPU: 0"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": "server rack datacenter blinking lights"
+    },
+    {
+      "id": "s2",
+      "text": "[impressed] Hoàn toàn thật! Engine kimi-k3-in-c viết bằng C thuần chỉ nặng vỏn vẹn 176 kilobyte, chạy trên một CPU và không cần thư viện BLAS hay GPU.",
+      "headline": "Engine C99 vỏn vẹn 176 KB",
+      "lines": [
+        "Mã nguồn: C99 thuần",
+        "Dung lượng binary: 176 KB",
+        "Không BLAS, không GPU"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Thường thì mô hình cỡ này cần cả cụm máy chủ GPU đắt đỏ. Còn ở đây, tác giả chọn cách đọc stream trực tiếp 1.56 terabyte checkpoint từ đĩa NVMe.",
+      "headline": "Đọc trực tiếp từ NVMe",
+      "lines": [
+        "Checkpoint trên đĩa: 1.56 TB",
+        "Bộ nhớ đỉnh đo đạc: 8.24 GB RSS",
+        "Stream dữ liệu mỗi bước"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": "developer coding at desk late night"
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Tức là 1.45 terabyte trọng số chuyên gia không bao giờ nằm thường trực trong RAM. Khi tính toán, engine chỉ chọn 16 trên tổng số 896 chuyên gia MoE và nhân thẳng từ định dạng nén 4-bit.",
+      "headline": "Kích hoạt 16/896 chuyên gia",
+      "lines": [
+        "1.45 TB routed experts ngoài đĩa",
+        "MoE chọn 16/896 chuyên gia",
+        "Nhân ma trận trực tiếp dạng 4-bit"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] 93 layer dày đặc được đóng gói thành một file trunk 109 gigabyte duy nhất, nên máy đọc mỗi layer chỉ bằng một lệnh I/O.",
+      "headline": "Đóng gói 93 dense layer",
+      "lines": [
+        "Trunk file: 109 GB",
+        "Đọc mỗi layer bằng 1 lệnh I/O",
+        "Biến RAM thành núm vặn tốc độ"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[laughs] Đổi lại, tốc độ trên máy 8GB RAM mất tới 32 giây mỗi token. Nhưng kết quả đầu ra hoàn toàn giống nhau từng byte so với máy chủ hàng trăm gigabyte RAM.",
+      "headline": "Đổi tốc độ lấy bộ nhớ",
+      "lines": [
+        "8 GB RAM: ~32.69s / token",
+        "128 GB+ RAM: 5.6s / token",
+        "Kết quả giống nhau từng byte"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": "person waiting frustrated at computer"
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Trong khi llama.cpp hỗ trợ lượng tử hóa từ 1.5 đến 8-bit trên nhiều phần cứng, thì nó chưa có cơ chế đóng gói trunk và stream off-disk chuyên biệt cho Kimi K3 như dự án này.",
+      "headline": "So sánh với llama.cpp",
+      "lines": [
+        "llama.cpp: Quant 1.5-bit đến 8-bit đa năng",
+        "kimi-k3-in-c: Stream off-disk chuyên biệt",
+        "Tối ưu riêng cho kiến trúc Kimi K3"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c",
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Anh em có thể kiểm tra tính đúng đắn ngay lập tức mà chưa cần tải checkpoint bằng lệnh make test chỉ trong vòng chưa đầy một phút.",
+      "headline": "Biên dịch và kiểm thử",
+      "lines": [
+        "Không cần checkpoint",
+        "Kiểm tra khớp PyTorch",
+        "Chỉ cần OpenMP và C99"
+      ],
+      "commands": [
+        "git clone https://github.com/FareedKhan-dev/kimi-k3-in-c.git",
+        "cd kimi-k3-in-c",
+        "make -j",
+        "make test"
+      ],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Vì checkpoint nặng tới 1.56 terabyte qua 96 shard, nên máy chủ bắt buộc phải có ít nhất 1.7 terabyte dung lượng trống và dùng ổ NVMe cục bộ.",
+      "headline": "Tải mô hình và đóng gói trunk",
+      "lines": [
+        "Yêu cầu: ~1.7 TB đĩa trống",
+        "Kiểm tra chính xác 96 shard",
+        "Bắt buộc dùng ổ đĩa NVMe"
+      ],
+      "commands": [
+        "export HF_TOKEN=hf_your_token_here",
+        "./scripts/download-model.sh ~/k3model",
+        "./scripts/pack-trunk.sh ~/k3model ~/k3trunk"
+      ],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để thử khi có ổ cứng lớn, và bấm theo dõi kênh nhé. Liệu anh em có dám chạy thử mô hình nghìn tỷ tham số trên 8GB RAM không?",
+      "headline": "Lưu lại và thử nghiệm",
+      "lines": [
+        "Lưu video để tra cứu",
+        "Follow kênh để xem thêm",
+        "2.78T tham số trên 8GB RAM"
+      ],
+      "commands": [],
+      "repos": [
+        "FareedKhan-dev/kimi-k3-in-c"
+      ],
+      "footage": "tech presenter talking to camera"
+    }
+  ]
+}

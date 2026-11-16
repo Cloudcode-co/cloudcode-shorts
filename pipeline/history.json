@@ -512,5 +512,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "kimi-k3-in-c-vs-llamacpp",
+    "topic": "Chạy Kimi K3 2.78T tham số trên VPS chỉ với 8GB RAM bằng C thuần: kimi-k3-in-c vs llama.cpp",
+    "format": "brief",
+    "date": "2026-11-16",
+    "direction": "news-desk",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
