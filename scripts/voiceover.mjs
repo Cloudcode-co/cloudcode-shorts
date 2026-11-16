@@ -45,6 +45,8 @@ const LETTERS = {
   N: "en", O: "âu", P: "pi", Q: "kiu", R: "a", S: "ét", T: "ti", U: "u", V: "vi", W: "đắp bờ liu", X: "ích", Y: "oai", Z: "dét",
 };
 const WORDS = new Set(["RAM", "ROM", "NASA", "LAN", "WAN", "LED", "GIF", "JPEG", "CAPTCHA", "COVID", "UNESCO", "ASEAN", "OK", "WIFI", "SIM", "BIOS", "LOL"]);
+// Acronyms said as an English word, written the way a Vietnamese voice says it.
+const SAY = { JSON: "giây sơn", YAML: "dam mồ", AJAX: "ây giắc", NGINX: "en gin ích" };
 const spell = (word) => [...word].map((c) => LETTERS[c]).join(" ");
 // Units are said as words wherever they stand ("hai GB RAM", "8GB"); "ghi"
 // keeps the hard g that "gi" loses ("di ga").
@@ -55,7 +57,7 @@ const spoken = (text) =>
     .replace(/(?<![\p{L}\[])([KMGTP]B)(?![\p{L}])/gu, (m, unit) => ` ${UNITS[unit]}`)
     .replace(/(?<![\p{L}\[])v([A-Z]{2,6})(?![\p{L}\]])/gu, (m, word) => `vi ${spell(word)}`) // vCPU
     .replace(/(?<![\p{L}\[])([A-Z]{2,6})v(\d)/gu, (m, word, n) => `${spell(word)} vi ${n}`) // IPv6
-    .replace(/(?<![\p{L}\[])([A-Z]{2,6})s?(?![\p{L}\]])/gu, (m, word) => (WORDS.has(word) ? m : spell(word)));
+    .replace(/(?<![\p{L}\[])([A-Z]{2,6})s?(?![\p{L}\]])/gu, (m, word) => (WORDS.has(word) ? m : SAY[word] ?? spell(word)));
 
 // Edge would read Eleven v3's audio tags ([excited], [laughs]) aloud.
 const edge = (text, file) =>
