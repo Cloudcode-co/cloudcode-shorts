@@ -42,14 +42,18 @@ const DURATIONS = `src/videos/${slug}/durations.json`;
 // ("ai pi"). The few said as words stay. Only the spoken text changes.
 const LETTERS = {
   A: "ây", B: "bi", C: "xi", D: "đi", E: "i", F: "ép", G: "gi", H: "ếch", I: "ai", J: "giây", K: "cây", L: "eo", M: "em",
-  N: "en", O: "âu", P: "pi", Q: "kiu", R: "a", S: "ét", T: "ti", U: "diu", V: "vi", W: "đắp bờ liu", X: "ích", Y: "oai", Z: "dét",
+  N: "en", O: "âu", P: "pi", Q: "kiu", R: "a", S: "ét", T: "ti", U: "u", V: "vi", W: "đắp bờ liu", X: "ích", Y: "oai", Z: "dét",
 };
 const WORDS = new Set(["RAM", "ROM", "NASA", "LAN", "WAN", "LED", "GIF", "JPEG", "CAPTCHA", "COVID", "UNESCO", "ASEAN", "OK", "WIFI", "SIM", "BIOS", "LOL"]);
 const spell = (word) => [...word].map((c) => LETTERS[c]).join(" ");
-const UNITS = { KB: "ki lô bai", MB: "mê ga bai", GB: "gi ga bai", TB: "tê ra bai", PB: "pê ta bai" };
+// Units are said as words wherever they stand ("hai GB RAM", "8GB"); "ghi"
+// keeps the hard g that "gi" loses ("di ga").
+const UNITS = { KB: "ki lô bai", MB: "mê ga bai", GB: "ghi ga bai", TB: "tê ra bai", PB: "pê ta bai" };
 const spoken = (text) =>
   text
-    .replace(/(\d)\s?([KMGTP]B)(?![\p{L}])/gu, (m, n, unit) => `${n} ${UNITS[unit]}`) // 8GB
+    .replace(/(?<![\p{L}\d.\-–])(\d[\d.,]*)\s*[-–—]\s*(\d[\d.,]*)(?![\d\-–])/gu, "$1 đến $2") // 1.3 - 1.7, not 2026-11-07
+    .replace(/(?<![\p{L}\[])([KMGTP]B)(?![\p{L}])/gu, (m, unit) => ` ${UNITS[unit]}`)
+    .replace(/(?<![\p{L}\[])v([A-Z]{2,6})(?![\p{L}\]])/gu, (m, word) => `vi ${spell(word)}`) // vCPU
     .replace(/(?<![\p{L}\[])([A-Z]{2,6})v(\d)/gu, (m, word, n) => `${spell(word)} vi ${n}`) // IPv6
     .replace(/(?<![\p{L}\[])([A-Z]{2,6})s?(?![\p{L}\]])/gu, (m, word) => (WORDS.has(word) ? m : spell(word)));
 
