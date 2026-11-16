@@ -212,15 +212,26 @@ const runAgent = (next, text) => {
       console.log(`${next.label} was denied ${d.tool_name}: ${JSON.stringify(d.tool_input).slice(0, 200)}`);
     }
     if (out.result) console.log(out.result.slice(-1500));
+    return { error: out.is_error === true || out.terminal_reason === "api_error", text: String(out.result ?? "") };
   } catch {
     console.log(result.error?.message ?? "", result.stdout?.slice(-3000), result.stderr?.slice(-3000));
+    return { error: true, text: `${result.stdout ?? ""} ${result.stderr ?? ""}` };
   }
 };
 
 let agent = null;
 for (const next of agents) {
   console.log(`\nBuilder: ${next.label}`);
-  runAgent(next, prompt);
+  let run = runAgent(next, prompt);
+  // The gateway throttles for a few minutes at a time ("HTTP 403 (reset after
+  // 2m)"): a build that failed on the API before changing anything waits out
+  // the reset and tries again, rather than leaving the video to the fallback.
+  for (let retry = 1; next.id === "beag" && run.error && !changedSince(start) && retry <= 2; retry++) {
+    const minutes = Math.min(5, Number(run.text.match(/reset after (\d+)m/)?.[1] ?? 2) + 0.5);
+    console.log(`${next.label}: API error, trying again in ${minutes} min (${retry}/2)`);
+    await new Promise((r) => setTimeout(r, minutes * 60 * 1000));
+    run = runAgent(next, prompt);
+  }
   if (changedSince(start) && typechecks()) {
     agent = next;
     break;
