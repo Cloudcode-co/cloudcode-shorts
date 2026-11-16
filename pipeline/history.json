@@ -534,5 +534,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "fossary-catalog-docker-compose",
+    "topic": "Fossary Catalog: Kho Docker Compose chuẩn hóa cho VPS và Homelab thay thế Portainer Templates",
+    "format": "story",
+    "date": "2026-11-16",
+    "direction": "documentary",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

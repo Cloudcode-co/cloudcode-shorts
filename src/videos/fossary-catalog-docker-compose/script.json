@@ -1,0 +1,221 @@
+{
+  "slug": "fossary-catalog-docker-compose",
+  "format": "explainer",
+  "topic": "Fossary Catalog: Kho Docker Compose chuẩn hóa cho VPS và Homelab thay thế Portainer Templates",
+  "title": "Anh em nạp template Portainer có hay bị lỗi không?",
+  "caption": "Fossary Catalog chuẩn hóa Docker Compose kèm sẵn proxy, backup và test tự động cho VPS homelab thay thế Portainer Templates.",
+  "hashtags": [
+    "#fossary",
+    "#dockercompose",
+    "#homelabvn",
+    "#tuhost",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern upbeat electronic synth groove, light tech arpeggios, clean digital beats, energetic and informative, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "minimal tech beat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth",
+        "rhythmic bassline",
+        "energetic electronic"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s7",
+      "styles": [
+        "bright melodic synths",
+        "confident groove",
+        "punchy drums"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm synth chords",
+        "smooth fadeout",
+        "satisfying resolution"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/fossaryhq/catalog",
+    "https://github.com/lissy93/portainer-templates",
+    "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "https://fossary.com/",
+    "https://docs.portainer.io/advanced/app-templates/format"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em nạp template Portainer xong bấm deploy có bao giờ bị văng lỗi không?",
+      "headline": "Lỗi template Portainer?",
+      "lines": [
+        "Deploy dính lỗi cổng",
+        "Biến môi trường thiếu"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer frustrated at computer monitor"
+    },
+    {
+      "id": "s2",
+      "text": "[thoughtful] Thường thì các kho như Portainer Templates gom hơn tám trăm mẫu cộng đồng, nhưng stack compose lại kẹt ở chuẩn version hai cũ do libcompose.",
+      "headline": "Portainer Templates kẹt ở Compose v2",
+      "lines": [
+        "Hơn 800 mẫu tổng hợp",
+        "Hạn chế kỹ thuật từ libcompose"
+      ],
+      "commands": [],
+      "repos": [
+        "lissy93/portainer-templates"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Còn Fossary Catalog chọn hướng ngược lại: xác minh trực tiếp từng hướng dẫn cài đặt thay vì chỉ đi nhặt link.",
+      "headline": "Fossary Catalog chuẩn hóa công thức",
+      "lines": [
+        "Xác minh từng hướng dẫn",
+        "Không chỉ đi gom link"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[excited] Tức là mỗi ứng dụng được đóng gói riêng với compose, biến môi trường mẫu, cùng cấu hình proxy cho Caddy, Nginx và Traefik.",
+      "headline": "Tích hợp sẵn Reverse Proxy",
+      "lines": [
+        "Caddyfile, nginx.conf",
+        "traefik.yaml cấu hình sẵn"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Thư mục nào cũng có sẵn file backup, restore cùng kịch bản kiểm thử tự động smoke-test trước khi xuất xưởng.",
+      "headline": "Kèm Backup, Restore và Test",
+      "lines": [
+        "backup.sh và restore.sh",
+        "smoke-test.sh tự động"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Hệ thống dùng lệnh catalogctl để tự động quét JSON Schema, cú pháp shell và kiểm tra rà soát lộ bí mật bảo mật.",
+      "headline": "Xác thực tự động với catalogctl",
+      "lines": [
+        "Quét JSON Schema và shell",
+        "Kiểm tra bảo mật và secrets"
+      ],
+      "commands": [
+        "catalogctl validate ./catalog/apps"
+      ],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[cheerfully] Vì vậy, ba mươi tám ứng dụng trên catalog đều chạy thực tế mượt mà, ngày hiển thị là ngày chạy test thật chứ không phải ngày sửa văn bản.",
+      "headline": "Nhật ký kiểm thử thực tế",
+      "lines": [
+        "38 ứng dụng qua smoke test",
+        "Ghi nhận đúng ngày test thật"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": "modern server room rack lights"
+    },
+    {
+      "id": "s8",
+      "text": "[warmly] Anh em còn nhập được thông số RAM và chip CPU để web lọc app vừa cấu hình, toàn bộ hồ sơ chỉ lưu cục bộ trên trình duyệt.",
+      "headline": "Lọc app theo cấu hình phần cứng",
+      "lines": [
+        "Nhập RAM, CPU architecture",
+        "Hồ sơ lưu cục bộ trên trình duyệt"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": "hands typing on laptop keyboard"
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Như Immich đòi hỏi hơn sáu giga RAM, còn ai dùng VPS một giga hay Raspberry Pi thì có sẵn danh mục riêng mười ba app nhẹ.",
+      "headline": "Đo ni đóng giày cho VPS và Pi",
+      "lines": [
+        "Immich yêu cầu 6144 MB RAM",
+        "13 app cho VPS dưới 1 GB"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[thoughtful] Dự án mới có ba mươi tám recipe nên số lượng chưa thể bằng tám trăm mẫu của Lissy93, bù lại độ chuẩn hóa cực kỳ an tâm.",
+      "headline": "Chất lượng thay vì số lượng",
+      "lines": [
+        "38 recipe đã kiểm định kỹ",
+        "Chuẩn hóa từng dòng lệnh"
+      ],
+      "commands": [],
+      "repos": [
+        "fossaryhq/catalog",
+        "lissy93/portainer-templates"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[cheerfully] Lưu video lại để dựng homelab nhé anh em, bấm theo dõi kênh, và liệu anh em nạp template Portainer xong có còn bị văng lỗi không?",
+      "headline": "Lưu lại và theo dõi ngay",
+      "lines": [
+        "Thử nghiệm trên VPS cá nhân",
+        "Đón xem giải pháp homelab mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

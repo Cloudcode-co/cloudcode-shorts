@@ -1,0 +1,90 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 5.027
+    },
+    "s2": {
+      "start": 5.027,
+      "length": 8.946
+    },
+    "s3": {
+      "start": 13.973,
+      "length": 7.326
+    },
+    "s4": {
+      "start": 21.299,
+      "length": 7.901
+    },
+    "s5": {
+      "start": 29.2,
+      "length": 6.934
+    },
+    "s6": {
+      "start": 36.134,
+      "length": 8.214
+    },
+    "s7": {
+      "start": 44.348,
+      "length": 8.371
+    },
+    "s8": {
+      "start": 52.719,
+      "length": 8.293
+    },
+    "s9": {
+      "start": 61.012,
+      "length": 8.789
+    },
+    "s10": {
+      "start": 69.801,
+      "length": 8.449
+    },
+    "s11": {
+      "start": 78.25,
+      "length": 9.322
+    }
+  },
+  "total": 87.572,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 13.97,
+      "scenes": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 13.97,
+      "length": 30.38,
+      "scenes": [
+        "s3",
+        "s4",
+        "s5",
+        "s6"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "start": 44.35,
+      "length": 25.45,
+      "scenes": [
+        "s7",
+        "s8",
+        "s9"
+      ]
+    },
+    {
+      "name": "Outro",
+      "start": 69.8,
+      "length": 17.77,
+      "scenes": [
+        "s10",
+        "s11"
+      ]
+    }
+  ]
+}
