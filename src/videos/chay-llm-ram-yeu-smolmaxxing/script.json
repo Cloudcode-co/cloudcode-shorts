@@ -1,0 +1,194 @@
+{
+  "slug": "chay-llm-ram-yeu-smolmaxxing",
+  "format": "explainer",
+  "topic": "Chạy LLM trên VPS cấu hình yếu với smolmaxxing: Tối ưu hóa cho thiết bị RAM nhỏ thay thế Ollama",
+  "title": "Thiết bị 1GB RAM chạy mô hình 8B thế nào?",
+  "caption": "Chạy mô hình LLM lớn trên thiết bị RAM yếu với smolmaxxing thay vì Ollama. Giải pháp phân trang flash cho anh em.",
+  "hashtags": [
+    "#smolmaxxing",
+    "#llamacpp",
+    "#selfhosted",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal modern tech electronic beat, crisp subtle synth pulses, clean low-profile bassline, fast-paced futuristic rhythm, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "driving bass",
+        "rhythmic"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s5",
+      "styles": [
+        "triumphant",
+        "high energy",
+        "bright synth"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "resolving",
+        "warm",
+        "fading electronic"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/hyperionaidev/smolmaxxing",
+    "https://github.com/ollama/ollama",
+    "https://github.com/ggml-org/llama.cpp",
+    "https://hyperion-ai.com/products/smolmaxxing",
+    "https://huggingface.co/hyperionaidev/Qwen3.6-35B-A3B-phone-GGUF",
+    "https://huggingface.co/hyperionaidev/Qwen3-Next-80B-A3B-phone-GGUF"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Thiết bị chỉ có một gigabyte RAM thì chạy mô hình tám tỷ tham số thế nào?",
+      "headline": "1GB RAM chạy mô hình 8B?",
+      "lines": [
+        "Chỉ 1GB RAM",
+        "Mô hình 8 tỷ tham số"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer looking at laptop"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì anh em hay cài Ollama chỉ bằng đúng một lệnh shell duy nhất. [casually] Nhưng Ollama phải nạp toàn bộ mô hình vào RAM, nên RAM dưới bốn gigabyte là văng ngay.",
+      "headline": "Ollama và giới hạn RAM",
+      "lines": [
+        "Ollama nạp toàn bộ vào RAM",
+        "Dễ tràn bộ nhớ trên máy yếu"
+      ],
+      "commands": [
+        "curl -fsSL https://ollama.com/install.sh | sh"
+      ],
+      "repos": [
+        "ollama/ollama"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Còn smolmaxxing thì tiếp cận khác hẳn, [excited] bản chất nó là một bản vá trực tiếp trên llama.cpp nhằm ép xung phần cứng yếu.",
+      "headline": "Bản vá smolmaxxing",
+      "lines": [
+        "Bản vá trực tiếp trên llama.cpp",
+        "Tối ưu cho phần cứng nhỏ nhất"
+      ],
+      "commands": [],
+      "repos": [
+        "hyperionaidev/smolmaxxing",
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Thường mô hình dày đặc khi vượt quá RAM sẽ bị nghẽn ở tốc độ đọc flash. [thoughtful] Còn mô hình MoE hỗn hợp chuyên gia chỉ cần kích hoạt vài expert cho mỗi token sinh ra.",
+      "headline": "Sự khác biệt của kiến trúc MoE",
+      "lines": [
+        "Mô hình dense nghẽn băng thông flash",
+        "MoE chỉ dùng vài expert mỗi token"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Tức là smolmaxxing chỉ giữ các expert phổ biến trong RAM, nạp trước tầng tiếp theo và đọc phần còn lại từ flash theo yêu cầu. [impressed] Vì vậy mô hình MoE tám tỷ tham số chạy nhanh gấp hai mươi bảy lần bản dense chín tỷ trên cùng thiết bị.",
+      "headline": "Cơ chế phân trang chuyên gia",
+      "lines": [
+        "Giữ expert hay dùng trong RAM",
+        "Đọc on-demand từ bộ nhớ flash",
+        "MoE 8B nhanh gấp 27 lần dense 9B"
+      ],
+      "commands": [],
+      "repos": [
+        "hyperionaidev/smolmaxxing"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Nhờ vậy, một chiếc TV Box dùng chip Cortex-A55 với một gigabyte RAM khả dụng vẫn gõ được mô hình mười sáu tỷ tham số. [excited] Thậm chí điện thoại trống ba gigabyte RAM còn chạy nổi cả Qwen ba mươi lăm tỷ đến tám mươi tỷ.",
+      "headline": "Thực nghiệm phần cứng",
+      "lines": [
+        "TV Box 1GB RAM: chạy Ling-mini 16B",
+        "Điện thoại 3GB RAM trống: chạy tới 80B"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room flashing led lights"
+    },
+    {
+      "id": "s7",
+      "text": "Tuy nhiên đây là dự án kỹ thuật thử nghiệm chứ không phải app tự động. [casually] Bạn bắt buộc phải biên dịch đúng bản vá llama.cpp chứ bản gốc hay Ollama không đọc được các file cắt tỉa đầu ra này.",
+      "headline": "Lưu ý kỹ thuật",
+      "lines": [
+        "Dự án thử nghiệm chuyên sâu",
+        "Yêu cầu build llama.cpp có patch"
+      ],
+      "commands": [],
+      "repos": [
+        "hyperionaidev/smolmaxxing",
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Để tối ưu tốc độ, bạn cần chạy một lượt benchmark để hệ thống tạo trước bộ đệm repack cache cho các kernel tùy biến. [thoughtful]",
+      "headline": "Khởi tạo bộ đệm repack",
+      "lines": [
+        "Tạo cache cho kernel tùy biến",
+        "Chạy bench một token đầu tiên"
+      ],
+      "commands": [
+        "GGML_REPACK_CACHE=$PWD/cache/q36f ./bin/llama-bench -m q36-q2-full.gguf -t 2 -C 0xC0 --cpu-strict 1 -p 0 -n 1 -r 1"
+      ],
+      "repos": [
+        "hyperionaidev/smolmaxxing"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Anh em lưu video lại để thử nghiệm khi vọc vạch máy cũ và bấm theo dõi kênh nhé! [cheerfully] Vậy theo bạn, thiết bị chỉ có một gigabyte RAM thì chạy mô hình tám tỷ tham số thế nào?",
+      "headline": "Lưu lại để vọc ngay",
+      "lines": [
+        "Lưu video để thử nghiệm sau",
+        "Follow kênh để cập nhật kỹ thuật mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer typing code at desk"
+    }
+  ]
+}

@@ -523,5 +523,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "chay-llm-ram-yeu-smolmaxxing",
+    "topic": "Chạy LLM trên VPS cấu hình yếu với smolmaxxing: Tối ưu hóa cho thiết bị RAM nhỏ thay thế Ollama",
+    "format": "news",
+    "date": "2026-11-16",
+    "direction": "news-desk",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
