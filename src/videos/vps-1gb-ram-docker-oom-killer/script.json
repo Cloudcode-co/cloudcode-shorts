@@ -1,0 +1,111 @@
+{
+  "slug": "vps-1gb-ram-docker-oom-killer",
+  "format": "meme",
+  "topic": "VPS 1GB RAM gánh Docker Compose",
+  "title": "Khi VPS 1GB RAM phải gánh cả hệ sinh thái Docker",
+  "caption": "Ảo tưởng sức mạnh con VPS giá rẻ và cái kết bị OOM Killer gõ đầu. Anh em từng bị trảm chưa?",
+  "hashtags": [
+    "#vpsgiare",
+    "#dockercompose",
+    "#oomkiller",
+    "#laptrinhvien",
+    "#devdoi"
+  ],
+  "musicPrompt": "bouncy playful funk bassline escalating into sudden chaotic alarm synths and funny sad violin outro, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "bouncy",
+        "playful funk",
+        "cheerful groove"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "confident rhythm",
+        "electronic beats",
+        "rising energy"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "sudden silence",
+        "distorted bass",
+        "panic alarm"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "sad trombone",
+        "melodramatic violin",
+        "comedic finish"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sinh viên IT săn được con VPS 1GB RAM 20k một tháng mừng rớt nước mắt",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing happy",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Tự tin clone docker-compose quất cả Nginx, MySQL, WordPress lẫn bot Discord",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Gõ docker compose up -d xong ung dung rung đùi đợi web lên sóng",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing chill",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Đột nhiên terminal đứng hình, SSH văng cái rụp báo Connection timed out",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic screaming",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Mở VNC console lên thấy OOM Killer đã trảm sạch sành sanh không chừa con nào",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying facepalm",
+      "place": "bedroom at night computer"
+    }
+  ]
+}

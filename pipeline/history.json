@@ -567,5 +567,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "vps-1gb-ram-docker-oom-killer",
+    "topic": "VPS 1GB RAM gánh Docker Compose",
+    "format": "meme",
+    "date": "2026-11-17",
+    "direction": "meme-skit",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

@@ -1,0 +1,87 @@
+{
+  "topic": "VPS 1GB RAM gánh Docker Compose",
+  "date": "2026-11-17",
+  "repos": [],
+  "notes": null,
+  "memes": [
+    {
+      "scene": "s1",
+      "query": "cat dancing happy",
+      "file": "memes/cat-dancing-happy-giphy-r7ZzwJ34ueeQTpnwNx.gif",
+      "id": "giphy-r7ZzwJ34ueeQTpnwNx",
+      "title": "Happy Dance Sticker by krist menina",
+      "page": "https://giphy.com/stickers/happy-dance-yesssss-r7ZzwJ34ueeQTpnwNx",
+      "author": "kristmmm",
+      "width": 480,
+      "height": 480,
+      "frames": 13,
+      "link": "https://media0.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlaHNrZDM1ZDRocXdwcmt0eXhrMHlkMTE5ZTYzb3lyb2F5NmgzOG05dSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/r7ZzwJ34ueeQTpnwNx/giphy.gif"
+    },
+    {
+      "scene": "s2",
+      "query": "cat typing laptop",
+      "file": "memes/cat-typing-laptop-giphy-WUlplcMpOCEmTGBtBW.gif",
+      "id": "giphy-WUlplcMpOCEmTGBtBW",
+      "title": "Black Cat Sticker by TRU LUV",
+      "page": "https://giphy.com/stickers/selfcare-the-app-tru-luv-WUlplcMpOCEmTGBtBW",
+      "author": "TRULUV",
+      "width": 480,
+      "height": 328,
+      "frames": 5,
+      "link": "https://media0.giphy.com/media/v1.Y2lkPWU1MDY5ZTRla3NmOXloZXFodHRydTE2M3l2Z21wN3E4NWpmbG84ZjdqeDRmdWU5NCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/WUlplcMpOCEmTGBtBW/giphy.gif"
+    },
+    {
+      "scene": "s3",
+      "query": "cat vibing chill",
+      "file": "memes/cat-vibing-chill-giphy-eNAg3vgDfBeB7ACAhW.gif",
+      "id": "giphy-eNAg3vgDfBeB7ACAhW",
+      "title": "Happy Cat Sticker by jjjjjohn",
+      "page": "https://giphy.com/stickers/tv-cat-sleep-eNAg3vgDfBeB7ACAhW",
+      "author": "jjjjjohn",
+      "width": 618,
+      "height": 618,
+      "frames": 12,
+      "link": "https://media4.giphy.com/media/v1.Y2lkPWU1MDY5ZTRldWFmMXhqeDVmaDlmenphMDlyYnIxZTk4NmZsa3M0ajNlcnM3djJreCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/eNAg3vgDfBeB7ACAhW/giphy.gif"
+    },
+    {
+      "scene": "s4",
+      "query": "cat panic screaming",
+      "file": "memes/cat-panic-screaming-giphy-SH8s8xDq69Oda9RMPj.gif",
+      "id": "giphy-SH8s8xDq69Oda9RMPj",
+      "title": "Tabby Cat Help Sticker by Lord Tofu Animation",
+      "page": "https://giphy.com/stickers/cat-cartoon-lord-tofu-SH8s8xDq69Oda9RMPj",
+      "author": "lordtofucat",
+      "width": 480,
+      "height": 480,
+      "frames": 16,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlYTN4eDYxamZnaGF6ZTl4NjR4anRibGN0bnZ3bm5jZGh5ZzR5ZjAyYiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/SH8s8xDq69Oda9RMPj/giphy.gif"
+    },
+    {
+      "scene": "s5",
+      "query": "cat crying facepalm",
+      "file": "memes/cat-crying-facepalm-giphy-gvNYG0zx3DfqiizJtq.gif",
+      "id": "giphy-gvNYG0zx3DfqiizJtq",
+      "title": "Oh No Crying Sticker by Bichi Mao",
+      "page": "https://giphy.com/stickers/BichiMao-embarrassed-regret-regretful-gvNYG0zx3DfqiizJtq",
+      "author": "BichiMao",
+      "width": 480,
+      "height": 480,
+      "frames": 16,
+      "link": "https://media0.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlMHdqMmx0eDhkMGpiNGs3bHcwZ2s4cmJ5Mm9jbDlja3prN3cxbDByeiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/gvNYG0zx3DfqiizJtq/giphy.gif"
+    }
+  ],
+  "images": [
+    {
+      "scene": "s1",
+      "query": "bedroom at night computer",
+      "file": "images/bedroom-at-night-computer-pixabay-5884606.jpg",
+      "sticker": false,
+      "id": "pixabay-5884606",
+      "page": "https://pixabay.com/photos/christmas-tree-christmas-bokeh-5884606/",
+      "author": "stewie012",
+      "tags": "christmas tree, christmas, bokeh, christmas lights, holidays, december, decoration, christmas decoration, christmas tree, christmas tree, christmas tree, christmas tree, christmas tree, christmas, christmas, christmas, christmas, christmas lights",
+      "width": 853,
+      "height": 1280
+    }
+  ]
+}
