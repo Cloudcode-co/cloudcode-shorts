@@ -1,0 +1,213 @@
+{
+  "slug": "macaq-quantize-gguf-huawei",
+  "format": "explainer",
+  "topic": "Nén model AI chạy trên VPS với MACaQ: Bộ công cụ quantize GGUF mã nguồn mở từ Huawei, so sánh với llama.cpp",
+  "title": "Nén model 122B với 33GB RAM cùng MACaQ?",
+  "caption": "MACaQ từ Huawei giúp nén mô hình AI nhanh bằng cơ chế streaming từng layer, xuất file GGUF chất lượng cao chạy thẳng trên llama.cpp. Anh em đã thử công cụ này chưa?",
+  "hashtags": [
+    "#macaq",
+    "#llamacpp",
+    "#gguf",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Energetic modern minimal electronic beat with pulsating synth bassline, clean tech atmosphere, punchy rhythmic drums, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy bass",
+        "curious"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady techno pulse",
+        "focused"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s5",
+      "styles": [
+        "driving synth",
+        "triumphant",
+        "high energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm resolution",
+        "fading pulse",
+        "clean"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/huawei-csl/MACaQ",
+    "https://github.com/RahulSChand/gpu_poor",
+    "https://github.com/casper-hansen/AutoAWQ",
+    "https://arxiv.org/abs/2611.10649",
+    "https://huawei-csl.com/blog/macaq/",
+    "https://huggingface.co/huawei-csl/Qwen3.6-35B-A3B-MACaQ-R-GGUF"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Nén model 122 tỷ tham số mất đúng 33 GB RAM, [curious] anh em tin không?",
+      "headline": "Nén 122B model chỉ với 32.5 GB RAM",
+      "lines": [
+        "122B tham số trong 64 phút",
+        "Chỉ tốn 32.5 GB bộ nhớ"
+      ],
+      "commands": [],
+      "repos": [
+        "huawei-csl/MACaQ"
+      ],
+      "footage": "developer working at desk night"
+    },
+    {
+      "id": "s2",
+      "text": "[impressed] Đó là MACaQ, bộ công cụ quantize mã nguồn mở Apache 2.0 từ Huawei Computing Systems Lab, nén Llama-3-8B nhanh hơn 11 lần so với MR-GPTQ.",
+      "headline": "MACaQ từ Huawei Computing Systems Lab",
+      "lines": [
+        "Mã nguồn mở Apache 2.0",
+        "Nhanh hơn 11 lần so với MR-GPTQ"
+      ],
+      "commands": [],
+      "repos": [
+        "huawei-csl/MACaQ"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Thường thì các thuật toán phải nạp cả mạng nơ-ron vào bộ nhớ. [thoughtful] Còn MACaQ xử lý độc lập từng linear layer theo dạng streaming, nên RAM chỉ cần chứa đúng một layer duy nhất.",
+      "headline": "Streaming từng layer độc lập",
+      "lines": [
+        "Thường thì: nạp toàn bộ mạng nơ-ron",
+        "MACaQ: chỉ nạp duy nhất một layer"
+      ],
+      "commands": [],
+      "repos": [
+        "huawei-csl/MACaQ"
+      ],
+      "footage": "modern datacenter server racks"
+    },
+    {
+      "id": "s4",
+      "text": "Để giữ độ chính xác ở mức 4-bit, MACaQ dùng kỹ thuật Flip-Refinement dựa trên ma trận Hessian. [casually] Thuật toán sẽ dịch chuyển các mã FP4 sang giá trị tối ưu lân cận mà không làm biến dạng các lớp khác.",
+      "headline": "Flip-Refinement tối ưu ma trận Hessian",
+      "lines": [
+        "Cân bằng channel và biến đổi Hadamard",
+        "Dịch chuyển mã FP4 tối ưu"
+      ],
+      "commands": [],
+      "repos": [
+        "huawei-csl/MACaQ"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Vì vậy chất lượng GGUF xuất ra rất cao. [excited] Thử nghiệm với Qwen3-4B trên llama.cpp, định dạng IQ4_XS của MACaQ đạt KL 0.028041, vượt cả Bartowski lẫn Unsloth ở cùng kích thước.",
+      "headline": "Chất lượng GGUF vượt trội trên llama.cpp",
+      "lines": [
+        "MACaQ IQ4_XS: KL 0.028041 (2.26 GB)",
+        "Bartowski: 0.034433 | Unsloth: 0.036629"
+      ],
+      "commands": [],
+      "repos": [
+        "huawei-csl/MACaQ"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Đặc biệt, bản MACaQ-R cho phép tinh chỉnh thẳng file GGUF có sẵn. [cheerfully] Tức là anh em chạy trực tiếp được trên llama.cpp chuẩn mà không cần cài thêm runtime tuỳ biến.",
+      "headline": "MACaQ-R tương thích chuẩn llama.cpp",
+      "lines": [
+        "Tinh chỉnh trực tiếp file GGUF có sẵn",
+        "Chạy mượt mà trên llama.cpp tiêu chuẩn"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Để trải nghiệm, anh em cài llama.cpp bằng một dòng lệnh, rồi kéo trực tiếp model MoE 35 tỷ tham số từ Hugging Face về máy.",
+      "headline": "Cài đặt và chạy model MoE",
+      "lines": [
+        "Cài llama.cpp chính thức",
+        "Chạy model Qwen3.6-35B MoE"
+      ],
+      "commands": [
+        "curl -LsSf https://llama.app/install.sh | sh",
+        "llama cli -hf huawei-csl/Qwen3.6-35B-A3B-MACaQ-R-GGUF:Q4_K_XL"
+      ],
+      "repos": [
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Nếu muốn dựng API tương thích OpenAI hoặc chạy qua Ollama, [cheerfully] anh em chỉ cần gõ đúng một câu lệnh là xong.",
+      "headline": "Khởi chạy API server hoặc Ollama",
+      "lines": [
+        "Mở cổng API chuẩn OpenAI",
+        "Hoặc gọi trực tiếp qua Ollama"
+      ],
+      "commands": [
+        "llama serve -hf huawei-csl/Qwen3.6-35B-A3B-MACaQ-R-GGUF:Q4_K_XL",
+        "ollama run hf.co/huawei-csl/Qwen3.6-35B-A3B-MACaQ-R-GGUF:Q4_K_XL"
+      ],
+      "repos": [
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Lưu ý là nếu tự quantize, anh em cần Python 3.12 trên Linux và phải chuẩn bị tập dữ liệu calibration đại diện bằng văn bản UTF-8.",
+      "headline": "Lưu ý khi tự nén mô hình",
+      "lines": [
+        "Hệ điều hành Linux + Python 3.12",
+        "Dữ liệu calibration UTF-8 riêng biệt"
+      ],
+      "commands": [],
+      "repos": [
+        "huawei-csl/MACaQ"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để thử nén model trên máy chủ nhé, bấm theo dõi để cập nhật thêm công cụ mới. Nén model 122 tỷ tham số mất đúng 33 GB RAM, [curious] anh em tin không?",
+      "headline": "Lưu video và theo dõi ngay",
+      "lines": [
+        "Lưu video để tự host AI",
+        "Theo dõi kênh để đón xem công cụ mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "young engineer smiling at screen"
+    }
+  ]
+}

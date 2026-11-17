@@ -556,5 +556,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "macaq-quantize-gguf-huawei",
+    "topic": "Nén model AI chạy trên VPS với MACaQ: Bộ công cụ quantize GGUF mã nguồn mở từ Huawei, so sánh với llama.cpp",
+    "format": "tutorial",
+    "date": "2026-11-17",
+    "direction": "terminal-tutorial",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
