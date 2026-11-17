@@ -1,0 +1,248 @@
+{
+  "slug": "telltaledns-vps-homelab",
+  "format": "explainer",
+  "topic": "Tự host TelltaleDNS trên VPS và Homelab: DNS chặn quảng cáo thế hệ mới, giải thích rõ từng truy vấn thay thế Pi-hole và AdGuard Home",
+  "title": "DNS nào chỉ tốn 14 MiB RAM mà soi rõ từng rule chặn?",
+  "caption": "TelltaleDNS: giải pháp DNS sinkhole bằng Rust nhẹ, giải thích cặn kẽ từng truy vấn và đồng bộ cluster cho homelab.",
+  "hashtags": [
+    "#telltaledns",
+    "#homelabvietnam",
+    "#selfhosted",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Minimalist electronic tech beat, warm synthesized bass pulses, modern crisp percussion, forward momentum, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimalist",
+        "crisp percussion",
+        "curious pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising energy",
+        "rhythmic synth",
+        "tech drive"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "punchy bass",
+        "confident groove",
+        "electronic flow"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s11",
+      "styles": [
+        "smooth fade",
+        "warm synth bed",
+        "clean outro"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/paimonsoror/telltaledns",
+    "https://github.com/AdguardTeam/AdGuardHome",
+    "https://github.com/pi-hole/pi-hole",
+    "https://paimonsoror.github.io/telltaledns/faq.html",
+    "https://raw.githubusercontent.com/paimonsoror/telltaledns/main/deploy/compose/compose.yaml",
+    "https://raw.githubusercontent.com/paimonsoror/telltaledns/main/deploy/compose/telltale.toml"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] DNS server nào chỉ tốn 14 MiB RAM mà soi rõ từng rule chặn?",
+      "headline": "DNS sinkhole chỉ 14 MiB RAM",
+      "lines": [
+        "Chỉ tốn 14 MiB RAM không tải",
+        "Giải thích rõ từng truy vấn"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì Pi-hole hay AdGuard Home chỉ báo chặn chung chung. [impressed] Còn TelltaleDNS thì chỉ đích danh danh sách nào, quy tắc nào đã chặn và upstream nào trả lời.",
+      "headline": "Giải thích rõ từng truy vấn",
+      "lines": [
+        "Thường: chỉ báo block chung chung",
+        "TelltaleDNS: chỉ rõ rule và upstream"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns",
+        "pi-hole/pi-hole",
+        "AdguardTeam/AdGuardHome"
+      ],
+      "footage": "developer typing terminal desk"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Anh em được chạy thử rule mới trên traffic hôm qua, tức là thấy trước nó có chặn nhầm web nào không rồi mới lưu.",
+      "headline": "Thử rule trên traffic hôm qua",
+      "lines": [
+        "Giả lập rule trên traffic thực tế",
+        "Tránh chặn nhầm trước khi áp dụng"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Image chỉ mười ba mê, lưu một triệu tên miền trong sáu mươi mê RAM, nên chín mươi chín phẩy chín chín chín phần trăm phản hồi gửi đi dưới hai trăm năm mươi microsecond.",
+      "headline": "Phản hồi dưới 250 microsecond",
+      "lines": [
+        "Image container chỉ ~13 MiB",
+        "1 triệu domain trong 60 MiB RAM",
+        "99.999% phản hồi < 250 µs"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": "server room datacenter racks"
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Bình thường anh em phải cài Unbound để phân giải gốc. Còn với TelltaleDNS, chỉ cần upstream recursive:// là nó tự hỏi cụm root server, không cần phần mềm phụ.",
+      "headline": "Tự phân giải gốc không cần Unbound",
+      "lines": [
+        "Upstream: recursive://",
+        "Truy vấn trực tiếp root server",
+        "Không cần chạy thêm Unbound"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Nó hỗ trợ cluster Active-Active giữa VPS và Raspberry Pi không cần database ngoài, vì mỗi node đều có bộ lưu trữ nhúng riêng.",
+      "headline": "Cluster Active-Active không cần DB",
+      "lines": [
+        "Đồng bộ giữa VPS và Raspberry Pi",
+        "Embedded store riêng biệt từng node"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": "system administrator inspecting server"
+    },
+    {
+      "id": "s7",
+      "text": "[warmly] Vì vậy khi node chính gặp sự cố, các node phụ vẫn tiếp tục phân giải từ cấu hình tốt gần nhất, mạng gia đình không lo bị gián đoạn.",
+      "headline": "Không sợ sập mạng khi lỗi node",
+      "lines": [
+        "Phản hồi từ cấu hình tốt gần nhất",
+        "Vẫn hoạt động ngay cả khi restart"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Mỗi máy dùng DoT hay DoH đều gán được Client ID riêng trên URL, nên anh em dễ dàng chia rule theo thiết bị dù ra ngoài mạng di động.",
+      "headline": "Client ID trên DoH và DoT",
+      "lines": [
+        "Gán Client ID trực tiếp trên URL",
+        "Phân nhóm rule cả khi dùng 4G/5G"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[cheerfully] Cài đặt qua Docker Compose rất tiện, anh em tạo thư mục rồi tải file cấu hình chính thức:",
+      "headline": "Tải cấu hình Docker Compose",
+      "lines": [
+        "Tải compose.yaml và telltale.toml"
+      ],
+      "commands": [
+        "mkdir telltale && cd telltale",
+        "curl -fsSLO https://raw.githubusercontent.com/paimonsoror/telltaledns/main/deploy/compose/compose.yaml",
+        "curl -fsSLO https://raw.githubusercontent.com/paimonsoror/telltaledns/main/deploy/compose/telltale.toml"
+      ],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Sau đó khởi chạy container và lấy token tạo tài khoản admin trên web cổng tám không năm ba:",
+      "headline": "Khởi chạy và lấy Token",
+      "lines": [
+        "Khởi chạy container",
+        "Tạo setup token cho Web UI 8053"
+      ],
+      "commands": [
+        "docker compose up -d",
+        "docker compose exec telltale telltale auth setup-token"
+      ],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[thoughtful] Bản này đang ở giai đoạn pre-1.0 và cố tình không có DHCP, nên nó sẽ đọc tên thiết bị qua router UniFi, OPNsense hoặc mDNS.",
+      "headline": "Lưu ý cấu hình và DHCP",
+      "lines": [
+        "Phần mềm đang ở giai đoạn pre-1.0",
+        "Cố tình không tích hợp DHCP",
+        "Đọc tên qua UniFi, OPNsense, mDNS"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s12",
+      "text": "[warmly] Anh em lưu video lại để thử trên VPS nhé, bấm theo dõi kênh, [curious] và kiểm tra xem DNS nhà mình đã nhẹ tới 14 MiB RAM chưa?",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để tự host trên homelab",
+        "Theo dõi kênh để đón xem công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "paimonsoror/telltaledns"
+      ],
+      "footage": "young man smiling phone desk"
+    }
+  ]
+}

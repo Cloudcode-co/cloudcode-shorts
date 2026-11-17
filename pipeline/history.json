@@ -545,5 +545,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "telltaledns-vps-homelab",
+    "topic": "Tự host TelltaleDNS trên VPS và Homelab: DNS chặn quảng cáo thế hệ mới, giải thích rõ từng truy vấn thay thế Pi-hole và AdGuard Home",
+    "format": "brief",
+    "date": "2026-11-17",
+    "direction": "news-desk",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
