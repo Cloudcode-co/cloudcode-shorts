@@ -9,7 +9,8 @@
 // Env: ANTHROPIC_API_KEY, CLAUDE_MODEL (default claude-sonnet-5-5),
 // CLAUDE_BUDGET_USD (default 4), CLAUDE_BIN (default "claude"); for a `heavy`
 // art direction CLAUDE_HEAVY_MODEL (default claude-opus-5-5) and
-// CLAUDE_HEAVY_BUDGET_USD (default 10); for the
+// CLAUDE_HEAVY_BUDGET_USD (default 10); for the Command Code builder (after
+// Claude) COMMAND_CODE_API_KEY, CMD_MODEL, CMD_BIN; for the
 // be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
 // ag/gemini-3.8-flash-high), BUILDER_HEAVY_BEAG_MODEL (the heavy backup's
 // model, default oc/glm-5.3-flash-free), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
@@ -102,7 +103,8 @@ const prompt =
   (keep && !past?.direction ? "" : `Art direction: ${direction.name}. ${direction.brief}\nPacing: ${pace}`) +
   (notes ? `\n\nRequests from the channel owner, which win over the art direction and pacing:\n${notes}` : "");
 
-// Who builds, in order: Claude on Anthropic's API, then the same Claude Code
+// Who builds, in order: Claude on Anthropic's API, then Command Code's CLI,
+// then Claude Code
 // running Gemini through the be-ag gateway (LLM_*), for when Anthropic fails
 // or the credit runs out. BUILDER=beag skips Claude.
 // A heavy direction (a demanding edit like breakcore-swiss) is always built by
@@ -129,6 +131,18 @@ const agents = [
       label: "Claude",
       env: { ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY },
       args: ["--model", claudeModel, "--max-budget-usd", claudeBudget],
+    },
+  // Command Code's own CLI (`cmd`) on the owner's Command Code plan.
+  process.env.COMMAND_CODE_API_KEY &&
+    process.env.BUILDER !== "beag" && {
+      id: "cmd",
+      label: `Command Code${process.env.CMD_MODEL ? ` (${process.env.CMD_MODEL})` : ""}`,
+      env: { COMMAND_CODE_API_KEY: process.env.COMMAND_CODE_API_KEY },
+      args: [
+        ...(process.env.CMD_MODEL ? ["--model", process.env.CMD_MODEL] : []),
+        "--max-turns",
+        process.env.BUILDER_MAX_TURNS || "150",
+      ],
     },
   ...(process.env.LLM_API_KEY ? beagModels : []).map((beagModel) => ({
     id: "beag",
@@ -184,8 +198,56 @@ const changedSince = (files) => {
   return now.size !== files.size || [...now].some(([f, text]) => files.get(f) !== text);
 };
 
+// Command Code has no per-path deny list like Claude Code's, so its run is
+// told the same limits and anything it changed outside the videos is put back.
+const PROTECTED = ["pipeline", ".github", "worker", "src/kit", ".claude", "scripts", "package.json", "package-lock.json"];
+const runCmd = (next, text) => {
+  const result = spawnSync(
+    process.env.CMD_BIN || "cmd",
+    [
+      "-p",
+      `${text}\n\nYou are running as Command Code, not Claude Code: a skill that pipeline/BUILDER.md names is the file ` +
+        `.claude/skills/<name>/SKILL.md (read it and the files it points to). Change only files under src/videos/${slug}/ ` +
+        `and public/videos/${slug}/; do not edit ${PROTECTED.join(", ")}, do not use the network, and do not print environment variables.`,
+      ...next.args,
+      "--yolo",
+      "--trust",
+      "--skip-onboarding",
+      "--output-format",
+      "json",
+    ],
+    {
+      env: { ...baseEnv, ...next.env },
+      encoding: "utf8",
+      maxBuffer: 64 * 1024 * 1024,
+      timeout: 90 * 60 * 1000,
+    },
+  );
+  spawnSync("git", ["checkout", "--", ...PROTECTED], { stdio: "inherit" });
+  spawnSync("git", ["clean", "-fdq", "--", ...PROTECTED], { stdio: "inherit" });
+  const lines = (result.stdout ?? "").trim().split("\n");
+  let out = {};
+  for (const line of lines.reverse()) {
+    try {
+      const v = JSON.parse(line);
+      if (v.type === "result") {
+        out = v;
+        break;
+      }
+    } catch {}
+  }
+  console.log(`${next.label}: ${out.subtype ?? `exit ${result.status}`}, ${out.stopReason ?? "-"}, ${Math.round((out.durationMs ?? 0) / 1000)}s`);
+  if (out.finalText) console.log(out.finalText.slice(-1500));
+  const detail = `${out.error ?? ""} ${(result.stderr ?? "").slice(-2000)}`.trim();
+  if (detail) console.log(detail);
+  // Exit 10 is no credit; 5, 6, 7 and 9 are rate limits, network and server errors.
+  const error = out.subtype === "error" || [1, 3, 5, 6, 7, 9, 10].includes(result.status ?? 1);
+  return { error, text: `${result.status === 10 ? "insufficient credits " : ""}${detail}` };
+};
+
 // Runs one builder on `text` in this checkout; what it changed is on disk.
 const runAgent = (next, text) => {
+  if (next.id === "cmd") return runCmd(next, text);
   const result = spawnSync(
     process.env.CLAUDE_BIN || "claude",
     [
