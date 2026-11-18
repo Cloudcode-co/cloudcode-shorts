@@ -78,7 +78,7 @@ jobs:
 
       - name: Install Claude Code, Remotion's browser and the backup voice
         run: |
-          npm install -g @anthropic-ai/claude-code command-code@latest
+          npm install -g @anthropic-ai/claude-code
           npx remotion browser ensure
           # Edge TTS reads the voiceover when ElevenLabs refuses (scripts/voiceover.mjs).
           pipx install edge-tts
@@ -117,9 +117,6 @@ jobs:
           # Animated meme stickers (pipeline/memes.mjs); empty turns them off.
           GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Command Code (`cmd`), the builder after Claude; CMD_MODEL picks its model.
-          COMMAND_CODE_API_KEY: ${{ secrets.COMMAND_CODE_API_KEY }}
-          CMD_MODEL: ${{ vars.CMD_MODEL }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           CLAUDE_BUDGET_USD: ${{ vars.CLAUDE_BUDGET_USD }}
           CLAUDE_HEAVY_MODEL: ${{ vars.CLAUDE_HEAVY_MODEL }}

@@ -171,7 +171,7 @@ try {
   const caption = `${script.caption}\n\n${script.hashtags.join(" ")}`;
   const title = `${revise ? `Đã sửa (bản ${version})` : "Xong"}: ${script.title}`;
   const footer =
-    `${build.direction}, ${{ claude: "Claude dựng", cmd: "Command Code dựng", beag: "be-ag dựng" }[build.built] ?? "khuôn dự phòng"} ` +
+    `${build.direction}, ${{ claude: "Claude dựng", beag: "be-ag dựng" }[build.built] ?? "khuôn dự phòng"} ` +
     `$${(build.costUsd ?? 0).toFixed(2)} · sửa: /sua video:${slug}` +
     (runUrl ? ` · <${runUrl}>` : "");
 
