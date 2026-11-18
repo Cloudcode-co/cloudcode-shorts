@@ -1,0 +1,90 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 4.453
+    },
+    "s2": {
+      "start": 4.453,
+      "length": 11.009
+    },
+    "s3": {
+      "start": 15.462,
+      "length": 7.169
+    },
+    "s4": {
+      "start": 22.631,
+      "length": 9.024
+    },
+    "s5": {
+      "start": 31.655,
+      "length": 9.494
+    },
+    "s6": {
+      "start": 41.149,
+      "length": 12.551
+    },
+    "s7": {
+      "start": 53.7,
+      "length": 9.024
+    },
+    "s8": {
+      "start": 62.724,
+      "length": 10.226
+    },
+    "s9": {
+      "start": 72.95,
+      "length": 12.446
+    },
+    "s10": {
+      "start": 85.396,
+      "length": 7.509
+    },
+    "s11": {
+      "start": 92.905,
+      "length": 10.994
+    }
+  },
+  "total": 103.899,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 15.46,
+      "scenes": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 15.46,
+      "length": 47.26,
+      "scenes": [
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7"
+      ]
+    },
+    {
+      "name": "Contrast",
+      "start": 62.72,
+      "length": 30.18,
+      "scenes": [
+        "s8",
+        "s9",
+        "s10"
+      ]
+    },
+    {
+      "name": "Outro",
+      "start": 92.91,
+      "length": 10.99,
+      "scenes": [
+        "s11"
+      ]
+    }
+  ]
+}

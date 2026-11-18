@@ -578,5 +578,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "tu-host-mosquitto-mqtt-broker",
+    "topic": "Tự host Eclipse Mosquitto trên VPS: MQTT Broker siêu nhẹ cho IoT và Homelab, so sánh với EMQX",
+    "format": "brief",
+    "date": "2026-11-18",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

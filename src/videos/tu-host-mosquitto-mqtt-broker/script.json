@@ -1,0 +1,235 @@
+{
+  "slug": "tu-host-mosquitto-mqtt-broker",
+  "format": "explainer",
+  "topic": "Tự host Eclipse Mosquitto trên VPS: MQTT Broker siêu nhẹ cho IoT và Homelab, so sánh với EMQX",
+  "title": "Sao Mosquitto vừa bật lên lại chặn kết nối ngoài?",
+  "caption": "Tự host Eclipse Mosquitto trên VPS: cách cấu hình xác thực an toàn và so sánh thực tế với EMQX.",
+  "hashtags": [
+    "#mosquitto",
+    "#mqtt",
+    "#homelab",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal electronic synth pulses, subtle rhythmic beat, tech podcast background, clean forward momentum, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady beat",
+        "electronic groove",
+        "focused"
+      ]
+    },
+    {
+      "name": "Contrast",
+      "from": "s8",
+      "styles": [
+        "dynamic",
+        "punchy synth",
+        "clarity"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s11",
+      "styles": [
+        "bright",
+        "resolving",
+        "warm finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/eclipse-mosquitto/mosquitto",
+    "https://github.com/emqx/emqx",
+    "https://github.com/nanomq/nanomq",
+    "https://mosquitto.org/documentation/authentication-methods/",
+    "https://mosquitto.org/documentation/dynamic-security/",
+    "https://www.emqx.com/en/news/emqx-adopts-business-source-license",
+    "https://docs.emqx.com/en/emqx/latest/guides/dashboard/introduction.html"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Sao Mosquitto vừa bật lên lại chặn sạch kết nối từ máy khác?",
+      "headline": "Mosquitto chặn kết nối ngoài?",
+      "lines": [
+        "Khởi động mặc định",
+        "Chỉ nhận localhost"
+      ],
+      "commands": [],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s2",
+      "text": "[thoughtful] Thường thì anh em gõ mosquitto chạy thử ngay. Nhưng từ bản 2.0, Mosquitto không file cấu hình chỉ cho phép localhost kết nối ẩn danh, nên client bên ngoài sẽ bị chặn.",
+      "headline": "Bắt buộc cấu hình xác thực",
+      "lines": [
+        "Mosquitto 2.0+",
+        "Chặn anonymous từ xa"
+      ],
+      "commands": [
+        "mosquitto"
+      ],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Để test cục bộ, anh em mở terminal lắng nghe qua mosquitto_sub, rồi bắn tin bằng mosquitto_pub là xong.",
+      "headline": "Test nhanh trên máy",
+      "lines": [
+        "mosquitto_sub nhận tin",
+        "mosquitto_pub gửi tin"
+      ],
+      "commands": [
+        "mosquitto_sub -t 'test/topic' -v",
+        "mosquitto_pub -t 'test/topic' -m 'hello world'"
+      ],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[cheerfully] Muốn mở ra ngoài an toàn, anh em tạo file mật khẩu bằng lệnh mosquitto_passwd với cờ trừ c. Cách này mã hóa tài khoản mà không bị lộ mật khẩu.",
+      "headline": "Tạo tài khoản xác thực",
+      "lines": [
+        "Tạo file mật khẩu mã hóa",
+        "Tránh lộ pass trong history"
+      ],
+      "commands": [
+        "mosquitto_passwd -c <password file> <username>"
+      ],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Khi thêm user mới, chỉ cần gửi tín hiệu SIGHUP bằng lệnh kill -HUP. Tức là broker nạp lại mật khẩu ngay mà không cần khởi động lại.",
+      "headline": "Nạp lại tài khoản tức thì",
+      "lines": [
+        "Gửi tín hiệu SIGHUP",
+        "Không tắt tiến trình"
+      ],
+      "commands": [
+        "kill -HUP <process id of mosquitto>"
+      ],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Muốn phân quyền chi tiết, Mosquitto có sẵn Dynamic Security plugin quản trị role và ACL qua topic. Plugin này hỗ trợ biến phần trăm c cho Client ID và phần trăm u cho Username.",
+      "headline": "Dynamic Security Plugin",
+      "lines": [
+        "Quản trị role qua topic API",
+        "Biến %c và %u trong ACL"
+      ],
+      "commands": [],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[curious] Nhưng lưu ý nhé, mặc định plugin sẽ chặn cả publish lẫn subscribe. Tức là thiết bị chưa được cấp quyền qua role sẽ không thể gửi hay nhận tin.",
+      "headline": "Chính sách mặc định",
+      "lines": [
+        "publishClientSend: deny",
+        "subscribe: deny"
+      ],
+      "commands": [],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Thường thì môi trường doanh nghiệp sẽ chọn EMQX vì hỗ trợ thêm CoAP, LwM2M và có sẵn Dashboard ở cổng 18083 với tài khoản admin mặc định.",
+      "headline": "EMQX: Tính năng doanh nghiệp",
+      "lines": [
+        "Hỗ trợ CoAP, LwM2M, QUIC",
+        "Web Dashboard cổng 18083"
+      ],
+      "commands": [],
+      "repos": [
+        "emqx/emqx"
+      ],
+      "footage": "server room datacenter"
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Nhưng từ bản v5.9.0, EMQX chuyển sang giấy phép BSL 1.1, chỉ miễn phí cho thử nghiệm hoặc production đơn node, lại yêu cầu Erlang fork riêng khi build.",
+      "headline": "Giấy phép BSL 1.1",
+      "lines": [
+        "Miễn phí single-node",
+        "Bắt buộc fork emqx/otp"
+      ],
+      "commands": [],
+      "repos": [
+        "emqx/emqx"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[excited] Nếu cần broker C nhẹ kiến trúc Actor triển khai nhanh qua Docker, anh em có thể chạy ngay NanoMQ với đúng một dòng lệnh.",
+      "headline": "NanoMQ: Broker C gọn nhẹ",
+      "lines": [
+        "Kiến trúc Actor POSIX C",
+        "Khởi chạy một dòng Docker"
+      ],
+      "commands": [
+        "docker run -d --name nanomq -p 1883:1883 -p 8083:8083 -p 8883:8883 emqx/nanomq:latest"
+      ],
+      "repos": [
+        "nanomq/nanomq"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Lưu video để tự dựng MQTT broker khi cần, và follow mình nhé! [laughs] Giờ thì anh em đã hiểu vì sao Mosquitto vừa bật lại chặn kết nối ngoài chưa?",
+      "headline": "Lưu lại và thử ngay",
+      "lines": [
+        "Lưu video khi dựng VPS",
+        "Follow để đón tip tiếp theo"
+      ],
+      "commands": [],
+      "repos": [
+        "eclipse-mosquitto/mosquitto"
+      ],
+      "footage": "developer coding at desk"
+    }
+  ]
+}
