@@ -226,27 +226,49 @@ const runAgent = (next, text) => {
 };
 
 let agent = null;
-for (const next of agents) {
+// Tries one builder; ok when it left a build that typechecks, else its API error.
+const tryAgent = (next) => {
   console.log(`\nBuilder: ${next.label}`);
-  let run = runAgent(next, prompt);
-  // The gateway throttles for a few minutes at a time ("HTTP 403 (reset after
-  // 2m)"): when no other builder is left, a build that failed on the API
-  // before changing anything waits out the reset and tries again, rather than
-  // leaving the video to the fallback.
-  const last = next === agents[agents.length - 1];
-  for (let retry = 1; last && next.id === "beag" && run.error && !changedSince(start) && retry <= 2; retry++) {
-    const minutes = Math.min(5, Number(run.text.match(/reset after (\d+)m/)?.[1] ?? 2) + 0.5);
-    console.log(`${next.label}: API error, trying again in ${minutes} min (${retry}/2)`);
-    await new Promise((r) => setTimeout(r, minutes * 60 * 1000));
-    run = runAgent(next, prompt);
-  }
-  if (changedSince(start) && typechecks()) {
-    agent = next;
-    break;
-  }
+  const run = runAgent(next, prompt);
+  if (changedSince(start) && typechecks()) return { ok: true };
   // A build that doesn't typecheck goes to the next builder from the start.
   console.log(changedSince(start) ? `${next.label}'s build does not typecheck.` : `${next.label} changed nothing.`);
   restore(start);
+  return { ok: false, ...run };
+};
+// The gateway locks a model's accounts for a minute or two at a time ("HTTP 403
+// (reset after 1m 39s)", or Gemini's 429 "Resource has been exhausted"), while
+// no credit and the oc free tier's daily limit stay until topped up. So when
+// every builder failed on the API, the ones that may come back get more rounds,
+// each after the longest reset the gateway named, before the fallback.
+const waitsOut = (text) => !/credit balance|FreeUsageLimit|insufficient|no balance/i.test(text);
+const resetSeconds = (text) => {
+  const m = text.match(/reset after (?:(\d+)m)?\s*(?:(\d+)s)?/);
+  return m && (m[1] || m[2]) ? Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0) : 90;
+};
+let retryable = [];
+for (const next of agents) {
+  const r = tryAgent(next);
+  if (r.ok) {
+    agent = next;
+    break;
+  }
+  if (next.id === "beag" && r.error && waitsOut(r.text)) retryable.push({ next, wait: resetSeconds(r.text) });
+}
+for (let round = 1; !agent && retryable.length && round <= 3; round++) {
+  const seconds = Math.min(300, Math.max(...retryable.map((r) => r.wait)) + 20);
+  console.log(`\nEvery builder failed on the API; round ${round}/3 of ${retryable.map((r) => r.next.label).join(", ")} in ${seconds}s`);
+  await new Promise((r) => setTimeout(r, seconds * 1000));
+  const again = [];
+  for (const { next } of retryable) {
+    const r = tryAgent(next);
+    if (r.ok) {
+      agent = next;
+      break;
+    }
+    if (r.error && waitsOut(r.text)) again.push({ next, wait: resetSeconds(r.text) });
+  }
+  retryable = again;
 }
 if (!agents.length) console.log("Neither ANTHROPIC_API_KEY nor LLM_API_KEY is set; using the fallback build.");
 
