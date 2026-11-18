@@ -589,5 +589,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "trai-nghiem-portop-linux-vps",
+    "topic": "Trải nghiệm portop trên VPS Linux: \"htop cho cổng mạng\" giám sát Docker và tiến trình thay thế netstat và lsof",
+    "format": "explainer",
+    "date": "2026-11-18",
+    "direction": "ops-console",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

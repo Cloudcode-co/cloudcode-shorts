@@ -1,0 +1,206 @@
+{
+  "slug": "trai-nghiem-portop-linux-vps",
+  "format": "explainer",
+  "topic": "Trải nghiệm portop trên VPS Linux: \"htop cho cổng mạng\" giám sát Docker và tiến trình thay thế netstat và lsof",
+  "title": "Anh em vẫn gõ netstat tìm PID chiếm port à?",
+  "caption": "Trải nghiệm portop: giao diện TUI phong cách htop theo dõi cổng mạng, tiến trình và Docker container trên Linux.",
+  "hashtags": [
+    "#portop",
+    "#linuxvps",
+    "#docker",
+    "#quantrimang",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Modern upbeat lo-fi tech groove with rhythmic synth bass, subtle clicks, and ambient electronic atmosphere, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "mysterious"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving beats",
+        "rhythmic",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "energetic",
+        "punchy",
+        "tech groove"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warmly",
+        "smooth",
+        "relaxed"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/padovanl/portop",
+    "https://github.com/wellsgz/portmon",
+    "https://github.com/imsnif/bandwhich",
+    "https://padovanl.github.io/portop/docs/containers.html",
+    "https://padovanl.github.io/portop/docs/firewall.html",
+    "https://padovanl.github.io/portop/docs/web-dashboard.html",
+    "https://padovanl.github.io/portop/docs/baseline.html"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em vẫn gõ netstat hay lsof rồi căng mắt tìm PID chiếm port à?",
+      "headline": "Tìm port kiểu cũ quá mệt?",
+      "lines": [
+        "netstat và lsof đã quá quen thuộc",
+        "Nhưng tìm PID lại mất thời gian"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer looking at screen frustrated"
+    },
+    {
+      "id": "s2",
+      "text": "[excited] Thử portop, công cụ mã nguồn mở viết bằng Go với giao diện TUI như htop cho cổng mạng.",
+      "headline": "portop: htop cho cổng mạng",
+      "lines": [
+        "Viết bằng Go, giấy phép MIT",
+        "Giao diện TUI thời gian thực"
+      ],
+      "commands": [
+        "portop"
+      ],
+      "repos": [
+        "padovanl/portop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Thường thì lệnh ss chỉ hiện số PID. Còn portop đọc thẳng cgroups để gọi tên chính xác container Docker hay Podman đang giữ port.",
+      "headline": "Nhận diện Docker qua cgroups",
+      "lines": [
+        "ss chỉ hiện PID trơ trọi",
+        "portop định danh thẳng container",
+        "Không cần cài thêm daemon phụ"
+      ],
+      "commands": [],
+      "repos": [
+        "padovanl/portop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Các cụm tiến trình master worker như Nginx cũng được gom vào một dòng duy nhất, kèm luôn tốc độ truyền tải bytes trên giây.",
+      "headline": "Gom nhóm master và worker",
+      "lines": [
+        "Gom gọn: nginx +3",
+        "Đo lưu lượng bytes/s từng socket"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Cổng mở ra ngoài internet hay loopback được phân biệt bằng màu, và tool còn tự đọc tường lửa ufw hay nftables xem port đó có bị chặn hay không.",
+      "headline": "Kiểm tra phơi nhiễm và Firewall",
+      "lines": [
+        "Mã hóa màu: 0.0.0.0 hay 127.0.0.1",
+        "Đánh giá tường lửa: allowed, blocked"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Lúc bị đụng cổng, anh em chỉ cần gõ portop gạch gạch free kèm số port, nó sẽ tự dọn tiến trình và chờ giải phóng xong.",
+      "headline": "Giải phóng port nhanh gọn",
+      "lines": [
+        "Dừng tiến trình chiếm cổng",
+        "Chờ socket giải phóng hoàn toàn"
+      ],
+      "commands": [
+        "portop --free 3000"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[excited] Thậm chí lệnh gạch gạch diff còn tự so sánh với mốc baseline để báo động ngay khi có port lạ mở bất thường trên máy chủ.",
+      "headline": "Bắt lệch port với baseline",
+      "lines": [
+        "Lưu mốc chuẩn: --save-baseline",
+        "Báo port lạ với exit code 3"
+      ],
+      "commands": [
+        "portop --save-baseline",
+        "portop --diff"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[impressed] Cần giao diện web? Chỉ việc thêm cờ gạch gạch web là có dashboard trực quan, hỗ trợ cả xuất metric Prometheus.",
+      "headline": "Web Dashboard trực quan",
+      "lines": [
+        "Truy cập qua cổng 8088",
+        "Có xác thực và endpoint /metrics"
+      ],
+      "commands": [
+        "portop --web"
+      ],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Cài đặt nhanh nhất bằng snap. Anh em lưu ý nên chạy cùng sudo thì tool mới đọc đủ tiến trình của các user khác và tường lửa.",
+      "headline": "Cài đặt và lưu ý quyền root",
+      "lines": [
+        "Cài nhanh qua snap package",
+        "Cần sudo để đọc tường lửa"
+      ],
+      "commands": [
+        "sudo snap install portop"
+      ],
+      "repos": [],
+      "footage": "server rack datacenter"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Lưu video lại để gỡ lỗi VPS khi cần, follow mình để không phải căng mắt gõ netstat tìm PID nữa!",
+      "headline": "Lưu lại và theo dõi kênh",
+      "lines": [
+        "Lưu lại để dùng khi debug VPS",
+        "Tạm biệt netstat và lsof thủ công"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "system administrator at desk"
+    }
+  ]
+}
