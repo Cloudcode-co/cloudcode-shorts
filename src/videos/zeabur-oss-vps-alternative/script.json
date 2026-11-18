@@ -1,0 +1,222 @@
+{
+  "slug": "zeabur-oss-vps-alternative",
+  "format": "explainer",
+  "topic": "Tự host Zeabur trên VPS: Nền tảng PaaS mã nguồn mở triển khai app tự động thay thế Coolify",
+  "title": "Một PaaS tự host không cần database riêng?",
+  "caption": "Khám phá Zeabur OSS: Nền tảng PaaS viết bằng Rust cho Kubernetes, giải pháp stateless đối đầu Coolify.",
+  "hashtags": [
+    "#zeabur",
+    "#coolify",
+    "#selfhosted",
+    "#laptrinh",
+    "#devops"
+  ],
+  "musicPrompt": "Minimal modern tech groove with deep electronic bass, crisp hi-hats, subtle synthesizers, steady momentum, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious synth",
+        "subtle sub bass"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s4",
+      "styles": [
+        "rising tension",
+        "driving electronic beat",
+        "pulsing"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s7",
+      "styles": [
+        "energetic synth groove",
+        "rhythmic bass",
+        "crisp drums"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm synth tail",
+        "relaxing",
+        "gentle fade"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/zeabur-oss/zeabur",
+    "https://github.com/coollabsio/coolify",
+    "https://github.com/Dokploy/dokploy",
+    "https://github.com/zeabur-oss/zeatend",
+    "https://oss.zeabur.com/docs/zeabur/install/existing-cluster/",
+    "https://oss.zeabur.com/docs/zeabur/reference/zeaburctl/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Một PaaS tự host lại hoàn toàn không cần database riêng để hoạt động?",
+      "headline": "PaaS tự host không cần database?",
+      "lines": [
+        "Zeabur OSS",
+        "Không database riêng",
+        "Không custom resource"
+      ],
+      "commands": [],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": "confused developer server room"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì các công cụ như Coolify viết bằng PHP và cần database riêng để lưu trạng thái.",
+      "headline": "Coolify lưu state vào database",
+      "lines": [
+        "Coolify: viết bằng PHP",
+        "Quản lý bằng database riêng"
+      ],
+      "commands": [],
+      "repos": [
+        "coollabsio/coolify"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn Zeabur OSS viết bằng Rust lại hoàn toàn stateless, không lưu database và không tạo custom resource.",
+      "headline": "Zeabur OSS: Stateless 100%",
+      "lines": [
+        "Viết hoàn toàn bằng Rust",
+        "Stateless: không DB riêng",
+        "Không can thiệp sâu K8s"
+      ],
+      "commands": [],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Tức là Zeabur tương tác thẳng với Kubernetes object, nên khi gỡ giao diện ra, ứng dụng và Ingress vẫn giữ nguyên.",
+      "headline": "Gỡ Zeabur, app vẫn chạy",
+      "lines": [
+        "Tương tác object Kubernetes gốc",
+        "App và Ingress không bị mất",
+        "TLS Certificate giữ nguyên"
+      ],
+      "commands": [],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Thường thì Coolify cài đặt cực nhanh trên VPS trắng chỉ bằng một dòng lệnh cURL duy nhất.",
+      "headline": "Coolify cài 1 lệnh trên VPS",
+      "lines": [
+        "Một lệnh cài trọn gói",
+        "Hỗ trợ VPS Linux trắng"
+      ],
+      "commands": [
+        "curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash"
+      ],
+      "repos": [
+        "coollabsio/coolify"
+      ],
+      "footage": "system administrator typing terminal"
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Còn Zeabur hiện tại chưa thể cài một lệnh như vậy, vì nó bắt buộc phải có sẵn cụm Kubernetes một chấm ba mươi trở lên.",
+      "headline": "Yêu cầu Kubernetes 1.30+",
+      "lines": [
+        "Chưa cài 1 lệnh trên bare VPS",
+        "Yêu cầu Kubernetes 1.30+",
+        "Cần Helm 4 và Ingress Traefik"
+      ],
+      "commands": [],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Vì vậy dự án đang phát triển thêm công cụ Zeatend, giúp biến Linux server thành cụm K3s chuẩn bảo mật CIS.",
+      "headline": "Dựng K8s tự động với Zeatend",
+      "lines": [
+        "Cấu hình K3s hoặc RKE2",
+        "Chuẩn bảo mật CIS benchmark"
+      ],
+      "commands": [
+        "sudo zeatend apply"
+      ],
+      "repos": [
+        "zeabur-oss/zeatend"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[excited] Thậm chí chỉ với file kubeconfig, anh em chẳng cần cài server lên cụm mà vẫn mở được dashboard cục bộ.",
+      "headline": "Mở dashboard qua CLI",
+      "lines": [
+        "Không cần cài server vào cụm",
+        "Lắng nghe cổng nội bộ 127.0.0.1",
+        "Token một lần bảo mật"
+      ],
+      "commands": [
+        "zeaburctl ui"
+      ],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": "developer working laptop desk"
+    },
+    {
+      "id": "s9",
+      "text": "Khi triển khai app, Zeabur mặc định dùng railpack hoặc Dockerfile rồi đẩy thẳng thư mục mã nguồn lên cụm.",
+      "headline": "Deploy mã nguồn bằng CLI",
+      "lines": [
+        "Build tự động bằng railpack",
+        "Giới hạn 256 MiB nén"
+      ],
+      "commands": [
+        "zeaburctl up ./site --project shop --service site"
+      ],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Lưu video lại để thử sau và follow kênh nhé, [curious] anh em thấy một PaaS không cần database riêng thế nào?",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để thử nghiệm",
+        "Follow kênh để cập nhật DevOps"
+      ],
+      "commands": [],
+      "repos": [
+        "zeabur-oss/zeabur"
+      ],
+      "footage": "developer smiling looking screen"
+    }
+  ]
+}

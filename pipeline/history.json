@@ -611,5 +611,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "zeabur-oss-vps-alternative",
+    "topic": "Tự host Zeabur trên VPS: Nền tảng PaaS mã nguồn mở triển khai app tự động thay thế Coolify",
+    "format": "explainer",
+    "date": "2026-11-18",
+    "direction": "3d-floating-diagram",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
