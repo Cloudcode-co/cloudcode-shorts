@@ -12,7 +12,8 @@
 // CLAUDE_HEAVY_BUDGET_USD (default 10); for the
 // be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
 // ag/gemini-3.8-flash-high), BUILDER_HEAVY_BEAG_MODEL (the heavy backup's
-// model, default oc/glm-5.3-flash-free), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
+// model, default oc/glm-5.3-flash-free), BUILDER_CMC_MODELS (Command Code models
+// through be-ag, tried first; "off" turns them off), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
 // to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
 // REVIEW=off skips the review round.
 // Prints a JSON line {direction, pacing, built, costUsd} last.
@@ -119,8 +120,14 @@ const geminiModel = process.env.BUILDER_BEAG_MODEL || "ag/gemini-3.8-flash-high"
 // the high one is locked, and the oc model (not on those accounts) after both.
 const geminiLow = geminiModel.replace(/-high$/, "-low");
 const ocModel = process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/glm-5.3-flash-free";
+// The owner's Command Code plan, also behind be-ag (cmc/*): the open models
+// its plan includes (Claude, GPT and Gemini 4 are not), tried before Gemini.
+const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/moonshotai/Kimi-K3.1-Pro,cmc/zai-org/GLM-5.3,cmc/deepseek/deepseek-v4-pro")
+  .split(",")
+  .map((m) => m.trim())
+  .filter((m) => m && m !== "off");
 const beagModels = [
-  ...new Set([...(heavy ? [ocModel] : []), geminiModel, geminiLow, ocModel]),
+  ...new Set([...cmcModels, ...(heavy ? [ocModel] : []), geminiModel, geminiLow, ocModel]),
 ];
 const agents = [
   process.env.ANTHROPIC_API_KEY &&
@@ -241,7 +248,7 @@ const tryAgent = (next) => {
 // no credit and the oc free tier's daily limit stay until topped up. So when
 // every builder failed on the API, the ones that may come back get more rounds,
 // each after the longest reset the gateway named, before the fallback.
-const waitsOut = (text) => !/credit balance|FreeUsageLimit|insufficient|no balance/i.test(text);
+const waitsOut = (text) => !/credit balance|FreeUsageLimit|insufficient|no balance|MODEL_NOT_IN_PLAN/i.test(text);
 const resetSeconds = (text) => {
   const m = text.match(/reset after (?:(\d+)m)?\s*(?:(\d+)s)?/);
   return m && (m[1] || m[2]) ? Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0) : 90;
