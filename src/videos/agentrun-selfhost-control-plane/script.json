@@ -1,0 +1,225 @@
+{
+  "slug": "agentrun-selfhost-control-plane",
+  "format": "explainer",
+  "topic": "Tự host AgentRun trên VPS: Control plane mã nguồn mở quản lý AI Agent bền bỉ và tiết kiệm token, so sánh với Langfuse",
+  "title": "Tự host AgentRun trên VPS: Tiết kiệm token AI Agent",
+  "caption": "Tự host AgentRun trên VPS giúp AI Agent chạy bền bỉ qua sự cố và tối ưu chi phí token so với Langfuse.",
+  "hashtags": [
+    "#agentrun",
+    "#aiagent",
+    "#langfuse",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal tech electronic beat, subtle synth pulse, rhythmic modern ambient bass, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious synth",
+        "subtle click beat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady electronic groove",
+        "driving bassline"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s7",
+      "styles": [
+        "confident groove",
+        "crisp percussion",
+        "tech melody"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm electronic",
+        "gentle fade",
+        "smooth resolving beat"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/Parcha-ai/agentrun",
+    "https://github.com/langfuse/langfuse",
+    "https://github.com/synergycodes/workflowbuilder",
+    "https://agentrun.ai/SKILL.md",
+    "https://langfuse.com/self-hosting/deployment/docker-compose"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Tại sao hóa đơn chạy agent từ hơn sáu nghìn đô giảm còn mười tám cent?",
+      "headline": "Hóa đơn AI Agent giảm 36 lần?",
+      "lines": [
+        "Từ $6,451/tháng xuống $0.18/lần",
+        "Bền bỉ và tối ưu hóa token"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": "developer looking at bills stressed"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì AI agent làm đi làm lại một việc vẫn lặp lại các bước cũ, vì vậy rất tốn token.",
+      "headline": "Vấn đề của AI Agent thông thường",
+      "lines": [
+        "Lặp lại logic khám phá cũ",
+        "Chi phí token đội lên liên tục"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Còn AgentRun là một control plane mã nguồn mở, dựng ngay trên harness agent của anh em để kiểm soát.",
+      "headline": "AgentRun: Control plane mã nguồn mở",
+      "lines": [
+        "Mã nguồn mở Apache-2.0",
+        "Kiểm soát ngân sách và phê duyệt"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Nhiều anh em hay nhầm với Langfuse, nhưng Langfuse chỉ thuần quan sát qua OpenTelemetry và làm AI Gateway.",
+      "headline": "Khác biệt rõ rệt với Langfuse",
+      "lines": [
+        "Langfuse: Observability & AI Gateway",
+        "AgentRun: Control plane & Durable execution"
+      ],
+      "commands": [],
+      "repos": [
+        "langfuse/langfuse",
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] AgentRun thì khác, nó có cơ chế thực thi bền bỉ: tức là tắt cụt server, bật lại vẫn chạy tiếp.",
+      "headline": "Durable Execution bền bỉ",
+      "lines": [
+        "Sập server giữa chừng?",
+        "Khởi động lại tiếp tục chạy ngay"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": "server rack blinking lights"
+    },
+    {
+      "id": "s6",
+      "text": "Nó tự lưu ghi chú và sau hai mươi lần chạy sẽ đúc kết thành workflow, nên không cần prompt lại từ đầu.",
+      "headline": "Tự học và tạo Workflow",
+      "lines": [
+        "Lưu bài học vào corrections.md",
+        "Biên dịch sau 20 lượt thành công"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Nhờ chuyển kinh nghiệm sang model rẻ hơn, tác vụ merchant giảm từ tám mươi chín cent xuống mười hai cent.",
+      "headline": "Cắt giảm chi phí thực tế",
+      "lines": [
+        "Merchant: $0.89 xuống $0.12",
+        "Bắt lỗi code gấp 1.6 lần Greptile"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": "programmer working at desk night"
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Anh em có thể cắm trực tiếp Claude Code, Codex hay pi, nhưng cần máy chủ có Node từ hai tư chấm hai hai trở lên.",
+      "headline": "Hỗ trợ nhiều Agent Harness",
+      "lines": [
+        "Hỗ trợ Claude Code, Codex, OpenCode, pi",
+        "Yêu cầu Node.js >= 24.22.3 trên Linux/macOS"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Nếu máy có sẵn Docker thì agent sẽ có cả sandbox shell, khởi động nhanh trên máy bằng lệnh này:",
+      "headline": "Chạy thử cục bộ",
+      "lines": [
+        "Tự động cấp Docker sandbox",
+        "Giao diện mở trên cổng 7340"
+      ],
+      "commands": [
+        "npx @parcha/agentrun"
+      ],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Còn muốn tự host lâu dài lên máy chủ riêng qua Tailscale thì anh em chạy lệnh chính thức này:",
+      "headline": "Tự host lên VPS qua Tailscale",
+      "lines": [
+        "Cài đặt chạy nền dạng service",
+        "Truy cập an toàn qua Tailnet nội bộ"
+      ],
+      "commands": [
+        "curl -fsSL https://agentrun.ai/install | sh -s -- --tailscale"
+      ],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Anh em lưu video lại để dựng thử trên VPS và bấm theo dõi kênh nhé, [cheerfully] xem hóa đơn token có giảm còn mười tám cent không!",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để tự host",
+        "Follow kênh để cập nhật công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "Parcha-ai/agentrun"
+      ],
+      "footage": ""
+    }
+  ]
+}

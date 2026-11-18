@@ -1,0 +1,5 @@
+{
+  "id": "what-if-sim",
+  "name": "What-if simulation",
+  "brief": "A cinematic what-if simulation made in code, seen through the viewer's eyes: the world fills the whole frame and moves the whole time (the kit's SatelliteZoom over the place in facts.json `satellite` for a fall or flight, else footage or photos of what is happening). A live counter ticks with the story, like ALTITUDE 119,635 FT · 104 MPH: a small spaced label, big tabular numerals, the unit small beside it. One short line of serif italic subtitle per beat, centred low. Subtle camera shake that grows with speed, a vignette, and colour that shifts with the story (thin cold blue up high, warm haze lower, red when it goes wrong). No cards, panels or logos; credit the imagery small in a corner."
+}

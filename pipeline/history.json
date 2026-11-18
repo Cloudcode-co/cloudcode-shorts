@@ -600,5 +600,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "agentrun-selfhost-control-plane",
+    "topic": "Tự host AgentRun trên VPS: Control plane mã nguồn mở quản lý AI Agent bền bỉ và tiết kiệm token, so sánh với Langfuse",
+    "format": "whatif",
+    "date": "2026-11-18",
+    "direction": "what-if-sim",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
