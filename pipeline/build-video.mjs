@@ -248,7 +248,7 @@ const tryAgent = (next) => {
 // no credit and the oc free tier's daily limit stay until topped up. So when
 // every builder failed on the API, the ones that may come back get more rounds,
 // each after the longest reset the gateway named, before the fallback.
-const waitsOut = (text) => !/credit balance|FreeUsageLimit|insufficient|no balance|MODEL_NOT_IN_PLAN/i.test(text);
+const waitsOut = (text) => !/credit balance|FreeUsageLimit|insufficient|no balance|MODEL_NOT_IN_PLAN|usage limit/i.test(text);
 const resetSeconds = (text) => {
   const m = text.match(/reset after (?:(\d+)m)?\s*(?:(\d+)s)?/);
   return m && (m[1] || m[2]) ? Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0) : 90;
