@@ -1,0 +1,90 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 4.949
+    },
+    "s2": {
+      "start": 4.949,
+      "length": 8.449
+    },
+    "s3": {
+      "start": 13.398,
+      "length": 8.867
+    },
+    "s4": {
+      "start": 22.265,
+      "length": 6.621
+    },
+    "s5": {
+      "start": 28.886,
+      "length": 7.326
+    },
+    "s6": {
+      "start": 36.212,
+      "length": 6.542
+    },
+    "s7": {
+      "start": 42.754,
+      "length": 7.091
+    },
+    "s8": {
+      "start": 49.845,
+      "length": 8.057
+    },
+    "s9": {
+      "start": 57.902,
+      "length": 7.822
+    },
+    "s10": {
+      "start": 65.724,
+      "length": 8.528
+    },
+    "s11": {
+      "start": 74.252,
+      "length": 8.669
+    }
+  },
+  "total": 82.921,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 22.27,
+      "scenes": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 22.27,
+      "length": 20.49,
+      "scenes": [
+        "s4",
+        "s5",
+        "s6"
+      ]
+    },
+    {
+      "name": "Feature Demo",
+      "start": 42.75,
+      "length": 31.5,
+      "scenes": [
+        "s7",
+        "s8",
+        "s9",
+        "s10"
+      ]
+    },
+    {
+      "name": "Outro",
+      "start": 74.25,
+      "length": 8.67,
+      "scenes": [
+        "s11"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "slug": "google-artemis-linux-android-ai",
+  "format": "explainer",
+  "topic": "Trải nghiệm Google ARTEMIS trên Linux: Tự động hóa Android bằng AI qua câu lệnh tự nhiên thay thế Appium",
+  "title": "Viết XPath Appium hay để AI tự test Android?",
+  "caption": "Trải nghiệm Google ARTEMIS trên Linux: điều khiển và test ứng dụng Android bằng AI qua lệnh tự nhiên thay vì viết Appium.",
+  "hashtags": [
+    "#artemis",
+    "#androidtesting",
+    "#testautomation",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern minimal tech electronic beat, crisp subtle synth pulses, clean rhythm, engaging and futuristic, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious synth",
+        "minimal bass"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s4",
+      "styles": [
+        "rising tempo",
+        "steady electronic beat",
+        "driving rhythm"
+      ]
+    },
+    {
+      "name": "Feature Demo",
+      "from": "s7",
+      "styles": [
+        "confident groove",
+        "modern tech beats",
+        "bright synths"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s11",
+      "styles": [
+        "smooth resolution",
+        "relaxed electronic pulse",
+        "warm fading chords"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/google/artemis",
+    "https://github.com/wistbean/learn_python3_spider",
+    "https://github.com/CopilotKit/CopilotKit",
+    "https://github.com/google-research/android_world"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Anh em vẫn phải ngồi viết từng dòng XPath Appium để test Android à? [curious]",
+      "headline": "Viết script Appium thủ công?",
+      "lines": [
+        "Vẫn dùng XPath để test app?",
+        "Tự động hóa Android kiểu cũ"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer debugging mobile app"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì test app rất cực, còn Google ARTEMIS vừa đạt mốc chín mươi chín phần trăm trên benchmark AndroidWorld chỉ bằng câu lệnh tự nhiên. [impressed]",
+      "headline": "Tự động hóa Android bằng AI",
+      "lines": [
+        "Google ARTEMIS mã nguồn mở",
+        "Đạt 99%+ trên AndroidWorld Benchmark"
+      ],
+      "commands": [],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Tức là thay vì tìm ID nút bấm, hệ thống kết hợp cây trợ năng, OCR và mô hình thị giác để nhận diện cả Flutter lẫn Compose. [thoughtful]",
+      "headline": "Nhận diện giao diện",
+      "lines": [
+        "Kết hợp cây trợ năng và OCR",
+        "Hỗ trợ cả Canvas, Compose, Flutter"
+      ],
+      "commands": [],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Để chạy trên Linux, anh em cắm điện thoại bật USB Debugging vào, rồi chạy đúng một file shell. [casually]",
+      "headline": "Khởi chạy trên Linux",
+      "lines": [
+        "Yêu cầu: Bật USB Debugging",
+        "Khởi động bằng một script duy nhất"
+      ],
+      "commands": [
+        "git clone https://github.com/google/artemis.git && cd artemis",
+        "./start.sh"
+      ],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": "hands connecting android phone to linux laptop"
+    },
+    {
+      "id": "s5",
+      "text": "Script này sẽ tự động tải luôn ADB, scrcpy, FFmpeg và uv về máy mà không cần cài tay. [excited]",
+      "headline": "Tự cấu hình toàn bộ toolchain",
+      "lines": [
+        "Tự động phát hiện và cài đặt:",
+        "ADB, scrcpy, FFmpeg, uv"
+      ],
+      "commands": [],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Sau đó trình duyệt mở ngay cổng tám nghìn, cho phép anh em xem màn hình trực tiếp và nhập lệnh tự động hóa. [cheerfully]",
+      "headline": "Giao diện web",
+      "lines": [
+        "Truy cập: http://localhost:8000",
+        "Chiếu màn hình và chạy tác vụ thời gian thực"
+      ],
+      "commands": [],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Nếu thích terminal, anh em gõ lệnh chạy với profile Flash để AI phản hồi sau ba đến năm giây mỗi bước. [casually]",
+      "headline": "Thực thi qua CLI",
+      "lines": [
+        "Profile Flash: phản xạ nhanh",
+        "Độ trễ khoảng 3–5 giây mỗi bước"
+      ],
+      "commands": [
+        "uv run artemis run \"Open Settings, find Battery and tell me current level\" --profile flash"
+      ],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Cần kiểm thử quy trình dài hơn một trăm bước thì đổi sang profile Pro, vì nó có đồ thị đa tác nhân tự lập kế hoạch và xác minh. [thoughtful]",
+      "headline": "Profile Flash đối đầu Pro",
+      "lines": [
+        "Profile Pro: Multi-agent graph",
+        "Xử lý quy trình phức tạp hơn 100 bước"
+      ],
+      "commands": [],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": "programmer analyzing data on multiple monitors"
+    },
+    {
+      "id": "s9",
+      "text": "Trên điện thoại, ARTEMIS cài một dịch vụ trợ năng nhẹ để đọc màn hình, nếu gặp sự cố sẽ tự chuyển về UIAutomator2. [casually]",
+      "headline": "Cơ chế đọc màn hình",
+      "lines": [
+        "Cài trước để giảm 3 giây độ trễ",
+        "Tự động fallback về UIAutomator2"
+      ],
+      "commands": [
+        "uv run artemis helper install"
+      ],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Hệ sinh thái này còn hỗ trợ MCP, nên các IDE như Claude Code hay Windsurf có thể trực tiếp kéo Logcat và ảnh chụp lỗi về. [excited]",
+      "headline": "Tích hợp Model Context Protocol",
+      "lines": [
+        "Hỗ trợ Claude Code, Windsurf, Antigravity",
+        "Thu thập Logcat và ảnh màn hình tự động"
+      ],
+      "commands": [
+        "uv run artemis mcp --install all"
+      ],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": "software engineer coding in modern office"
+    },
+    {
+      "id": "s11",
+      "text": "Lưu video lại để dựng thử trên Linux nhé, bấm theo dõi kênh, [warmly] hay anh em vẫn thích ngồi viết từng dòng XPath Appium? [laughs]",
+      "headline": "Lưu lại để thử trên Linux",
+      "lines": [
+        "Lưu video và follow kênh",
+        "Tự động hóa Android không cần viết script"
+      ],
+      "commands": [],
+      "repos": [
+        "google/artemis"
+      ],
+      "footage": ""
+    }
+  ]
+}
