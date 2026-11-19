@@ -130,7 +130,7 @@ const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/deepseek/deepseek-v4-p
   .filter((m) => m && m !== "off");
 // Free models on other providers behind be-ag, the last tries before the
 // fallback template: weaker, but a build that typechecks beats the template.
-const lastModels = (process.env.BUILDER_LAST_MODELS || "oc/deepseek-v4.1-flash-free,nous/stepfun/step-3.7-flash:free,cf/@cf/zai-org/glm-4.7-flash")
+const lastModels = (process.env.BUILDER_LAST_MODELS || "nvidia/minimaxai/minimax-m3.1-flash,oc/deepseek-v4.1-flash-free,nous/stepfun/step-3.7-flash:free,cf/@cf/zai-org/glm-4.7-flash")
   .split(",")
   .map((m) => m.trim())
   .filter((m) => m && m !== "off");
