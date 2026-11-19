@@ -13,7 +13,8 @@
 // be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
 // ag/gemini-3.8-flash-high), BUILDER_HEAVY_BEAG_MODEL (the heavy backup's
 // model, default oc/glm-5.3-flash-free), BUILDER_CMC_MODELS (Command Code models
-// through be-ag, tried first; "off" turns them off), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
+// through be-ag, tried first; "off" turns them off), BUILDER_LAST_MODELS (free
+// models tried last), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
 // to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
 // REVIEW=off skips the review round.
 // Prints a JSON line {direction, pacing, built, costUsd} last.
@@ -127,8 +128,14 @@ const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/deepseek/deepseek-v4-p
   .split(",")
   .map((m) => m.trim())
   .filter((m) => m && m !== "off");
+// Free models on other providers behind be-ag, the last tries before the
+// fallback template: weaker, but a build that typechecks beats the template.
+const lastModels = (process.env.BUILDER_LAST_MODELS || "oc/deepseek-v4.1-flash-free,nous/stepfun/step-3.7-flash:free,cf/@cf/zai-org/glm-4.7-flash")
+  .split(",")
+  .map((m) => m.trim())
+  .filter((m) => m && m !== "off");
 const beagModels = [
-  ...new Set([...cmcModels, ...(heavy ? [ocModel] : []), geminiModel, geminiLow, ocModel]),
+  ...new Set([...cmcModels, ...(heavy ? [ocModel] : []), geminiModel, geminiLow, ocModel, ...lastModels]),
 ];
 const agents = [
   process.env.ANTHROPIC_API_KEY &&
