@@ -1,0 +1,105 @@
+{
+  "slug": "discord-webhook-infinite-retry-loop",
+  "format": "meme",
+  "topic": "Webhook Discord báo lỗi bị loop spam sập server",
+  "title": "Gắn webhook Discord báo lỗi VPS và cái kết",
+  "caption": "Tưởng làm hệ thống alert ai ngờ thành trùm spam bot. Anh em nào từng dính quả loop webhook này chưa?",
+  "hashtags": [
+    "#discordbot",
+    "#vpsvietnam",
+    "#laptrinhvien",
+    "#congnghe",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Playful lo-fi beat turning into an intense chaotic phonk with panic alarms, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "bouncy lo-fi",
+        "quirky beat",
+        "chill synth",
+        "playful"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "glitchy beat",
+        "fast ticking",
+        "alarm sounds"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s4",
+      "styles": [
+        "chaotic phonk",
+        "funny panic",
+        "big bass drop",
+        "loud alarms"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Dev gắn webhook Discord vào VPS để hễ có bug là ping về máy",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Tiện tay code thêm hàm tự động retry nếu bắt được exception",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "2 giờ sáng database rớt kết nối đúng nửa giây kích hoạt hàm retry",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Vòng lặp lỗi spam 3000 tin nhắn mỗi giây làm điện thoại rung muốn nổ",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Sáng dậy thấy Discord ban acc vĩnh viễn còn VPS cháy sạch băng thông",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying",
+      "place": "bedroom at night computer"
+    }
+  ]
+}
