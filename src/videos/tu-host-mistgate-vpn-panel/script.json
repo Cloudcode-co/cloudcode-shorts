@@ -1,0 +1,220 @@
+{
+  "slug": "tu-host-mistgate-vpn-panel",
+  "format": "explainer",
+  "topic": "Tự host Mistgate trên VPS: Panel quản lý VPN siêu nhẹ không cần Docker cho gia đình và nhóm bạn, so sánh với Marzban và WG-Easy",
+  "title": "Panel VPN nào chạy không cần Docker chỉ ăn 16MB RAM?",
+  "caption": "Tự host Mistgate làm server VPN nhẹ cho gia đình: không cần Docker, chỉ tốn 16MB RAM và gom trọn Hysteria2 lẫn VLESS.",
+  "hashtags": [
+    "#mistgate",
+    "#vlessreality",
+    "#hysteria2",
+    "#tuhost",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Minimalist modern electronic beat with warm synth pulses, subtle sub bass and crisp hi-hats, tech conference vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious",
+        "sub bass"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady beat",
+        "clean synth"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "triumphant",
+        "upbeat electronic",
+        "crisp percussion"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm synth",
+        "gentle fade",
+        "chill outro"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/Mistgate/mistgate",
+    "https://github.com/Gozargah/Marzban",
+    "https://github.com/wg-easy/wg-easy",
+    "https://github.com/OutlineFoundation/outline-apps"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Panel VPN gom ba giao thức chống chặn mà chỉ ăn mười sáu Megabyte RAM?",
+      "headline": "16 MiB RAM cho cả hệ thống VPN?",
+      "lines": [
+        "Chỉ tốn 16-20 MiB RAM",
+        "Không Docker",
+        "Gom 3 giao thức hiện đại"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": "young developer server room"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì chạy Marzban hay WG-Easy anh em buộc phải cài Docker, tốn từ vài chục đến hàng trăm Megabyte RAM.",
+      "headline": "Marzban và WG-Easy ngốn tài nguyên",
+      "lines": [
+        "WG-Easy: bắt buộc Docker",
+        "Marzban: ngốn 68 đến hơn 400 MiB RAM",
+        "Nặng nề trên VPS cấu hình thấp"
+      ],
+      "commands": [],
+      "repos": [
+        "Gozargah/Marzban",
+        "wg-easy/wg-easy"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn Mistgate viết hoàn toàn bằng Go tĩnh, lưu dữ liệu thẳng vào SQLite qua systemd nên chạy rất nhẹ.",
+      "headline": "Mistgate: Go tĩnh kết hợp SQLite",
+      "lines": [
+        "2 file binary Go duy nhất",
+        "Cơ sở dữ liệu SQLite nhẹ nhàng",
+        "Quản lý dịch vụ qua systemd"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[excited] Điểm tiện nhất là mỗi người chỉ nhận đúng một link subscription duy nhất, gom trọn Hysteria2, VLESS REALITY và AmneziaWG.",
+      "headline": "Một link nhận đủ 3 giao thức",
+      "lines": [
+        "Hysteria2 qua UDP QUIC",
+        "VLESS REALITY qua Xray-core",
+        "AmneziaWG phiên bản 2.0 và 3.1"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": "friends gaming online laptops"
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Tức là các app như Mihomo sẽ tự nhận cả ba cấu hình, node nào chập chờn là app tự động chuyển sang server khác.",
+      "headline": "Tự động chuyển đổi server",
+      "lines": [
+        "App Mihomo tự nhận diện",
+        "Tự nhảy sang node hoạt động",
+        "Tunnel độc lập, panel sập mạng vẫn chạy"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Muốn mở rộng node, anh em chỉ cần gõ IP và pass root từ trình duyệt, panel sẽ tự cấu hình tường lửa và nạp agent.",
+      "headline": "Thêm node từ web qua SSH",
+      "lines": [
+        "Kết nối SSH trực tiếp từ giao diện web",
+        "Tự mở cổng UFW hoặc firewalld",
+        "Tự cài agent đã ký bảo mật"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": "typing terminal keyboard close up"
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Cứ năm phút panel lại kiểm tra từ góc nhìn client, có sẵn bác sĩ chẩn đoán hai mươi hai lỗi và tự dựng trang ngụy trang.",
+      "headline": "Bác sĩ chẩn đoán và trang ngụy trang",
+      "lines": [
+        "Kiểm tra kết nối mỗi 5 phút",
+        "22 bài kiểm tra lỗi máy chủ",
+        "Trang ngụy trang che mắt người ngoài"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Để cài đặt trên máy chủ Linux trống cổng 80 và 443, anh em chỉ cần chạy đúng một dòng lệnh chính thức này.",
+      "headline": "Cài đặt bằng một dòng lệnh",
+      "lines": [
+        "Yêu cầu: Linux x86_64 hoặc ARM64",
+        "Cần tên miền trỏ về VPS",
+        "Cấp link thiết lập admin trong 30 phút"
+      ],
+      "commands": [
+        "curl -fsSL https://mistgate.app/install.sh | sudo bash -s -- --public-url https://panel.example.com"
+      ],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Vì Mistgate đang ở giai đoạn Beta nên chưa hỗ trợ VMess hay Shadowsocks, và anh em cần sẵn một domain riêng để lấy SSL.",
+      "headline": "Lưu ý khi triển khai",
+      "lines": [
+        "Hiện ở phiên bản Beta 0.1",
+        "Chưa có VMess hay Shadowsocks",
+        "Bắt buộc domain riêng cho SSL"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để dựng VPN nhẹ mượt cho gia đình nhé, follow kênh để khám phá thêm nhiều công cụ tự host hay ho!",
+      "headline": "Lưu lại và trải nghiệm ngay",
+      "lines": [
+        "Tự host VPN nhẹ cho bạn bè",
+        "Nhấn lưu để thử nghiệm sau",
+        "Follow kênh để cập nhật công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "Mistgate/mistgate"
+      ],
+      "footage": ""
+    }
+  ]
+}

@@ -644,5 +644,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "tu-host-mistgate-vpn-panel",
+    "topic": "Tự host Mistgate trên VPS: Panel quản lý VPN siêu nhẹ không cần Docker cho gia đình và nhóm bạn, so sánh với Marzban và WG-Easy",
+    "format": "explainer",
+    "date": "2026-11-19",
+    "direction": "creator-layouts",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
