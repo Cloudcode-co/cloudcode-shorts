@@ -122,7 +122,8 @@ const geminiLow = geminiModel.replace(/-high$/, "-low");
 const ocModel = process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/glm-5.3-flash-free";
 // The owner's Command Code plan, also behind be-ag (cmc/*): the open models
 // its plan includes (Claude, GPT and Gemini 4 are not), tried before Gemini.
-const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/moonshotai/Kimi-K3.1-Pro,cmc/zai-org/GLM-5.3,cmc/deepseek/deepseek-v4-pro")
+// Cheap ones only: one Kimi K3.1 Pro build used the whole 5-hour plan window.
+const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/deepseek/deepseek-v4-pro,cmc/zai-org/GLM-5.3")
   .split(",")
   .map((m) => m.trim())
   .filter((m) => m && m !== "off");
