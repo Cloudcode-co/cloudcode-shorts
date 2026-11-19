@@ -62,7 +62,7 @@ const list = (value) =>
 // Every model to try, in order, with the gateway that serves it.
 const llmTargets = () => [
   ...(process.env.LLM_API_KEY
-    ? list(process.env.LLM_MODEL || "ds/deepseek-v4.1-flash,ag/gemini-3.8-flash,ag/gemini-3.8-flash-medium,ag/gpt-oss-120b-medium,ag/gemini-3.8-flash-high,oc/deepseek-v4.1-flash-free").map((model) => ({
+    ? list(process.env.LLM_MODEL || "ag/gemini-3.8-flash,ag/gemini-3.8-flash-medium,ag/gpt-oss-120b-medium,ds/deepseek-v4.1-flash,ag/gemini-3.8-flash-high,oc/deepseek-v4.1-flash-free").map((model) => ({
         model,
         base: LLM_BASE_URL,
         key: process.env.LLM_API_KEY,
