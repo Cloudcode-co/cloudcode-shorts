@@ -1,0 +1,211 @@
+{
+  "slug": "ffmpeg-skill-vps-video-automation",
+  "format": "explainer",
+  "topic": "Tự động hóa biên tập video trên VPS với ffmpeg-skill: Bộ công cụ MCP 42 tính năng FFmpeg cho AI Agent thay thế Remotion",
+  "title": "Dựng video tự động trên VPS ngốn CPU vì Remotion?",
+  "caption": "Tự động hóa biên tập video trên VPS với ffmpeg-skill: 42 công cụ FFmpeg cho AI Agent không cần cloud API.",
+  "hashtags": [
+    "#ffmpeg",
+    "#aiagent",
+    "#selfhosted",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "minimal tech synth pulse driving rhythm electronic beat with low bassline, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious synth",
+        "ticking beat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "tech pulse",
+        "driving bass"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "bright electronic",
+        "energetic",
+        "groove"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm synth",
+        "resolving bass",
+        "crisp percussion"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/kajisho5/ffmpeg-skill",
+    "https://github.com/rustdesk/rustdesk",
+    "https://github.com/Zulko/moviepy",
+    "https://github.com/kajisho5/remotion-ffmpeg-skill"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Dựng video tự động trên VPS mà chạy Remotion thì ngốn sạch CPU đúng không?",
+      "headline": "Remotion ngốn sạch CPU VPS",
+      "lines": [
+        "Tự động dựng video",
+        "VPS quá tải tài nguyên"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "exhausted developer server room"
+    },
+    {
+      "id": "s2",
+      "text": "[thoughtful] Thường thì Remotion phải bật trình duyệt headless để render, nên trên VPS hai core, clip ba mươi giây mất tận tám mươi giây CPU.",
+      "headline": "Headless browser gây nghẽn",
+      "lines": [
+        "Clip 30 giây mất 80 giây",
+        "Chiếm dụng toàn bộ CPU core"
+      ],
+      "commands": [],
+      "repos": [
+        "kajisho5/remotion-ffmpeg-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Còn ffmpeg-skill lại cung cấp bốn mươi hai công cụ FFmpeg cho Claude Code và Cursor qua MCP, không cần API key hay cloud.",
+      "headline": "42 công cụ FFmpeg qua MCP",
+      "lines": [
+        "Chạy hoàn toàn local",
+        "Không API key, thư viện chuẩn Python"
+      ],
+      "commands": [],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": "developer typing terminal code"
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Agent sẽ chạy theo chu trình bốn bước: probe đo đạc, chỉnh sửa không nén, check quy chuẩn nền tảng, rồi verify bằng ảnh contact sheet.",
+      "headline": "Chu trình biên tập 4 bước",
+      "lines": [
+        "Probe thông số kỹ thuật",
+        "Chỉnh sửa lossless và verify contact sheet"
+      ],
+      "commands": [],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Tính năng phụ đề tự động chạy bằng faster-whisper cục bộ, tức là toàn bộ âm thanh không bao giờ bị tải lên mạng.",
+      "headline": "Phụ đề chạy offline an toàn",
+      "lines": [
+        "Engine faster-whisper trên máy",
+        "Dữ liệu âm thanh không ra ngoài"
+      ],
+      "commands": [],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Cài đặt trên Linux rất gọn, anh em chỉ cần cài FFmpeg rồi chạy lệnh npx ffmpeg-skill để kéo bộ công cụ về.",
+      "headline": "Cài đặt skill cho Agent",
+      "lines": [
+        "Cài đặt FFmpeg",
+        "Kéo skill về ~/.claude/skills"
+      ],
+      "commands": [
+        "sudo apt install ffmpeg",
+        "npx ffmpeg-skill"
+      ],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Sau đó kiểm tra bằng lệnh doctor, và cài thêm faster-whisper nếu anh em muốn tự động nhận diện giọng nói.",
+      "headline": "Kiểm tra hệ thống với doctor",
+      "lines": [
+        "Kiểm tra môi trường FFmpeg",
+        "Cài thêm engine nhận diện giọng nói"
+      ],
+      "commands": [
+        "npx ffmpeg-skill doctor",
+        "pip install faster-whisper"
+      ],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[excited] Khi xuất video, chỉ cần một lệnh render là Agent tự động crop khung hình chín mười sáu và chuẩn hóa âm lượng trừ mười bốn LUFS.",
+      "headline": "Xuất chuẩn định dạng TikTok",
+      "lines": [
+        "Template TikTok tự động canh safe zone",
+        "Chuẩn hóa âm lượng -14 LUFS"
+      ],
+      "commands": [
+        "python3 $S/render.py talk.mp4 --template tiktok --cues cues.txt"
+      ],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Vì ffmpeg-skill có giấy phép MIT và là công cụ thực thi, nên phần lên kịch bản cắt ghép vẫn do Agent LLM quyết định.",
+      "headline": "Giấy phép MIT và công cụ thực thi",
+      "lines": [
+        "Mã nguồn mở giấy phép MIT",
+        "LLM lên kịch bản, ffmpeg-skill thực thi"
+      ],
+      "commands": [],
+      "repos": [
+        "kajisho5/ffmpeg-skill"
+      ],
+      "footage": "modern server rack lights blinking"
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để dựng thử trên VPS nhé, và bấm follow để không lo video ngốn sạch CPU nữa!",
+      "headline": "Lưu lại và thử ngay",
+      "lines": [
+        "Lưu video để setup",
+        "Follow kênh để cập nhật công cụ mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

@@ -633,5 +633,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "ffmpeg-skill-vps-video-automation",
+    "topic": "Tự động hóa biên tập video trên VPS với ffmpeg-skill: Bộ công cụ MCP 42 tính năng FFmpeg cho AI Agent thay thế Remotion",
+    "format": "quiz",
+    "date": "2026-11-19",
+    "direction": "quiz-show",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
