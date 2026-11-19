@@ -1,0 +1,88 @@
+{
+  "style": "chiptune",
+  "bpm": 110,
+  "key": "C",
+  "mode": "major",
+  "sections": [
+    {
+      "name": "Hook",
+      "energy": 0.45,
+      "chords": [
+        1,
+        5,
+        6,
+        4
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Build",
+      "energy": 0.65,
+      "chords": [
+        6,
+        4,
+        1,
+        5
+      ],
+      "drums": "full",
+      "lead": false
+    },
+    {
+      "name": "Reveal",
+      "energy": 0.95,
+      "chords": [
+        4,
+        5,
+        1,
+        6
+      ],
+      "drums": "full",
+      "lead": true
+    },
+    {
+      "name": "Outro",
+      "energy": 0.35,
+      "chords": [
+        2,
+        5,
+        1,
+        6
+      ],
+      "drums": "light",
+      "lead": false
+    }
+  ],
+  "motif": [
+    {
+      "beat": 0,
+      "length": 1,
+      "degree": 4
+    },
+    {
+      "beat": 1,
+      "length": 1,
+      "degree": 5
+    },
+    {
+      "beat": 2,
+      "length": 2,
+      "degree": 6
+    },
+    {
+      "beat": 4,
+      "length": 1,
+      "degree": 7
+    },
+    {
+      "beat": 5,
+      "length": 1,
+      "degree": 9
+    },
+    {
+      "beat": 6,
+      "length": 2,
+      "degree": 5
+    }
+  ]
+}

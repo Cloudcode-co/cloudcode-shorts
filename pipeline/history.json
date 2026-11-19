@@ -655,5 +655,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "holyarrs-vs-jellyfin-navidrome",
+    "topic": "Tự host HolyArrs trên VPS/Homelab: media server 15MB gộp phim, show và nhạc vào một chỗ, so sánh với Jellyfin và Navidrome",
+    "format": "explainer",
+    "date": "2026-11-19",
+    "direction": "creator-layouts",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 5
   }
 ]

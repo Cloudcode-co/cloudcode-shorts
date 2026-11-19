@@ -1,0 +1,262 @@
+{
+  "slug": "holyarrs-vs-jellyfin-navidrome",
+  "format": "explainer",
+  "topic": "Tự host HolyArrs trên VPS/Homelab: media server 15MB gộp phim, show và nhạc vào một chỗ, so sánh với Jellyfin và Navidrome",
+  "title": "16 MB thay 685 MB của 6 app *arr — HolyArrs có đủ không?",
+  "caption": "HolyArrs gộp Sonarr, Radarr, Lidarr, Bazarr, Prowlarr, Seerr vào một container 16 MB. Nhưng nhạc trong app vẫn đang xây, và phát phim vẫn phải nhờ Jellyfin.",
+  "hashtags": [
+    "#selfhost",
+    "#homelab",
+    "#holyarrs",
+    "#congnghe",
+    "#reviewcongnghe"
+  ],
+  "musicPrompt": "Upbeat minimal tech-house instrumental bed for a fast Vietnamese tech explainer, clean plucked synth arpeggio, tight kick and clap, subtle bass pulse, light digital textures, steady forward momentum, bright and curious mood, 110 BPM, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "clean pluck",
+        "curious",
+        "tight pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s4",
+      "styles": [
+        "rising tension",
+        "layered synth",
+        "steady drums",
+        "focused"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s9",
+      "styles": [
+        "brighter",
+        "open chords",
+        "confident groove",
+        "lifted"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s13",
+      "styles": [
+        "warm resolve",
+        "soft pad",
+        "gentle groove",
+        "fading"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/HolyArrs/HolyArrs",
+    "https://github.com/jellyfin/jellyfin",
+    "https://github.com/navidrome/navidrome",
+    "https://github.com/streamaserver/streama",
+    "https://docs.holyarrs.com/",
+    "https://docs.holyarrs.com/start/folders/",
+    "https://docs.holyarrs.com/start/first-run/",
+    "https://docs.holyarrs.com/reference/env-vars/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Sáu app *arr cộng lại 685 MB. HolyArrs làm lại đúng phần đó trong 16 MB.",
+      "headline": "685 MB xuống 16 MB",
+      "lines": [
+        "Sonarr, Radarr, Lidarr, Bazarr, Prowlarr, Seerr",
+        "HolyArrs: 16.1 MB"
+      ],
+      "commands": [],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì anh em giữ sáu login, sáu port, sáu vòng update, sáu API key dán qua lại. Show không về thì phải mở sáu chỗ để tìm lý do.",
+      "headline": "Sáu chỗ để kiểm tra",
+      "lines": [
+        "1 login · 1 port · 1 chỗ để xem"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer at desk at night"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] HolyArrs gom lại một: có người request, nó tìm trong Sources, chọn bản theo Pick rules, đẩy qua downloader rồi xếp vào Library.",
+      "headline": "Tìm, tải, xếp thư viện",
+      "lines": [
+        "Sources: Torznab, Newznab, Prowlarr, Jackett",
+        "Downloader: qBittorrent, SABnzbd, NZBGet"
+      ],
+      "commands": [],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Nhưng nó không phát phim. HolyArrs đẩy thư viện sang Plex, Jellyfin, Emby. Phần xem vẫn nhờ app cũ.",
+      "headline": "Không thay phần phát",
+      "lines": [
+        "Media servers: Plex, Jellyfin, Emby",
+        "Nó không tự tải: vẫn cần downloader"
+      ],
+      "commands": [],
+      "repos": [
+        "jellyfin/jellyfin"
+      ],
+      "footage": "friends watching movie on couch"
+    },
+    {
+      "id": "s5",
+      "text": "[cheerfully] Cài thì một file compose, image holyarrs/holyarrs:latest, port 6262. Chạy một lệnh là lên.",
+      "headline": "Một file, một port",
+      "lines": [
+        "Port 6262"
+      ],
+      "commands": [
+        "docker compose up -d"
+      ],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[warmly] Mở http://your-server:6262 rồi tạo owner ngay. Không có mật khẩu mặc định. Ai mở trước sẽ thành owner.",
+      "headline": "Ai mở trước, người đó làm chủ",
+      "lines": [
+        "Không có mật khẩu mặc định",
+        "Owner đầu tiên phải tạo liền"
+      ],
+      "commands": [
+        "docker exec -i holyarrs /holyarrs reset-owner"
+      ],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] Muốn import tức thì thì mount một thư mục cha chung cho HolyArrs và downloader, cùng đường dẫn. Mount rời thì mỗi lần import là copy toàn bộ.",
+      "headline": "Một thư mục cha, hardlink tức thì",
+      "lines": [
+        "Hardlink: không tốn thêm dung lượng",
+        "Mount rời: copy, tốn gấp đôi tới khi xoá bản gốc"
+      ],
+      "commands": [
+        "mkdir -p /srv/data/downloads/{torrents,usenet} /srv/data/media/{movies,tv,music}",
+        "chown -R 1000:1000 /srv/data"
+      ],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Còn /config phải là ổ local, đừng để trên network share. File holyarrs.key mở toàn bộ key đã lưu mà backup không có, phải tải key kit riêng.",
+      "headline": "/config local, key kit tải riêng",
+      "lines": [
+        "Backups không gồm holyarrs.key",
+        "Settings > Backups > Download key kit"
+      ],
+      "commands": [],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": "server room blinking lights"
+    },
+    {
+      "id": "s9",
+      "text": "[impressed] So với Jellyfin: Jellyfin là hệ phát media, mặc định port 8096, không có bản premium. HolyArrs không đụng phần phát, nên hai cái chạy song song được.",
+      "headline": "Jellyfin lo phát, HolyArrs lo tìm",
+      "lines": [
+        "Jellyfin: port 8096",
+        "HolyArrs: port 6262"
+      ],
+      "commands": [],
+      "repos": [
+        "jellyfin/jellyfin",
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[curious] Còn nhạc thì Navidrome làm từ 2016: thư viện lớn, client Subsonic, transcode từng user. Phần nhạc trong Explore của HolyArrs vẫn đang xây, nên chưa gộp được.",
+      "headline": "Nhạc vẫn đang xây",
+      "lines": [
+        "Music in Explore is still being built",
+        "Navidrome: Subsonic client, transcode"
+      ],
+      "commands": [],
+      "repos": [
+        "navidrome/navidrome",
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[thoughtful] Và nhớ, repo tạo 2026-11-09, bản 1.2.0 ra 2026-11-17. Import sang thì chỉ đọc app cũ, undo được, nhưng custom formats, tags và history không đi theo.",
+      "headline": "Dự án mới vài ngày",
+      "lines": [
+        "Import: chỉ đọc, không sửa app cũ",
+        "Custom formats, tags, history: không sang"
+      ],
+      "commands": [],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": "developer at desk at night"
+    },
+    {
+      "id": "s12",
+      "text": "[casually] Máy nhỏ thì low-memory tự bật khi còn khoảng 2.5 GiB RAM. Còn HTTP_PROXY bị bỏ qua có chủ đích, nên VPS chặn mạng thì poster fail, phải set proxy từng Source.",
+      "headline": "VPS nhỏ: mốc 2.5 GiB RAM",
+      "lines": [
+        "HTTP_PROXY, HTTPS_PROXY, ALL_PROXY: bỏ qua",
+        "Proxy phải set riêng từng Source"
+      ],
+      "commands": [],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s13",
+      "text": "[warmly] Lưu video lại để thử sau. Sáu app 685 MB, một app 16 MB. Nhưng nhạc thì còn chờ. Follow để xem bản sau.",
+      "headline": "Lưu lại, thử sau",
+      "lines": [
+        "685 MB → 16 MB",
+        "Nhạc: chưa gộp được"
+      ],
+      "commands": [],
+      "repos": [
+        "HolyArrs/HolyArrs"
+      ],
+      "footage": ""
+    }
+  ]
+}

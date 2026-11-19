@@ -1,0 +1,421 @@
+{
+  "topic": "Tự host HolyArrs trên VPS/Homelab: media server 15MB gộp phim, show và nhạc vào một chỗ, so sánh với Jellyfin và Navidrome",
+  "models": [
+    "ds/deepseek-v4.1-flash",
+    "ag/gemini-3.8-flash",
+    "ag/gemini-3.8-flash-medium",
+    "ag/gpt-oss-120b-medium",
+    "ag/gemini-3.8-flash-high",
+    "oc/deepseek-v4.1-flash-free"
+  ],
+  "date": "2026-11-19",
+  "repos": [
+    {
+      "repo": "HolyArrs/HolyArrs",
+      "asked": "HolyArrs/HolyArrs",
+      "name": "HolyArrs",
+      "stars": 2185,
+      "description": "One self-hosted app for your shows, movies and music.",
+      "license": "AGPL-3.0",
+      "language": "Go",
+      "pushedAt": "2026-11-18T22:55:53Z",
+      "url": "https://github.com/HolyArrs/HolyArrs",
+      "avatar": "repos/HolyArrs.png"
+    },
+    {
+      "repo": "jellyfin/jellyfin",
+      "asked": "jellyfin/jellyfin",
+      "name": "Jellyfin",
+      "stars": 59543,
+      "description": "The Free Software Media System - Server Backend & API",
+      "license": "GPL-2.0",
+      "language": "C#",
+      "pushedAt": "2026-11-19T16:58:08Z",
+      "url": "https://github.com/jellyfin/jellyfin",
+      "avatar": "repos/jellyfin.png"
+    },
+    {
+      "repo": "navidrome/navidrome",
+      "asked": "navidrome/navidrome",
+      "name": "Navidrome",
+      "stars": 24851,
+      "description": "🎧 Your Personal Streaming Service ",
+      "license": "GPL-3.0",
+      "language": "Go",
+      "pushedAt": "2026-11-19T10:10:03Z",
+      "url": "https://github.com/navidrome/navidrome",
+      "avatar": "repos/navidrome.png"
+    }
+  ],
+  "pages": [],
+  "idea": null,
+  "notes": {
+    "audience": "Người Việt đang tự host trên VPS hoặc homelab, đã quen (hoặc đang cân nhắc) Sonarr/Radarr/Prowlarr và Jellyfin/Navidrome, muốn gộp phim, show và nhạc vào một app duy nhất.",
+    "angle": "HolyArrs thay 6 app *arr bằng một container 16 MB trên một port duy nhất — nhưng nó chỉ lo phần tìm, tải và xếp thư viện, còn phát lại vẫn phải nhờ Jellyfin/Plex/Emby và nhạc trong app thì 'vẫn đang xây', nên đây là video so sánh thực tế chứ không phải lời quảng cáo.",
+    "facts": [
+      {
+        "fact": "HolyArrs tự mô tả là một app self-hosted duy nhất cho show, phim và nhạc.",
+        "quote": "One self-hosted app for your shows, movies and music.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Nó được định vị thay thế đúng 6 app: Sonarr, Radarr, Lidarr, Bazarr, Prowlarr và Seerr — 6 login, 6 port, 6 vòng update, 6 API key.",
+        "quote": "A normal media server runs six apps: Sonarr, Radarr, Lidarr, Bazarr, Prowlarr and Seerr.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Dung lượng image ~16.1 MB, trong khi 6 app kia cộng lại 685.0 MB — README nói 'nhỏ hơn khoảng 43 lần'.",
+        "quote": "The six apps it replaces download 685.0 MB together.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "README ghi ~95 MiB RAM khi idle trên bản cài mới, chạy được trên amd64, arm64 và armv7.",
+        "quote": "About 16.1 MB to download · about 95 MiB of RAM idle on a fresh install · amd64, arm64, armv7",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Con số RAM idle được đo trên thư viện lớn: 10.000 title, 55.000 phim và tập.",
+        "quote": "Idle RAM measured 2026-11-08 with 10,000 titles and 55,000 movies and episodes.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Truy cập web UI ở port 6262, tạo tài khoản owner ngay lần đầu.",
+        "quote": "Open `http://your-server:6262` and make the owner account.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Không cần API key bên thứ ba cho metadata và không cần container thứ hai.",
+        "quote": "No API keys to hunt down. No second container.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Không có mật khẩu mặc định: ai mở web trước sẽ thành owner, nên phải tạo owner ngay.",
+        "quote": "There is no default password. Until you make it, whoever opens HolyArrs first becomes the owner.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Muốn import tức thì (hardlink, không tốn thêm dung lượng), phải mount MỘT thư mục cha chung cho cả HolyArrs và downloader, cùng đường dẫn.",
+        "quote": "Put downloads and media under one parent folder, on one disk, and mount that parent into HolyArrs and your downloader at the same path.",
+        "source": "https://docs.holyarrs.com/start/folders/"
+      },
+      {
+        "fact": "Nếu mount rời /movies /tv /music /downloads thì mỗi lần import là copy toàn bộ file.",
+        "quote": "The cost: each mount is its own filesystem inside the container, so every import is a full copy.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Thư mục /config bắt buộc nằm trên ổ local, không được là network share.",
+        "quote": "Databases, settings, the master key, backups and logs. Local disk only, never a network share.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "File holyarrs.key mở toàn bộ mật khẩu/key đã lưu và KHÔNG nằm trong backup — phải tải 'Download key kit' riêng.",
+        "quote": "Backups don't include it, so keep a copy somewhere else.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Đây không phải app tải phim: nó chỉ kết nối tới qBittorrent, SABnzbd, Transmission, Deluge, rTorrent, aria2, NZBGet.",
+        "quote": "HolyArrs connects to qBittorrent, SABnzbd and the others. It doesn't replace them.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Chưa có app điện thoại hay TV, chỉ có web app (dùng được trên điện thoại).",
+        "quote": "Not built. The web app works on a phone.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Phần nhạc trong Explore vẫn đang được xây — đây là mấu chốt khi so với Navidrome.",
+        "quote": "**Music in Explore** is still being built.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "HolyArrs coi Plex, Jellyfin, Emby là media server để đẩy thư viện sang, tức nó không thay phần phát video.",
+        "quote": "**Media servers:** Plex, Jellyfin, Emby",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Bật 'Old-app API' thì Seerr, Prowlarr, Bazarr, Unpackerr và Homepage vẫn dùng được HolyArrs như cũ.",
+        "quote": "Seerr, Prowlarr, Bazarr, Unpackerr and Homepage keep working once you turn it on.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Import từ Sonarr/Radarr/Lidarr/Prowlarr/Bazarr/Seerr/Overseerr chỉ đọc, không sửa app cũ, và có thể undo.",
+        "quote": "HolyArrs only reads your old apps and changes nothing in them, so you can run both side by side until you trust it.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Custom formats, tags và history KHÔNG được mang sang khi import.",
+        "quote": "Custom formats, tags and history don't come over.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Dự án cực mới: repo tạo 2026-11-09, bản 1.2.0 phát hành 2026-11-17.",
+        "quote": "Latest release: 1.2.0 (2026-11-17)",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Viết bằng Go, license AGPL-3.0.",
+        "quote": "Language: Go; license: AGPL-3.0; created 2026-11-09; last push 2026-11-18",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Poster, trailer và nhạc nền lấy từ server metadata do chính tác giả tự trả tiền vận hành.",
+        "quote": "Every poster, trailer and score in your HolyArrs comes from a server I run and pay for myself, so it stays free for everyone.",
+        "source": "https://github.com/HolyArrs/HolyArrs"
+      },
+      {
+        "fact": "Low-memory mode tự bật khi máy có khoảng 2.5 GiB RAM hoặc ít hơn — hữu ích cho VPS nhỏ.",
+        "quote": "Unset, it turns on at about 2.5 GiB of RAM or less.",
+        "source": "https://docs.holyarrs.com/reference/env-vars/"
+      },
+      {
+        "fact": "HolyArrs cố tình bỏ qua HTTP_PROXY/HTTPS_PROXY/ALL_PROXY; muốn đi proxy phải set Proxy riêng cho từng Source.",
+        "quote": "HolyArrs ignores HTTP_PROXY, HTTPS_PROXY and ALL_PROXY, in capitals or lowercase, on purpose.",
+        "source": "https://docs.holyarrs.com/reference/env-vars/"
+      },
+      {
+        "fact": "Chạy sau reverse proxy thì set HOLYARRS_URL_BASE (ví dụ /holyarrs) và HOLYARRS_ALLOWED_HOSTS.",
+        "quote": "Serve HolyArrs under a path behind a reverse proxy. / ignores a path saved in Settings.",
+        "source": "https://docs.holyarrs.com/reference/env-vars/"
+      },
+      {
+        "fact": "Lộ trình cài đặt chính thức có 5 bước, từ install tới phim đầu tiên nằm trong Library.",
+        "quote": "Five steps from install to your first movie in your Library.",
+        "source": "https://docs.holyarrs.com/"
+      },
+      {
+        "fact": "Mỗi folder chỉ dùng một lần và không được lồng vào folder khác.",
+        "quote": "Each folder is used once and cannot sit inside another one you added.",
+        "source": "https://docs.holyarrs.com/start/first-run/"
+      },
+      {
+        "fact": "Jellyfin (C#, GPL-2.0, bản v12.4 ngày 2026-10-26) định vị là media system phát media tới thiết bị người dùng, không có bản premium.",
+        "quote": "There are no strings attached, no premium licenses or features, and no hidden agendas",
+        "source": "https://github.com/jellyfin/jellyfin"
+      },
+      {
+        "fact": "Jellyfin mặc định phục vụ web client ở port 8096 — khác port 6262 của HolyArrs, nên chạy song song được.",
+        "quote": "the Web Client can be accessed at `http://localhost:8096` by default",
+        "source": "https://github.com/jellyfin/jellyfin"
+      },
+      {
+        "fact": "Navidrome (Go, GPL-3.0, có từ 2016-02-24, bản v0.64.2 ngày 2026-09-24) là server nhạc web, tự ví là 'Spotify cá nhân' và tương thích client Subsonic.",
+        "quote": "Navidrome is an open source web-based music collection server and streamer.",
+        "source": "https://github.com/navidrome/navidrome"
+      },
+      {
+        "fact": "Streama (JavaScript, MIT, v1.11.3) chỉ làm phim/show và bắt buộc có API key theMovieDb.org — ngược với HolyArrs 'no API keys'.",
+        "quote": "For the API-Key, the validation checks against theMovieDb.org to see if you've entered a valid API-key.",
+        "source": "https://github.com/streamaserver/streama"
+      }
+    ],
+    "install": [
+      "name: holyarrs\nservices:\n  holyarrs:\n    image: holyarrs/holyarrs:latest\n    container_name: holyarrs\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - /your/local/path:/config\n      - /path/to/movies:/movies #optional\n      - /path/to/tv:/tv #optional\n      - /path/to/music:/music #optional\n      - /path/to/downloads:/downloads #optional\n    ports:\n      - 6262:6262\n    restart: unless-stopped",
+      "docker compose up -d",
+      "docker run -d \\\n  --name=holyarrs \\\n  -e PUID=1000 \\\n  -e PGID=1000 \\\n  -e TZ=America/New_York \\\n  -p 6262:6262 \\\n  -v /your/local/path:/config \\\n  -v /path/to/movies:/movies `#optional` \\\n  -v /path/to/tv:/tv `#optional` \\\n  -v /path/to/music:/music `#optional` \\\n  -v /path/to/downloads:/downloads `#optional` \\\n  --restart unless-stopped \\\n  holyarrs/holyarrs:latest",
+      "mkdir -p /srv/data/downloads/{torrents,usenet} /srv/data/media/{movies,tv,music}",
+      "chown -R 1000:1000 /srv/data",
+      "id youruser",
+      "docker compose pull",
+      "docker exec -i holyarrs /holyarrs reset-owner",
+      "docker exec holyarrs /holyarrs restore --pre-update"
+    ],
+    "caveats": [
+      "Nhạc trong Explore vẫn đang xây — chưa thể nói 'gộp nhạc vào một chỗ' như hoàn chỉnh.",
+      "Không tự tải: vẫn phải giữ qBittorrent/SABnzbd (bản có downloader tích hợp chỉ là kế hoạch).",
+      "Không có app điện thoại/TV, chỉ web app.",
+      "Không thay Jellyfin/Plex/Emby về mặt phát media; nó chỉ đẩy thư viện sang các app đó.",
+      "Mount rời từng thư mục thì mọi import là copy toàn bộ, tốn gấp đôi dung lượng tới khi downloader xoá bản gốc.",
+      "/config phải là ổ local, không dùng network share.",
+      "holyarrs.key không nằm trong backup; mất là mất toàn bộ key/password đã lưu.",
+      "Không có mật khẩu mặc định: ai mở web đầu tiên sẽ thành owner.",
+      "Dự án chỉ mới vài ngày tuổi (tạo 2026-11-09), bản 1.2.0 đã có 'over 30 fixes' — rủi ro thay đổi nhanh.",
+      "Số liệu RAM trong README không khớp: ~95 MiB ở phần đầu và ~140 MiB trong bảng so sánh.",
+      "Import không mang theo custom formats, tags, history; key/password phải nhập lại.",
+      "Env HTTP_PROXY/HTTPS_PROXY bị bỏ qua có chủ đích; trên VPS bị chặn mạng thì poster/metadata sẽ fail, phải set proxy theo từng Source.",
+      "Mỗi folder chỉ dùng một lần và không được lồng nhau; gõ đường dẫn host thay vì đường dẫn trong container sẽ bị từ chối."
+    ],
+    "gaps": [
+      "HolyArrs có transcode không, hay bắt buộc phải có Jellyfin/Plex để xem phim?",
+      "Giao diện HolyArrs có tiếng Việt chưa? README chỉ liệt kê 10 ngôn ngữ, không thấy tiếng Việt.",
+      "RAM/CPU thực tế trên VPS 1–2 GB (kiểu VPS Việt Nam) ra sao, ngoài phép đo 10.000 title của tác giả?",
+      "Nhạc có phát được ngay trong HolyArrs hôm nay không, hay vẫn phải dùng Navidrome/Subsonic client song song?",
+      "Hardlink/import có chạy đúng trên Unraid, Synology hay chỉ trên VPS ổ đĩa thường?",
+      "Có hỗ trợ hardware transcoding / Live TV như Jellyfin không?",
+      "Nếu server metadata của tác giả ngừng hoạt động thì poster/trailer có tự lấy từ nguồn khác được không?",
+      "Tốc độ và độ ổn định của app khi thư viện lớn hơn 10.000 title?"
+    ]
+  },
+  "research": "Primary sources, fetched from GitHub on 2026-11-19:\n\n## HolyArrs/HolyArrs (https://github.com/HolyArrs/HolyArrs)\nDescription: One self-hosted app for your shows, movies and music.\nHomepage: https://holyarrs.com\nLanguage: Go; license: AGPL-3.0; created 2026-11-09; last push 2026-11-18\nLatest release: 1.2.0 (2026-11-17)\nREADME (start):\nEnglish · Español · Français · Italiano · 简体中文 · 한국어 · 日本語 · हिन्दी · العربية · Русский · More languages\n\n  \n    \n    \n  \n\n&nbsp;&nbsp;\n\n  \n  \n  \n  \n  \n  \n\n&nbsp;&nbsp;\n\n> [!NOTE]\n> **HolyArrs 1.2.0: a red dot shows what needs attention, and connection tests name the exact problem.** Plex labels for requested titles, names in your language, and over 30 fixes. Connect apps over MCP with keys you control. [See what's new](https://holyarrs.com/whats-new/)\n\n> Every poster, trailer and score in your HolyArrs comes from a server I run and pay for myself, so it stays free for everyone. If HolyArrs made movie night a little better, a sponsor keeps the lights on for all of us 💛\n>\n> \n\n> [!TIP]\n> Be with us!\n>\n> | | |\n> |:--|:--|\n> |  | Get help fast and hang out on [Discord](https://discord.com/invite/mthsvesKpC) |\n> |  | Share ideas and vote on [r/HolyArrs](https://reddit.com/r/HolyArrs) |\n> |  | Sneak peeks on [X](https://x.com/CoderLuii) |\n> |  | More projects on [GitHub](https://github.com/CoderLuii) |\n\nSix apps to watch a show. Now it's one.\n\nHolyArrs is one self-hosted app for your shows, movies and music.Browse like a streaming app, ask for what you want, and it handles the rest.\n\nAbout 16.1 MB to download · about 95 MiB of RAM idle on a fresh install · amd64, arm64, armv7The six apps it replaces download 685.0 MB together.\n\nQuick start · Why · What it does · Moving from other apps · The manual · Help\n\n  \n\n## 🚀 Running in two minutes\n\nSave this as `docker-compose.yml` in a new folder on a local disk:\n\n```yaml\nname: holyarrs\nservices:\n  holyarrs:\n    image: holyarrs/holyarrs:latest\n    container_name: holyarrs\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - /your/local/path:/config\n      - /path/to/movies:/movies #optional\n      - /path/to/tv:/tv #optional\n      - /path/to/music:/music #optional\n      - /path/to/downloads:/downloads #optional\n    ports:\n      - 6262:6262\n    restart: unless-stopped\n```\n\n```sh\ndocker compose up -d\n```\n\nOpen `http://your-server:6262` and make the owner account. A short setup walks you through folders, a downloader and a Source.\n\nNo API keys to hunt down. No second container. Every setting is explained in [the manual](#manual) further down.\n\n## 💡 Why I built it\n\nA normal media server runs six apps: Sonarr, Radarr, Lidarr, Bazarr, Prowlarr and Seerr.\n\nThat's six logins, six ports, six update cycles and six API keys to copy between them. When a show doesn't land, you check six places to find out why.\n\nI wanted one app. One login, one port, one place to look.\n\nSo I built it.\n\n| App | Download (amd64) | Idle RAM | Logins | Web ports |\n|---|---|---|---|---|\n| Sonarr | 83.8 MB | | 1 | 1 |\n| Radarr | 86.7 MB | | 1 | 1 |\n| Lidarr | 115.7 MB | | 1 | 1 |\n| Prowlarr | 77.1 MB | | 1 | 1 |\n| Bazarr | 149.2 MB | | 1 | 1 |\n| Overseerr | 172.4 MB | | 1 | 1 |\n| **Six together** | **685.0 MB** | | **6** | **6** |\n| **HolyArrs** | **16.1 MB** | **~140 MiB** | **1** | **1 (6262)** |\n\nAbout 43 times smaller. Compressed size as shown on Docker Hub, linuxserver.io images, amd64, measured 2026-11-13 (HolyArrs 1.1.3). Idle RAM measured 2026-11-08 with 10,000 titles and 55,000 movies and episodes.\n\n## 🎬 Ask for a title, and it shows up in your library\n\nSomeone asks for a title. HolyArrs searches your Sources, picks the best release with your Pick rules, sends it to your downloader and files it in your library. Your media server hears about it when it lands.\n\n| | |\n|---|---|\n| 🍿 **Explore** | Browse like a streaming app. Hover a title and the trailer plays. |\n| 🙋 **Requests** | A whole show or one season. You approve, or let trusted people skip the queue. Plex and Pulsarr watchlists can become requests. |\n| 🎯 **Pick rules** | You decide which release wins: size, quality, language. |\n| 💬 **Subtitles** | In the languages you pick, found on subtitle sites and kept with the file. |\n| 📅 **Calendar** | What's airing next for everything you follow. |\n| 🔔 **Alerts** | Discord, email, Telegram, ntfy, Gotify, Pushover or a webhook. |\n| 🚚 **Import your setup** | From Sonarr, Radarr, Lidarr, Prowlarr, Bazarr, Seerr, Overseerr, qBittorrent and SABnzbd. Pick what comes over, undo it later. |\n| 🔌 **Old-app API** | Seerr, Prowlarr, Bazarr, Unpackerr and Homepage keep working once you turn it on. |\n| 🗝️ **No API keys needed** | Titles, artwork and charts come from the HolyArrs metadata server. Your own keys or server work too. |\n| 🔒 **Encrypted keys** | Stored passwords and keys are locked with a master key that lives in your config folder. |\n| 🪶 **Tiny** | An image of about 16.1 MB with nothing but HolyArrs inside. |\n\nSee every page in motion\n\nHome · Everything waiting on you, at a glance.\nTitle page · Trailer, cast and one button to ask.\n\nRequests · Approve what friends and family ask for.\nDownloads · Every grab, live, in one table.\n\n## 🤝 It works with what you already run\n\n- **Downloaders:** qBittorrent, Transmission, Deluge, rTorrent, aria2, SABnzbd, NZBGet\n- **Media servers:** Plex, Jellyfin, Emby\n- **Sources:** any Torznab or Newznab indexer, or Prowlarr or Jackett\n- **Imports your setup from:** Sonarr, Radarr, Lidarr, Prowlarr, Bazarr, Seerr, Overseerr, qBittorrent, SABnzbd\n\n## 🚚 Bring your old setup with you\n\nOpen **Settings > Import from other apps**, add each old app's address and API key (or a backup zip), pick what comes over, then select **Import**. You can undo an import later.\n\n| From | What comes over |\n|---|---|\n| Sonarr, Radarr, Lidarr | Library folders, titles, quality profiles as Pick rules, exclusions, naming, indexers and download clients |\n| Prowlarr | Indexers as Sources |\n| Bazarr | Default subtitle languages |\n| Seerr, Overseerr | People and their waiting or approved requests |\n| qBittorrent, SABnzbd | Downloaders |\n\nHolyArrs only reads your old apps and changes nothing in them, so you can run both side by side until you trust it.\n\nKeys and passwords stay behind; you type them in again or import them from a file. Custom formats, tags and history don't come over. Media files never move. Step by step: [Import from other apps](https://docs.HolyArrs.com/migrate/).\n\n## 🧭 What it doesn't do yet\n\n- **Downloading by itself.** HolyArrs connects to qBittorrent, SABnzbd and the others. It doesn't replace them.\n- **Phone and TV apps.** Not built. The web app works on a phone.\n- **Music in Explore** is still being built.\n\nWhat's next is on the [roadmap](https://holyarrs.com/roadmap/). You vote, I build. Post ideas on [r/HolyArrs](https://reddit.com/r/HolyArrs).\n\n## ❓ Questions people ask first\n\n**Do I keep qBittorrent or SABnzbd?**\nYes, for now. HolyArrs connects to the downloader you already run. A built-in downloader is planned for a later release.\n\n**Can Sonarr and Radarr keep running while I try it?**\nYes. HolyArrs reads them once and never changes them.\n\n**Is it free?**\nYes. It's free and open source.\n\n---\n\n# 📖 The manual\n\nEverything below is reference. The full guides live at [docs.HolyArrs.com](https://docs.HolyArrs.com).\n\n## Supported architectures\n\nPulling `holyarrs/holyarrs:latest` gets the right image for your machine.\n\n| Architecture | Available | Runs on |\n| :----: | :----: | --- |\n| amd64 | ✅ | Most PCs, servers and NAS boxes |\n| arm64 | ✅ | Apple silicon, newer Raspberry Pis, ARM servers |\n| armv7 | ✅ | Older 32-bit ARM boards |\n\nOn a NAS? See [Unraid, Synology and other NAS boxes](https://docs.HolyArrs.com/run/platforms/).\n\nPrefer a native package? An experimental Synology package (`.spk`) is attached to each [release](https://github.com/HolyArrs/HolyArrs/releases). See [Synology package](docs/run/synology.md).\n\n## Version tags\n\nImages live on Docker Hub as [`holyarrs/holyarrs`](https://hub.docker.com/r/holyarrs/holyarrs).\n\n| Tag | Use it for |\n| :----: | --- |\n| `latest` | The newest release. |\n| `1.1.4` | One exact version. It never moves. |\n\n## Usage\n\n### docker compose (recommended)\n\n```yaml\nname: holyarrs\nservices:\n  holyarrs:\n    image: holyarrs/holyarrs:latest\n    container_name: holyarrs\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=America/New_York\n    volumes:\n      - /your/local/path:/config\n      - /path/to/movies:/movies #optional\n      - /path/to/tv:/tv #optional\n      - /path/to/music:/music #optional\n      - /path/to/downloads:/downloads #optional\n    ports:\n      - 6262:6262\n    restart: unless-stopped\n```\n\n### docker cli\n\n```sh\ndocker run -d \\\n  --name=holyarrs \\\n  -e PUID=1000 \\\n  -e PGID=1000 \\\n  -e TZ=America/New_York \\\n  -p 6262:6262 \\\n  -v /your/local/path:/config \\\n  -v /path/to/movies:/movies `#optional` \\\n  -v /path/to/tv:/tv `#optional` \\\n  -v /path/to/music:/music `#optional` \\\n  -v /path/to/downloads:/downloads `#optional` \\\n  --restart unless-stopped \\\n  holyarrs/holyarrs:latest\n```\n\nContainer settings go in compose. Everything else is set in the app.\n\n## Parameters\n\nEach one is written `:`. Change the left side only.\n\n| Parameter | Function |\n| :----: | --- |\n| `-p 6262:6262` | The web app. |\n| `-e PUID=1000` | The user HolyArrs runs as. See [User and group](#user-and-group). |\n| `-e PGID=1000` | The group HolyArrs runs as. |\n| `-e TZ=America/New_York` | Your time zone, for the calendar, schedules and logs. `Etc/UTC` when left out. |\n| `-e UMASK=022` | Optional. Permission bits new files leave out. Use `002` when a group must write too. |\n| `-v /config` | Databases, settings, the master key, backups and logs. Local disk only, never a network share. |\n| `-v /movies` | Optional. A movie Library folder. |\n| `-v /tv` | Optional. A shows Library folder. |\n| `-v /music` | Optional. A music Library folder. |\n| `-v /downloads` | Optional. Your downloader's download folder. |\n| `--read-only=true` | Optional. Only `/config` and `/tmp` need to be writable. |\n| `--user=1000:1000` | Optional. Start as a fixed user. `PUID` and `PGID` are then ignored. |\n\nMore variables (reverse proxy, URL base, save path): [Environment variables](https://docs.HolyArrs.com/reference/env-vars/).\n\n### Environment variables from files\n\nPut `FILE__` in front of any variable to read its value from a file, such as a Docker secret:\n\n```yaml\nenvironment:\n  - FILE__HOLYARRS_ALLOWED_HOSTS=/run/secrets/holyarrs_hosts\n```\n\n## User and group\n\n`PUID` and `PGID` must match the user that owns your media folders. Find them with:\n\n```sh\nid youruser\n# uid=1000(youruser) gid=1000(youruser)\n```\n\nHolyArrs never changes the owner of your media or download folders. Give that user write access to them, because HolyArrs makes folders and moves files.\n\n## Application setup\n\nOpen `http://your-server:6262` and make the owner account right away. There is no default password. Until you make it, whoever opens HolyArrs first becomes the owner.\n\nThe setup that opens next asks for your folders, a downloader and a Source. Guide: [First run](https://docs.HolyArrs.com/start/first-run/).\n\n### Media folders\n\nThe four optional mounts are the easy way to start. The cost: each mount is its own filesystem inside the container, so every import is a full copy.\n\nWant instant moves that take no extra space? Mount one parent folder with downloads and Library folders inside it, and give your downloader the same mount at the same path. Guide: [Folders](https://docs.HolyArrs.com/start/folders/).\n\n### Docker Desktop on Windows and Mac\n\nUse a named volume for `/config`. Media folders can stay host folders. Guide: [Install](https://docs.HolyArrs.com/start/install/).\n\n## Keep your master key safe\n\n`holyarrs.key` in your config folder is what opens your stored passwords and keys. Backups don't include it, so keep a copy somewhere else. As the owner, open **Settings > Backups** and choose **Download key kit**. See [Backups](https://docs.HolyArrs.com/run/backups/).\n\n## Updating\n\n```sh\ndocker compose pull\ndocker compose up -d\n```\n\nIf the new version changes how data is stored, HolyArrs makes a backup first. To go back to it: `docker exec holyarrs /holyarrs restore --pre-update`, then `docker restart holyarrs`. Never remove `/con\n\n## jellyfin/jellyfin (https://github.com/jellyfin/jellyfin)\nDescription: The Free Software Media System - Server Backend & API\nHomepage: https://jellyfin.org\nLanguage: C#; license: GPL-2.0; created 2018-12-09; last push 2026-11-19\nLatest release: v12.4 (2026-10-26)\nREADME (start):\nJellyfin\nThe Free Software Media System\n\n---\n\n---\n\nJellyfin is a Free Software Media System that puts you in control of managing and streaming your media. It is an alternative to the proprietary Emby and Plex, to provide media from a dedicated server to end-user devices via multiple apps. Jellyfin is descended from Emby's 3.5.2 release and ported to the .NET platform to enable full cross-platform support.\n\nThere are no strings attached, no premium licenses or features, and no hidden agendas: just a team that wants to build something better and work together to achieve it. We welcome anyone who is interested in joining us in our quest!\n\nFor further details, please see [our documentation page](https://jellyfin.org/docs/). To receive the latest updates, get help with Jellyfin, and join the community, please visit [one of our communication channels](https://jellyfin.org/docs/general/getting-help). For more information about the project, please see our [about page](https://jellyfin.org/docs/general/about).\n\nWant to get started?\nCheck out our downloads page or our installation guide, then see our quick start guide. You can also build from source.\n\nSomething not working right?\nOpen an Issue on GitHub.\n\nWant to contribute?\nCheck out our contributing choose-your-own-adventure to see where you can help, then see our contributing guide and our community standards.\n\nNew idea or improvement?\nCheck out our feature request hub.\n\nDon't see Jellyfin in your language?\nCheck out our Weblate instance to help translate Jellyfin and its subprojects.\n\n---\n\n## Jellyfin Server\n\nThis repository contains the code for Jellyfin's backend server. Note that this is only one of many projects under the Jellyfin GitHub [organization](https://github.com/jellyfin/) on GitHub. If you want to contribute, you can start by checking out our [documentation](https://jellyfin.org/docs/general/contributing/index.html) to see what to work on.\n\n## Server Development\n\nThese instructions will help you get set up with a local development environment in order to contribute to this repository. Before you start, please be sure to completely read our [guidelines on development contributions](https://jellyfin.org/docs/general/contributing/development.html). Note that this project is supported on all major operating systems except FreeBSD, which is still incompatible.\n\n### Prerequisites\n\nBefore the project can be built, you must first install the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet) on your system.\n\nInstructions to run this project from the command line are included here, but you will also need to install an IDE if you want to debug the server while it is running. Any IDE that supports .NET 6 development will work, but two options are recent versions of [Visual Studio](https://visualstudio.microsoft.com/downloads/) (at least 2022) and [Visual Studio Code](https://code.visualstudio.com/Download).\n\n[ffmpeg](https://github.com/jellyfin/jellyfin-ffmpeg) will also need to be installed.\n\n### Cloning the Repository\n\nAfter dependencies have been installed you will need to clone a local copy of this repository. If you just want to run the server from source you can clone this repository directly, but if you are intending to contribute code changes to the project, you should [set up your own fork](https://jellyfin.org/docs/general/contributing/development.html#set-up-your-copy-of-the-repo) of the repository. The following example shows how you can clone the repository directly over HTTPS.\n\n```bash\ngit clone https://github.com/jellyfin/jellyfin.git\n```\n\n### Installing the Web Client\n\nThe server is configured to host the static files required for the [web client](https://github.com/jellyfin/jellyfin-web) in addition to serving the backend by default. Before you can run the server, you will need to get a copy of the web client since they are not included in this repository directly.\n\nNote that it is recommended for development to [host the web client separately](#hosting-the-web-client-separately) from the web server with some additional configuration, in which case you can skip this step.\n\nThere are two options to get the files for the web client.\n\n1. Build them from source following the instructions on the [jellyfin-web repository](https://github.com/jellyfin/jellyfin-web)\n2. Get the pre-built files from an existing installation of the server. For example, with a Windows server installation the client files are located at `C:\\Program Files\\Jellyfin\\Server\\jellyfin-web`\n\n### Running The Server\n\nThe following instructions will help you get the project up and running via the command line, or your preferred IDE.\n\n#### Running With Visual Studio\n\nTo run the project with Visual Studio you can open the solution (`.slnx`) file and then press `F5` to run the server.\n\n#### Running With Visual Studio Code\n\nTo run the project with Visual Studio Code you will first need to open the repository directory with Visual Studio Code using the `Open Folder...` option.\n\nSecond, you need to [install the recommended extensions for the workspace](https://code.visualstudio.com/docs/editor/extension-gallery#_recommended-extensions). Note that extension recommendations are classified as either \"Workspace Recommendations\" or \"Other Recommendations\", but only the \"Workspace Recommendations\" are required.\n\nAfter the required extensions are installed, you can run the server by pressing `F5`.\n\n#### Running From the Command Line\n\nTo run the server from the command line you can use the `dotnet run` command. The example below shows how to do this if you have cloned the repository into a directory named `jellyfin` (the default directory name) and should work on all operating systems.\n\n```bash\ncd jellyfin                          # Move into the repository directory\ndotnet run --project Jellyfin.Server --webdir /absolute/path/to/jellyfin-web/dist # Run the server startup project\n```\n\nA second option is to build the project and then run the resulting executable file directly. When running the executable directly you can easily add command line options. Add the `--help` flag to list details on all the supported command line options.\n\n1. Build the project\n\n```bash\ndotnet build                       # Build the project\ncd Jellyfin.Server/bin/Debug/net10.0 # Change into the build output directory\n```\n\n2. Execute the build output. On Linux, Mac, etc. use `./jellyfin` and on Windows use `jellyfin.exe`.\n\n#### Accessing the Hosted Web Client\n\nIf the Server is configured to host the Web Client, and the Server is running, the Web Client can be accessed at `http://localhost:8096` by default.\n\nAPI documentation can be viewed at `http://localhost:8096/api-docs/swagger/index.html`\n\n### Running from GitHub Codespaces\n\nAs Jellyfin will run on a container on a GitHub hosted server, JF needs to handle some things differently.\n\n**NOTE:** Depending on the selected configuration (if you just click 'create codespace' it will create a default configuration one) it might take 20-30 seconds to load all extensions and prepare the environment while VS Code is already open. Just give it some time and wait until you see `Downloading .NET version(s) 7.0.15~x64 ...... Done!` in the output tab.\n\n**NOTE:** If you want to access the JF instance from outside, like with a WebClient on another PC, remember to set the \"ports\" in the lower VS Code window to public.\n\n**NOTE:** When first opening the server instance with any WebUI, you will be sent to the login instead of the setup page. Refresh the login page once and you should be redirected to the Setup.\n\nThere are two configurations for you to choose from.\n#### Default - Development Jellyfin Server\nThis creates a container that has everything to run and debug the Jellyfin Media server but does not setup anything else. Each time you create a new container you have to run through the whole setup again. There is also no ffmpeg, webclient or media preloaded. Use the `.NET Launch (nowebclient)` launch config to start the server.\n\n> Keep in mind that as this has no web client you have to connect to it via an external client. This can be just another codespace container running the WebUI. vuejs does not work from the get-go as it does not support the setup steps.\n\n#### Development Jellyfin Server ffmpeg\nthis extends the default server with a default installation of ffmpeg6 though the means described here: https://jellyfin.org/docs/general/installation/linux#repository-manual\nIf you want to install a specific ffmpeg version, follow the comments embedded in the `.devcontainer/Dev - Server Ffmpeg/install.ffmpeg.sh` file.\n\nUse the `ghcs .NET Launch (nowebclient, ffmpeg)` launch config to run with the jellyfin-ffmpeg enabled.\n\n### Running The Tests\n\nThis repository also includes unit tests that are used to validate functionality as part of a CI pipeline on Azure. There are several ways to run these tests.\n\n1. Run tests from the command line using `dotnet test`\n2. Run tests in Visual Studio using the [Test Explorer](https://docs.microsoft.com/en-us/visualstudio/test/run-unit-tests-with-test-explorer)\n3. Run individual tests in Visual Studio Code using the associated [CodeLens annotation](https://github.com/OmniSharp/omnisharp-vscode/wiki/How-to-run-and-debug-unit-tests)\n\n### Advanced Configuration\n\nThe following sections describe some more advanced scenarios for running the server from source that build upon the standard instructions above.\n\n#### Hosting The Web Client Separately\n\nIt is not necessary to host the frontend web client as part of the backend server. Hosting these two components separately may be useful for frontend developers who would prefer to host the client in a separate webpack development server for a tighter development loop. See the [jellyfin-web](https://github.com/jellyfin/jellyfin-web#getting-started) repo for instructions on how to do this.\n\nTo instruct the server not to host the web content, there is a `nowebclient` configuration flag that must be set. This can be specified using the command line\nswitch `--nowebclient` or the environment variable `JELLYFIN_HOSTWEBCLIENT=false`.\n\nSince this is a common scenario, there is also a separate launch profile defined for Visual Studio called `Jellyfin.Server (nowebcontent)` that can be selected from the 'Start Debugging' dropdown in the main toolbar.\n\n**NOTE:** The setup wizard cannot be run if the web client is hosted separately.\n\n---\n\nThis project is supported by:\n\n## navidrome/navidrome (https://github.com/navidrome/navidrome)\nDescription: 🎧 Your Personal Streaming Service \nHomepage: https://www.navidrome.org\nLanguage: Go; license: GPL-3.0; created 2016-02-24; last push 2026-11-19\nLatest release: v0.64.2 (2026-09-24)\nREADME (start):\n# Navidrome Music Server &nbsp;[](https://twitter.com/intent/tweet?text=Tired%20of%20paying%20for%20music%20subscriptions%2C%20and%20not%20finding%20what%20you%20really%20like%3F%20Roll%20your%20own%20streaming%20service%21&url=https://navidrome.org&via=navidrome)\n\n[](https://github.com/navidrome/navidrome/releases)\n[](https://nightly.link/navidrome/navidrome/workflows/pipeline/master)\n[](https://github.com/navidrome/navidrome/releases/latest)\n[](https://hub.docker.com/r/navidrome/navidrome)\n[](https://discord.gg/xh7j7yF)\n[](https://www.reddit.com/r/navidrome/)\n[](CODE_OF_CONDUCT.md)\n[](https://gurubase.io/g/navidrome)\n\nNavidrome is an open source web-based music collection server and streamer. It gives you freedom to listen to your\nmusic collection from any browser or mobile device. It's like your personal Spotify!\n\n**Note**: The `master` branch may be in an unstable or even broken state during development. \nPlease use [releases](https://github.com/navidrome/navidrome/releases) instead of \nthe `master` branch in order to get a stable set of binaries.\n\n## [Check out our Live Demo!](https://www.navidrome.org/demo/)\n\n__Any feedback is welcome!__ If you find a bug, please file a [GitHub issue](https://github.com/navidrome/navidrome/issues/new/choose). \nIf you need/want a new feature or think of any way to improve Navidrome, please share it in \n[Discussions](https://github.com/navidrome/navidrome/discussions/categories/ideas) or join the discussion in our \n[Subreddit](https://www.reddit.com/r/navidrome/). Before contributing code, please read the \n[Contribution Guide](CONTRIBUTING.md). If you want to contribute to the project in any other way \n([ui/backend dev](https://www.navidrome.org/docs/developers/), \n[translations](https://www.navidrome.org/docs/developers/translations/), \n[themes](https://www.navidrome.org/docs/developers/creating-themes)), please join the chat in our \n[Discord server](https://discord.gg/xh7j7yF). \n\n## Installation\n\nSee instructions on the [project's website](https://www.navidrome.org/docs/installation/)\n\n## Cloud Hosting\n\nSeveral cloud hosting providers partner with us to offer [officially supported, cloud-hosted solutions](https://www.navidrome.org/docs/installation/managed). If you sign up with any of these providers, a share of the revenue funds the development of Navidrome at no additional cost for you.\n\n## Features\n \n - Handles very **large music collections**\n - Streams virtually **any audio format** available\n - Reads and uses all your beautifully curated **metadata**\n - Great support for **compilations** (Various Artists albums) and **box sets** (multi-disc albums)\n - **Multi-user**, each user has their own play counts, playlists, favourites, etc...\n - Very **low resource usage**\n - **Multi-platform**, runs on macOS, Linux and Windows. **Docker** images are also provided\n - Ready to use binaries for all major platforms, including **Raspberry Pi**\n - Automatically **monitors your library** for changes, importing new files and reloading new metadata \n - Supports **lyrics** from sidecar .ttml, .yaml/.yml Lyricsfile, .elrc, .lrc, .srt, .txt files and embedded TTML, Enhanced LRC, LRC, SRT, and plain-text tags (via `lyricspriority`)\n - **Themeable**, modern and responsive **Web interface** based on [Material UI](https://material-ui.com)\n - **Compatible** with all Subsonic/Madsonic/Airsonic [clients](https://www.navidrome.org/docs/overview/#apps)\n - **Transcoding** on the fly. Can be set per user/player. **Opus encoding is supported**\n - Translated to **various languages**\n\n## Translations\n\nNavidrome uses [POEditor](https://poeditor.com/) for translations, and we are always looking \nfor [more contributors](https://www.navidrome.org/docs/developers/translations/)\n\n \n\n## Documentation\nAll documentation can be found in the project's website: https://www.navidrome.org/docs. \nHere are some useful direct links:\n\n- [Overview](https://www.navidrome.org/docs/overview/)\n- [Installation](https://www.navidrome.org/docs/installation/)\n  - [Docker](https://www.navidrome.org/docs/installation/docker/)\n  - [Binaries](https://www.navidrome.org/docs/installation/pre-built-binaries/)\n  - [Build from source](https://www.navidrome.org/docs/installation/build-from-source/)\n- [Development](https://www.navidrome.org/docs/developers/)\n- [Subsonic API Compatibility](https://www.navidrome.org/docs/developers/subsonic-api/)\n\n## Screenshots\n\n## streamaserver/streama (https://github.com/streamaserver/streama)\nDescription: Self hosted streaming media server. https://docs.streama-project.com/\nHomepage: -\nLanguage: JavaScript; license: MIT; created 2015-07-29; last push 2026-11-12\nLatest release: v1.11.3 (2026-11-12)\nREADME (start):\n# STREAMA\n\n[](https://travis-ci.org/streamaserver/streama) \n[](https://github.com/streamaserver/streama/releases)\n[](https://github.com/streamaserver/streama/blob/master/LICENSE.md) \n[](https://discord.gg/CJEHWX9)\n\n  \nDocs: https://docs.streama-project.com/  \n\nEver had a huge bookshelf full of shows and movies? Ever wanted to digitalize them, but didn't have a good way of organizing the files? Worry no more! Streama is your own personal Netflix for just such a purpose!\n\n[](https://github.com/streamaserver/streama/wiki) \n[](https://streama.demo-version.net/) \n[](https://play.google.com/store/apps/details?id=dularion.streama) \n\n## Live-Demo\nhttps://streama.demo-version.net/   \n**credentials: username: demoUser | password: demoUser**  \nFeel free to play around there as much as you like (everything is reset at night)  \nWe will keep this demo updated with our newest releases as they come, so that you can check out new features there first before deciding to deploy them in your own environments. \n\n## Donate\n\nIf you want to donate to the developer via bitcoin use 17rCUEX6KYQ8ZM4w39ttEUL7SUDnGCpcWq  \n\n## Table of contents:\n- [Getting Started](#getting-started)\n- [Downloads](#downloads)\n- [The Application](#the-application)\n  - [Settings](#settings)\n  - [The Dashboard](#the-dashboard)\n  - [The Player](#the-player)\n  - [The Admin-Panel](#the-admin-panel)\n  - [Accessing existing files](#accessing-existing-files)\n  - [The Users](#the-users) \n- [Technical Details](#technical-details)\n- [Changelog](#changelog)\n- [Roadmap](#roadmap)\n- [Known Issues](#known-issues)\n- [Contributing](#contributing)\n- [License](#license)\n\n# Getting Started\n- [Installation and first-time setup](https://docs.streama-project.com/getting-started/installing/)\n\nIf you have any issues getting started, feel free to [chat with us on Discord](https://discord.gg/CJEHWX9). We are more than happy to assist and then improve the docs accordingly. \n\n# Downloads\n- **Stable and beta** versions see the GitHub [releases](https://github.com/streamaserver/streama/releases)\n\n# The Application\n\n### Settings\n\nWhen you first run the application, you will be redirected to the settings page. Here you enter your desired upload directory for the video files, your [theMovieDb.org API key](https://www.themoviedb.org/documentation/api) and a different base URL if so desired (useful for remote hosting).\n\nOnce you made adjustments to any of the settings, make sure to validate the value before saving.\n- For the API-Key, the validation checks against theMovieDb.org to see if you've entered a valid API-key.\n- For the upload directory, the application checks if it has read/write permissions for it.\n\n### The Dashboard\n\nOn the dashboard, a user can see their recently watched TV-shows and Movies and their progress (they can continue where they left off) as well start new shows and movies that they haven't yet seen. The \"Continue Watching\" Feature works by periodically updating the database (only while watching, of course!) with info about the currently watched Video and how far it has been seen.\n\nIf a Movie or Episode does not contain any video-files, it won't show up in the dashboard.\n\n### The Player\n\nThe Streama-Player is (heavily) inspired by Netflix, so you get all the good stuff from there. For Shows, there is a \"next episode\" button and a handy episode/season browser. There are also the basics: volume-control, play/pause, and fullscreen. \nLater down the road I will add a feature to add subtitles and switch between video-files (for instance for different quality uploads). \nThe player is HTML5-based and has only really been tested in Chrome so far.\n\n##### The Episode Browser\nI am especially proud of the Episode-Browser, which aims to function just like on Netflix. By default, the current video files season is selected. The user gets an overview of which other episodes there are in the season, how many seasons there are, and, as an added feature, the user sees all the added episodes, even if no video-files are added to them (thus greyed out).\n\n### The Admin-Panel\n\nOne of the most important things to me was to make managing shows, movies, and episodes as easy and fun as possible. For this, I made heavy use of the API from [theMovieDatabase.org](https://www.themoviedb.org/), which auto-fills the episodes, shows and movies with useful information and great images. This eases the user's role in adding content.\n\nFor example, creating a new TV-show and the episodes for the first season looks something like this:\n\nUploading video-files for each episode is as easy as drag-and-drop!\n\n  \n\n### Accessing existing files\nIf you want to avoid uploading every file, use our new and improved \"Local File\" Feature instead. You can define a local directory (I use one directly in which I created symlinks to all my mounted drives) and then you can either use the local file browser for individual movies / tv-Shows or you can use the bulk-create feature. \n\n#### The local file browser\nYou can access the lo\n\nMore pages, read on 2026-11-19:\n\n## First run | HolyArrs Docs\nURL: https://docs.holyarrs.com/start/first-run/\nDescription: Make the owner account and answer the setup steps so HolyArrs knows what you collect and where it lives.\n\nSkip to content\nHolyArrs\nOn this page\nTop of page\nFirst run\n\nNEW HERE\n\nMake the owner account and tell HolyArrs what you collect. Nobody can use the app until the owner finishes this.\n\nMake the owner\nLink to Make the owner\n\nOpen http://your-server:6262.\n\nPick an owner name and a password of at least 8 characters.\n\nSign in.\n\nYou should see Coming from other apps?\n\nAnswer the setup steps\nLink to Answer the setup steps\n\nComing from other apps? Pick Start fresh for a new setup. Pick Bring my apps to copy titles, folders and settings from Sonarr, Radarr, Lidarr, Overseerr and others. HolyArrs only reads them; your files and old apps stay as they are. See Import from other apps.\n\nWhere’s your media? Turn on what you collect: movies, TV shows, music. Type a folder for each, as HolyArrs sees it inside the container, such as /data/media/movies. Press Continue.\n\nEvery part you leave ticked needs a folder. TV shows starts ticked; untick it if you only want movies.\n\nKeep these folders in the same mount as your downloads, such as /data/media/movies next to /data/downloads. Then imports are instant and take no extra space. Folders on separate mounts, such as /movies and /downloads, make every import a full copy. See Folders.\n\nWhich app downloads? Connect your downloader, or press Skip for now. Connect walks through it.\n\nWhere should we search? Link Prowlarr or Jackett, or press Skip for now. Also covered in Connect.\n\nHolyArrs is ready. Press Open Home, or Invite family to turn on Requests and add users.\n\nIf Bring my apps found a downloader or a source, HolyArrs skips that step.\n\nChoices\nLink to Choices\nSkip for now\nLink to Skip for now\n\nThe folder, downloader and source steps each have it. Skipped steps show as Not set on the last screen; each opens the matching Settings page.\n\nChange your answers later\nLink to Change your answers later\n\nOpen /welcome any time to change what you use: movies, TV shows, music, subtitles, and whether family asks for titles. Saying yes to family adds a Requests page.\n\nIf it does not work\nLink to If it does not work\nYOU SEE\tFIX\nSomeone else became the owner\tOn the server, run docker exec -i holyarrs /holyarrs reset-owner. Everyone then signs in again.\nOnly the owner or an admin with Settings access can finish setup.\tSign in as the owner, or as an admin with Settings access.\nA folder is refused\tEach folder is used once and cannot sit inside another one you added. Pick another path.\nHolyArrs is not answering\tWait a few seconds and retry. If it repeats, check docker compose ps.\nFor experts\nLink to For experts\nSETUP DETAILS\nRelated\nLink to Related\nFolders\nConnect\nUsers and roles\nPREVIOUS\nStep 2 of 5: Folders\nNEXT\nStep 4 of 5: Connect\n\nHolyArrs is free. If it saved you time, star it on GitHub, sponsor it or buy me a coffee.\n\n## Environment variables | HolyArrs Docs\nURL: https://docs.holyarrs.com/reference/env-vars/\nDescription: Every environment variable HolyArrs reads for a normal install, with its default and an example.\n\nSkip to content\nHolyArrs\nOn this page\nTop of page\nEnvironment variables\n\nEXPERT\n\nEvery variable the HolyArrs container reads. Most installs set only PUID, PGID and TZ.\n\nCommon\nLink to Common\nVARIABLE\tWHAT IT DOES\tDEFAULT\tEXAMPLE\nPUID, PGID\tUser and group HolyArrs runs as. Must own /config and your media folders.\t1000, 1000\tPUID=1000\nTZ\tTime zone for schedules and logs.\tEtc/UTC\tTZ=Europe/Amsterdam\nUMASK\tPermission bits new files leave out. Affects new files only.\t022\tUMASK=002\nHOLYARRS_SAVE_PATH\tThe downloader’s save folder, as the downloader sees it. Sent with every download.\tnone\t/data/downloads\nHOLYARRS_URL_BASE\tServe HolyArrs under a path behind a reverse proxy. / ignores a path saved in Settings.\tnone\t/holyarrs\nHOLYARRS_ALLOWED_HOSTS\tExtra host names people use to reach HolyArrs, comma separated.\tIPs and localhost\tholyarrs.example.com\nHOLYARRS_TRUSTED_PROXIES\tYour reverse proxy’s address or network, comma separated. Needed for real client addresses.\tnone\t172.18.0.0/16\nHOLYARRS_MASTER_KEY_FILE\tRead the vault’s master key from its own file. The PUID user must be able to read it.\t/config/holyarrs.key\t/keys/holyarrs.key\nValues from files\nLink to Values from files\n\nPut FILE__ in front of any variable to read its value from a file, such as a Docker secret.\n\nenvironment:\n  - FILE__HOLYARRS_ALLOWED_HOSTS=/run/secrets/holyarrs_hosts\n\nHolyArrs drops one newline at the end of the file. If the file is missing, HolyArrs stops and the log names the variable and file, never the value.\n\nRecovery and troubleshooting\nLink to Recovery and troubleshooting\nVARIABLE\tWHAT IT DOES\tDEFAULT\tEXAMPLE\nHOLYARRS_SAFE_MODE\tStart only the core: sign-in, Library, settings, backups and health. Remove it after the fix.\toff\t1\nHOLYARRS_LOW_MEMORY\t1 forces low-memory mode on, 0 forces it off. Unset, it turns on at about 2.5 GiB of RAM or less.\tby machine size\t1\nHOLYARRS_FOLLOW_LINKS\t1 lets the Library scan and imports use video and music files that are symlinks (libraries built from links into a mounted drive). A linked download is placed in the Library as a link.\toff\t1\nGOMEMLIMIT\tOverride the memory target HolyArrs sets for itself.\tset by HolyArrs\t1GiB\nHOLYARRS_SKIP_SPACE_CHECK\tSkip the free-space check before a database update.\toff\tyes\nHOLYARRS_CONFIG_IN_MEMORY\tAllow /config on a memory-backed folder. For test boxes; data is lost on restart.\toff\tyes\nHOLYARRS_ALLOW_DESKTOP_FOLDER\tStart with /config in a Docker Desktop shared folder on a Mac, after you check file locks work there. HolyArrs warns on every start.\toff\t1\nHOLYARRS_READONLY_DOWNLOADERS\tDownloaders HolyArrs must never change, by id or address, comma separated.\tnone\t3,http://qbit:8080\nHOLYARRS_HEALTH_URL\tAddress the container health check calls.\thttp://127.0.0.1:6262\thttp://127.0.0.1:6262/holyarrs\n\nOn/off variables accept 1, true, yes or on. HOLYARRS_FOLLOW_LINKS takes only 1.\n\nSingle sign-on\nLink to Single sign-on\n\nSet these before start. If HOLYARRS_OIDC_ENABLED is present at all, even as false, the environment owns single sign-on and Settings only shows it. The on/off ones here take only true or false; anything else stops the start.\n\nVARIABLE\tWHAT IT DOES\tDEFAULT\nHOLYARRS_OIDC_ENABLED\tTurn on single sign-on.\tfalse\nHOLYARRS_OIDC_ISSUER\tThe provider’s exact HTTPS issuer.\tnone\nHOLYARRS_OIDC_CLIENT_ID\tRegistered client id.\tnone\nHOLYARRS_OIDC_CLIENT_SECRET_FILE\tFile holding the client secret, at most 4096 bytes. Leave out for a public client.\tnone\nHOLYARRS_OIDC_REDIRECT_URL\tExact callback: your address, URL base if any, then /api/v1/auth/oidc/callback.\tnone\nHOLYARRS_OIDC_ALLOW_JOIN\tNew people join as members who can only ask.\tfalse\nHOLYARRS_OIDC_ALLOW_LOCAL_NETWORK\tAllow a provider on your private network.\tfalse\nHOLYARRS_OIDC_ALLOW_LOOPBACK_HTTP\tAllow plain HTTP on this machine, for testing.\tfalse\nHOLYARRS_FORWARD_AUTH_ENABLED\tTurn on trusted proxy sign-in.\tfalse\nHOLYARRS_FORWARD_AUTH_ISSUER\tStable HTTPS name for the proxy.\tnone\nHOLYARRS_FORWARD_AUTH_TRUSTED_PEERS\tProxy addresses or ranges allowed to send identity headers, comma separated.\tnone\nHOLYARRS_FORWARD_AUTH_ALLOW_JOIN\tNew proxy names join as members who can only ask.\tfalse\n\nA bad setup stops HolyArrs from starting. Steps are in Sign-in and passwords.\n\nProxy variables\nLink to Proxy variables\n\nHolyArrs ignores HTTP_PROXY, HTTPS_PROXY and ALL_PROXY, in capitals or lowercase, on purpose. Before every outside connection, HolyArrs checks the real address it is about to reach, so that a lookup can never be steered to your local network. A proxy from the environment would connect for HolyArrs, to an address HolyArrs never sees, and that check would mean nothing.\n\nWhen one of them is set, the log says so at start and the doctor shows a warning under Network. Posters, metadata and update checks still connect directly, and fail where your network blocks them. There is no app-wide proxy setting.\n\nWhat to do instead:\n\nLet HolyArrs reach the addresses in Outside addresses through your firewall.\nFor a Source that needs another route, set Proxy on that Source. It takes an HTTP or SOCKS5 proxy. See Sources.\nFor experts\nLink to For experts\nMETADATA\nFIRST-START SHORTCUTS\nDEVELOPER AND TEST VARIABLES\nRelated\nLink to Related\nInstall\nRun under a path\nSign-in and passwords\nPREVIOUS\nReference\nNEXT\nOld-app API\n\nHolyArrs is free. If it saved you time, star it on GitHub, sponsor it or buy me a coffee.\n\n## Folders | HolyArrs Docs\nURL: https://docs.holyarrs.com/start/folders/\nDescription: Lay out one shared data folder so HolyArrs moves finished downloads into your Library instantly with hardlinks.\n\nSkip to content\nHolyArrs\nOn this page\nTop of page\nFolders\n\nNEW HERE\n\nSet up your folders once so finished downloads land in your Library instantly, without a second copy.\n\nThe Install example already mounts one data folder at /data. This page shows the layout inside it and how to give your downloader the same view. Mounting /movies, /tv, /music and /downloads one by one also works, but then every import is a full copy.\n\nAlready running with separate mounts? See Move to one data folder.\n\nThe rule\nLink to The rule\n\nPut downloads and media under one parent folder, on one disk, and mount that parent into HolyArrs and your downloader at the same path.\n\nA hardlink is a second name for the same file. It takes no extra space and is made instantly. It only works inside one filesystem, and Docker treats every mount as its own, so separate mounts force a full copy.\n\n/srv/data                  mounted as /data in HolyArrs and the downloader\n├── downloads\n│   ├── torrents\n│   └── usenet\n└── media\n    ├── movies\n    ├── tv\n    └── music\nSet it up\nLink to Set it up\n\nMake the folders on the host:\n\nTerminal window\nmkdir -p /srv/data/downloads/{torrents,usenet} /srv/data/media/{movies,tv,music}\n\nGive your PUID user write access:\n\nTerminal window\nchown -R 1000:1000 /srv/data\n\nMount the parent in HolyArrs: - /srv/data:/data.\n\nMount it the same way in your downloader: - /srv/data:/data, and set its save folder to /data/downloads/torrents or /data/downloads/usenet.\n\nIn HolyArrs, use /data/media/movies, /data/media/tv and /data/media/music as Library folders during First run.\n\nYou should see Instant, no extra space on each folder in Settings > Library folders.\n\nCAUTION\n\nSeparate NAS shares or datasets under /srv/data are separate filesystems. Files still copy between them. Use folders inside one share.\n\nHardlink, move or copy\nLink to Hardlink, move or copy\n\nWhen a download finishes, HolyArrs puts each file in your Library in one of three ways:\n\nDOWNLOAD\tSAME MOUNT AND DISK\tDIFFERENT MOUNTS OR DISKS\nTorrent\tHardlink. The downloader keeps seeding the same file.\tCopy. The torrent keeps its own file.\nUsenet, or a file HolyArrs unpacked\tMove.\tCopy. HolyArrs then clears the finished job, with its files, from SABnzbd or NZBGet.\nA hardlink or a move is instant and takes no extra space. A copy takes as long as writing the file again, and the file sits on disk twice until the downloader’s copy is gone.\nBefore a copy, HolyArrs checks there is room for the file. It writes the copy under a hidden .holyarrs- name in the target folder and gives it its real name only when it is complete, so a half-written file never shows in your Library.\nA copy shows in History as by copy (hardlink not possible).\nHolyArrs never moves files out of a downloader it may not change (HolyArrs can change this Downloader off, or HOLYARRS_READONLY_DOWNLOADERS), or out of a Library folder. Those files are hardlinked, or copied.\nChoices\nLink to Choices\nSeparate mounts\nLink to Separate mounts\n\n/movies, /tv, /music and /downloads as four mounts still work. Every import then copies the file, which takes longer and uses double the space until the downloader deletes its copy. That holds for Usenet downloads too, even on one disk: a file can only move instantly within one mount, so use the shared parent folder above.\n\nDownloader in another container with other paths\nLink to Downloader in another container with other paths\n\nIf the downloader sees the folder under another name, fill in Downloader’s path and HolyArrs’ path on the downloader in Settings > Downloaders, such as /data/torrents and /downloads. Matching paths need no mapping.\n\nIf it does not work\nLink to If it does not work\nYOU SEE\tCAUSE\tFIX\nEach import makes a full copy (uses extra space) on a Library folder\tDownloads and media are on different mounts or filesystems\tMount one parent folder, as above. Already set up? See Move to one data folder\nCannot write here or Folder not found\tThe path is wrong, or PUID cannot write\tUse the path inside the container; fix ownership\nA folder is not found\tYou typed the host path\tType the container path, such as /data/media/movies\nImport says the path is not allowed\tThe download folder is not a known place\tSet HOLYARRS_SAVE_PATH, or add it under Settings > Library folders > Extra import folders\nFor experts\nLink to For experts\nWHAT THE FOLDER CHECK TESTS\nLIBRARY FOLDER RULES\nRelated\nLink to Related\nInstall\nLibrary folders\nMove to one data folder\nPlatforms\nPREVIOUS\nStep 1 of 5: Install\nNEXT\nStep 3 of 5: First run\n\nHolyArrs is free. If it saved you time, star it on GitHub, sponsor it or buy me a coffee.\n\n## HolyArrs docs | HolyArrs Docs\nURL: https://docs.holyarrs.com/\nDescription: Install HolyArrs, import from your old apps, or look up a setting.\n\nSkip to content\nHolyArrs\nEN\nHolyArrs docs\n\nNEW HERE\n\nHolyArrs finds, downloads and organises your movies, shows and music in one app. Pick where you are.\n\nNew to HolyArrs\nFive steps from install to your first movie in your Library.\nImport from other apps\nBring your titles, folders and settings over. Your old apps keep running.\nLooking something up\nSettings, env vars, the old-app API and the route list.\nStart here\nLink to Start here\nSTEP\tPAGE\tYOU END WITH\n1\tInstall\tHolyArrs open on port 6262\n2\tFolders\tOne folder layout that moves files instantly\n3\tFirst run\tAn owner account and your Library folders\n4\tConnect\tA downloader and a source that both pass Test\n5\tFirst title\tOne movie found, downloaded and in your Library\n\nThen see Home and Settings to find your way around.\n\nOn a NAS or without Docker\nLink to On a NAS or without Docker\nUnraid, Synology and other NAS boxes\nPortable build, no Docker\nStuck\nLink to Stuck\nTroubleshooting\nGet support\nNEXT\nStart here\n\nHolyArrs is free. If it saved you time, star it on GitHub, sponsor it or buy me a coffee.",
+  "footage": [
+    {
+      "scene": "s2",
+      "query": "developer at desk at night",
+      "file": "footage/developer-at-desk-at-night-pixabay-345244.mp4",
+      "id": "pixabay-345244",
+      "page": "https://pixabay.com/videos/id-345244/",
+      "author": "danydory",
+      "tags": "kingfisher, bird, fauna, river, plugged, at the water's edge, colorful, beak, plumage",
+      "duration": 10,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2026/04/08/345244_large.mp4"
+    },
+    {
+      "scene": "s4",
+      "query": "friends watching movie on couch",
+      "file": "footage/friends-watching-movie-on-couch-pixabay-185888.mp4",
+      "id": "pixabay-185888",
+      "page": "https://pixabay.com/videos/id-185888/",
+      "author": "fvonderaa",
+      "tags": "ai generated, couch, sofa, rain, books, candles, forest, fall, cozy, nature",
+      "duration": 6,
+      "width": 1440,
+      "height": 1792,
+      "link": "https://cdn.pixabay.com/video/2023/10/20/185888-876579680_medium.mp4"
+    },
+    {
+      "scene": "s8",
+      "query": "server room blinking lights",
+      "file": "footage/server-room-blinking-lights-pixabay-142554.mp4",
+      "id": "pixabay-142554",
+      "page": "https://pixabay.com/videos/id-142554/",
+      "author": "Joe_hackney",
+      "tags": "christmas, room, living room, tree, fireplace, wreath, garland, lights, blinking, couch, wall, holiday, beautiful wallpaper, fire, glowing, festive, festive season, screensaver, relaxing, meditation, peaceful, floor, wood, background",
+      "duration": 80,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2022/12/11/142554-780232278_large.mp4"
+    },
+    {
+      "scene": "s11",
+      "query": "developer at desk at night",
+      "file": "footage/developer-at-desk-at-night-pixabay-12127.mp4",
+      "id": "pixabay-12127",
+      "page": "https://pixabay.com/videos/id-12127/",
+      "author": "badzhoo",
+      "tags": "footage, dawn, city, sunrise, sun, beach, sky, river, nature, water, early morning, clouds, landscape, morning, at dawn",
+      "duration": 7,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2017/09/20/12127-235051444_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "man working on laptop at night",
+      "file": "footage/man-working-on-laptop-at-night-pixabay-283431.mp4",
+      "id": "pixabay-283431",
+      "page": "https://pixabay.com/videos/id-283431/",
+      "author": "Kanenori",
+      "tags": "night view, yamada's rice fields, rice farming, rice terraces, starry sky, milky way, reflection on the water surface, japan",
+      "duration": 8,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2025/06/03/283431_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "man working at computer night",
+      "file": "footage/man-working-at-computer-night-pixabay-215751.mp4",
+      "id": "pixabay-215751",
+      "page": "https://pixabay.com/videos/id-215751/",
+      "author": "G3Remote",
+      "tags": "man, office work, business, payroll, payroll management, working late night, computer, digital, tired",
+      "duration": 18,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2024/06/07/215751_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "developer coding",
+      "file": "footage/developer-coding-pixabay-348042.mp4",
+      "id": "pixabay-348042",
+      "page": "https://pixabay.com/videos/id-348042/",
+      "author": "doktorkleinmusic",
+      "tags": "coding, programmer, developer, screen, glasses, reflection, code, technology, focus, work, computer, ai, cyber, night, concentration, software, programming, digital, internet, business, data, hacking, hacker, ai generated",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/21/348042_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "music headphones",
+      "file": "footage/music-headphones-pixabay-161062.mp4",
+      "id": "pixabay-161062",
+      "page": "https://pixabay.com/videos/id-161062/",
+      "author": "u_ayuc6ef9vb",
+      "tags": "woman, headphones, earphones, music, listen, relax, park",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2023/04/30/161062-822582130_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "server room",
+      "file": "footage/server-room-pixabay-345428.mp4",
+      "id": "pixabay-345428",
+      "page": "https://pixabay.com/videos/id-345428/",
+      "author": "WhiteHatDesigner",
+      "tags": "technology, data, digital, cyberspace, server, network, futuristic, sci-fi, internet, computing, database, future, ai, glowing, abstract, matrix, tunnel, hallway, cyber, tech, information, system, connection, server room",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/09/345428_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "cinema movie theater",
+      "file": "footage/cinema-movie-theater-pixabay-320.mp4",
+      "id": "pixabay-320",
+      "page": "https://pixabay.com/videos/id-320/",
+      "author": "Vimeo-Free-Videos",
+      "tags": "curtains, cinema, red, movie theater, the movies, motion-picture theater, closed, stage, theater, flicks, pictures",
+      "duration": 10,
+      "width": 1728,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2015/08/11/320-135989968_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "couple watching tv",
+      "file": "footage/couple-watching-tv-pixabay-245932.mp4",
+      "id": "pixabay-245932",
+      "page": "https://pixabay.com/videos/id-245932/",
+      "author": "xBriantcx",
+      "tags": "couple, love, lovers, together, relationship, romance, romantic",
+      "duration": 7,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2024/12/09/245932_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "person using smartphone",
+      "file": "footage/person-using-smartphone-pixabay-3135.mp4",
+      "id": "pixabay-3135",
+      "page": "https://pixabay.com/videos/id-3135/",
+      "author": "Life-Of-Vids",
+      "tags": "smartphone, businessman, mobile, people, phone, technology, person, communication, business, internet, man, app, business phone, person on phone, cell, man on phone, texting, message, using, professional, on the phone, telephone, mobile phone, mobile app",
+      "duration": 24,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3135-166335908_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "vinyl record player",
+      "file": "footage/vinyl-record-player-pixabay-38388.mp4",
+      "id": "pixabay-38388",
+      "page": "https://pixabay.com/videos/id-38388/",
+      "author": "Matthias_Groeneveld",
+      "tags": "record, record player, vinyl, turntable, retro, spinning, disco, playing, equipment, black",
+      "duration": 19,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2020/05/07/38388-418005845_medium.mp4"
+    }
+  ]
+}
