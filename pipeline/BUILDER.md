@@ -134,6 +134,10 @@ Load these when the video calls for them:
   match, and the drop carries the biggest moment.
 - `edit-styles`: when the art direction is `pastel-3d-explainer` or
   `breakcore-swiss`; read only the file for that style.
+- `creator-layouts` (.claude/skills/creator-layouts/SKILL.md): when the art direction
+  is `creator-layouts`, or a scene should look like a creator's edit (a person clip
+  framed under visuals, a tier list, a counter with a profile card). Copy parts
+  from its examples.tsx.
 - `transitions-dev`: ready-made motion for explainer parts: a number popping in
   (`02`), text swaps and morphs (`04`, `33`, `34`), a staggered text reveal
   (`18`), a spinning counter (`26`), an AI "thinking" line and streaming text

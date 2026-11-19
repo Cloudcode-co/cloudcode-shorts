@@ -26,3 +26,7 @@ project's videos. Each folder keeps its source's license.
 | transitions-polish | https://github.com/jakubantalik/transitions.dev (commit e3aefb5, skills/) | LICENSE.txt (Transitions.dev License) in the folder |
 | transitions-ui-generation | https://github.com/jakubantalik/transitions.dev (commit e3aefb5, skills/); description frontmatter quoted so the YAML parses | LICENSE.txt (Transitions.dev License) in the folder |
 | make-interfaces-feel-better | https://github.com/jakubkrehel/make-interfaces-feel-better (commit 35545ea) | LICENSE (MIT) in the folder |
+
+## Written for this project
+
+`creator-layouts` is original to this repo: layouts measured from a creator's Instagram reel (facebook.com/share/r/19j1nMbLEP), with no code, images or assets copied from it.

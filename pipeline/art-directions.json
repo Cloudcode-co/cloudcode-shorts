@@ -137,6 +137,11 @@
       "name": "Breakcore Swiss",
       "brief": "Load the edit-styles skill and follow its breakcore-swiss.md. Footage-first: fetch 2+ clips per scene, cut every scene into 1–2 beat shots on a 150 BPM grid (24 frames a beat), half of them full-bleed footage regraded every beat with ribbons, the rest white Swiss posters, pixel scatters, a ring portal and colour-bar cards. 2-frame flash and smear inserts on the snare. Almost no text: each scene's fact in Unbounded at one fixed spot, still while the shots cut under it.",
       "heavy": true
+    },
+    {
+      "id": "creator-layouts",
+      "name": "Creator layouts",
+      "brief": "Load the creator-layouts skill and follow it. A creator's edit without a presenter: person footage in rounded cards under paper panels with one serif-italic accent word, a label box on the split seam, a coral arrow filling an empty slot, a real-number counter over a profile card, an S-to-F tier board where cards drop into rank. At least three of its layouts, one per scene, live one-phrase captions over footage."
     }
   ],
   "pacing": [
