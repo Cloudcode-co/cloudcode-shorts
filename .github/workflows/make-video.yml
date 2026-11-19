@@ -61,7 +61,8 @@ permissions:
 
 jobs:
   make:
-    runs-on: ubuntu-latest
+    # RUNNER=self-hosted renders on your own machine (a VPS with a GitHub runner).
+    runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
@@ -106,6 +107,8 @@ jobs:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_MODEL: ${{ vars.LLM_MODEL }}
+          # Who the channel is, for the script writer (a fork's own channel).
+          CHANNEL_DESCRIPTION: ${{ vars.CHANNEL_DESCRIPTION }}
           # Builder fallback through be-ag; BUILDER=beag skips Claude.
           BUILDER: ${{ inputs.builder || github.event.client_payload.builder || vars.BUILDER }}
           BUILDER_CHOSEN: ${{ inputs.builder || github.event.client_payload.builder }}

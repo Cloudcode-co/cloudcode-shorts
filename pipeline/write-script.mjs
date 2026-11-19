@@ -177,7 +177,9 @@ if (!topic && !sourceUrls.length && existsSync("ideas")) {
   }
 }
 const today = new Date().toISOString().slice(0, 10);
+// CHANNEL_DESCRIPTION describes someone else's channel (a fork of this repo).
 const channel =
+  process.env.CHANNEL_DESCRIPTION ||
   "a Vietnamese TikTok channel for developers and self-hosters, run by a Vietnamese VPS and " +
   "game-server host, making 60–110 second videos";
 
