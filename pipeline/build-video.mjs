@@ -13,7 +13,7 @@
 // be-ag fallback and the review LLM_API_KEY, LLM_BASE_URL, BUILDER_BEAG_MODEL (default
 // ag/gemini-3.8-flash-high), BUILDER_HEAVY_BEAG_MODEL (the heavy backup's
 // model, default oc/glm-5.3-flash-free), BUILDER_CMC_MODELS (Command Code models
-// through be-ag, tried first; "off" turns them off), BUILDER_LAST_MODELS (free
+// through be-ag, tried after Gemini; "off" turns them off), BUILDER_LAST_MODELS (free
 // models tried last), BUILDER_MAX_TURNS (default 150), and BUILDER=beag
 // to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
 // REVIEW=off skips the review round.
@@ -123,10 +123,11 @@ const geminiModel = process.env.BUILDER_BEAG_MODEL || "ag/gemini-3.8-flash-high"
 // accounts) after them.
 const geminiTiers = [geminiModel, ...["-low", "-medium", ""].map((tier) => geminiModel.replace(/-high$/, tier))];
 const ocModel = process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/deepseek-v4.1-flash-free";
-// The owner's Command Code plan, also behind be-ag (cmc/*): the open models
-// its plan includes (Claude, GPT and Gemini 4 are not), tried before Gemini.
-// Cheap ones only: one Kimi K3.1 Pro build used the whole 5-hour plan window.
-const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/deepseek/deepseek-v4-pro,cmc/zai-org/GLM-5.3")
+// Paid models behind be-ag, tried when every free Gemini tier failed:
+// DeepSeek's own API (ds/*, a small prepaid credit, so its cheapest model) and
+// the owner's Command Code plan (cmc/*; one Kimi K3.1 Pro build used the whole
+// 5-hour plan window).
+const cmcModels = (process.env.BUILDER_CMC_MODELS || "ds/deepseek-v4.1-flash,cmc/deepseek/deepseek-v4-pro,cmc/zai-org/GLM-5.3")
   .split(",")
   .map((m) => m.trim())
   .filter((m) => m && m !== "off");
@@ -137,7 +138,7 @@ const lastModels = (process.env.BUILDER_LAST_MODELS || "nvidia/minimaxai/minimax
   .map((m) => m.trim())
   .filter((m) => m && m !== "off");
 const beagModels = [
-  ...new Set([...cmcModels, ...(heavy ? [ocModel] : []), ...geminiTiers, ocModel, ...lastModels]),
+  ...new Set([...(heavy ? [ocModel] : []), ...geminiTiers, ...cmcModels, ocModel, ...lastModels]),
 ];
 const agents = [
   process.env.ANTHROPIC_API_KEY &&

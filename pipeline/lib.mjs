@@ -62,7 +62,7 @@ const list = (value) =>
 // Every model to try, in order, with the gateway that serves it.
 const llmTargets = () => [
   ...(process.env.LLM_API_KEY
-    ? list(process.env.LLM_MODEL || "ag/gemini-3.8-flash,ag/gemini-3.8-flash-medium,ag/gpt-oss-120b-medium,ag/gemini-3.8-flash-high,oc/deepseek-v4.1-flash-free").map((model) => ({
+    ? list(process.env.LLM_MODEL || "ds/deepseek-v4.1-flash,ag/gemini-3.8-flash,ag/gemini-3.8-flash-medium,ag/gpt-oss-120b-medium,ag/gemini-3.8-flash-high,oc/deepseek-v4.1-flash-free").map((model) => ({
         model,
         base: LLM_BASE_URL,
         key: process.env.LLM_API_KEY,
@@ -121,7 +121,10 @@ export const llmJson = async (prompt, schema, temperature = 0.7, images = []) =>
           messages: [
             { role: "user", content },
           ],
-          response_format: { type: "json_schema", json_schema: { name: "answer", schema: jsonSchema } },
+          // DeepSeek's API takes only json_object; the schema is in the prompt too.
+          response_format: model.startsWith("ds/")
+            ? { type: "json_object" }
+            : { type: "json_schema", json_schema: { name: "answer", schema: jsonSchema } },
         }),
         signal: AbortSignal.timeout(LLM_TIMEOUT),
       }).catch((err) => new Response(String(err), { status: 599 }));
