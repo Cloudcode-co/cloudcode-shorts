@@ -117,10 +117,12 @@ const claudeBudget = heavy ? process.env.CLAUDE_HEAVY_BUDGET_USD || "10" : proce
 if (heavy) console.log(`Heavy direction ${direction.id}: building with ${claudeModel}, budget $${claudeBudget}`);
 const gateway = (process.env.LLM_BASE_URL || "https://be-ag.harumi.io.vn/v1").replace(/\/v1\/?$/, "");
 const geminiModel = process.env.BUILDER_BEAG_MODEL || "ag/gemini-3.8-flash-high";
-// The gateway locks its accounts per model, so the low tier still answers when
-// the high one is locked, and the oc model (not on those accounts) after both.
-const geminiLow = geminiModel.replace(/-high$/, "-low");
-const ocModel = process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/glm-5.3-flash-free";
+// The gateway locks its accounts per model, so the other tiers of the same
+// Gemini still answer when one is locked (the script writer uses the plain and
+// medium ones last, so they are usually fresh), and the oc model (not on those
+// accounts) after them.
+const geminiTiers = [geminiModel, ...["-low", "-medium", ""].map((tier) => geminiModel.replace(/-high$/, tier))];
+const ocModel = process.env.BUILDER_HEAVY_BEAG_MODEL || "oc/deepseek-v4.1-flash-free";
 // The owner's Command Code plan, also behind be-ag (cmc/*): the open models
 // its plan includes (Claude, GPT and Gemini 4 are not), tried before Gemini.
 // Cheap ones only: one Kimi K3.1 Pro build used the whole 5-hour plan window.
@@ -130,12 +132,12 @@ const cmcModels = (process.env.BUILDER_CMC_MODELS || "cmc/deepseek/deepseek-v4-p
   .filter((m) => m && m !== "off");
 // Free models on other providers behind be-ag, the last tries before the
 // fallback template: weaker, but a build that typechecks beats the template.
-const lastModels = (process.env.BUILDER_LAST_MODELS || "nvidia/minimaxai/minimax-m3.1-flash,oc/deepseek-v4.1-flash-free,nous/stepfun/step-3.7-flash:free,cf/@cf/zai-org/glm-4.7-flash")
+const lastModels = (process.env.BUILDER_LAST_MODELS || "nvidia/minimaxai/minimax-m3.1-flash,ag/gpt-oss-120b-medium,nous/stepfun/step-3.7-flash:free,cf/@cf/zai-org/glm-4.7-flash")
   .split(",")
   .map((m) => m.trim())
   .filter((m) => m && m !== "off");
 const beagModels = [
-  ...new Set([...cmcModels, ...(heavy ? [ocModel] : []), geminiModel, geminiLow, ocModel, ...lastModels]),
+  ...new Set([...cmcModels, ...(heavy ? [ocModel] : []), ...geminiTiers, ocModel, ...lastModels]),
 ];
 const agents = [
   process.env.ANTHROPIC_API_KEY &&
@@ -241,11 +243,19 @@ const runAgent = (next, text) => {
 };
 
 let agent = null;
+// Typechecking misses code that only breaks at render time, like a builder
+// that wraps its video in its own <Composition> (Root.tsx already does), which
+// failed a whole run in the QA stills.
+const rendersAlone = () => {
+  const bad = [...snapshot()].find(([, text]) => /<Composition\b|registerRoot\(/.test(text));
+  if (bad) console.log(`${bad[0]} mounts its own <Composition> or root; the kit's Root.tsx does that.`);
+  return !bad;
+};
 // Tries one builder; ok when it left a build that typechecks, else its API error.
 const tryAgent = (next) => {
   console.log(`\nBuilder: ${next.label}`);
   const run = runAgent(next, prompt);
-  if (changedSince(start) && typechecks()) return { ok: true };
+  if (changedSince(start) && typechecks() && rendersAlone()) return { ok: true };
   // A build that doesn't typecheck goes to the next builder from the start.
   console.log(changedSince(start) ? `${next.label}'s build does not typecheck.` : `${next.label} changed nothing.`);
   restore(start);
