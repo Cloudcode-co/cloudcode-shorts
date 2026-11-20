@@ -677,5 +677,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 1
+  },
+  {
+    "slug": "artex-ai-pentest-vps",
+    "topic": "Trải nghiệm ARTEX trên VPS Linux: Hệ thống AI tự động pentest và rà quét bảo mật thay thế PentestGPT",
+    "format": "story",
+    "date": "2026-11-20",
+    "direction": "documentary",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
