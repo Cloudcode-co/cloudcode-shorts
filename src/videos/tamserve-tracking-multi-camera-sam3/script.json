@@ -1,0 +1,234 @@
+{
+  "slug": "tamserve-tracking-multi-camera-sam3",
+  "format": "explainer",
+  "topic": "Tự host tamserve trên VPS và Homelab: Theo dõi vật thể đa camera thời gian thực bằng SAM 3 siêu nhẹ, so sánh với Frigate NVR",
+  "title": "Chạy AI 64 camera tốn chưa tới 6GB VRAM?",
+  "caption": "Tự host tamserve theo dõi đa camera thời gian thực bằng SAM 3 và so sánh với Frigate NVR.",
+  "hashtags": [
+    "#tamserve",
+    "#homelab",
+    "#frigate",
+    "#congnghe",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Minimal electronic pulsing beat with subtle synth plucks and clean driving bassline, high tech homelab atmosphere, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy bass",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady groove",
+        "driving synth",
+        "focused"
+      ]
+    },
+    {
+      "name": "Comparison",
+      "from": "s7",
+      "styles": [
+        "warm pads",
+        "subtle tension",
+        "analytical"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "triumphant",
+        "crisp beat",
+        "fading out"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/aryamandarda/tamserve",
+    "https://github.com/dedsxc/mcp-frigate",
+    "https://github.com/nnanhuang/SegAnyMo",
+    "https://github.com/blakeblackshear/frigate"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Chạy AI theo dõi 64 camera thời gian thực mà tốn chưa tới 6 GB VRAM?",
+      "headline": "Theo dõi 64 camera dưới 6 GB VRAM",
+      "lines": [
+        "64 camera cùng lúc",
+        "Chỉ tốn 5.7 GB GPU memory",
+        "Tốc độ 321 frames/s"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": "server room racks flashing lights"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì các mã nguồn theo dõi video sẽ chạy mỗi camera một bản sao mô hình riêng, làm VRAM phình to theo từng phút.",
+      "headline": "Vấn đề của cách làm cũ",
+      "lines": [
+        "Mỗi camera chạy 1 bản sao model",
+        "Bộ nhớ tăng theo thời lượng video",
+        "Dễ tràn VRAM trên GPU"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn tamserve dùng đúng một bản sao mô hình duy nhất trên GPU, nên 8 camera chỉ tốn 2.2 GB thay vì 8.6 GB.",
+      "headline": "Một bản sao cho mọi camera",
+      "lines": [
+        "Dùng chung 1 model duy nhất",
+        "8 camera: 2.2 GB thay vì 8.6 GB",
+        "Không phụ thuộc độ dài video"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Engine đẩy thẳng khung hình thô lên GPU để resize mất nửa mili-giây, nhanh hơn nhiều mức 16 mili-giây khi xử lý bằng CPU.",
+      "headline": "Tối ưu hóa pipeline xử lý ảnh",
+      "lines": [
+        "Resize trên GPU: 0.5 ms / frame",
+        "Resize trên CPU: 16 ms / frame",
+        "Giảm tải CPU tối đa"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Anh em chỉ cần đưa vào câu lệnh chữ, SAM 3 sẽ tìm vật thể tương ứng rồi chuyển cho EdgeTAM bám đuổi liên tục.",
+      "headline": "Tìm bằng văn bản và bám đuổi",
+      "lines": [
+        "SAM 3: Tìm vật thể theo mô tả",
+        "EdgeTAM: Theo dõi bám sát frame",
+        "Bắt đầu track tại bất kỳ frame nào"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Vì SAM 3 tốn khoảng 65 mili-giây một lượt, nên hệ thống giãn cách ba frame mới quét một lần, các frame ở giữa do engine bám theo.",
+      "headline": "Chiến thuật phối hợp SAM 3",
+      "lines": [
+        "SAM 3 quét 1 lần mỗi 3 frame",
+        "Engine gánh các frame trung gian",
+        "Cân bằng tốc độ và tài nguyên"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[warmly] Đặt cạnh Frigate NVR, Frigate là hệ thống NVR hoàn chỉnh với motion detection nhẹ, ghi hình 24/7 và đẩy cảnh báo qua MQTT.",
+      "headline": "Frigate NVR: Giải pháp hoàn chỉnh",
+      "lines": [
+        "Quản lý luồng RTSP và lưu trữ 24/7",
+        "Tích hợp sâu Home Assistant",
+        "Chỉ kích hoạt AI khi có chuyển động"
+      ],
+      "commands": [],
+      "repos": [
+        "blakeblackshear/frigate"
+      ],
+      "footage": "developer working at desk monitor"
+    },
+    {
+      "id": "s8",
+      "text": "[casually] tamserve thì không có giao diện web hay tự ghi hình, tức là nó tập trung làm engine phân đoạn viền pixel nhẹ cho đa luồng.",
+      "headline": "Khác biệt bản chất",
+      "lines": [
+        "Frigate: NVR quản lý trọn gói",
+        "tamserve: Engine tracking pixel mask",
+        "Cần GPU NVIDIA và Python 3.10+"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve",
+        "blakeblackshear/frigate"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Để thử nghiệm trên máy cá nhân hoặc VPS có GPU NVIDIA, anh em cài qua các lệnh pip này.",
+      "headline": "Cài đặt tamserve",
+      "lines": [
+        "Yêu cầu Python 3.10+",
+        "Hỗ trợ GPU NVIDIA"
+      ],
+      "commands": [
+        "pip install tamserve",
+        "pip install \"tamserve[sam3]\"",
+        "pip install opencv-python"
+      ],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Lưu ý là nếu bật chế độ biên dịch tối ưu, lần khởi động đầu tiên có thể mất gần 20 phút để compile xong các batch size.",
+      "headline": "Lưu ý khi biên dịch",
+      "lines": [
+        "compile=True lần đầu tốn thời gian",
+        "Mất khoảng 1.190 giây trên RTX 4090",
+        "Các lần chạy sau sẽ rất nhanh"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[cheerfully] Anh em lưu video lại để thử nghiệm trên dàn homelab, và theo dõi kênh để kéo hàng chục camera chỉ với vài GB VRAM nhé!",
+      "headline": "Lưu lại và theo dõi",
+      "lines": [
+        "Tối ưu tracking đa camera",
+        "Tiết kiệm VRAM cho Homelab",
+        "Follow để cập nhật thêm"
+      ],
+      "commands": [],
+      "repos": [
+        "aryamandarda/tamserve"
+      ],
+      "footage": "young man smiling at camera desk"
+    }
+  ]
+}
