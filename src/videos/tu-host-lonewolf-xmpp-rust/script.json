@@ -1,0 +1,222 @@
+{
+  "slug": "tu-host-lonewolf-xmpp-rust",
+  "format": "explainer",
+  "topic": "Tự host Lonewolf trên VPS: Server chat XMPP độc lập bằng Rust siêu nhẹ, so sánh với Prosody và ejabberd",
+  "title": "Tự host server chat XMPP không cần database rời?",
+  "caption": "Trải nghiệm Lonewolf: máy chủ XMPP viết bằng Rust với database nhúng redb trên VPS.",
+  "hashtags": [
+    "#xmpp",
+    "#rustlang",
+    "#selfhosted",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal modern tech synth pulses with subtle energetic electro beats, clean rhythmic bassline, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic beat"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "tech synth",
+        "focused"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s7",
+      "styles": [
+        "triumphant",
+        "driving beat",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "resolved",
+        "ambient beat"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/lonewolf-im/lonewolf",
+    "https://github.com/prosody/prosody-docker",
+    "https://github.com/mikma/ejabberd",
+    "https://github.com/lonewolf-im/lonewolf/releases",
+    "https://github.com/cberner/redb"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Muốn tự host server chat XMPP mà ngại cài database rời cồng kềnh?",
+      "headline": "Server XMPP không cần database rời",
+      "lines": [
+        "Tự host máy chủ chat",
+        "Không cần PostgreSQL hay MySQL"
+      ],
+      "commands": [],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": "developer at desk at night"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì ejabberd yêu cầu Erlang và Libexpat, còn Prosody chạy trên nền Lua.",
+      "headline": "Sự cồng kềnh truyền thống",
+      "lines": [
+        "ejabberd: Erlang/OTP, Libexpat",
+        "Prosody: Nền Lua, Debian image"
+      ],
+      "commands": [],
+      "repos": [
+        "mikma/ejabberd",
+        "prosody/prosody-docker"
+      ],
+      "footage": "server room racks datacenter"
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn Lonewolf đóng gói toàn bộ vào một binary duy nhất viết bằng Rust, cấu hình thử chỉ hai dòng toml.",
+      "headline": "Lonewolf: Đơn giản với Rust",
+      "lines": [
+        "Một binary duy nhất",
+        "Viết hoàn toàn bằng Rust",
+        "Chỉ cần 2 dòng cấu hình toml"
+      ],
+      "commands": [],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Tức là dữ liệu tài khoản và tin nhắn được lưu trực tiếp vào redb, database nhúng thuần Rust hỗ trợ ACID.",
+      "headline": "Lưu trữ nhúng với redb",
+      "lines": [
+        "Cơ sở dữ liệu nhúng redb",
+        "Cấu trúc copy-on-write B+tree",
+        "Đầy đủ giao dịch ACID"
+      ],
+      "commands": [],
+      "repos": [
+        "cberner/redb"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Để cài đặt trên VPS, anh em clone repo Lonewolf về và biên dịch bằng Cargo.",
+      "headline": "Biên dịch từ source",
+      "lines": [
+        "Clone tag v0.3.0",
+        "Cargo build release"
+      ],
+      "commands": [
+        "git clone --branch v0.3.0 https://github.com/lonewolf-im/lonewolf.git",
+        "cd lonewolf",
+        "cargo build --release --locked -p lonewolf -p lonewolfctl"
+      ],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Sau đó khởi chạy server với file cấu hình và tạo ngay tài khoản bằng lonewolfctl.",
+      "headline": "Khởi chạy và tạo tài khoản",
+      "lines": [
+        "Chạy tiến trình server",
+        "Tạo user bằng lonewolfctl"
+      ],
+      "commands": [
+        "./target/release/lonewolf --config ./lonewolf.toml",
+        "./target/release/lonewolfctl account create alice@localhost",
+        "./target/release/lonewolfctl account create bob@localhost"
+      ],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Bản không chấm ba đã hỗ trợ federation qua chứng chỉ TLS, kèm Direct TLS bảo mật từ byte đầu tiên.",
+      "headline": "Tính năng v0.3.0",
+      "lines": [
+        "Federation: SASL EXTERNAL + TLS cert",
+        "Direct TLS (XEP-0368)",
+        "Không dùng Server Dialback"
+      ],
+      "commands": [],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[warmly] Lonewolf còn tự động cấp chứng chỉ Let's Encrypt qua ACME, đồng thời hỗ trợ Carbons đồng bộ tin nhắn đa thiết bị.",
+      "headline": "Let's Encrypt và Carbons",
+      "lines": [
+        "Tự động cấp chứng chỉ ACME",
+        "Message Carbons (XEP-0280)",
+        "Stanza Forwarding (XEP-0297)"
+      ],
+      "commands": [],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Vì đang ở giai đoạn pre-1.0 nên server chỉ chạy single-node, chưa hỗ trợ chat nhóm MUC hay lưu lịch sử MAM.",
+      "headline": "Lưu ý hiện tại",
+      "lines": [
+        "Phiên bản pre-1.0",
+        "Chỉ chạy single-node",
+        "Chưa có MUC và MAM"
+      ],
+      "commands": [],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[excited] Anh em lưu video lại để dựng thử, bấm follow kênh nhé! Liệu anh em có sẵn sàng bỏ database rời cho server chat không?",
+      "headline": "Lưu video và thử ngay",
+      "lines": [
+        "Lưu lại để triển khai trên VPS",
+        "Follow để đón xem cập nhật mới"
+      ],
+      "commands": [],
+      "repos": [
+        "lonewolf-im/lonewolf"
+      ],
+      "footage": "programmer typing code close up"
+    }
+  ]
+}

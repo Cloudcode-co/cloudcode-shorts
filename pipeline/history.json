@@ -666,5 +666,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 5
+  },
+  {
+    "slug": "tu-host-lonewolf-xmpp-rust",
+    "topic": "Tự host Lonewolf trên VPS: Server chat XMPP độc lập bằng Rust siêu nhẹ, so sánh với Prosody và ejabberd",
+    "format": "brief",
+    "date": "2026-11-20",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 1
   }
 ]
