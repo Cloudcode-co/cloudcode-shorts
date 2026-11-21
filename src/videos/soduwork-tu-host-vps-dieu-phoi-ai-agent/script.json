@@ -1,0 +1,220 @@
+{
+  "slug": "soduwork-tu-host-vps-dieu-phoi-ai-agent",
+  "format": "explainer",
+  "topic": "Tự host SoduWork trên VPS: Nền tảng điều phối đa AI Agent mã nguồn mở cho team, so sánh với Dify",
+  "title": "Chatbot trả xong câu hỏi, ai nghiệm thu việc?",
+  "caption": "Tự host SoduWork trên VPS để điều phối đa AI agent và nghiệm thu công việc nội bộ cho team.",
+  "hashtags": [
+    "#soduwork",
+    "#selfhosted",
+    "#aiagent",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Modern driving electronic beat with clean minimal synth pulses, subtle percussion, focused tech stage atmosphere, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "punchy",
+        "electronic pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving bass",
+        "rising tension",
+        "rhythmic tech"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s5",
+      "styles": [
+        "bright synths",
+        "confident groove",
+        "upbeat tech"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "smooth fade",
+        "steady beat",
+        "clean finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/mdiri-ai/SoduWork",
+    "https://github.com/langgenius/dify",
+    "https://github.com/mantrakp04/manusmcp"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Chatbot trả lời xong là hết việc, [curious] nhưng ai nghiệm thu kết quả cho anh em?",
+      "headline": "Chatbot xong, ai nghiệm thu?",
+      "lines": [
+        "Chatbot trả lời xong là hết việc",
+        "Ai chịu trách nhiệm kiểm tra?"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer looking at monitor"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì Dify giúp anh em dựng pipeline RAG và kéo thả workflow AI rất trực quan.",
+      "headline": "Dify tập trung vào RAG và workflow",
+      "lines": [
+        "Dify: Visual canvas kéo thả",
+        "RAG pipeline & quan sát LLMOps"
+      ],
+      "commands": [],
+      "repos": [
+        "langgenius/dify"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Còn SoduWork là engine mã nguồn mở JavaScript để quản trị và phân bổ task cho cả đội ngũ.",
+      "headline": "SoduWork: Engine điều phối cho team",
+      "lines": [
+        "Mã nguồn mở JavaScript (MIT)",
+        "Tập trung giao việc và quản trị"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Một yêu cầu chỉ kết thúc khi chính người tạo việc bấm ký duyệt.",
+      "headline": "Chỉ kết thúc khi con người ký duyệt",
+      "lines": [
+        "Yêu cầu gắn sẵn tiêu chí nghiệm thu",
+        "Không dừng lại ở câu trả lời chatbot"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] SoduWork cho harness này làm việc, rồi gọi harness khác chạy model riêng để kiểm tra lại.",
+      "headline": "Một bên làm việc, một bên đối soát",
+      "lines": [
+        "Pi thực hiện công việc",
+        "OpenCode review theo tiêu chuẩn"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Anh em giao task cho agent của đồng nghiệp, [thoughtful] nhưng agent không tự ý chuyển việc mà tuân theo chỉ định.",
+      "headline": "Minh bạch từng luồng phân việc",
+      "lines": [
+        "Giao task cho agent đồng nghiệp",
+        "Quy trình do người và plugin kiểm soát"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": "colleagues collaborating tech office"
+    },
+    {
+      "id": "s7",
+      "text": "Nền tảng hỗ trợ chín harness như Pi, Qwen Code, DeepSeek, đổi runtime giữa chừng vẫn giữ lịch sử.",
+      "headline": "Hỗ trợ 9 harness độc lập",
+      "lines": [
+        "Harness là môi trường runtime, không phải model",
+        "Giữ nguyên context khi đổi runtime"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Khi một phiên chat hoàn thành đúng chuẩn, [excited] ta lưu ngay thành plugin để cả nhóm cùng dùng lại.",
+      "headline": "Đóng gói chat thành plugin chung",
+      "lines": [
+        "Lưu luồng thành công thành plugin",
+        "Cả team tái sử dụng sau duyệt"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Để tự host trên VPS bằng Docker, anh em chỉ cần chạy đúng hai lệnh Python có sẵn.",
+      "headline": "Dựng nhanh trên máy chủ cá nhân",
+      "lines": [
+        "Hub, console và PostgreSQL trên một server"
+      ],
+      "commands": [
+        "python3 ops/self-host/deploy.py up",
+        "python3 ops/self-host/deploy.py credentials"
+      ],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": "server room datacenter racks"
+    },
+    {
+      "id": "s10",
+      "text": "[casually] Dự án đang Public Beta, nên sau khi lưu API key, anh em nhớ thêm chat model thủ công nhé.",
+      "headline": "Lưu ý cấu hình model",
+      "lines": [
+        "Bản thử nghiệm Public Beta",
+        "Cần thêm chat model thủ công sau khi nhập key"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[cheerfully] Anh em lưu video lại để tự host thử và follow kênh nhé, [curious] chứ chatbot trả lời xong ai nghiệm thu?",
+      "headline": "Lưu video và thử nghiệm ngay",
+      "lines": [
+        "Lưu video để tự host trên VPS",
+        "Follow kênh để cập nhật công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    }
+  ]
+}

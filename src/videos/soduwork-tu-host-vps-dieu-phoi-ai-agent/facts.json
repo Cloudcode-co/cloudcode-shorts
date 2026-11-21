@@ -1,0 +1,328 @@
+{
+  "topic": "Tự host SoduWork trên VPS: Nền tảng điều phối đa AI Agent mã nguồn mở cho team, so sánh với Dify",
+  "models": [
+    "ag/gemini-3.8-flash",
+    "ag/gemini-3.8-flash-medium",
+    "ag/gpt-oss-120b-medium",
+    "ds/deepseek-v4.1-flash",
+    "ag/gemini-3.8-flash-high",
+    "oc/deepseek-v4.1-flash-free"
+  ],
+  "date": "2026-11-21",
+  "repos": [
+    {
+      "repo": "mdiri-ai/SoduWork",
+      "asked": "mdiri-ai/SoduWork",
+      "name": "SoduWork",
+      "stars": 6095,
+      "description": "The AI-native engine for teams and their agents. Multi-harness, multi-agent, self-hosted.",
+      "license": "MIT",
+      "language": "JavaScript",
+      "pushedAt": "2026-11-21T05:07:08Z",
+      "url": "https://github.com/mdiri-ai/SoduWork",
+      "avatar": "repos/mdiri-ai.png"
+    },
+    {
+      "repo": "langgenius/dify",
+      "asked": "langgenius/dify",
+      "name": "Dify",
+      "stars": 161593,
+      "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+      "license": "NOASSERTION",
+      "language": "Python",
+      "pushedAt": "2026-11-21T05:08:32Z",
+      "url": "https://github.com/langgenius/dify",
+      "avatar": "repos/langgenius.png"
+    }
+  ],
+  "pages": [],
+  "idea": null,
+  "notes": {
+    "audience": "Các lập trình viên, DevOps và người tự host VPS muốn triển khai một nền tảng điều phối đa AI Agent nội bộ để cộng tác nhóm thay vì chỉ dùng công cụ chat đơn lẻ.",
+    "angle": "Tự host SoduWork trên VPS để biến quy trình giao việc, nghiệm thu nhiều agent thành một hệ thống quản trị nội bộ thay vì chỉ xây chatbot RAG kéo thả như Dify.",
+    "facts": [
+      {
+        "fact": "SoduWork là engine AI-native dành cho đội ngũ và các agent, hỗ trợ đa harness, đa agent và tự host.",
+        "quote": "The AI-native engine for teams and their agents. Multi-harness, multi-agent, self-hosted.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Mã nguồn SoduWork được viết bằng JavaScript, phân phối theo giấy phép mã nguồn mở MIT.",
+        "quote": "Language: JavaScript; license: MIT",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Quy trình của SoduWork không dừng lại ở câu trả lời chatbot mà chỉ kết thúc khi người tạo yêu cầu ký duyệt nghiệm thu.",
+        "quote": "A chat ends with an answer. A SoduWork request ends when the person who asked signs off.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "SoduWork cho phép một harness thực hiện công việc và một harness khác sử dụng model khác để kiểm tra lại theo tiêu chí nghiệm thu.",
+        "quote": "Pick Pi to do the work. OpenCode, on a different model, reviews it against the acceptance criteria. If the review fails, the work goes back with the reasons.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Người dùng có thể giao việc cho agent của đồng nghiệp; agent làm việc và review nhưng quyết định cuối cùng vẫn do con người ký duyệt.",
+        "quote": "The assignee's agent does the work and reviews it, and a person signs off. Everyone on the request can see who did what.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Người dùng có thể lưu lại luồng trò chuyện thành công thành một plugin để toàn bộ team tái sử dụng sau khi qua kiểm duyệt.",
+        "quote": "When you and AI get a task right, save the chat as a plugin. After review, anyone on the team can use it and contribute improvements",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "SoduWork hỗ trợ 9 harness gồm Pi (tích hợp sẵn), OpenCode, DeepSeek Harness, Qwen Code, Kimi Code, Codex Harness và Codex.",
+        "quote": "Works with Pi · OpenCode · DeepSeek Harness · Qwen Code · Kimi Code · Codex Harness · Codex",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Harness trong SoduWork là môi trường thực thi runtime của agent chứ không phải là model AI.",
+        "quote": "A harness is the agent runtime that does the work. It is not the model.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Các công cụ hỗ trợ Agent Client Protocol (ACP) có thể tích hợp vào SoduWork bằng khai báo catalog.",
+        "quote": "Programs that support the Agent Client Protocol (ACP) can be added with a catalog declaration.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "SoduWork cho phép chuyển đổi harness ngay giữa cuộc trò chuyện mà vẫn giữ nguyên lịch sử và thư mục làm việc.",
+        "quote": "Switch harnesses mid-conversation and keep the history and the working folder.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Các agent trong SoduWork không tự động chuyển giao công việc cho nhau mà phải theo plugin và người được giao việc chỉ định.",
+        "quote": "Between steps and between people, work moves the way the plugin and the assignee say. Agents don't hand work to other agents on their own.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Khi chạy từ source, SoduWork yêu cầu môi trường máy chủ cài Python 3.12+, Node.js 22.19+ và Git.",
+        "quote": "You need Python 3.12+, Node.js 22.19+ and Git.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Việc lưu thông tin chứng thực dịch vụ (API key) trong Model catalog chưa tự tạo ra model để chọn mà phải thêm cấu hình chat model thủ công.",
+        "quote": "Saving a service credential alone does not create a selectable model.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Triển khai SoduWork bằng script Docker sẽ khởi chạy đồng thời Hub, console quản trị và cơ sở dữ liệu PostgreSQL trên một máy chủ.",
+        "quote": "This starts the Hub, the admin console and PostgreSQL on one server. Put an HTTPS reverse proxy in front of it to open it to your team.",
+        "source": "https://github.com/mdiri-ai/SoduWork"
+      },
+      {
+        "fact": "Dify tập trung vào phát triển ứng dụng LLM trực quan với AI workflow trên canvas, pipeline RAG, quản lý model và các tính năng quan sát LLMOps.",
+        "quote": "Its intuitive interface combines AI workflow, RAG pipeline, agent capabilities, model management, observability features",
+        "source": "https://github.com/langgenius/dify"
+      },
+      {
+        "fact": "Dify triển khai qua Docker Compose yêu cầu Docker Compose phiên bản v2.35.0 trở lên và sử dụng OpenSSL để tạo token local sandbox.",
+        "quote": "Docker Compose v2.35.0 or later, and OpenSSL.",
+        "source": "https://github.com/langgenius/dify"
+      }
+    ],
+    "install": [
+      "python3 ops/self-host/deploy.py up",
+      "python3 ops/self-host/deploy.py credentials",
+      "git clone https://github.com/mdiri-ai/SoduWork",
+      "cd SoduWork",
+      "sh start.sh --desktop"
+    ],
+    "caveats": [
+      "SoduWork hiện đang ở giai đoạn Public Beta, tài liệu khuyến cáo cần đánh giá kỹ trước khi đưa vào môi trường production.",
+      "Kiểm tra kết nối (probe) thành công không đảm bảo gọi inference thành công; còn phụ thuộc số dư tài khoản, quyền truy cập model và hỗ trợ giao thức.",
+      "Lưu API key vào Model catalog chưa đủ, phải vào thêm chat model thủ công với mã model chính xác thì mới xuất hiện trong danh sách chọn.",
+      "Codex sử dụng tài khoản OpenAI riêng và cần đăng nhập riêng, không tự động dùng chung API key đã cấu hình cho SoduWork.",
+      "Các agent không tự ý giao việc cho agent khác mà quy trình chuyển giao hoàn toàn phụ thuộc vào plugin hoặc con người chỉ định."
+    ],
+    "gaps": [
+      "Mức tiêu hao tài nguyên phần cứng tối thiểu (CPU, RAM, Disk) cụ thể khi chạy SoduWork bằng Docker là bao nhiêu.",
+      "Các cổng (port) mạng mặc định mà Hub và Admin Console của SoduWork lắng nghe khi dựng trên VPS.",
+      "Sự khác biệt chi tiết về mặt cơ chế lưu trữ dữ liệu giữa PostgreSQL của SoduWork và hệ thống cơ sở dữ liệu của Dify."
+    ]
+  },
+  "research": "Primary sources, fetched from GitHub on 2026-11-21:\n\n## mdiri-ai/SoduWork (https://github.com/mdiri-ai/SoduWork)\nDescription: The AI-native engine for teams and their agents. Multi-harness, multi-agent, self-hosted.\nHomepage: https://www.soduwork.ai\nLanguage: JavaScript; license: MIT; created 2026-10-29; last push 2026-11-21\nLatest release: v1.13.19 (2026-11-19)\nREADME (start):\n**English** · [简体中文](README.zh-CN.md)\n\n> **中文文档入口：[文档目录](docs/README.zh-CN.md) · [安装与启动](docs/getting-started.md) · [开发指南](docs/development.md)**\n\n# SoduWork\n\n## The AI-native engine for teams and their agents\n\n**A chat ends with an answer. A SoduWork request ends when the person who asked signs off.**\n\n**Multi-harness · Multi-agent · Self-hosted**\n\nWorks with Pi · OpenCode · DeepSeek Harness · Qwen Code · Kimi Code · Codex Harness · Codex\n\n```sh\ngit clone https://github.com/mdiri-ai/SoduWork\ncd SoduWork\n```\n\n| Platform | Start command |\n| --- | --- |\n| macOS / Linux | `sh start.sh --desktop` |\n| Windows PowerShell | `.\\start.cmd --desktop` |\n| Windows Command Prompt | `start.cmd --desktop` |\n\n[Website](https://soduwork.ai) | [Live demo](https://soduwork.ai) | [Documentation](docs/README.md) | [Docs website](https://dev.soduwork.ai) | [Releases](https://github.com/mdiri-ai/SoduWork/releases) | [Discord](https://discord.gg/AXYNrAYHy)\n\n[](LICENSE)\n[](https://github.com/mdiri-ai/SoduWork/releases)\n[](#quick-start)\n[](https://discord.gg/AXYNrAYHy)\n\n---\n\n## What SoduWork can do for you\n\n| | |\n| --- | --- |\n| **One harness does the work, another reviews it** | Pick Pi to do the work. OpenCode, on a different model, reviews it against the acceptance criteria. If the review fails, the work goes back with the reasons. |\n| **Hand a request to a colleague's agent** | People and AI work together: you file a request, AI writes the acceptance criteria, and you assign it to yourself or a colleague. The assignee's agent does the work and reviews it, and a person signs off. Everyone on the request can see who did what. |\n| **Turn one person's know-how into a team asset** | When you and AI get a task right, save the chat as a plugin. After review, anyone on the team can use it and contribute improvements, with access granted as needed. |\n\n## Core ideas\n\n**🔀 Smart dispatch**\n\n**The right agent and model for each job.**\n\n- Pick a harness for each step and switch mid-conversation\n- Routine steps on cheap or local models, strong models where it matters\n- Long tasks go to your own cloud runner\n\n**🛡️ Built-in governance**\n\n**Your organization decides which AI does what, and where.**\n\n- Plugins are reviewed before they are shared, granted to teams or people, and can be revoked\n- Roles, usage, cost and an audit log\n- Self-hosted\n\n**✅ Verified delivery**\n\n**Set the bar first. Done means the requester signed off.**\n\n- Every request carries its acceptance criteria\n- A separate AI review checks each one\n- A person makes the final call\n\n## Quick start\n\n> SoduWork is in public beta. Try it and tell us what you think, and evaluate it before using it in production.\n\nYou need Python 3.12+, Node.js 22.19+ and Git.\n\nFrom the cloned repository, run `sh start.sh --desktop` on macOS/Linux, `.\\start.cmd --desktop` in Windows PowerShell, or `start.cmd --desktop` in Command Prompt.\n\nThe first run installs dependencies, then starts the Hub, the admin console and the desktop client on this computer. Set a password for the `admin` account (12–128 characters) when asked. Then add a model provider under **Model catalog** in the admin console, start a chat in the client and try a small task. Pi is built in.\n\n### Already added an API key? Start here\n\n1. **Add a chat model as well.** Under **Capabilities → Model catalog**, find the service you connected, choose **Add model**, enter the provider's exact model ID, select **Chat model**, and save. Saving a service credential alone does not create a selectable model.\n2. **Open the desktop client and sign in to the same Hub.** Use `--desktop` when starting from source. The browser admin console configures the service; check that **Connection** on the desktop sign-in screen points to that same Hub.\n3. **Choose New conversation, Pi, and the model you added.** Pi uses the SoduWork model catalog. Codex uses its own account and needs its own sign-in; it does not automatically use this API key.\n4. **Try a small task.** For example: “Turn these fictional meeting notes into an action table with owner and due date. Mark missing information as unconfirmed: Alex will organize the requirements by Friday; Sam will check the quotation.” Check the returned table against the notes.\n5. **Create a requirement when you need assignment and acceptance.** Describe the goal, inputs and acceptance criteria, open **Arrange execution**, choose an Agent and model, and inspect the delivery before accepting it. A normal conversation does not require a project, plugin or automation first.\n\nFor the first message, use an **OpenAI-compatible chat model with Pi**. A successful connection probe does not guarantee a successful inference: balance, model permissions and protocol support still matter. If the Agent list is empty, check **Agent management** and the Runner connection. If the model list is empty, check that the model exists, is enabled, and both interfaces use the same Hub.\n\nSee [Run from source: send your first AI message](docs/getting-started.en.md#send-your-first-ai-message) for field-by-field setup and troubleshooting.\n\nTry the live demo\n\nDownload the client from [Releases](https://github.com/mdiri-ai/SoduWork/releases/latest), enter `https://service.soduwork.ai` under **Connection** on the sign-in screen, then sign up and sign in.\n\n> The demo is for evaluation only. Don't upload real business data or anything sensitive.\n\nInstall the desktop client\n\nFollow the illustrated [desktop installation and first conversation guide](docs/desktop-quickstart.en.md).\n\n| OS | Package |\n| --- | --- |\n| Windows | `SoduWork--Setup.exe` |\n| macOS (Apple Silicon / Intel) | `SoduWork--mac-.dmg` |\n| Linux | `SoduWork--linux.deb` / `.rpm` / `.tar.gz` |\n\nDownload from [Releases](https://github.com/mdiri-ai/SoduWork/releases). On first launch, enter your Hub address under **Connection**, then sign in. On macOS, if you see \"cannot verify the developer\", open **System Settings → Privacy & Security** and choose **Open Anyway**.\n\nDeploy for a team with Docker\n\nWith Docker installed and running, from the repository root:\n\n```bash\npython3 ops/self-host/deploy.py up\npython3 ops/self-host/deploy.py credentials   # show the initial admin password\n```\n\nThis starts the Hub, the admin console and PostgreSQL on one server. Put an HTTPS reverse proxy in front of it to open it to your team. See [Deploy with Docker](https://dev.soduwork.ai/docs/get-started/docker) and [Deploy for a team](https://dev.soduwork.ai/docs/deploy).\n\nPorts, data folders and troubleshooting are in [Run from source](https://dev.soduwork.ai/docs/get-started/run-from-source) and the [FAQ](https://dev.soduwork.ai/docs/get-started/faq).\n\n## Why SoduWork\n\nAI agents give everyone fast output. What no one gets for free is trust in that output — or a way to keep what worked. That's where individuals and teams get stuck alike:\n\n| The problem | What SoduWork does |\n| --- | --- |\n| **Fast output, slow trust** — whether you work alone or in a team, the time AI saves goes back into checking what it produced | **The request is the spec.** Criteria set before work starts; a separate AI review checks each one; a person signs off |\n| **What worked dies in a chat thread** — for one person, it's last month's perfect run you can't reproduce; for a team, it's one person's method nobody else can use | **Get it right once, keep it as a plugin.** Reuse it yourself or publish it for everyone — every improvement reaches everyone |\n| **A drawer full of AI tools** — three subscriptions and no standard for which one does what | **One workbench, your playbook.** Your plugins run on every harness. Switch mid-conversation, keep your history and files |\n| **Results that never enter the workflow** — output gets copy-pasted around, and every handoff re-explains the background | **Issues that carry the context.** People and agents pick up where it left off, with a full record of who did what |\n\n## How it works\n\nRequests, execution, review and reuse all happen in one shared issue pool:\n\n```mermaid\nflowchart LR\n  A[Raise a request] --> B[AI refines itadds acceptance criteria]\n  B --> C[Assignyourself · a colleague · an agent]\n  C --> D[Agent runs itwith a team plugin]\n  D --> E[AI reviewassignee confirms]\n  E --> F[Requester signs off]\n  F --> G[Save as a plugin]\n  G -.reused by the team.-> D\n```\n\n| Role | Where they join |\n| --- | --- |\n| **Solo developer** | Puts requests in the pool, lets agents work through them, and only signs off |\n| **Specialist** | Gets a task right with AI, saves the method as a plugin, and publishes it to the team |\n| **Manager** | Drops in a request; AI fills in the criteria and routes it to a person or an agent; signs off at the end |\n| **New team member** | Uses the plugins the organization has built up to do the work to team standards, and improves them when they find a gap |\n\nWho asked, who did the work, which plugin ran and who approved it is always on record.\n\n## Multi-harness · Multi-agent\n\nA harness is the agent runtime that does the work. It is not the model. SoduWork connects every harness through one adapter interface, so issues, plugins and review don't depend on any single harness. Switch harnesses mid-conversation and keep the history and the working folder. Programs that support the Agent Client Protocol (ACP) can be added with a catalog declaration.\n\nSupported harnesses (9)\n\n| Harness | Models | How it connects |\n| --- | --- | --- |\n| Pi | Your SoduWork models | Built in |\n| OpenCode | Your SoduWork models | Native adapter, installed on demand |\n| DeepSeek Harness | Your SoduWork models, or your own DeepSeek key | ACP, installed on demand |\n| Qwen Code | Your SoduWork models | ACP, installed on demand |\n| Kimi Code | Your SoduWork models | ACP, installed on demand |\n| Codex Harness | Your SoduWork models | ACP, installed on demand |\n| Codex | Its own OpenAI account | Native adapter, installed on demand |\n\nAgents work together at several levels:\n\n| Level | Who decides | Example |\n| --- | --- | --- |\n| Harness | The harness itself | OpenCode or Qwen Code starts its own subagents to explore the code or split a task |\n| Single method | A Skill or plugin sets the method, process, rules and what counts as done | A review plugin tells the agent which checks to run and what evidence to attach |\n| Combined methods | A plugin workflow picks the harness, Skill and model for each step | Pi drafts, Qwen Code checks the sources, and the run stops if the check fails |\n| People and agents | The requester and the assignee or their agent | A request goes to a colleague, their agent does the work, the requester signs off |\n| In parallel | The Hub | Different issues run on different agents at the same time, including on cloud runners |\n\nBetween steps and between people, work moves the way the plugin and the assignee say. Agents don't hand work to other agents on their own.\n\n## Plugins and apps\n\nA skill tells AI how to do something. An agent wraps AI into an assistant. SoduWork plugins and apps turn the way your team works into something that **runs, gets verified, improves and stays governed**.\n\n| | Skill | Agent | SoduWork plugin | SoduWork app |\n| --- | :---: | :---: | :---: | :---: |\n| **What it is** | A method doc that AI reads and follows | Prompts, knowledge, tools or a platform flow | A versioned package: method, inputs, acceptance criteria, workflow | A plugin with its own UIand an AI chat panel |\n| **Best for** | A single technique | One type of task | Standard team work, run by AI | Repeated work in a dedicated UI |\n| **How you use it** | AI picks it up | Inside its platform | `/` in chat · on issues · in automations | Its own window + AI sidebar |\n| **Step-by-step process** | ✗ | ◐ | ✓ | ✓ |\n| **Choose and switch harness** | ✗ | ◐ | ✓ | ✓ |\n| **Criteria, AI review, sign-off** | ✗ | ◐ | ✓ | ✓ |\n| **Versioning** | ✗ | ◐ | ✓ | ✓ |\n| **UI and interaction** | ✗ | ◐ Chat | ◐ Chat | ✓ |\n| **Review, grant, revoke** | ◐ Configurable | ◐ Configurable | ✓ | ✓ |\n\n✓ Supported\n\n## langgenius/dify (https://github.com/langgenius/dify)\nDescription: Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.\nHomepage: https://dify.ai\nLanguage: Python; license: NOASSERTION; created 2023-04-12; last push 2026-11-21\nLatest release: 1.20.0 (2026-11-18)\nREADME (start):\nDify Cloud ·\n  Self-hosting ·\n  Documentation ·\n  Dify edition overview\n\n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n    \n        \n\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n\nDify is an open-source LLM app development platform. Its intuitive interface combines AI workflow, RAG pipeline, agent capabilities, model management, observability features (including [Opik](https://www.comet.com/docs/opik/integrations/dify), [Langfuse](https://docs.langfuse.com), and [Arize Phoenix](https://docs.arize.com/phoenix)) and more, letting you quickly go from prototype to production. Here's a list of the core features:\n\n## Quick start\n\n> Before installing Dify, make sure your machine meets the following minimum system requirements:\n>\n> - CPU >= 2 Core\n> - RAM >= 4 GiB\n\nThe easiest way to start the Dify server is through [Docker Compose](docker/docker-compose.yaml). Install [Docker](https://docs.docker.com/get-docker/) with a running daemon, Docker Compose v2.35.0 or later, and OpenSSL.\n\nFor a new deployment, run the following commands from the repository root. For an existing deployment, preserve your `.env` and follow the [upgrade guidance](docker/README.md#review-configuration-after-an-upgrade).\n\n```bash\ncd docker\ncp .env.example .env\nopenssl rand -hex 32\n```\n\nOpen `.env` and set `DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN` to the generated value. Keep the default `COMPOSE_PROFILES` value for the bundled services. Service defaults load automatically; no additional configuration files are required.\n\nFrom the same `docker` directory, start the services:\n\n```bash\ndocker compose up -d\ndocker compose ps --all\n```\n\nOnce the services are running, open [http://localhost/install](http://localhost/install) to complete the initial setup. The one-time `init_permissions` service is expected to exit with code `0`.\n\nFor optional settings and service overrides, see the [Docker deployment guide](docker/README.md#configure-dify).\n\n### Seeking help\n\nPlease refer to our [FAQ](https://docs.dify.ai/getting-started/install-self-hosted/faqs) if you encounter problems setting up Dify. Reach out to [the community and us](#community--contact) if you are still having issues.\n\n> If you'd like to contribute to Dify or do additional development, refer to our [guide to deploying from source code](https://docs.dify.ai/getting-started/install-self-hosted/local-source-code)\n\n## Key features\n\n**1. Workflow**:\nBuild and test powerful AI workflows on a visual canvas, leveraging all the following features and beyond.\n\n**2. Comprehensive model support**:\nSeamless integration with hundreds of proprietary / open-source LLMs from dozens of inference providers and self-hosted solutions, covering GPT, Mistral, Llama3, and any OpenAI API-compatible models. A full list of supported model providers can be found [here](https://docs.dify.ai/getting-started/readme/model-providers).\n\n**3. Prompt IDE**:\nIntuitive interface for crafting prompts, comparing model performance, and adding additional features such as text-to-speech to a chat-based app.\n\n**4. RAG Pipeline**:\nExtensive RAG capabilities that cover everything from document ingestion to retrieval, with out-of-box support for text extraction from PDFs, PPTs, and other common document formats.\n\n**5. Agent**: Autonomous agents with a sandbox of their own: they run commands, install software, and handle files to get open-ended tasks done. Describe the agent you want and it builds itself. Give it skills, connect tools from [Dify Marketplace](https://marketplace.dify.ai/?category=tool), MCP servers, or your own APIs, and put it to work as a chat app or as a step in any workflow.\n\n**6. LLMOps**:\nMonitor and analyze application logs and performance over time. You could continuously improve prompts, datasets, and models based on production data and annotations.\n\n**7. Backend-as-a-Service**:\nAll of Dify's offerings come with corresponding APIs, so you could effortlessly integrate Dify into your own business logic.\n\n## Using Dify\n\n- **Cloud **\n  We host [Dify Cloud](https://cloud.dify.ai) so you can try Dify without managing a server. See the [pricing page](https://dify.ai/pricing) for current plans and usage allowances. If you run into issues, [contact our Cloud support team](mailto:cloud@dify.ai?subject=%5BGitHub%5DDify%20Cloud%20Support).\n\n- **Self-hosting Dify Community Edition**\n  Quickly get Dify running in your environment with this [starter guide](#quick-start).\n  Use our [documentation](https://docs.dify.ai) for further references and more in-depth instructions.\n\n- **[Dify Enterprise](https://dify.ai/dify-enterprise)**\n  For organizations requiring self-hosting, SSO, RBAC Security and Enterprise Support SLAs, please fill out [this form](https://share-na2.hsforms.com/14-09ff5HS92Sh4m3f4yrcw40s9fk) to speak to a solution representative. \n\n## Staying ahead\n\nStar Dify on GitHub and be instantly notified of new releases.\n\n## Advanced Setup\n\nFor custom configuration, observability, and deployment options, see [Advanced Setup](docs/ADVANCED_SETUP.md).\n\n## Contributing\n\nDify welcomes contributions of all kinds:\n\n- **Code**: Read the [Contribution Guide](CONTRIBUTING.md), then browse [good first issues](https://github.com/langgenius/dify/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22).\n- **Ideas and feedback**: Start or join a [GitHub Discussion](https://github.com/langgenius/dify/discussions).\n- **Translations**: Follow the [internationalization guide](web/i18n/README.md) to add or update a locale.\n- **Community**: Share the apps you build, help other users, and spread the word about Dify.\n\n### Contributors\n\n  \n\n## Community & contact\n\nChoose the channel that best fits your question:\n\n- [GitHub Discussions](https://github.com/langgenius/dify/discussions): Get help, share feedback, and propose ideas.\n- [GitHub Issues](https://github.com/langgenius/dify/issues): Report reproducible bugs and track engineering work. Read the [Contribution Guide](CONTRIBUTING.md) before opening one.\n- [Discord](https://discord.gg/FngNHpbcY7): Chat in real time, share your apps, and connect with other Dify users.\n- [X](https://x.com/dify_ai): Follow Dify for release news and project updates.\n\n## Star History\n\n[](https://star-history.dera.page/langgenius/dify?type=date&legend=top-left#gh-light-mode-only) [](https://star-history.dera.page/langgenius/dify?type=date&legend=top-left#gh-dark-mode-only)\n\n## Security disclosure\n\nReport vulnerabilities privately through GitHub Security Advisories, following our [security policy](SECURITY.md). Do not disclose them in public issues, discussions, or pull requests.\n\n## License\n\nThis repository is licensed under the [Dify Open Source License](LICENSE), based on Apache 2.0 with additional conditions.\n\n## mantrakp04/manusmcp (https://github.com/mantrakp04/manusmcp)\nDescription: ManusMCP is a project that implements AI agent workflows using Flowise. It features specialized AI agents with distinct roles (Planner, FileWizard, CommandRunner, WebNavigator) that can be used for task automation and complex problem-solving.\nHomepage: https://discord.gg/hVfRZH8kE3\nLanguage: TypeScript; license: MIT; created 2025-03-16; last push 2025-04-13\nNo releases\nREADME (start):\n# ManusMCP\n\nAn AI agent framework using Flowise to deploy AI team members with specialized capabilities.\n\n**Note**: Tested with Anthropic models only. [Reason](https://x.com/barre_of_lube/status/1901661792667103351)\n\n## What is ManusMCP?\n\nManusMCP is a framework for orchestrating specialized AI agents that work together to accomplish complex tasks. The Model Context Protocol (MCP) enables these agents to collaborate effectively by providing a shared context and communication layer.\n\n## Installation\n\n```bash\n# Clone the repository\ngit clone https://github.com/mantrakp04/manusmcp.git\ncd manusmcp/pytools\n\n# Install dependencies\nnpm i -g bun\nbash flowise.sh\n```\n\n## Usage\n\n### 1: Run it with docker\n\n```bash\ncp .env.example .env\ndocker-compose up -d\n```\n\n### 2: Open Flowise\n\n1. Open Flowise UI in your [browser](http://localhost:8001)\n2. Go to \"Agentflows\" section\n3. Click on \"Add New\" (Top Right)\n4. Click Settings (Top Right)\n5. Click Import and select the v2.2 and save it\n6. Create a new flow, (FROM STEP 2)\n7. Use v2.3 as the flow file\n\n### [Optional] Checkout the MCP Server\n\n```bash\ncd pytools\nbunx @modelcontextprotocol/inspector uv run manusmcp\n```\n\nRecommended runtime: [`bun`](https://bun.sh/)\n\n## Contributing\n\nThis project is currently in development with initial working functionality. Here are the core components that could benefit from community contributions:\n\n- **Prompts**: Help refine the AI agent prompts for more effective interactions\n- **Workflows**: Enhance the workflow definitions in `Agents.json`\n- **MCP Server**: Improve the Model Context Protocol server implementation in `.runtime/index.ts`\n\nTo contribute:\n\n1. Fork the repository\n2. Create a feature branch\n3. Submit a pull request with your changes\n\n## Sources\n\n- [Huggingface discord post](https://discord.com/channels/879548962464493619/1348836305223815200)\n\n## Disclaimer\n\nCurrently testing in main branch.",
+  "footage": [
+    {
+      "scene": "s1",
+      "query": "developer looking at monitor",
+      "file": "footage/developer-looking-at-monitor-pixabay-1210.mp4",
+      "id": "pixabay-1210",
+      "page": "https://pixabay.com/videos/id-1210/",
+      "author": "TBIT",
+      "tags": "heart rate, frequency, medicine, rhythm, pulse, line, wave, life, monitor, display, grid, oscilloscope",
+      "duration": 10,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2015/10/28/1210-143977098_large.mp4"
+    },
+    {
+      "scene": "s6",
+      "query": "colleagues collaborating tech office",
+      "file": "footage/colleagues-collaborating-tech-office-pixabay-183107.mp4",
+      "id": "pixabay-183107",
+      "page": "https://pixabay.com/videos/id-183107/",
+      "author": "riaz-baloch",
+      "tags": "artificial intelligence, technology, robot, future, ai, holographic tech, tech, computer, office, future world, space, educational, education",
+      "duration": 17,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2023/10/01/183107-870151708_large.mp4"
+    },
+    {
+      "scene": "s9",
+      "query": "server room datacenter racks",
+      "file": "footage/server-room-datacenter-racks-pixabay-171185.mp4",
+      "id": "pixabay-171185",
+      "page": "https://pixabay.com/videos/id-171185/",
+      "author": "MozoMozo",
+      "tags": "ai generated, robot, technology, future, screens, futuristic, sci fi, server, date",
+      "duration": 21,
+      "width": 1080,
+      "height": 1881,
+      "link": "https://cdn.pixabay.com/video/2023/07/12/171185-844787983_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "programming code screen",
+      "file": "footage/programming-code-screen-pixabay-348042.mp4",
+      "id": "pixabay-348042",
+      "page": "https://pixabay.com/videos/id-348042/",
+      "author": "doktorkleinmusic",
+      "tags": "coding, programmer, developer, screen, glasses, reflection, code, technology, focus, work, computer, ai, cyber, night, concentration, software, programming, digital, internet, business, data, hacking, hacker, ai generated",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/21/348042_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "robot arm working",
+      "file": "footage/robot-arm-working-pixabay-160974.mp4",
+      "id": "pixabay-160974",
+      "page": "https://pixabay.com/videos/id-160974/",
+      "author": "Dimitri_K",
+      "tags": "pin, precision, technology, tech, computer, ai, artificial, intelligence, deep learning, algorithm, brain, arm, robotic arm, industrial, industry, factory, robot, robotics, futuristic, modern, render, 3d, work, production",
+      "duration": 18,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2023/04/29/160974-822391309_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "server room corridor",
+      "file": "footage/server-room-corridor-pixabay-846.mp4",
+      "id": "pixabay-846",
+      "page": "https://pixabay.com/videos/id-846/",
+      "author": "klimkin",
+      "tags": "library, books, the corridor, window, rack, the culture, reading, classic, new items, reading room, society, shelves, education, studies, school",
+      "duration": 13,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2015/09/27/846-140823862_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "data center servers",
+      "file": "footage/data-center-servers-pixabay-4001.mp4",
+      "id": "pixabay-4001",
+      "page": "https://pixabay.com/videos/id-4001/",
+      "author": "FindingFootage",
+      "tags": "data, matrix, tunnel, technology, green, information, computer, information technology, internet, cyberspace, server, transfer, futuristic, digital, beautiful wallpaper, network, communication, computer technology, online, tech, web, connection, system, electronic, virtual, data center, background",
+      "duration": 30,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/07/25/4001-176277735_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "hands typing keyboard dark",
+      "file": "footage/hands-typing-keyboard-dark-pixabay-3174.mp4",
+      "id": "pixabay-3174",
+      "page": "https://pixabay.com/videos/id-3174/",
+      "author": "Coverr-Free-Footage",
+      "tags": "computer keyboard, typing, hands, female, keyboard, computer, technology, business, office, internet, type, key, communication, pc, information, white, working, letter, fingers",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3174-166338976_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "fiber optic cables light",
+      "file": "footage/fiber-optic-cables-light-pixabay-278840.mp4",
+      "id": "pixabay-278840",
+      "page": "https://pixabay.com/videos/id-278840/",
+      "author": "doktorkleinmusic",
+      "tags": "loop, fiber, optic, data, flow, energy, particles, light, cable, transmission, network, stream, tunnel, technology, abstract, digital, curve, electricity, speed, spectrum, violet, blue, signal, pipeline, pulse, ai generated",
+      "duration": 10,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2025/05/13/278840_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "team working office laptops",
+      "file": "footage/team-working-office-laptops-pixabay-268230.mp4",
+      "id": "pixabay-268230",
+      "page": "https://pixabay.com/videos/id-268230/",
+      "author": "isuruzampa",
+      "tags": "business, office, computer, man, laptop, company, corporate, meeting, work, marketing, team, technology, people, internet, planning, professional, working, project, web, startup, building, young, students, plan",
+      "duration": 12,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2025/03/28/268230_medium.mp4"
+    }
+  ],
+  "images": [
+    {
+      "scene": null,
+      "query": "signing document close up",
+      "file": "images/signing-document-close-up-pixabay-2654081.jpg",
+      "sticker": false,
+      "id": "pixabay-2654081",
+      "page": "https://pixabay.com/photos/signature-contract-close-up-tool-2654081/",
+      "author": "AbsolutVision",
+      "tags": "signature contract, close-up, tool, sign, contract, signature, pen, office, business, note, notary, service, pencil, paper, purchase, writing, message, testament, text, letter, closeup, communication, conclusion, certificate, career, corporation, agreement, handwriting, document, finance, bank contract, gray office, gray paper, gray writing, gray community, gray finance, gray communication, gray bank, gray letter, gray tools, gray document, gray note, gray service, contract, notary, notary, notary, notary, notary",
+      "width": 852,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "business handshake",
+      "file": "images/business-handshake-pixabay-10222194.jpg",
+      "sticker": false,
+      "id": "pixabay-10222194",
+      "page": "https://pixabay.com/photos/meeting-conference-business-office-10222194/",
+      "author": "ZaidAysh_Graphix",
+      "tags": "meeting, conference, business, office, team, collaboration, agreement, handshake, partnership, corporate, professional, discussion, presentation, chart, graph, laptop, documents, strategy, negotiation, success, leadership, workplace, formal",
+      "width": 956,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "gears mechanism macro",
+      "file": "images/gears-mechanism-macro-pixabay-4651185.jpg",
+      "sticker": false,
+      "id": "pixabay-4651185",
+      "page": "https://pixabay.com/photos/clockwork-church-gears-time-clock-4651185/",
+      "author": "Holedulidu",
+      "tags": "clockwork, church, gears, time, clock, church clock, pointer, metal, old, drive, gears, time, time, time, time, time, clock, clock, clock",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "circuit board macro blue",
+      "file": "images/circuit-board-macro-blue-pixabay-4199160.jpg",
+      "sticker": false,
+      "id": "pixabay-4199160",
+      "page": "https://pixabay.com/photos/circuit-computer-chip-electronics-4199160/",
+      "author": "guypracy",
+      "tags": "circuit, computer chip, electronics, circuits, microchip, technology, semiconductor, motherboard, component, capacitor, resistor, hardware, transistor, resistors, pcb, semiconductor, semiconductor, resistor, resistor, transistor, transistor, transistor, transistor, resistors, pcb, pcb, pcb, pcb, pcb",
+      "width": 853,
+      "height": 1280
+    }
+  ]
+}

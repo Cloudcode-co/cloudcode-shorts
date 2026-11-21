@@ -699,5 +699,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "soduwork-tu-host-vps-dieu-phoi-ai-agent",
+    "topic": "Tự host SoduWork trên VPS: Nền tảng điều phối đa AI Agent mã nguồn mở cho team, so sánh với Dify",
+    "format": "whatif",
+    "date": "2026-11-21",
+    "direction": "what-if-sim",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
