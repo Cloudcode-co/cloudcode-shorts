@@ -1,0 +1,208 @@
+{
+  "slug": "soduwork-multi-agent-vps-vs-dify",
+  "format": "explainer",
+  "topic": "Tự host SoduWork trên VPS: Nền tảng điều phối đa AI Agent cho team tự host, so sánh với Dify",
+  "title": "Ai duyệt xem AI làm đúng hay sai?",
+  "caption": "Tự host SoduWork trên VPS: Điều phối đa AI harness cho team với cơ chế nghiệm thu sign-off bắt buộc, khác gì Dify?",
+  "hashtags": [
+    "#soduwork",
+    "#dify",
+    "#selfhosted",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal modern tech beat, deep sub bass, fast hi-hats, subtle electronic synthesizer texture, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "synth pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady beat",
+        "electronic grooves",
+        "focused"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s7",
+      "styles": [
+        "driving rhythm",
+        "confident",
+        "tech punch"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "bright synth",
+        "triumphant",
+        "clean finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/mdiri-ai/SoduWork",
+    "https://github.com/langgenius/dify",
+    "https://github.com/FlowiseAI/Flowise"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Chatbot trả lời xong là xong, nhưng ai duyệt xem AI làm đúng hay sai?",
+      "headline": "Ai duyệt khi AI làm xong?",
+      "lines": [
+        "Chatbot trả lời là xong việc?",
+        "Ai kiểm tra chất lượng?"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer looking at screen"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì Dify tập trung kéo thả workflow và dựng app RAG. Còn SoduWork lại là engine quản lý issue và điều phối harness cho team.",
+      "headline": "Dify so với SoduWork",
+      "lines": [
+        "Dify: Visual workflow, RAG, Chat app",
+        "SoduWork: Issue pool, điều phối đa Agent"
+      ],
+      "commands": [],
+      "repos": [
+        "langgenius/dify",
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Tức là chat bình thường kết thúc khi có câu trả lời, còn request trên SoduWork chỉ đóng khi người yêu cầu ký duyệt xác nhận.",
+      "headline": "Ký duyệt nghiệm thu bắt buộc",
+      "lines": [
+        "Chat thường: Kết thúc bằng câu trả lời",
+        "SoduWork: Kết thúc khi requester ký sign-off"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[excited] Hệ thống hỗ trợ chín harness như Pi, OpenCode hay DeepSeek Harness. Một harness code xong, harness khác dùng model khác nhảy vào review tiêu chí nghiệm thu.",
+      "headline": "Một Agent làm, một Agent review",
+      "lines": [
+        "Hỗ trợ 9 harness: Pi, OpenCode, Qwen...",
+        "Agent khác dùng model khác để đối chiếu"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Vì vậy agent chỉ chuyển giao theo quy định của plugin và người được giao việc.",
+      "headline": "Kiểm soát phân quyền chặt chẽ",
+      "lines": [
+        "Agent không tự ý chuyển giao công việc",
+        "Phụ thuộc phân quyền của plugin và assignee"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] Khi anh em giải quyết xong một task chuẩn chỉ, đoạn chat đó được lưu lại thành plugin nội bộ cho cả team tái sử dụng.",
+      "headline": "Lưu quy trình thành Plugin",
+      "lines": [
+        "Biến phiên làm việc thành plugin nội bộ",
+        "Được review trước khi chia sẻ cho team"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": "software engineers collaborating desk"
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Về bản quyền, SoduWork dùng MIT license thay vì license riêng như Dify. Anh em muốn tự host trên VPS thì chuẩn bị Docker và chạy script deploy:",
+      "headline": "Giấy phép MIT, tự host VPS",
+      "lines": [
+        "Mã nguồn mở MIT license",
+        "Triển khai Docker trên VPS"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": "server room blinking lights"
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Chạy lệnh deploy: Hub, admin console và PostgreSQL sẽ tự động khởi chạy trên server.",
+      "headline": "Khởi chạy cụm dịch vụ",
+      "lines": [
+        "Khởi chạy Hub, Console và PostgreSQL"
+      ],
+      "commands": [
+        "python3 ops/self-host/deploy.py up"
+      ],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Lấy pass admin bằng lệnh credentials. Nhớ là thêm API key xong phải vào Add model gõ đúng model ID thì mới chat được nhé.",
+      "headline": "Lấy thông tin đăng nhập",
+      "lines": [
+        "Lấy password ban đầu của admin",
+        "Cần nhập đúng model ID trong Model catalog"
+      ],
+      "commands": [
+        "python3 ops/self-host/deploy.py credentials"
+      ],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Anh em lưu video lại để tự host thử cho team, bấm follow để đón xem tiếp: ai sẽ duyệt việc cho AI?",
+      "headline": "Lưu lại và thử nghiệm",
+      "lines": [
+        "Lưu video để tự host trên VPS",
+        "Follow để đón xem các công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "mdiri-ai/SoduWork"
+      ],
+      "footage": ""
+    }
+  ]
+}

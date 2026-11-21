@@ -688,5 +688,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "soduwork-multi-agent-vps-vs-dify",
+    "topic": "Tự host SoduWork trên VPS: Nền tảng điều phối đa AI Agent cho team tự host, so sánh với Dify",
+    "format": "whatif",
+    "date": "2026-11-21",
+    "direction": "what-if-sim",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
