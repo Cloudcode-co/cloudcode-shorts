@@ -710,5 +710,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "opencomputer-vs-devin-openhands",
+    "topic": "Tự host OpenComputer trên VPS: AI kỹ sư lập trình mã nguồn mở thay thế Devin, so sánh với OpenHands",
+    "format": "quiz",
+    "date": "2026-11-22",
+    "direction": "quiz-show",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 6
   }
 ]

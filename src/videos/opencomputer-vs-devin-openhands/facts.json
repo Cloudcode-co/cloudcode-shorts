@@ -1,0 +1,200 @@
+{
+  "topic": "Tự host OpenComputer trên VPS: AI kỹ sư lập trình mã nguồn mở thay thế Devin, so sánh với OpenHands",
+  "models": [
+    "ag/gemini-3.8-flash",
+    "ag/gemini-3.8-flash-medium",
+    "ag/gpt-oss-120b-medium",
+    "ds/deepseek-v4.1-flash",
+    "ag/gemini-3.8-flash-high",
+    "oc/deepseek-v4.1-flash-free"
+  ],
+  "date": "2026-11-22",
+  "repos": [
+    {
+      "repo": "diggerhq/opencomputer",
+      "asked": "diggerhq/opencomputer",
+      "name": "OpenComputer",
+      "stars": 1189,
+      "description": "An open-source, faster Devin alternative",
+      "license": "Apache-2.0",
+      "language": "TypeScript",
+      "pushedAt": "2026-11-22T00:04:57Z",
+      "url": "https://github.com/diggerhq/opencomputer",
+      "avatar": "repos/diggerhq.png"
+    },
+    {
+      "repo": "OpenHands/OpenHands",
+      "asked": "OpenHands/OpenHands",
+      "name": "OpenHands",
+      "stars": 93974,
+      "description": "🙌 OpenHands: AI-Driven Development",
+      "license": "MIT",
+      "language": "TypeScript",
+      "pushedAt": "2026-11-22T01:35:04Z",
+      "url": "https://github.com/OpenHands/OpenHands",
+      "avatar": "repos/OpenHands.png"
+    },
+    {
+      "repo": "OpenHands/OpenHands-Cloud",
+      "asked": "OpenHands/OpenHands-Cloud",
+      "name": "OpenHands Cloud",
+      "stars": 95,
+      "description": "All Hands AI OpenHands Self-hosted Cloud",
+      "license": "NOASSERTION",
+      "language": "Python",
+      "pushedAt": "2026-11-21T16:53:09Z",
+      "url": "https://github.com/OpenHands/OpenHands-Cloud",
+      "avatar": "repos/OpenHands.png"
+    }
+  ],
+  "pages": [],
+  "idea": null,
+  "notes": {
+    "audience": "Các lập trình viên, kỹ sư DevOps và người tự host VPS muốn triển khai một AI coding agent tự quản lý dữ liệu thay thế Devin và OpenHands.",
+    "angle": "Tự host OpenComputer trên VPS đơn lẻ để biến bot Slack thành kỹ sư lập trình chạy nhanh hơn Devin 3,3 lần, tận dụng tài khoản LLM có sẵn thay vì dính rào cản bản quyền Polyform của OpenHands Cloud.",
+    "facts": [
+      {
+        "fact": "OpenComputer định vị là giải pháp mã nguồn mở, tự host thay thế cho Devin, tương tác trực tiếp qua Slack để mở Pull Request.",
+        "quote": "OpenComputer is the open source, self hostable alternative to Devin. Mention @Computer in a Slack thread with a task, it works on its own computer",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Toàn bộ kiến trúc OpenComputer có thể chạy trên một máy ảo (VM) duy nhất, khuyến nghị giới hạn kết nối outbound-only.",
+        "quote": "The whole stack runs on a single VM, which we recommend locking down to outbound-only network access.",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Cổng kết nối Calvin chạy trên VM để lắng nghe sự kiện Slack và kích hoạt phiên làm việc với Claude Code, Codex hoặc OpenCode.",
+        "quote": "The VM runs the gateway, Calvin: a thin bridge that listens for Slack events and starts a session with Claude Code, Codex or OpenCode, depending on your configuration.",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Mỗi phiên làm việc của OpenComputer được cô lập an toàn bằng rootless Podman.",
+        "quote": "Each session is isolated with rootless Podman.",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Trạng thái của OpenComputer được ghi trước vào ổ cứng cục bộ VM, sau đó lưu trữ bền vững vào kho lưu trữ bằng Git.",
+        "quote": "Its state is written first to the VM's local disk, then persisted to a git-backed store.",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Phần còn lại của hạ tầng OpenComputer vận hành trên Cloudflare Workers và Durable Objects.",
+        "quote": "The rest of the stack runs on Cloudflare Workers and Durable Objects. Support for Fly and other platforms is coming soon.",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "OpenComputer được phát hành theo giấy phép mã nguồn mở hoàn toàn Apache-2.0.",
+        "quote": "Apache 2.0. See LICENSE.",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Theo bài benchmark 4 kho mã nguồn, OpenComputer mở 4 PR vượt qua kiểm tra CI trong 56 giây, nhanh hơn 3,3 lần so với Devin (185 giây).",
+        "quote": "3.3x faster than Devin: all 4 PRs open with CI green in 56s vs 185s",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "OpenComputer thực hiện lần push code đầu tiên sau 24 giây, nhanh hơn 2,6 lần mức trung bình của 4 cloud agent phổ biến (62 giây).",
+        "quote": "2.6x faster than the average of the 4 most popular cloud agents: first push in 24s vs a 62s average",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Người dùng có thể mang theo gói thuê bao ChatGPT hoặc Codex cá nhân vào sử dụng (BYO subscription).",
+        "quote": "Bring your own ChatGPT / Codex subscription",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Bản OpenComputer Cloud cung cấp dùng thử miễn phí 3 ngày với 600 phút làm việc.",
+        "quote": "3-day free trial with 600 work minutes",
+        "source": "https://github.com/diggerhq/opencomputer"
+      },
+      {
+        "fact": "Bản lõi OpenHands/OpenHands sử dụng giấy phép nguồn mở MIT License với 94k stars.",
+        "quote": "MIT license",
+        "source": "https://github.com/OpenHands/OpenHands"
+      },
+      {
+        "fact": "OpenHands Agent Canvas có thể khởi chạy bằng giao diện dòng lệnh npm yêu cầu Node.js 24 trở lên và uv.",
+        "quote": "Prerequisites: Node.js 24 or later, uv\n\nnpm install -g @openhands/agent-canvas\nagent-canvas",
+        "source": "https://github.com/OpenHands/OpenHands"
+      },
+      {
+        "fact": "Chạy Agent Canvas của OpenHands không dùng sandbox sẽ trao quyền truy cập toàn bộ hệ thống tệp cho agent.",
+        "quote": "This runs the agent-server directly on the machine you're installing on — the agent will have full access to your filesystem!",
+        "source": "https://github.com/OpenHands/OpenHands"
+      },
+      {
+        "fact": "OpenHands cho phép chạy trong Docker container cô lập với cổng 8000 và mount thư mục dự án.",
+        "quote": "docker run -it --rm \\\n  -p 127.0.0.1:8000:8000 \\\n  -e AGENT_CANVAS_ALLOW_LAN_SESSION_KEY=true \\\n  -v openhands-state:/home/openhands/.openhands \\\n  -v \"${PROJECTS_PATH}:/projects\" \\\n  ghcr.io/openhands/agent-canvas:1.43.0",
+        "source": "https://github.com/OpenHands/OpenHands"
+      },
+      {
+        "fact": "OpenHands hỗ trợ chạy từng cuộc trò chuyện trong một container Docker riêng biệt qua biến môi trường OH_CONVERSATION_RUNTIME=docker.",
+        "quote": "OH_CONVERSATION_RUNTIME=docker agent-canvas",
+        "source": "https://github.com/OpenHands/OpenHands"
+      }
+    ],
+    "install": [
+      "npm install -g @openhands/agent-canvas",
+      "agent-canvas",
+      "export PROJECTS_PATH=\"$HOME/projects\"",
+      "mkdir -p \"$PROJECTS_PATH\"",
+      "OH_CONVERSATION_RUNTIME=docker agent-canvas"
+    ],
+    "caveats": [
+      "Tài liệu README của OpenComputer chỉ mô tả nguyên lý kiến trúc (VM + rootless Podman + Calvin gateway + Cloudflare Workers) chứ chưa ghi cụ thể chuỗi lệnh cài đặt self-host từng bước trong file chính.",
+      "OpenHands-Cloud (bản Helm chart cho Kubernetes) không phải là mã nguồn mở thực thụ mà bị giới hạn bản quyền 30 ngày/năm (Polyform Free Trial License).",
+      "Nếu chạy OpenHands trực tiếp (không dùng Docker sandbox), agent sẽ có toàn quyền can thiệp vào toàn bộ filesystem của máy chủ/VPS.",
+      "Trên Linux chạy OpenHands bằng Docker, UID 10001 bên trong container cần được cấp quyền đọc ghi vào thư mục dự án trên host.",
+      "Kiến trúc của OpenComputer phụ thuộc một phần vào Cloudflare Workers và Durable Objects ngoài máy ảo VM."
+    ],
+    "gaps": [
+      "Cấu hình phần cứng tối thiểu cho VPS để tự host OpenComputer (CPU, RAM, dung lượng disk) là bao nhiêu?",
+      "Lệnh cài đặt chi tiết từng bước cho gateway Calvin và cấu hình rootless Podman của OpenComputer trên VPS Linux chưa có trong README.",
+      "Cách tự thiết lập phần backend Cloudflare Workers / Durable Objects khi tự host hoàn toàn OpenComputer như thế nào?",
+      "Chi phí API khi tích hợp trực tiếp Claude Code/Codex vào OpenComputer trung bình cho một PR là bao nhiêu?"
+    ]
+  },
+  "research": "Primary sources, fetched from GitHub on 2026-11-22:\n\n## diggerhq/opencomputer (https://github.com/diggerhq/opencomputer)\nDescription: An open-source, faster Devin alternative\nHomepage: https://opencomputer.dev\nLanguage: TypeScript; license: Apache-2.0; created 2025-12-09; last push 2026-11-22\nLatest release: v0.6.0.50 (2026-11-09)\nREADME (start):\nThe open-source Devin alternative: a coding agent your team works with in Slack, on its own computers, in your cloud or ours.\n\n  Cloud | Self-hosting | Docs | Website | Benchmark | Community | X\n\n  \n  \n\n  \n\n  \n  \n  \n\n## Introduction\n\nOpenComputer is the open source, self hostable alternative to Devin. Mention `@Computer` in a Slack thread with a task, it works on its own computer, you & your team can watch and steer it as it goes, and the result lands as a pull request.\n\nIt is open source from the compute layer up, so you can run all of it in your own cloud account, or start on OpenComputer Cloud in two minutes.\n\nWe built it to feel as fast as Claude Code on your laptop: in our benchmark it opens PRs 3.3x faster than Devin.\n\n## See it work\n\n  \n\n## As fast as local\n\n  \n\n## How it works\n\nOpenComputer is built to be simple to self-host without giving up scale or security. The whole stack runs on a single VM, which we recommend locking down to outbound-only network access.\n\nThe VM runs the gateway, Calvin: a thin bridge that listens for Slack events and starts a session with Claude Code, Codex or OpenCode, depending on your configuration. Each session is isolated with rootless Podman. Its state is written first to the VM's local disk, then persisted to a git-backed store.\n\nThe rest of the stack runs on Cloudflare Workers and Durable Objects. Support for Fly and other platforms is coming soon.\n\n  \n\n## Try it in Cloud\n\nThe fastest way to experience `@Computer` is to install the Slack app from the cloud: [sign up here](https://app.opencomputer.dev), connect your repos, and install the Slack app to get started.\n\n  \n\n- **3.3x faster than Devin**: all 4 PRs open with CI green in 56s vs 185s ([benchmark](https://opencomputer.dev/blog/cloud-agents-as-fast-as-local/))\n- **2.6x faster than the average of the 4 most popular cloud agents**: first push in 24s vs a 62s average ([benchmark](https://opencomputer.dev/blog/cloud-agents-as-fast-as-local/))\n- **3-day free trial** with 600 work minutes\n- **Bring your own ChatGPT / Codex subscription**\n\n## License\n\nApache 2.0. See [LICENSE](LICENSE).\n\n## OpenHands/OpenHands-Cloud (https://github.com/OpenHands/OpenHands-Cloud)\nDescription: All Hands AI OpenHands Self-hosted Cloud\nHomepage: -\nLanguage: Python; license: NOASSERTION; created 2025-02-17; last push 2026-11-21\nLatest release: openhands/0.114.1 (2026-11-20)\nREADME (start):\n# OpenHands Cloud\n\n[](https://github.com/OpenHands/OpenHands-Cloud/actions/workflows/release-replicated-unstable.yml)\n[](https://github.com/OpenHands/OpenHands-Cloud/actions/workflows/release-replicated-beta.yml)\n\n> [!WARNING]\n> This software is licensed under the [Polyform Free Trial License](./LICENSE). This is **NOT** an open source license. Usage is limited to 30 days per calendar year without a commercial license. If you would like to use it beyond 30 days, please [contact us](https://www.all-hands.dev/contact).\n\nThis repository contains Helm charts for installing OpenHands Cloud\nin your own Kubernetes cluster. These charts are also used to drive\nthe official, public version of OpenHands Cloud at\n[app.all-hands.dev](https://app.all-hands.dev).\n\n> [!NOTE]\n> The preferred method of installing OpenHands Cloud is via Replicated. [You can access it here](https://install.r9.all-hands.dev/openhands/signup)\n\nYou may also want to check out the MIT-licensed [OpenHands](https://github.com/All-Hands-AI/OpenHands)\n\nIssues in this repository are for the OpenHands Cloud app and\nfor the Helm charts here. Issues with OpenHands itself should be\nopened in the [core OpenHands repository](github.com/All-Hands-AI/OpenHands).\n\n# Installation\n\nSee [charts/openhands/README.md](./charts/openhands/README.md) for\nfull instructions. See [Keycloak administration](./docs/keycloak-administration.md)\nfor configuring admin console access through Replicated.\n\n# Automation\n\n- [Automated image-tag bumps](./docs/automated-image-tag-bumps.md)\n- [Automated development chart bumps](./docs/development-chart-bumps.md)\n- [Automated staging chart bumps](./docs/staging-chart-bumps.md)\n\nMore pages, read on 2026-11-22:\n\n## GitHub - diggerhq/opencomputer: An open-source, faster Devin alternative · GitHub\nURL: https://github.com/diggerhq/opencomputer\nDescription: An open-source, faster Devin alternative. Contribute to diggerhq/opencomputer development by creating an account on GitHub.\n\nSkip to content\nNavigation Menu\nSign in\ndiggerhq\nopencomputer\nRepository navigation\nCode\nIssues\n12\n (12)\nPull requests\n82\n (82)\nMore\nitems\nopencomputer\nPublic\nNotifications\nFork141\n (141)\nStar1.2k\n (1.2k)\nAbout\n\nAn open-source, faster Devin alternative\n\nopencomputer.dev\nResources\nReadme\nApache-2.0 license\nActivity\nCustom properties\nStars\n1.2k stars\nWatchers\n5 watching\nForks\n141 forks\nReport repository\nmain\nCode\nLatest commit\nopencomputer-app[bot]\nand\nmo-digger\nHistory\nFolders and files\nName\tLast commit date\n\n.agents\n\t\n\n.github\n\t\n\nagent\n\t\n\ncli\n\t\n\ncloudflare-workers\n\t\n\ncomputer\n\t\n\ncreate-start\n\t\n\ndocs\n\t\n\nreact\n\t\n\nscripts\n\t\n\nView all files\nRepository files navigation\nREADME\nApache-2.0 license\n\nThe open-source Devin alternative: a coding agent your team works with in Slack, on its own computers, in your cloud or ours.\n\nCloud | Self-hosting | Docs | Website | Benchmark | Community | X\n\n \n\n  \n\nIntroduction\n\nOpenComputer is the open source, self hostable alternative to Devin. Mention @Computer in a Slack thread with a task, it works on its own computer, you & your team can watch and steer it as it goes, and the result lands as a pull request.\n\nIt is open source from the compute layer up, so you can run all of it in your own cloud account, or start on OpenComputer Cloud in two minutes.\n\nWe built it to feel as fast as Claude Code on your laptop: in our benchmark it opens PRs 3.3x faster than Devin.\n\nSee it work\n\nAs fast as local\n\nHow it works\n\nOpenComputer is built to be simple to self-host without giving up scale or security. The whole stack runs on a single VM, which we recommend locking down to outbound-only network access.\n\nThe VM runs the gateway, Calvin: a thin bridge that listens for Slack events and starts a session with Claude Code, Codex or OpenCode, depending on your configuration. Each session is isolated with rootless Podman. Its state is written first to the VM's local disk, then persisted to a git-backed store.\n\nThe rest of the stack runs on Cloudflare Workers and Durable Objects. Support for Fly and other platforms is coming soon.\n\nTry it in Cloud\n\nThe fastest way to experience @Computer is to install the Slack app from the cloud: sign up here, connect your repos, and install the Slack app to get started.\n\n3.3x faster than Devin: all 4 PRs open with CI green in 56s vs 185s (benchmark)\n2.6x faster than the average of the 4 most popular cloud agents: first push in 24s vs a 62s average (benchmark)\n3-day free trial with 600 work minutes\nBring your own ChatGPT / Codex subscription\nLicense\n\nApache 2.0. See LICENSE.\n\nReleases\n218\n (218)\noc v0.6.0.50\nLatest\n+ 217 releases\nContributors\n14\n (14)\nLanguages\nTypeScript\n92%\nPython\n2.8%\nGo\n1.9%\nShell\n1.5%\nJavaScript\n1.4%\nHTML\n0.2%\nOther\n0.2%\nFooter\n© 2026 GitHub, Inc.\nFooter navigation\nTerms\nPrivacy\nSecurity\nStatus\nCommunity\nDocs\nContact\nManage cookies\nDo not share my personal information\n\n## GitHub - OpenHands/OpenHands: 🙌 OpenHands: AI-Driven Development · GitHub\nURL: https://github.com/OpenHands/OpenHands\nDescription: 🙌 OpenHands: AI-Driven Development. Contribute to OpenHands/OpenHands development by creating an account on GitHub.\n\nSkip to content\nNavigation Menu\nSign in\nOpenHands\nOpenHands\nRepository navigation\nCode\nIssues\n643\n (643)\nMore\nitems\nOpenHands\nPublic\nNotifications\nFork12.6k\n (12.6k)\nStar94k\n (94k)\nAbout\n\n🙌 OpenHands: AI-Driven Development\n\nopenhands.dev\nTopics\nagent\nartificial-intelligence\nchatgpt\nclaude-ai\ncli\ndeveloper-tools\ngpt\nllm\nopenai\nResources\nReadme\nMIT license\nActivity\nCustom properties\nStars\n94.0k stars\nWatchers\n500 watching\nForks\n12.6k forks\nReport repository\nmain\nCode\nLatest commit\ndependabot[bot]\nHistory\nFolders and files\nName\tLast commit date\n\n.agents/skills\n\t\n\n.github\n\t\n\n.husky\n\t\n\n.openhands\n\t\n\n.pr\n\t\n\n.screenshots\n\t\n\n__mocks__\n\t\n\n__tests__\n\t\n\nbin\n\t\n\nconfig\n\t\n\nView all files\nRepository files navigation\nREADME\nMIT license\n\nAgent Canvas\n\nThe self-hosted developer control center for coding agents and automations.\n\nRun OpenHands, Claude Code, Codex, Gemini, Pi, OpenCode, or any ACP-compatible agent across local, remote, and cloud backends.\n\n   \nQuickstart | Docs | Self-Hosting | ACP Agents | Automations | Slack\n\nOpenHands Agent Canvas turns your coding agents into a self-hosted, always-on engineering team. It's a developer control center for starting conversations and automating everyday tasks — like generating reports that publish to Slack or automatically decomposing GitHub issues into tasks.\n\nIt runs locally on your machine by default, but can connect to multiple “agent backends”, e.g. running agents in Docker containers, on VMs, or within your company infrastructure. You can optionally choose to run agents on OpenHands Cloud or OpenHands Enterprise infrastructure.\n\nAgent Canvas runs the open source OpenHands agent out-of-the-box, but can use third-party agents such as Claude Code, Codex, Gemini CLI, Pi, and OpenCode.\n\n\t\nSelf-host your way\tRun agents locally, in Docker, on VMs, or anywhere you can run an agent server backend\nSwitch between different backends\tSwitch between local, remote, and cloud agents without losing focus\nCreate automations\tCreate automations and workflows that integrate with Slack, GitHub, Linear, and more. Run on a schedule or in response to webhook events\nIntegrate with the tools you use\tConnect your automations with third-party services like Slack, GitHub, Notion, and more to automate workflows\nBring your own model\tUse with any LLM\nUse with any agent\tUse with OpenHands, Claude Code, Codex, Gemini, Pi, OpenCode, or any agent with Agent-Client Protocol (ACP).\n\nIf you have questions or feedback, please open a GitHub issue or join the #proj-agent-canvas channel in Slack.\n\nQuickstart\n\nYou can install OpenHands to run agents on any machine: on your laptop, on a dedicated computer like a Mac Mini, or on a server in the cloud.\n\nThe most powerful way to run OpenHands is on a server in the cloud. This allows your agents to continue running even when your laptop is shut, and makes it easier to trigger your agents through third-party services like Slack, GitHub, and Datadog. See SELF_HOSTING.md for details, especially with respect to security hardening.\n\nNotably, you can run the backend in multiple different environments, and switch between them from the same Agent Canvas frontend. E.g. you can share an Agent Server with your team for agents doing code review and dependency updates, then have your personal agents running on your laptop.\n\nOption 1: Without a Sandbox\n\nWarning\n\nThis runs the agent-server directly on the machine you're installing on — the agent will have full access to your filesystem!\n\nPrerequisites: Node.js 24 or later, uv\n\nnpm install -g @openhands/agent-canvas\nagent-canvas\n\nThe agent-canvas command starts the full local stack by default. You can also split it when you want to run pieces separately:\n\nagent-canvas --frontend-only  # static frontend + ingress only\nagent-canvas --backend-only   # agent server + automation backend + ingress only\nOption 2: With a Docker Sandbox\n\nInstall Docker Desktop on macOS/Windows, or Docker Engine/Docker Desktop on Linux. Windows users can follow the PowerShell quickstart.\n\nThe steps below are for macOS and Linux. A named Docker volume stores settings, secrets, and conversations; projects are mounted at /projects.\n\n1. Prepare a workspace\n\nexport PROJECTS_PATH=\"$HOME/projects\"  # directory containing your project folders\nmkdir -p \"$PROJECTS_PATH\"\n\nOn Linux Docker Engine, uid 10001 inside the container must be able to read and write the workspace and its existing files. Grant that user access using appropriate ownership or ACLs for your system. For a dedicated workspace you are comfortable sharing with all local users, the following is another option:\n\nfind \"$PROJECTS_PATH\" -type d -exec chmod a+rwX {} +\nfind \"$PROJECTS_PATH\" -type f -exec chmod a+rw {} +\n\nThese commands grant all host users access to the workspace. Keep it separate from ~/.openhands and other sensitive data. Docker Desktop on macOS/Windows handles bind-mount permissions, so those commands are normally unnecessary.\n\n2. Start Agent Canvas\n\ndocker run -it --rm \\\n  -p 127.0.0.1:8000:8000 \\\n  -e AGENT_CANVAS_ALLOW_LAN_SESSION_KEY=true \\\n  -v openhands-state:/home/openhands/.openhands \\\n  -v \"${PROJECTS_PATH}:/projects\" \\\n  ghcr.io/openhands/agent-canvas:1.43.0 # x-release-please-version\n\nOpen http://localhost:8000/canvas. Reuse openhands-state to retain state across container removals. A fresh volume does not contain existing ~/.openhands data; inspect or back it up with docker volume inspect openhands-state.\n\nLinux permission troubleshooting and existing state\n\nNote\n\nThe entrypoint stops the container with exit code 1 when the Agent Server stops answering its /alive check for about 30 seconds, so a crash or hang fails visibly instead of leaving a container that returns 502 for every request. Automatic recovery needs a restart policy: use --restart unless-stopped instead of --rm, or restart: unless-stopped in Docker Compose.\n\nThe agent will be able to access any project under PROJECTS_PATH.\n\nOption 3: With Multiple Docker Sandboxes\n\nRun each new conversation in its own Docker container, with its own Agent Server and tools. This is useful for running several agents concurrently. Canvas and the outer Agent Server run on your host and route conversation requests to the containers.\n\nPrerequisites: Node.js 24 or later, uv, and a running Docker Desktop (macOS) or Docker Engine/Desktop (Linux). The user starting Canvas must be able to run docker commands.\n\nmacOS / Linux:\n\nnpm install -g @openhands/agent-canvas\nOH_CONVERSATION_RUNTIME=docker agent-canvas\n\nOpen http://localhost:8000 and start a new conversation. Existing local conversations are not converted. Each container mounts its conversation's workspace and persisted state, so workspace files and conversation history survive container replacement. Conversations using the same host workspace still share those files; choose separate directories or worktrees to avoid conflicting edits.\n\nThis setting isolates conversation execution; it does not move the entire Canvas or automation service into a sandbox. For Windows, see README.windows.md.\n\nOption 4: From Source\n\nWarning\n\nThis runs the agent-server directly on the machine you're installing on — the agent will have full access to your filesystem!\n\nPrerequisites: Node.js 24 or later, npm 11.12.1 (the repository pin), uv (for running the agent server via uvx)\n\nCheck npm --version before resolving dependencies. The seven-day release-age filter (npm install --min-release-age=7) requires npm >=11.10; older versions do not enforce it. Use npm ci to replay the committed lockfile. This npm requirement is for contributor dependency resolution, not for installing the published Canvas package.\n\ngit clone https://github.com/OpenHands/OpenHands.git\ncd OpenHands\nnpm ci\nnpm run dev\n\nAccess the UI at http://localhost:8000 for the npm/source launchers, or http://localhost:8000/canvas for the Docker image. You can add additional backends directly from the UI.\n\nLocal (npx / npm run dev) listeners bind loopback only (127.0.0.1) so the auto-injected session key is not reachable from other machines on the network. To listen on all interfaces, pass --host 0.0.0.0 (or set OH_BIND_HOST); the session key is then not injected and the UI uses the same API-key entry screen as --public.\n\nDocker listens on all container interfaces so port publishing works, but does not inject its session key into HTML by default. The quickstart above explicitly enables injection while publishing the host port on 127.0.0.1 only. If you publish Docker on a LAN or public interface, omit AGENT_CANVAS_ALLOW_LAN_SESSION_KEY and enter the API key in the UI. Set LOCAL_BACKEND_API_KEY to a strong value, or retrieve the generated value with docker exec <container> sh -c 'cat \"$STATE_DIR/api-key.txt\"'. For internet-facing installs, follow self-hosting.\n\nArchitecture\n\nAgent Canvas is powered by the OpenHands Agent Server, a REST API for running multiple agents on a single machine. Each Agent Server runs on a single host/port; the Agent Canvas can connect to multiple Agent Servers and easily flip between them.\n\nYou can run an Agent Server anywhere:\n\nDirectly on your laptop (be careful!)\nOn a dedicated machine like a Mac Mini\nOn a virtual machine in the cloud\nInside OpenHands Cloud (our commercial offering)\n\nThe Agent Server is often paired with an Automation Server, which lets you set up agents that run on a schedule or in response to events.\n\nRepository boundaries\n\nAgent Canvas is part of a multi-repository OpenHands system. Changes should go to the repository that owns the behavior:\n\nRepository\tResponsibility\nOpenHands/OpenHands\tAgent Canvas frontend, user-facing control center, backend selection, and local-stack orchestration.\nOpenHands/software-agent-sdk\tPython SDK, Agent Server, agents, tools, conversations, workspaces, events, and the canonical server API.\nOpenHands/typescript-client\tBrowser-compatible TypeScript client for the Agent Server API.\nOpenHands/automation\tAutomation definitions, scheduling, webhooks, run history, and dispatching.\n\nThe Agent Server API is implemented by the SDK and consumed through the TypeScript client by Agent Canvas. The automation service decides when work runs and dispatches conversations to the Agent Server/SDK, which decides what runs. See AGENTS.md for contributor-specific boundaries and the required custom code-review guide.\n\nMore documentation\nDocumentation index\nArchitecture overview\nDevelopment guide, including embedding Canvas components in a host app (load @openhands/agent-canvas/styles.css once next to the component imports)\nSelf-hosting guide\nReleases\n166\n (166)\nv1.43.0\nLatest\n+ 165 releases\nContributors\n634\n (634)\n+ 620 contributors\nLanguages\nTypeScript\n92%\nJavaScript\n6.8%\nPython\n0.4%\nShell\n0.3%\nCSS\n0.3%\nHTML\n0.1%\nOther\n0.1%\nFooter\n© 2026 GitHub, Inc.\nFooter navigation\nTerms\nPrivacy\nSecurity\nStatus\nCommunity\nDocs\nContact\nManage cookies\nDo not share my personal information\n\n## What happens when cloud agents are as fast as your local machine? – OpenComputer\nURL: https://opencomputer.dev/blog/cloud-agents-as-fast-as-local/\nDescription: Cloud coding agents lost on interactivity, not capability. We built @computer to be as fast as Claude Code on your laptop, and benchmarked it against local Claude Code and other cloud coding agents.\n\nBLOG\n\nWhat happens when cloud agents are as fast as your local machine?\n\nBy Igor Zalutski, Mohamed Habib, Utpal Nadiger · October 30, 2026\n\nWe’ve spent the last few years obsessing over infrastructure. Over the last few months, we’ve been especially focused on cloud coding agents and on how to make it as easy as possible for developers transitioning from the local machines to continue using them without a problem.\n\nIn fact this attempt started internally in our team late last year, somewhere around the time when Andrej Karpathy wrote his “2025 LLM year in review”, article, we’ve basically been hammering at it ever since. To us, coding agents moving to a secure cloud environment seemed inevitable, but the question was why it had not happened yet?\n\nThe bottleneck is speed, we realized, and we thought, “What happens when cloud agents are as fast as your local machine?”\n\nWhen you ping your favourite cloud coding agent in Slack with a task, for example, you don’t expect it to reply instantly. It would take a few seconds, maybe ask a clarifying question, then go away and produce a PR that you or another agent would glance over. We’re now used to equating cloud-based agents with “background agents”, as if it was the same thing. But it’s not.\n\nWith Claude Code running on your laptop you wouldn’t work this way. You can of course give it a goal and leave it unattended, and it’ll get it done - but that doesn’t work well for the most important work that you care about most. You’d typically first iterate on designs, plans, different approaches with lots of back-and-forth, look at some prototypes, and most importantly clarify what exactly it is that you want before throwing a swarm of agents at it.\n\nThis is the gap that is not (yet) well addressed with cloud agents.\n\nWe lose interactivity with background agents as of today!\n\nAnd interactivity matters a lot, much more than it seems. The main reason is that context-switching is extremely expensive - it’s quite literally the worst possible way to use the human brain. An agent that takes just a tiny bit too long to respond forces you to switch to something else, and every switch costs your brain dearly. It’s a lot like token cache in LLMs actually, very similar dynamic. Except that imagine if cache misses in LLMs made them much slower and much dumber - that’s roughly what context-switching does to the human brain.\n\nAnother factor is wasted effort because of extended feedback loops. If you provide feedback to the agent as soon as there’s something to critique, it won’t waste any time. But if you only share feedback when the entire project is done, chances are that 90% of the work will be wasted and will need to be redone. So working with a slower agent is not merely slower proportionally to speed - the time to project completion grows non-linearly.\n\nWhile models weren’t good enough we got used to agents other than those running on our laptops being too slow to be interactive - so we keep using them in fire-and-forget fashion. But all this does is grow work in progress for no reason, and overloading our brains. Full autonomy isn’t the answer either. As soon as full autonomy at some level is achieved, it stops being a concern for humans - it’s just done fully automatically, without any need to interact with it at all. You’d just switch your attention to a level above where AI still needs steering occasionally. And there, attention management matters again.\n\n@Computer and how it happened\n\nSince launching OpenComputer about seven weeks ago (after a few months in alpha), we kept seeing very similar patterns: many users were building cloud coding agents to use from Slack, and most were hacking them together on our agent API.\n\nThis prompted us to build @Computer, initially as a template. It would soon become our daily driver for writing code internally. But given its interactivity and speed, we decided to lead with it and benchmark it too, so users can easily try it in Slack.\n\nHere’s what that looked like:\n\n@Computer vs local Claude Code\n\nOur first test was to compare an OpenComputer cloud session with a local Claude Code session side by side. In order to perform this test we built a CLI client for OpenComputer.\n\nIn a few rounds of tests of side by side comparison with the same task we saw that OpenComputer was either as fast as local Claude or faster. This test was run on a local MacBook Pro M2 machine. One of the surprising advantages of having a cloud session is that it is likely closer to the inference provider or colocated with it, which (to our surprise) also leads to sometimes faster than local speeds. In this video the left is Claude Code running on the local Mac machine, the right is opc running in a remote cloud session. Both have been given the same task in the same repo for a fair comparison.\n\n@Computer vs other cloud coding agents\n\nThe second comparison we did was OpenComputer vs other cloud coding agents such as Devin (& friends). In order to test the speed of a task we created a simple test where we give an agent access to 4 different repos and gave each agent the same task:\n\n@<Agent> bump zod to the latest version in sb-config-loader, sb-api-schema, sb-form-validator and sb-event-parser, run the checks, and open a PR in each.\n\nThe repo is public here: https://github.com/diggerhq/speedbench\n\nFor each one of these the prompt was shared in Slack, we measured the time from the prompt (Slack message timestamp) until the 4 PRs appeared. The time from initial message until PR appearing in GitHub is the elapsed time.\n\nFor each provider we did 5 rounds of this test. After each round we closed the open PRs and started over. In some cases the providers needed an additional nudge to run the benchmark test since they would refuse the task given that a closed PR exists (memory interference).\n\nWe measured the median across 5 rounds and recorded the results as shown below:\n\n\tFIRST PUSH\tALL 4 PRS OPEN, CI GREEN\tRUNS COMPLETED\nOpenComputer\t24s\t56s\t5/6\nCapy\t55s\t85s\t5/5\nReplicas\t53s\t87s\t4/9\nHoplite\t69s\t95s\t4/6\nDevin\t72s\t185s\t5/5\nYou should try it for yourself\n\nToday we’ve opened access to @Computer via a public beta. You get 3 days/600 work minutes free to try it out and can bring your subscription with you.\n\nGo and try it out and let us know what you think!\n\nShip your next change from Slack.\n\nAdd it to Slack, then mention @Computer in any channel.\n\nAdd @Computer to Slack\nTalk to founders\n© 2026 OpenComputer\nDocs\nCompare\nGitHub\nComputer is typing\nInspect\nGrid\n\n@Computer\n\n@Computer",
+  "footage": [
+    {
+      "scene": "s1",
+      "query": "developer looking at monitor clock",
+      "file": "footage/developer-looking-at-monitor-clock-pixabay-7549.mp4",
+      "id": "pixabay-7549",
+      "page": "https://pixabay.com/videos/id-7549/",
+      "author": "PIRO4D",
+      "tags": "clock, clockwork, time, time display, clock face, pointer, analog clock",
+      "duration": 10,
+      "width": 1718,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2017/01/27/7549-201442276_large.mp4"
+    },
+    {
+      "scene": "s3",
+      "query": "programmer typing in chat app",
+      "file": "footage/programmer-typing-in-chat-app-pixabay-117.mp4",
+      "id": "pixabay-117",
+      "page": "https://pixabay.com/videos/id-117/",
+      "author": "Coverr-Free-Footage",
+      "tags": "notebook, laptop, blur, home office, typing, writing, programming, developer, programmer, fingers, hands, mobile, electronics, device",
+      "duration": 13,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2015/08/08/117-135736418_large.mp4"
+    },
+    {
+      "scene": "s7",
+      "query": "frustrated developer at desk",
+      "file": "footage/frustrated-developer-at-desk-pixabay-232538.mp4",
+      "id": "pixabay-232538",
+      "page": "https://pixabay.com/videos/id-232538/",
+      "author": "Darioguzben",
+      "tags": "keyboard, writing, digital, technology, desk, hardware, job, electronics, computing",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2024/09/21/232538_large.mp4"
+    }
+  ]
+}

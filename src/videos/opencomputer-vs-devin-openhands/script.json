@@ -1,0 +1,225 @@
+{
+  "slug": "opencomputer-vs-devin-openhands",
+  "format": "explainer",
+  "topic": "Tự host OpenComputer trên VPS: AI kỹ sư lập trình mã nguồn mở thay thế Devin, so sánh với OpenHands",
+  "title": "Mở 4 PR trong 56 giây: OpenComputer thay thế Devin?",
+  "caption": "Tự host AI coding agent OpenComputer trên VPS đơn lẻ: nhanh hơn Devin 3,3 lần và so sánh với OpenHands.",
+  "hashtags": [
+    "#opencomputer",
+    "#openhands",
+    "#selfhosted",
+    "#laptrinh",
+    "#devops"
+  ],
+  "musicPrompt": "Fast-paced tech synthwave with driving bassline, clean arpeggio pulses, electronic groove, modern developer vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy bass",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth",
+        "fast arpeggio",
+        "steady beat"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s7",
+      "styles": [
+        "intense electronic",
+        "sharp rhythm",
+        "high energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "resolving synth",
+        "triumphant",
+        "clean finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/diggerhq/opencomputer",
+    "https://github.com/OpenHands/OpenHands-Cloud",
+    "https://github.com/OpenHands/OpenHands",
+    "https://opencomputer.dev/blog/cloud-agents-as-fast-as-local/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Mở 4 PR chỉ mất 56 giây, nhanh hơn Devin 3,3 lần, anh em tin nổi không?",
+      "headline": "56 giây mở 4 PR",
+      "lines": [
+        "OpenComputer: 56s (CI xanh)",
+        "Devin: 185s"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": "developer looking at monitor clock"
+    },
+    {
+      "id": "s2",
+      "text": "[impressed] Đó là benchmark thực tế của OpenComputer, dự án mã nguồn mở chuẩn Apache-2.0 thay thế trực tiếp Devin.",
+      "headline": "Mã nguồn mở Apache-2.0",
+      "lines": [
+        "OpenComputer tự host",
+        "Thay thế Devin độc quyền"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Thường thì cloud agent phản hồi rất chậm, còn OpenComputer thì cho anh em tag trực tiếp a-còng Computer ngay trong Slack.",
+      "headline": "Lập trình qua Slack",
+      "lines": [
+        "Tag @Computer vào task",
+        "Tự code và đẩy Pull Request"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": "programmer typing in chat app"
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Toàn bộ kiến trúc chạy gọn trên một VM duy nhất, nên anh em chỉ cần cấu hình mạng outbound-only là kiểm soát được an toàn.",
+      "headline": "Chạy trên 1 VM duy nhất",
+      "lines": [
+        "Một máy ảo Linux đơn lẻ",
+        "Khóa mạng outbound-only"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Cổng kết nối Calvin sẽ đón sự kiện Slack, kích hoạt Claude Code hoặc Codex và cô lập từng phiên bằng rootless Podman.",
+      "headline": "Calvin Gateway và Podman",
+      "lines": [
+        "Gateway Calvin bắt sự kiện Slack",
+        "Mỗi session cô lập bằng rootless Podman"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Tức là trạng thái lưu thẳng vào đĩa rồi đồng bộ Git, lại còn cho anh em mang tài khoản ChatGPT hoặc Codex cá nhân vào dùng.",
+      "headline": "Dùng subscription cá nhân",
+      "lines": [
+        "Lưu trạng thái vào Git",
+        "Tự mang gói ChatGPT / Codex"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[curious] Nhìn sang OpenHands, dù bản lõi là MIT, nhưng bản OpenHands-Cloud lại dùng giấy phép Polyform giới hạn 30 ngày thử nghiệm.",
+      "headline": "Rào cản bản quyền OpenHands",
+      "lines": [
+        "OpenHands core: MIT License",
+        "OpenHands-Cloud: Polyform 30 ngày/năm"
+      ],
+      "commands": [],
+      "repos": [
+        "OpenHands/OpenHands",
+        "OpenHands/OpenHands-Cloud"
+      ],
+      "footage": "frustrated developer at desk"
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Còn nếu tự chạy Agent Canvas không qua sandbox, agent sẽ có toàn quyền can thiệp vào toàn bộ hệ thống tệp của máy chủ.",
+      "headline": "Cảnh báo bảo mật Agent Canvas",
+      "lines": [
+        "Chạy thẳng không sandbox",
+        "AI có full quyền trên filesystem"
+      ],
+      "commands": [],
+      "repos": [
+        "OpenHands/OpenHands"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Vì vậy anh em bắt buộc phải chạy qua Docker sandbox để cô lập từng phiên làm việc của OpenHands.",
+      "headline": "Chạy OpenHands qua Docker",
+      "lines": [
+        "Cô lập runtime trong Docker",
+        "Tránh xung đột quyền host"
+      ],
+      "commands": [
+        "npm install -g @openhands/agent-canvas",
+        "OH_CONVERSATION_RUNTIME=docker agent-canvas"
+      ],
+      "repos": [
+        "OpenHands/OpenHands"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[impressed] Thế nên OpenComputer nổi bật hẳn vì vừa mở Apache-2.0, vừa đạt thời gian push code lần đầu chỉ mất 24 giây.",
+      "headline": "First Push chỉ 24 giây",
+      "lines": [
+        "OpenComputer: 24 giây",
+        "Trung bình 4 cloud agent: 62 giây"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Lưu video lại để tự dựng trên VPS và follow kênh nhé, liệu bot của anh em có mở PR nhanh hơn 56 giây không?",
+      "headline": "Lưu video và thử ngay",
+      "lines": [
+        "Tự host coding agent",
+        "Follow kênh để cập nhật"
+      ],
+      "commands": [],
+      "repos": [
+        "diggerhq/opencomputer"
+      ],
+      "footage": ""
+    }
+  ]
+}
