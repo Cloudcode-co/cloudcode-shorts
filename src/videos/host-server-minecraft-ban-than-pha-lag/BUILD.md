@@ -1,0 +1,3 @@
+A group-chat meme short about hosting a Minecraft server that a friend's TNT farm brings down: messages, typing dots, monitor stats, an SSH terminal that never answers, and GIPHY reactions, all over a dark gaming-desk backdrop. The video is silent and captioned by the chat itself, with chapter cards on the hook, the ten-minute mark, the RAM spike, and the group turning on the admin.
+
+In QA I moved the header gradient behind the message thread so the "Mạnh mồm gáy trên Discord" bubble and other scrolled messages stay fully readable, and added the group-chat header and input bar to the s3 drop slate so every chat scene keeps the same phone layout.

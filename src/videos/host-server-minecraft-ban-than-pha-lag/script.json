@@ -1,0 +1,112 @@
+{
+  "slug": "host-server-minecraft-ban-than-pha-lag",
+  "format": "meme",
+  "topic": "Tự host server Minecraft cho bạn bè",
+  "title": "Khi bạn tự tin mở server Minecraft cho hội bạn thân",
+  "caption": "Tự tin mở server bao mượt xong gặp ngay mấy con báo làm farm TNT. Anh em từng bị sập server kiểu này chưa?",
+  "hashtags": [
+    "#minecraftvietnam",
+    "#serverminecraft",
+    "#homelabvn",
+    "#laptrinhvien",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Playful quirky comedic plucks building into chaotic frantic accordion and circus fail trombone, meme energy, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "playful",
+        "bouncy",
+        "confident",
+        "quirky pizzicato"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "chaotic",
+        "fast tempo"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "dramatic pause",
+        "big crash",
+        "circus fail"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "sad flute",
+        "clown music",
+        "funny defeat"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Tự tin thuê con VPS giá rẻ mở server Minecraft rủ đám bạn thân vào quẩy",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing headphones",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Mạnh mồm gáy trên Discord server tao tối ưu Paper bao mượt không giật lag",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing smug",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Thằng bạn thân vừa vào đúng mười phút đã dựng xong máy nhân bản TNT và farm mía nghìn block",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat wide eyes",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "RAM nhảy vọt lên 99%, TPS tụt thẳng từ 20 về 0.5 rồi đơ toàn tập",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic fast",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Cả nhóm quay ra chửi admin lùa gà trong khi terminal SSH còn éo thèm phản hồi",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying facepalm",
+      "place": "bedroom at night computer"
+    }
+  ]
+}

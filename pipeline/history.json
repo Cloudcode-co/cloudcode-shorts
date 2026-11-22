@@ -721,5 +721,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 6
+  },
+  {
+    "slug": "host-server-minecraft-ban-than-pha-lag",
+    "topic": "Tự host server Minecraft cho bạn bè",
+    "format": "chat",
+    "date": "2026-11-22",
+    "direction": "chat-thread",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 2
   }
 ]
