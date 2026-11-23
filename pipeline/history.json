@@ -754,5 +754,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 1
+  },
+  {
+    "slug": "unkernel-linux-webassembly",
+    "topic": "Trải nghiệm unkernel trên Linux: Chạy nhân Linux biên dịch sang WebAssembly khởi động dưới 1 giây trên web, so sánh với v86",
+    "format": "explainer",
+    "date": "2026-11-23",
+    "direction": "ops-console",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 1
   }
 ]

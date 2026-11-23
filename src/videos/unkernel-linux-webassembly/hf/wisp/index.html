@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      #root {
+        position: absolute; inset: 0; overflow: hidden;
+        background-color: #06110d;
+      }
+      #bg {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(29,59,47,0.22) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(29,59,47,0.22) 1px, transparent 1px);
+        background-size: 72px 72px;
+      }
+      .rail {
+        position: absolute; left: 103px; width: 777px; height: 1px;
+        background: #1d3b2f; transform-origin: left center;
+      }
+      #scan {
+        position: absolute; left: 103px; width: 777px; height: 1px;
+        background: #5cf2b4; opacity: 0;
+      }
+      #routes { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      #routes path { fill: none; stroke: #2c7d5e; stroke-width: 2; }
+      #bus { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+      #busline { stroke: #5cf2b4; stroke-width: 4; }
+      .flow { stroke: #06110d; stroke-width: 4; stroke-dasharray: 3 21; }
+      #sockets { position: absolute; left: 110px; top: 600px; width: 190px; height: 476px; }
+      .tile {
+        position: absolute; left: 0; width: 190px; height: 66px;
+        background: #0a1b15; border: 1px solid #1d3b2f; border-left: 3px solid #5cf2b4;
+        display: flex; align-items: center; gap: 12px; padding: 0 16px;
+        font-family: "JetBrains Mono", monospace; font-size: 34px; color: #e9f6ef;
+        overflow: hidden;
+      }
+      .tile.udp { border-left-color: #ffb454; }
+      .lamp {
+        width: 12px; height: 12px; border-radius: 6px; background: #5cf2b4;
+        box-shadow: 0 0 10px #5cf2b499; flex: none;
+      }
+      .tile.udp .lamp { background: #ffb454; box-shadow: 0 0 10px #ffb45499; }
+      .tile .bar {
+        position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+        background: #5cf2b4; transform-origin: left center;
+      }
+      .tile.udp .bar { background: #ffb454; }
+      #packets { position: absolute; inset: 0; }
+      .packet {
+        position: absolute; width: 10px; height: 10px; border-radius: 5px;
+        background: #5cf2b4; box-shadow: 0 0 12px #5cf2b4; opacity: 0;
+      }
+      .packet.udp { background: #ffb454; box-shadow: 0 0 12px #ffb454; }
+      #wisp {
+        position: absolute; left: 400px; top: 775px; width: 190px; height: 190px;
+        border-radius: 18px; border: 1px solid #5cf2b4; background: #0f251c;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "JetBrains Mono", monospace; font-size: 54px; font-weight: 700;
+        color: #5cf2b4; letter-spacing: -0.02em;
+        box-shadow: 0 0 34px rgba(92,242,180,0.16);
+      }
+      #ws-label {
+        position: absolute; left: 596px; top: 718px;
+        font-family: "JetBrains Mono", monospace; font-size: 34px; color: #5cf2b4;
+      }
+      #browser-label {
+        position: absolute; left: 110px; top: 548px;
+        font-family: "JetBrains Mono", monospace; font-size: 34px; color: #7e9c8d;
+      }
+      #inet {
+        position: absolute; left: 700px; top: 780px; width: 170px;
+        display: flex; flex-direction: column; align-items: center; gap: 12px;
+      }
+      #inet svg { width: 150px; height: 150px; }
+      #inet .name {
+        font-family: "JetBrains Mono", monospace; font-size: 34px; color: #e9f6ef;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6.15" data-width="1080" data-height="1920" data-fps="60">
+      <div id="bg" class="clip" data-start="0" data-duration="6.15"></div>
+      <div id="rail-a" class="rail clip" data-start="0" data-duration="6.15" style="top: 536px"></div>
+      <div id="rail-b" class="rail clip" data-start="0" data-duration="6.15" style="top: 1300px"></div>
+      <div id="scan" class="clip" data-start="0" data-duration="6.15" style="top: 540px"></div>
+
+      <svg id="routes" class="clip" data-start="0" data-duration="6.15" viewBox="0 0 1080 1920">
+        <path class="path" d="M300 633 C350 633 360 870 400 870" stroke-dasharray="300" stroke-dashoffset="300" opacity="0" />
+        <path class="path" d="M300 715 C350 715 360 870 400 870" stroke-dasharray="300" stroke-dashoffset="300" opacity="0" />
+        <path class="path" d="M300 797 C350 797 360 870 400 870" stroke-dasharray="300" stroke-dashoffset="300" opacity="0" />
+        <path class="path" d="M300 879 C340 879 360 870 400 870" stroke-dasharray="300" stroke-dashoffset="300" opacity="0" />
+        <path class="path" d="M300 961 C350 961 360 870 400 870" stroke-dasharray="300" stroke-dashoffset="300" opacity="0" />
+        <path class="path" d="M300 1043 C350 1043 360 870 400 870" stroke-dasharray="300" stroke-dashoffset="300" opacity="0" />
+      </svg>
+
+      <div id="browser-label" class="clip" data-start="0" data-duration="6.15">browser</div>
+
+      <div id="sockets" class="clip" data-start="0" data-duration="6.15">
+        <div class="tile" style="top: 0"><span class="lamp"></span>tcp<span class="bar"></span></div>
+        <div class="tile udp" style="top: 82px"><span class="lamp"></span>udp<span class="bar"></span></div>
+        <div class="tile" style="top: 164px"><span class="lamp"></span>tcp<span class="bar"></span></div>
+        <div class="tile udp" style="top: 246px"><span class="lamp"></span>udp<span class="bar"></span></div>
+        <div class="tile" style="top: 328px"><span class="lamp"></span>tcp<span class="bar"></span></div>
+        <div class="tile udp" style="top: 410px"><span class="lamp"></span>udp<span class="bar"></span></div>
+      </div>
+
+      <div id="packets" class="clip" data-start="0" data-duration="6.15">
+        <div class="packet" style="left: 295px; top: 628px" data-dx="100" data-dy="237"></div>
+        <div class="packet udp" style="left: 295px; top: 710px" data-dx="100" data-dy="155"></div>
+        <div class="packet" style="left: 295px; top: 792px" data-dx="100" data-dy="73"></div>
+        <div class="packet udp" style="left: 295px; top: 874px" data-dx="100" data-dy="-9"></div>
+        <div class="packet" style="left: 295px; top: 956px" data-dx="100" data-dy="-91"></div>
+        <div class="packet udp" style="left: 295px; top: 1038px" data-dx="100" data-dy="-173"></div>
+      </div>
+
+      <div id="wisp" class="clip" data-start="0" data-duration="6.15">wisp</div>
+
+      <div id="ws-label" class="clip" data-start="0" data-duration="6.15">WebSocket</div>
+
+      <svg id="bus" class="clip" data-start="0" data-duration="6.15" viewBox="0 0 1080 1920">
+        <line id="busline" x1="590" y1="870" x2="700" y2="870" />
+        <line class="flow" x1="590" y1="870" x2="700" y2="870" />
+      </svg>
+
+      <div id="inet" class="clip" data-start="0" data-duration="6.15">
+        <svg viewBox="0 0 120 120" fill="none" stroke="#5cf2b4" stroke-width="2.5">
+          <circle cx="60" cy="60" r="46" />
+          <ellipse cx="60" cy="60" rx="20" ry="46" />
+          <ellipse cx="60" cy="60" rx="42" ry="16" />
+          <line x1="60" y1="14" x2="60" y2="106" />
+          <line x1="14" y1="60" x2="106" y2="60" />
+        </svg>
+        <span class="name">internet</span>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(".rail", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out", stagger: 0.14 }, 0.2);
+      tl.fromTo("#browser-label", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.4);
+      tl.fromTo(".tile", { x: -26, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.08 }, 0.5);
+      tl.fromTo(".tile .bar", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.out", stagger: 0.08 }, 1.0);
+
+      tl.fromTo("#scan", { opacity: 0 }, { opacity: 0.22, duration: 0.2 }, 1.1);
+      tl.fromTo("#scan", { y: 0 }, { y: 760, duration: 2.4, ease: "none", immediateRender: false }, 1.25);
+      tl.fromTo("#scan", { opacity: 0.22 }, { opacity: 0, duration: 0.4, immediateRender: false }, 3.55);
+
+      tl.fromTo("#wisp", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.6)" }, 2.3);
+
+      tl.fromTo(".path", { strokeDashoffset: 300, opacity: 0 }, { strokeDashoffset: 0, opacity: 1, duration: 0.65, ease: "power2.inOut", stagger: 0.07 }, 2.7);
+
+      const packets = document.querySelectorAll(".packet");
+      packets.forEach((p, i) => {
+        tl.fromTo(p, { x: 0, y: 0, opacity: 0 }, {
+          x: Number(p.dataset.dx), y: Number(p.dataset.dy), opacity: 1,
+          duration: 0.75, ease: "power1.in", repeat: 2, repeatDelay: 0.25,
+        }, 3.25 + i * 0.1);
+      });
+
+      tl.fromTo("#busline", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out", transformOrigin: "left center" }, 3.6);
+      tl.fromTo(".flow", { strokeDashoffset: 0 }, { strokeDashoffset: -72, duration: 0.9, ease: "none", repeat: 2 }, 4.05);
+
+      tl.fromTo("#ws-label", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 3.75);
+      tl.fromTo("#inet", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 3.95);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

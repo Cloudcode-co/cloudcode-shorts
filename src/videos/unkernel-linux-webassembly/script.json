@@ -1,0 +1,202 @@
+{
+  "slug": "unkernel-linux-webassembly",
+  "format": "explainer",
+  "topic": "Trải nghiệm unkernel trên Linux: Chạy nhân Linux biên dịch sang WebAssembly khởi động dưới 1 giây trên web, so sánh với v86",
+  "title": "Nhân Linux trên WebAssembly dưới 1 giây?",
+  "caption": "unkernel biên dịch trực tiếp nhân Linux sang WebAssembly với MMU thật, khởi động dưới một giây.",
+  "hashtags": [
+    "#webassembly",
+    "#unkernel",
+    "#linuxkernel",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "upbeat futuristic electronic tech beat with synth pulses and crisp digital percussion, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "clean bass",
+        "curious intro"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising synth",
+        "driving beat",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s5",
+      "styles": [
+        "punchy bassline",
+        "fast tempo",
+        "high energy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm synth",
+        "mellowing rhythm",
+        "smooth finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/pithings/unkernel",
+    "https://github.com/martin12333/browserPOSIX-discussion",
+    "https://unkernel.dev"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Nhân Linux đầy đủ chạy trên trình duyệt mà khởi động chưa tới một giây?",
+      "headline": "Linux trên web dưới 1 giây",
+      "lines": [
+        "Khởi động shell tức thì",
+        "Không cần server backend"
+      ],
+      "commands": [],
+      "repos": [
+        "pithings/unkernel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì các dự án như v86 phải giả lập cả máy tính x86 nên chạy rất chậm.",
+      "headline": "v86 giả lập toàn bộ phần cứng",
+      "lines": [
+        "Giả lập CPU x86 và thiết bị",
+        "Tốn tài nguyên phần cứng"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn unkernel biên dịch thẳng nhân Linux 7.x sang WebAssembly với MMU Sv39 thật.",
+      "headline": "Biên dịch thẳng sang WASM",
+      "lines": [
+        "Nhân Linux 7.x chính gốc",
+        "Hỗ trợ MMU Sv39 đầy đủ"
+      ],
+      "commands": [],
+      "repos": [
+        "pithings/unkernel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Tức là syscall, bộ lập lịch và ext4 chạy ở tốc độ WASM, chỉ ứng dụng aarch64 mới cần giả lập.",
+      "headline": "Kernel chạy tốc độ WASM",
+      "lines": [
+        "Syscall và ext4 nguyên bản",
+        "Chỉ giả lập user space aarch64"
+      ],
+      "commands": [],
+      "repos": [
+        "pithings/unkernel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Vì vậy chu kỳ fork chỉ tốn sáu mươi micro giây, nhanh hơn cả native trên máy thật.",
+      "headline": "Fork 60 µs nhanh hơn native",
+      "lines": [
+        "Native tốn khoảng 70 µs",
+        "qemu-system tốn 1.2 ms"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer coding terminal fast"
+    },
+    {
+      "id": "s6",
+      "text": "[cheerfully] Trình duyệt chỉ cần tải mười megabyte dữ liệu, và Alpine boot gọn trong bốn mươi tám megabyte RAM.",
+      "headline": "Tải 10 MB, tốn 48 MB RAM",
+      "lines": [
+        "Nhân chạm init sau 70 ms",
+        "Alpine sẵn sàng sau 0.3 s"
+      ],
+      "commands": [],
+      "repos": [
+        "pithings/unkernel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Do trình duyệt không mở được TCP thô, nên kết nối mạng được chuyển tiếp qua proxy Wisp.",
+      "headline": "Proxy mạng qua Wisp",
+      "lines": [
+        "Ghép nhiều socket qua WebSocket",
+        "Truy cập Internet trơn tru"
+      ],
+      "commands": [],
+      "repos": [
+        "MercuryWorkshop/wisp-protocol"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Muốn chạy thử ngay từ terminal, anh em chỉ cần gõ đúng một lệnh npx unkernel.",
+      "headline": "Chạy ngay với NPX",
+      "lines": [
+        "Khởi động Alpine tức thì",
+        "Mạng chạy qua host socket"
+      ],
+      "commands": [
+        "npx unkernel"
+      ],
+      "repos": [
+        "pithings/unkernel"
+      ],
+      "footage": "hands typing on mechanical keyboard"
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Dù vậy, tác vụ nặng CPU vẫn chậm hơn native và trình duyệt bắt buộc phải hỗ trợ JSPI.",
+      "headline": "Lưu ý về hiệu năng",
+      "lines": [
+        "Cần trình duyệt có JSPI",
+        "Tác vụ nặng CPU chậm hơn native"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để thử sau nhé! [curious] Liệu nhân Linux chạy trên web dưới một giây đã đủ tiện chưa?",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để vọc thử",
+        "Follow kênh để xem thêm mẹo dev"
+      ],
+      "commands": [],
+      "repos": [
+        "pithings/unkernel"
+      ],
+      "footage": ""
+    }
+  ]
+}
