@@ -1,0 +1,211 @@
+{
+  "slug": "self-host-pcapanalyzer-ai-wireshark",
+  "format": "explainer",
+  "topic": "Tự host PcapAnalyzer trên VPS: Phân tích file pcap và chẩn đoán sự cố mạng bằng AI, so sánh với Wireshark",
+  "title": "Mất bao nhiêu tiếng soi Wireshark khi server lỗi mạng?",
+  "caption": "Tự host PcapAnalyzer để AI và 27 bộ detector tự động chẩn đoán file pcap thay vì mò Wireshark thủ công.",
+  "hashtags": [
+    "#pcapanalyzer",
+    "#wireshark",
+    "#quantrimang",
+    "#devops",
+    "#laptrinh"
+  ],
+  "musicPrompt": "minimal pulsing synth bass with modern electronic tech textures, analytical cyber vibe, steady rhythm, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "mysterious",
+        "electronic pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady tech beat",
+        "synthesizer"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "high energy",
+        "bright synth",
+        "driving bass"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm synth",
+        "clean outro",
+        "ambient"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/sebaandrada-cell/PcapAnalyzer",
+    "https://github.com/mfscpayload-690/network-packet-analyzer-mock-UI",
+    "https://github.com/cirosantilli/china-dictatorship"
+  ],
+  "voiceId": "ueSxRO0nLF1bj93J2hVt",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Anh em mất bao nhiêu tiếng soi từng gói Wireshark khi server gặp sự cố?",
+      "headline": "Soi gói tin thủ công mất bao lâu?",
+      "lines": [
+        "Phân tích lưu lượng mạng",
+        "Hàng nghìn dòng packet rối mắt"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer debugging night"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì phải tự nhớ display filter rồi lội từng gói tin. Còn PcapAnalyzer tự chạy 27 bộ phát hiện lỗi ngay khi upload file.",
+      "headline": "Wireshark thủ công vs PcapAnalyzer",
+      "lines": [
+        "Thường thì: Tự viết bộ lọc, mò thủ công",
+        "PcapAnalyzer: 27 detector quét tự động",
+        "Hỗ trợ .pcap, .pcapng, gzip"
+      ],
+      "commands": [],
+      "repos": [
+        "sebaandrada-cell/PcapAnalyzer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Tức là nó tự bắt các lỗi TCP như tường lửa chặn SYN RST, bắt tay chậm, retransmission, hay đường truyền bị PMTUD black holes.",
+      "headline": "Bắt lỗi TCP và đường truyền",
+      "lines": [
+        "SYN -> RST (Firewall blocks)",
+        "Slow handshakes, retransmissions",
+        "PMTUD black holes, low MSS"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room flashing lights"
+    },
+    {
+      "id": "s4",
+      "text": "Các sự cố như DNS SERVFAIL, bão ARP, đến nguy cơ bảo mật như quét cổng và đăng nhập truyền văn bản rõ cũng bị phát hiện.",
+      "headline": "Quét dịch vụ mạng và bảo mật",
+      "lines": [
+        "DNS SERVFAIL, ARP storms",
+        "Port scans & sweeps",
+        "Cleartext logins (FTP, HTTP Basic)"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[curious] Nó còn đánh giá chất lượng file capture, cảnh báo nếu gói tin bị trùng khung do mirror port hay bắt thiếu một chiều.",
+      "headline": "Cảnh báo chất lượng bắt gói",
+      "lines": [
+        "Trùng khung do mirror port",
+        "Chỉ thấy traffic một chiều",
+        "Gói tin bị cắt cụt (truncated)"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] Anh em có thể gắn Anthropic API key để AI điều tra chuyên sâu và trích dẫn số gói tin làm bằng chứng.",
+      "headline": "Điều tra gói tin bằng AI",
+      "lines": [
+        "Dùng Anthropic API key cá nhân",
+        "Chỉ rõ số thứ tự packet chứng minh",
+        "Hỏi đáp chi tiết theo ngữ cảnh"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "ai network cybersecurity"
+    },
+    {
+      "id": "s7",
+      "text": "[thoughtful] AI chỉ nhận metadata từ công cụ lọc chứ không đọc cả file pcap, và toàn bộ dữ liệu tự xóa sau sáu mươi phút không hoạt động.",
+      "headline": "Bảo mật dữ liệu khi phân tích",
+      "lines": [
+        "AI chỉ nhận packet metadata",
+        "Không gửi toàn bộ file pcap",
+        "Xóa sau 60 phút không hoạt động"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Nếu chưa có API key, anh em vẫn dùng được chế độ demo miễn phí để xem trước toàn bộ quy trình chẩn đoán.",
+      "headline": "Chế độ demo hoàn toàn miễn phí",
+      "lines": [
+        "Không cần API key",
+        "Mô phỏng đầy đủ luồng phân tích",
+        "Xem kết quả mẫu trực quan"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Để tự dựng trên VPS cá nhân bằng Docker, anh em chỉ cần gõ đúng ba dòng lệnh này:",
+      "headline": "Cài đặt PcapAnalyzer",
+      "lines": [],
+      "commands": [
+        "git clone https://github.com/sebaandrada-cell/PcapAnalyzer.git",
+        "cd PcapAnalyzer",
+        "./start.sh"
+      ],
+      "repos": [
+        "sebaandrada-cell/PcapAnalyzer"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[casually] Mặc định hệ thống chỉ bind vào một hai bảy chấm không chấm không chấm một, nên anh em cần reverse proxy có xác thực trước khi mở ra ngoài.",
+      "headline": "Lưu ý cấu hình truy cập",
+      "lines": [
+        "Mặc định bind: 127.0.0.1",
+        "Token ngẫu nhiên lưu trong .env",
+        "Cần Reverse Proxy có xác thực"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "sysadmin typing terminal"
+    },
+    {
+      "id": "s11",
+      "text": "[cheerfully] Lưu video lại để dựng khi debug mạng và bấm theo dõi kênh nhé! Anh em mất bao nhiêu tiếng soi Wireshark khi server gặp sự cố?",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để tự host sau",
+        "Follow để đón nhận công cụ mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

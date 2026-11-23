@@ -732,5 +732,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 2
+  },
+  {
+    "slug": "self-host-pcapanalyzer-ai-wireshark",
+    "topic": "Tự host PcapAnalyzer trên VPS: Phân tích file pcap và chẩn đoán sự cố mạng bằng AI, so sánh với Wireshark",
+    "format": "brief",
+    "date": "2026-11-23",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 5
   }
 ]
