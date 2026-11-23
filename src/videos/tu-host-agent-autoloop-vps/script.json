@@ -1,0 +1,194 @@
+{
+  "slug": "tu-host-agent-autoloop-vps",
+  "format": "explainer",
+  "topic": "Tự host agent-autoloop trên VPS: Vận hành CLI Agent chạy ngầm 24/7 với cơ chế Human-in-the-Loop, thay thế treo tmux thủ công",
+  "title": "Treo tmux canh CLI agent chạy ngầm cả đêm?",
+  "caption": "Tự host agent-autoloop giải phóng anh em khỏi cảnh canh terminal cho Claude Code hay Codex chạy ngầm.",
+  "hashtags": [
+    "#agentautoloop",
+    "#claudecode",
+    "#devops",
+    "#laptrinh",
+    "#tudonghoa"
+  ],
+  "musicPrompt": "Minimal tech house beat with rhythmic synth pulses, punchy clean bassline and modern hacker vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth",
+        "rhythmic bass",
+        "steady groove"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s5",
+      "styles": [
+        "high energy",
+        "confident",
+        "melodic synth"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "smooth fade",
+        "warm groove"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/KKKKhazix/agent-autoloop"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Anh em vẫn treo tmux rồi thức đêm canh terminal cho Claude Code chạy à?",
+      "headline": "Canh terminal cả đêm?",
+      "lines": [
+        "Treo tmux thủ công",
+        "Dễ đứt phiên giữa chừng"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": "developer working late at night"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì đóng terminal là việc đứt gánh, còn agent-autoloop thì biến các CLI agent thành worker chạy ngầm độc lập.",
+      "headline": "Tự động hóa CLI Agent",
+      "lines": [
+        "Không cần túc trực terminal",
+        "Hỗ trợ Claude Code & Codex"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[thoughtful] Nhân của nó chạy zero runtime dependency, không gửi request ra ngoài mà chỉ nhận việc theo luật trong rules chấm json.",
+      "headline": "Zero runtime dependency",
+      "lines": [
+        "Không phụ thuộc thư viện ngoài",
+        "Điều phối qua rules.json"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": "server room blinking lights"
+    },
+    {
+      "id": "s4",
+      "text": "[excited] Đang chạy mà gặp chỗ cần anh em duyệt, tiến trình agent sẽ thoát hẳn về zero phần trăm CPU và không tốn token.",
+      "headline": "Nghỉ chờ duyệt: 0% CPU",
+      "lines": [
+        "Tiến trình tự ngắt khi chờ duyệt",
+        "Không hao phí token khi treo"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[impressed] Nó đẩy ngay thông báo sang Discord, Slack hoặc Feishu. Anh em bấm chọn xong, nó tự nạp lại đúng session cũ để làm nốt.",
+      "headline": "Human-in-the-Loop liền mạch",
+      "lines": [
+        "Nhận thẻ duyệt qua webhook",
+        "Tự nối lại context cũ"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": "person checking notification on phone"
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Nếu agent trả về JSON lỗi, hệ thống chỉ yêu cầu viết lại câu trả lời chứ không chạy lại toàn bộ tác vụ. Kèm luôn bộ ngắt mạch tám tầng chống lặp.",
+      "headline": "Cơ chế chống lỗi & vòng lặp",
+      "lines": [
+        "Chỉ retry đoạn JSON sai",
+        "Ngắt mạch tối đa 8 tầng"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[cheerfully] Yêu cầu máy có Node 24 với Git, anh em kéo về bằng đúng một dòng lệnh cURL này:",
+      "headline": "Cài đặt một dòng lệnh",
+      "lines": [
+        "Yêu cầu: Node 24+ & Git"
+      ],
+      "commands": [
+        "curl -fsSL https://raw.githubusercontent.com/KKKKhazix/agent-autoloop/main/install.sh | sh"
+      ],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Cài xong, gõ ngay lệnh try để thử tương tác, rồi dùng lệnh answer và status để kiểm tra tiến độ.",
+      "headline": "Test thử luồng hoạt động",
+      "lines": [
+        "Thử nghiệm luồng hỏi đáp",
+        "Kiểm tra tiến độ tức thì"
+      ],
+      "commands": [
+        "agent-autoloop try",
+        "agent-autoloop answer 1 2",
+        "agent-autoloop status"
+      ],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Lưu video lại để setup cho VPS ngay nhé, follow kênh để không bỏ lỡ mẹo tự động hóa tiếp theo!",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để setup",
+        "Follow để đón tip mới"
+      ],
+      "commands": [],
+      "repos": [
+        "KKKKhazix/agent-autoloop"
+      ],
+      "footage": ""
+    }
+  ]
+}

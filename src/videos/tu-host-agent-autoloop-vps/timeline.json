@@ -1,0 +1,80 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 5.027
+    },
+    "s2": {
+      "start": 5.027,
+      "length": 7.431
+    },
+    "s3": {
+      "start": 12.458,
+      "length": 8.136
+    },
+    "s4": {
+      "start": 20.594,
+      "length": 7.431
+    },
+    "s5": {
+      "start": 28.025,
+      "length": 8.136
+    },
+    "s6": {
+      "start": 36.161,
+      "length": 9.102
+    },
+    "s7": {
+      "start": 45.263,
+      "length": 7
+    },
+    "s8": {
+      "start": 52.263,
+      "length": 6.778
+    },
+    "s9": {
+      "start": 59.041,
+      "length": 8.042
+    }
+  },
+  "total": 67.083,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 12.46,
+      "scenes": [
+        "s1",
+        "s2"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 12.46,
+      "length": 15.57,
+      "scenes": [
+        "s3",
+        "s4"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "start": 28.02,
+      "length": 24.24,
+      "scenes": [
+        "s5",
+        "s6",
+        "s7"
+      ]
+    },
+    {
+      "name": "Outro",
+      "start": 52.26,
+      "length": 14.82,
+      "scenes": [
+        "s8",
+        "s9"
+      ]
+    }
+  ]
+}

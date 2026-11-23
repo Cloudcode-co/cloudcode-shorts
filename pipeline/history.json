@@ -765,5 +765,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 1
+  },
+  {
+    "slug": "tu-host-agent-autoloop-vps",
+    "topic": "Tự host agent-autoloop trên VPS: Vận hành CLI Agent chạy ngầm 24/7 với cơ chế Human-in-the-Loop, thay thế treo tmux thủ công",
+    "format": "story",
+    "date": "2026-11-23",
+    "direction": "documentary",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
