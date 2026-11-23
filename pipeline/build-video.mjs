@@ -74,7 +74,8 @@ const snapshot = () =>
   new Map(
     readdirSync(DIR, { recursive: true })
       .map((f) => `${DIR}/${String(f).replaceAll("\\", "/")}`)
-      .filter((f) => /\.tsx?$/.test(f))
+      // Also the HyperFrames projects under hf/, not their .hyperframes caches.
+      .filter((f) => /\.tsx?$/.test(f) || (/\/hf\/.+\.(html|css|js)$/.test(f) && !f.includes("/.hyperframes/")))
       .map((f) => [f, readFileSync(f, "utf8")]),
   );
 const restore = (files) => {
@@ -249,8 +250,17 @@ let agent = null;
 // failed a whole run in the QA stills.
 const rendersAlone = () => {
   const bad = [...snapshot()].find(([, text]) => /<Composition\b|registerRoot\(/.test(text));
-  if (bad) console.log(`${bad[0]} mounts its own <Composition> or root; the kit's Root.tsx does that.`);
-  return !bad;
+  if (bad) {
+    console.log(`${bad[0]} mounts its own <Composition> or root; the kit's Root.tsx does that.`);
+    return false;
+  }
+  // An <HfClip> plays an MP4 HyperFrames renders from src/videos/<slug>/hf/:
+  // a project that does not render would fail the whole video later.
+  if (existsSync(`${DIR}/hf`) && !sh("node", ["scripts/hyperframes.mjs", slug])) {
+    console.log("A HyperFrames clip does not render.");
+    return false;
+  }
+  return true;
 };
 // Tries one builder; ok when it left a build that typechecks, else its API error.
 const tryAgent = (next) => {

@@ -29,4 +29,6 @@ project's videos. Each folder keeps its source's license.
 
 ## Written for this project
 
+`html-scenes` is original to this repo; its HyperFrames format notes follow the HyperFrames docs (heygen-com/hyperframes).
+
 `creator-layouts` is original to this repo: layouts measured from a creator's Instagram reel (facebook.com/share/r/19j1nMbLEP), with no code, images or assets copied from it.

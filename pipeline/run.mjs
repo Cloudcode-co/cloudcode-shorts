@@ -154,6 +154,9 @@ try {
   slug = made.slug;
   const { build } = made;
   const script = readJson(`src/videos/${slug}/script.json`);
+  // HyperFrames clips are not committed: a re-render of an older video makes
+  // them again from their projects.
+  run("node", ["scripts/hyperframes.mjs", slug]);
   run("node", ["scripts/qa-stills.mjs", slug]);
 
   const history = readJson("pipeline/history.json", []);

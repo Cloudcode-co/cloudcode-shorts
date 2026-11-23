@@ -18,6 +18,7 @@
     "@remotion/renderer": "4.0.540",
     "@remotion/three": "4.0.540",
     "@remotion/transitions": "4.0.540",
+    "gsap": "3.15.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "remotion": "4.0.540",
@@ -30,6 +31,7 @@
     "@types/three": "0.187.0",
     "@types/web": "0.0.166",
     "eslint": "10.12.0",
+    "hyperframes": "0.9.84",
     "prettier": "3.8.1",
     "typescript": "5.9.3"
   },
@@ -44,6 +46,7 @@
     "sfx": "node --env-file=.env scripts/sfx.mjs",
     "qa": "node scripts/qa-stills.mjs",
     "footage": "node pipeline/footage.mjs",
+    "hyperframes": "node scripts/hyperframes.mjs",
     "image": "node pipeline/images.mjs",
     "meme": "node pipeline/memes.mjs",
     "satellite": "node pipeline/satellite.mjs",

@@ -20,3 +20,6 @@ worker/node_modules
 
 # Satellite tiles, fetched again from facts.json (pipeline/satellite.mjs)
 public/videos/*/satellite/
+# HyperFrames clips, rendered again from src/videos/<slug>/hf/ (scripts/hyperframes.mjs)
+public/videos/*/hf/
+src/videos/*/hf/*/.hyperframes/

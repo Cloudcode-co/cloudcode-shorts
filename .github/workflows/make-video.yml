@@ -81,6 +81,8 @@ jobs:
         run: |
           npm install -g @anthropic-ai/claude-code
           npx remotion browser ensure
+          # HyperFrames renders a video's HTML clips (scripts/hyperframes.mjs).
+          npx hyperframes browser ensure
           # Edge TTS reads the voiceover when ElevenLabs refuses (scripts/voiceover.mjs).
           pipx install edge-tts
           # uv runs scripts/beats.py (librosa), which measures a beat-cut track.
