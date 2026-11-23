@@ -743,5 +743,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 5
+  },
+  {
+    "slug": "fast-anything-vs-rust-anything",
+    "topic": "Tối ưu hiệu năng backend trên VPS: Fast-Anything vs rust-anything – Viết lại 5% code nghẽn hay rewrite toàn bộ bằng Rust?",
+    "format": "news",
+    "date": "2026-11-23",
+    "direction": "news-desk",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 1
   }
 ]

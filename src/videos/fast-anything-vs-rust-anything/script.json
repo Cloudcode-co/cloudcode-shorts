@@ -1,0 +1,224 @@
+{
+  "slug": "fast-anything-vs-rust-anything",
+  "format": "explainer",
+  "topic": "Tối ưu hiệu năng backend trên VPS: Fast-Anything vs rust-anything – Viết lại 5% code nghẽn hay rewrite toàn bộ bằng Rust?",
+  "title": "Viết lại 5% code nghẽn hay rewrite cả backend sang Rust?",
+  "caption": "Tối ưu backend trên VPS cùng fast-anything và rust-anything mà không sợ sai logic.",
+  "hashtags": [
+    "#backend",
+    "#rustlang",
+    "#laptrinh",
+    "#devops",
+    "#congnghe"
+  ],
+  "musicPrompt": "Energetic modern tech synth beats, pulsating bass, subtle arpeggios, confident dynamic rhythm, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth",
+        "fast tempo",
+        "focused"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s7",
+      "styles": [
+        "confident",
+        "triumphant",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm",
+        "resolving",
+        "clean beat"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/EL4CTEO/fast-anything",
+    "https://github.com/erkamyaman/rust-anything",
+    "https://github.com/therealaleph/MasterHttpRelayVPN-RUST"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Sao phải đập đi viết lại cả backend khi chỉ năm phần trăm code gây nghẽn?",
+      "headline": "Viết lại 5% hay toàn bộ?",
+      "lines": [
+        "Chỉ 5% code thực sự gây nghẽn",
+        "Có nên rewrite cả backend sang Rust?"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì anh em rewrite cả dự án sang Rust mất hàng tháng, vừa lâu vừa dễ sinh lỗi logic mới.",
+      "headline": "Cái giá của rewrite toàn bộ",
+      "lines": [
+        "Mất hàng tháng chuyển đổi",
+        "Biên dịch lâu, tốn dung lượng",
+        "Dễ phát sinh lỗi logic ngầm"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated programmer coding screen"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] Còn fast-anything thì khác, nó tự profile để tìm đúng hàm nặng nhất trong ứng dụng Python hay Node.js của anh em.",
+      "headline": "fast-anything: Khoanh vùng điểm nghẽn",
+      "lines": [
+        "Tự động scan và profiling",
+        "Xác định đúng vòng lặp tốn CPU",
+        "Giữ nguyên 95% codebase cũ"
+      ],
+      "commands": [],
+      "repos": [
+        "EL4CTEO/fast-anything"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Tác vụ lọc trùng mờ trên Python giảm từ bốn phẩy chín mươi mốt giây xuống bốn mươi hai mili giây, nhanh hơn một trăm mười sáu lần!",
+      "headline": "Tăng tốc lên tới 116 lần",
+      "lines": [
+        "Python dedupe 700 tên:",
+        "4.91s ➔ 42ms (116x)",
+        "TypeScript dedupe 2.000 tên:",
+        "3.11s ➔ 155ms (20x)"
+      ],
+      "commands": [],
+      "repos": [
+        "EL4CTEO/fast-anything"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[thoughtful] Tức là mỗi hàm chỉ tạo thành một crate duy nhất, biên dịch vài giây và tự kiểm thử năm trăm lần gọi thực tế cùng các trường hợp biên.",
+      "headline": "Kiểm thử 500 edge cases",
+      "lines": [
+        "One-function crate: build vài giây",
+        "Replay 500 lần gọi thực tế",
+        "Tự test NaN, vô cùng, text non-ASCII"
+      ],
+      "commands": [],
+      "repos": [
+        "EL4CTEO/fast-anything"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Vì vậy nếu chi phí gọi qua Rust mà tốn hơn thời gian tiết kiệm được, fast-anything sẽ từ chối kích hoạt ngay.",
+      "headline": "Tránh bẫy FFI Call Overhead",
+      "lines": [
+        "Chỉ kích hoạt khi thực sự nhanh hơn",
+        "Loại bỏ chi phí switch ngữ cảnh FFI",
+        "Tắt mở linh hoạt qua biến môi trường"
+      ],
+      "commands": [],
+      "repos": [
+        "EL4CTEO/fast-anything"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[curious] Nhưng nếu anh em muốn chuyển toàn bộ server sang Rust từng bước một thì sao? [excited] Khi đó hãy dùng rust-anything.",
+      "headline": "rust-anything: Rewrite từng bước",
+      "lines": [
+        "Chuyển đổi từng phần ứng dụng",
+        "Kiểm thử hành vi byte-for-byte",
+        "Tiến tới pure Rust bằng app lift"
+      ],
+      "commands": [],
+      "repos": [
+        "erkamyaman/rust-anything"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[impressed] Điển hình như json-server chuyển hẳn sang Rust, thời gian phản hồi đầu tiên giảm từ hơn tám mươi mili giây xuống chỉ còn tám đến mười mili giây.",
+      "headline": "Khởi động và phản hồi tức thì",
+      "lines": [
+        "json-server từ 79-85ms ➔ 8-10ms",
+        "RAM idle từ 74MB ➔ 3.5MB",
+        "Chạy binary thuần không cần runtime"
+      ],
+      "commands": [],
+      "repos": [
+        "erkamyaman/rust-anything"
+      ],
+      "footage": "server room glowing lights"
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Cả hai công cụ đều không tự dịch code mà nhờ coding agent như Claude Code viết, còn chúng đóng vai trò đo lường và xác minh.",
+      "headline": "AI viết, công cụ kiểm chứng",
+      "lines": [
+        "Coding agent viết code Rust",
+        "Công cụ đóng vai trò verify & gate",
+        "Cần chạy trên staging để tránh side-effect"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Anh em cài đặt qua npm hoặc cargo rồi chỉ định file khởi chạy dự án.",
+      "headline": "Cài đặt và sử dụng",
+      "lines": [
+        "Cài đặt một lệnh duy nhất",
+        "Yêu cầu sẵn Rust toolchain"
+      ],
+      "commands": [
+        "npm i -g @el4cteo/fast-anything",
+        "fast-anything go --agent claude -- python app.py"
+      ],
+      "repos": [
+        "EL4CTEO/fast-anything"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Lưu video lại để tối ưu VPS ngay và theo dõi kênh nhé! Vậy anh em sẽ viết lại toàn bộ hay chỉ năm phần trăm?",
+      "headline": "Tối ưu ngay trên VPS",
+      "lines": [
+        "Lưu video để áp dụng sau",
+        "Follow để đón xem mẹo backend tiếp theo!"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}
