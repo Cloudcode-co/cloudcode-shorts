@@ -18,8 +18,9 @@
 // to skip Claude; STYLE (an art direction id or name, or free text); NOTES;
 // REVIEW=off skips the review round.
 // Prints a JSON line {direction, pacing, built, costUsd} last.
-import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { spawn, spawnSync } from "node:child_process";
+import { createInterface } from "node:readline";
+import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { readJson, report } from "./lib.mjs";
 import { pickDirection } from "./direction.mjs";
 import { reviewVideo } from "./review-video.mjs";
@@ -204,45 +205,96 @@ const changedSince = (files) => {
 };
 
 // Runs one builder on `text` in this checkout; what it changed is on disk.
-const runAgent = (next, text) => {
-  const result = spawnSync(
-    process.env.CLAUDE_BIN || "claude",
-    [
-      "-p",
-      text,
-      ...next.args,
-      "--permission-mode",
-      "dontAsk",
-      "--allowedTools",
-      allowed.join(","),
-      "--disallowedTools",
-      denied.join(","),
-      "--output-format",
-      "json",
-    ],
-    {
-      env: { ...baseEnv, ...next.env },
-      encoding: "utf8",
-      maxBuffer: 64 * 1024 * 1024,
-      timeout: 90 * 60 * 1000,
-    },
-  );
-  try {
-    const out = JSON.parse(result.stdout.trim().split("\n").pop());
-    // Only Anthropic's own price is real; the gateway bills separately.
-    const cost = next.id === "claude" ? out.total_cost_usd ?? 0 : 0;
-    costUsd += cost;
-    console.log(`${next.label}: ${out.terminal_reason ?? out.subtype ?? "done"}, ${out.num_turns ?? "?"} turns, $${cost.toFixed(2)}`);
-    for (const d of out.permission_denials ?? []) {
-      console.log(`${next.label} was denied ${d.tool_name}: ${JSON.stringify(d.tool_input).slice(0, 200)}`);
-    }
-    if (out.result) console.log(out.result.slice(-1500));
-    return { error: out.is_error === true || out.terminal_reason === "api_error", text: String(out.result ?? "") };
-  } catch {
-    console.log(result.error?.message ?? "", result.stdout?.slice(-3000), result.stderr?.slice(-3000));
-    return { error: true, text: `${result.stdout ?? ""} ${result.stderr ?? ""}` };
-  }
+// Every builder run's full event stream, kept as a workflow artifact
+// (out/build-logs/) for reading the model's reasoning after the run.
+let runCount = 0;
+const LOGS = "out/build-logs";
+const short = (v, n) => {
+  const t = String(v ?? "").replace(/\s+/g, " ").trim();
+  return t.length > n ? t.slice(0, n) + "…" : t;
 };
+// One line per tool call: what it touched, not its whole input.
+const toolLine = (name, input = {}) => {
+  const target = input.file_path ?? input.path ?? input.command ?? input.pattern ?? input.skill ?? input.description ?? "";
+  return name + " " + short(String(target).replace(process.cwd() + "/", ""), 160);
+};
+
+// Runs one builder on `text` in this checkout; what it changed is on disk. Its
+// thinking, messages and tool calls print live to the log as they happen.
+const runAgent = (next, text) =>
+  new Promise((resolve) => {
+    mkdirSync(LOGS, { recursive: true });
+    const file = `${LOGS}/${slug}-${String(++runCount).padStart(2, "0")}-${next.label.replace(/[^a-z0-9.]+/gi, "_")}.jsonl`;
+    const log = createWriteStream(file);
+    const child = spawn(
+      process.env.CLAUDE_BIN || "claude",
+      [
+        "-p",
+        text,
+        ...next.args,
+        "--permission-mode",
+        "dontAsk",
+        "--allowedTools",
+        allowed.join(","),
+        "--disallowedTools",
+        denied.join(","),
+        "--output-format",
+        "stream-json",
+        "--verbose",
+      ],
+      { env: { ...baseEnv, ...next.env }, stdio: ["ignore", "pipe", "pipe"] },
+    );
+    const timer = setTimeout(() => child.kill("SIGTERM"), 90 * 60 * 1000);
+    let out = null;
+    let stderr = "";
+    let turn = 0;
+    child.stderr.on("data", (d) => (stderr = (stderr + d).slice(-4000)));
+    createInterface({ input: child.stdout }).on("line", (line) => {
+      log.write(line + "\n");
+      let ev;
+      try {
+        ev = JSON.parse(line);
+      } catch {
+        return;
+      }
+      if (ev.type === "result") out = ev;
+      if (ev.type === "assistant") {
+        turn++;
+        for (const c of ev.message?.content ?? []) {
+          if (c.type === "thinking" && c.thinking) console.log(`  [${turn}] thinks: ${short(c.thinking, 700)}`);
+          if (c.type === "text" && c.text) console.log(`  [${turn}] says: ${short(c.text, 700)}`);
+          if (c.type === "tool_use") console.log(`  [${turn}] ${toolLine(c.name, c.input)}`);
+        }
+      }
+      if (ev.type === "user") {
+        for (const c of ev.message?.content ?? []) {
+          if (c.type === "tool_result" && c.is_error) {
+            const body = Array.isArray(c.content) ? c.content.map((x) => x.text ?? "").join(" ") : c.content;
+            console.log(`      error: ${short(body, 300)}`);
+          }
+        }
+      }
+    });
+    child.on("error", (err) => console.log(`${next.label} did not start: ${err.message}`));
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      log.end();
+      if (!out) {
+        console.log(`${next.label} exited with ${code} and no result.`, stderr);
+        resolve({ error: true, text: stderr });
+        return;
+      }
+      // Only Anthropic's own price is real; the gateway bills separately.
+      const cost = next.id === "claude" ? out.total_cost_usd ?? 0 : 0;
+      costUsd += cost;
+      console.log(`${next.label}: ${out.terminal_reason ?? out.subtype ?? "done"}, ${out.num_turns ?? "?"} turns, $${cost.toFixed(2)} (log: ${file})`);
+      for (const d of out.permission_denials ?? []) {
+        console.log(`${next.label} was denied ${d.tool_name}: ${JSON.stringify(d.tool_input).slice(0, 200)}`);
+      }
+      if (out.result) console.log(out.result.slice(-1500));
+      resolve({ error: out.is_error === true || out.terminal_reason === "api_error", text: String(out.result ?? "") });
+    });
+  });
 
 let agent = null;
 // Typechecking misses code that only breaks at render time, like a builder
@@ -263,9 +315,9 @@ const rendersAlone = () => {
   return true;
 };
 // Tries one builder; ok when it left a build that typechecks, else its API error.
-const tryAgent = (next) => {
+const tryAgent = async (next) => {
   console.log(`\nBuilder: ${next.label}`);
-  const run = runAgent(next, prompt);
+  const run = await runAgent(next, prompt);
   if (changedSince(start) && typechecks() && rendersAlone()) return { ok: true };
   // A build that doesn't typecheck goes to the next builder from the start.
   console.log(changedSince(start) ? `${next.label}'s build does not typecheck.` : `${next.label} changed nothing.`);
@@ -284,7 +336,7 @@ const resetSeconds = (text) => {
 };
 let retryable = [];
 for (const next of agents) {
-  const r = tryAgent(next);
+  const r = await tryAgent(next);
   if (r.ok) {
     agent = next;
     break;
@@ -297,7 +349,7 @@ for (let round = 1; !agent && retryable.length && round <= 3; round++) {
   await new Promise((r) => setTimeout(r, seconds * 1000));
   const again = [];
   for (const { next } of retryable) {
-    const r = tryAgent(next);
+    const r = await tryAgent(next);
     if (r.ok) {
       agent = next;
       break;
@@ -329,7 +381,7 @@ if (agent && built === agent.id && process.env.REVIEW !== "off") {
     const list = reviewed.map((r) => `- ${r.scene}: ${r.problem} Fix: ${r.fix}`).join("\n");
     console.log(`Review found ${reviewed.length}:\n${list}`);
     const before = snapshot();
-    runAgent(
+    await runAgent(
       agent,
       `A reviewer looked at stills of the video "${slug}" you built and found the problems below. ` +
         `pipeline/BUILDER.md still applies. Check each one with npm run qa, fix the real ones, keep everything ` +

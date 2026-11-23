@@ -152,6 +152,16 @@ jobs:
           TOKEN: ${{ github.token }}
         run: bash scripts/save-video.sh
 
+      # Every builder run's full event stream (thinking, messages, tool calls),
+      # the same that prints live in the "Make the video" step.
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-logs
+          path: out/build-logs/*.jsonl
+          retention-days: 7
+          if-no-files-found: ignore
+
       # The video and QA stills, only when the video did not reach the CDN.
       # Kept 3 days: the private repo has 500 MB of artifact storage.
       - uses: actions/upload-artifact@v4
