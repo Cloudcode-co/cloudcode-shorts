@@ -1,0 +1,111 @@
+{
+  "slug": "pi-hole-homelab-shopee-fail",
+  "format": "meme",
+  "topic": "Cài Pi-hole chặn ads cho mạng nhà và cái kết",
+  "title": "Khi IT boy cài Pi-hole chặn ads cho cả nhà",
+  "caption": "Chặn quảng cáo cho cố vô rồi mẹ không bấm được link sale Shopee. Nhà anh em có ai từng nghịch DNS kiểu này chưa?",
+  "hashtags": [
+    "#homelab",
+    "#pihole",
+    "#laptrinhvien",
+    "#haihuoc",
+    "#itdoisong"
+  ],
+  "musicPrompt": "Playful quirky pizzicato synth turning into chaotic meme panic with awkward bass pauses, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "quirky synth",
+        "light bounce",
+        "playful"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "confident groove",
+        "bouncy bass",
+        "cheerful"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s3",
+      "styles": [
+        "awkward pause",
+        "record scratch",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "goofy whistle",
+        "comedic outro",
+        "deflating synth"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "IT boy homelab hí hửng dựng Pi-hole trên VPS để chặn sạch quảng cáo mạng nhà",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Tự tin set DNS thẳng vào router, khoe bố mẹ từ nay lướt web bao mượt",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "10 phút sau mẹ chạy sang phòng quát sao bấm link sale Shopee toàn báo lỗi",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": "cozy living room"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Bố thì càu nhàu TV thông minh tịt ngóm không load nổi clip YouTube",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "cozy living room"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Vội vàng mò vào router đổi lại DNS 8.8.8.8 rồi đổ tội do đứt cáp quang biển",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat facepalm",
+      "place": "bedroom at night computer"
+    }
+  ]
+}

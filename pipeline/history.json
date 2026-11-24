@@ -798,5 +798,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 2
+  },
+  {
+    "slug": "pi-hole-homelab-shopee-fail",
+    "topic": "Cài Pi-hole chặn ads cho mạng nhà và cái kết",
+    "format": "meme",
+    "date": "2026-11-24",
+    "direction": "meme-skit",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]
