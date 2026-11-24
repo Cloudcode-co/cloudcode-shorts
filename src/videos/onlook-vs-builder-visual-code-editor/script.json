@@ -1,0 +1,199 @@
+{
+  "slug": "onlook-vs-builder-visual-code-editor",
+  "format": "explainer",
+  "topic": "Trải nghiệm Onlook: Công cụ thiết kế trực quan AI mã nguồn mở sửa thẳng code React, so sánh với Builder.io",
+  "title": "Sửa code React trực quan không cần CMS?",
+  "caption": "Trải nghiệm Onlook: công cụ trực quan AI mã nguồn mở sửa thẳng Git repo cục bộ thay vì dùng headless CMS.",
+  "hashtags": [
+    "#onlook",
+    "#builderio",
+    "#reactjs",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal modern tech beat, rhythmic electronic synth pulses, subtle clean bassline, forward momentum, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "clean synth",
+        "curious"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving rhythm",
+        "tech groove",
+        "focused"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "bright synth",
+        "warm finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/onlook-dev/onlook",
+    "https://github.com/BuilderIO/builder",
+    "https://github.com/plasmicapp/plasmic",
+    "https://www.builder.io/c/docs/how-builder-works-technical",
+    "https://www.builder.io/c/docs/developers",
+    "https://www.onlook.com/install"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Sửa trực tiếp code React ngay trên giao diện mà không cần CMS?",
+      "headline": "Sửa code trực quan không cần CMS?",
+      "lines": [
+        "Trực tiếp vào code React",
+        "Không qua CMS trung gian"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": "developer looking at computer screen"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì nền tảng như Builder.io sẽ lưu layout dạng các mảng block trên đám mây, rồi kéo về qua API hoặc SDK.",
+      "headline": "Cách tiếp cận của Builder.io",
+      "lines": [
+        "Mô hình headless visual CMS",
+        "Render dữ liệu block qua API và SDK"
+      ],
+      "commands": [],
+      "repos": [
+        "BuilderIO/builder"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn Onlook là ứng dụng desktop mã nguồn mở giấy phép Apache 2.0, chạy thẳng trên Git repository trên máy của anh em.",
+      "headline": "Onlook: Desktop mã nguồn mở",
+      "lines": [
+        "Mã nguồn mở Apache 2.0",
+        "Hoạt động trực tiếp trên Git repo"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Onlook tự khởi chạy dev server của chính dự án, đồng thời tạo một bản sao Git worktree an toàn để tránh làm hỏng thư mục gốc.",
+      "headline": "Chạy dev server và Git worktree",
+      "lines": [
+        "Tự bật dev server cục bộ",
+        "Bảo vệ thư mục gốc bằng Git worktree"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Giao diện hiển thị trực tiếp trên canvas, tức là anh em chỉ cần nhấp đúp vào phần tử bất kỳ để mở chat nội dòng điều hướng sửa code.",
+      "headline": "Sửa phần tử bằng inline chat",
+      "lines": [
+        "Canvas hiển thị app thực tế",
+        "Double-click phần tử để gọi chat"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": "hands typing on sleek keyboard"
+    },
+    {
+      "id": "s6",
+      "text": "[casually] Công cụ không kèm model riêng mà hoạt động theo dạng mang agent của bạn, kết nối thẳng tài khoản Claude Code hoặc ChatGPT có sẵn.",
+      "headline": "Cơ chế Bring Your Own Agent",
+      "lines": [
+        "Tự mang tài khoản AI",
+        "Hỗ trợ Claude Code và ChatGPT / Codex"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Vì vậy anh em có thể gắn thêm connector qua giao thức MCP để cấp đầy đủ ngữ cảnh dự án cho AI sửa file.",
+      "headline": "Mở rộng ngữ cảnh qua MCP",
+      "lines": [
+        "Kết nối Model Context Protocol",
+        "Đưa toàn bộ ngữ cảnh vào quy trình"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Khi cần bàn giao nhanh, Onlook hỗ trợ xuất thẳng các artifact độc lập thành HTML, PDF, PNG hoặc JPEG.",
+      "headline": "Xuất artifact độc lập",
+      "lines": [
+        "Xuất file HTML độc lập",
+        "Hỗ trợ ảnh PNG, JPEG và PDF"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Onlook hoàn toàn miễn phí tải về, nhưng hiện tại chỉ mới có bản chính thức cho macOS 13 trở lên với khoảng 1 GB dung lượng ổ đĩa.",
+      "headline": "Yêu cầu hệ thống",
+      "lines": [
+        "Miễn phí sử dụng ứng dụng",
+        "Yêu cầu macOS 13 trở lên, ~1 GB ổ đĩa"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": "modern desk setup with mac"
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Anh em lưu video lại để thử thiết kế trực quan ngay trên code React, và follow kênh để cập nhật thêm nhé!",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để áp dụng sau",
+        "Follow kênh để xem thêm công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "onlook-dev/onlook"
+      ],
+      "footage": ""
+    }
+  ]
+}

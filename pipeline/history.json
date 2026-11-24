@@ -776,5 +776,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "onlook-vs-builder-visual-code-editor",
+    "topic": "Trải nghiệm Onlook: Công cụ thiết kế trực quan AI mã nguồn mở sửa thẳng code React, so sánh với Builder.io",
+    "format": "brief",
+    "date": "2026-11-24",
+    "direction": "news-desk",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 6
   }
 ]

@@ -1,0 +1,394 @@
+{
+  "topic": "Trải nghiệm Onlook: Công cụ thiết kế trực quan AI mã nguồn mở sửa thẳng code React, so sánh với Builder.io",
+  "models": [
+    "ag/gemini-3.8-flash",
+    "ag/gemini-3.8-flash-medium",
+    "ag/gpt-oss-120b-medium",
+    "ds/deepseek-v4.1-flash",
+    "ag/gemini-3.8-flash-high",
+    "oc/deepseek-v4.1-flash-free"
+  ],
+  "date": "2026-11-24",
+  "repos": [
+    {
+      "repo": "onlook-dev/onlook",
+      "asked": "onlook-dev/onlook",
+      "name": "Onlook",
+      "stars": 27839,
+      "description": "The Developer Tool for Designers • An Open-Source AI-First Design tool • Visually build, style, and edit your code with AI • World's best, top-most agent recommended #1 Developer tool for Designers and Visual Engineers to design with Real Code.",
+      "license": "Apache-2.0",
+      "language": "TypeScript",
+      "pushedAt": "2026-11-23T23:59:26Z",
+      "url": "https://github.com/onlook-dev/onlook",
+      "avatar": "repos/onlook-dev.png"
+    },
+    {
+      "repo": "BuilderIO/builder",
+      "asked": "BuilderIO/builder",
+      "name": "Builder.io",
+      "stars": 8890,
+      "description": "Visual Development for React, Vue, Svelte, Qwik, and more",
+      "license": "MIT",
+      "language": "TypeScript",
+      "pushedAt": "2026-11-23T23:41:18Z",
+      "url": "https://github.com/BuilderIO/builder",
+      "avatar": "repos/BuilderIO.png"
+    }
+  ],
+  "pages": [],
+  "idea": null,
+  "notes": {
+    "audience": "Front-end React developers, visual engineers, and self-hosters looking for an open-source visual design tool that edits local source code directly with AI instead of relying on a hosted visual CMS.",
+    "angle": "Khác với Builder.io hay Plasmic biến web thành CMS kéo thả phụ thuộc SDK/API, Onlook là desktop app mã nguồn mở chạy thẳng dev server cục bộ và dùng AI BYOK (Claude Code, ChatGPT) sửa trực tiếp code React trong Git repo của bạn.",
+    "facts": [
+      {
+        "fact": "Onlook là công cụ mã nguồn mở được phát hành theo giấy phép Apache 2.0.",
+        "quote": "Onlook's source code is distributed under the Apache 2.0 License.",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Onlook hoạt động trực tiếp trên Git repository thực tế và tự khởi chạy dev server của chính dự án.",
+        "quote": "Onlook opens any Git repository on your machine and runs your own dev server, so what you design is your actual product, not a mockup that someone has to rebuild later.",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Onlook tạo bản sao worktree Git an toàn để tránh làm hỏng hoặc can thiệp trực tiếp vào thư mục gốc đang làm việc.",
+        "quote": "Safe worktree copy, so your folder is never touched",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Onlook không tự cung cấp mô hình AI riêng mà hoạt động theo cơ chế Bring Your Own Agent kết nối với tài khoản Claude Code hoặc ChatGPT/Codex có sẵn của người dùng.",
+        "quote": "We don't ship our own model. Connect the Claude Code or ChatGPT/Codex account you already have, and that agent does the work inside your project.",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Người dùng có thể mở rộng ngữ cảnh cho quy trình thiết kế AI của Onlook bằng các kết nối MCP (Model Context Protocol).",
+        "quote": "Plug in more tools through MCP connectors to bring all of the context you need to your creative workflow.",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Người dùng có thể nhấp đúp vào một phần tử cụ thể trên canvas để dùng chat nội dòng điều hướng AI chỉnh sửa đúng phần tử đó trong code.",
+        "quote": "double-click on a specific element to use the inline chat and guide the AI to edit that specific element.",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Onlook hỗ trợ xuất các bản phác thảo và artifact thành HTML, PDF, PNG và JPEG độc lập.",
+        "quote": "Export artifacts as self-contained HTML, PNG, JPEG, or PDF to hand off, review, or post.",
+        "source": "https://github.com/onlook-dev/onlook"
+      },
+      {
+        "fact": "Onlook hoàn toàn miễn phí sử dụng, không tính phí riêng ngoài chi phí thuê bao AI mà người dùng tự trả cho nhà cung cấp.",
+        "quote": "Yes. Onlook connects to the AI subscription you already pay for, so there is no separate charge to use it — you bring your own key and nothing else changes about how you are billed.",
+        "source": "https://www.onlook.com/install"
+      },
+      {
+        "fact": "Onlook yêu cầu máy Mac chạy macOS 13 trở lên (Apple Silicon hoặc Intel x64) cùng khoảng 1 GB dung lượng ổ đĩa.",
+        "quote": "A Mac with Apple Silicon or an Intel processor running macOS 13 or later, roughly 1 GB of disk space",
+        "source": "https://www.onlook.com/install"
+      },
+      {
+        "fact": "Trái ngược với Onlook chỉnh sửa code cục bộ, Builder.io phân phối nội dung trực quan bằng API hoặc render động qua SDK của nền tảng.",
+        "quote": "You can choose whether to merge content directly into your codebase or deliver it dynamically using the Visual Editor Publish button.",
+        "source": "https://www.builder.io/c/docs/how-builder-works-technical"
+      },
+      {
+        "fact": "Builder Content hoạt động theo mô hình headless CMS, lưu trang và section dưới dạng mảng các block component và dữ liệu có cấu trúc.",
+        "quote": "Builder automatically populates a field called blocks that is a list of components to render and their options",
+        "source": "https://www.builder.io/c/docs/how-builder-works-technical"
+      },
+      {
+        "fact": "Builder chia làm hai nhánh sản phẩm: Builder Code (chuyển Figma thành code) và Builder Content (trực quan hóa nội dung cho non-dev bằng kéo thả).",
+        "quote": "Whether you’re building a new UI from Figma or enabling non-developers to manage content visually, Builder gives you tools that fit directly into your existing codebase.",
+        "source": "https://www.builder.io/c/docs/developers"
+      }
+    ],
+    "install": [],
+    "caveats": [
+      "Hiện tại Onlook chỉ có bản phát hành chính thức cho macOS (hỗ trợ Apple Silicon và Intel x64 macOS 13+); bản cho Windows đang trong danh sách chờ và chưa phát hành artifact cho Linux.",
+      "Giấy phép Apache 2.0 chỉ áp dụng cho mã nguồn; các tài sản như icon từ Central Icons, logo thương hiệu, DMG art và âm thanh không đi kèm trong giấy phép mã nguồn mở khi fork.",
+      "Telemetry thu thập dữ liệu sử dụng được bật mặc định trên bản cài đặt đóng gói sẵn tải từ website.",
+      "Code không tự động gửi lên Onlook nhưng các đoạn code hoặc prompt sẽ được gửi trực tiếp tới AI provider (Anthropic hoặc OpenAI) theo tài khoản/key người dùng kết nối."
+    ],
+    "gaps": [
+      "Chi phí API thực tế phát sinh khi chạy Claude Code hoặc ChatGPT/Codex liên tục qua Onlook cho một dự án trung bình là bao nhiêu?",
+      "Khả năng can thiệp trực tiếp vào file CSS/Tailwind của Onlook khi dev server hot-reload phức tạp đến mức nào nếu repo có cấu trúc monorepo lớn?",
+      "Thời điểm chính thức ra mắt phiên bản Windows và Linux là khi nào?"
+    ]
+  },
+  "research": "Primary sources, fetched from GitHub on 2026-11-24:\n\n## onlook-dev/onlook (https://github.com/onlook-dev/onlook)\nDescription: The Developer Tool for Designers • An Open-Source AI-First Design tool • Visually build, style, and edit your code with AI • World's best, top-most agent recommended #1 Developer tool for Designers and Visual Engineers to design with Real Code.\nHomepage: https://onlook.com\nLanguage: TypeScript; license: Apache-2.0; created 2024-06-25; last push 2026-11-23\nLatest release: v2.0.2 (2026-11-19)\nREADME (start):\nOnlook\n  \n    The developer tool for Designers\n    \n    Onlook is a free, local-first editor where designers craft exceptional experiences in code\n    \n    \n    → Download today \n  \n  \n    👨‍💻👩‍💻👨‍💻\n    We're hiring engineers and designers in SF!\n    👩‍💻👨‍💻👩‍💻\n\n[中文](https://www.readme-i18n.com/onlook-dev/onlook?lang=zh) |\n[Español](https://www.readme-i18n.com/onlook-dev/onlook?lang=es) |\n[Deutsch](https://www.readme-i18n.com/onlook-dev/onlook?lang=de) |\n[français](https://www.readme-i18n.com/onlook-dev/onlook?lang=fr) |\n[Português](https://www.readme-i18n.com/onlook-dev/onlook?lang=pt) |\n[Русский](https://www.readme-i18n.com/onlook-dev/onlook?lang=ru) |\n[日本語](https://www.readme-i18n.com/onlook-dev/onlook?lang=ja) |\n[한국어](https://www.readme-i18n.com/onlook-dev/onlook?lang=ko)\n\n# An Open-Source, Visual-First Canvas for Code\n\nCraft websites, prototypes, and designs with AI on a canvas built for creative work. See\nyour real app running live, shape it visually, and let your own agent write the code. An\nopen-source alternative to Figma, V0, Replit Agent, Base 44, Webflow, etc.\n\n## Why Onlook\n\n- 🎨 **Built for design.** Onlook is the open-source developer tool for designers. You see your real app running live on a canvas, explore ideas side by side, and shape the interface visually instead of from a terminal. Design apps, websites, posters, graphics, and more with your local fonts and assets. \n- 🤖 **Bring your own agent.** We don't ship our own model. Connect the Claude Code or ChatGPT/Codex account you already have, and that agent does the work inside your project. Plug in more tools through MCP connectors to bring all of the context you need to your creative workflow. Work on multiple design tasks at once across repos and pages.\n- 📁 **Works on your real repo.** Onlook opens any Git repository on your machine and runs your own dev server, so what you design is your actual product, not a mockup that someone has to rebuild later.\n- 🖥️ **A desktop app, local-first.** Onlook runs on your computer. Your code stays on your computer, and the source build needs no Onlook account, cloud keys, or `.env` file.\n- 📤 **Share what you make.** Export artifacts as self-contained HTML, PNG, JPEG, or PDF to hand off, review, or post.\n- 🧡 **Open source.** Apache 2.0. Read it, fork it, and customize it yourself (we'd love to hear how you customize it!)\n\n## What you can do with Onlook\n\n- [x] Design on your real codebase\n  - [x] Live app on an infinite canvas\n  - [x] Mobile, tablet, and desktop frames side by side\n  - [x] Safe worktree copy, so your folder is never touched\n  - [x] Parallel projects as tabs\n- [x] Design with your own agent\n  - [x] Bring your own Claude Code or ChatGPT/Codex plan\n  - [x] Ask about any element on the canvas\n  - [x] Agent arranges the canvas for you (variations, states, flows)\n  - [x] Reference images on the canvas\n- [x] Sketch and share\n  - [x] Artifacts for quick HTML sketches outside your repo\n  - [x] Export to HTML, PDF, PNG, and JPEG\n- [x] Ship it\n  - [x] Import a GitHub repo\n  - [x] Start entirely new codebases from scratch\n  - [x] One-press pull requests, from checks to merge\n\n## Getting Started\n🖥️ [Download the Desktop App](https://www.onlook.com/install) (Recommended) – The fastest way to get started with Onlook.\n\n* macOS (Apple Silicon · Intel x64) → [Download](https://www.onlook.com/install)\n* Windows – Coming soon. Join the [Windows waitlist here](https://www.onlook.com/waitlist?os=windows) and be emailed when we have updates.\n* Linux – No Linux artifact is published and we're still gauging demand for Linux. Join the [Linux waitlist here](https://www.onlook.com/waitlist?os=linux) and be emailed when we have updates. \n\n🧑‍💻 Build from source – [SOURCE_BUILD.md](SOURCE_BUILD.md) covers building and running Onlook on a Mac. No Onlook account or cloud keys needed.\n\n## How it works\n\n1. **Open a project.** Point Onlook at any Git repository on your computer, or import one. Your code stays where it is.\n2. **Onlook runs your app.** It starts your own dev server locally, the same way you would from a terminal.\n3. **See it live on a canvas.** Your running app appears in frames on an open canvas, so you can look at pages, sizes, and ideas side by side.\n4. **Design with your agent.** Describe what you want in chat. Onlook hands the request to the Claude Code or ChatGPT/Codex account you connected, and that agent edits the real files in your repo.\n5. **Watch it update.** Changes show up on the canvas as your dev server reloads, and Git keeps track of everything that changed.\n6. **Share the result.** Export artifacts as self-contained HTML, PNG, JPEG, or PDF.\n\nBecause Onlook runs your project with its own tooling, it works with all web frameworks or languages your dev server already supports.\n\n## An example workflow\n\n1. Start a new empty project by clicking the \"New Draft\" button in the upper left corner of the projects page.\n2. Use the input box in the lower right corner of the screen to write what you'd like to be designed in Onlook.\n3. Answer clarifying questions from the agent, and wait for it to build\n4. Click to select individual frames for context in follow-up prompts, or double-click on a specific element to use the inline chat and guide the AI to edit that specific element.\n5. Prompt more ideas on one or multiple designs until you're ready to share your work with a colleague.\n6. Select the frame you'd like to share, and ask the agent to convert it into an Artifact for exporting.\n7. Export the artifact as HTML/CSS or as a PNG using the export button in the upper right corner of the frame. \n8. Paste the exported artifact in Slack, email, or any messaging tool. \n\n## Our Tech Stack\n\n| Layer | Stack |\n|---|---|\n| Desktop | [Electron](https://www.electronjs.org/) · [React 19](https://react.dev/) · [Astryx](https://astryx.atmeta.com/) (Design system)· [React Flow](https://reactflow.dev/) · [Zustand](https://zustand.docs.pmnd.rs/) · [CodeMirror](https://codemirror.net/) |\n| Your project | [Git](https://git-scm.com/) for working directly on your repo · [node-pty](https://github.com/microsoft/node-pty) for running your dev server and shells |\n| Tooling | [Bun](https://bun.sh/) · [Turborepo](https://turbo.build/) · usage analytics (see [Usage data](#usage-data)) |\n| Export | HTML · PNG & JPEG ([Electron capturePage](https://www.electronjs.org/docs/latest/api/web-contents#contentscapturepagerect-opts)) · PDF ([Electron printToPDF](https://www.electronjs.org/docs/latest/api/web-contents#contentsprinttopdfoptions)) & [pdf-lib](https://pdf-lib.js.org/) |\n\n## Contributing\n\nIf you have a suggestion that would make this better, please fork the repo and\ncreate a pull request. You can also browse [open issues](https://github.com/onlook-dev/onlook/issues).\n\nSee the [CONTRIBUTING.md](CONTRIBUTING.md) for instructions and code of conduct.\n\nTo report a security issue, follow [SECURITY.md](SECURITY.md) instead of opening a public issue.\n\n#### Contributors\n\n  \n\n## Contact\n\n- Contact us: [Discord](https://discord.gg/hERDfFZCsH) - [Email](mailto:contact@onlook.com)\n- Updates: [Twitter](https://twitter.com/onlookdev) - [LinkedIn](https://www.linkedin.com/company/onlook/) - [YouTube](https://youtube.com/@onlookdev) - [Substack](https://onlook.substack.com/)\n- Project: [https://github.com/onlook-dev/onlook](https://github.com/onlook-dev/onlook)\n- Website: [https://onlook.com](https://onlook.com/?utm_source=github&utm_medium=readme&utm_campaign=github)\n\n## Looking for the previous version of Onlook?\n\n- **Onlook v1 (web):** the browser-based version lives on the\n  [`v1` branch](https://github.com/onlook-dev/onlook/tree/v1) of this repository.\n- **Onlook Desktop (Electron, original):** the first desktop version is at\n  [onlook-dev/desktop](https://github.com/onlook-dev/desktop).\n\n## Usage data\n\nOnlook collects product usage analytics to help us improve the app. In the official download they are on by default; a build from source asks first. You can turn them off in Settings, or set `STUDIO_TELEMETRY=0` to run or build without them. See the [privacy policy](https://www.onlook.com/privacy-policy) for details.\n\n## License\n\nOnlook's source code is distributed under the Apache 2.0 License. See\n[LICENSE](LICENSE) for details.\n\nThe license covers source code, not every asset in this repository. Onlook's\nicons come from [Central Icons](https://iconists.co/central) by Iconists. They\nare licensed to Onlook for its own product, and that license does not extend to\nforks. Onlook's brand marks, DMG art, and sounds aren't covered either. See\n[ASSETS.md](ASSETS.md) for what's covered and what to replace if you fork, and\n[NOTICE](NOTICE) for third-party notices.\n\n[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yMC40NSAyMC40NWgtMy41NnYtNS41N2MwLTEuMzMtLjAyLTMuMDQtMS44NS0zLjA0LTEuODUgMC0yLjEzIDEuNDUtMi4xMyAyLjk0djUuNjdIOS4zNVY5aDMuNDF2MS41NmguMDVjLjQ4LS45IDEuNjQtMS44NSAzLjM3LTEuODUgMy42IDAgNC4yNyAyLjM3IDQuMjcgNS40NnY2LjI4ek01LjM0IDcuNDNhMi4wNiAyLjA2IDAgMSAxIDAtNC4xMyAyLjA2IDIuMDYgMCAwIDEgMCA0LjEzek03LjEyIDIwLjQ1SDMuNTZWOWgzLjU2djExLjQ1ek0yMi4yMiAwSDEuNzdDLjc5IDAgMCAuNzcgMCAxLjczdjIwLjU0QzAgMjMuMjMuNzkgMjQgMS43NyAyNGgyMC40NWMuOTggMCAxLjc4LS43NyAxLjc4LTEuNzNWMS43M0MyNCAuNzcgMjMuMiAwIDIyLjIyIDB6Ii8+PC9zdmc+\n[linkedin-url]: https://www.linkedin.com/company/onlook\n[twitter-shield]: https://img.shields.io/badge/-X-000000?style=flat-square&logo=x&logoColor=white\n[twitter-url]: https://x.com/onlookdev\n[discord-shield]: https://img.shields.io/badge/-Discord-black?style=flat-square&logo=discord&logoColor=white&color=5865F2\n[discord-url]: https://discord.gg/hERDfFZCsH\n[youtube-shield]: https://img.shields.io/badge/-YouTube-black?style=flat-square&logo=youtube&logoColor=white&color=FF0000\n[youtube-url]: https://www.youtube.com/@onlookdev\n[substack-shield]: https://img.shields.io/badge/-Substack-black?style=flat-square&logo=substack&logoColor=white&color=FF6719\n[substack-url]: https://onlook.substack.com\n\n## BuilderIO/builder (https://github.com/BuilderIO/builder)\nDescription: Visual Development for React, Vue, Svelte, Qwik, and more\nHomepage: https://builder.io\nLanguage: TypeScript; license: MIT; created 2019-01-30; last push 2026-11-23\nLatest release: @builder.io/sdk-vue@5.4.8 (2026-11-23)\nREADME (start):\nVisual Development On Any Stack\n\n   Turn Figma designs into code. Drag and drop your components. Publish with a click.\n\n  \n  \n  \n  \n  \n\n  \n\n## How the Builder.io platform works\n\nBuilder connects to your existing site or app, so you can visually edit and generate code using your existing components. Use Figma designs or our drag-and-drop editor. Export your code or publish your updates via our [SDKs](https://www.builder.io/c/docs/developers).\n\nRead more about [How Builder works](https://www.builder.io/c/docs/how-builder-works-technical).\n\n  \n\n## Try it out\n\n[Sign up for a free account](https://builder.io/signup) to dive right in. \n\n## What's in this repository\n\nThis repo houses all of the various [SDKs](packages), [usage examples](examples), [starter projects](starters), and [plugins](plugins).\n\n## Join the community\n\nQuestions, requests, or feedback? Chat with us on the [Builder.io Forum](https://forum.builder.io).\n\n## We're hiring!\n\nHelp us enable anyone to build digital experiences and bring more ideas to life. [View openings](https://www.builder.io/m/careers) now.\n\n## plasmicapp/plasmic (https://github.com/plasmicapp/plasmic)\nDescription: Visual builder for React. Build apps, websites, and content. Integrate with your codebase.\nHomepage: https://www.plasmic.app\nLanguage: TypeScript; license: MIT; created 2021-02-02; last push 2026-11-23\nNo releases\nREADME (start):\nPlasmic\n\n  The open-source visual builder for your codebase.\n\n  Build beautiful apps and websites incredibly fast.\n\n  Drag and drop your own components, integrate with your codebase.\n\n  Break through the low-code ceiling.\n\n&nbsp;\n\n  \n    \n  \n\n  \n    \n  \n\n  \n  \n  \n  \n\n## Quick links\n\n- [Website](https://www.plasmic.app/)\n- [Documentation][docs]\n- [Quickstart][quickstart]\n- [Plasmic Forum][forum]\n- [Slack Community][slack]\n\n[docs]: https://www.plasmic.app/learn/\n[quickstart]: https://www.plasmic.app/learn/quickstart/\n[forum]: https://forum.plasmic.app/\n[slack]: https://www.plasmic.app/slack\n\n## See Plasmic in action\n\n- Vercel marketing page: https://youtu.be/itvbmgLZvcM (live app: https://vercel-workflow.vercel.app)\n\n- Apple.com: https://apple.plasmic.run\n\n- Shopify headless storefront: https://commerce.plasmic.run\n\n- Twitter clone: https://youtu.be/rpdjrFuVMog (live app: https://twitter.plasmic.run)\n\n- Service desk app: https://youtu.be/rYqSpUEJSTw (live app: https://tickets.plasmic.run)\n\n- Interview with Lee Robinson, Plasmic as a visual CMS: https://www.youtube.com/watch?v=pcVzNR6FBAQ\n\n## What is Plasmic?\n\nPlasmic is a visual builder for the web.\n\nIt enables rapidly designing and building applications and websites--code optional.\n\nMain use cases:\n\n- Content management: let marketing drag/drop your React components to build landing pages in your Next.js website, with design guardrails\n\n- Applications: let developers and technical users quickly build internal tools, client portals, and business software\n\n- Website builder and design tool that doesn’t limit you to some built-in ecommerce platform, CMS, or hosting\n\nPlasmic is powerful, with a deep feature set that scales to complex projects.\nAnd with codebase integration, it removes the ceiling typically associated with low-code tools.\n\n## What makes Plasmic special?\n\nPlasmic combines some seemingly disparate genres:\n\n- Webflow, Wordpress and other site builders\n- Retool and other tool builders\n- Glide and no-code app builders\n- Contentful and other CMSes\n\nToday these are different tools to specialize in, but the line between, say, a website and an application is blurry (consider an ecommerce storefront with user logins). With the right foundations, we think these can be unified—Plasmic’s UI can adapt to different levels of control for different personas/tasks.\n\nBut more importantly, unlike existing tools, Plasmic integrates with codebases. This is critical to making low-code scale past the complexity ceiling that all such tools (including Plasmic) have. You can drag and drop existing complex React components, and you can visually create new UIs/components within traditionally-coded applications, seamlessly weaving code and no-code.\n\nSome feature highlights:\n\n- **Full design freedom** and speedy modern design tool UX.\n- **Integrate with codebases** to drag/drop existing React components, publish screens into existing applications, and extend/customize Plasmic Studio.\n- Create **rich stateful interactions and behavior**.\n- Connect with **arbitrary data source and backend integrations**.\n- **Powerful abstractions** like components, variants, slots, composable state management, and more that promote composition and let you build and maintain at scale.\n- **Customizable headless design system components** powered by [react-aria](https://react-spectrum.adobe.com/react-aria/).\n- **Content creator mode**: give specific collaborators a more simplified editing experience with design guardrails.\n- **Open integrations**: choose your own CMS, ecommerce platform, hosting provider, and more.\n- Deep collaboration with multiplayer, branching, cross-project imports, and multi-workspace organizations.\n- **Import designs from Figma**, translating its proprietary vector document format into DOM/CSS.\n- **Page performance and high-quality codegen**. Supports static site generation, automatic image optimization, layout shift reduction, and more.\n- **Deploy/host/export anywhere**, including Vercel, Netlify, or any hosting provider.\n- **End-user auth and permissions**, including RBAC and user-scoped permissions.\n- **Open-source platform** that you can always fork and control.\n\nLearn more on [our website][website] and [our docs][docs]. Or check out [comparisons of Plasmic vs other tools][comparisons].\n\n[website]: https://www.plasmic.app\n[comparisons]: https://docs.plasmic.app/learn/comparisons/\n\n## How do I integrate Plasmic as a CMS?\n\nThis is one popular use case of Plasmic.\n\n**Step 1.** Install Plasmic into your codebase (exact package [depends on your framework][quickstart]).\n\n```\nnpm install @plasmicapp/loader-nextjs\n```\n\n**Step 2 (optional).** Make components from your app or design system available for drag-and-drop in the visual editor:\n\n```tsx\n// Take any component from your app or design system...\nexport default function HeroSection({ children }) {\n  return {children};\n}\n\n// ...and make it available for drag-and-drop, along with any props you want to\n// expose.\nPLASMIC.register\n\nMore pages, read on 2026-11-24:\n\n## How Builder Content Works\nURL: https://www.builder.io/c/docs/how-builder-works-technical\nDescription: Builder Content is a Visual Development Platform that integrates with your existing applications. Content in Builder can be turned into code.\n\nSkip to content\nSkip to main content\nAgent-Native Hackathon winners revealed live Nov 13.\nOverview\nHow Builder works\nSearch docs\nCtrl\nK\nHow Builder Content works\n\nBuilder Content is a Visual Development Platform that integrates with your existing sites and apps.\n\nAny content in Builder Content can be turned into code, including designs imported from Figma with Builder Figma plugin, Imported from the web with the Chrome extension, or created manually with Builder's Visual Editor.\n\nBuilder supports two output methods: generated code and Builder's APIs.\n\nYou can choose whether to merge content directly into your codebase or deliver it dynamically using the Visual Editor Publish button. This makes it ideal for marketing content and pages.\n\nCompare to a headless CMS\n\nIn many ways, Builder works the same as any headless CMS, and Builder's CMS data models work identically.\n\nLike a typical headless CMS, you create entries with structured Custom fields or Targeting. You can then query these fields with our Content API and display the content you want, where you want.\n\nIn many cases with Builder, the main difference is that instead of hard-coding a page layout, a Builder component dynamically renders the content, optionally using components from your codebase by Registering custom components.\n\nOptionally, you can also restrict Builder editing to only these components, with or without allowing custom styling, using Components-only mode and Roles and permissions.\n\nThe next image shows how integrating your app can remove hard-coded content best maintained by other roles on your team, such as marketers, and copywriters.\n\nIn addition to visual editing, Builder also adds additional features that are less common in traditional headless CMSes, such as Targeting content and Content Entry insights.\n\nStructured CMS data has its purposes, and while it often isn't the best for things like pages and layouts, it can be great for a number of other use cases that structured data can be more ideal than pure visual editing.\n\nHow the data is structured\n\nBuilder is a headless CMS like any other. Create documents with Custom structured data fields, consume them through our SDKs and APIs, and render the data as you choose.\n\nOn top of this, Builder adds even more power by letting you Register custom components that can render dynamically, saving you from having to write all of this logic manually. Instead, you can pass the data to a render Builder provides, such as in the following snippet:\n\nFor pages and sections, Builder automatically populates a field called blocks that is a list of components to render and their options, as in the following snippet:\n\nWhat's next\nBest Practices: Builder Content Architecture\nCore Concepts in Builder Content\nFor Developers: Quickstart\nWas this article helpful?\n\nGet the latest from Builder.io\n\nBy submitting, you agree to our Privacy Policy.\n\nSubmit\n\nPLATFORM\n\nCode\nContent\nProduct Updates\n\nCOMPANY\n\nAbout\nCareers\nContact Sales\nBrand\n\nDEVELOPER\n\nDocumentation\nCode Docs\nContent Docs\n\nFRAMEWORKS\n\nDesign to Code\nCMS\nPage Builder\n\nUSE CASES\n\nApp Development\nPrototypes\nDesign to Code\nMarketing Sites\nE-commerce\nPersonalization\nHeadless CMS\nMulti-Brand CMS\nHeadless Commerce\n\nRESOURCES\n\nAll Resources\nBlog\nLivestreams\nGuides\nCustomer Stories\nCommunity Forum\nPartners\nAffiliate Program\nCMS Integrations\nCMS Blueprints\nExplainers\nGlossary\nFree Tools\nAgent-Native\n\nPOPULAR GUIDES\n\nFigma to Code Guide\nHeadless CMS Guide\nHeadless Commerce Guide\nComposable DXP Guide\n© 2026 BUILDER.IO, INC.\nSecurity\nPrivacy Policy\nTerms\nTrust Center\nCookie Preferences\n\n## Builder Developer Docs\nURL: https://www.builder.io/c/docs/developers\nDescription: Learn the differences between Builder Code and Builder Content from a developer perspective. Get a high-level idea of the differences and then dive in.\n\nSkip to content\nSkip to main content\nAgent-Native Hackathon winners revealed live Nov 13.\nDevelopers\nDev home\n\nBuilder Developer Docs\n\nSearch Builder.io\nCtrl\nK\n\nBuilder is a visual development platform that helps your team work in parallel so you can ship faster. Whether you’re building a new UI from Figma or enabling non-developers to manage content visually, Builder gives you tools that fit directly into your existing codebase.\n\nStart by choosing the product that's right for you:\n\nBuilder Code\n\nConvert Figma designs into clean, production-ready code\n\nBuilder Code is your AI-powered assistant for turning design files into responsive, accessible code — fast. Map your design system, sync components, and stay in control of the output with custom instructions.\n\nIdeal for building new features, modernizing legacy code, or speeding up prototyping.\n\nUse Builder Code if you:\n\nNeed to convert Figma designs into code\nWant to map design tokens and components\nWant to generate code that aligns with your team’s coding standards\n\nBuilder Content\n\nEmpower your team to create and manage content visually\n\nWith Builder Content, you define what’s editable and what stays in code. Let your team create landing pages, targeted sections, and structured content with a drag-and-drop Visual Editor — all while keeping control of your components, codebase, and hosting.\n\nIdeal for streamlining content updates, enabling non-devs, and reducing dev handoffs.\n\nUse Builder Content if you:\n\nWant non-devs to safely manage parts of your site\nNeed to A/B test or personalize content without engineering time\nPrefer visual editing with full control over your architecture\nWas this article helpful?\n\nGet the latest from Builder.io\n\nBy submitting, you agree to our Privacy Policy.\n\nSubmit\n\nPLATFORM\n\nCode\nContent\nProduct Updates\n\nCOMPANY\n\nAbout\nCareers\nContact Sales\nBrand\n\nDEVELOPER\n\nDocumentation\nCode Docs\nContent Docs\n\nFRAMEWORKS\n\nDesign to Code\nCMS\nPage Builder\n\nUSE CASES\n\nApp Development\nPrototypes\nDesign to Code\nMarketing Sites\nE-commerce\nPersonalization\nHeadless CMS\nMulti-Brand CMS\nHeadless Commerce\n\nRESOURCES\n\nAll Resources\nBlog\nLivestreams\nGuides\nCustomer Stories\nCommunity Forum\nPartners\nAffiliate Program\nCMS Integrations\nCMS Blueprints\nExplainers\nGlossary\nFree Tools\nAgent-Native\n\nPOPULAR GUIDES\n\nFigma to Code Guide\nHeadless CMS Guide\nHeadless Commerce Guide\nComposable DXP Guide\n© 2026 BUILDER.IO, INC.\nSecurity\nPrivacy Policy\nTerms\nTrust Center\nCookie Preferences\n\n## Download Onlook for Mac and Windows — Onlook\nURL: https://www.onlook.com/install\nDescription: Onlook is available for macOS and Windows. Start crafting in code in as little as 90 seconds — from download to design.\n\n27.8k\nStart crafting in code in as little as 90 seconds — from download to design.\n\nWorks with \nClaude and \nCodex – Others coming soon\n\nJoin the Linux waitlist\nComing soon\nDownload for Windows\nInstaller\nApple Silicon\nDownload\nMac Intel\nDownload\nThe fastest path from idea to reality.\n\nStart from scratch or open an existing repo. Explore, refine, and craft real mergeable work without ever leaving the canvas.\n\nDesign with any codebase.\n\nRun your codebase in a canvas. Build real features, craft mockups, tools, prototypes, Storybook stories, components, and more however you like.\n\nYour craft, supercharged with AI.\n\nOnlook runs Claude Code and Codex, with Cursor, OpenCode, and other agents coming soon.\n\nNot limited to HTML and CSS.\n\nWork in your real framework, components, and styling system. Onlook adapts to how your team builds instead of forcing a new way to work.\n\nEffortless developer setup.\n\nPoint Onlook at a repo and it runs. Dev servers start on their own and every exploration gets its own git branch, with no configuration to babysit.\n\nYour code stays yours.\n\nNo proprietary file format and no lock-in. Every change lands as plain code on a branch your team reviews and merges like any other.\n\nFAQ\nRead our FAQs\nWhat do I need to run it?\n\nA Mac with Apple Silicon or an Intel processor running macOS 13 or later, roughly 1 GB of disk space, and hopefully a coding project you're excited to work on. No worries if not — you can start from scratch.\n\nIs Onlook free?\n\nYes. Onlook connects to the AI subscription you already pay for, so there is no separate charge to use it — you bring your own key and nothing else changes about how you are billed.\n\nDoes my code leave my machine?\n\nYour project stays on your machine. Onlook opens it locally the same way your editor does; the only thing that goes out is what you send to your own AI provider when you ask it to make a change.\n\nCompany\nAbout\nWhy Onlook\nWhat is a Visual Engineer?\nFAQ\nBlog\nContact\nBook a Demo\nProduct\nGitHub Repo\nFeatures\nAI\nPrototyping\nVisual Builder\nPricing\nWorks with\nNext.js\nReact\nVite\nStorybook\nshadcn/ui\nFollow the Odyssey\nTerms of Service\nPrivacy Policy\nSitemap\n© 2026 On Off, Inc.\n\nWe use cookies to analyze site usage and improve your experience. If you decline, you won't be tracked other than for essential site functionality.\n\nDecline\nAccept\nProduct\nResources\nAbout\nJoin the Linux waitlist\nOther platforms",
+  "footage": [
+    {
+      "scene": "s1",
+      "query": "developer looking at computer screen",
+      "file": "footage/developer-looking-at-computer-screen-pixabay-174086.mp4",
+      "id": "pixabay-174086",
+      "page": "https://pixabay.com/videos/id-174086/",
+      "author": "riaz-baloch",
+      "tags": "robot, artificial intelligence, technology, developer, tech, computer, digital computer, future technology, futuristic",
+      "duration": 15,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2023/08/01/174086-850404739_large.mp4"
+    },
+    {
+      "scene": "s5",
+      "query": "hands typing on sleek keyboard",
+      "file": "footage/hands-typing-on-sleek-keyboard-pixabay-3174.mp4",
+      "id": "pixabay-3174",
+      "page": "https://pixabay.com/videos/id-3174/",
+      "author": "Coverr-Free-Footage",
+      "tags": "computer keyboard, typing, hands, female, keyboard, computer, technology, business, office, internet, type, key, communication, pc, information, white, working, letter, fingers",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3174-166338976_large.mp4"
+    },
+    {
+      "scene": "s9",
+      "query": "modern desk setup with mac",
+      "file": "footage/modern-desk-setup-with-mac-pixabay-154384.mp4",
+      "id": "pixabay-154384",
+      "page": "https://pixabay.com/videos/id-154384/",
+      "author": "IamFOSNA",
+      "tags": "camera, lens, photography, technology, equipment, setup, fujifilm, xpro, digital",
+      "duration": 15,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2023/03/12/154384-807362369_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "cloud data center servers",
+      "file": "footage/cloud-data-center-servers-pixabay-380334.mp4",
+      "id": "pixabay-380334",
+      "page": "https://pixabay.com/videos/id-380334/",
+      "author": "MrWashingt0n",
+      "tags": "data center, server room, cloud computing, data streaming, network infrastructure, information technology, cybersecurity, artificial intelligence, digital transformation, high speed data, technology background, futuristic network, enterprise storage, web hosting, telecommunication system, big data processing, computing power, digital connection, footage, motion blur, illuminated, perspective shot, symmetrical, ai generated",
+      "duration": 8,
+      "width": 2542,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2026/10/02/380334_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "programmer code on computer screen",
+      "file": "footage/programmer-code-on-computer-screen-pixabay-27706.mp4",
+      "id": "pixabay-27706",
+      "page": "https://pixabay.com/videos/id-27706/",
+      "author": "Ceos_Stock",
+      "tags": "glitch, code, programming, hacker, data, technology, digital, matrix, binary, network, internet, computer, coding, software, web, development, programmer",
+      "duration": 10,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2019/10/09/27706-365890968_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "artificial intelligence ai technology abstract",
+      "file": "footage/artificial-intelligence-ai-technology-ab-pixabay-330028.mp4",
+      "id": "pixabay-330028",
+      "page": "https://pixabay.com/videos/id-330028/",
+      "author": "WhiteHatDesigner",
+      "tags": "brain, artificial intelligence, ai, neuroscience, neural network, technology, innovation, idea, creativity, science, concept, glowing, intelligence, mind, abstract, thinking, machine learning, digital, human brain, futuristic, energy, ai generated",
+      "duration": 7,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/01/24/330028_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "network cables server rack",
+      "file": "footage/network-cables-server-rack-pixabay-171185.mp4",
+      "id": "pixabay-171185",
+      "page": "https://pixabay.com/videos/id-171185/",
+      "author": "MozoMozo",
+      "tags": "ai generated, robot, technology, future, screens, futuristic, sci fi, server, date",
+      "duration": 21,
+      "width": 1080,
+      "height": 1881,
+      "link": "https://cdn.pixabay.com/video/2023/07/12/171185-844787983_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "designer working laptop creative studio",
+      "file": "footage/designer-working-laptop-creative-studio-pixabay-10822.mp4",
+      "id": "pixabay-10822",
+      "page": "https://pixabay.com/videos/id-10822/",
+      "author": "Coverr-Free-Footage",
+      "tags": "keyboard, typing, writing, notebook, computer, technology, laptop, business, internet, work, office, person, hand, communication, working, using, connection, pc, information, desktop, web, workplace",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2017/07/23/10822-226624975_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "laptop screen code close up",
+      "file": "footage/laptop-screen-code-close-up-pixabay-303927.mp4",
+      "id": "pixabay-303927",
+      "page": "https://pixabay.com/videos/id-303927/",
+      "author": "izhar-ahamed",
+      "tags": "eyeglasses, reflection, monitor, digital, technology, screen, coding, close-up, focus, blue light, computer, software, internet, data, concentration, eyes, interface, electronics, wearable, vision, optics, glasses, perspective, programming, ai generated",
+      "duration": 9,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2025/09/14/303927_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "smiling developer working laptop",
+      "file": "footage/smiling-developer-working-laptop-pixabay-3145.mp4",
+      "id": "pixabay-3145",
+      "page": "https://pixabay.com/videos/id-3145/",
+      "author": "Life-Of-Vids",
+      "tags": "laptop, keyboard, typing, writing, notebook, developer, user, using, study, work, top view, working, computer, technology, communication",
+      "duration": 43,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3145-166335957_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "macbook laptop on desk",
+      "file": "footage/macbook-laptop-on-desk-pixabay-19454.mp4",
+      "id": "pixabay-19454",
+      "page": "https://pixabay.com/videos/id-19454/",
+      "author": "andrepazleal",
+      "tags": "macbook, apple, macbook air, technology, mac, notebook, office, business, desk, computer, laptop",
+      "duration": 20,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2018/11/21/19454-302196093_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "laptop computer desk workspace",
+      "file": "footage/laptop-computer-desk-workspace-pixabay-251763.mp4",
+      "id": "pixabay-251763",
+      "page": "https://pixabay.com/videos/id-251763/",
+      "author": "globleranksSEO",
+      "tags": "computer, laptop, technology, office, work, desk, workspace, macbook, monitor, tech, editing, pc",
+      "duration": 15,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2025/01/10/251763_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "software developer coding laptop",
+      "file": "footage/software-developer-coding-laptop-pixabay-348042.mp4",
+      "id": "pixabay-348042",
+      "page": "https://pixabay.com/videos/id-348042/",
+      "author": "doktorkleinmusic",
+      "tags": "coding, programmer, developer, screen, glasses, reflection, code, technology, focus, work, computer, ai, cyber, night, concentration, software, programming, digital, internet, business, data, hacking, hacker, ai generated",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/21/348042_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "code editor screen programming",
+      "file": "footage/code-editor-screen-programming-pixabay-377176.mp4",
+      "id": "pixabay-377176",
+      "page": "https://pixabay.com/videos/id-377176/",
+      "author": "simovina",
+      "tags": "code, coding, programming, source code, typing, code editor, autocomplete, code suggestions, software development, computer screen, technology, glitch, glitch effect, digital distortion, rgb split, scanlines, digital noise, interference, distorted text, cyberpunk, retro, abstract, vhs, vhs effect",
+      "duration": 24,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2026/09/18/377176_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "woman working laptop office vertical",
+      "file": "footage/woman-working-laptop-office-vertical-pixabay-1046.mp4",
+      "id": "pixabay-1046",
+      "page": "https://pixabay.com/videos/id-1046/",
+      "author": "Coverr-Free-Footage",
+      "tags": "keyboard, hands, writing, computer, mouse, typing, project, design, coffee mug, working, study, technology, business, office",
+      "duration": 17,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2015/10/16/1046-142621379_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "hands typing laptop keyboard vertical",
+      "file": "footage/hands-typing-laptop-keyboard-vertical-pixabay-3188.mp4",
+      "id": "pixabay-3188",
+      "page": "https://pixabay.com/videos/id-3188/",
+      "author": "Coverr-Free-Footage",
+      "tags": "computer keyboard, typing, white, keyboard, computer, technology, business, office, internet, communication, fingers, hands, fast, text, messaging",
+      "duration": 14,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3188-166339073_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "creative workspace tablet designer vertical",
+      "file": "footage/creative-workspace-tablet-designer-verti-pixabay-154787.mp4",
+      "id": "pixabay-154787",
+      "page": "https://pixabay.com/videos/id-154787/",
+      "author": "nitin1111",
+      "tags": "flowers, clouds, sun, blossom, sunrise, peaceful, vertical, nature",
+      "duration": 7,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2023/03/15/154787-808530571_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "programmer working at desk computer",
+      "file": "footage/programmer-working-at-desk-computer-pixabay-3160.mp4",
+      "id": "pixabay-3160",
+      "page": "https://pixabay.com/videos/id-3160/",
+      "author": "Coverr-Free-Footage",
+      "tags": "laptop, keyboard, typing, writing, notebook, computer, work, business, technology, office, communication, working, education, desk, programmer, computer keyboard, programming, hands, fingers",
+      "duration": 13,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/05/12/3160-166338886_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "designer using tablet at desk",
+      "file": "footage/designer-using-tablet-at-desk-pixabay-107491.mp4",
+      "id": "pixabay-107491",
+      "page": "https://pixabay.com/videos/id-107491/",
+      "author": "patw64",
+      "tags": "technology, using tablet, ipad, people, business",
+      "duration": 33,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2022/02/12/107491-679592539_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "man typing laptop keyboard close up",
+      "file": "footage/man-typing-laptop-keyboard-close-up-pixabay-43559.mp4",
+      "id": "pixabay-43559",
+      "page": "https://pixabay.com/videos/id-43559/",
+      "author": "PhotoDhaba",
+      "tags": "keyboard, laptop, computer, technology, work, typing, desk, student, workplace, working, work from home, home, office, internet, study, web, pc, notebook, keyboard typing, typing on keyboard, hands on laptop, hands on keyboard",
+      "duration": 18,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2020/07/01/43559-436237492_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "graphic designer working computer",
+      "file": "footage/graphic-designer-working-computer-pixabay-245762.mp4",
+      "id": "pixabay-245762",
+      "page": "https://pixabay.com/videos/id-245762/",
+      "author": "OWNFILTERS",
+      "tags": "transition, paper, texture, letter, green, design, pattern, computer, laptop, work, food, light, portrait, tree, graphics, business, designer, nature, template, face, workplace, keyboard, creative, banner, monitor",
+      "duration": 8,
+      "width": 2560,
+      "height": 1440,
+      "link": "https://cdn.pixabay.com/video/2024/12/09/245762_medium.mp4"
+    }
+  ]
+}
