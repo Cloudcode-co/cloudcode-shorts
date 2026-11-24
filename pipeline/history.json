@@ -787,5 +787,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 6
+  },
+  {
+    "slug": "xnulinux-macos-tren-linux-arm64",
+    "topic": "Trải nghiệm xnulinux: Chạy trực tiếp ứng dụng và GUI macOS trên Linux arm64, so sánh với Darling",
+    "format": "tutorial",
+    "date": "2026-11-24",
+    "direction": "terminal-tutorial",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 2
   }
 ]

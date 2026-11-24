@@ -1,0 +1,202 @@
+{
+  "slug": "xnulinux-macos-tren-linux-arm64",
+  "format": "explainer",
+  "topic": "Trải nghiệm xnulinux: Chạy trực tiếp ứng dụng và GUI macOS trên Linux arm64, so sánh với Darling",
+  "title": "Chạy desktop macOS trên Linux arm64 không cần máy ảo?",
+  "caption": "xnulinux nạp trực tiếp kernel XNU của macOS làm kernel module trên Linux arm64, chạy được cả WindowServer và Safari.",
+  "hashtags": [
+    "#xnulinux",
+    "#macoslinux",
+    "#arm64",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Energetic electronic synthwave with driving bassline, clean tech atmosphere, modern developer vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "electronic pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth bass",
+        "fast tempo",
+        "tech rhythm"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s5",
+      "styles": [
+        "energetic",
+        "triumphant",
+        "punchy beats"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "warm finish",
+        "clean outro",
+        "melodic synth"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/AFK-surf/xnulinux",
+    "https://github.com/darlinghq/www.darlinghq.org",
+    "https://github.com/RealNarcissus/macRun"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Anh em có tin Linux arm64 chạy được cả desktop macOS mà không cần máy ảo?",
+      "headline": "macOS trên Linux không hypervisor",
+      "lines": [
+        "Chạy GUI macOS nguyên bản",
+        "Không cần hypervisor máy ảo"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": "developer working on computer setup"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì Darling chỉ dịch syscall dòng lệnh, còn macRun chỉ bọc lại app Electron. [curious] Nhưng xnulinux lại nạp thẳng kernel XNU vào làm module của Linux.",
+      "headline": "Khác biệt với Darling và macRun",
+      "lines": [
+        "Darling: chỉ hỗ trợ CLI",
+        "macRun: thay thế runtime Electron",
+        "xnulinux: nạp trực tiếp kernel XNU"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux",
+        "RealNarcissus/macRun"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Tức là không hề có tầng hypervisor trung gian nào giữa hai hệ điều hành. [impressed] Tiến trình macOS chạy song song ngay cạnh tiến trình Linux trên cùng CPU vật lý.",
+      "headline": "Chạy song song không hypervisor",
+      "lines": [
+        "Không có hypervisor trung gian",
+        "Tiến trình macOS và Linux chạy chung CPU"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Mỗi CPU của macOS thực chất là một thread Linux ghim vào CPU vật lý. Vì vậy, XNU nhận bộ nhớ CMA từ Linux và tự quản lý qua pmap riêng với trang bốn kilobyte.",
+      "headline": "Cơ chế điều phối CPU và bộ nhớ",
+      "lines": [
+        "Mỗi CPU macOS là một Linux thread",
+        "XNU tự quản lý bộ nhớ qua CMA và pmap"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Nhờ đó, macOS 27 boot lên màn hình desktop tự đăng nhập chỉ mất từ 31 đến 48 giây! Nhanh hơn cả máy ảo Apple Virtualization trên cùng máy Mac vốn mất 49 giây.",
+      "headline": "Boot desktop nhanh hơn máy ảo",
+      "lines": [
+        "Boot desktop: 31–48 giây",
+        "Apple Virtualization VM: 49 giây"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Hệ thống kéo được cả WindowServer, Dock và Finder. [cheerfully] Bài test 30 phút mở 40 lượt Safari, Notes và Spotlight hoàn toàn không gặp lỗi panic hay crash nào.",
+      "headline": "Chạy được cả WindowServer và Safari",
+      "lines": [
+        "Đầy đủ WindowServer, Finder, Safari",
+        "Vượt qua stress test 30 phút mở app liên tục"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": "developer smiling looking at screen"
+    },
+    {
+      "id": "s7",
+      "text": "Để dựng hệ thống, anh em cần một máy Mac cài Xcode để trích xuất đĩa cài và chạy tuần tự các script chính thức này trên host Linux arm64.",
+      "headline": "Quy trình cài đặt xnulinux",
+      "lines": [
+        "Cần máy Mac có Xcode để làm đĩa",
+        "Chạy script chính thức trên host arm64"
+      ],
+      "commands": [
+        "scripts/vm-xnu-build.sh",
+        "scripts/vm-xnu-rebuild.sh",
+        "scripts/mk-macvm-disk.sh",
+        "scripts/xnulinux-boot.sh"
+      ],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Anh em có thể cấu hình nó thành dịch vụ systemd để tự khởi động lại nếu panic. [thoughtful] Nhưng cần lưu ý: trang bốn kilobyte chậm hơn mười sáu kilobyte native, và kernel Linux sẽ bị đánh dấu tainted.",
+      "headline": "Chạy systemd và lưu ý",
+      "lines": [
+        "Chạy nền qua xnulinux.service",
+        "Bộ nhớ 4K chậm hơn 16K native",
+        "Kernel Linux bị gắn cờ tainted"
+      ],
+      "commands": [
+        "scripts/install-service.sh"
+      ],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": "server room datacenter glowing lights"
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Anh em lưu video này lại để thử khi có máy Linux arm64, và bấm theo dõi kênh nhé! Liệu cách nạp kernel này có thay thế hoàn toàn máy ảo macOS?",
+      "headline": "Lưu lại và theo dõi",
+      "lines": [
+        "Lưu video để vọc xnulinux",
+        "Bấm follow để cập nhật thủ thuật mới"
+      ],
+      "commands": [],
+      "repos": [
+        "AFK-surf/xnulinux"
+      ],
+      "footage": ""
+    }
+  ]
+}
