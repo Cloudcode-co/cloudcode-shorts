@@ -831,5 +831,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 5
+  },
+  {
+    "slug": "davish-linux-vps-desktop-ssh",
+    "topic": "Trải nghiệm davish: Quản lý VPS Linux với giao diện desktop qua SSH không cần cài agent, so sánh với Cockpit",
+    "format": "whatif",
+    "date": "2026-11-25",
+    "direction": "what-if-sim",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]

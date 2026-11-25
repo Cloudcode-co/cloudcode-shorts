@@ -1,0 +1,197 @@
+{
+  "slug": "davish-linux-vps-desktop-ssh",
+  "format": "explainer",
+  "topic": "Trải nghiệm davish: Quản lý VPS Linux với giao diện desktop qua SSH không cần cài agent, so sánh với Cockpit",
+  "title": "Quản lý VPS Linux bằng giao diện desktop không cần agent?",
+  "caption": "Trải nghiệm Davish: biến VPS Linux thành desktop qua SSH thuần, hoàn toàn agentless và bảo mật.",
+  "hashtags": [
+    "#davish",
+    "#sysadmin",
+    "#selfhosted",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal low-fi tech synth beat, rhythmic digital pulses, clean sub bass, futuristic, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady groove",
+        "modern tech"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s7",
+      "styles": [
+        "confident",
+        "driving bass",
+        "melodic synth"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "resolved",
+        "fading electronic"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/2hjaito/davish",
+    "https://github.com/jlcodes99/cockpit-tools",
+    "https://github.com/1Panel-dev/1Panel",
+    "https://davish.app"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Quản lý VPS Linux bằng giao diện desktop mà không cài agent hay mở port?",
+      "headline": "Desktop cho Linux VPS",
+      "lines": [
+        "Không cần cài agent",
+        "Không cần mở port mới"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": "developer working on server late night"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì muốn có giao diện, anh em phải curl script cài web panel như 1Panel vào thẳng server rồi mở thêm port web.",
+      "headline": "Cách quản lý truyền thống",
+      "lines": [
+        "Cài trực tiếp lên server",
+        "Mở port dịch vụ web"
+      ],
+      "commands": [
+        "bash -c \"$(curl -sSL https://resource.1panel.pro/v2/quick_start.sh)\""
+      ],
+      "repos": [
+        "1Panel-dev/1Panel"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn Davish thì agentless hoàn toàn, tức là nó chỉ chạy từ máy cá nhân của anh em qua cổng SSH và SFTP sẵn có.",
+      "headline": "Davish: Hoàn toàn Agentless",
+      "lines": [
+        "Chỉ cần OpenSSH và SFTP",
+        "Chạy client từ máy cá nhân"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": "modern server room racks glowing"
+    },
+    {
+      "id": "s4",
+      "text": "[casually] Davish kết nối thẳng bằng SSH key rồi đưa vào desktop riêng, nên server không phải chạy thêm bất kỳ tiến trình nền nào.",
+      "headline": "Kết nối thẳng qua SSH Key",
+      "lines": [
+        "Không màn hình đăng nhập web",
+        "Không tiến trình chạy ngầm"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Mọi lệnh can thiệp như tắt service hay khởi động container đều hiện rõ câu lệnh trước khi chạy, vì vậy anh em kiểm soát được mọi thứ.",
+      "headline": "Minh bạch từng câu lệnh",
+      "lines": [
+        "Hiện lệnh trước khi thực thi",
+        "Tránh thao tác nhầm lẫn"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Tất cả được ghi lại trong command log để xuất thành shell script, còn mật khẩu sudo chỉ lưu tạm trên RAM mười lăm phút.",
+      "headline": "An toàn thông tin đăng nhập",
+      "lines": [
+        "Xuất log ra shell script",
+        "Sudo password xóa sau 15 phút"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[excited] Mỗi server là một workspace riêng, cho phép kéo thả file giữa hai VPS và quản lý Docker, Nginx hay Cron ngay trên cửa sổ.",
+      "headline": "Workspace đa server",
+      "lines": [
+        "Kéo thả file giữa các server",
+        "Quản lý Docker, Nginx, Cron"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": "programmer multitasking multiple monitors"
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Dù vậy, ứng dụng chưa ký số nên hệ điều hành sẽ cảnh báo ở lần mở đầu, và trên Linux dùng NVIDIA thì GPU render mặc định bị tắt.",
+      "headline": "Lưu ý khi sử dụng",
+      "lines": [
+        "Cần xác nhận SmartScreen hoặc macOS",
+        "Tùy chọn bật GPU trên Linux NVIDIA"
+      ],
+      "commands": [
+        "DAVISH_WEBVIEW_GPU=always ./Davish"
+      ],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[cheerfully] Anh em lưu video lại để thử quản lý VPS bằng giao diện desktop không cần cài agent, và bấm follow nhé!",
+      "headline": "Trải nghiệm ngay Davish",
+      "lines": [
+        "Lưu lại để thử",
+        "Follow kênh để cập nhật công cụ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "2hjaito/davish"
+      ],
+      "footage": ""
+    }
+  ]
+}
