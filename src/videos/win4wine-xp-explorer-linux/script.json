@@ -1,0 +1,195 @@
+{
+  "slug": "win4wine-xp-explorer-linux",
+  "format": "explainer",
+  "topic": "Trải nghiệm win4wine trên Linux: Chạy trực tiếp giao diện Windows XP Explorer qua Wine, so sánh với Chicago95",
+  "title": "Chạy thẳng Explorer Windows XP trên Linux?",
+  "caption": "Không chỉ là theme như Chicago95, win4wine chạy trực tiếp explorer.exe thật của Windows XP làm desktop shell trên Linux.",
+  "hashtags": [
+    "#win4wine",
+    "#windowsxp",
+    "#reactos",
+    "#linuxvn",
+    "#congnghe"
+  ],
+  "musicPrompt": "Nostalgic 2000s synth-pop meets modern lo-fi tech groove with crisp beats, retro digital synths, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "retro synth",
+        "quirky",
+        "curious intro"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "steady beat",
+        "electronic",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s5",
+      "styles": [
+        "funky synth bass",
+        "energetic groove",
+        "nostalgic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s8",
+      "styles": [
+        "warm chiptune",
+        "relaxed fade",
+        "outro groove"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/mikuta0407/win4wine",
+    "https://github.com/grassmunk/Chicago95"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Chạy thẳng explorer.exe của Windows XP làm desktop Linux, anh em thử bao giờ chưa?",
+      "headline": "Explorer.exe trên Linux",
+      "lines": [
+        "Chạy explorer.exe trên Wine",
+        "Không chỉ là bộ giao diện"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": "retro computer screen setup"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì các dự án như Chicago95 chỉ là bộ theme bọc ngoài cho desktop XFCE.",
+      "headline": "Khác biệt với Chicago95",
+      "lines": [
+        "Chicago95: theme XFCE/GTK",
+        "Chỉ đổi giao diện bên ngoài"
+      ],
+      "commands": [],
+      "repos": [
+        "grassmunk/Chicago95"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn win4wine thì chạy trực tiếp nhị phân explorer chấm exe thật trích xuất từ ISO Windows XP.",
+      "headline": "Nhị phân XP nguyên bản",
+      "lines": [
+        "Trích xuất từ ISO Windows XP",
+        "Dùng explorer.exe nguyên bản"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Tức là Taskbar, Start Menu hay cửa sổ thư mục đều là đồ thật vận hành qua bản Wine đã vá.",
+      "headline": "Wine làm desktop shell",
+      "lines": [
+        "Taskbar và Start Menu thật",
+        "Wine 11.0 vá 151 bản sửa lỗi"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Nhờ bridge-wm, ứng dụng Linux cũng mang viền cửa sổ XP, nằm gọn trong All Programs và khay hệ thống.",
+      "headline": "Tích hợp ứng dụng Linux",
+      "lines": [
+        "Cửa sổ Linux mang viền XP",
+        "Hỗ trợ khay hệ thống và Alt+Tab"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[laughs] Thậm chí anh em còn mở được Internet Explorer 6 và Windows Media Player 9 trích xuất từ đĩa cài.",
+      "headline": "Chạy IE6 và Media Player",
+      "lines": [
+        "Internet Explorer 6 hoạt động",
+        "Windows Media Player 9 từ ISO"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Nếu không có ISO Windows XP, dự án cho phép dùng luôn shell nguồn mở của ReactOS mang phong cách Windows 2000.",
+      "headline": "Tùy chọn ReactOS",
+      "lines": [
+        "Không bắt buộc có ISO XP",
+        "Giao diện Windows 2000 Classic"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[thoughtful] Để thử nghiệm, anh em cần Debian 13 cài mới rồi chạy các lệnh sau, lưu ý biên dịch Wine mất khoảng một tiếng rưỡi.",
+      "headline": "Cách cài trên Debian 13",
+      "lines": [
+        "Chỉ thử trên Debian 13 mới tinh",
+        "Biên dịch Wine mất ~1.5 giờ"
+      ],
+      "commands": [
+        "git clone https://github.com/mikuta0407/win4wine.git ~/win4wine",
+        "cd ~/win4wine",
+        "scripts/setup.sh --media /path/to/WindowsXPSP3.iso --greeter"
+      ],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": "developer typing terminal desk"
+    },
+    {
+      "id": "s9",
+      "text": "[warmly] Anh em lưu lại video để thử trên máy ảo nhé, nhấn theo dõi để cùng vọc explorer.exe của Windows XP!",
+      "headline": "Lưu lại thử trên máy ảo",
+      "lines": [
+        "Khuyến cáo thử trên máy ảo",
+        "Follow để đón xem mẹo mới"
+      ],
+      "commands": [],
+      "repos": [
+        "mikuta0407/win4wine"
+      ],
+      "footage": ""
+    }
+  ]
+}

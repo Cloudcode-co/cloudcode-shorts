@@ -1,0 +1,88 @@
+{
+  "style": "lofi",
+  "bpm": 86,
+  "key": "F",
+  "mode": "major",
+  "sections": [
+    {
+      "name": "Hook",
+      "energy": 0.45,
+      "chords": [
+        4,
+        5,
+        3,
+        6
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Build",
+      "energy": 0.65,
+      "chords": [
+        4,
+        5,
+        3,
+        6
+      ],
+      "drums": "light",
+      "lead": false
+    },
+    {
+      "name": "Drop",
+      "energy": 0.95,
+      "chords": [
+        4,
+        5,
+        3,
+        6
+      ],
+      "drums": "full",
+      "lead": true
+    },
+    {
+      "name": "Outro",
+      "energy": 0.35,
+      "chords": [
+        4,
+        5,
+        3,
+        6
+      ],
+      "drums": "none",
+      "lead": false
+    }
+  ],
+  "motif": [
+    {
+      "beat": 0,
+      "length": 1,
+      "degree": 5
+    },
+    {
+      "beat": 1.5,
+      "length": 0.5,
+      "degree": 6
+    },
+    {
+      "beat": 2,
+      "length": 1.5,
+      "degree": 8
+    },
+    {
+      "beat": 4,
+      "length": 1,
+      "degree": 5
+    },
+    {
+      "beat": 5.5,
+      "length": 0.5,
+      "degree": 4
+    },
+    {
+      "beat": 6,
+      "length": 1.5,
+      "degree": 3
+    }
+  ]
+}

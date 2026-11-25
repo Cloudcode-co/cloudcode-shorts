@@ -809,5 +809,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "win4wine-xp-explorer-linux",
+    "topic": "Trải nghiệm win4wine trên Linux: Chạy trực tiếp giao diện Windows XP Explorer qua Wine, so sánh với Chicago95",
+    "format": "brief",
+    "date": "2026-11-25",
+    "direction": "news-desk",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 5
   }
 ]
