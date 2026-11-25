@@ -1,0 +1,215 @@
+{
+  "slug": "songe-homelab-vps-local-ai-training",
+  "format": "explainer",
+  "topic": "Tự chạy songe trên VPS và Homelab: Tận dụng tài nguyên nhàn rỗi để huấn luyện AI cục bộ, so sánh với Unsloth",
+  "title": "Anh em cắm VPS cả ngày chỉ để chạy model AI thôi sao?",
+  "caption": "Tận dụng VPS và máy chủ nhàn rỗi để AI tự học qua Songe thay vì fine-tune thủ công như Unsloth.",
+  "hashtags": [
+    "#songe",
+    "#unsloth",
+    "#homelab",
+    "#ai",
+    "#laptrinh"
+  ],
+  "musicPrompt": "Futuristic minimal electronic synthwave with warm pulsing bassline and clean tech groove no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "sparse",
+        "subtle pulse"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising synth",
+        "tech groove",
+        "driving bass"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s6",
+      "styles": [
+        "bright arpeggios",
+        "confident beat",
+        "electronic punch"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "steady groove",
+        "warm fadeout"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/sous-labs/songe",
+    "https://github.com/unslothai/unsloth",
+    "https://github.com/axolotl-ai-cloud/axolotl",
+    "https://github.com/Orangeices/llama-factory",
+    "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Anh em cắm VPS cả ngày chỉ để chạy model AI thôi sao? [curious]",
+      "headline": "Tài nguyên nhàn rỗi đang bị lãng phí?",
+      "lines": [
+        "Máy chủ chạy 24/7",
+        "AI chỉ trả lời thụ động"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server rack lights flashing"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì muốn AI hiểu thói quen của mình, anh em phải chuẩn bị dataset rồi dùng Unsloth để huấn luyện theo mẻ. [casually]",
+      "headline": "Cách huấn luyện truyền thống",
+      "lines": [
+        "Unsloth: gom dataset thủ công",
+        "Huấn luyện hàng loạt theo mẻ",
+        "Yêu cầu tối thiểu 3GB VRAM"
+      ],
+      "commands": [],
+      "repos": [
+        "unslothai/unsloth"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Còn Songe thì khác, nó dựng một proxy trung gian tại cổng 127.0.0.1:7613 giữa agent và model server. [excited]",
+      "headline": "Proxy Songe",
+      "lines": [
+        "agent ──► Songe (127.0.0.1:7613)",
+        "Songe ──► model server",
+        "Ghi nhận luồng làm việc thực tế"
+      ],
+      "commands": [],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Khi anh em gõ lệnh bằng opencode hay pi, Songe ghi nhận các lỗi công cụ và những đoạn anh em sửa lại câu trả lời. [thoughtful]",
+      "headline": "Tự học từ thói quen",
+      "lines": [
+        "Bắt lỗi công cụ thực tế",
+        "Ghi nhớ chỉnh sửa của người dùng",
+        "Không gửi dữ liệu ra ngoài"
+      ],
+      "commands": [],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": "developer working desk at night"
+    },
+    {
+      "id": "s5",
+      "text": "Tức là lúc anh em đi ngủ, máy tính nhàn rỗi và bộ nhớ trống, Songe sẽ tự kích hoạt cơ chế Dream để mô hình tự học. [warmly]",
+      "headline": "Cơ chế Dream khi máy nhàn rỗi",
+      "lines": [
+        "Chỉ chạy khi agent nghỉ",
+        "Dừng ngay khi người dùng thao tác lại",
+        "Tận dụng chu kỳ máy tính rảnh rỗi"
+      ],
+      "commands": [],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": "man sleeping bed bedroom"
+    },
+    {
+      "id": "s6",
+      "text": "Quick Dream mất vài phút cập nhật prompt, còn Deep Dream thì tự sinh kịch bản thực hành rồi huấn luyện adapter riêng. [impressed]",
+      "headline": "Quick Dream và Deep Dream",
+      "lines": [
+        "Quick Dream: cập nhật chỉ dẫn nhanh",
+        "Deep Dream: huấn luyện adapter cục bộ",
+        "Chưng cất on-policy tự động"
+      ],
+      "commands": [],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Bản mới chỉ được áp dụng nếu vượt qua bài test chất lượng, nên nếu không ưng ý, anh em quay lại bản cũ cực dễ. [casually]",
+      "headline": "An toàn và dễ đảo ngược",
+      "lines": [
+        "Tự kiểm tra kết quả trước khi áp dụng",
+        "Hoàn tác bất kỳ lúc nào"
+      ],
+      "commands": [
+        "songe undo"
+      ],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Vì vậy anh em lưu ý, VPS không có GPU rời thì chỉ ghi nhận được dữ liệu chứ không Deep Dream được như card NVIDIA hay Apple Silicon. [thoughtful]",
+      "headline": "Yêu cầu phần cứng",
+      "lines": [
+        "NVIDIA / AMD: hỗ trợ qua PyTorch",
+        "Apple Silicon: hỗ trợ qua MLX",
+        "CPU-only: chỉ serve và ghi log"
+      ],
+      "commands": [],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Để cài đặt Songe, anh em chỉ cần gõ đúng hai lệnh này qua uv tool là xong. [cheerfully]",
+      "headline": "Cài đặt Songe",
+      "lines": [
+        "Cài Songe vào môi trường riêng",
+        "Tự động nhận diện server và agent"
+      ],
+      "commands": [
+        "uv tool install songe",
+        "songe init"
+      ],
+      "repos": [
+        "sous-labs/songe"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Lưu video lại để tối ưu VPS, bấm follow kênh nhé, hay là anh em vẫn muốn cắm máy cả ngày chỉ để chạy model AI thôi? [laughs]",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Unsloth cho dataset lớn",
+        "Songe cho tự học mỗi đêm",
+        "Follow để đón tip công nghệ mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    }
+  ]
+}

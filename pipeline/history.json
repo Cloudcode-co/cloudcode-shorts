@@ -820,5 +820,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 5
+  },
+  {
+    "slug": "songe-homelab-vps-local-ai-training",
+    "topic": "Tự chạy songe trên VPS và Homelab: Tận dụng tài nguyên nhàn rỗi để huấn luyện AI cục bộ, so sánh với Unsloth",
+    "format": "explainer",
+    "date": "2026-11-25",
+    "direction": "ops-console",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 5
   }
 ]
