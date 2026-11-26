@@ -1,0 +1,229 @@
+{
+  "slug": "lookatmyquant-llm-linux",
+  "format": "explainer",
+  "topic": "Tối ưu LLM trên Linux với lookatmyquant: Nén model chính xác gấp 12 lần so với Q4_K_M của llama.cpp",
+  "title": "Nén LLM chính xác gấp 12 lần llama.cpp?",
+  "caption": "Compiler LookAtMyQuant nén model cùng dung lượng nhưng chính xác hơn Q4_K_M của llama.cpp tới 12 lần.",
+  "hashtags": [
+    "#lookatmyquant",
+    "#llamacpp",
+    "#localllm",
+    "#quantization",
+    "#congnghe"
+  ],
+  "musicPrompt": "fast clean modular synth pulses with light tech beat, minimal progressive techno, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving",
+        "steady pulse",
+        "tech groove"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "bright",
+        "energetic",
+        "punchy"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "calm",
+        "fading pulse",
+        "smooth"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/ShinMegamiBoson/lookatmyquant",
+    "https://github.com/kesperinc/ggerganov_llama.cpp",
+    "https://github.com/AutoGPTQ/AutoGPTQ",
+    "https://lookatmyquant.com/compiler/",
+    "https://lookatmyquant.com/2/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Cùng kích thước file, nén kiểu gì để mô hình chuẩn gấp 12 lần?",
+      "headline": "Nén model chuẩn gấp 12 lần",
+      "lines": [
+        "Cùng dung lượng file Q4_K_M",
+        "Độ lệch KL thấp hơn 12 lần"
+      ],
+      "commands": [],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[curious] Anh em tự host mô hình trên Linux chắc quá quen với chuẩn Q4_K_M của llama.cpp đúng không?",
+      "headline": "Công thức nén quen thuộc",
+      "lines": [
+        "llama.cpp Q4_K_M",
+        "Áp dụng cố định cho đa số tensor"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "developer at a desk at night"
+    },
+    {
+      "id": "s3",
+      "text": "[casually] Thường thì llama.cpp dùng một công thức cố định cho mọi tầng, còn LookAtMyQuant lại là một compiler lượng tử hóa.",
+      "headline": "Compiler lượng tử hóa",
+      "lines": [
+        "Thường thì: công thức cố định",
+        "Còn LookAtMyQuant: đo tổn hại từng phần"
+      ],
+      "commands": [],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Tức là nó chủ động đo xem nén từng mảnh trọng số sẽ làm hỏng đầu ra bao nhiêu, rồi mới chia dung lượng.",
+      "headline": "Đo đạc trước khi nén",
+      "lines": [
+        "Đo tổn hại từng khối ma trận",
+        "Tối ưu ngân sách bit chính xác"
+      ],
+      "commands": [],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[excited] Ví dụ trên Gemma 4 E2B, riêng bảng lookup mỗi tầng đã chiếm tới hai phẩy ba mươi lăm tỷ trọng số.",
+      "headline": "Bảng lookup khổng lồ",
+      "lines": [
+        "Gemma 4 E2B: 4.63 tỷ weights",
+        "Lookup table: 2.35 tỷ weights"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[impressed] llama.cpp nén bảng này ở Q6_K mất một phẩy chín mươi ba gigabyte, nhưng compiler này hạ thẳng xuống IQ4_XS chỉ bốn phẩy hai mươi lăm bit.",
+      "headline": "Cắt giảm đúng chỗ",
+      "lines": [
+        "llama.cpp: Q6_K (1.93 GB)",
+        "LookAtMyQuant: IQ4_XS (4.25 bit)"
+      ],
+      "commands": [],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[casually] Vì vậy nó tiết kiệm được không phẩy sáu mươi tám gigabyte, dồn toàn bộ lượng bit dôi dư đó để giữ ma trận tính toán ở Q8_0 hoặc BF16.",
+      "headline": "Tái phân bổ ngân sách",
+      "lines": [
+        "Tiết kiệm: 0.68 GB",
+        "Dồn bit cho ma trận: Q8_0 hoặc BF16"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "server room flashing lights"
+    },
+    {
+      "id": "s8",
+      "text": "[excited] Kết quả là độ lệch KL giảm 12 lần, điểm toán GSM8K tăng từ 50% lên tận 59% so với Q4_K_M gốc.",
+      "headline": "Hiệu năng thực tế",
+      "lines": [
+        "KL divergence: giảm 12x",
+        "GSM8K: 50% -> 59%"
+      ],
+      "commands": [],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Chưa hết, trong các ma trận input, 10% số hàng mang tới 79% thông tin Fisher, nên nó chia bit linh hoạt theo từng hàng.",
+      "headline": "Phân bổ theo Fisher",
+      "lines": [
+        "10% số hàng mang 79% Fisher information",
+        "Phân bổ bit không đồng đều"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Cài đặt trên Linux GPU, anh em cài gói hỗ trợ CUDA này character-by-character.",
+      "headline": "Cài đặt trên Linux",
+      "lines": [
+        "Hỗ trợ CUDA runtime",
+        "Chạy qua pip"
+      ],
+      "commands": [
+        "pip install -e \".[cuda]\""
+      ],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "[casually] Sau đó chạy trực tiếp model với lệnh lamq generate trên thiết bị CUDA.",
+      "headline": "Chạy mô hình",
+      "lines": [
+        "Inference trực tiếp trên GPU"
+      ],
+      "commands": [
+        "lamq generate shinmegamiboson/Inkling-2-Mini-LookAtMyQuant-8.9GB --device cuda -p \"What is 17 times 23?\""
+      ],
+      "repos": [
+        "ShinMegamiBoson/lookatmyquant"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s12",
+      "text": "[warmly] Anh em lưu video lại để thử tối ưu server nhé, follow kênh để xem thêm mẹo nén mô hình chuẩn gấp 12 lần!",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video thử ngay",
+        "Follow kênh để xem thêm mẹo LLM"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "happy young developer smiling"
+    }
+  ]
+}

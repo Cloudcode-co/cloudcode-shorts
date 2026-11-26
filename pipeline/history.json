@@ -842,5 +842,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "lookatmyquant-llm-linux",
+    "topic": "Tối ưu LLM trên Linux với lookatmyquant: Nén model chính xác gấp 12 lần so với Q4_K_M của llama.cpp",
+    "format": "brief",
+    "date": "2026-11-26",
+    "direction": "news-desk",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
