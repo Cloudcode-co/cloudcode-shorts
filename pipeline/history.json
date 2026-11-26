@@ -864,5 +864,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "homelab-laptop-ve-chai",
+    "topic": "laptop nát làm server homelab bị mẹ bán ve chai",
+    "format": "meme",
+    "date": "2026-11-26",
+    "direction": "meme-skit",
+    "pacing": "Fast cuts: a new shot or visual change at least every 1.5s.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]

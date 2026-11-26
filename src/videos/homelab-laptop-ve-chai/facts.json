@@ -1,0 +1,99 @@
+{
+  "topic": "laptop nát làm server homelab bị mẹ bán ve chai",
+  "date": "2026-11-26",
+  "repos": [],
+  "notes": null,
+  "memes": [
+    {
+      "scene": "s1",
+      "query": "cat typing laptop",
+      "file": "memes/cat-typing-laptop-giphy-hiJ9ypGI5tIKdwKoK2.gif",
+      "id": "giphy-hiJ9ypGI5tIKdwKoK2",
+      "title": "Happy Busy Bee Sticker by Kennysgifs",
+      "page": "https://giphy.com/stickers/happy-kawaii-computer-hiJ9ypGI5tIKdwKoK2",
+      "author": "Kennymays",
+      "width": 480,
+      "height": 296,
+      "frames": 2,
+      "link": "https://media0.giphy.com/media/v1.Y2lkPWU1MDY5ZTRldTVlbGNlNjJpbzdvcWN3ZWFjMXI2cW5zNW5nZnlyNHUzc3ExcnFzcyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/hiJ9ypGI5tIKdwKoK2/giphy.gif"
+    },
+    {
+      "scene": "s2",
+      "query": "cat vibing",
+      "file": "memes/cat-vibing-giphy-sTsg7kyZpBE6ecUVof.gif",
+      "id": "giphy-sTsg7kyZpBE6ecUVof",
+      "title": "Happy Good Vibes Sticker by Bichi Mao",
+      "page": "https://giphy.com/stickers/BichiMao-music-listening-to-cat-sTsg7kyZpBE6ecUVof",
+      "author": "BichiMao",
+      "width": 480,
+      "height": 480,
+      "frames": 13,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRldmM0OXl1Z3Z3MHphb2NjY3lubWZ4b3YxYWY1c2p5cG1reTV1a3IwOCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/sTsg7kyZpBE6ecUVof/giphy.gif"
+    },
+    {
+      "scene": "s3",
+      "query": "cat dancing",
+      "file": "memes/cat-dancing-giphy-qlJpTJwsh09rlf6oIr.gif",
+      "id": "giphy-qlJpTJwsh09rlf6oIr",
+      "title": "Spanish Halloween Sticker by LA CALABAZA DAILY",
+      "page": "https://giphy.com/stickers/pumpkin-calabaza-la-qlJpTJwsh09rlf6oIr",
+      "author": "lacalabazadaily",
+      "width": 480,
+      "height": 480,
+      "frames": 168,
+      "link": "https://media3.giphy.com/media/v1.Y2lkPWU1MDY5ZTRldWxrd3gydXh1eHNxMmt3anY2Mnk5ejhzY2hoYWhzOXM0cnp2aHo4ciZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/qlJpTJwsh09rlf6oIr/giphy.gif"
+    },
+    {
+      "scene": "s4",
+      "query": "cat panic",
+      "file": "memes/cat-panic-giphy-eAot8Ldr85y3peseC3.gif",
+      "id": "giphy-eAot8Ldr85y3peseC3",
+      "title": "Happy Cat Sticker",
+      "page": "https://giphy.com/stickers/cat-kitten-yippee-eAot8Ldr85y3peseC3",
+      "author": "michael_lurz_xr",
+      "width": 480,
+      "height": 468,
+      "frames": 36,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlbDNldHZweGE3OXcyOGh2amE1c3pwa3UzM2QxdXdkazU2aWN5aW5peSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/eAot8Ldr85y3peseC3/giphy.gif"
+    },
+    {
+      "scene": "s5",
+      "query": "cat crying",
+      "file": "memes/cat-crying-giphy-Xr9TlAqw3S7VPOrftK.gif",
+      "id": "giphy-Xr9TlAqw3S7VPOrftK",
+      "title": "Happy Cat Sticker",
+      "page": "https://giphy.com/stickers/beauty-crying-cry-Xr9TlAqw3S7VPOrftK",
+      "author": "mrcartes",
+      "width": 480,
+      "height": 398,
+      "frames": 2,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlYnJob2I4aWMxZGlpM3o1ODRuNzZhZTI1dTd6bXF3Y2JybTZ3MndlZSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/Xr9TlAqw3S7VPOrftK/giphy.gif"
+    }
+  ],
+  "images": [
+    {
+      "scene": "s1",
+      "query": "messy bedroom desk computer",
+      "file": "images/messy-bedroom-desk-computer-pixabay-2583442.jpg",
+      "sticker": false,
+      "id": "pixabay-2583442",
+      "page": "https://pixabay.com/photos/girl-woman-office-work-coffee-2583442/",
+      "author": "StockSnap",
+      "tags": "girl, woman, office, work, coffee, laptop, computer, business, busy, windows, office, office, office, office, office, work, business",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": "s3",
+      "query": "university lecture hall projector",
+      "file": "images/university-lecture-hall-projector-pixabay-6996598.jpg",
+      "sticker": false,
+      "id": "pixabay-6996598",
+      "page": "https://pixabay.com/photos/classroom-blackboard-school-desks-6996598/",
+      "author": "Vincema",
+      "tags": "classroom, blackboard, school, desks, shadow, education, room, classroom, classroom, classroom, classroom, classroom, blackboard, China, Chongqing",
+      "width": 960,
+      "height": 1280
+    }
+  ]
+}

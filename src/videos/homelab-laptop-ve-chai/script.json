@@ -1,0 +1,112 @@
+{
+  "slug": "homelab-laptop-ve-chai",
+  "format": "meme",
+  "topic": "laptop nát làm server homelab bị mẹ bán ve chai",
+  "title": "Khi bạn tận dụng laptop cũ làm server homelab",
+  "caption": "Uptime 90 ngày bay màu trong một nốt nhạc vì mẹ dọn phòng. Đã anh em nào từng dính quả đắng này chưa?",
+  "hashtags": [
+    "#homelab",
+    "#sinhvienit",
+    "#laptrinhvien",
+    "#congnghe",
+    "#haihuoc"
+  ],
+  "musicPrompt": "bouncy playful lo-fi hip hop turns into suspenseful ticking clock then sudden tragic sad flute meme ending, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "lo-fi hip hop",
+        "bouncy",
+        "chill beat",
+        "playful"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "confident",
+        "upbeat groove",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "record scratch",
+        "awkward silence",
+        "suspense"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s5",
+      "styles": [
+        "sad meme flute",
+        "tragic comedy",
+        "disappointment"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Sinh viên IT tận dụng con laptop nát gãy bản lề làm server homelab chạy 24/7",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "messy bedroom desk computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Deploy bot Discord, Nextcloud với web đồ án tốt nghiệp, tự hào khoe uptime 90 ngày",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat vibing",
+      "place": "messy bedroom desk computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Hôm nay lên giảng đường tự tin mở laptop demo đồ án kết nối server cho thầy chấm",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat dancing",
+      "place": "university lecture hall projector"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Terminal liên tục báo Connection timed out, ping không phản hồi, server bay màu không dấu vết",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "university lecture hall projector"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Mẹ gửi tin nhắn phòng bừa quá nên mẹ vừa rút điện đem cho đồng nát rồi",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying",
+      "place": "university lecture hall projector"
+    }
+  ]
+}
