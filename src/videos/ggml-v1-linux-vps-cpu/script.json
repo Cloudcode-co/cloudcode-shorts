@@ -1,0 +1,218 @@
+{
+  "slug": "ggml-v1-linux-vps-cpu",
+  "format": "explainer",
+  "topic": "Trải nghiệm GGML v1.0.0 trên VPS Linux: Thư viện tensor suy luận AI tối ưu CPU siêu nhẹ, so sánh với ONNX Runtime",
+  "title": "Chạy suy luận AI trên CPU VPS dưới 1MB?",
+  "caption": "Trải nghiệm GGML v1.0.0 trên VPS Linux: thư viện C++ nhẹ, zero alloc khi chạy suy luận CPU không cần GPU.",
+  "hashtags": [
+    "#ggml",
+    "#selfhost",
+    "#vpslinux",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal modern tech electronic beats, subtle bass groove, cybernetic synth textures, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "minimal",
+        "mysterious",
+        "punchy synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "rising tension",
+        "steady beat",
+        "electronic pulse"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s6",
+      "styles": [
+        "driving bass",
+        "dynamic groove",
+        "clean drums"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm synth",
+        "chilled beat",
+        "fading"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/ggml-org/ggml",
+    "https://github.com/k2-fsa/sherpa-onnx",
+    "https://github.com/danielclough/fireside-chat",
+    "https://huggingface.co/blog/introduction-to-ggml",
+    "https://github.com/ggml-org/ggml/releases",
+    "https://k2-fsa.github.io/sherpa/onnx/index.html"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Chạy mô hình AI trên CPU VPS mà file nhị phân chưa tới một megabyte?",
+      "headline": "AI Trên CPU Dưới 1MB?",
+      "lines": [
+        "Chỉ với CPU VPS",
+        "File nhị phân dưới 1MB"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": "server room flashing lights"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì kéo PyTorch về mất hàng trăm megabyte. Còn với GGML, toàn bộ thư viện cốt lõi gói gọn trong chưa tới năm tệp tin C/C++ thuần.",
+      "headline": "Tối Giản Hóa Thư Viện",
+      "lines": [
+        "PyTorch: Hàng trăm MB",
+        "GGML: Dưới 5 tệp tin cốt lõi",
+        "C/C++ thuần không phụ thuộc"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Tức là [impressed] anh em không cần cài thêm dependency nào, lại còn zero memory allocations trong suốt thời gian chạy suy luận.",
+      "headline": "Zero-Alloc Lúc Runtime",
+      "lines": [
+        "Không phụ thuộc bên ngoài",
+        "Không cấp phát bộ nhớ động",
+        "Tối ưu triệt để runtime"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Vì vậy nó tối ưu cho RAM máy chủ yếu, hỗ trợ lượng tử hóa từ 2-bit đến 8-bit, kèm cả chuẩn NVFP4 và MXFP4 mới.",
+      "headline": "Lượng Tử Hóa Sâu",
+      "lines": [
+        "Quantization: 2-bit đến 8-bit",
+        "Hỗ trợ NVFP4 & MXFP4",
+        "Tiết kiệm RAM tối đa"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Thường thì ONNX Runtime qua dự án sherpa-onnx xử lý mô hình âm thanh rất mượt không cần mạng. Còn GGML lại là xương sống của llama.cpp và ollama.",
+      "headline": "GGML vs ONNX Runtime",
+      "lines": [
+        "ONNX Runtime: Tốt cho sherpa-onnx",
+        "GGML: Nền tảng llama.cpp & ollama",
+        "Chạy hoàn toàn cục bộ"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml",
+        "k2-fsa/sherpa-onnx"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Ở bản 1.0.0, scheduler tự động bỏ qua việc nạp các input không dùng, đồng thời chuyển MUL_MAT sang F32 trên CPU backend.",
+      "headline": "Điểm Mới Trên v1.0.0",
+      "lines": [
+        "Scheduler bỏ qua nạp thừa",
+        "Chuyển MUL_MAT sang F32",
+        "Tích lũy FlashAttention F32"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Để tự biên dịch trên Ubuntu, anh em chỉ cần GCC hoặc Clang và cài gói cơ bản này:",
+      "headline": "Cài Đặt Công Cụ Build",
+      "lines": [
+        "Không cần build tool phức tạp",
+        "Chỉ cần GCC hoặc Clang"
+      ],
+      "commands": [
+        "sudo apt install build-essential cmake git gdb"
+      ],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": "developer typing on keyboard"
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Sau đó clone repo về và biên dịch trực tiếp bằng CMake:",
+      "headline": "Biên Dịch Từ Source",
+      "lines": [
+        "Clone repo chính thức",
+        "Build nhanh với CMake"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[thoughtful] Nhưng vì là thư viện cấp thấp, nếu nạp context quá nặng trên VPS ít RAM, anh em vẫn có thể dính lỗi tràn bộ nhớ.",
+      "headline": "Lưu Ý Bộ Nhớ RAM",
+      "lines": [
+        "Lập trình low-level C++",
+        "Tránh nạp context quá lớn",
+        "Đề phòng Out Of Memory"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": "frustrated programmer at desk"
+    },
+    {
+      "id": "s10",
+      "text": "[cheerfully] Anh em lưu video lại để thử nghiệm trên VPS nhé, follow kênh để xem thêm cách chạy AI dưới một megabyte!",
+      "headline": "Lưu Lại & Follow",
+      "lines": [
+        "Lưu video để tự host",
+        "Follow kênh để cập nhật"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/ggml"
+      ],
+      "footage": ""
+    }
+  ]
+}

@@ -853,5 +853,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "ggml-v1-linux-vps-cpu",
+    "topic": "Trải nghiệm GGML v1.0.0 trên VPS Linux: Thư viện tensor suy luận AI tối ưu CPU siêu nhẹ, so sánh với ONNX Runtime",
+    "format": "quiz",
+    "date": "2026-11-26",
+    "direction": "quiz-show",
+    "pacing": "Chapters: a title card before each section, then quick shots inside it.",
+    "built": "fallback",
+    "costUsd": 0,
+    "reviewIssues": null
   }
 ]
