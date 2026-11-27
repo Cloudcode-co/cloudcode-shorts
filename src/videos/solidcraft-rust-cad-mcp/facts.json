@@ -1,0 +1,319 @@
+{
+  "topic": "Tự host SolidCraft trên VPS: Ứng dụng CAD 3D tham số bằng Rust chạy trên Web và điều khiển qua MCP, so sánh với FreeCAD",
+  "models": [
+    "ag/gemini-3.8-flash",
+    "ag/gemini-3.8-flash-medium",
+    "ag/gpt-oss-120b-medium",
+    "ds/deepseek-v4.1-flash",
+    "ag/gemini-3.8-flash-high",
+    "oc/deepseek-v4.1-flash-free"
+  ],
+  "date": "2026-11-27",
+  "repos": [
+    {
+      "repo": "tangency-labs/solidcraft",
+      "asked": "tangency-labs/solidcraft",
+      "name": "SolidCraft",
+      "stars": 18638,
+      "description": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.",
+      "license": "Apache-2.0",
+      "language": "Rust",
+      "pushedAt": "2026-11-27T10:34:17Z",
+      "url": "https://github.com/tangency-labs/solidcraft",
+      "avatar": "repos/tangency-labs.png"
+    },
+    {
+      "repo": "FreeCAD/FreeCAD",
+      "asked": "FreeCAD/FreeCAD",
+      "name": "FreeCAD",
+      "stars": 35826,
+      "description": "Official source code of FreeCAD, a free and opensource multiplatform 3D parametric modeler.",
+      "license": "LGPL-2.1",
+      "language": "C++",
+      "pushedAt": "2026-11-27T09:15:20Z",
+      "url": "https://github.com/FreeCAD/FreeCAD",
+      "avatar": "repos/FreeCAD.png"
+    },
+    {
+      "repo": "openscad/openscad",
+      "asked": "openscad/openscad",
+      "name": "OpenSCAD",
+      "stars": 10751,
+      "description": "OpenSCAD - The Programmers Solid 3D CAD Modeller  ",
+      "license": "NOASSERTION",
+      "language": "C++",
+      "pushedAt": "2026-11-27T02:20:46Z",
+      "url": "https://github.com/openscad/openscad",
+      "avatar": "repos/openscad.png"
+    }
+  ],
+  "pages": [],
+  "idea": null,
+  "notes": {
+    "audience": "Các lập trình viên, kỹ sư cơ khí, maker và cộng đồng self-hoster Việt Nam muốn triển khai công cụ CAD 3D tham số hiện đại trên máy chủ VPS và tự động hóa dựng hình bằng AI agent.",
+    "angle": "Thay vì dùng FreeCAD cồng kềnh với C++/Python, SolidCraft mang đến kiến trúc CAD 3D thuần Rust siêu nhẹ, chạy mượt trên Web/VPS và tích hợp sẵn server MCP giúp AI tự động vẽ 3D từ dòng lệnh.",
+    "facts": [
+      {
+        "fact": "SolidCraft là ứng dụng CAD 3D tham số mã nguồn mở được phát triển hoàn toàn bằng Rust.",
+        "quote": "An open-source parametric 3D CAD application built in pure Rust.",
+        "source": "https://github.com/tangency-labs/solidcraft"
+      },
+      {
+        "fact": "SolidCraft hỗ trợ chạy trên desktop, chạy trực tiếp trên trình duyệt web, hoặc điều khiển thông qua server MCP tích hợp.",
+        "quote": "Run it on your desktop, in your browser, or let AI agents model through the built-in MCP server.",
+        "source": "https://github.com/tangency-labs/solidcraft"
+      },
+      {
+        "fact": "Phiên bản mới nhất của SolidCraft là v0.50.0 phát hành vào ngày 26/11/2026 dưới giấy phép Apache-2.0.",
+        "quote": "Latest release: v0.50.0 (2026-11-26)",
+        "source": "https://github.com/tangency-labs/solidcraft"
+      },
+      {
+        "fact": "Kernel hình học SolidCore đang được phát triển cho SolidCraft là bản chuyển mã (port) sang Rust từ thư viện C++ SMLib của NVIDIA.",
+        "quote": "SolidCore is a Rust port of SMLib, NVIDIA’s open-source C++ geometry library.",
+        "source": "https://solidcraft.io/"
+      },
+      {
+        "fact": "Về độ chính xác toán học, 75 trong 76 chi tiết mẫu đối chiếu của SolidCraft khớp hoàn toàn với kết quả phân tích hoặc tính toán từ FreeCAD.",
+        "quote": "75 of 76 public reference parts match their analytic or FreeCAD-computed volume, area, centre of mass and bounding box",
+        "source": "https://github.com/tangency-labs/solidcraft"
+      },
+      {
+        "fact": "FreeCAD phát hành phiên bản mới nhất là 1.1.4 vào ngày 28/09/2026 và được cấp phép theo LGPL-2.1.",
+        "quote": "Language: C++; license: LGPL-2.1; created 2012-09-09; last push 2026-11-27\nLatest release: 1.1.4 (2026-09-28)",
+        "source": "https://github.com/FreeCAD/FreeCAD"
+      },
+      {
+        "fact": "Một lựa chọn CAD lập trình khác là OpenSCAD hoạt động như một trình biên dịch 3D đọc mã script chứ không phải là trình dựng hình tương tác trực tiếp.",
+        "quote": "OpenSCAD is not an interactive modeler. Instead it is more like a 3D-compiler that reads a script file that describes the object and renders the 3D model",
+        "source": "https://github.com/openscad/openscad"
+      },
+      {
+        "fact": "Bộ nhớ cho guest plugin bị giới hạn kỹ thuật ở mức tối đa 4096 MiB do quy chuẩn ABI Wasm32 hiện tại.",
+        "quote": "Guest memory is limited to 4096 MiB by the current Wasm32 ABI; that technical boundary requires a different runtime ABI to change.",
+        "source": "https://github.com/tangency-labs/solidcraft"
+      },
+      {
+        "fact": "Mô hình xe tự hành SELENE là ví dụ thực tế được dựng hoàn toàn thông qua máy chủ MCP của SolidCraft bởi người dùng 0xlillith.",
+        "quote": "Meet SELENE. A scientific rover modeled through SolidCraft’s MCP server.",
+        "source": "https://solidcraft.io/"
+      }
+    ],
+    "install": [
+      "cargo run --release -p solidcraft -- --sample",
+      "cargo run --release -p solidcraft-cli -- commands",
+      "cargo run --release -p solidcraft-cli -- run examples/bracket.json --out bracket.step",
+      "cargo xtask ci",
+      "claude mcp add solidcraft -- solidcraft-cli mcp"
+    ],
+    "caveats": [
+      "SolidCraft vẫn còn ở giai đoạn sớm, phù hợp cho các chi tiết đơn giản; trong 76 chi tiết thử nghiệm chuẩn vẫn còn 1 chi tiết bị lỗi đang được theo dõi.",
+      "File cài đặt cho Windows hiện chưa được ký số (code signing), hệ thống SmartScreen có thể cảnh báo khi cài đặt.",
+      "Bản phát hành Release Candidate (RC) có nguy cơ hỏng thiết kế hoặc không tương thích ngược với bản stable.",
+      "Hệ thống plugin WebAssembly trên desktop vẫn là bản thử nghiệm (0.x), phiên bản minor sau có thể làm mất tính tương thích với bản trước đó, và phiên bản hiện tại chưa có giao diện cấp quyền (grant UI) cho nhóm lệnh nâng cao.",
+      "Thực thi plugin Wasm trên nền web, tự động tải xuống hay tùy biến giao diện panel hiện chưa được hỗ trợ mà thuộc kế hoạch tương lai."
+    ],
+    "gaps": [
+      "Tài liệu không cung cấp cấu hình Dockerfile, docker-compose, hoặc file cài đặt web server cụ thể để tự host phiên bản web trên VPS độc lập.",
+      "Không nêu thông số phần cứng tối thiểu (vCPU, RAM, GPU) của VPS để compile mã nguồn từ Rust hoặc render mượt trên Web/Wasm.",
+      "Không nói rõ cơ chế xác thực hoặc proxy bảo vệ cổng kết nối MCP/Web khi public ra môi trường Internet từ VPS."
+    ]
+  },
+  "research": "Primary sources, fetched from GitHub on 2026-11-27:\n\n## tangency-labs/solidcraft (https://github.com/tangency-labs/solidcraft)\nDescription: SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Desktop, web, and automation through MCP.\nHomepage: https://solidcraft.io\nLanguage: Rust; license: Apache-2.0; created 2026-10-07; last push 2026-11-27\nLatest release: v0.50.0 (2026-11-26)\nREADME (start):\nSolidCraft\n\n  An open-source parametric 3D CAD application built in pure Rust.\n  Sketch, constrain, and build solids with a parametric feature timeline. Change a dimension\n  and watch your model rebuild. Run it on your desktop, in your browser, or let AI agents\n  model through the built-in MCP server.\n\n  Website ·\n  Download ·\n  Try it in the browser ·\n  Documentation ·\n  \n  Discord ·\n  SolidCore\n\n  \n  \n  \n  \n  \n  \n  \n\n  \n  \n\n*A Raspberry Pi 4 case from an empty design: a sketch dimensioned with the board's parameters, extrude, fillet, shell, the rim rounded in one pick, an M2.5 standoff patterned on the 58 × 49 mm hole rectangle, port cut-outs, vent slots, \"Pi 4\" engraved in DejaVu Sans Bold and a PETG material defined in the design, with its mass in Properties, then height 24 → 32 mm in Parameters and it all rebuilds. 6× playback with the idle pauses cut. [Full video](https://github.com/tangency-labs/solidcraft/raw/refs/heads/main/docs/screenshots/demo.mp4), recorded with the [demo script](examples/demo/record_ui.sh).*\n\n## Download\n\n- **Windows:** the [installer][windows-msi].\n- **macOS:** the [disk image][macos-dmg] (Apple silicon and Intel).\n- **Linux:** the [AppImage][linux-appimage], or a [Snap package][linux-snap]\n  ([installation instructions][snap-install], including ARM64).\n- **Web:** [try it in your browser][web-app], no install.\n\nARM64 and 32-bit builds, portable zip, .deb, .rpm, Flatpak and the other packages are on the\n[downloads page](docs/downloads.md). The macOS app is signed with a Developer ID and notarized by\nApple. The Windows files are unsigned for now ([code signing and privacy](https://docs.solidcraft.io/code-signing-policy.html)),\nso SmartScreen may warn: choose **More info**, then **Run anyway**. On SolidCraft 0.11 to 0.14, download once by hand; see\n[updating](https://docs.solidcraft.io/guide/updates.html#updating-from-011-to-014).\n\n## What works\n\nEarly but usable for simple parts: 75 of 76 public reference parts match their analytic or\nFreeCAD-computed volume, area, centre of mass and bounding box ([oracle](docs/oracle.md)); the\nother is a tracked bug.\n\n- **Sketches and constraints:** lines, arcs, splines, text and more, solved by our own constraint solver, with parameter-driven dimensions.\n- **Features:** extrude, revolve, sweep, loft, fillet, chamfer, shell, draft, holes, threads, patterns, mirror, split and combine on an editable parametric timeline.\n- **Parameters and configurations** with unit-aware expressions.\n- **Assemblies** with joints, motion studies, contact sets, interference and mass properties.\n- **Sheet metal** with flanges, hems, fold/unfold and flat patterns. Choose how two edge flanges\n  meet at a corner: **Butt**, **Partial overlap** or **Full overlap**.\n- **Plastic enclosure features.**\n- **Files:** STEP, IGES, 3MF, STL, OBJ and glTF in and out where supported, URDF export, `.sc` designs (`.solidcraft` files from earlier releases still open).\n- **Desktop app, browser app, headless CLI and MCP server**, all running the same commands.\n\nThe full list is in [docs/capabilities.md](docs/capabilities.md) and [docs/features.md](docs/features.md);\nstatus and plans are in [ROADMAP.md](ROADMAP.md). See also [what people built](docs/showcase.md),\n[3D mouse support](docs/3d-mouse.md) and the [architecture](docs/architecture.md).\n\n## Build from source\n\n```sh\ncargo run --release -p solidcraft -- --sample      # desktop app with a sample part\ncargo run --release -p solidcraft-cli -- commands  # the command registry\ncargo run --release -p solidcraft-cli -- run examples/bracket.json --out bracket.step\ncargo xtask ci                                     # fmt, clippy, tests, icons, assets, layers, wasm\n```\n\nMore commands, the Windows cross-build and the browser build are in [docs/building.md](docs/building.md).\n\n## AI agents (MCP)\n\n`solidcraft-cli mcp` is a [Model Context Protocol](https://modelcontextprotocol.io) server. Headless it\nruns its own design session, or with `--connect` it drives the running app so you can watch.\nClaude Code: `claude mcp add solidcraft -- solidcraft-cli mcp`. If a terminal doesn't find\n`solidcraft-cli` (older Windows installers don't put it on `PATH`), give its full path (by default\n`\"C:\\\\Program Files\\\\SolidCraft\\\\solidcraft-cli.exe\"`). Tools, access rules and an example session:\n[docs/mcp.md](docs/mcp.md).\n\n## Scripts\n\nA script is a JSON list of the same commands the UI runs, executed with `solidcraft-cli run`.\nFormat and example: [docs/scripts.md](docs/scripts.md). Pages can also be driven through the\n[browser command API](docs/browser-api.md).\n\n## Plugins (experimental desktop runtime)\n\nPlugins add separately distributed behaviour without compiling that behaviour into SolidCraft.\nThe initial runtime loads **WebAssembly components**, explicitly requested by the user. Merely\ninstalling a folder, enabling it in Preferences, or opening a design never executes plugin code.\nThe interface is experimental: WIT package `craft:plugin@0.2.0`, capability `commands@0.2` (plugins built for 0.1 still run). While\nit is 0.x a minor version may break the one before it; the host refuses a plugin that needs a\ncapability it does not have, in plain words. Review a plugin again after an update. The desktop app and headless CLI use the same commands. Browser\nexecution, automatic downloads and updates, custom panels, and plugin-defined parametric feature\ntypes are future work.\n\n### Install and inspect\n\nA package is a folder named after its id, containing `plugin.json` and a `.wasm` component.\nPreferences > Plugins lists packages under the per-user data folder: `%LOCALAPPDATA%/SolidCraft/plugins`\non Windows, `~/Library/Application Support/SolidCraft/plugins` on macOS, and\n`${XDG_DATA_HOME:-~/.local/share}/solidcraft/plugins` on Linux. **Show in folder** opens this location.\nYou can also inspect and explicitly run a package in another folder. Nothing is downloaded by the host.\n\nA minimal manifest looks like this. Plugin packages and examples are maintained outside this\nrepository, as specified in [the plugin RFC](docs/rfcs/0002-plugins.md).\n\n```json\n{\n  \"id\": \"example-box\",\n  \"name\": \"Example box\",\n  \"version\": \"0.1.0\",\n  \"description\": \"Create an ordinary editable box from dimensions.\",\n  \"capabilities\": [\"commands@0.1\"],\n  \"runtime\": {\n    \"module\": \"plugin.wasm\",\n    \"entries\": [\"make\"],\n    \"commands\": [\"solid.box\"],\n    \"limits\": {\"fuel\": 10000000, \"memory_mib\": 64, \"deadline_ms\": 5000}\n  }\n}\n```\n\nRun `plugin.inspect` with `{\"path\":\"/path/to/example-box\"}` through the CLI's JSON scripts, MCP\n`execute`, or the desktop control channel's `engine.execute`. It reads the manifest and component\nwithout executing them, returning the declared commands, limits and an `approval` SHA-256 hash.\nReview the author, code and declared rights before using that hash. Inspection does not approve a\npackage. Existing metadata-only packages remain listable but cannot run until they declare a runtime.\n\n### Run explicitly\n\nAfter reviewing the inspected package, execute:\n\n```json\n{\n  \"command\": \"plugin.run\",\n  \"params\": {\n    \"path\": \"/path/to/example-box\",\n    \"approval\": \"\",\n    \"entry\": \"make\",\n    \"params\": {\"length\": 20, \"width\": 10, \"height\": 3}\n  }\n}\n```\n\nFor example, save that command in a JSON array and use `solidcraft-cli run commands.json`.\nFor the running desktop app, send it as the `command` and `params` of a standalone\n`engine.execute` request (see [control protocol](docs/control-protocol.md)). The native host runs\nit on a worker and keeps the window responsive. Stop or a design change discards the pending\nresult; the host does not automatically rerun external code. Desktop batches and scripts must send\n`plugin.run` separately. Headless CLI scripts may include it as a normal command.\n\nThe hash binds **both the exact manifest bytes and the component bytes**, so an updated package\nrequires a fresh inspection and permission review. It is a content identity, not a signature or an\nauthor's reputation. Agent chat asks before executing external plugin code. MCP and the control\nchannel keep their existing file scopes: allow the package folder explicitly where needed. Naming\na package never grants access to another folder.\n\n### User resource ceilings\n\nThe invocation defaults remain **10,000,000 fuel, 64 MiB of guest memory and 5000 ms**.\nThe default host ceilings remain **100,000,000,000 fuel and 128 MiB**. A package can declare\nlarger fuel, memory, command host-call or guest compute time budgets, but execution is refused until you explicitly raise the host\nceilings and approve that exact package content. `plugin.inspect` is inert and reports the\nrequested limits, current `host_limits`, `within_host_limits` and any `limits_error` even when\na request is too large.\n\nIn the native GUI, open **Preferences > Plugins**, enter **Max plugin fuel**,\n**Max plugin memory (MiB)**, **Max plugin host calls** and **Max plugin guest time (ms)**,\nthen choose **Apply** or **OK**. Enter also accepts the values;\n**Cancel** reverts changes since the last Apply and **Restore defaults** resets this page.\nThe settings persist in your user preferences and do not travel with saved designs.\n\nFor standalone CLI or headless MCP sessions, create a UTF-8 JSON file, for example\n`plugin-limits.json` containing:\n\n```json\n{\"max_fuel\": 200000000000, \"max_memory_mib\": 512, \"max_host_calls\": 2000, \"max_deadline_ms\": 120000}\n```\n\nPass it explicitly when starting the process:\n\n```text\nsolidcraft-cli --plugin-limits plugin-limits.json run inspect-plugin.json --results\nsolidcraft-cli --plugin-limits plugin-limits.json mcp --headless --allow-path /path/to/plugins\n```\n\nMissing fields use the original host ceilings. Connected desktop sessions use the GUI's\npreferences; CLI settings cannot override them. Positive integer fuel, host-call and guest\ndeadline millisecond values up to `u64::MAX`\nare accepted without rounding. Guest memory is limited to 4096 MiB by the current Wasm32 ABI;\nthat technical boundary requires a different runtime ABI to change. These settings do not change\na package's declared budget, executes it, adds permissions, or retries a failed invocation.\nReview its manifest and component, obtain the content approval hash, and explicitly invoke it.\nA changed manifest budget requires a fresh approval hash. Keep the selected ceilings within your\nmachine's available resources; they are limits on guest execution, not total SolidCraft memory\nor native CAD work. The guest compute deadline pauses during native host work. Its command\nceiling defaults to 30 seconds, and the command host-call ceiling defaults to 256;\nlarger approved requests need these ceilings raised. Existing requests still default to\n256 calls and 5 seconds of guest compute.\n\nStandalone CLI runs and headless MCP use the plugins installed for the desktop app; approvals\ngiven there last for the run. Add `--keep-plugin-approvals` to keep them between runs, shared\nwith the desktop app, so a plugin is installed and approved once, and `--plugins-dir DIR` to use\na separate set of plugins and approvals, for example in CI. List kept approvals with\n`solidcraft-cli --keep-plugin-approvals exec plugin.grants` and take one back with\n`solidcraft-cli --keep-plugin-approvals exec plugin.revoke '{\"id\":\"PLUGIN_ID\"}'`\n([Headless use](docs/plugins.md#headless-use)).\n\n### Permissions, results and saved designs\n\nA plugin can call any command in the MCP catalog whose exact id its manifest lists. Commands that\nreach past the open design are grouped: `file` (saving, exporting, importing, inserting from files,\nlibraries), `doc` (opening or switching designs), `app` (settings, window, diagnostics) and `plugin`\n(inspecting or running plugins). Each group is refused unless the manifest requests it in\n`runtime.permissions.command_groups` and the user grants it; this version has no grant UI yet.\nFilesystem calls require matching manifest permissions and approved folder grants. The clock\nrequires its manifest permission; otherwise it returns a fixed epoch\n\n## FreeCAD/FreeCAD (https://github.com/FreeCAD/FreeCAD)\nDescription: Official source code of FreeCAD, a free and opensource multiplatform 3D parametric modeler.\nHomepage: https://www.freecad.org\nLanguage: C++; license: LGPL-2.1; created 2012-09-09; last push 2026-11-27\nLatest release: 1.1.4 (2026-09-28)\nREADME (start):\n### Your own 3D Parametric Modeler\n\n[Website](https://www.freecad.org) •\n[Documentation](https://wiki.freecad.org) •\n[Forum](https://forum.freecad.org/) •\n[Bug tracker](https://github.com/FreeCAD/FreeCAD/issues) •\n[Git repository](https://github.com/FreeCAD/FreeCAD) •\n[Blog](https://blog.freecad.org)\n\n[](https://github.com/freecad/freecad/releases/latest) [](https://crowdin.com/project/freecad)\n\nOverview\n--------\n\n* **Freedom to build what you want**  FreeCAD is an open-source parametric 3D\nmodeler for designing real-life objects of any size. Parametric modeling lets\nyou modify a design by changing parameters in its model history.\n\n* **Create 3D from 2D and back** FreeCAD lets you sketch geometry-constrained\n2D shapes and use them as a base to build other objects. It also provides tools\nto adjust dimensions and create high-quality production drawings from 3D models.\n\n* **Designed for your needs** FreeCAD is designed to fit a wide range of uses\nincluding product design, mechanical engineering and architecture,\nwhether you are a hobbyist, programmer, experienced CAD user, student or teacher.\n\n* **Cross platform** FreeCAD runs on Windows, macOS and Linux operating systems.\n\n* **Underlying technology**\n    * **OpenCASCADE** A powerful geometry kernel, the most important component of FreeCAD\n    * **Coin3D library** Open Inventor-compliant 3D scene representation model\n    * **Python** FreeCAD offers a broad Python API\n    * **Qt** Graphical user interface built with Qt\n\nInstalling\n----------\n\nPrecompiled packages for stable releases are available for Windows, macOS and Linux on the\n[latest releases page](https://github.com/FreeCAD/FreeCAD/releases/latest).\n\nOn most Linux distributions, FreeCAD is also directly installable from the \nsoftware center application.\n\nFor weekly development releases visit the [releases page](https://github.com/FreeCAD/FreeCAD/releases/).\n\nOther options are described on the [wiki Download page](https://wiki.freecad.org/Download).\n\nCompiling\n---------\n\nSee the [Developers Handbook – Getting Started](https://freecad.github.io/DevelopersHandbook/gettingstarted/)\nfor build instructions.\n\nReporting Issues\n---------\n\nTo report an issue please:\n\n- Consider posting to the [Forum](https://forum.freecad.org), [Discord](https://discord.com/invite/w2cTKGzccC) channel, or [Reddit](https://www.reddit.com/r/FreeCAD) to verify the issue; \n- Search the existing [issues](https://github.com/FreeCAD/FreeCAD/issues) for potential duplicates; \n- Use the most updated stable or [development versions](https://github.com/FreeCAD/FreeCAD/releases/) of FreeCAD; \n- Post version info from `Help > About FreeCAD > Copy to clipboard`; \n- Restart FreeCAD in safe mode `Help > Restart in safe mode` and try to reproduce the issue again. If the issue is resolved it can be fixed by deleting the FreeCAD config files.\n- Start recording a macro `Macro > Macro recording...` and repeat all steps. Stop recording after the issue occurs and upload the saved macro or copy the macro code in the issue; \n- Post a Step-By-Step explanation on how to recreate the issue; \n- Upload an example file (FCStd as ZIP file) to demonstrate the problem; \n\nFor more details see:\n\n- [Bug Tracker](https://github.com/FreeCAD/FreeCAD/issues)\n- [Reporting Issues and Requesting Features](https://github.com/FreeCAD/FreeCAD/issues/new/choose)\n- [Contributing](https://github.com/FreeCAD/FreeCAD/blob/main/CONTRIBUTING.md)\n- [Help Forum](https://forum.freecad.org/viewforum.php?f=3)\n\nContributing Code\n-----------------\n\nRead the [contribution process](CONTRIBUTING.md) and the\n[contributor guidelines](contrib/guidelines/README.md) for practical advice on architecture,\ncode reuse, implementation, UI design, testing, and review. The guides link to relevant\nsections of the [Developers Handbook](https://freecad.github.io/DevelopersHandbook/) and FEPs.\n\n> [!NOTE]\nThe [FPA](https://fpa.freecad.org) offers developers the opportunity\nto apply for a grant to work on projects of their choosing. Check\n[jobs and funding](https://blog.freecad.org/jobs/) to know more.\n\nUsage & Getting Help\n--------------------\n\nThe FreeCAD wiki contains documentation on general usage and Python scripting.\nView these pages for more information:\n\n- [Getting started](https://wiki.freecad.org/Getting_started)\n- [Features list](https://wiki.freecad.org/Feature_list)\n- [Frequent questions](https://wiki.freecad.org/FAQ/en)\n- [Workbenches](https://wiki.freecad.org/Workbenches)\n- [Scripting](https://wiki.freecad.org/Power_users_hub)\n- [Developers Handbook](https://freecad.github.io/DevelopersHandbook/)\n\nThe [FreeCAD forum](https://forum.freecad.org) is a great place\nto find help and solve specific problems when learning to use FreeCAD.\n\n---\n\nThis project receives generous infrastructure support from\n  \n    \n   and KiCad Services Corp.\n\n## openscad/openscad (https://github.com/openscad/openscad)\nDescription: OpenSCAD - The Programmers Solid 3D CAD Modeller  \nHomepage: https://www.openscad.org\nLanguage: C++; license: NOASSERTION; created 2010-11-03; last push 2026-11-27\nLatest release: openscad-2021.01 (2021-02-07)\nREADME (start):\n[](https://github.com/openscad/openscad/actions)\n[](https://circleci.com/gh/openscad/openscad/tree/master)\n[](https://scan.coverity.com/projects/2510)\n\n[](https://kiwiirc.com/client/irc.libera.chat/#openscad)\n\n# What is OpenSCAD?\n\nOpenSCAD is a software for creating solid 3D CAD objects. It is free software and\navailable for Linux/UNIX, MS Windows and macOS.\n\nUnlike most free software for creating 3D models (such as the famous\napplication Blender), OpenSCAD focuses on the CAD aspects rather than the\nartistic aspects of 3D modeling. Thus this might be the application you are\nlooking for when you are planning to create 3D models of machine parts but\nprobably not the tool for creating computer-animated movies.\n\nOpenSCAD is not an interactive modeler. Instead it is more like a\n3D-compiler that reads a script file that describes the object and renders\nthe 3D model from this script file (see examples below). This gives you, the\ndesigner, complete control over the modeling process and enables you to easily\nchange any step in the modeling process or make designs that are defined by\nconfigurable parameters.\n\nOpenSCAD provides two main modeling techniques: First there is constructive\nsolid geometry (aka CSG) and second there is extrusion of 2D outlines. As the data\nexchange format for these 2D outlines Autocad DXF files are used. In\naddition to 2D paths for extrusion it is also possible to read design parameters\nfrom DXF files. Besides DXF files OpenSCAD can read and create 3D models in the\nSTL and OFF file formats.\n\n# Contents\n\n- [Getting Started](#getting-started)\n- [Documentation](#documentation)\n    - [Building OpenSCAD](#building-openscad)\n        - [Prerequisites](#prerequisites)\n        - [Getting the source code](#getting-the-source-code)\n        - [Building for macOS](#building-for-macos)\n        - [Building for Linux/BSD](#building-for-linuxbsd)\n        - [Building for Linux/BSD on systems with older or missing dependencies](#building-for-linuxbsd-on-systems-with-older-or-missing-dependencies)\n        - [Building for Windows](#building-for-windows)\n        - [Compilation](#compilation)\n\n# Getting started\n\nYou can download the latest binaries of OpenSCAD at\n. Install binaries as you would any other\nsoftware.\n\nWhen you open OpenSCAD, you'll see three frames within the window. The\nleft frame is where you'll write code to model 3D objects. The right\nframe is where you'll see the 3D rendering of your model.\n\nLet's make a tree! Type the following code into the left frame:\n\n```scad\ncylinder(h = 30, r = 8);\n```\n\nThen render the 3D model by hitting F5. Now you can see a cylinder for\nthe trunk in our tree. Now let's add the bushy/leafy part of the tree\nrepresented by a sphere. To do so, we will union a cylinder and a\nsphere.\n\n```scad\nunion() {\n    cylinder(h = 30, r = 8);\n    sphere(20);\n}\n```\n\nBut, it's not quite right! The bushy/leafy are around the base of the\ntree. We need to move the sphere up the z-axis.\n\n```scad\nunion() {\n    cylinder(h = 30, r = 8);\n    translate([0, 0, 40]) sphere(20);\n}\n```\n\nAnd that's it! You made your first 3D model! There are other primitive\nshapes that you can combine with other set operations (union,\nintersection, difference) and transformations (rotate, scale,\ntranslate) to make complex models! Check out all the other language\nfeatures in the [OpenSCAD\nManual](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual).\n\n# Documentation\n\nHave a look at the OpenSCAD Homepage (https://www.openscad.org/documentation.html) for documentation.\n\n## Building OpenSCAD\n\nTo build OpenSCAD from source, follow the instructions for the\nplatform applicable to you below.\n\n### Prerequisites\n\nTo build OpenSCAD, you need some libraries and tools. The version\nnumbers in brackets specify the versions which have been used for\ndevelopment. Other versions may or may not work as well.\n\nIf you're using a newer version of Ubuntu, you can install these\nlibraries from aptitude. If you're using Mac, or an older Linux/BSD, there\nare build scripts that download and compile the libraries from source.\nFollow the instructions for the platform you're compiling on below.\n\n* A C++ compiler supporting C++17\n* [cmake (3.5 ->)](https://cmake.org/)\n* [Qt (5.15 ->)](https://qt.io/)\n* [QScintilla2 (2.9 ->)](https://riverbankcomputing.com/software/qscintilla/)\n* [CGAL (5.4 ->)](https://www.cgal.org/)\n * [GMP (5.x)](https://gmplib.org/)\n * [MPFR (3.x)](https://www.mpfr.org/)\n* [boost (1.70 ->)](https://www.boost.org/)\n* [OpenCSG (1.4.2 ->)](http://www.opencsg.org/)\n* [GLEW (1.5.4 ->)](http://glew.sourceforge.net/)\n* [Eigen (3.x)](https://eigen.tuxfamily.org/)\n* [glib2 (2.x)](https://developer.gnome.org/glib/)\n* [fontconfig (2.10 -> )](https://fontconfig.org/)\n* [freetype2 (2.4 -> )](https://freetype.org/)\n* [harfbuzz (0.9.19 -> )](https://www.freedesktop.org/wiki/Software/HarfBuzz/)\n* [libzip (0.10.1 -> )](https://libzip.org/)\n* [Bison (2.4 -> )](https://www.gnu.org/software/bison/)\n* [Flex (2.5.35 -> )](http://flex.sourceforge.net/)\n* [\n\nMore pages, read on 2026-11-27:\n\n## SolidCraft: free, open-source parametric 3D CAD\nURL: https://solidcraft.io/\nDescription: Sketch, constrain, and build editable parts with SolidCraft. Open-source parametric CAD for desktop and browser, with optional MCP agent workflows.\n\nSkip to content\nSolidCraft\nMenu\n\nDESKTOP AND BROWSER\n\nOpen-source\nparametric CAD.\nBuilt in Rust.\n\nCreate sketches, set dimensions, and build 3D parts with an editable feature history. Work in the editor or connect an AI agent through MCP.\n\nDownload for Linux\nOther downloads\nTry in your browser\n\nOther versions: try the release candidate. It can break, and designs saved in it may not open in the stable version. Designs you saved in the browser before November 3 can be brought over to the new address.\n\nConnect an AI agent\nHow it was built →\nv0.50.0 available\nWindows / macOS / Linux / FreeBSD\nDesktop + browser\n01 / SKETCH\nConstrain your sketch.\n\nSet dimensions, angles, and geometric constraints.\n\n02 / BUILD\nBuild a solid.\n\nExtrude or revolve a sketch into a 3D part.\n\n03 / REFINE\nEdit earlier features.\n\nChange parameters and rebuild the model.\n\n04 / EXCHANGE\nImport and export files.\n\nSave editable designs or export STEP and mesh files.\n\nPARAMETERS AND FEATURE HISTORY\n\nChange dimensions.\nRebuild the model.\n\nUse named parameters for dimensions such as board width, wall thickness, and enclosure height. Change a value to rebuild the features that depend on it.\n\n01\nStart with a constrained sketch.\n\nDefine the sketch’s dimensions and geometric constraints.\n\n02\nAdd features to the timeline.\n\nKeep the sketch, features, and parameters in an editable timeline.\n\n03\nChange the enclosure height.\n\nThe recorded enclosure changes from 24 to 32 mm in height.\n\nWatch the enclosure demo\nHow it was built →\n\nAI AGENTS / MODEL CONTEXT PROTOCOL\n\nModel with an AI agent.\n\nMCP lets a compatible AI agent run modeling commands, measure geometry, change parameters, and export files. You can open and edit the resulting design in SolidCraft.\n\nExplore MCP\nRead the setup guide\n\nAI is optional. SolidCraft works without a connected assistant.\n\nHow it was built →\nBuild\nInspect\nRevise\nExport\n\nMODELING TOOLS\n\nSketch, model, and assemble.\nExplore the features\n01\nSketches and constraints.\n\nDraw lines, arcs, and splines, then add dimensions and constraints.\n\n02\nSolid modeling.\n\nExtrude, revolve, fillet, and edit features in the timeline.\n\n03\nAssemblies and joints.\n\nCombine components, define joints, and create configurations.\n\n04\nImport and export.\n\nSee which formats preserve editable history, solid geometry, or meshes.\n\nFACE\nEDGE\nVERTEX\nB-rep · Connected faces, edges, and vertices describe a solid’s boundary. Explanatory illustration.\n\nSOLIDCORE / GEOMETRY KERNEL\n\nSolidCore.\nA Rust geometry kernel.\n\nSolidCore is a Rust port of SMLib, NVIDIA’s open-source C++ geometry library. A geometry kernel represents 3D shapes and performs modeling operations on them.\n\nAbout SolidCore\n\nSolidCore is being developed for use in SolidCraft.\n\nEXAMPLE MODELS\n\nMade with SolidCraft.\nSee the showcase\n\nPARAMETRIC MODELING · SOLIDCRAFT CONTRIBUTORS\n\nRaspberry Pi enclosure.\n\nSketch, model, and resize an enclosure with named parameters.\n\nAGENT WORKFLOW · 0XLILLITH\n\nMeet SELENE.\n\nA scientific rover modeled through SolidCraft’s MCP server.\n\nLATEST RELEASE\n\nSolidCraft v0.50.0\n\nSee the latest changes and read the upstream compatibility notes before upgrading.\n\nWhat’s new\n\nCONTRIBUTE\n\nHelp build SolidCraft.\n\nReport bugs, improve the documentation, or contribute code. See the contribution guide for setup instructions and development practices.\n\nContribution guide\n\nDOWNLOAD\n\nGet SolidCraft.\n\nInstall the desktop app or use it in your browser.\n\nDownload for Linux\nOther downloads\nTry in your browser\nSolidCraft\n\nParametric CAD for desktop\nand browser.\n\n© Tangency Labs\nCI powered by\nProduct\nFeatures\nDownloads\nBrowser app\nReleases\nLearn & build\nDocumentation\nMCP & agents\nShowcase\nGetting started\nProject\nGitHub\nSolidCore\nContribute\nIssues & feedback\nCode signing policy\ncontact@tangencylabs.io\n\nIndependent open-source software. Autodesk and NVIDIA do not endorse these projects.\n\nDisclaimer\nLicenses\nPrivacy\n\n## What is the Model Context Protocol (MCP)? - Model Context Protocol\nURL: https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro\n\nDocumentation Index\n\nFetch the complete documentation index at: /llms.txt\n\nUse this file to discover all available pages before exploring further.\n\nSkip to main content\nModel Context Protocol home page\nSearch...\nNavigation\nGet started\nWhat is the Model Context Protocol (MCP)?\nGet started\nWhat is the Model Context Protocol (MCP)?\nCopy page\nMCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.\nUsing MCP, AI applications like Claude or ChatGPT can connect to data sources (e.g. local files, databases), tools (e.g. search engines, calculators) and workflows (e.g. specialized prompts)—enabling them to access key information and perform tasks.\nThink of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.\nWhat can MCP enable?\nAgents can access your Google Calendar and Notion, acting as a more personalized AI assistant.\nClaude Code can generate an entire web app using a Figma design.\nEnterprise chatbots can connect to multiple databases across an organization, empowering users to analyze data using chat.\nAI models can create 3D designs on Blender and print them out using a 3D printer.\nWhy does MCP matter?\nDepending on where you sit in the ecosystem, MCP can have a range of benefits.\nDevelopers: MCP reduces development time and complexity when building, or integrating with, an AI application or agent.\nAI applications or agents: MCP gives them access to an ecosystem of data sources, tools and apps, which enhances their capabilities and improves the end-user experience.\nEnd-users: MCP results in more capable AI applications or agents that can access user data and take actions on the user’s behalf when necessary.\nBroad ecosystem support\nMCP is an open protocol supported across a wide range of clients and servers. AI assistants like Claude and ChatGPT, development tools like Visual Studio Code, Cursor, MCPJam, and many others all support MCP — making it easy to build once and integrate everywhere.\nStart Building\nBuild servers\nCreate MCP servers to expose your data and tools\nBuild clients\nDevelop applications that connect to MCP servers\nBuild MCP Apps\nBuild interactive apps that run inside AI clients\nLearn more\nArchitecture\nLearn the core concepts and architecture of MCP\nSecurity\nUnderstand the security considerations and best practices for MCP\nCommunity\nContributing\nLearn how to get involved and contribute to MCP\n\nWas this page helpful?\n\nYes\nNo\nArchitecture\ngithub\ndiscord\nPowered by\nThis documentation is built and hosted on Mintlify, a developer documentation platform\nCopyright © Model Context Protocol a Series of LF Projects, LLC.\nFor web site terms of use, trademark policy and other project policies please see https://lfprojects.org.",
+  "footage": [
+    {
+      "scene": "s2",
+      "query": "engineer working on cad",
+      "file": "footage/engineer-working-on-cad-pixabay-283431.mp4",
+      "id": "pixabay-283431",
+      "page": "https://pixabay.com/videos/id-283431/",
+      "author": "Kanenori",
+      "tags": "night view, yamada's rice fields, rice farming, rice terraces, starry sky, milky way, reflection on the water surface, japan",
+      "duration": 8,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2025/06/03/283431_medium.mp4"
+    },
+    {
+      "scene": "s10",
+      "query": "developer at desk night",
+      "file": "footage/developer-at-desk-night-pixabay-232538.mp4",
+      "id": "pixabay-232538",
+      "page": "https://pixabay.com/videos/id-232538/",
+      "author": "Darioguzben",
+      "tags": "keyboard, writing, digital, technology, desk, hardware, job, electronics, computing",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2024/09/21/232538_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "computer aided design engineer screen",
+      "file": "footage/computer-aided-design-engineer-screen-pixabay-1058.mp4",
+      "id": "pixabay-1058",
+      "page": "https://pixabay.com/videos/id-1058/",
+      "author": "Coverr-Free-Footage",
+      "tags": "laptop, notebook, student, studying, typing, writing, computer, technology, business, screen, laptop screen, office, internet, computer technology, computer screen, work, mobile, communication, woman, girl, female",
+      "duration": 12,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2015/10/16/1058-142621439_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "3d printer",
+      "file": "footage/3d-printer-pixabay-164479.mp4",
+      "id": "pixabay-164479",
+      "page": "https://pixabay.com/videos/id-164479/",
+      "author": "geoangeludis",
+      "tags": "printing 3d, printer 3d, close 3d printing, print 3d, close of 3d printer, close up of 3d printing",
+      "duration": 11,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2023/05/25/164479-830744020_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "robot arm industry",
+      "file": "footage/robot-arm-industry-pixabay-159021.mp4",
+      "id": "pixabay-159021",
+      "page": "https://pixabay.com/videos/id-159021/",
+      "author": "Dimitri_K",
+      "tags": "robot, robotics, manufacturing, tech, technology, robotic arm, artificial intellugence, ai, automation, industrial, heavy industry, automotive industry, production, production line, engineering, high tech, futuristic",
+      "duration": 11,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2023/04/15/159021-818026286_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "server room",
+      "file": "footage/server-room-pixabay-345428.mp4",
+      "id": "pixabay-345428",
+      "page": "https://pixabay.com/videos/id-345428/",
+      "author": "WhiteHatDesigner",
+      "tags": "technology, data, digital, cyberspace, server, network, futuristic, sci-fi, internet, computing, database, future, ai, glowing, abstract, matrix, tunnel, hallway, cyber, tech, information, system, connection, server room",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/09/345428_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "engineer blueprint workshop",
+      "file": "footage/engineer-blueprint-workshop-pixabay-31483.mp4",
+      "id": "pixabay-31483",
+      "page": "https://pixabay.com/videos/id-31483/",
+      "author": "julientromeur",
+      "tags": "architect, real estate, job, business, architecture, design, estate, real, building, construction, house, home, urban, industry, blueprint, project, engineering, cartoon, 3d, character, man",
+      "duration": 6,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2020/01/22/31483-387312378_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "rover space exploration",
+      "file": "footage/rover-space-exploration-pixabay-378416.mp4",
+      "id": "pixabay-378416",
+      "page": "https://pixabay.com/videos/id-378416/",
+      "author": "doktorkleinmusic",
+      "tags": "mars, rover, astronaut, space, planet, vehicle, exploration, dust, terrain, alien, red, colonization, mission, science, future, base, technology, driving, ai generated",
+      "duration": 8,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/09/23/378416_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "programmer coding screen",
+      "file": "footage/programmer-coding-screen-pixabay-348042.mp4",
+      "id": "pixabay-348042",
+      "page": "https://pixabay.com/videos/id-348042/",
+      "author": "doktorkleinmusic",
+      "tags": "coding, programmer, developer, screen, glasses, reflection, code, technology, focus, work, computer, ai, cyber, night, concentration, software, programming, digital, internet, business, data, hacking, hacker, ai generated",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/21/348042_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "man working laptop office",
+      "file": "footage/man-working-laptop-office-pixabay-346879.mp4",
+      "id": "pixabay-346879",
+      "page": "https://pixabay.com/videos/id-346879/",
+      "author": "doktorkleinmusic",
+      "tags": "man, glasses, eyeglasses, tired, exhausted, stress, work, night, office, computer, screen, monitor, focus, concentration, eyestrain, fatigue, insomnia, professional, developer, technology, reflection, thinking, serious, digital, indoor, ai generated",
+      "duration": 10,
+      "width": 1440,
+      "height": 2560,
+      "link": "https://cdn.pixabay.com/video/2026/04/16/346879_medium.mp4"
+    },
+    {
+      "scene": null,
+      "query": "3d modeling design",
+      "file": "footage/3d-modeling-design-pixabay-14744.mp4",
+      "id": "pixabay-14744",
+      "page": "https://pixabay.com/videos/id-14744/",
+      "author": "7898250",
+      "tags": "apple, 3d model, template, design, creative, green, technology, modern, 3d, model, modeling, equipment, scene, green screen, alpha, notebook, laptop",
+      "duration": 24,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2018/03/04/14744-685293410_large.mp4"
+    },
+    {
+      "scene": null,
+      "query": "mechanical engineer working computer",
+      "file": "footage/mechanical-engineer-working-computer-pixabay-2714.mp4",
+      "id": "pixabay-2714",
+      "page": "https://pixabay.com/videos/id-2714/",
+      "author": "Activedia",
+      "tags": "technology, production, abstract, machine, loop, looped, modern, industry, business, manufacture, factory, work, equipment, industrial, electronic, energy, engineering, automation, automated, control, plant, line, clean, energy abstract, science, power, smart, technology abstract, complex, computer, computer technology, gear, mechanical, process, steel, device, app, design",
+      "duration": 10,
+      "width": 1920,
+      "height": 1080,
+      "link": "https://cdn.pixabay.com/video/2016/04/05/2714-161671440_large.mp4"
+    }
+  ],
+  "images": [
+    {
+      "scene": null,
+      "query": "technical drawing blueprint",
+      "file": "images/technical-drawing-blueprint-pixabay-5146202.jpg",
+      "sticker": false,
+      "id": "pixabay-5146202",
+      "page": "https://pixabay.com/photos/adult-architect-caucasian-5146202/",
+      "author": "ds_30",
+      "tags": "adult, architect, caucasian, construction, cup, design, designer, details, engineer, engineering, female, girl, hands, paper, pencil, people, person, plans, print, project, sketch, woman",
+      "width": 949,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "metal gears macro",
+      "file": "images/metal-gears-macro-pixabay-4651185.jpg",
+      "sticker": false,
+      "id": "pixabay-4651185",
+      "page": "https://pixabay.com/photos/clockwork-church-gears-time-clock-4651185/",
+      "author": "Holedulidu",
+      "tags": "clockwork, church, gears, time, clock, church clock, pointer, metal, old, drive, gears, time, time, time, time, time, clock, clock, clock",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "mars rover",
+      "file": "images/mars-rover-pixabay-11613.jpg",
+      "sticker": false,
+      "id": "pixabay-11613",
+      "page": "https://pixabay.com/photos/planet-mars-crater-victoria-crater-11613/",
+      "author": "WikiImages",
+      "tags": "planet, mars, crater, victoria crater, impact crater, space, outer space, planet, mars, mars, mars, mars, mars, crater, space",
+      "width": 1018,
+      "height": 1280
+    }
+  ]
+}

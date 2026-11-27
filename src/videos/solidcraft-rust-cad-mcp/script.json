@@ -1,0 +1,223 @@
+{
+  "slug": "solidcraft-rust-cad-mcp",
+  "format": "explainer",
+  "topic": "Tự host SolidCraft trên VPS: Ứng dụng CAD 3D tham số bằng Rust chạy trên Web và điều khiển qua MCP, so sánh với FreeCAD",
+  "title": "SolidCraft: CAD 3D thuần Rust chạy Web và MCP",
+  "caption": "Khám phá SolidCraft v0.50.0, công cụ CAD 3D tham số thuần Rust chạy trên trình duyệt và điều khiển qua MCP.",
+  "hashtags": [
+    "#solidcraft",
+    "#rustlang",
+    "#mcp",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimalist modern electronic tech groove with subtle pulsing synths and crisp clean beats, energetic pacing, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "curious",
+        "electronic"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "driving rhythm",
+        "clean synth"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s6",
+      "styles": [
+        "punchy bass",
+        "high energy",
+        "confident"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm resolution",
+        "smooth fade"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/tangency-labs/solidcraft",
+    "https://github.com/FreeCAD/FreeCAD",
+    "https://github.com/openscad/openscad",
+    "https://solidcraft.io/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] 75 trên 76 chi tiết mẫu khớp chuẩn FreeCAD dù viết hoàn toàn bằng Rust?",
+      "headline": "CAD 3D thuần Rust",
+      "lines": [
+        "75/76 chi tiết khớp chuẩn FreeCAD",
+        "Mã nguồn mở viết bằng Rust"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì anh em dựng mô hình 3D mã nguồn mở phải cài FreeCAD khá cồng kềnh với C++, Python và Qt.",
+      "headline": "Kiến trúc CAD truyền thống",
+      "lines": [
+        "FreeCAD v1.1.4 (C++, LGPL-2.1)",
+        "Dựa trên Python và giao diện Qt"
+      ],
+      "commands": [],
+      "repos": [
+        "FreeCAD/FreeCAD"
+      ],
+      "footage": "engineer working on cad"
+    },
+    {
+      "id": "s3",
+      "text": "[impressed] Còn SolidCraft v0.50.0 lại viết thuần bằng Rust, tức là chạy nhẹ nhàng ngay trên trình duyệt web lẫn desktop.",
+      "headline": "SolidCraft v0.50.0",
+      "lines": [
+        "Thuần Rust, giấy phép Apache-2.0",
+        "Chạy trên trình duyệt và desktop"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[thoughtful] Kernel hình học SolidCore bên dưới được chuyển mã sang Rust từ thư viện C++ SMLib của NVIDIA, nên cho độ chính xác rất cao.",
+      "headline": "Kernel SolidCore từ SMLib",
+      "lines": [
+        "Chuyển mã Rust từ SMLib (NVIDIA)",
+        "Xử lý chuẩn xác thể tích và trọng tâm"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "[casually] OpenSCAD hoạt động như một trình biên dịch đọc script, còn SolidCraft lại cho anh em dựng hình tương tác có dòng thời gian tham số.",
+      "headline": "Dựng hình tham số tương tác",
+      "lines": [
+        "OpenSCAD: biên dịch mã script 3D",
+        "SolidCraft: timeline tham số trực quan"
+      ],
+      "commands": [],
+      "repos": [
+        "openscad/openscad",
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[excited] Đặc biệt hơn, SolidCraft tích hợp sẵn server MCP, giúp các AI agent tự gọi lệnh để vẽ 3D trực tiếp.",
+      "headline": "Tích hợp sẵn MCP Server",
+      "lines": [
+        "Model Context Protocol tích hợp",
+        "AI agent trực tiếp gọi lệnh dựng hình"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[impressed] Chiếc xe tự hành SELENE này chính là ví dụ thực tế được dựng hoàn toàn thông qua máy chủ MCP của SolidCraft.",
+      "headline": "Dự án xe tự hành SELENE",
+      "lines": [
+        "Dựng bởi người dùng 0xlillith",
+        "Điều khiển hoàn toàn qua MCP server"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[cheerfully] Anh em có thể biên dịch và chạy thử ngay ứng dụng mẫu từ kho mã nguồn:",
+      "headline": "Chạy thử bản Desktop",
+      "lines": [
+        "Chạy bản mẫu với Cargo"
+      ],
+      "commands": [
+        "cargo run --release -p solidcraft -- --sample"
+      ],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[casually] Nếu muốn để AI hỗ trợ, anh em chỉ cần kết nối công cụ qua dòng lệnh:",
+      "headline": "Kết nối Claude qua MCP",
+      "lines": [
+        "Đăng ký server SolidCraft vào Claude"
+      ],
+      "commands": [
+        "claude mcp add solidcraft -- solidcraft-cli mcp"
+      ],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[thoughtful] Vì dùng chuẩn Wasm32, bộ nhớ plugin hiện bị giới hạn ở 4096 MiB, và trong 76 chi tiết thử nghiệm vẫn còn một lỗi đang theo dõi.",
+      "headline": "Giới hạn kỹ thuật",
+      "lines": [
+        "Giới hạn 4096 MiB bộ nhớ Wasm32",
+        "Còn 1 chi tiết đang được theo dõi"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": "developer at desk night"
+    },
+    {
+      "id": "s11",
+      "text": "[warmly] Anh em lưu video này lại để thử nghiệm và theo dõi kênh nhé! 75 trên 76 chi tiết mẫu đã đủ thuyết phục anh em thử chưa?",
+      "headline": "Lưu lại và theo dõi",
+      "lines": [
+        "Lưu video để trải nghiệm",
+        "Follow kênh để cập nhật công nghệ mới"
+      ],
+      "commands": [],
+      "repos": [
+        "tangency-labs/solidcraft"
+      ],
+      "footage": ""
+    }
+  ]
+}

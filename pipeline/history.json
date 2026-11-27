@@ -897,5 +897,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 8
+  },
+  {
+    "slug": "solidcraft-rust-cad-mcp",
+    "topic": "Tự host SolidCraft trên VPS: Ứng dụng CAD 3D tham số bằng Rust chạy trên Web và điều khiển qua MCP, so sánh với FreeCAD",
+    "format": "story",
+    "date": "2026-11-27",
+    "direction": "documentary",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 2
   }
 ]
