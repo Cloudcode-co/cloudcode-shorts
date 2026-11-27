@@ -886,5 +886,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 1
+  },
+  {
+    "slug": "llm-asm-linux-qwen-assembly",
+    "topic": "Trải nghiệm llm.asm trên Linux: Chạy model AI Qwen bằng 100% Assembly x86-64 chỉ 12KB, so sánh với llama.cpp",
+    "format": "top5",
+    "date": "2026-11-27",
+    "direction": "countdown",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 8
   }
 ]

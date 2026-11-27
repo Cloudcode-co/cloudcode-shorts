@@ -1,0 +1,227 @@
+{
+  "slug": "llm-asm-linux-qwen-assembly",
+  "format": "explainer",
+  "topic": "Trải nghiệm llm.asm trên Linux: Chạy model AI Qwen bằng 100% Assembly x86-64 chỉ 12KB, so sánh với llama.cpp",
+  "title": "Chạy AI bằng Assembly 14KB nhanh hơn C++?",
+  "caption": "Trải nghiệm llm.asm chạy Qwen3-0.6B bằng 100% Assembly x86-64 không cần libc trên Linux.",
+  "hashtags": [
+    "#llmasm",
+    "#assemblyx86",
+    "#llamacpp",
+    "#laptrinh",
+    "#ai"
+  ],
+  "musicPrompt": "Minimal low-fi synthwave with driving bassline and precise rhythmic pulse, cybernetic feel, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy bass",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s4",
+      "styles": [
+        "driving pulse",
+        "electronic synth",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s8",
+      "styles": [
+        "steady tech groove",
+        "clear rhythm"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s11",
+      "styles": [
+        "warm finish",
+        "sparse synth"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/alesha-pro/llm.asm",
+    "https://github.com/ggml-org/llama.cpp"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "File Assembly mười bốn kilobyte chạy AI nhanh hơn cả C++ ba mươi sáu phần trăm? [curious]",
+      "headline": "14KB Assembly chạy AI?",
+      "lines": [
+        "14 KB pure Assembly x86-64",
+        "Nhanh hơn llama.cpp tới +36%"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì anh em chạy mô hình AI cục bộ bằng llama chấm cpp viết bằng C và C++. [casually]",
+      "headline": "Cách chạy thông thường",
+      "lines": [
+        "llama.cpp: viết bằng C/C++",
+        "Chạy đa nền tảng phần cứng"
+      ],
+      "commands": [],
+      "repos": [
+        "ggml-org/llama.cpp"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Còn dự án llm chấm asm được viết bằng một trăm phần trăm Assembly NASM, hoàn toàn không phụ thuộc libc. [impressed]",
+      "headline": "llm.asm: 100% Assembly",
+      "lines": [
+        "Zero C, Zero libc",
+        "File thực thi tĩnh 14.7 KB"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "Tức là mã nguồn tự gọi thẳng syscall Linux và dùng trực tiếp các tập lệnh AVX2, FMA để nhân ma trận. [thoughtful]",
+      "headline": "Tối ưu phần cứng tối đa",
+      "lines": [
+        "Syscall Linux trực tiếp",
+        "Lệnh AVX2 + FMA + F16C"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": "developer typing terminal code"
+    },
+    {
+      "id": "s5",
+      "text": "Nhờ vậy, tốc độ decode mô hình Qwen3-0.6B trên CPU vượt llama chấm cpp từ mười tám đến ba mươi sáu phần trăm. [excited]",
+      "headline": "So sánh tốc độ decode",
+      "lines": [
+        "EPYC 7642: 4 threads đạt 69.2 tok/s",
+        "llama.cpp cùng cấu hình: 51.0 tok/s"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm",
+        "ggml-org/llama.cpp"
+      ],
+      "footage": "server room cpu cooling"
+    },
+    {
+      "id": "s6",
+      "text": "Tuy nhiên, llm chấm asm chạy prefill từng token bằng GEMV, nên bước nạp prompt dài sẽ không tối ưu bằng GEMM của llama chấm cpp. [thoughtful]",
+      "headline": "Hạn chế khi nạp prompt",
+      "lines": [
+        "llm.asm: token-by-token GEMV",
+        "llama.cpp: batched GEMM cho prefill"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Vì vậy anh em bắt buộc phải có CPU hỗ trợ AVX2 và phải convert mô hình sang đuôi asmbin trước. [casually]",
+      "headline": "Yêu cầu phần cứng",
+      "lines": [
+        "CPU: AVX2 + FMA + F16C",
+        "Định dạng trọng số: .asmbin"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Để cài đặt trên Ubuntu, anh em kéo nasm về rồi clone repo từ GitHub. [cheerfully]",
+      "headline": "Cài đặt công cụ",
+      "lines": [
+        "Cài nasm và binutils",
+        "Clone mã nguồn llm.asm"
+      ],
+      "commands": [
+        "sudo apt install nasm binutils",
+        "git clone https://github.com/alesha-pro/llm.asm.git",
+        "cd llm.asm"
+      ],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "Tiếp theo, anh em chạy script convert trọng số Qwen3 và build bản tối ưu FAST Q8. [casually]",
+      "headline": "Chuyển trọng số và build",
+      "lines": [
+        "Export Qwen3-0.6B sang asmbin",
+        "Build chế độ FAST_Q8=1"
+      ],
+      "commands": [
+        "python3 scripts/export_weights.py --model-dir models/qwen3-0.6b-bf16 --out models/qwen3-0.6b-q8_0.asmbin --scale-dtype fp16",
+        "make inference FAST_Q8=1"
+      ],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Bây giờ anh em có thể bắt đầu chat trực tiếp ngay trên terminal với mười sáu luồng CPU! [excited]",
+      "headline": "Chạy chat trực tiếp",
+      "lines": [
+        "Chế độ tương tác --chat",
+        "Giữ bộ nhớ đệm KV-cache"
+      ],
+      "commands": [
+        "./build/asm-llm -m models/qwen3-0.6b-q8_0.asmbin --chat -t 16"
+      ],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s11",
+      "text": "Anh em lưu video lại để thử nghiệm và bấm theo dõi nhé! [warmly]",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để vọc thử",
+        "Follow để đón tip low-level tiếp theo"
+      ],
+      "commands": [],
+      "repos": [
+        "alesha-pro/llm.asm"
+      ],
+      "footage": ""
+    }
+  ]
+}
