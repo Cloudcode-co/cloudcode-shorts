@@ -1,0 +1,208 @@
+{
+  "slug": "tu-host-magpie-vps-gop-quota-ai-agent",
+  "format": "explainer",
+  "topic": "Tự host Magpie trên VPS: Gộp các gói Claude, ChatGPT và Copilot chống cạn quota cho AI Agent, so sánh với LiteLLM",
+  "title": "Gộp gói Claude, ChatGPT chống cạn quota với Magpie?",
+  "caption": "Tự host Magpie trên VPS gom các gói Claude, ChatGPT và Copilot thành một pool, tự failover cho AI Agent.",
+  "hashtags": [
+    "#magpie",
+    "#litellm",
+    "#aiagent",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Minimal modern tech synth groove, pulsing electronic bass, clean forward-moving rhythm, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "rising tension",
+        "subtle synth"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "electronic bass",
+        "driving pulse",
+        "groove"
+      ]
+    },
+    {
+      "name": "Reveal",
+      "from": "s7",
+      "styles": [
+        "bright tech synth",
+        "confident",
+        "rhythmic"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s10",
+      "styles": [
+        "warm finish",
+        "sparse pulse"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/yetone/magpie",
+    "https://github.com/BerriAI/litellm",
+    "https://github.com/firecrawl/firecrawl",
+    "https://usemagpie.ai/docs/docker",
+    "https://usemagpie.ai/docs/start"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Anh em có bao giờ bị cạn quota Claude đúng lúc đang code dở chưa? [curious]",
+      "headline": "Cạn quota khi code dở",
+      "lines": [
+        "Hết quota giữa chừng?",
+        "AI Agent dừng đột ngột"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "frustrated developer night coding desk"
+    },
+    {
+      "id": "s2",
+      "text": "Thường thì mỗi AI agent chỉ khóa vào một tài khoản, hết lượt là đứng hình. [casually] Còn Magpie gom sạch ChatGPT, Claude và Copilot thành một pool.",
+      "headline": "Gom mọi gói vào một pool",
+      "lines": [
+        "Thường: mỗi agent một tài khoản",
+        "Magpie: gộp chung thuê bao"
+      ],
+      "commands": [],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s3",
+      "text": "Tức là khi một gói cạn hạn mức, gateway tự failover sang tài khoản tiếp theo. [excited] Chế độ smart còn ưu tiên gói sắp reset chu kỳ trước để đỡ phí quota.",
+      "headline": "Tự động failover thông minh",
+      "lines": [
+        "Tự chuyển tài khoản khi cạn",
+        "Ưu tiên gói sắp reset chu kỳ"
+      ],
+      "commands": [],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "LiteLLM cũng là gateway, nhưng chuyên quản lý API key pay-as-you-go doanh nghiệp và bắt buộc nối PostgreSQL mới bật được ngân sách. [thoughtful]",
+      "headline": "So sánh với LiteLLM",
+      "lines": [
+        "LiteLLM: chuyên API key trả phí",
+        "Cần PostgreSQL để quản lý ngân sách"
+      ],
+      "commands": [],
+      "repos": [
+        "BerriAI/litellm"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s5",
+      "text": "Magpie thì khác, viết bằng Go, tập trung gom trực tiếp các gói thuê bao cá nhân anh em trả tiền hàng tháng cho bất kỳ agent nào dùng. [casually]",
+      "headline": "Bản chất của Magpie",
+      "lines": [
+        "Viết bằng Go gọn nhẹ",
+        "Tận dụng gói thuê bao cá nhân"
+      ],
+      "commands": [],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "Đặc biệt là tính năng privacy masking, [impressed] tự nhận diện và che giấu API key hay mật khẩu trên máy trước khi prompt gửi lên server vendor.",
+      "headline": "Bảo mật privacy masking",
+      "lines": [
+        "Mask mật khẩu và API key",
+        "Giấu bí mật trước khi gửi prompt"
+      ],
+      "commands": [],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "Để cài nhanh trên máy tính cá nhân, anh em chỉ cần chạy một lệnh chính thức: [cheerfully]",
+      "headline": "Cài đặt Magpie",
+      "lines": [
+        "Cài đặt một dòng lệnh"
+      ],
+      "commands": [
+        "curl -fsSL https://usemagpie.ai/install.sh | sh"
+      ],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "Còn đưa lên Docker VPS, Web UI chạy cổng 3430. [casually] Vì image chưa có sẵn Claude Code, nên anh em tải binary Anthropic bằng lệnh chuyên dụng.",
+      "headline": "Chạy Docker trên VPS",
+      "lines": [
+        "Giao diện Web UI cổng 3430",
+        "Cài binary Claude Code"
+      ],
+      "commands": [
+        "docker exec -it magpie magpie claude-code install"
+      ],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": "modern server room datacenter glowing"
+    },
+    {
+      "id": "s9",
+      "text": "Khi đăng nhập tài khoản như Codex từ xa, [laughs] trình duyệt trả callback về localhost nên anh em chỉ việc copy URL đó dán ngược vào giao diện.",
+      "headline": "Đăng nhập OAuth từ xa",
+      "lines": [
+        "OAuth chuyển hướng về localhost",
+        "Dán URL vào ô Callback URL"
+      ],
+      "commands": [
+        "docker exec -it magpie magpie accounts add codex"
+      ],
+      "repos": [
+        "yetone/magpie"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "Lưu video lại để cấu hình VPS và theo dõi mình nhé! [warmly] Cứ gom chung tài khoản lại thì làm sao lo cạn quota Claude nữa? [excited]",
+      "headline": "Lưu lại và trải nghiệm",
+      "lines": [
+        "Lưu video để dựng trạm",
+        "Follow để xem mẹo AI mới"
+      ],
+      "commands": [],
+      "repos": [],
+      "footage": "happy developer smiling looking at laptop"
+    }
+  ]
+}

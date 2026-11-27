@@ -875,5 +875,16 @@
     "built": "fallback",
     "costUsd": 0,
     "reviewIssues": null
+  },
+  {
+    "slug": "tu-host-magpie-vps-gop-quota-ai-agent",
+    "topic": "Tự host Magpie trên VPS: Gộp các gói Claude, ChatGPT và Copilot chống cạn quota cho AI Agent, so sánh với LiteLLM",
+    "format": "brief",
+    "date": "2026-11-27",
+    "direction": "news-desk",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 1
   }
 ]
