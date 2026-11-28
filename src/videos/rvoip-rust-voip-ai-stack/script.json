@@ -1,0 +1,209 @@
+{
+  "slug": "rvoip-rust-voip-ai-stack",
+  "format": "explainer",
+  "topic": "Tự host rvoip trên VPS: VoIP stack bằng Rust tích hợp AI Voice Agent và WebRTC, thay thế Asterisk và FreeSWITCH",
+  "title": "Một máy ảo gánh 8.000 cuộc gọi không cần Asterisk?",
+  "caption": "Tự host rvoip bằng Rust: stack VoIP và WebRTC tích hợp sẵn AI Voice Agent, so với cụm Asterisk truyền thống.",
+  "hashtags": [
+    "#rvoip",
+    "#rustlang",
+    "#voip",
+    "#laptrinh",
+    "#congnghe"
+  ],
+  "musicPrompt": "Fast-paced modern tech electronic beat with modular synth pulses, driving bassline, minimal percussion, tech showcase vibe, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "sparse",
+        "punchy",
+        "rising tension"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s3",
+      "styles": [
+        "driving synth",
+        "fast tempo",
+        "energetic"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s7",
+      "styles": [
+        "high energy",
+        "confident",
+        "rhythmic drop"
+      ]
+    },
+    {
+      "name": "Outro",
+      "from": "s9",
+      "styles": [
+        "warm",
+        "resolved synth",
+        "clean finish"
+      ]
+    }
+  ],
+  "sources": [
+    "https://github.com/eisenzopf/rvoip",
+    "https://github.com/asterisk/asterisk",
+    "https://github.com/signalwire/freeswitch",
+    "https://github.com/mynaparrot/plugNmeet-server",
+    "https://docs.rs/rvoip/0.5.1/rvoip/",
+    "https://docs.rs/rvoip-sip/0.5.1/rvoip_sip/"
+  ],
+  "voiceId": "aN7cv9yXNrfIR87bDmyD",
+  "modelId": "eleven_v3",
+  "voiceSettings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "[curious] Một con máy ảo gánh hơn tám nghìn cuộc gọi mỗi giây mà không cần Asterisk?",
+      "headline": "8.000+ CPS trên 1 VM?",
+      "lines": [
+        "Không cần Asterisk",
+        "Stack VoIP thuần Rust"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": "server rack datacenter blinking lights"
+    },
+    {
+      "id": "s2",
+      "text": "[casually] Thường thì anh em dựng tổng đài phải cài Asterisk bằng C, cấu hình rất nhiều file và mặc định chỉ chịu khoảng 150 cuộc gọi SIP.",
+      "headline": "Cụm Asterisk truyền thống",
+      "lines": [
+        "Biên dịch C với make menuselect",
+        "Mặc định giới hạn ~150 cuộc gọi SIP"
+      ],
+      "commands": [],
+      "repos": [
+        "asterisk/asterisk"
+      ],
+      "footage": "developer looking frustrated at multiple monitors"
+    },
+    {
+      "id": "s3",
+      "text": "[excited] rvoip là thư viện VoIP thuần Rust, nhúng thẳng vào code ứng dụng thay vì chạy server rời bên cạnh.",
+      "headline": "rvoip: Thư viện VoIP thuần Rust",
+      "lines": [
+        "Nhúng trực tiếp vào ứng dụng",
+        "Không cần cài thêm SIP proxy hay media server"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s4",
+      "text": "[impressed] Thử nghiệm trên máy ảo 16 vCPU, rvoip đạt tới 8.348 CPS cho báo hiệu SIP qua TLS.",
+      "headline": "8.348 CPS trên AWS c8i.4xlarge",
+      "lines": [
+        "16 vCPU, 32 GiB RAM",
+        "8.348 calls per second (SIP TLS)"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": "modern cloud infrastructure data server"
+    },
+    {
+      "id": "s5",
+      "text": "[casually] Với RTP G.711, nó gánh tương đương 12.000 cuộc gọi đồng thời, độ trễ thiết lập chỉ 1 phần nghìn giây.",
+      "headline": "~12.000 cuộc gọi đồng thời",
+      "lines": [
+        "1.204 CPS (RTP G.711, 10s calls)",
+        "Độ trễ thiết lập p50 chỉ 1 ms"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s6",
+      "text": "[thoughtful] Tức là khi chịu tải gấp đôi công suất, nó tự từ chối nhanh bằng phản hồi 503 và hồi phục ngay khi tải giảm, nên hệ thống không sập.",
+      "headline": "Chống sốc tải",
+      "lines": [
+        "Từ chối lưu lượng thừa bằng mã 503",
+        "Tự động hồi phục sạch khi giảm tải"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s7",
+      "text": "[excited] rvoip gom cả SIP, WebRTC và adapter AI Voice Agent của Vapi vào chung một mô hình giao tiếp duy nhất.",
+      "headline": "Tích hợp sẵn WebRTC và AI Agent",
+      "lines": [
+        "SIP, WebRTC, SRTP chung một call model",
+        "Adapter WebSocket hai chiều cho Vapi"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s8",
+      "text": "[casually] Vì là thư viện nên anh em phải tự viết code Rust với 4 tầng API, và phần WebRTC hay AI hiện mới ở mức preview.",
+      "headline": "Thư viện SDK cho Rustacean",
+      "lines": [
+        "4 API: Endpoint, StreamPeer, CallbackPeer, UnifiedCoordinator",
+        "SIP đã beta, WebRTC và AI đang preview"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s9",
+      "text": "[cheerfully] Anh em chỉ cần clone repo và gõ lệnh chạy thử ngay cuộc gọi local trên máy tính.",
+      "headline": "Chạy thử nghiệm trên máy tính",
+      "lines": [],
+      "commands": [
+        "git clone https://github.com/eisenzopf/rvoip.git && cd rvoip",
+        "cargo run -p rvoip-sip --example endpoint_local_call"
+      ],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    },
+    {
+      "id": "s10",
+      "text": "[warmly] Anh em lưu video lại để tự host thử nhé, và bấm theo dõi kênh để cập nhật công nghệ mới.",
+      "headline": "Lưu lại và trải nghiệm rvoip!",
+      "lines": [
+        "Lưu video để tự test trên VPS",
+        "Follow kênh để cập nhật công nghệ"
+      ],
+      "commands": [],
+      "repos": [
+        "eisenzopf/rvoip"
+      ],
+      "footage": ""
+    }
+  ]
+}
