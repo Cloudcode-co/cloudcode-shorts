@@ -1,0 +1,111 @@
+{
+  "slug": "host-palworld-server-vps-4gb-oom",
+  "format": "meme",
+  "topic": "Dựng server Palworld trên VPS ít RAM bị OOM trảm",
+  "title": "Dựng server Palworld VPS 4GB RAM cho anh em và cái kết",
+  "caption": "Tưởng tiết kiệm tiền net, ai ngờ Palworld nó nuốt RAM như uống nước lã. Anh em mở server game tốn bao nhiêu GB RAM rồi?",
+  "hashtags": [
+    "#palworldserver",
+    "#vpsgiare",
+    "#oomkiller",
+    "#laptrinhvien",
+    "#haihuoc"
+  ],
+  "musicPrompt": "Playful bouncy meme synth beat turning into fast chaotic panic with dramatic horns and a funny sad fail finish, no vocals",
+  "musicSections": [
+    {
+      "name": "Hook",
+      "from": "s1",
+      "styles": [
+        "bouncy",
+        "upbeat electronic",
+        "cheerful 8-bit"
+      ]
+    },
+    {
+      "name": "Build",
+      "from": "s2",
+      "styles": [
+        "rising tension",
+        "fast tempo",
+        "chaotic synth"
+      ]
+    },
+    {
+      "name": "Drop",
+      "from": "s4",
+      "styles": [
+        "dramatic brass",
+        "heavy distortion",
+        "panic"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "from": "s5",
+      "styles": [
+        "sad comedic trombone",
+        "slow awkward beat",
+        "sparse"
+      ]
+    }
+  ],
+  "sources": [],
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "",
+      "headline": "Hí hửng dựng server Palworld trên con VPS 4GB RAM vừa săn sale cho 5 anh em cày đêm",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat typing laptop",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s2",
+      "text": "",
+      "headline": "Anh em vừa lụm xong 3 con Pal đầu tiên thì thanh RAM vọt thẳng lên 99%",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "shocked cat",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s3",
+      "text": "",
+      "headline": "Cả team bắt đầu trôi xuyên tường rơi xuống biển, cửa sổ SSH đơ không nhận lệnh",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat panic",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s4",
+      "text": "",
+      "headline": "Check console thấy OOM Killer thẳng tay trảm server game, swapfile 16GB cháy đỏ rực",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat screaming",
+      "place": "bedroom at night computer"
+    },
+    {
+      "id": "s5",
+      "text": "",
+      "headline": "Discord anh em réo đòi đền save game, còn mình ngồi khóc ngắm bảng giá VPS 32GB",
+      "lines": [],
+      "commands": [],
+      "repos": [],
+      "footage": "",
+      "reaction": "cat crying",
+      "place": "bedroom at night computer"
+    }
+  ]
+}

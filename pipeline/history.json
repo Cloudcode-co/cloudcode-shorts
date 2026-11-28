@@ -919,5 +919,16 @@
     "built": "beag",
     "costUsd": 0,
     "reviewIssues": 0
+  },
+  {
+    "slug": "host-palworld-server-vps-4gb-oom",
+    "topic": "Dựng server Palworld trên VPS ít RAM bị OOM trảm",
+    "format": "meme",
+    "date": "2026-11-28",
+    "direction": "meme-skit",
+    "pacing": "Few long shots: 3–5 shots, each building up in place.",
+    "built": "beag",
+    "costUsd": 0,
+    "reviewIssues": 0
   }
 ]

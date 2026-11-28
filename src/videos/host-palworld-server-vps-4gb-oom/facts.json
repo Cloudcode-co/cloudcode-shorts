@@ -1,0 +1,148 @@
+{
+  "topic": "Dựng server Palworld trên VPS ít RAM bị OOM trảm",
+  "date": "2026-11-28",
+  "repos": [],
+  "notes": null,
+  "memes": [
+    {
+      "scene": "s1",
+      "query": "cat typing laptop",
+      "file": "memes/cat-typing-laptop-giphy-hiJ9ypGI5tIKdwKoK2.gif",
+      "id": "giphy-hiJ9ypGI5tIKdwKoK2",
+      "title": "Happy Busy Bee Sticker by Kennysgifs",
+      "page": "https://giphy.com/stickers/happy-kawaii-computer-hiJ9ypGI5tIKdwKoK2",
+      "author": "Kennymays",
+      "width": 480,
+      "height": 296,
+      "frames": 2,
+      "link": "https://media3.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlc3BucXJjZDZheDkzdDdvbWU4am15bGtkbDY3NGEyaHFmY3A4YzZueiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/hiJ9ypGI5tIKdwKoK2/giphy.gif"
+    },
+    {
+      "scene": "s2",
+      "query": "shocked cat",
+      "file": "memes/shocked-cat-giphy-crPtfTE2O00qrDgmm7.gif",
+      "id": "giphy-crPtfTE2O00qrDgmm7",
+      "title": "Sticker ねこ Sticker by Japan",
+      "page": "https://giphy.com/stickers/japan-sticker-neko-meme-mi-mu-crPtfTE2O00qrDgmm7",
+      "author": "japan",
+      "width": 480,
+      "height": 302,
+      "frames": 89,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlMzhmYm02c2h1YzRrNnk1dzE2MjRuaTVraWloNDlxeWdhajZsemNjbiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/crPtfTE2O00qrDgmm7/giphy.gif"
+    },
+    {
+      "scene": "s3",
+      "query": "cat panic",
+      "file": "memes/cat-panic-giphy-eAot8Ldr85y3peseC3.gif",
+      "id": "giphy-eAot8Ldr85y3peseC3",
+      "title": "Happy Cat Sticker",
+      "page": "https://giphy.com/stickers/cat-kitten-yippee-eAot8Ldr85y3peseC3",
+      "author": "michael_lurz_xr",
+      "width": 480,
+      "height": 468,
+      "frames": 36,
+      "link": "https://media2.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlcmxvZXZnbmVocng1MjJydXU1cXQ0c29tcDM1c2t6OXFrd3YxczhkaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/eAot8Ldr85y3peseC3/giphy.gif"
+    },
+    {
+      "scene": "s4",
+      "query": "cat screaming",
+      "file": "memes/cat-screaming-giphy-cODsKQjgESv852mIPd.gif",
+      "id": "giphy-cODsKQjgESv852mIPd",
+      "title": "cat kitty Sticker by Roundhouse",
+      "page": "https://giphy.com/stickers/roundhouse-gotroundhoused-rhdog-rhpet-cODsKQjgESv852mIPd",
+      "author": "roundhouse",
+      "width": 480,
+      "height": 480,
+      "frames": 8,
+      "link": "https://media3.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlbTRubGE4bzI0YzRldTY1bGV0a3htZDVsbXliZ3h1N3R5cWR4ZG1jbiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/cODsKQjgESv852mIPd/giphy.gif"
+    },
+    {
+      "scene": "s5",
+      "query": "cat crying",
+      "file": "memes/cat-crying-giphy-Xr9TlAqw3S7VPOrftK.gif",
+      "id": "giphy-Xr9TlAqw3S7VPOrftK",
+      "title": "Happy Cat Sticker",
+      "page": "https://giphy.com/stickers/beauty-crying-cry-Xr9TlAqw3S7VPOrftK",
+      "author": "mrcartes",
+      "width": 480,
+      "height": 398,
+      "frames": 2,
+      "link": "https://media0.giphy.com/media/v1.Y2lkPWU1MDY5ZTRldGV2am9zaWg0ajRhc2NrenpmYXg5dDZhc2Fwb3Z0cGp2YzYzbXozdyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/Xr9TlAqw3S7VPOrftK/giphy.gif"
+    },
+    {
+      "scene": null,
+      "query": "shocked cat",
+      "file": "memes/shocked-cat-giphy-xUA7b7SQ5ZhNrIJAMo.gif",
+      "id": "giphy-xUA7b7SQ5ZhNrIJAMo",
+      "title": "surprised STICKER by imoji",
+      "page": "https://giphy.com/stickers/imoji-wow-xUA7b7SQ5ZhNrIJAMo",
+      "author": null,
+      "width": 480,
+      "height": 480,
+      "frames": 8,
+      "link": "https://media4.giphy.com/media/v1.Y2lkPWU1MDY5ZTRlMzhmYm02c2h1YzRrNnk1dzE2MjRuaTVraWloNDlxeWdhajZsemNjbiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/xUA7b7SQ5ZhNrIJAMo/giphy.gif"
+    }
+  ],
+  "images": [
+    {
+      "scene": "s1",
+      "query": "bedroom at night computer",
+      "file": "images/bedroom-at-night-computer-pixabay-5884606.jpg",
+      "sticker": false,
+      "id": "pixabay-5884606",
+      "page": "https://pixabay.com/photos/christmas-tree-christmas-bokeh-5884606/",
+      "author": "stewie012",
+      "tags": "christmas tree, christmas, bokeh, christmas lights, holidays, december, decoration, christmas decoration, christmas tree, christmas tree, christmas tree, christmas tree, christmas tree, christmas, christmas, christmas, christmas, christmas lights",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "dark bedroom computer desk night",
+      "file": "images/dark-bedroom-computer-desk-night-pixabay-2583442.jpg",
+      "sticker": false,
+      "id": "pixabay-2583442",
+      "page": "https://pixabay.com/photos/girl-woman-office-work-coffee-2583442/",
+      "author": "StockSnap",
+      "tags": "girl, woman, office, work, coffee, laptop, computer, business, busy, windows, office, office, office, office, office, work, business",
+      "width": 853,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "gaming setup night",
+      "file": "images/gaming-setup-night-pixabay-289470.jpg",
+      "sticker": false,
+      "id": "pixabay-289470",
+      "page": "https://pixabay.com/photos/game-strategy-computer-289470/",
+      "author": "Tomasz_Mikolajczyk",
+      "tags": "game, strategy, computer, computer game, monitor, player, game, computer, computer game, computer game, computer game, computer game, computer game",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "laptop desk at night",
+      "file": "images/laptop-desk-at-night-pixabay-4222025.jpg",
+      "sticker": false,
+      "id": "pixabay-4222025",
+      "page": "https://pixabay.com/photos/desk-tea-coffee-table-laptop-cup-4222025/",
+      "author": "monicore",
+      "tags": "desk, coffee cup, tea cup, tea, coffee, table, laptop, cup, mug, workplace",
+      "width": 947,
+      "height": 1280
+    },
+    {
+      "scene": null,
+      "query": "dark bedroom at night",
+      "file": "images/dark-bedroom-at-night-pixabay-10528056.jpg",
+      "sticker": false,
+      "id": "pixabay-10528056",
+      "page": "https://pixabay.com/photos/milky-way-starry-sky-night-sky-10528056/",
+      "author": "Lanius",
+      "tags": "milky way, starry sky, night sky, astronomy, space, galaxy, dark sky, light pollution, photography, black, radiant light, stargazing, mountains, horizon, hiking, astrophotography, night, tranquil, awe, nature, peace",
+      "width": 853,
+      "height": 1280
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "scenes": {
+    "s1": {
+      "start": 0,
+      "length": 4.5
+    },
+    "s2": {
+      "start": 4.5,
+      "length": 3.8
+    },
+    "s3": {
+      "start": 8.3,
+      "length": 4.2
+    },
+    "s4": {
+      "start": 12.5,
+      "length": 4
+    },
+    "s5": {
+      "start": 16.5,
+      "length": 6
+    }
+  },
+  "total": 22.5,
+  "sections": [
+    {
+      "name": "Hook",
+      "start": 0,
+      "length": 4.5,
+      "scenes": [
+        "s1"
+      ]
+    },
+    {
+      "name": "Build",
+      "start": 4.5,
+      "length": 8,
+      "scenes": [
+        "s2",
+        "s3"
+      ]
+    },
+    {
+      "name": "Drop",
+      "start": 12.5,
+      "length": 4,
+      "scenes": [
+        "s4"
+      ]
+    },
+    {
+      "name": "Punchline",
+      "start": 16.5,
+      "length": 6,
+      "scenes": [
+        "s5"
+      ]
+    }
+  ]
+}
